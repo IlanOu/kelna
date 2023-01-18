@@ -52,7 +52,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot](images/screenshot.png)
 
 " " is a video game project to deepen our knowledge of programming in alliance with developers and designers !
 
@@ -103,14 +103,13 @@ _Below is how you can how to install " " . You have to_ :
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-In progress...
+*In progress...*
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: images/screenshot.png
+<!--  -->
 [P5.js]: https://img.shields.io/badge/p5%20js-ED225D?style=for-the-badge&logo=p5dotjs&logoColor=white
 [P5-url]: https://p5js.org/
