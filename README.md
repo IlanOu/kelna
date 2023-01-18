@@ -17,7 +17,8 @@
   <h3 align="center">VIDEO GAME 2D</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Welcome to the project : " " from the studio " " !
+    You are currently reading the documentation, happy reading :)
   </p>
 </div>
 
