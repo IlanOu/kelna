@@ -52,7 +52,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot](images/screenshot.png)
+<!--[![Product Name Screen Shot](images/screenshot.png)  -->
 
 " " is a video game project to deepen our knowledge of programming in alliance with developers and designers !
 
