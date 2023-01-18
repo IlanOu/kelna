@@ -92,7 +92,7 @@ You need to play " " the software mentioned and its extension below :
 
 _Below is how you can how to install " " . You have to_ :
 
-1. Get get Visual Studio Code software,
+1. Get Visual Studio Code software,
 2. Install the Live preview extension on Visual Studio Code
 3. Launch the code and play !
 
