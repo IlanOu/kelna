@@ -70,7 +70,7 @@ Use the `BLANK_README.md` to get started.
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Next][Next.js]][Next-url]
+* [![P5][P5.js]][P5-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,5 +134,5 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/p5%20js-ED225D?style=for-the-badge&logo=p5dotjs&logoColor=white
-[Next-url]: https://nextjs.org/
+[P5.js]: https://img.shields.io/badge/p5%20js-ED225D?style=for-the-badge&logo=p5dotjs&logoColor=white
+[P5-url]: https://p5js.org/
