@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 ![GitHub contributors](https://img.shields.io/github/contributors/IlanOu/projet-jeu-2D?color=0d0&style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/IlanOu/projet-jeu-2D?style=for-the-badge)
+![GitHub release](https://img.shields.io/github/v/release/IlanOu/projet-jeu-2D?style=for-the-badge)
 ![GitHub watchers](https://img.shields.io/github/watchers/IlanOu/projet-jeu-2D?style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/IlanOu/projet-jeu-2D?style=for-the-badge)
@@ -122,5 +122,3 @@ In progress...
 [product-screenshot]: images/screenshot.png
 [P5.js]: https://img.shields.io/badge/p5%20js-ED225D?style=for-the-badge&logo=p5dotjs&logoColor=white
 [P5-url]: https://p5js.org/
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
