@@ -62,7 +62,7 @@ This is a 2D game called : " " produced by our studio " ", you play a ...
 
 *Note : This project is a student project*
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top !</a>)</p>
 
 
 
@@ -72,7 +72,7 @@ This section lists the main framework used to start your project. This is p5.js 
 
 * [![P5][P5.js]][P5-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top !</a>)</p>
 
 
 
@@ -96,7 +96,7 @@ _Below is how you can how to install " " . You have to_ :
 2. Install the Live preview extension on Visual Studio Code
 3. Launch the code and play !
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top !</a>)</p>
 
 
 
@@ -106,7 +106,7 @@ _Below is how you can how to install " " . You have to_ :
 *In progress...*
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top !</a>)</p>
 
 
 
