@@ -4,7 +4,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[!https://img.shields.io/badge/dynamic/json?color=f05e2f&label=bernard%20Lermite&prefix=JS&query=test%20query&suffix=PS&url=https%3A%2F%2Fwww.deepl.com%2Ffr%2Ftranslator%23fr%2Fen%2Fprojet%2520de%2520jeu%2520en%2520cours%2520sur%2520p5.js]
+https://img.shields.io/badge/dynamic/json?url=<URL>&label=<LABEL>&query=<$.DATA.SUBDATA>&color=<COLOR>&prefix=<PREFIX>&suffix=<SUFFIX>
 
 
 <!-- PROJECT LOGO -->
