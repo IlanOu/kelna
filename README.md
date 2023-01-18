@@ -84,7 +84,7 @@ To be able to play " ", you must stick to it as follows :
 You need to play " " the software mentioned and its extension below :
 
 * ![VSCode](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
-* [ScreenEXT](https://zupimages.net/viewer.php?id=23/03/fri4.png)
+* [ScreenEXT](https://zupimages.net/up/23/03/fri4.png)
 
 ### Installation
 
