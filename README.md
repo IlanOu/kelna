@@ -3,7 +3,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 ![GitHub watchers](https://img.shields.io/github/watchers/IlanOu/projet-jeu-2D?style=for-the-badge)
-[[![Stargazers][stars-shield]][stars-url]](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&logo=github&style=flat-square)
+![GitHub Repo stars](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&style=for-the-badge)
 [![Issues][issues-shield]][issues-url]
 
 
