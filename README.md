@@ -2,7 +2,7 @@
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[[![Stargazers][stars-shield]][stars-url]](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&logo=github&style=flat-square)
 [![Issues][issues-shield]][issues-url]
 
 
