@@ -58,7 +58,7 @@
 
 This is a 2D game called : " " produced by our studio " ", you play a ...
 
-Note: This project is a student project
+*Note : This project is a student project*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -77,15 +77,14 @@ This section lists the main framework used to start your project. This is p5.js 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a working local copy, follow these simple example steps.
+To be able to play " ", you must stick to it as follows :
 
 ### Prerequisites
 
-This is a sample list of things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+You need to play " " the software mentioned and its extension below :
+
+* ![VSCode](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+* [ScreenEXT] ()
 
 ### Installation
 
@@ -112,9 +111,8 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+In progress...
+<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
