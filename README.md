@@ -19,6 +19,7 @@
 
   <p align="center">
     Welcome to the project : " " from the studio " " !
+    <br>
     You are currently reading the documentation, happy reading :)
   </p>
 </div>
