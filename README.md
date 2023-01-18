@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/IlanOu/projet-jeu-2D?style=for-the-badge)
 ![GitHub watchers](https://img.shields.io/github/watchers/IlanOu/projet-jeu-2D?style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&style=for-the-badge)
 [![Issues][issues-shield]][issues-url]
