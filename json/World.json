@@ -1,0 +1,7 @@
+{
+    "world":{
+        "worldsMap": [
+            ["map1", "map2"]
+        ]
+    }
+}

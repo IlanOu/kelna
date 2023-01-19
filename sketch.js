@@ -5,26 +5,30 @@ function setup() {
 
 
 function preload() {
+  // Images preload
   imgset = loadImage("assets/img.webp")
   menu = loadImage("assets/menu.jpg")
   ingame = loadImage("assets/echap.jpg")
+
+  // JSON preload
+  Maps = loadJSON("json/Maps.json");
 }
 
 
 function draw() {
 
-  // Si le joeuur appuie sur echap : 
   if (isInPaused === false) {
-    let gridReturns = drawaGrid()
+    // Si le joueur appuie sur echap : 
+    let gridReturns = drawGrid()
     character(gridReturns[1], gridReturns[3], gridReturns[4])
   }
   if (isInPaused === true) {
-    MenuEchap()
     // Menu echap apparait
+    MenuEchap()
   }
   if (isSettings === true) {
-    Settings()
     // Menu setting
+    Settings()
   }      
 
 }

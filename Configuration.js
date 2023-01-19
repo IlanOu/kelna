@@ -36,3 +36,6 @@ let spaceKeyIsPressed = false;
 let isInPaused = false;
 let isSettings = false;
 let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
+
+// cartes du jeu
+let Maps;

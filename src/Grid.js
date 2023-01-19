@@ -32,9 +32,16 @@ function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
   
   for (let x=0; x<grid.length; x++){
     for(let y=0; y<grid[x].length; y++){
+      
+      if(grid[x][y] === 0){
+        fill(color(255, 255, 255));
+      }else if (grid[x][y] === 1) {
+          fill(color(255, 0, 0));
+      }
+
       rect(
-        positionX+x*rectWidth,
-        positionY+y*rectHeight,
+        positionY+y*rectWidth,
+        positionX+x*rectHeight,
         rectWidth,
         rectHeight
       )
@@ -45,7 +52,7 @@ function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
 }
 
 
-function drawaGrid(){
+function drawGrid(){
 
   background(220);
   stroke(0)
@@ -60,14 +67,13 @@ function drawaGrid(){
 
   // générer un tableau avec le maximum de cases possible
   // let grid = createTable(maxNumberCasesX, maxNumberCasesY)
-  let grid = createTable(10, 10)
+  // let grid = createTable(10, 10)
+  let grid = Maps.map1.layers[1]
   fill(255)
 
   // afficher le tableau sous forme de grille en position 0,0
-  let gridX1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[0]
-  let gridY1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[1]
-  let gridX2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[2]
-  let gridY2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[3]
+  let [gridX1, gridY1, gridX2, gridY2] = displayGrid(grid, 0, 0, rectWidth, rectHeight)
+
 
   return [grid, gridX1, gridY1,gridX2, gridY2]
 }
