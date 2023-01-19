@@ -5,9 +5,9 @@ function setup() {
 
 
 function preload() {
-  imgset = loadImage("images/img.webp")
-  menu = loadImage("images/menu.jpg")
-  ingame = loadImage("images/echap.jpg")
+  imgset = loadImage("assets/img.webp")
+  menu = loadImage("assets/menu.jpg")
+  ingame = loadImage("assets/echap.jpg")
 }
 
 
