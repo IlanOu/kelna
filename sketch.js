@@ -12,6 +12,7 @@ function preload() {
 
   // JSON preload
   Maps = loadJSON("json/Maps.json");
+  World = loadJSON("json/World.json");
 }
 
 
