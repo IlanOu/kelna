@@ -1,10 +1,5 @@
 
-function keyPressed() {
-    if (keyCode === ESCAPE) {
-        isInPaused = !isInPaused
-    }
-}
-
+// FOR ECHAP
 
 let MenuEchap = () => {
 
