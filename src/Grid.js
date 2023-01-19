@@ -43,3 +43,31 @@ function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
   }
   return [positionX, positionY, gridWidth, gridHeight]
 }
+
+
+function drawaGrid(){
+
+  background(220);
+  stroke(0)
+
+  // récupérer le maximum de cases possible dans le canvas
+  let [maxNumberCasesX, maxNumberCasesY] = getNumberOfCasesInRect(
+    windowWidth,
+    windowHeight,
+    rectWidth,
+    rectHeight
+  )
+
+  // générer un tableau avec le maximum de cases possible
+  // let grid = createTable(maxNumberCasesX, maxNumberCasesY)
+  let grid = createTable(10, 10)
+  fill(255)
+
+  // afficher le tableau sous forme de grille en position 0,0
+  let gridX1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[0]
+  let gridY1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[1]
+  let gridX2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[2]
+  let gridY2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[3]
+
+  return [grid, gridX1, gridY1,gridX2, gridY2]
+}
