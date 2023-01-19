@@ -31,3 +31,8 @@ const gravityForce = 0.5;
 // Autre
 let isJumping = false;
 let spaceKeyIsPressed = false;
+
+// Pour que le joueur fasse echap
+let isInPaused = false;
+let isSettings = false;
+let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;

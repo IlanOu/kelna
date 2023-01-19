@@ -5,9 +5,9 @@ let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXSet, ButYSet, ButWSet,ButHSet, B
 
 
 function preload() {
-  IMGWaitToPlay = loadImage("enattente.webp")
-  IMGPlay = loadImage("lancegame.jpg")
-  IMGSetting = loadImage("settings.jpg")
+  IMGWaitToPlay = loadImage("images/enattente.webp")
+  IMGPlay = loadImage("images/lancegame.jpg")
+  IMGSetting = loadImage("images/settings.jpg")
 }
 
 
@@ -47,7 +47,7 @@ let WaitToPlay = () => {
     fill(255);
     textAlign(CENTER);
     textSize(32);
-    text("ATTENTE", width / 2, height / 2);
+    text("WAIT", width / 2, height / 2);
   
   
     fill(200);

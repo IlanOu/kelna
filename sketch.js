@@ -1,7 +1,14 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  PositionButtons()
 }
 
+
+function preload() {
+  imgset = loadImage("images/img.webp")
+  menu = loadImage("images/menu.jpg")
+  ingame = loadImage("images/echap.jpg")
+}
 
 
 function draw() {
@@ -100,4 +107,20 @@ function draw() {
                 characterPositionY, 
                 characterWidth, 
                 characterHeight)
+
+  // Si le joeuur appuie sur echap : 
+  if (isInPaused === false) {
+    IsGame()
+
+    // le jeu continue
+  }
+  if (isInPaused === true) {
+    MenuEchap()
+    // Menu echap apparait
+  }
+  if (isSettings === true) {
+    Settings()
+    // Menu setting
+  }      
+
 }

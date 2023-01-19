@@ -38,7 +38,6 @@ function keyPressed() {
   
 let YouDie = () => {
     background(0);
-    // image(IMGPlay, 0,0,width,height)
     fill(255);
     textAlign(CENTER);
     textSize(32);
