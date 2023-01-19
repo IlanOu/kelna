@@ -17,7 +17,8 @@ function draw() {
                                           )
   
   // générer un tableau avec le maximum de cases possible
-  let grid = createTable(maxNumberCasesX, maxNumberCasesY)
+  // let grid = createTable(maxNumberCasesX, maxNumberCasesY)
+  let grid = createTable(10, 10)
   
   fill(255)
   
