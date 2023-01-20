@@ -72,8 +72,16 @@ function drawGrid(){
   fill(255)
 
   // afficher le tableau sous forme de grille en position 0,0
-  let [gridX1, gridY1, gridX2, gridY2] = displayGrid(grid, 0, 0, rectWidth, rectHeight)
+  // let [gridX1, gridY1, gridX2, gridY2] = displayGrid(grid, 0, 0, rectWidth, rectHeight)
+  
+  let currentMapPlayerPosition = getCharacterCurrentGrid()
+  let [gridX1, gridY1, gridX2, gridY2] = displayGrid(currentMapPlayerPosition, 0, 0, rectWidth, rectHeight)
 
 
-  return [grid, gridX1, gridY1,gridX2, gridY2]
+  return [currentMapPlayerPosition, gridX1, gridY1,gridX2, gridY2]
+}
+
+function getCharacterCurrentGrid(){
+  let currentMap = World.world.worldsMap[characterInMapX][characterInMapY]
+  return Maps[currentMap].layers[1]
 }

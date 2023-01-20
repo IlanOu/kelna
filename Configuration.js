@@ -5,6 +5,9 @@ let rectHeight = 50;
 
 
 // caractéristiques du perso
+let characterInMapX = 0;
+let characterInMapY = 1;
+
 let characterPositionX = 0;
 let characterPositionY = 0;
 
@@ -39,3 +42,4 @@ let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButX
 
 // cartes du jeu
 let Maps;
+let World;

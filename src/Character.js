@@ -1,12 +1,17 @@
 // ajouter des controles à l'objet  
 function getMovementsControls (objectPositionX, speed){
-  if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+  // éviter de pouvoir aller à droite et à gauche en meme temps
+  if ((keyIsDown(68) && keyIsDown(81)) 
+  || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) 
+  || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
+  || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
+  {
+    return objectPositionX
+  } else if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
     return moveLeft(objectPositionX, speed)
-  }
-
-  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+  }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
     return moveRight(objectPositionX, speed)
-  }
+  } 
   return objectPositionX
 }
 
@@ -48,15 +53,15 @@ function drawCharacter (positionX, positionY, width, height) {
 
 function character(gridX1, gridX2, gridY2) {
 
-  // ajouter des contrôles au perso (gauche, droite)
+  // ajouter des contrôles au perso (gauche, droite) | inverser movesSpeed pour inverser le sens de deplacements
   characterPositionX = getMovementsControls(characterPositionX, characterMovesSpeed)
 
 
   // ajouter la gravité au personnage
   let gravityReturns = getPositionWithGravity(characterPositionY,
-    characterVelocityY,
-    gravityForce,
-    characterMass)
+                                              characterVelocityY,
+                                              gravityForce,
+                                              characterMass)
   characterPositionY = gravityReturns[0]
   characterVelocityY = gravityReturns[1]
 
@@ -72,9 +77,9 @@ function character(gridX1, gridX2, gridY2) {
       characterJumpCount++;
 
       let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
+                                characterJumpHeight,
+                                characterVelocityY,
+                                gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
 
@@ -85,9 +90,9 @@ function character(gridX1, gridX2, gridY2) {
       characterJumpCount++;
 
       let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
+                                characterJumpHeight,
+                                characterVelocityY,
+                                gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
     }
