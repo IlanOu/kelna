@@ -83,7 +83,6 @@ function character(gridX1, gridX2, gridY2) {
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
 
-
       // ajoute le double saut au personnage  
     } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
       characterDoubleJumping = false;
@@ -98,33 +97,31 @@ function character(gridX1, gridX2, gridY2) {
     }
   }
   // vérifier si le joueur touche le sol
-  characterIsGrounded = isGrounded(characterPositionY,
-    characterHeight,
-    gridX1,
-    gridY2,
-    gridX2)
+  characterIsGrounded = isGrounded( characterPositionY,
+                                    characterHeight,
+                                    gridX1,
+                                    gridY2,
+                                    gridX2)
 
+  // si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
     isJumping = false;
     characterJumpCount = 0
-  }
-
-
+   } 
+ 
   // contraindre les positions du perso
-  let positions = containedPositionsIn(characterPositionX,
-    characterPositionY,
-    characterWidth,
-    characterHeight,
-    gridX2,
-    gridY2)
+  let positions = containedPositionsIn( characterPositionX,
+                                        characterPositionY,
+                                        characterWidth,
+                                        characterHeight,
+                                        gridX2*2,
+                                        gridY2)
   characterPositionX = positions[0];
   characterPositionY = positions[1];
 
   // afficher le personnage
   drawCharacter(characterPositionX,
-    characterPositionY,
-    characterWidth,
-    characterHeight)
-
-
+                characterPositionY,
+                characterWidth,
+                characterHeight)
 }

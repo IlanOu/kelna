@@ -23,7 +23,7 @@ function createTable(columnNumber, rowNumber){
 
 
 // Affichage d'une grille à la position x et y, de la taille N par M;
-function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
+function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
   let gridWidth = 0
   let gridHeight = 0
   
@@ -68,20 +68,28 @@ function drawGrid(){
   // générer un tableau avec le maximum de cases possible
   // let grid = createTable(maxNumberCasesX, maxNumberCasesY)
   // let grid = createTable(10, 10)
-  let grid = Maps.map1.layers[1]
+  // let grid = Maps.map1.layers[1]
   fill(255)
 
   // afficher le tableau sous forme de grille en position 0,0
   // let [gridX1, gridY1, gridX2, gridY2] = displayGrid(grid, 0, 0, rectWidth, rectHeight)
   
-  let currentMapPlayerPosition = getCharacterCurrentGrid()
-  let [gridX1, gridY1, gridX2, gridY2] = displayGrid(currentMapPlayerPosition, 0, 0, rectWidth, rectHeight)
+  // prend la map sur laquelle est le joueur 
+  let currentMapPlayerPosition = getCurrentMap(characterPositionX, characterPositionY)
+  
+  // mettre la position de la grille à l'endroit où est le joueur 
+  let testX = World.worldsMap[0].indexOf(currentMapPlayerPosition.name)*500
 
+  // afficher la grille
+  let [gridY1, gridX1, gridX2, gridY2] = displayGrid(currentMapPlayerPosition.layers[1], testX, 0, rectWidth, rectHeight)
 
-  return [currentMapPlayerPosition, gridX1, gridY1,gridX2, gridY2]
+  return [currentMapPlayerPosition, gridX1, gridY1, gridX2, gridY2]
 }
 
-function getCharacterCurrentGrid(){
-  let currentMap = World.world.worldsMap[characterInMapX][characterInMapY]
-  return Maps[currentMap].layers[1]
+function getCurrentMap(x,y){
+  let currentMapPosX = Math.floor(x/(Maps.numberOfRow*Maps.tileWidth));
+  let currentMapPosY = Math.floor(y/(Maps.numberOfColumns*Maps.tileHeight));
+  
+  let currentMap = World.worldsMap[currentMapPosY][currentMapPosX]
+  return Maps[currentMap]
 }
