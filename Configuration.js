@@ -1,15 +1,25 @@
 // caractéristique de la grille
-let rectWidth = 50;
-let rectHeight = 50;
+let rectWidth = 20;
+let rectHeight = 20;
+
+let xStartWorld = 0;
+let yStartWorld = 0;
+
+let arrayMap = [];
 
 
 
 // caractéristiques du perso
 let characterInMapX = 0;
-let characterInMapY = 1;
+let characterInMapY = 0;
 
-let characterPositionX = 0;
-let characterPositionY = 0;
+
+
+let characterPositionX = 250;
+let characterPositionY = 250;
+
+let characterPositionXInScreen = 0;
+let characterPositionYInScreen = 0;
 
 let characterWidth = 60;
 let characterHeight = 60;
@@ -17,7 +27,7 @@ let characterHeight = 60;
 let characterMass = 50;
 let characterJumpHeight = 20;
 
-let characterMovesSpeed = 10;
+let characterMovesSpeed = 7;
 
 let characterVelocityY = 0;
 

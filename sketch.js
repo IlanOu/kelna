@@ -11,7 +11,11 @@ function preload() {
   ingame = loadImage("assets/echap.jpg")
 
   // JSON preload
-  Maps = loadJSON("json/Maps.json");
+  Maps = loadJSON("json/Maps.json", (e) => {
+    arrayMap.push(e.map1)
+    arrayMap.push(e.map2)
+    arrayMap.push(e.map8)
+  });
   World = loadJSON("json/World.json");
 }
 
@@ -19,9 +23,9 @@ function preload() {
 function draw() {
 
   if (isInPaused === false) {
-    // Si le joueur appuie sur echap : 
-    let gridReturns = drawGrid()
-    character(gridReturns[1], gridReturns[3], gridReturns[4])
+    // Si le joueur appuie sur echap :
+    drawGrid()
+    character()
   }
   if (isInPaused === true) {
     // Menu echap apparait

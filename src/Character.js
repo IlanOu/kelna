@@ -11,7 +11,7 @@ function getMovementsControls (objectPositionX, speed){
     return moveLeft(objectPositionX, speed)
   }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
     return moveRight(objectPositionX, speed)
-  } 
+  }
   return objectPositionX
 }
 
@@ -45,17 +45,46 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce){
 
 // dessiner le perso
 function drawCharacter (positionX, positionY, width, height) {
-  fill('red')
+  fill('black')
   ellipse(positionX, positionY, width, height)
 }
 
 
 
-function character(gridX1, gridX2, gridY2) {
+function character() {
+
+  
+
 
   // ajouter des contrôles au perso (gauche, droite) | inverser movesSpeed pour inverser le sens de deplacements
   characterPositionX = getMovementsControls(characterPositionX, characterMovesSpeed)
 
+
+  // caméra mouvements droite
+  if (characterPositionX < width-width/4){
+    characterPositionXInScreen = characterPositionX
+  }else{
+    if (xStartWorld+((rectWidth*Maps.numberOfRow)*World.worldsMap[0].length)-(rectWidth*Maps.numberOfRow*2) > 0){
+      xStartWorld -= characterMovesSpeed
+      characterPositionX -= characterMovesSpeed
+    }
+  }
+
+  // caméra mouvements gauche
+  if (characterPositionX > width/4){
+    characterPositionXInScreen = characterPositionX
+  }else{
+    if (xStartWorld < 0){
+      xStartWorld += characterMovesSpeed
+      characterPositionX += characterMovesSpeed
+    }
+  }
+
+  // caméra mouvements bas
+  if (characterPositionY > height-height/8){
+    yStartWorld -= characterVelocityY
+  }
+  
 
   // ajouter la gravité au personnage
   let gravityReturns = getPositionWithGravity(characterPositionY,
@@ -99,9 +128,9 @@ function character(gridX1, gridX2, gridY2) {
   // vérifier si le joueur touche le sol
   characterIsGrounded = isGrounded( characterPositionY,
                                     characterHeight,
-                                    gridX1,
-                                    gridY2,
-                                    gridX2)
+                                    0,
+                                    height,
+                                    width)
 
   // si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
@@ -114,13 +143,13 @@ function character(gridX1, gridX2, gridY2) {
                                         characterPositionY,
                                         characterWidth,
                                         characterHeight,
-                                        gridX2*2,
-                                        gridY2)
+                                        width,
+                                        height)
   characterPositionX = positions[0];
   characterPositionY = positions[1];
 
   // afficher le personnage
-  drawCharacter(characterPositionX,
+  drawCharacter(characterPositionXInScreen,
                 characterPositionY,
                 characterWidth,
                 characterHeight)
