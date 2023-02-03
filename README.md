@@ -12,13 +12,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="[images/logo.png](https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/vibrant-sunflower-sticker-30284-550x550.png)" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">VIDEO GAME 2D</h3>
 
   <p align="center">
-    Welcome to the project : " " from the studio " " !
+    Welcome to the project : " " from the studio Sunflower !
     <br>
     You are currently reading the documentation, happy reading :)
   </p>
