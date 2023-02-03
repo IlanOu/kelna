@@ -1,10 +1,15 @@
 // ajouter des controles à l'objet  
 function getMovementsControls (objectPositionX, speed){
-  if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+  // éviter de pouvoir aller à droite et à gauche en meme temps
+  if ((keyIsDown(68) && keyIsDown(81)) 
+  || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) 
+  || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
+  || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
+  {
+    return objectPositionX
+  } else if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
     return moveLeft(objectPositionX, speed)
-  }
-
-  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+  }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
     return moveRight(objectPositionX, speed)
   }
   return objectPositionX
@@ -40,23 +45,52 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce){
 
 // dessiner le perso
 function drawCharacter (positionX, positionY, width, height) {
-  fill('red')
+  fill('black')
   ellipse(positionX, positionY, width, height)
 }
 
 
 
-function character(gridX1, gridX2, gridY2) {
+function character() {
 
-  // ajouter des contrôles au perso (gauche, droite)
+  
+
+
+  // ajouter des contrôles au perso (gauche, droite) | inverser movesSpeed pour inverser le sens de deplacements
   characterPositionX = getMovementsControls(characterPositionX, characterMovesSpeed)
 
 
+  // caméra mouvements droite
+  if (characterPositionX < width-width/4){
+    characterPositionXInScreen = characterPositionX
+  }else{
+    if (xStartWorld+((rectWidth*Maps.numberOfRow)*World.worldsMap[0].length)-(rectWidth*Maps.numberOfRow*2) > 0){
+      xStartWorld -= characterMovesSpeed
+      characterPositionX -= characterMovesSpeed
+    }
+  }
+
+  // caméra mouvements gauche
+  if (characterPositionX > width/4){
+    characterPositionXInScreen = characterPositionX
+  }else{
+    if (xStartWorld < 0){
+      xStartWorld += characterMovesSpeed
+      characterPositionX += characterMovesSpeed
+    }
+  }
+
+  // caméra mouvements bas
+  if (characterPositionY > height-height/8){
+    yStartWorld -= characterVelocityY
+  }
+  
+
   // ajouter la gravité au personnage
   let gravityReturns = getPositionWithGravity(characterPositionY,
-    characterVelocityY,
-    gravityForce,
-    characterMass)
+                                              characterVelocityY,
+                                              gravityForce,
+                                              characterMass)
   characterPositionY = gravityReturns[0]
   characterVelocityY = gravityReturns[1]
 
@@ -72,12 +106,11 @@ function character(gridX1, gridX2, gridY2) {
       characterJumpCount++;
 
       let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
+                                characterJumpHeight,
+                                characterVelocityY,
+                                gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
-
 
       // ajoute le double saut au personnage  
     } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
@@ -85,41 +118,39 @@ function character(gridX1, gridX2, gridY2) {
       characterJumpCount++;
 
       let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
+                                characterJumpHeight,
+                                characterVelocityY,
+                                gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
     }
   }
   // vérifier si le joueur touche le sol
-  characterIsGrounded = isGrounded(characterPositionY,
-    characterHeight,
-    gridX1,
-    gridY2,
-    gridX2)
+  characterIsGrounded = isGrounded( characterPositionY,
+                                    characterHeight,
+                                    0,
+                                    height,
+                                    width)
 
+  // si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
     isJumping = false;
     characterJumpCount = 0
-  }
-
-
+   } 
+ 
   // contraindre les positions du perso
-  let positions = containedPositionsIn(characterPositionX,
-    characterPositionY,
-    characterWidth,
-    characterHeight,
-    gridX2,
-    gridY2)
+  let positions = containedPositionsIn( characterPositionX,
+                                        characterPositionY,
+                                        characterWidth,
+                                        characterHeight,
+                                        width,
+                                        height)
   characterPositionX = positions[0];
   characterPositionY = positions[1];
 
   // afficher le personnage
-  drawCharacter(characterPositionX,
-    characterPositionY,
-    characterWidth,
-    characterHeight)
-
-
+  drawCharacter(characterPositionXInScreen,
+                characterPositionY,
+                characterWidth,
+                characterHeight)
 }

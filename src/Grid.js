@@ -1,29 +1,6 @@
-// Obtenir le nombre maximum de cases dans le rectangle
-function getNumberOfCasesInRect(bigRectWidth, bigRectHeight, rectWidth, rectHeight){
-  let numberOfCasesX = Math.floor(bigRectWidth/rectWidth)
-  let numberOfCasesY = Math.floor(bigRectHeight/rectHeight)
-  
-  return [numberOfCasesX, numberOfCasesY]
-}
-
-
-// création d'une grille de N colonnes et M lignes 
-function createTable(columnNumber, rowNumber){
-  let grid = []
-  
-  for (let x=0; x<columnNumber; x++){
-    let row = []
-    for(let y=0; y<rowNumber; y++){
-      row.push(0)
-    }
-    grid.push(row)
-  }
-  return grid
-}
-
 
 // Affichage d'une grille à la position x et y, de la taille N par M;
-function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
+function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
   let gridWidth = 0
   let gridHeight = 0
   
@@ -32,9 +9,16 @@ function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
   
   for (let x=0; x<grid.length; x++){
     for(let y=0; y<grid[x].length; y++){
+      
+      if(grid[x][y] === 0){
+        fill(color(255, 255, 255));
+      }else if (grid[x][y] === 1) {
+          fill(color(255, 0, 0));
+      }
+
       rect(
-        positionX+x*rectWidth,
-        positionY+y*rectHeight,
+        positionY+y*rectWidth,
+        positionX+x*rectHeight,
         rectWidth,
         rectHeight
       )
@@ -45,7 +29,60 @@ function displayGrid(grid, positionX, positionY, rectWidth, rectHeight){
 }
 
 
-function drawaGrid(){
+function drawGrid(){
+
+  arrayMap = []
+
+  let currentMap = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+
+  // Dessiner la map et les chunks autour
+    
+  // Milieu Milieu
+  arrayMap.push(World.worldsMap[currentMap[1]][currentMap[0]])
+
+  // Milieu Gauche 
+  if (currentMap[0]-1 >= 0){
+    arrayMap.push(World.worldsMap[currentMap[1]][currentMap[0]-1])
+  }
+
+  // Milieu Droite
+  if (currentMap[0]+1 < World.worldsMap[0].length ){
+    arrayMap.push(World.worldsMap[currentMap[1]][currentMap[0]+1])
+  }
+
+  // Milieu Bas
+  if(currentMap[1]+1 < World.worldsMap.length){
+    arrayMap.push(World.worldsMap[currentMap[1]+1][currentMap[0]])
+  }
+
+  // Milieu Haut
+  if (currentMap[1]-1 >= 0){
+    arrayMap.push(World.worldsMap[currentMap[1]-1][currentMap[0]])
+  }
+
+  // Milieu Haut Gauche
+  if (currentMap[1]-1 >= 0 && currentMap[0]-1 >= 0){
+    arrayMap.push(World.worldsMap[currentMap[1]-1][currentMap[0]-1])
+  }
+
+  // Milieu Haut Droite
+  if (currentMap[1]-1 >= 0 && currentMap[0]+1 < World.worldsMap[0].length){
+    arrayMap.push(World.worldsMap[currentMap[1]-1][currentMap[0]+1])
+  }
+
+  // Milieu Bas Droite
+  if (currentMap[1]+1 < World.worldsMap.length && currentMap[0]+1 < World.worldsMap[0].length){
+    arrayMap.push(World.worldsMap[currentMap[1]+1][currentMap[0]+1])
+  }
+
+  // Milieu Bas Gauche
+  if (currentMap[1]+1 < World.worldsMap.length && currentMap[0]-1 >= 0){
+    arrayMap.push(World.worldsMap[currentMap[1]+1][currentMap[0]-1])
+  }
+
+
+
+
 
   background(220);
   stroke(0)
@@ -58,16 +95,31 @@ function drawaGrid(){
     rectHeight
   )
 
-  // générer un tableau avec le maximum de cases possible
-  // let grid = createTable(maxNumberCasesX, maxNumberCasesY)
-  let grid = createTable(10, 10)
+  
   fill(255)
 
-  // afficher le tableau sous forme de grille en position 0,0
-  let gridX1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[0]
-  let gridY1 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[1]
-  let gridX2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[2]
-  let gridY2 = displayGrid(grid, 0, 0, rectWidth, rectHeight)[3]
+  
+  
+  arrayMap.forEach(element => {
+    
 
-  return [grid, gridX1, gridY1,gridX2, gridY2]
+    let indexMap = findIndexValueIn2dArray(World.worldsMap, Maps[element].name)
+    // console.log(indexMap)
+    // indexMap : [y, x]
+    let gridWidthPx = rectWidth*Maps.numberOfRow
+    let gridHeightPx = rectHeight*Maps.numberOfColumns
+    displayGrid(Maps[element].layers[1], xStartWorld+gridWidthPx*indexMap[1], yStartWorld+gridHeightPx*indexMap[0], rectWidth, rectHeight)
+    
+  
+  });
+  
+  
+  // let [gridY1, gridX1, gridX2, gridY2] = displayGrid(Maps.map1.layers[1], 0, 520, rectWidth, rectHeight)
+
+
+
+
+
+  // return [currentMapPlayerPosition, gridX1, gridY1, gridX2, gridY2]
 }
+
