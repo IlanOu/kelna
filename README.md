@@ -11,9 +11,8 @@
 <!-- LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="[images/logo.png](https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/vibrant-sunflower-sticker-30284-550x550.png)" alt="Logo" width="80" height="80">
-  </a>
+    
+  <img src="https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/vibrant-sunflower-sticker-30284-550x550.png" alt="Logo" width="80" height="80">
 
   <h3 align="center">VIDEO GAME 2D</h3>
 
