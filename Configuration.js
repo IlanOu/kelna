@@ -18,8 +18,10 @@ let characterInMapY = 0;
 let characterPositionX = 250;
 let characterPositionY = 250;
 
+
 let characterPositionXInScreen = 0;
 let characterPositionYInScreen = 0;
+
 
 let characterWidth = 60;
 let characterHeight = 60;
@@ -36,6 +38,8 @@ let characterIsGrounded = false;
 let characterJumpCount = 0;
 let characterMaxJumps = 2;
 let characterDoubleJumping = false;
+
+
 
 // physique
 const gravityForce = 0.5;

@@ -1,13 +1,3 @@
-// function getCurrentMap(Array , x,y){
-//     let currentMapPosX = Math.floor(x/(Array.numberOfRow*rectWidth));
-//     let currentMapPosY = Math.floor(y/(Array.numberOfColumns*rectHeight));
-
-//     let currentMap = World.worldsMap[currentMapPosY][currentMapPosX]
-//     return Array[currentMap]
-// }
-
-
-
 // Obtenir le nombre maximum de cases dans le rectangle
 function getNumberOfCasesInRect(bigRectWidth, bigRectHeight, rectWidth, rectHeight){
     let numberOfCasesX = Math.floor(bigRectWidth/rectWidth)
@@ -47,13 +37,13 @@ function findIndexValueIn2dArray(array, value){
 
 
 let previous_index_pos;
-function findIndexOfPositionIn2dArray(posX,posY,array,sideArrayX,sideArrayY){
+function findIndexOfPositionIn2dArray(posX,posY,array,ArrayWidth,ArrayHeight){
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
-            let minX = xStartWorld + sideArrayX * column;
-            let minY = yStartWorld + sideArrayY * row ;
-            let maxX = xStartWorld + sideArrayX * (column + 1);
-            let maxY = yStartWorld + sideArrayY * (row + 1);
+            let minX = xStartWorld + ArrayWidth * column;
+            let minY = yStartWorld + ArrayHeight * row ;
+            let maxX = xStartWorld + ArrayWidth * (column + 1);
+            let maxY = yStartWorld + ArrayHeight * (row + 1);
 
                   
             if (posX > minX && posX < maxX && posY > minY && posY < maxY) {
@@ -65,3 +55,13 @@ function findIndexOfPositionIn2dArray(posX,posY,array,sideArrayX,sideArrayY){
     return previous_index_pos;
 }
 
+
+function rectIsInRect(Object1X, Object1Y, Object1Width, Object1Height, Object2X, Object2Y, Object2Width, Object2Height) {
+    // Vérifier si les boîtes se chevauchent
+
+    return (Object1X + Object1Width >= Object2X &&
+    Object2X + Object2Width >= Object1X &&
+    Object1Y + Object1Height >= Object2Y &&
+    Object2Y + Object2Height >= Object1Y);
+    
+}

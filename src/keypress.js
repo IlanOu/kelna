@@ -8,6 +8,7 @@ function keyPressed() {
 
 
     if (keyCode === 32) {
+        
         spaceKeyIsPressed = true;
     }
 }

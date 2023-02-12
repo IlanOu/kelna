@@ -88,12 +88,12 @@ function drawGrid(){
   stroke(0)
 
   // récupérer le maximum de cases possible dans le canvas
-  let [maxNumberCasesX, maxNumberCasesY] = getNumberOfCasesInRect(
-    windowWidth,
-    windowHeight,
-    rectWidth,
-    rectHeight
-  )
+  // let [maxNumberCasesX, maxNumberCasesY] = getNumberOfCasesInRect(
+  //   windowWidth,
+  //   windowHeight,
+  //   rectWidth,
+  //   rectHeight
+  // )
 
   
   fill(255)
