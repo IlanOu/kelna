@@ -8,14 +8,13 @@ function containedPositionsIn (objectPositionX,
 {
   return  [constrain(
             objectPositionX, 
-            objectWidth / 2, 
-            containerWidth - objectWidth / 2
+            0, 
+            containerWidth-objectWidth
           ), 
           constrain(
             objectPositionY, 
-            objectHeight / 2, 
-            containerHeight - 
-            objectHeight / 2
+            0,
+            containerHeight-objectHeight
           )]
 }
 

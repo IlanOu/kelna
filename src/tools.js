@@ -56,12 +56,9 @@ function findIndexOfPositionIn2dArray(posX,posY,array,ArrayWidth,ArrayHeight){
 }
 
 
-function rectIsInRect(Object1X, Object1Y, Object1Width, Object1Height, Object2X, Object2Y, Object2Width, Object2Height) {
-    // Vérifier si les boîtes se chevauchent
-
-    return (Object1X + Object1Width >= Object2X &&
-    Object2X + Object2Width >= Object1X &&
-    Object1Y + Object1Height >= Object2Y &&
-    Object2Y + Object2Height >= Object1Y);
-    
-}
+function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, rect2Width, rect2Height) {
+    return (rect1X < rect2X + rect2Width &&
+            rect1X + rect1Width > rect2X &&
+            rect1Y < rect2Y + rect2Height &&
+            rect1Height + rect1Y > rect2Y);
+  }

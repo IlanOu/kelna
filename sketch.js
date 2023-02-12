@@ -25,6 +25,8 @@ function draw() {
   if (isInPaused === false) {
     // Si le joueur appuie sur echap :
     drawGrid()
+    previousPlayerX = characterPositionX
+    previousPlayerY = characterPositionY
     character()
   }
   if (isInPaused === true) {

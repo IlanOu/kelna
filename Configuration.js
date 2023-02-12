@@ -1,6 +1,6 @@
 // caractéristique de la grille
-let rectWidth = 20;
-let rectHeight = 20;
+let rectWidth = 50 ;
+let rectHeight = 50 ;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
@@ -18,6 +18,9 @@ let characterInMapY = 0;
 let characterPositionX = 250;
 let characterPositionY = 250;
 
+let previousPlayerX = 0;
+let previousPlayerY = 0
+
 
 let characterPositionXInScreen = 0;
 let characterPositionYInScreen = 0;
@@ -29,7 +32,7 @@ let characterHeight = 60;
 let characterMass = 50;
 let characterJumpHeight = 20;
 
-let characterMovesSpeed = 7;
+let characterMovesSpeed = 3;
 
 let characterVelocityY = 0;
 
