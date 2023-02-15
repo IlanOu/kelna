@@ -25,7 +25,6 @@ function createTable(columnNumber, rowNumber){
 function findIndexValueIn2dArray(array, value){
       for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
-            // alert(array)      
             if (value === array[column][row]) {
                 return [column,row];
                   
@@ -62,3 +61,33 @@ function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, r
             rect1Y < rect2Y + rect2Height &&
             rect1Height + rect1Y > rect2Y);
   }
+
+
+
+
+// contraindre les position X, Y dans le containeur
+function containedPositionsIn ( objectPositionX, 
+                                objectPositionY, 
+                                objectWidth, 
+                                objectHeight, 
+                                containerWidth, 
+                                containerHeight) 
+{
+    return [constrain(  objectPositionX, 
+                        0, 
+                        containerWidth-objectWidth), 
+            constrain(  objectPositionY, 
+                        0,
+                        containerHeight-objectHeight)]  
+}
+
+// ajouter la gravité à la positionY !! ATTENTION, la velocité doit être ACTUALISEE !
+function getPositionWithGravity(positionY, velocityY, gravityForce, objectMass){
+    velocityY += (gravityForce*objectMass)/20;
+    positionY += velocityY;
+    return [positionY, velocityY]
+}
+
+function isGrounded(objectPositionX, objectPositionY, objectWidth, objectHeight, groundX1, groundY1, groundX2){
+    return rectIsInRect(objectPositionX, objectPositionY+objectHeight-1, objectWidth, objectHeight, groundX1, groundY1, groundX2, groundY1)
+}

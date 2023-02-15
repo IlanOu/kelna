@@ -108,7 +108,7 @@ function drawGrid(){
     // indexMap : [y, x]
     let gridWidthPx = rectWidth*Maps.numberOfRow
     let gridHeightPx = rectHeight*Maps.numberOfColumns
-    displayGrid(Maps[element].layers[1], xStartWorld+gridWidthPx*indexMap[1], yStartWorld+gridHeightPx*indexMap[0], rectWidth, rectHeight)
+    displayGrid(Maps[element].layers[1], xStartWorld+(gridWidthPx*indexMap[1]), yStartWorld+(gridHeightPx*indexMap[0]), rectWidth, rectHeight)
     
   
   });
