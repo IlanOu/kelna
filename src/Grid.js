@@ -11,17 +11,19 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
     for(let y=0; y<grid[x].length; y++){
       
       if(grid[x][y] === 0){
-        fill(color(255, 255, 255));
+        // fill(color(255, 255, 255));
+        image(sky, positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
       }else if (grid[x][y] === 1) {
-          fill(color(255, 0, 0));
+        image(stoneBrick, positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
+        // fill(color(255, 0, 0));
       }
 
-      rect(
-        positionY+y*rectWidth,
-        positionX+x*rectHeight,
-        rectWidth,
-        rectHeight
-      )
+      // rect(
+      //   positionY+y*rectWidth,
+      //   positionX+x*rectHeight,
+      //   rectWidth,
+      //   rectHeight
+      // )
       
     }
   }

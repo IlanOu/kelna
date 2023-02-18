@@ -3,12 +3,6 @@ let isSettings = false;
 let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
 
 
-function preload() {
-  imgset = loadImage("img.webp")
-  menu = loadImage("menu.jpg")
-  ingame = loadImage("echap.jpg")
-}
-
 
 function setup() {
   createCanvas(800, 600);

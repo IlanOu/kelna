@@ -4,13 +4,6 @@ let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXSet, ButYSet, ButWSet,ButHSet, B
 
 
 
-function preload() {
-  IMGWaitToPlay = loadImage("images/enattente.webp")
-  IMGPlay = loadImage("images/lancegame.jpg")
-  IMGSetting = loadImage("images/settings.jpg")
-}
-
-
 function setup() {
   createCanvas(800, 600);
   PositionButtons()

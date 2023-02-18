@@ -4,6 +4,9 @@ function keyPressed() {
     
     if (keyCode === ESCAPE) {
         isInPaused = !isInPaused
+        if (!isInPaused){
+            isSettings = false
+        }
     }
 
 

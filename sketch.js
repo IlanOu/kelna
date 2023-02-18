@@ -1,6 +1,14 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let viewportDisplayWidth = 1920
+  let viewportDisplayHeight = 1080
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight){
+    viewportDisplayWidth = windowWidth
+    viewportDisplayHeight = windowHeight
+  }
+
+  createCanvas(viewportDisplayWidth, viewportDisplayHeight);
   PositionButtons()
+
 }
 
 
@@ -9,6 +17,16 @@ function preload() {
   imgset = loadImage("assets/img.webp")
   menu = loadImage("assets/menu.jpg")
   ingame = loadImage("assets/echap.jpg")
+
+  // Textures
+  stone = loadImage("assets/textures/Pierre.jpg")
+  stoneBrick = loadImage("assets/textures/BriqueRouge.png")
+  sky = loadImage("assets/textures/Sky.jpg")
+
+  // Personnage
+  characterTextureIdle = loadImage("assets/animations/IdleBase.png")
+  characterTextureWalk = loadImage("assets/animations/WalkBase.png")
+  characterTextureJump = loadImage("assets/animations/JumpBase.png")
 
   // JSON preload
   Maps = loadJSON("json/Maps.json", (e) => {
@@ -22,19 +40,19 @@ function preload() {
 
 function draw() {
 
-  if (isInPaused === false) {
-    // Si le joueur appuie sur echap :
-    drawGrid()
-    
-    character()
-  }
-  if (isInPaused === true) {
+  if (isInPaused) {
     // Menu echap apparait
     MenuEchap()
+    if (isSettings) {
+      // Menu setting
+      Settings()
+    }
   }
-  if (isSettings === true) {
-    // Menu setting
-    Settings()
-  }      
+  else {
+    // Si le joueur appuie sur echap :
+    drawGrid()
+    character()
+  }
+        
 
 }

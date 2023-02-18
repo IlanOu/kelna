@@ -46,121 +46,128 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce){
 
 
 //& dessiner le perso
-function drawCharacter (positionX, positionY, width, height) {
-  fill('black')
-  rect(positionX, positionY, width, height)
+function drawCharacter (positionX, positionY, width, height, direction, movement) {
+  let timer = (round(millis()/100)) % 2
+
+  characterTextureList = []
+  
+
+
+  //? animation MARCHER
+  if (movement == "walk"){
+    
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTextureWalk.get(x, y, 320, 320));
+      }
+    }
+
+  //? animation IDLE
+  }else if (movement == "idle"){
+
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTextureIdle.get(x, y, 320, 320));
+      }
+    }
+    
+  }
+  //? animation JUMP
+  else if (movement == "jump"){
+
+  for (let y = 0; y < 320; y += 320) {
+    for (let x = 0; x < 960; x += 320) {
+      characterTextureList.push(characterTextureJump.get(x, y, 320, 320));
+    }
+  }
+  
+}
+
+  //? Changer de frame
+  if (timer && !characterAnimationFramePassed){
+    characterAnimationIndex++
+    characterAnimationFramePassed = true
+  }
+  if (!timer){
+    characterAnimationFramePassed = false
+  }
+  //? Remettre l'index au début 
+  if (characterAnimationIndex >= characterTextureList.length){
+    characterAnimationIndex = 0
+  }
+
+  let characterCurrentTexture = characterTextureList[characterAnimationIndex]
+
+
+  //? direction DROITE
+  if (direction == "right"){
+    image(characterCurrentTexture, positionX, positionY, width, height)
+  
+  //? direction GAUCHE
+  }else if (direction == "left"){
+    scale(-1, 1)
+    image(characterCurrentTexture, -positionX-width, positionY, width, height)
+  }
+ 
 }
 
 
 //& Collisions
 function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
-  
+
   //* Vérifier si les boîtes se chevauchent
   
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
 
-    let collideOnBorder = false;
-    let collideOnTopOrBot = false;
-
-    
-    
     
     //~ Collisions dessus / dessous de l'objet
-    if (!collideOnBorder){
-      
-      //? collisions au dessous de l'objet
-      if (agentY < objectY + objectHeight && agentY - objectY >= objectHeight){
-        agentY = objectY + objectHeight - 5000
-        collideOnTopOrBot = true
-        fill(255,255,0)
-        
+    if ((agentX < objectX + objectWidth - (objectWidth/10)) && (agentX + agentWidth > objectX + (objectWidth/10))){
+      //? collisions en dessous de l'objet
+      if (agentY < objectY + objectHeight && agentY > objectY){
+        agentY = objectY + objectHeight
+
+        //! est relatif au perso
+        characterVelocityY = 0;
+        // fill(0,0,0)
       }
       //? collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY){
-        fill(105,25,225)
-        collideOnTopOrBot = true
+        // fill(255,0,0)
 
         agentY = objectY - agentHeight
 
-        characterIsGrounded = true
+        //! est relatif au perso
         characterJumpCount = 0;
+        //! est relatif au perso
         isJumping = false
+        //! est relatif au perso
         if (!spaceKeyIsPressed)
         characterVelocityY = 0
-      }
-      
-      
+      }      
     }
     
 
     //~ Collisions gauche / droite de l'objet
-    if (!collideOnTopOrBot){
-      //? si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
-      if (agentY + agentHeight > objectY + objectHeight / 10){
+    //? si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
+    if ((agentY < objectY + objectHeight - (objectHeight/10)) && (agentY + agentHeight > objectY + (objectHeight/10))){
+      
+      //? collisions à droite de l'objet
+      if (agentX + agentWidth > objectX && agentX > objectX){
         
-        //? collisions à droite de l'objet
-        if (agentX + agentWidth > objectX && agentX > objectX){
-          
-          fill(3, 158, 160)
-          agentX = objectX + objectWidth
-          collideOnBorder = true
-        //? collisions à gauche de l'objet
-        }else if (agentX < objectX + objectWidth && agentX < objectX){
-          fill(100, 158, 10)
-          agentX = objectX - agentWidth
-          collideOnBorder = true
-        }
+        // fill(0, 255, 0)
+        agentX = objectX + objectWidth
+
+      //? collisions à gauche de l'objet
+      }else if (agentX < objectX + objectWidth && agentX < objectX){
+        // fill(0, 0, 255)
+        agentX = objectX - agentWidth
       }
     }
     
-    
-
-    // // //? si le bas de mon perso est en dessous du haut de mon cube (si je suis posé sur un cube)
-    // // if (agentY + agentHeight > objectY && agentY + agentHeight < objectY + objectHeight){
-
-
-    // //   if (!spaceKeyIsPressed){
-    // //     characterIsGrounded = true;
-    // //     characterJumpCount = 0;
-    // //     isJumping = false;
-    // //     characterVelocityY = 0;
-
-    // //     //? je suis sur le cube
-    // //     agentY = objectY - agentHeight;
-    // //   }
-     
-     
-    // //   fill(0, 0, 255)
-       
-    // // }
-    // // //? si le haut de mon perso est au dessus du bas de mon cube
-    // // //? et que le bas de mon perso est au dessous du bas de mon cube (si je saute sous un cube)
-    // // else if(agentY < objectY + objectHeight && agentY + agentHeight > objectY + objectHeight){
-    
-    // //   if (agentY < objectY + objectHeight){
-    // //     agentY = objectY + objectHeight
-    // //     fill(255,0,255)
-    // //   }
-
-    // // }else{
-    // //   //? si mon perso est à gauche du cube 
-    // //   if (agentX < objectX + objectWidth && agentX > objectX){
-        
-    // //     //? le perso est à gauche du cube
-    // //     agentX = objectX + objectWidth
-    // //   }else if (agentX + agentWidth > objectX  && agentX < objectX){
-    // //     //? le perso est à droite du cube
-    // //     agentX = objectX - agentWidth
-    // //   }
-    // // }
 
     
-  
-    
-
-    
-    rect(objectX, objectY, objectWidth, objectHeight)
-    fill(255, 255, 255)
+    // rect(objectX, objectY, objectWidth, objectHeight)
+    // fill(255, 255, 255)
     
   }
   return [agentX, agentY]
@@ -212,6 +219,9 @@ function character() {
   if (characterPositionY > height-height/8){
     yStartWorld -= characterVelocityY
   }
+  if (characterPositionY > height - height/4){
+    yStartWorld -= 10
+  }
   
   //#endregion
 
@@ -257,13 +267,13 @@ function character() {
     }
   }
   //^ vérifie si le joueur touche le sol
-  characterIsGrounded = isGrounded( characterPositionX,
-                                    characterPositionY,
-                                    characterWidth,
-                                    characterHeight,
-                                    0,
-                                    height,
-                                    width)
+  // characterIsGrounded = isGrounded( characterPositionX,
+  //                                   characterPositionY,
+  //                                   characterWidth,
+  //                                   characterHeight,
+  //                                   0,
+  //                                   100,
+  //                                   width)
 
   //^ si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
@@ -309,11 +319,11 @@ function character() {
       let thisObjectX = ((rectWidth*Maps.numberOfRow)*(currentMapInWorld[0])) + (xStartWorld + (rectWidth*column))
       let thisObjectY = ((rectHeight*Maps.numberOfColumns)*(currentMapInWorld[1])) + (yStartWorld + (rectHeight*row))
 
-      rect(thisObjectX, thisObjectY, 10, 10)
+      // rect(thisObjectX, thisObjectY, 10, 10)
 
 
       if (thisObject > 0){
-        [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterWidth, characterHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
       }
     }
   }
@@ -324,8 +334,39 @@ function character() {
 
 
   //~ affichage du personnage
-  drawCharacter(characterPositionX,
+  
+  if (isJumping){
+    if (previousPlayerX < characterPositionX){
+      characterDirection = "right"
+      characterMovement = "jump"
+    }else if (previousPlayerX > characterPositionX){
+      characterDirection = "left"
+      characterMovement = "jump"
+    }else{
+      characterDirection = characterLastDirection
+      characterMovement = "jump"
+    }
+  }else{
+    if (previousPlayerX < characterPositionX){
+      characterDirection = "right"
+      characterMovement = "walk"
+    }else if (previousPlayerX > characterPositionX){
+      characterDirection = "left"
+      characterMovement = "walk"
+    }else{
+      characterDirection = characterLastDirection
+      characterMovement = "idle"
+    }
+  }
+
+  
+
+  characterLastDirection = characterDirection
+
+  drawCharacter(characterPositionX-(characterWidth-characterBoundingBoxWidth)/2,
                 characterPositionY,
                 characterWidth,
-                characterHeight)
+                characterHeight,
+                characterDirection,
+                characterMovement)
 }
