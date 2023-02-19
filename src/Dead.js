@@ -16,7 +16,7 @@ function draw() {
     
     
   } if (ViePlayer === 0) {
-      YouDie()
+    YouDie()
     
     
   } if (isMenu === true){
@@ -42,7 +42,6 @@ let YouDie = () => {
     textAlign(CENTER);
     textSize(32);
     text("VOUS ETES MORT", width / 2, height / 2);
-  
   
   
     fill(200);

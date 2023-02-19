@@ -1,20 +1,80 @@
 //& ajouter des controles à l'objet  
-function getMovementsControls (objectPositionX, speed){
+function getMovementsControls (objectPositionX, objectPositionY, speed){
 
-  //* éviter de pouvoir aller à droite et à gauche en meme temps
+  if (EngineOne){
 
-  if ((keyIsDown(68) && keyIsDown(81)) 
-  || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) 
-  || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
-  || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
-  {
+    //~ Gauche Droite
+    //* éviter de pouvoir aller à droite et à gauche en meme temps
+    if ((keyIsDown(38) && keyIsDown(81)) 
+    || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) 
+    || (keyIsDown(38) && keyIsDown(LEFT_ARROW))
+    || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
+    {
+      return objectPositionX
+    } else if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+      return moveLeft(objectPositionX, speed)
+    }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+      return moveRight(objectPositionX, speed)
+    }
+
     return objectPositionX
-  } else if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
-    return moveLeft(objectPositionX, speed)
-  }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-    return moveRight(objectPositionX, speed)
+  }else{
+
+    //^ réduire la vitesse des diagonales
+    if (( keyIsDown(68) && keyIsDown(83)) ||
+          keyIsDown(68) && keyIsDown(DOWN_ARROW)||
+          keyIsDown(68) && keyIsDown(90) ||
+          keyIsDown(68) && keyIsDown(UP_ARROW) ||
+          keyIsDown(81) && keyIsDown(83) ||
+          keyIsDown(81) && keyIsDown(DOWN_ARROW)||
+          keyIsDown(81) && keyIsDown(90) ||
+          keyIsDown(81) && keyIsDown(UP_ARROW) ||
+          keyIsDown(RIGHT_ARROW) && keyIsDown(83) ||
+          keyIsDown(RIGHT_ARROW) && keyIsDown(DOWN_ARROW)||
+          keyIsDown(RIGHT_ARROW) && keyIsDown(90) ||
+          keyIsDown(RIGHT_ARROW) && keyIsDown(UP_ARROW) ||
+          keyIsDown(LEFT_ARROW) && keyIsDown(83) ||
+          keyIsDown(LEFT_ARROW) && keyIsDown(DOWN_ARROW)||
+          keyIsDown(LEFT_ARROW) && keyIsDown(90) ||
+          keyIsDown(LEFT_ARROW) && keyIsDown(UP_ARROW)){
+      speed /= 1.25
+    }
+
+
+    //~ Gauche Droite
+    if ((keyIsDown(68) && keyIsDown(81)) 
+    || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) 
+    || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
+    || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
+    {
+      objectPositionX = objectPositionX
+    }
+    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+      objectPositionX = moveLeft(objectPositionX, speed)
+    }
+    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+      objectPositionX = moveRight(objectPositionX, speed)
+    }
+    
+    //~Haut Bas
+    if ((keyIsDown(90) && keyIsDown(83)) 
+    || (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW)) 
+    || (keyIsDown(90) && keyIsDown(DOWN_ARROW))
+    || (keyIsDown(83) && keyIsDown(UP_ARROW)))
+    {
+      objectPositionY = objectPositionY
+    }
+    if (keyIsDown(90) || keyIsDown(UP_ARROW)){
+      objectPositionY =  moveUp(objectPositionY, speed)
+      
+    }
+    if (keyIsDown(83) || keyIsDown(DOWN_ARROW)){
+      objectPositionY = moveDown(objectPositionY, speed)
+    }
+
+    return [objectPositionX, objectPositionY]
   }
-  return objectPositionX
+  
 }
 
 
@@ -116,9 +176,7 @@ function drawCharacter (positionX, positionY, width, height, direction, movement
 function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
 
   //* Vérifier si les boîtes se chevauchent
-  
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
-
     
     //~ Collisions dessus / dessous de l'objet
     if ((agentX < objectX + objectWidth - (objectWidth/10)) && (agentX + agentWidth > objectX + (objectWidth/10))){
@@ -128,11 +186,9 @@ function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objec
 
         //! est relatif au perso
         characterVelocityY = 0;
-        // fill(0,0,0)
       }
       //? collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY){
-        // fill(255,0,0)
 
         agentY = objectY - agentHeight
 
@@ -154,35 +210,29 @@ function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objec
       //? collisions à droite de l'objet
       if (agentX + agentWidth > objectX && agentX > objectX){
         
-        // fill(0, 255, 0)
         agentX = objectX + objectWidth
 
       //? collisions à gauche de l'objet
       }else if (agentX < objectX + objectWidth && agentX < objectX){
-        // fill(0, 0, 255)
+
         agentX = objectX - agentWidth
       }
     }
-    
-
-    
-    // rect(objectX, objectY, objectWidth, objectHeight)
-    // fill(255, 255, 255)
-    
   }
   return [agentX, agentY]
 }
 
 
-//& Système du personnage
+//& Système du personnage pour le moteur de vue 1
 function character() {
+  //~ Ancienne positions du perso
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
 
   //~ Contrôles du perso (gauche, droite)
-  characterPositionX = getMovementsControls(characterPositionX, characterMovesSpeed)
-
-
+  characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
+  
+  //~ Limites de la velocité Y du perso
   characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
 
 
@@ -241,8 +291,10 @@ function character() {
     }
   }
   if (characterPositionY < height/4){
-    yStartWorld += characterMovesSpeed
-    characterPositionY += characterMovesSpeed
+    if (yStartWorld < 0){
+      yStartWorld += characterMovesSpeed
+      characterPositionY += characterMovesSpeed
+    }
   }
   
   
@@ -374,6 +426,7 @@ function character() {
   //^ Ajoute les collisions pour toute les maps autour du perso 
   for (let i=0; i<mapsToCheck.length; i++){
 
+
     let currentMapToCheck = mapsToCheck[i]
     let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]]
 
@@ -406,14 +459,13 @@ function character() {
   //#endregion
 
 
-
-  //~ affichage du personnage
+  //#region //~ affichage du personnage
   
   if (isJumping){
-    if (previousPlayerX < characterPositionX){
+    if (RightArrowPressed){
       characterDirection = "right"
       characterMovement = "jump"
-    }else if (previousPlayerX > characterPositionX){
+    }else if (LeftArrowPressed){
       characterDirection = "left"
       characterMovement = "jump"
     }else{
@@ -421,10 +473,10 @@ function character() {
       characterMovement = "jump"
     }
   }else{
-    if (previousPlayerX < characterPositionX){
+    if (RightArrowPressed){
       characterDirection = "right"
       characterMovement = "walk"
-    }else if (previousPlayerX > characterPositionX){
+    }else if (LeftArrowPressed){
       characterDirection = "left"
       characterMovement = "walk"
     }else{
@@ -443,4 +495,101 @@ function character() {
                 characterHeight,
                 characterDirection,
                 characterMovement)
+
+  //#endregion
+}
+
+//& Système du personnage pour le moteur de vue 2
+function characterView2(){
+  
+  //#region //~ Contrôles du perso (gauche, droite, haut, bas)
+  
+  let positionsControls = getMovementsControls(characterInsidePosX, characterInsidePosY, characterMovesSpeed)
+  characterInsidePosX = positionsControls[0]
+  characterInsidePosY = positionsControls[1]
+
+  //#endregion
+
+  //#region //~ Mouvement de caméra
+
+
+  //^ caméra mouvements droite
+
+  //? si mon perso est à DROITE de l'écran
+  if (characterInsidePosX > width-width/4){
+
+      
+    //? le monde bouge vers la gauche (la caméra se décale vers la droite)
+    xStartHouse -= characterMovesSpeed
+    characterInsidePosX -= characterMovesSpeed
+    
+  }
+
+  //^ caméra mouvements gauche
+
+  //? si mon perso est à GAUCHE de l'écran
+  if (characterInsidePosX < width/4){
+
+
+    //? le monde bouge vers la droite (la caméra se décale vers la gauche)
+    xStartHouse += characterMovesSpeed
+    characterInsidePosX += characterMovesSpeed
+    
+  }
+
+
+  //^ caméra mouvements bas
+
+  //? si mon perso est en BAS de l'écran
+  if (characterInsidePosY > height - height/3){
+    yStartHouse -= characterMovesSpeed
+    characterInsidePosY -= characterMovesSpeed
+  }
+
+
+  //^ caméra mouvements haut
+
+  //? si mon perso est en HAUT de l'écran
+  if (characterInsidePosY < height/4){
+    yStartHouse += characterMovesSpeed
+    characterInsidePosY += characterMovesSpeed
+    
+  }
+  
+  //#endregion
+
+  //#region //~ Collisions 
+
+  //^ Récupère la couche des collisions sur la map
+  let currentMapTableColliders = Houses["house1"].layers[1]
+
+  //^ Pour chaque carré dans le tableau 
+  for (let row=0; row<currentMapTableColliders.length; row++){
+    for (let column=0; column<currentMapTableColliders[row].length; column++){
+
+      //^ Lui donner une collision
+      let thisObject = currentMapTableColliders[row][column]
+
+
+      let thisObjectX = (xStartHouse + (rectWidth*column))
+      let thisObjectY = (yStartHouse + (rectHeight*row))
+
+      if (thisObject > 0){
+        
+        //? pour faire en vue TOP DOWN -> rectHeight/3
+        [characterInsidePosX, characterInsidePosY] = handleCollision(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        
+      }
+    }
+  }
+
+  //#endregion
+
+  //#region //~ Affichage du perso
+  
+  fill(255, 0, 0)
+  rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight)
+
+  //#endregion
+
 }

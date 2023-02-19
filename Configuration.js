@@ -28,11 +28,18 @@ let yStartWorld = 0;
 let arrayMap = [];
 
 
+// caractéristiques des maisons
+let xStartHouse = 0;
+let yStartHouse = 0;
+
 
 // caractéristiques du perso
 let characterInMapX = 0;
 let characterInMapY = 0;
 
+
+let characterInsidePosX = 1;
+let characterInsidePosY = 1;
 
 
 let characterPositionX = 1;
@@ -64,7 +71,6 @@ let characterMaxJumps = 2;
 let characterDoubleJumping = false;
 
 let isJumping = false;
-let spaceKeyIsPressed = false;
 
 // physique
 const gravityForce = 0.81;
@@ -76,6 +82,18 @@ let isInPaused = false;
 let isSettings = false;
 let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
 
+// Debut Game
+let isPlay = false;
+let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
+
 // cartes du jeu
 let Maps;
 let World;
+let Houses;
+
+// Evenements 
+let spaceKeyIsPressed = false;
+let RightArrowPressed = false;
+let LeftArrowPressed = false;
+
+let EngineOne = true;

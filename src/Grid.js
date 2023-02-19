@@ -30,7 +30,7 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
   return [positionX, positionY, gridWidth, gridHeight]
 }
 
-
+//~ Map normale 
 function drawGrid(){
 
   arrayMap = []
@@ -88,15 +88,6 @@ function drawGrid(){
 
   background(220);
   stroke(0)
-
-  // récupérer le maximum de cases possible dans le canvas
-  // let [maxNumberCasesX, maxNumberCasesY] = getNumberOfCasesInRect(
-  //   windowWidth,
-  //   windowHeight,
-  //   rectWidth,
-  //   rectHeight
-  // )
-
   
   fill(255)
 
@@ -125,3 +116,16 @@ function drawGrid(){
   // return [currentMapPlayerPosition, gridX1, gridY1, gridX2, gridY2]
 }
 
+//~ Maisons 
+function drawHouse(){
+  fill(0)
+  rect(
+    0,
+    0,
+    width,
+    height
+  )
+
+  displayGrid(Houses["house1"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
+
+}

@@ -29,12 +29,9 @@ function preload() {
   characterTextureJump = loadImage("assets/animations/JumpBase.png")
 
   // JSON preload
-  Maps = loadJSON("json/Maps.json", (e) => {
-    arrayMap.push(e.map1)
-    arrayMap.push(e.map2)
-    arrayMap.push(e.map8)
-  });
+  Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
+  Houses = loadJSON("json/Houses.json");
 }
 
 
@@ -49,9 +46,14 @@ function draw() {
     }
   }
   else {
-    // Si le joueur appuie sur echap :
-    drawGrid()
-    character()
+    if (EngineOne){
+      drawGrid()
+      character()
+    }else{
+      drawHouse()
+      characterView2()
+    }
+    
   }
         
 

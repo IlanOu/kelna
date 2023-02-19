@@ -1,6 +1,4 @@
-let isPlay = false;
-let isSettings = false;
-let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXSet, ButYSet, ButWSet,ButHSet, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
+
 
 
 
