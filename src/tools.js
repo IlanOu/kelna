@@ -91,3 +91,13 @@ function getPositionWithGravity(positionY, velocityY, gravityForce, objectMass){
 function isGrounded(objectPositionX, objectPositionY, objectWidth, objectHeight, groundX1, groundY1, groundX2){
     return rectIsInRect(objectPositionX, objectPositionY+objectHeight-1, objectWidth, objectHeight, groundX1, groundY1, groundX2, groundY1)
 }
+
+function removeDuplicates(array) {
+    return array.filter((item,
+        index) => array.indexOf(item) === index);
+}
+
+function limitNumberWithinRange(number, minimum, maximum){
+    let parsed = parseInt(number)
+    return Math.min(Math.max(parsed, minimum), maximum)
+  }

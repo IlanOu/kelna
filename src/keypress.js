@@ -1,7 +1,6 @@
 
 // vérifier si une touche est pressée 
-function keyPressed() {
-    
+function keyPressed(key) {
     if (keyCode === ESCAPE) {
         isInPaused = !isInPaused
         if (!isInPaused){
@@ -9,9 +8,7 @@ function keyPressed() {
         }
     }
 
-
     if (keyCode === 32) {
-        
         spaceKeyIsPressed = true;
     }
 }

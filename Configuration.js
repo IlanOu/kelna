@@ -19,8 +19,8 @@ let characterLastDirection = "right";
 let characterMovement = "idle";
 
 // caractéristique de la grille
-let rectWidth = 50;
-let rectHeight = 50;
+let rectWidth = 100;
+let rectHeight = 100;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
@@ -42,18 +42,20 @@ let previousPlayerX = 0;
 let previousPlayerY = 0
 
 
-let characterWidth = 60;
-let characterHeight = 60;
+let characterWidth = 100;
+let characterHeight = 100;
 
-let characterBoundingBoxWidth = 40;
-let characterBoundingBoxHeight = 60;
+let characterBoundingBoxWidth = 75;
+let characterBoundingBoxHeight = 100;
 
-let characterMass = 50;
-let characterJumpHeight = 15;
+let characterMass = 60;
+let characterJumpHeight = 35;
 
-let characterMovesSpeed = 5;
+let characterMovesSpeed = 7.5;
 
 let characterVelocityY = 0;
+let characterVelocityYMin = -80
+let characterVelocityYMax = 100
 
 let characterIsGrounded = false;
 
@@ -65,7 +67,7 @@ let isJumping = false;
 let spaceKeyIsPressed = false;
 
 // physique
-const gravityForce = 0.5;
+const gravityForce = 0.81;
 
 
 

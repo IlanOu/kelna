@@ -183,13 +183,16 @@ function character() {
   characterPositionX = getMovementsControls(characterPositionX, characterMovesSpeed)
 
 
+  characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
+
+
   //#region //~ Mouvement de caméra
 
 
   //^ caméra mouvements droite
 
-  //? si mon perso est à droite de l'écran
-  if (characterPositionX > width-width/4){
+  //? si mon perso est à DROITE de l'écran
+  if (characterPositionX > width-width/2){
 
     //? si mon écran n'est pas le plus à gauche possible
     if (xStartWorld+((rectWidth*Maps.numberOfRow)*World.worldsMap[0].length)-(rectWidth*Maps.numberOfRow) > 0){
@@ -202,7 +205,7 @@ function character() {
 
   //^ caméra mouvements gauche
 
-  //? si mon perso est à gauche de l'écran
+  //? si mon perso est à GAUCHE de l'écran
   if (characterPositionX < width/4){
 
     //? si mon écran n'est pas le plus à gauche possible
@@ -214,14 +217,35 @@ function character() {
     }
   }
 
+
   //^ caméra mouvements bas
 
-  if (characterPositionY > height-height/8){
+  //? si mon perso est en BAS de l'écran
+  if (characterPositionY > height-height/4){
     yStartWorld -= characterVelocityY
+    characterPositionY -= characterVelocityY
   }
-  if (characterPositionY > height - height/4){
-    yStartWorld -= 10
+  if (characterPositionY > height - height/3){
+    yStartWorld -= characterMovesSpeed
+    characterPositionY -= characterMovesSpeed
   }
+
+
+  //^ caméra mouvements haut
+
+  //? si mon perso est en HAUT de l'écran
+  if (characterPositionY < height/3){
+    if (yStartWorld < 0){
+      yStartWorld += characterMovesSpeed
+      characterPositionY += characterMovesSpeed
+    }
+  }
+  if (characterPositionY < height/4){
+    yStartWorld += characterMovesSpeed
+    characterPositionY += characterMovesSpeed
+  }
+  
+  
   
   //#endregion
 
@@ -250,8 +274,11 @@ function character() {
                                 characterJumpHeight,
                                 characterVelocityY,
                                 gravityForce)
+
+      
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
+      
 
       //^ le double saut du personnage  
     } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
@@ -264,6 +291,7 @@ function character() {
                                 gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
+      
     }
   }
   //^ vérifie si le joueur touche le sol
@@ -300,36 +328,82 @@ function character() {
 
   //#region //~ collisions
 
-  //^ Récupère la map actuelle 
+  let mapsToCheck = []
+
+
+  //? map actuelle
   let currentMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
-  let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
+  mapsToCheck.push(currentMapInWorld)
+  
+  //? map à DROITE du perso
+  let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth*Maps.numberOfRow)/2, characterPositionY, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atRightMapInWorld)
+
+  //? map à GAUCHE du perso
+  let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth*Maps.numberOfRow)/2, characterPositionY, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atLeftMapInWorld)
+
+  //? map en HAUT du perso
+  let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atTopMapInWorld)
+
+  //? map en BAS du perso
+  let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atBottomMapInWorld)
+
+  //? map en BAS à DROITE du perso
+  let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth*Maps.numberOfRow)/2, characterPositionY + (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atBottomRightMapInWorld)
+
+  //? map en BAS à GAUCHE du perso
+  let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth*Maps.numberOfRow)/2, characterPositionY + (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atBottomLeftMapInWorld)
+  
+  //? map en HAUT à DROITE du perso
+  let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth*Maps.numberOfRow)/2, characterPositionY - (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atTopRightMapInWorld)
+
+  //? map en HAUT à GAUCHE du perso
+  let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth*Maps.numberOfRow)/2, characterPositionY - (rectHeight*Maps.numberOfColumns)/2, World.worldsMap, rectWidth*Maps.numberOfRow, rectHeight*Maps.numberOfColumns)
+  mapsToCheck.push(atTopLeftMapInWorld)
 
 
-  //^ Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Maps[currentMapName].layers[1]
+  mapsToCheck = removeDuplicates(mapsToCheck)
 
-  //^ Pour chaque carré dans le tableau 
-  for (let row=0; row<currentMapTableColliders.length; row++){
-    for (let column=0; column<currentMapTableColliders[row].length; column++){
+  
+  //^ Ajoute les collisions pour toute les maps autour du perso 
+  for (let i=0; i<mapsToCheck.length; i++){
 
-      //^ Lui donner une collision
-      let thisObject = currentMapTableColliders[row][column]
+    let currentMapToCheck = mapsToCheck[i]
+    let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]]
+
+    //^ Récupère la couche des collisions sur la map
+    let currentMapTableColliders = Maps[currentMapToCheckName].layers[1]
+
+    //^ Pour chaque carré dans le tableau 
+    for (let row=0; row<currentMapTableColliders.length; row++){
+      for (let column=0; column<currentMapTableColliders[row].length; column++){
+
+        //^ Lui donner une collision
+        let thisObject = currentMapTableColliders[row][column]
 
 
-      let thisObjectX = ((rectWidth*Maps.numberOfRow)*(currentMapInWorld[0])) + (xStartWorld + (rectWidth*column))
-      let thisObjectY = ((rectHeight*Maps.numberOfColumns)*(currentMapInWorld[1])) + (yStartWorld + (rectHeight*row))
+        let thisObjectX = ((rectWidth*Maps.numberOfRow)*(currentMapToCheck[0])) + (xStartWorld + (rectWidth*column))
+        let thisObjectY = ((rectHeight*Maps.numberOfColumns)*(currentMapToCheck[1])) + (yStartWorld + (rectHeight*row))
 
-      // rect(thisObjectX, thisObjectY, 10, 10)
+        // rect(thisObjectX, thisObjectY, 10, 10)
 
 
-      if (thisObject > 0){
-        [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        if (thisObject > 0){
+          [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        }
       }
     }
   }
 
-  //#endregion
+  
 
+  //#endregion
 
 
 
