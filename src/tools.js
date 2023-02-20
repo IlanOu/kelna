@@ -1,13 +1,3 @@
-// function getCurrentMap(Array , x,y){
-//     let currentMapPosX = Math.floor(x/(Array.numberOfRow*rectWidth));
-//     let currentMapPosY = Math.floor(y/(Array.numberOfColumns*rectHeight));
-
-//     let currentMap = World.worldsMap[currentMapPosY][currentMapPosX]
-//     return Array[currentMap]
-// }
-
-
-
 // Obtenir le nombre maximum de cases dans le rectangle
 function getNumberOfCasesInRect(bigRectWidth, bigRectHeight, rectWidth, rectHeight){
     let numberOfCasesX = Math.floor(bigRectWidth/rectWidth)
@@ -35,7 +25,6 @@ function createTable(columnNumber, rowNumber){
 function findIndexValueIn2dArray(array, value){
       for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
-            // alert(array)      
             if (value === array[column][row]) {
                 return [column,row];
                   
@@ -47,13 +36,13 @@ function findIndexValueIn2dArray(array, value){
 
 
 let previous_index_pos;
-function findIndexOfPositionIn2dArray(posX,posY,array,sideArrayX,sideArrayY){
+function findIndexOfPositionIn2dArray(posX,posY,array,ArrayWidth,ArrayHeight){
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
-            let minX = xStartWorld + sideArrayX * column;
-            let minY = yStartWorld + sideArrayY * row ;
-            let maxX = xStartWorld + sideArrayX * (column + 1);
-            let maxY = yStartWorld + sideArrayY * (row + 1);
+            let minX = xStartWorld + ArrayWidth * column;
+            let minY = yStartWorld + ArrayHeight * row ;
+            let maxX = xStartWorld + ArrayWidth * (column + 1);
+            let maxY = yStartWorld + ArrayHeight * (row + 1);
 
                   
             if (posX > minX && posX < maxX && posY > minY && posY < maxY) {
@@ -65,3 +54,50 @@ function findIndexOfPositionIn2dArray(posX,posY,array,sideArrayX,sideArrayY){
     return previous_index_pos;
 }
 
+
+function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, rect2Width, rect2Height) {
+    return (rect1X < rect2X + rect2Width &&
+            rect1X + rect1Width > rect2X &&
+            rect1Y < rect2Y + rect2Height &&
+            rect1Height + rect1Y > rect2Y);
+  }
+
+
+
+
+// contraindre les position X, Y dans le containeur
+function containedPositionsIn ( objectPositionX, 
+                                objectPositionY, 
+                                objectWidth, 
+                                objectHeight, 
+                                containerWidth, 
+                                containerHeight) 
+{
+    return [constrain(  objectPositionX, 
+                        0, 
+                        containerWidth-objectWidth), 
+            constrain(  objectPositionY, 
+                        0,
+                        containerHeight-objectHeight)]  
+}
+
+// ajouter la gravité à la positionY !! ATTENTION, la velocité doit être ACTUALISEE !
+function getPositionWithGravity(positionY, velocityY, gravityForce, objectMass){
+    velocityY += (gravityForce*objectMass)/20;
+    positionY += velocityY;
+    return [positionY, velocityY]
+}
+
+function isGrounded(objectPositionX, objectPositionY, objectWidth, objectHeight, groundX1, groundY1, groundX2){
+    return rectIsInRect(objectPositionX, objectPositionY+objectHeight-1, objectWidth, objectHeight, groundX1, groundY1, groundX2, groundY1)
+}
+
+function removeDuplicates(array) {
+    return array.filter((item,
+        index) => array.indexOf(item) === index);
+}
+
+function limitNumberWithinRange(number, minimum, maximum){
+    let parsed = parseInt(number)
+    return Math.min(Math.max(parsed, minimum), maximum)
+}

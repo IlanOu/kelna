@@ -1,35 +1,80 @@
-// caractéristique de la grille
-let rectWidth = 20;
-let rectHeight = 20;
+//^ Textures
+
+//#region //~ Textures
+let stone;
+let stoneBrick;
+let sky;
+
+//#endregion
+
+//#region //~ Textures Perso
+let characterTextureIdle;
+let characterTextureWalk;
+let characterTextureJump;
+
+let characterTextureList = [];
+
+let characterAnimationIndex = 0
+let characterAnimationFramePassed = false;
+
+let characterDirection = "";
+let characterLastDirection = "right";
+
+let characterMovement = "idle";
+
+//#endregion
+
+//^ Grille
+
+//#region //~ caractéristique de la grille
+let rectWidth = 75;
+let rectHeight = 75;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
 
 let arrayMap = [];
 
+//#endregion
 
+//#region //~ caractéristiques des maisons
+let xStartHouse = 0;
+let yStartHouse = 0;
 
-// caractéristiques du perso
+//#endregion
+
+//^ Perso
+
+//#region //~ caractéristiques du perso
 let characterInMapX = 0;
 let characterInMapY = 0;
 
 
+let characterInsidePosX = 1;
+let characterInsidePosY = 1;
 
-let characterPositionX = 250;
-let characterPositionY = 250;
 
-let characterPositionXInScreen = 0;
-let characterPositionYInScreen = 0;
+let characterPositionX = 1;
+let characterPositionY = 1;
 
-let characterWidth = 60;
-let characterHeight = 60;
+let previousPlayerX = 0;
+let previousPlayerY = 0
 
-let characterMass = 50;
-let characterJumpHeight = 20;
 
-let characterMovesSpeed = 7;
+let characterWidth = 80;
+let characterHeight = 80;
+
+let characterBoundingBoxWidth = 40;
+let characterBoundingBoxHeight = 80;
+
+let characterMass = 60;
+let characterJumpHeight = 35;
+
+let characterMovesSpeed = 7.5;
 
 let characterVelocityY = 0;
+let characterVelocityYMin = -80
+let characterVelocityYMax = 100
 
 let characterIsGrounded = false;
 
@@ -37,19 +82,84 @@ let characterJumpCount = 0;
 let characterMaxJumps = 2;
 let characterDoubleJumping = false;
 
-// physique
-const gravityForce = 0.5;
-
-
-// Autre
 let isJumping = false;
-let spaceKeyIsPressed = false;
+
+let isDashing = false;
+
+//#endregion
+
+//^ Interfaces
+
+//#region //~ Interactions Joueur - Machine
+
+// Pouvoir faire echap
+let YouCanEscape = true;
+
 
 // Pour que le joueur fasse echap
-let isInPaused = false;
-let isSettings = false;
-let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
+let PlayerIsInPaused = false;
+let isSettingsEchap = false;
 
-// cartes du jeu
+
+
+// Attente du joueur pour joueur
+let PlayerIsInPlay = false;
+let isSettingsWait = false;
+
+
+// Quand le joueur est mort
+let isStats = false;
+let isMenu = false;
+
+
+// pour coeur
+let HealthMax = 3; // largeur de la barre de vie
+let MargeBarVie = 30; // marge de la barre de vie
+let Pressing = false; // Quand on appuie
+let Degating = false; // Pour les degats
+let Regening = false; // Pour regen
+let AddHeart = false; // Pour ajouter un coeur
+let DeleteHeart = false; // Pour enlever un coeur
+let HealthPlayer = 3; // vie du perso
+
+
+
+// STATS
+let ForStat = false;
+
+// MUSIC / SETTINGS
+let MusicIsActivateOrNot = false;
+let ColorForRectMusic = 200
+let SongIsActivateOrNot = false;
+let ColorForRectSong = 200
+
+//#endregion
+
+//#region //~ Debut Game
+let isPlay = false;
+let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
+
+//#endregion
+
+//^ Autres
+
+//#region //~ physique
+const gravityForce = 0.81;
+
+//#endregion
+
+//#region //~ cartes du jeu
 let Maps;
 let World;
+let Houses;
+
+//#endregion
+
+//#region //~ Evenements 
+let spaceKeyIsPressed = false;
+let RightArrowPressed = false;
+let LeftArrowPressed = false;
+
+let EngineOne = true;
+
+//#endregion

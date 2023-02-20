@@ -11,24 +11,26 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
     for(let y=0; y<grid[x].length; y++){
       
       if(grid[x][y] === 0){
-        fill(color(255, 255, 255));
+        // fill(color(255, 255, 255));
+        image(sky, positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
       }else if (grid[x][y] === 1) {
-          fill(color(255, 0, 0));
+        image(stoneBrick, positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
+        // fill(color(255, 0, 0));
       }
 
-      rect(
-        positionY+y*rectWidth,
-        positionX+x*rectHeight,
-        rectWidth,
-        rectHeight
-      )
+      // rect(
+      //   positionY+y*rectWidth,
+      //   positionX+x*rectHeight,
+      //   rectWidth,
+      //   rectHeight
+      // )
       
     }
   }
   return [positionX, positionY, gridWidth, gridHeight]
 }
 
-
+//~ Map normale 
 function drawGrid(){
 
   arrayMap = []
@@ -86,15 +88,6 @@ function drawGrid(){
 
   background(220);
   stroke(0)
-
-  // récupérer le maximum de cases possible dans le canvas
-  let [maxNumberCasesX, maxNumberCasesY] = getNumberOfCasesInRect(
-    windowWidth,
-    windowHeight,
-    rectWidth,
-    rectHeight
-  )
-
   
   fill(255)
 
@@ -108,7 +101,7 @@ function drawGrid(){
     // indexMap : [y, x]
     let gridWidthPx = rectWidth*Maps.numberOfRow
     let gridHeightPx = rectHeight*Maps.numberOfColumns
-    displayGrid(Maps[element].layers[1], xStartWorld+gridWidthPx*indexMap[1], yStartWorld+gridHeightPx*indexMap[0], rectWidth, rectHeight)
+    displayGrid(Maps[element].layers[1], xStartWorld+(gridWidthPx*indexMap[1]), yStartWorld+(gridHeightPx*indexMap[0]), rectWidth, rectHeight)
     
   
   });
@@ -121,5 +114,19 @@ function drawGrid(){
 
 
   // return [currentMapPlayerPosition, gridX1, gridY1, gridX2, gridY2]
+}
+
+//~ Maisons 
+function drawHouse(){
+  fill(0)
+  rect(
+    0,
+    0,
+    width,
+    height
+  )
+
+  displayGrid(Houses["house1"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
+
 }
 
