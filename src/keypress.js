@@ -14,17 +14,17 @@ function keyPressed(key) {
         spaceKeyIsPressed = true;
     }
 
-    //^ Flèche de droite
-    if (keyCode === 39)
-    RightArrowPressed = true;
+    if ((keyCode === 39 || keyCode === 68))
+        RightArrowPressed = true;
 
     //^ Flèche de gauche
-    else if (keyCode === 37)
-    LeftArrowPressed = true;
+    if ((keyCode === 37 || keyCode === 81))
+        LeftArrowPressed = true;
+    
 
     //^ Touche E
     if (keyCode === 69)
-    EngineOne = !EngineOne;
+        EngineOne = !EngineOne;
 }
 
 
@@ -37,10 +37,11 @@ function keyReleased() {
     }
 
     //^ Flèche de droite
-    if (keyCode === 39)
-    RightArrowPressed = false;
+    if ((keyCode === 39 || keyCode === 68))
+        RightArrowPressed = false;
 
     //^ Flèche de gauche
-    else if (keyCode === 37)
-    LeftArrowPressed = false;
+    if ((keyCode === 37 || keyCode === 81))
+        LeftArrowPressed = false;
+    
 }

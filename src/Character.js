@@ -10,11 +10,13 @@ function getMovementsControls (objectPositionX, objectPositionY, speed){
     || (keyIsDown(38) && keyIsDown(LEFT_ARROW))
     || (keyIsDown(81) && keyIsDown(RIGHT_ARROW)))
     {
-      return objectPositionX
-    } else if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
-      return moveLeft(objectPositionX, speed)
-    }else if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-      return moveRight(objectPositionX, speed)
+      objectPositionX = objectPositionX
+    } 
+    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+      objectPositionX = moveLeft(objectPositionX, speed)
+    }
+     if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+      objectPositionX = moveRight(objectPositionX, speed)
     }
 
     return objectPositionX
@@ -239,13 +241,18 @@ function character() {
   //#region //~ Mouvement de caméra
 
 
+  // rect(0, yStartWorld, 20, ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length))
+  // fill(255, 0, 0)
+  // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
+
+
   //^ caméra mouvements droite
 
   //? si mon perso est à DROITE de l'écran
   if (characterPositionX > width-width/2){
 
     //? si mon écran n'est pas le plus à gauche possible
-    if (xStartWorld+((rectWidth*Maps.numberOfRow)*World.worldsMap[0].length)-(rectWidth*Maps.numberOfRow) > 0){
+    if (xStartWorld+((rectWidth*Maps.numberOfRow)*World.worldsMap[0].length)-width > 0){
       
       //? le monde bouge vers la gauche (la caméra se décale vers la droite)
       xStartWorld -= characterMovesSpeed
@@ -272,12 +279,18 @@ function character() {
 
   //? si mon perso est en BAS de l'écran
   if (characterPositionY > height-height/4){
-    yStartWorld -= characterVelocityY
-    characterPositionY -= characterVelocityY
+    if (yStartWorld + ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length)-height > 0){
+      yStartWorld -= characterVelocityY
+      characterPositionY -= characterVelocityY
+    }
+    
   }
   if (characterPositionY > height - height/3){
-    yStartWorld -= characterMovesSpeed
-    characterPositionY -= characterMovesSpeed
+    if (yStartWorld + ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length)-height > 0){
+      yStartWorld -= characterMovesSpeed
+      characterPositionY -= characterMovesSpeed
+    }
+    
   }
 
 

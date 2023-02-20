@@ -100,4 +100,4 @@ function removeDuplicates(array) {
 function limitNumberWithinRange(number, minimum, maximum){
     let parsed = parseInt(number)
     return Math.min(Math.max(parsed, minimum), maximum)
-  }
+}

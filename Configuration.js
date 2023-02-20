@@ -1,9 +1,13 @@
-// Textures
+//^ Textures
+
+//#region //~ Textures
 let stone;
 let stoneBrick;
 let sky;
 
-// Textures Perso
+//#endregion
+
+//#region //~ Textures Perso
 let characterTextureIdle;
 let characterTextureWalk;
 let characterTextureJump;
@@ -18,22 +22,30 @@ let characterLastDirection = "right";
 
 let characterMovement = "idle";
 
-// caractéristique de la grille
-let rectWidth = 100;
-let rectHeight = 100;
+//#endregion
+
+//^ Grille
+
+//#region //~ caractéristique de la grille
+let rectWidth = 75;
+let rectHeight = 75;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
 
 let arrayMap = [];
 
+//#endregion
 
-// caractéristiques des maisons
+//#region //~ caractéristiques des maisons
 let xStartHouse = 0;
 let yStartHouse = 0;
 
+//#endregion
 
-// caractéristiques du perso
+//^ Perso
+
+//#region //~ caractéristiques du perso
 let characterInMapX = 0;
 let characterInMapY = 0;
 
@@ -49,11 +61,11 @@ let previousPlayerX = 0;
 let previousPlayerY = 0
 
 
-let characterWidth = 100;
-let characterHeight = 100;
+let characterWidth = 80;
+let characterHeight = 80;
 
-let characterBoundingBoxWidth = 75;
-let characterBoundingBoxHeight = 100;
+let characterBoundingBoxWidth = 40;
+let characterBoundingBoxHeight = 80;
 
 let characterMass = 60;
 let characterJumpHeight = 35;
@@ -72,28 +84,42 @@ let characterDoubleJumping = false;
 
 let isJumping = false;
 
-// physique
-const gravityForce = 0.81;
+//#endregion
 
+//^ Interfaces
 
-
-// Pour que le joueur fasse echap
+//#region //~ Pour que le joueur fasse echap
 let isInPaused = false;
 let isSettings = false;
 let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
 
-// Debut Game
+//#endregion
+
+//#region //~ Debut Game
 let isPlay = false;
 let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
 
-// cartes du jeu
+//#endregion
+
+//^ Autres
+
+//#region //~ physique
+const gravityForce = 0.81;
+
+//#endregion
+
+//#region //~ cartes du jeu
 let Maps;
 let World;
 let Houses;
 
-// Evenements 
+//#endregion
+
+//#region //~ Evenements 
 let spaceKeyIsPressed = false;
 let RightArrowPressed = false;
 let LeftArrowPressed = false;
 
 let EngineOne = true;
+
+//#endregion
