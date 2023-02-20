@@ -14,9 +14,12 @@ function setup() {
 
 function preload() {
   // Images preload
-  imgset = loadImage("assets/img.webp")
-  menu = loadImage("assets/menu.jpg")
-  ingame = loadImage("assets/echap.jpg")
+  GamerHeart = loadImage("assets/GamerHeart.webp")
+  GUIParameters = loadImage("assets/GUIParameters.png")
+  GUIForEscape = loadImage("assets/GUIForEscape.png")
+  GUIOfDeath = loadImage("assets/GUIOfDeath.png")
+  GUIForStats = loadImage("assets/GUIForStats.png")
+  Background = loadImage("assets/Background.gif")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -32,6 +35,9 @@ function preload() {
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
+
+  // SONG
+  SongBackground = loadSound("music/SongBackground.mp3")
 }
 let dashForce = 2;
 let velocityX = 0;
@@ -39,24 +45,37 @@ let dashMaxLength = 5;
 
 function draw() {
 
-  if (isInPaused) {
-    // Menu echap apparait
-    MenuEchap()
-    if (isSettings) {
-      // Menu setting
-      Settings()
-    }
+  if (PlayerIsInPlay === false) {
+    WaitToPlay()
+    // SongBackground.play()
   }
-  else {
-    if (EngineOne){
+  if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
+    if (EngineOne) {
       drawGrid()
+      displayVie();
       character()
-    }else{
+    } else {
       drawHouse()
       characterView2()
     }
-    
+
   }
+  if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
+    MenuEscape()
+  }
+  if (isSettingsEchap === true && PlayerIsInPlay === true) {
+    Setting()
+  }
+  if (isSettingsWait === true && PlayerIsInPlay === false) {
+    Setting()
+  }
+  if (HealthPlayer === 0 && PlayerIsInPlay === true && PlayerIsInPlay === true) {
+    PlayerIsDie()
+  }
+  if (isStats === true && HealthPlayer === 0) {
+    Stats()
+  } 
+
 
   if (isDashing){
     if (LeftArrowPressed || RightArrowPressed){

@@ -90,10 +90,48 @@ let isDashing = false;
 
 //^ Interfaces
 
-//#region //~ Pour que le joueur fasse echap
-let isInPaused = false;
-let isSettings = false;
-let ButXSet, ButYSet, ButWSet, ButHSet, ButXRet, ButYRet, ButWRet, ButRSet, ButXRetG, ButYRetG, ButWRetG, ButRSetG;
+//#region //~ Interactions Joueur - Machine
+
+// Pouvoir faire echap
+let YouCanEscape = true;
+
+
+// Pour que le joueur fasse echap
+let PlayerIsInPaused = false;
+let isSettingsEchap = false;
+
+
+
+// Attente du joueur pour joueur
+let PlayerIsInPlay = false;
+let isSettingsWait = false;
+
+
+// Quand le joueur est mort
+let isStats = false;
+let isMenu = false;
+
+
+// pour coeur
+let HealthMax = 3; // largeur de la barre de vie
+let MargeBarVie = 30; // marge de la barre de vie
+let Pressing = false; // Quand on appuie
+let Degating = false; // Pour les degats
+let Regening = false; // Pour regen
+let AddHeart = false; // Pour ajouter un coeur
+let DeleteHeart = false; // Pour enlever un coeur
+let HealthPlayer = 3; // vie du perso
+
+
+
+// STATS
+let ForStat = false;
+
+// MUSIC / SETTINGS
+let MusicIsActivateOrNot = false;
+let ColorForRectMusic = 200
+let SongIsActivateOrNot = false;
+let ColorForRectSong = 200
 
 //#endregion
 
