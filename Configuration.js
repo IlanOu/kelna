@@ -84,6 +84,8 @@ let characterDoubleJumping = false;
 
 let isJumping = false;
 
+let isDashing = false;
+
 //#endregion
 
 //^ Interfaces

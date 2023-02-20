@@ -33,7 +33,9 @@ function preload() {
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
 }
-
+let dashForce = 2;
+let velocityX = 0;
+let dashMaxLength = 5;
 
 function draw() {
 
@@ -56,6 +58,36 @@ function draw() {
     
   }
 
+  if (isDashing){
+    if (LeftArrowPressed || RightArrowPressed){
+
+      velocityX += dashForce
+      
+      if (LeftArrowPressed){
+        characterPositionX -= velocityX
+      }else if (RightArrowPressed){
+        
+        characterPositionX += velocityX
+      }
+
+      
+
+      if (velocityX > dashMaxLength){
+          isDashing = false
+      }
+    }
+      
+  }else if (velocityX > 0){
+    velocityX -= dashForce
+
+    if (LeftArrowPressed){
+      velocityX += dashForce
+      characterPositionX -= velocityX
+    }else if (RightArrowPressed){
+      velocityX += dashForce
+      characterPositionX += velocityX
+    }
+  }
         
 
 }

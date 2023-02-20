@@ -29,6 +29,16 @@ function keyPressed(key) {
     
         
     
+
+    if (keyCode === 82){
+        if (LeftArrowPressed || RightArrowPressed){
+            if (!isDashing){
+                isDashing = true
+            } 
+        }
+        
+           
+    }
  
 }
 
