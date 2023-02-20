@@ -25,8 +25,12 @@ function keyPressed(key) {
     //^ Touche E
     if (keyCode === 69)
         EngineOne = !EngineOne;
-}
 
+    
+        
+    
+ 
+}
 
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
