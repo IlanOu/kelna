@@ -22,6 +22,7 @@ function preload() {
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
+  PNJ1.IMG = loadImage("assets/PNJ.png");
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -53,6 +54,7 @@ function draw() {
   if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
     if (EngineOne) {
       drawGrid()
+      ForPNJ1()
       displayVie();
       character()
     } else {

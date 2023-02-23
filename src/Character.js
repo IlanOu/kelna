@@ -110,6 +110,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
+  console.log(positionX)
 
   if (PlayerCanMove === true) {
     //? animation MARCHER
