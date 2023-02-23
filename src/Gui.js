@@ -276,12 +276,19 @@ let DownHeart = () => {
 
 let FunctionForMusic = () => {
     if (MusicIsActivateOrNot === true) {
+        if (MusicForCinematic === false) {
+            
+            MusicIsActivateOrNot = false
+            SongBackground.loop()
+            console.log("Musique activé")
+            ColorForRectMusic = 200
+        }
+        if (MusicForCinematic === true) {
+            console.log("Musique en pause a cause de la cinematique")
+            SongBackground.pause()
+            setTimeout(EndOfOpeningFromBeginning, 4000);
 
-        MusicIsActivateOrNot = false
-        SongBackground.loop()
-        console.log("Musique activé")
-        ColorForRectMusic = 200
-
+        }
     }
     else if (MusicIsActivateOrNot === false) {
         MusicIsActivateOrNot = true
@@ -291,6 +298,8 @@ let FunctionForMusic = () => {
     }
 
 }
+
+
 
 
 let FunctionForSong = () => {
@@ -506,6 +515,7 @@ function mousePressed() {
             PlayerIsInPlay = false;
             isStats = false;
             isMenu = false;
+            CinematicIsStart = true
             YouCanEscape = true;
             PlayerCanMove = true
             HealthPlayer = 3;
@@ -516,6 +526,7 @@ function mousePressed() {
     if (isMenu === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMenuInDie && mouseY < ButtonYMenuInDie + IsHeightForAllButtons) {
             PlayerIsInPlay = false;
+            CinematicIsStart = true
             isStats = false;
             isMenu = false;
             YouCanEscape = true;

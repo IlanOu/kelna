@@ -140,6 +140,7 @@ let PlayerCanMove = true
 
 //#endregion
 
+
 //#region Interfaces
 
 // Pour les interfaces
@@ -182,6 +183,7 @@ const gravityForce = 0.81;
 
 //#endregion
 
+
 //#region //~ cartes du jeu
 let Maps;
 let World;
@@ -189,7 +191,9 @@ let Houses;
 
 //#endregion
 
+
 //#region //~ Evenements 
+
 let spaceKeyIsPressed = false;
 let RightArrowPressed = false;
 let LeftArrowPressed = false;
@@ -197,3 +201,16 @@ let LeftArrowPressed = false;
 let EngineOne = true;
 
 //#endregion
+
+
+//#region CINEMATIC
+
+let StartCinematic;
+
+let CinematicIsStart = true;
+let MusicForCinematic = false;
+
+let CinematicForEnd = false;
+
+//#endregion
+

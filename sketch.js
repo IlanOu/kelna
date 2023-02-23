@@ -1,7 +1,7 @@
 function setup() {
   let viewportDisplayWidth = 1920
   let viewportDisplayHeight = 1080
-  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight){
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
   }
@@ -41,17 +41,28 @@ function preload() {
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
+
+
+  //CINEMATIC
+  StartCinematic = createVideo('assets/cinematic/testcinematic.mp4');
+  StartCinematic.hide();
+  // StartCinematic.volume(0);
 }
+
+
+
 let dashForce = 2;
 let velocityX = 0;
 let dashMaxLength = 5;
 
 function draw() {
-
   if (PlayerIsInPlay === false) {
     WaitToPlay()
   }
-  if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
+  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === true) {
+    StartOpeningCinematic()
+  }
+  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === false) {
     if (EngineOne) {
       drawGrid()
       ForPNJ1()
@@ -63,6 +74,7 @@ function draw() {
     }
 
   }
+
   if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
     MenuEscape()
   }
@@ -77,39 +89,39 @@ function draw() {
   }
   if (isStats === true && HealthPlayer === 0) {
     Stats()
-  } 
+  }
 
 
-  if (isDashing){
-    if (LeftArrowPressed || RightArrowPressed){
+  if (isDashing) {
+    if (LeftArrowPressed || RightArrowPressed) {
 
       velocityX += dashForce
-      
-      if (LeftArrowPressed){
+
+      if (LeftArrowPressed) {
         characterPositionX -= velocityX
-      }else if (RightArrowPressed){
-        
+      } else if (RightArrowPressed) {
+
         characterPositionX += velocityX
       }
 
-      
 
-      if (velocityX > dashMaxLength){
-          isDashing = false
+
+      if (velocityX > dashMaxLength) {
+        isDashing = false
       }
     }
-      
-  }else if (velocityX > 0){
+
+  } else if (velocityX > 0) {
     velocityX -= dashForce
 
-    if (LeftArrowPressed){
+    if (LeftArrowPressed) {
       velocityX += dashForce
       characterPositionX -= velocityX
-    }else if (RightArrowPressed){
+    } else if (RightArrowPressed) {
       velocityX += dashForce
       characterPositionX += velocityX
     }
   }
-        
+
 
 }

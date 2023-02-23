@@ -20,8 +20,6 @@ let ForPNJ1 = () => {
 
     PNJ1.x += (PNJ1.Speed * PNJ1.Direction);
 
-    console.log(PNJ1.x)
-
 
     if (PNJ1.x >= 800 - PNJ1.Taille || PNJ1.x <= 400) {
         PNJ1.Direction *= -1;
