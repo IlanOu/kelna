@@ -1,7 +1,7 @@
 
 //#region  PNJ ATTRIBUT
 let PNJ1 = {
-    x: 200,
+    x: 600,
     y: 575,
     Direction: 1,
     IMG: null,
@@ -20,8 +20,10 @@ let ForPNJ1 = () => {
 
     PNJ1.x += (PNJ1.Speed * PNJ1.Direction);
 
+    console.log(PNJ1.x)
 
-    if (PNJ1.x >= 500 - PNJ1.Taille || PNJ1.x <= 100) {
+
+    if (PNJ1.x >= 800 - PNJ1.Taille || PNJ1.x <= 400) {
         PNJ1.Direction *= -1;
     }
 
