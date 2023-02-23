@@ -9,6 +9,7 @@ function setup() {
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
   PositionButtons()
 
+
 }
 
 
@@ -44,9 +45,9 @@ function preload() {
 
 
   //CINEMATIC
-  StartCinematic = createVideo('assets/cinematic/testcinematic.mp4');
+  StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
   StartCinematic.hide();
-  // StartCinematic.volume(0);
+  StartCinematic.volume(0);
 }
 
 
@@ -125,3 +126,5 @@ function draw() {
 
 
 }
+
+

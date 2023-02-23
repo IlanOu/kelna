@@ -4,25 +4,31 @@
 
 let StartOpeningCinematic = () => {
     if (CinematicIsStart === true) {
-        MusicForCinematic = true
-        VerificationForMusic = true
-        console.log(VerificationForMusic + " " + MusicForCinematic)
         image(StartCinematic, 0, 0, width, height)
-        setTimeout(EndOfOpeningFromBeginning, 4000);
         StartCinematic.play();
-        
-
+        PlayerIsInPlay = true;
+        MusicForCinematic = true
+        FunctionForMusic()
+        // console.log("2eme appel")
+        setTimeout(EndOfOpeningFromBeginning, 5000);
     }
 }
 
+
+
+
 let EndOfOpeningFromBeginning = () => {
     CinematicIsStart = false
-    MusicForCinematic = false
-    SongBackground.loop()
     StartCinematic.hide();
-
+    MusicForCinematic = false
+    MusicIsActivateOrNot = false
+    FunctionForMusic()
+    // console.log("4eme appel")
 
 }
+
+
+
 
 
 //#endregion

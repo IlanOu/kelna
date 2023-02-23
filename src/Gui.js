@@ -274,25 +274,29 @@ let DownHeart = () => {
 }
 
 
-let FunctionForMusic = () => {
-    if (MusicIsActivateOrNot === true) {
-        if (MusicForCinematic === false) {
-            
-            MusicIsActivateOrNot = false
-            SongBackground.loop()
-            console.log("Musique activé")
-            ColorForRectMusic = 200
-        }
-        if (MusicForCinematic === true) {
-            console.log("Musique en pause a cause de la cinematique")
-            SongBackground.pause()
-            setTimeout(EndOfOpeningFromBeginning, 4000);
 
-        }
+let FunctionForMusic = () => {
+
+    if (MusicForCinematic === true) {
+
+        MusicIsActivateOrNot = undefined
+        SongBackground.pause()
+        //console.log("Musique bloqué par la cinematique")
+        ColorForRectMusic = 200
+
     }
-    else if (MusicIsActivateOrNot === false) {
+    if (MusicIsActivateOrNot === true) {
+
+        MusicIsActivateOrNot = false
+        SongBackground.loop()
+        //console.log("Musique activé")
+        ColorForRectMusic = 200
+
+    }
+    else if (MusicIsActivateOrNot === false && IsNot === true) {
+
         MusicIsActivateOrNot = true
-        console.log("Musique desactivé")
+        //console.log("Musique desactivé")
         SongBackground.pause()
         ColorForRectMusic = 50
     }
@@ -321,6 +325,11 @@ let FunctionForSong = () => {
 
 }
 
+
+// window.onbeforeunload = () => {
+//     console.log("sa passe")
+//     return "Êtes-vous sûr de vouloir quitter cette page ? Vous allez perdre toute votre progression !";
+// };
 
 
 //#endregion INTERACTIONS
@@ -471,6 +480,7 @@ function mousePressed() {
             isSettingsEchap = false;
             PlayerIsInPlay = false;
             PlayerIsInPaused = false
+            CinematicIsStart = true
             YouCanEscape = true;
         }
     }

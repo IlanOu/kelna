@@ -129,7 +129,14 @@ let ForStat = false;
 
 
 // MUSIC / SETTINGS
-let MusicIsActivateOrNot = true;
+let MusicIsActivateOrNot = true
+
+let IsNot = true
+
+let cinematicIsRunning = false;
+
+let openingTimeout = null;
+
 let ColorForRectMusic = 50
 let SongIsActivateOrNot = false;
 let ColorForRectSong = 200
