@@ -20,6 +20,8 @@ function preload() {
   GUIOfDeath = loadImage("assets/GUIOfDeath.png")
   GUIForStats = loadImage("assets/GUIForStats.png")
   Background = loadImage("assets/Background.gif")
+  IMGPlay = loadImage("assets/Play.png")
+  IMGSet = loadImage("assets/Settings.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -47,7 +49,6 @@ function draw() {
 
   if (PlayerIsInPlay === false) {
     WaitToPlay()
-    // SongBackground.play()
   }
   if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
     if (EngineOne) {
@@ -69,7 +70,7 @@ function draw() {
   if (isSettingsWait === true && PlayerIsInPlay === false) {
     Setting()
   }
-  if (HealthPlayer === 0 && PlayerIsInPlay === true && PlayerIsInPlay === true) {
+  if (HealthPlayer === 0 && PlayerIsInPlay === true) {
     PlayerIsDie()
   }
   if (isStats === true && HealthPlayer === 0) {

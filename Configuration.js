@@ -127,13 +127,47 @@ let HealthPlayer = 3; // vie du perso
 // STATS
 let ForStat = false;
 
+
 // MUSIC / SETTINGS
-let MusicIsActivateOrNot = false;
-let ColorForRectMusic = 200
+let MusicIsActivateOrNot = true;
+let ColorForRectMusic = 50
 let SongIsActivateOrNot = false;
 let ColorForRectSong = 200
 
+
+// Plus pouvoir bouger apres la mort
+let PlayerCanMove = true
+
 //#endregion
+
+//#region Interfaces
+
+// Pour les interfaces
+let IsWidthForAllInterfaces = 800;
+let IsHeightForAllInterfaces = 600;
+
+let IsXForAllInterfaces = (window.innerWidth / 2) - (IsWidthForAllInterfaces / 2);
+let IsYForAllInterfaces = (window.innerHeight / 2) - (IsHeightForAllInterfaces / 2);
+
+
+// Pour les boutons de wait
+let IsWidthForWaitButtons = 100
+let IsHeightForWaitButtons = 80
+
+
+// Pour tous les autres boutons hors wait
+let IsWidthForAllButtons = 290
+let IsHeightForAllButtons = 50
+let IsXForAllButtons = (window.innerWidth / 2) - (IsWidthForAllButtons / 2);
+let IsYForAllButtons = (window.innerHeight / 2) - (IsHeightForAllButtons / 2);
+
+
+// Pour tous les textes des autres boutons hors wait
+let IsXForTextAllButtons = (window.innerWidth / 2);
+
+
+//#endregion
+
 
 //#region //~ Debut Game
 let isPlay = false;
