@@ -46,6 +46,13 @@ let yStartHouse = 0;
 //^ Perso
 
 //#region //~ caractéristiques du perso
+
+
+let dashForce = 2;
+let velocityX = 0;
+let dashMaxLength = 5;
+
+
 let characterInMapX = 0;
 let characterInMapY = 0;
 
@@ -130,13 +137,7 @@ let ForStat = false;
 
 // MUSIC / SETTINGS
 let MusicIsActivateOrNot = true
-
 let IsNot = true
-
-let cinematicIsRunning = false;
-
-let openingTimeout = null;
-
 let ColorForRectMusic = 50
 let SongIsActivateOrNot = false;
 let ColorForRectSong = 200
@@ -144,6 +145,19 @@ let ColorForRectSong = 200
 
 // Plus pouvoir bouger apres la mort
 let PlayerCanMove = true
+
+
+// RECHERCHE
+let PlayerReward = 0;
+let VarToKeepPoster = false;
+let PlayerIsRecherche = false;
+
+
+let PlayerCanBeSearched = () => {
+    fill(0)
+    text(PlayerReward + " " + "pieces", 10, 30);
+    image(WantedPoster, 50, 50, 400, 400);
+}
 
 //#endregion
 

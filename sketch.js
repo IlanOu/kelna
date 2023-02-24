@@ -24,6 +24,7 @@ function preload() {
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
   PNJ1.IMG = loadImage("assets/PNJ.png");
+  WantedPoster = loadImage("assets/WantedPoster.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -52,9 +53,6 @@ function preload() {
 
 
 
-let dashForce = 2;
-let velocityX = 0;
-let dashMaxLength = 5;
 
 function draw() {
   if (PlayerIsInPlay === false) {
@@ -65,6 +63,7 @@ function draw() {
   }
   if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === false) {
     if (EngineOne) {
+      //PlayerCanBeSearched()
       drawGrid()
       ForPNJ1()
       displayVie();

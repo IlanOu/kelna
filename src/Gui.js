@@ -547,4 +547,23 @@ function mousePressed() {
     }
 }
 
+
+
+
+// function mouseClicked() {
+//     if (PlayerIsRecherche === true) {
+//        Test()
+//     }
+// }
+
+
+let Test = () => {
+
+    fill(0)
+    text(PlayerReward, 10, 30);
+    text('PIECES', 10, 30);
+    image(WantedPoster, 50, 50, 400, 400);
+
+}
+
 //#endregion CLIQUE DE SOURIS
