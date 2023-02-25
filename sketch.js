@@ -63,10 +63,11 @@ function draw() {
   }
   if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === false) {
     if (EngineOne) {
-      //PlayerCanBeSearched()
       drawGrid()
       ForPNJ1()
       displayVie();
+      PlayerCanBeSearched()
+      displayInventory()
       character()
     } else {
       drawHouse()
@@ -74,7 +75,6 @@ function draw() {
     }
 
   }
-
   if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
     MenuEscape()
   }

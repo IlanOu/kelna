@@ -19,6 +19,9 @@ let MenuEscape = () => {
     // Interface 
     image(GUIForEscape, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
+    // ALL BOUTTONS
+    stroke(0);
+
 
     // Boutton QUIT
     fill(200);
@@ -188,6 +191,9 @@ let PlayerIsDie = () => {
     // Interface 
     image(GUIOfDeath, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
+    // ALL BOUTTONS
+    stroke(0);
+
     // Boutton STATS
     fill(0);
     rect(IsXForAllButtons, ButtonYStats, IsWidthForAllButtons, IsHeightForAllButtons);
@@ -205,6 +211,23 @@ let PlayerIsDie = () => {
     text("RETURN TO MENU", IsXForTextAllButtons, ButtonYMenuInDie + ButtonHMenuInDie / 2 + 5);
 
 }
+
+//#endregion
+
+
+//#region RECHERCHED 
+
+let PlayerCanBeSearched = () => {
+    if (PlayerIsRecherche === true) {
+        textSize(16);
+        fill(0)
+        image(WantedPoster, PositionXPoster, PositionYPoster, WidthPoster, HeightPoster);
+        text(PlayerReward + " " + 'PIECES', PositionXTextOfPoster, PositionYTextOfPoster);
+    } else {
+        return
+    }
+}
+
 
 //#endregion
 
@@ -326,6 +349,8 @@ let FunctionForSong = () => {
 }
 
 
+
+// SI LE JOUEUR FAIS F5 EN PLEIN JEU
 // window.onbeforeunload = () => {
 //     console.log("sa passe")
 //     return "Êtes-vous sûr de vouloir quitter cette page ? Vous allez perdre toute votre progression !";
@@ -482,6 +507,8 @@ function mousePressed() {
             PlayerIsInPaused = false
             CinematicIsStart = true
             YouCanEscape = true;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
@@ -529,6 +556,8 @@ function mousePressed() {
             YouCanEscape = true;
             PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
@@ -542,28 +571,10 @@ function mousePressed() {
             YouCanEscape = true;
             PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
 
         }
     }
 }
-
-
-
-
-// function mouseClicked() {
-//     if (PlayerIsRecherche === true) {
-//        Test()
-//     }
-// }
-
-
-let Test = () => {
-
-    fill(0)
-    text(PlayerReward, 10, 30);
-    text('PIECES', 10, 30);
-    image(WantedPoster, 50, 50, 400, 400);
-
-}
-
 //#endregion CLIQUE DE SOURIS

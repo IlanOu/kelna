@@ -143,21 +143,32 @@ let SongIsActivateOrNot = false;
 let ColorForRectSong = 200
 
 
-// Plus pouvoir bouger apres la mort
+// Plus pouvoir bouger apres la mort ou en pause
 let PlayerCanMove = true
 
 
 // RECHERCHE
+let PositionXPoster = 1550;
+let PositionYPoster = 50;
+let WidthPoster = 300;
+let HeightPoster = 300;
+
+
+let PositionXTextOfPoster = 1700;
+let PositionYTextOfPoster = 317;
 let PlayerReward = 0;
 let VarToKeepPoster = false;
 let PlayerIsRecherche = false;
 
 
-let PlayerCanBeSearched = () => {
-    fill(0)
-    text(PlayerReward + " " + "pieces", 10, 30);
-    image(WantedPoster, 50, 50, 400, 400);
-}
+// INVENTAIRE
+let Inventory = [];
+let WidthSlot = 85;
+let HeightSlot = 85;
+let ForSlotOneX = 750;
+let ActualSlot = 0;
+
+
 
 //#endregion
 

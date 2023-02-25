@@ -21,14 +21,9 @@ let EndOfOpeningFromBeginning = () => {
     CinematicIsStart = false
     StartCinematic.hide();
     MusicForCinematic = false
+    PlayerIsRecherche = true
     MusicIsActivateOrNot = false
     FunctionForMusic()
     // console.log("4eme appel")
-
 }
-
-
-
-
-
 //#endregion
