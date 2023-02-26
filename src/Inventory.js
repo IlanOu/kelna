@@ -12,19 +12,18 @@ let displayInventory = () => {
     let ForAllSlotY = 800;
 
     noFill();
-    // stroke(255);
 
-    if (ActualSlot === 0) {
+    if (currentSlot === 0) {
         stroke(255, 0, 0);
         rect(ForSlotOneX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);
        
-    } if (ActualSlot === 1) {
+    } if (currentSlot === 1) {
         stroke(255, 0, 0);
         rect(ForSlotTwoX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);
     } 
-    if (ActualSlot === 2) {
+    if (currentSlot === 2) {
         stroke(255, 0, 0);
         rect(ForSlotThreeX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);

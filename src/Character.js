@@ -1,7 +1,7 @@
 //& ajouter des controles à l'objet  
 function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
-  if (EngineOne) {
+  if (engineOne) {
 
     //~ Gauche Droite
     //* éviter de pouvoir aller à droite et à gauche en meme temps
@@ -116,7 +116,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTextureWalk.get(x, y, 320, 320));
+          characterTextureList.push(characterTexture_Walk.get(x, y, 320, 320));
         }
       }
 
@@ -125,7 +125,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTextureIdle.get(x, y, 320, 320));
+          characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
         }
       }
 
@@ -135,7 +135,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTextureJump.get(x, y, 320, 320));
+          characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
         }
       }
 
@@ -145,7 +145,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTextureDash.get(x, y, 320, 320));
+          characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
         }
       }
 
@@ -474,7 +474,7 @@ function character() {
   //#region //~ roulade du perso
   
   const currentTime = millis();
-  if (DashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)){
+  if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)){
     characterIsDashing = true;
     
     lastDashTime = currentTime;
@@ -493,10 +493,10 @@ function character() {
   //#region //~ affichage du personnage
 
   if (characterIsJumping) {
-    if (RightArrowPressed) {
+    if (rightArrowPressed) {
       characterDirection = "right"
       characterMovement = "jump"
-    } else if (LeftArrowPressed) {
+    } else if (leftArrowPressed) {
       characterDirection = "left"
       characterMovement = "jump"
     } else {
@@ -505,18 +505,18 @@ function character() {
     }
   } else {
     if (characterIsDashing){
-      if (RightArrowPressed) {
+      if (rightArrowPressed) {
         characterDirection = "right"
         characterMovement = "dash"
-      } else if (LeftArrowPressed) {
+      } else if (leftArrowPressed) {
         characterDirection = "left"
         characterMovement = "dash"
       }
     }else{
-      if (RightArrowPressed) {
+      if (rightArrowPressed) {
         characterDirection = "right"
         characterMovement = "walk"
-      } else if (LeftArrowPressed) {
+      } else if (leftArrowPressed) {
         characterDirection = "left"
         characterMovement = "walk"
       } else {

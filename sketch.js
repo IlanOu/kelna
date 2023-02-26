@@ -32,10 +32,10 @@ function preload() {
   sky = loadImage("assets/textures/Sky.jpg")
 
   // Personnage
-  characterTextureIdle = loadImage("assets/animations/IdleBase.png")
-  characterTextureWalk = loadImage("assets/animations/WalkBase.png")
-  characterTextureJump = loadImage("assets/animations/JumpBase.png")
-  characterTextureDash = loadImage("assets/animations/RollBase.png")
+  characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
+  characterTexture_Walk = loadImage("assets/animations/WalkBase.png")
+  characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
+  characterTexture_Dash = loadImage("assets/animations/RollBase.png")
 
   // JSON preload
   Maps = loadJSON("json/Maps.json");
@@ -56,14 +56,14 @@ function preload() {
 
 
 function draw() {
-  if (PlayerIsInPlay === false) {
+  if (gameIsPlaying === false) {
     WaitToPlay()
   }
-  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === true) {
+  if (gameIsPaused === false && gameIsPlaying === true && CinematicIsStart === true) {
     StartOpeningCinematic()
   }
-  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === false) {
-    if (EngineOne) {
+  if (gameIsPaused === false && gameIsPlaying === true && CinematicIsStart === false) {
+    if (engineOne) {
       drawGrid()
       ForPNJ1()
       displayVie();
@@ -76,16 +76,16 @@ function draw() {
     }
 
   }
-  if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
+  if (gameIsPaused === true && gameIsPlaying === true && isSettingsEchap === false) {
     MenuEscape()
   }
-  if (isSettingsEchap === true && PlayerIsInPlay === true) {
+  if (isSettingsEchap === true && gameIsPlaying === true) {
     Setting()
   }
-  if (isSettingsWait === true && PlayerIsInPlay === false) {
+  if (isSettingsWait === true && gameIsPlaying === false) {
     Setting()
   }
-  if (HealthPlayer === 0 && PlayerIsInPlay === true) {
+  if (HealthPlayer === 0 && gameIsPlaying === true) {
     PlayerIsDie()
   }
   if (isStats === true && HealthPlayer === 0) {

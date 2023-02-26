@@ -80,7 +80,7 @@ let Setting = () => {
     text("MUSIC", IsXForTextAllButtons, ForButYMusic);
 
 
-    if (PlayerIsInPlay === false) {
+    if (gameIsPlaying === false) {
         // Boutton du return quand le joueur ne joue pas => Retour au wait to play
         fill(0);
         rect(IsXForAllButtons, ButtonYReturnInPausedW, IsWidthForAllButtons, IsHeightForAllButtons);
@@ -89,7 +89,7 @@ let Setting = () => {
         textSize(14);
         text("Return to menu", IsXForTextAllButtons, ForButtonYReturnInWait);
     }
-    if (PlayerIsInPlay === true) {
+    if (gameIsPlaying === true) {
         // Boutton du return quand le joueur joue => Retour au echap
         fill(0);
         rect(IsXForAllButtons, ButtonYReturnToMenuOfSettingOfEchap, IsWidthForAllButtons, IsHeightForAllButtons);
@@ -222,7 +222,7 @@ let PlayerCanBeSearched = () => {
         textSize(16);
         fill(0)
         image(WantedPoster, PositionXPoster, PositionYPoster, WidthPoster, HeightPoster);
-        text(PlayerReward + " " + 'PIECES', PositionXTextOfPoster, PositionYTextOfPoster);
+        text(playerReward + " " + 'PIECES', PositionXTextOfPoster, PositionYTextOfPoster);
     } else {
         return
     }
@@ -237,21 +237,21 @@ let PlayerCanBeSearched = () => {
 let ForInteract = () => {
 
     //Interaction avec les pavés tactiles
-    if (Degating) {
+    if (gettingHurt) {
         Degat(1);
-        Degating = false;
+        gettingHurt = false;
     }
-    if (Regening) {
+    if (gettingHeal) {
         Regen(1);
-        Regening = false;
+        gettingHeal = false;
     }
-    if (AddHeart) {
+    if (addHeart) {
         OneHeart(1);
-        AddHeart = false;
+        addHeart = false;
     }
-    if (DeleteHeart) {
+    if (removeHeart) {
         DownHeart(1);
-        DeleteHeart = false;
+        removeHeart = false;
     }
 
 
@@ -473,26 +473,26 @@ let PositionButtons = () => {
 function mousePressed() {
 
     // Boutton Music
-    if (PlayerIsInPlay === false && isSettingsWait === true || PlayerIsInPaused === true && isSettingsEchap === true) {
+    if (gameIsPlaying === false && isSettingsWait === true || gameIsPaused === true && isSettingsEchap === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMusic && mouseY < ButtonYMusic + IsHeightForAllButtons) {
             FunctionForMusic()
         }
     }
     // Button song
-    if (PlayerIsInPlay === false && isSettingsWait === true || PlayerIsInPaused === true && isSettingsEchap === true) {
+    if (gameIsPlaying === false && isSettingsWait === true || gameIsPaused === true && isSettingsEchap === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYSon && mouseY < ButtonYSon + IsHeightForAllButtons) {
             FunctionForSong()
         }
     }
     // Quand on appuie sur play
-    if (PlayerIsInPlay === false && PlayerIsInPaused === false && isSettingsWait === false) {
+    if (gameIsPlaying === false && gameIsPaused === false && isSettingsWait === false) {
         if (mouseX > ButXPlay && mouseX < ButXPlay + ButWPlay && mouseY > ButYPlay && mouseY < ButYPlay + ButHPlay) {
-            PlayerIsInPlay = true;
+            gameIsPlaying = true;
         }
     }
 
     // Quand on appuie sur settings
-    if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsWait === false && isSettingsEchap === false) {
+    if (gameIsPaused === true && gameIsPlaying === true && isSettingsWait === false && isSettingsEchap === false) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYTextSettingsOfEchap && mouseY < ButtonYTextSettingsOfEchap + IsHeightForAllButtons) {
             isSettingsEchap = true;
             YouCanEscape = false;
@@ -500,11 +500,11 @@ function mousePressed() {
     }
 
     // Quit de echap
-    if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsWait === false) {
+    if (gameIsPaused === true && gameIsPlaying === true && isSettingsWait === false) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYQuitInEchap && mouseY < ButtonYQuitInEchap + IsHeightForAllButtons) {
             isSettingsEchap = false;
-            PlayerIsInPlay = false;
-            PlayerIsInPaused = false
+            gameIsPlaying = false;
+            gameIsPaused = false
             CinematicIsStart = true
             YouCanEscape = true;
             MusicIsActivateOrNot = false
@@ -520,21 +520,21 @@ function mousePressed() {
         }
 
         // Retour au jeu  
-    } if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
+    } if (gameIsPaused === true && gameIsPlaying === true && isSettingsEchap === false) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYReturnToGameInEchap && mouseY < ButtonYReturnToGameInEchap + IsHeightForAllButtons) {
-            PlayerIsInPaused = false;
+            gameIsPaused = false;
         }
     }
 
     //Parametre au wait to play en true
-    if (isSettingsWait === false && PlayerIsInPlay === false) {
+    if (isSettingsWait === false && gameIsPlaying === false) {
         if (mouseX > ButXSetW && mouseX < ButXSetW + ButWSetW && mouseY > ButYSetW && mouseY < ButYSetW + ButHSetW) {
             isSettingsWait = true;
         }
     }
 
     //Parametre au wait to play en false
-    if (isSettingsWait === true && PlayerIsInPlay === false) {
+    if (isSettingsWait === true && gameIsPlaying === false) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYReturnInPausedW && mouseY < ButtonYReturnInPausedW + IsHeightForAllButtons) {
             isSettingsWait = false;
         }
@@ -549,7 +549,7 @@ function mousePressed() {
 
     if (isStats === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYStatsInDie && mouseY < ButtonYStatsInDie + IsHeightForAllButtons) {
-            PlayerIsInPlay = false;
+            gameIsPlaying = false;
             isStats = false;
             isMenu = false;
             CinematicIsStart = true
@@ -564,7 +564,7 @@ function mousePressed() {
     //Retours au menu apres la mort
     if (isMenu === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMenuInDie && mouseY < ButtonYMenuInDie + IsHeightForAllButtons) {
-            PlayerIsInPlay = false;
+            gameIsPlaying = false;
             CinematicIsStart = true
             isStats = false;
             isMenu = false;

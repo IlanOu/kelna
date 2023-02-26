@@ -8,10 +8,10 @@ let sky;
 //#endregion
 
 //#region //~ Textures Perso
-let characterTextureIdle;
-let characterTextureWalk;
-let characterTextureJump;
-let characterTextureDash;
+let characterTexture_Idle;
+let characterTexture_Walk;
+let characterTexture_Jump;
+let characterTexture_Dash;
 
 let characterTextureList = [];
 
@@ -50,10 +50,9 @@ let yStartHouse = 0;
 
 //#region //~ caractéristiques du perso
 
-
-let characterInMapX = 0;
-let characterInMapY = 0;
-
+//? Positions
+// let characterInMapX = 0;
+// let characterInMapY = 0;
 
 let characterInsidePosX = 1;
 let characterInsidePosY = 1;
@@ -72,10 +71,12 @@ let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
 
+let characterMovesSpeed = 7.5;
+
+
+//? Saut
 let characterMass = 60;
 let characterJumpHeight = 35;
-
-let characterMovesSpeed = 7.5;
 
 let characterVelocityY = 0;
 let characterVelocityYMin = -80
@@ -89,7 +90,7 @@ let characterDoubleJumping = false;
 
 let characterIsJumping = false;
 
-
+//? Dash
 let characterIsDashing = false;
 let lastDashTime = 0;
 const dashCooldown = 1000;
@@ -104,17 +105,17 @@ const dashForce = 2;
 //#region //~ Interactions Joueur - Machine
 
 // Pouvoir faire echap
-let YouCanEscape = true;
+let canPressEscape = true;
 
 
 // Pour que le joueur fasse echap
-let PlayerIsInPaused = false;
+let gameIsPaused = false;
 let isSettingsEchap = false;
 
 
 
 // Attente du joueur pour joueur
-let PlayerIsInPlay = false;
+let gameIsPlaying = false;
 let isSettingsWait = false;
 
 
@@ -126,11 +127,11 @@ let isMenu = false;
 // pour coeur
 let HealthMax = 3; // largeur de la barre de vie
 let MargeBarVie = 30; // marge de la barre de vie
-let Pressing = false; // Quand on appuie
-let Degating = false; // Pour les degats
-let Regening = false; // Pour regen
-let AddHeart = false; // Pour ajouter un coeur
-let DeleteHeart = false; // Pour enlever un coeur
+let pressingKey = false; // Quand on appuie
+let gettingHurt = false; // Pour les degats
+let gettingHeal = false; // Pour regen
+let addHeart = false; // Pour ajouter un coeur
+let removeHeart = false; // Pour enlever un coeur
 let HealthPlayer = 3; // vie du perso
 
 
@@ -160,7 +161,7 @@ let HeightPoster = 300;
 
 let PositionXTextOfPoster = 1700;
 let PositionYTextOfPoster = 317;
-let PlayerReward = 0;
+let playerReward = 0;
 let VarToKeepPoster = false;
 let PlayerIsRecherche = false;
 
@@ -170,7 +171,7 @@ let Inventory = [];
 let WidthSlot = 85;
 let HeightSlot = 85;
 let ForSlotOneX = 750;
-let ActualSlot = 0;
+let currentSlot = 0;
 
 
 
@@ -179,7 +180,7 @@ let ActualSlot = 0;
 
 //#region //~ Interfaces
 
-// Pour les interfaces
+// Interfaces
 let IsWidthForAllInterfaces = 800;
 let IsHeightForAllInterfaces = 600;
 
@@ -187,19 +188,19 @@ let IsXForAllInterfaces = (window.innerWidth / 2) - (IsWidthForAllInterfaces / 2
 let IsYForAllInterfaces = (window.innerHeight / 2) - (IsHeightForAllInterfaces / 2);
 
 
-// Pour les boutons de wait
+// Boutons wait
 let IsWidthForWaitButtons = 100
 let IsHeightForWaitButtons = 80
 
 
-// Pour tous les autres boutons hors wait
+// Autres boutons hors wait
 let IsWidthForAllButtons = 290
 let IsHeightForAllButtons = 50
 let IsXForAllButtons = (window.innerWidth / 2) - (IsWidthForAllButtons / 2);
 let IsYForAllButtons = (window.innerHeight / 2) - (IsHeightForAllButtons / 2);
 
 
-// Pour tous les textes des autres boutons hors wait
+// Textes autres boutons hors wait
 let IsXForTextAllButtons = (window.innerWidth / 2);
 
 
@@ -211,6 +212,8 @@ let isPlay = false;
 let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
 
 //#endregion
+
+
 
 //^ Autres
 
@@ -231,16 +234,16 @@ let Houses;
 //#region //~ Evenements 
 
 let spaceKeyIsPressed = false;
-let RightArrowPressed = false;
-let LeftArrowPressed = false;
-let DashKeyIsPressed = false;
+let rightArrowPressed = false;
+let leftArrowPressed = false;
+let dashKeyIsPressed = false;
 
-let EngineOne = true;
+let engineOne = true;
 
 //#endregion
 
 
-//#region CINEMATIC
+//#region //~ CINEMATIC
 
 let StartCinematic;
 
