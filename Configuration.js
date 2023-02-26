@@ -116,6 +116,8 @@ let gameIsPaused = false
 let gameIsPlaying = false
 let playerCanMove = false
 
+let isSettingsWait = false
+
 // Life Bar
 
 let healthPlayer = 0
