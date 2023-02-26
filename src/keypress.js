@@ -34,6 +34,19 @@ function keyPressed(key) {
         DashKeyIsPressed = true
     }
 
+    if (keyCode === 49) { // Touche 1 au dessus
+        ActualSlot = 0;
+    } 
+    
+    if (keyCode === 50) { // Touche 2 au dessus
+        ActualSlot = 1;
+    }
+
+    if (keyCode === 51) { // Touche 3 au dessus
+        ActualSlot = 2;
+    }
+
+
 
     if (keyCode === 97) { // 1 du pavé
         if (!Pressing) {
@@ -60,7 +73,10 @@ function keyPressed(key) {
         Pressing = true;
     }
 
+    if (keyCode === 79) { // O du clavier
+        PlayerReward += 50
 
+    }
 
 }
 

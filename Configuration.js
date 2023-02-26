@@ -49,6 +49,8 @@ let yStartHouse = 0;
 //^ Perso
 
 //#region //~ caractéristiques du perso
+
+
 let characterInMapX = 0;
 let characterInMapY = 0;
 
@@ -138,16 +140,42 @@ let ForStat = false;
 
 
 // MUSIC / SETTINGS
-let MusicIsActivateOrNot = true;
+let MusicIsActivateOrNot = true
+let IsNot = true
 let ColorForRectMusic = 50
 let SongIsActivateOrNot = false;
 let ColorForRectSong = 200
 
 
-// Plus pouvoir bouger apres la mort
+// Plus pouvoir bouger apres la mort ou en pause
 let PlayerCanMove = true
 
+
+// RECHERCHE
+let PositionXPoster = 1550;
+let PositionYPoster = 50;
+let WidthPoster = 300;
+let HeightPoster = 300;
+
+
+let PositionXTextOfPoster = 1700;
+let PositionYTextOfPoster = 317;
+let PlayerReward = 0;
+let VarToKeepPoster = false;
+let PlayerIsRecherche = false;
+
+
+// INVENTAIRE
+let Inventory = [];
+let WidthSlot = 85;
+let HeightSlot = 85;
+let ForSlotOneX = 750;
+let ActualSlot = 0;
+
+
+
 //#endregion
+
 
 //#region //~ Interfaces
 
@@ -191,6 +219,7 @@ const gravityForce = 0.81;
 
 //#endregion
 
+
 //#region //~ cartes du jeu
 let Maps;
 let World;
@@ -198,7 +227,9 @@ let Houses;
 
 //#endregion
 
+
 //#region //~ Evenements 
+
 let spaceKeyIsPressed = false;
 let RightArrowPressed = false;
 let LeftArrowPressed = false;
@@ -207,3 +238,16 @@ let DashKeyIsPressed = false;
 let EngineOne = true;
 
 //#endregion
+
+
+//#region CINEMATIC
+
+let StartCinematic;
+
+let CinematicIsStart = true;
+let MusicForCinematic = false;
+
+let CinematicForEnd = false;
+
+//#endregion
+

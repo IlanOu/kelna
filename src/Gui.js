@@ -19,6 +19,9 @@ let MenuEscape = () => {
     // Interface 
     image(GUIForEscape, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
+    // ALL BOUTTONS
+    stroke(0);
+
 
     // Boutton QUIT
     fill(200);
@@ -188,6 +191,9 @@ let PlayerIsDie = () => {
     // Interface 
     image(GUIOfDeath, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
+    // ALL BOUTTONS
+    stroke(0);
+
     // Boutton STATS
     fill(0);
     rect(IsXForAllButtons, ButtonYStats, IsWidthForAllButtons, IsHeightForAllButtons);
@@ -205,6 +211,23 @@ let PlayerIsDie = () => {
     text("RETURN TO MENU", IsXForTextAllButtons, ButtonYMenuInDie + ButtonHMenuInDie / 2 + 5);
 
 }
+
+//#endregion
+
+
+//#region RECHERCHED 
+
+let PlayerCanBeSearched = () => {
+    if (PlayerIsRecherche === true) {
+        textSize(16);
+        fill(0)
+        image(WantedPoster, PositionXPoster, PositionYPoster, WidthPoster, HeightPoster);
+        text(PlayerReward + " " + 'PIECES', PositionXTextOfPoster, PositionYTextOfPoster);
+    } else {
+        return
+    }
+}
+
 
 //#endregion
 
@@ -274,23 +297,36 @@ let DownHeart = () => {
 }
 
 
+
 let FunctionForMusic = () => {
+
+    if (MusicForCinematic === true) {
+
+        MusicIsActivateOrNot = undefined
+        SongBackground.pause()
+        //console.log("Musique bloqué par la cinematique")
+        ColorForRectMusic = 200
+
+    }
     if (MusicIsActivateOrNot === true) {
 
         MusicIsActivateOrNot = false
         SongBackground.loop()
-        console.log("Musique activé")
+        //console.log("Musique activé")
         ColorForRectMusic = 200
 
     }
-    else if (MusicIsActivateOrNot === false) {
+    else if (MusicIsActivateOrNot === false && IsNot === true) {
+
         MusicIsActivateOrNot = true
-        console.log("Musique desactivé")
+        //console.log("Musique desactivé")
         SongBackground.pause()
         ColorForRectMusic = 50
     }
 
 }
+
+
 
 
 let FunctionForSong = () => {
@@ -312,6 +348,13 @@ let FunctionForSong = () => {
 
 }
 
+
+
+// SI LE JOUEUR FAIS F5 EN PLEIN JEU
+// window.onbeforeunload = () => {
+//     console.log("sa passe")
+//     return "Êtes-vous sûr de vouloir quitter cette page ? Vous allez perdre toute votre progression !";
+// };
 
 
 //#endregion INTERACTIONS
@@ -462,7 +505,10 @@ function mousePressed() {
             isSettingsEchap = false;
             PlayerIsInPlay = false;
             PlayerIsInPaused = false
+            CinematicIsStart = true
             YouCanEscape = true;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
@@ -506,9 +552,12 @@ function mousePressed() {
             PlayerIsInPlay = false;
             isStats = false;
             isMenu = false;
+            CinematicIsStart = true
             YouCanEscape = true;
             PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
@@ -516,14 +565,16 @@ function mousePressed() {
     if (isMenu === true) {
         if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMenuInDie && mouseY < ButtonYMenuInDie + IsHeightForAllButtons) {
             PlayerIsInPlay = false;
+            CinematicIsStart = true
             isStats = false;
             isMenu = false;
             YouCanEscape = true;
             PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
 
         }
     }
 }
-
 //#endregion CLIQUE DE SOURIS

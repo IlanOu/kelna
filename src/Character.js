@@ -110,7 +110,6 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
-
   if (PlayerCanMove === true) {
     //~ animation MARCHER
     if (movement == "walk") {

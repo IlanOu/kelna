@@ -1,13 +1,14 @@
 function setup() {
   let viewportDisplayWidth = 1920
   let viewportDisplayHeight = 1080
-  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight){
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
   }
 
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
   PositionButtons()
+
 
 }
 
@@ -22,6 +23,8 @@ function preload() {
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
+  PNJ1.IMG = loadImage("assets/PNJ.png");
+  WantedPoster = loadImage("assets/WantedPoster.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -41,18 +44,31 @@ function preload() {
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
+
+
+  //CINEMATIC
+  StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
+  StartCinematic.hide();
+  StartCinematic.volume(0);
 }
 
 
-function draw() {
 
+
+function draw() {
   if (PlayerIsInPlay === false) {
     WaitToPlay()
   }
-  if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
+  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === true) {
+    StartOpeningCinematic()
+  }
+  if (PlayerIsInPaused === false && PlayerIsInPlay === true && CinematicIsStart === false) {
     if (EngineOne) {
       drawGrid()
+      ForPNJ1()
       displayVie();
+      PlayerCanBeSearched()
+      displayInventory()
       character()
     } else {
       drawHouse()
@@ -74,7 +90,7 @@ function draw() {
   }
   if (isStats === true && HealthPlayer === 0) {
     Stats()
-  } 
+  }
 
 
   
@@ -82,3 +98,5 @@ function draw() {
         
 
 }
+
+
