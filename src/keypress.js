@@ -1,12 +1,10 @@
 
 //~ vérifier si une touche est pressée 
-function keyPressed(key) {
+function keyPressed() {
     //^ Bouton echap
     if (keyCode === ESCAPE) {
-        if (gameIsPlaying === true && canPressEscape === true) {
-            gameIsPaused = !gameIsPaused
-
-        }
+        if (inGame)
+        gameIsPaused = !gameIsPaused
     }
 
     //^ Barre espace
@@ -104,7 +102,7 @@ function keyReleased() {
     }
 
 
-
+    //^ Si n'importe quelle touche est relachée
     if (keyCode) {
         pressingKey = false;
     }

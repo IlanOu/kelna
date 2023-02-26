@@ -9,7 +9,7 @@ let BackOfTheBackground = () => {
 //#endregion 
 
 
-//#region FOR ECHAP
+//#region //~ ECHAP
 
 let MenuEscape = () => {
 
@@ -50,10 +50,10 @@ let MenuEscape = () => {
 
 }
 
-//#endregion FOR ECHAP
+//#endregion 
 
 
-//#region FOR SETTINGS
+//#region //~ SETTINGS
 
 let Setting = () => {
 
@@ -105,10 +105,10 @@ let Setting = () => {
 
 }
 
-//#endregion FOR SETTINGS
+//#endregion
 
 
-//#region FOR WAIT TO PLAY
+//#region //~ WAIT TO PLAY
 let WaitToPlay = () => {
 
 
@@ -135,21 +135,21 @@ let WaitToPlay = () => {
 
 
 
-    //  Boutton PLAY
-    // fill(200);
-    // rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
-    // fill(0);
-    // textAlign(CENTER);
-    // textSize(16);
-    // text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
+    ////  Boutton PLAY
+    //// fill(200);
+    //// rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
+    //// fill(0);
+    //// textAlign(CENTER);
+    //// textSize(16);
+    //// text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
 
-    //  Boutton SETTINGS
-    // fill(200);
-    // rect(ButXSetW, ButYSetW, ButWSetW, ButHSetW);
-    // fill(0);
-    // textAlign(CENTER);
-    // textSize(16);
-    // text("Settings", ButXSetW + ButWSetW / 2, ButYSetW + ButHSetW / 2 + 5);
+    ////  Boutton SETTINGS
+    //// fill(200);
+    //// rect(ButXSetW, ButYSetW, ButWSetW, ButHSetW);
+    //// fill(0);
+    //// textAlign(CENTER);
+    //// textSize(16);
+    //// text("Settings", ButXSetW + ButWSetW / 2, ButYSetW + ButHSetW / 2 + 5);
 
 
 }
@@ -157,7 +157,7 @@ let WaitToPlay = () => {
 //#endregion
 
 
-//#region FOR STATS
+//#region //~ STATS
 let Stats = () => {
 
     // Fond d'arriere plan
@@ -175,10 +175,10 @@ let Stats = () => {
     text("RETURN TO MENU", IsXForTextAllButtons, ButtonYStatsInDie + ButtonHStatsInDie / 2 + 5);
 }
 
-//#endregion FOR STATS
+//#endregion 
 
 
-//#region FOR DIE
+//#region //~ DIE
 let PlayerIsDie = () => {
 
     // Menu de mort est donc vrai
@@ -215,7 +215,7 @@ let PlayerIsDie = () => {
 //#endregion
 
 
-//#region RECHERCHED 
+//#region //~ WANTED 
 
 let PlayerCanBeSearched = () => {
     if (PlayerIsRecherche === true) {
@@ -232,7 +232,7 @@ let PlayerCanBeSearched = () => {
 //#endregion
 
 
-//#region INTERACTIONS
+//#region //~ INTERACTIONS
 
 let ForInteract = () => {
 
@@ -357,16 +357,16 @@ let FunctionForSong = () => {
 // };
 
 
-//#endregion INTERACTIONS
+//#endregion
 
 
-//#region POSITIONS BUTTONS
+//#region //~ Positions BUTTONS
 let PositionButtons = () => {
 
 
-    //#region BUTTON WAIT
+    //#region //~ Bouton WAIT
 
-    //BOUTON DE PLAY QUAND ON EST AU WAIT EN IMAGE
+    // Bouton PLAY QUAND ON EST AU WAIT EN IMAGE
     ButXPlay = width / 2;
     ButYPlay = height / 2;
     ButWPlay = 100;
@@ -387,10 +387,10 @@ let PositionButtons = () => {
 
     ForButtonYReturnInWait = ButtonYReturnInPausedW + ButtonHReturnInPausedW / 2 + 5
 
-    //#endregion BUTTON WAIT
+    //#endregion
 
 
-    //#region BUTTON SETTING DE ECHAP
+    //#region //~ Bouton PARAMETRES du menu de pause
 
     ButtonYTextSettingsOfEchap = 400;
     ButtonHTextSettingsOfEchap = 50;
@@ -398,14 +398,13 @@ let PositionButtons = () => {
     ForButYGoToSetToEchap = ButtonYTextSettingsOfEchap + ButtonHTextSettingsOfEchap / 2 + 5
 
 
-    // BOUTON DE RETOUR AU MENU QUAND ON EST DANS LES SETTINGS DE L'ECHAP
+    // Bouton RETOUR AU MENU dans le menu de pause
     ButtonYReturnToMenuOfSettingOfEchap = 615;
     ButtonHReturnToMenuOfSettingOfEchap = 50;
 
     ForButYReturnFromSett = ButtonYReturnToMenuOfSettingOfEchap + ButtonHReturnToMenuOfSettingOfEchap / 2 + 5;
 
-
-    // BOUTON DE RETOUR AU JEU QUAND ON EST DANS L'ECHAP
+    // Bouton RETOUR AU JEU dans le menu de pause
     ButtonYReturnToGameInEchap = 290;
     ButtonHReturnToGameInEchap = 50;
 
@@ -413,7 +412,7 @@ let PositionButtons = () => {
 
 
 
-    // BOUTON DE QUIT DANS ECHAP
+    // Bouton QUIT dans le menu de pause
     ButtonYQuitInEchap = 500;
     ButtonHQuitInEchap = 50;
 
@@ -421,11 +420,11 @@ let PositionButtons = () => {
 
 
 
-    //#endregion BUTTON ECHAP
+    //#endregion
 
 
-    //#region PARAMETRE DANS SETTINGS
-    // BOUTON DE SON DANS LES SETTINGS
+    //#region //~ PARAMETRE DANS SETTINGS
+    // Bouton SON dans les paramètres
     ButtonYSon = 325;
     ButtonHSon = 50;
 
@@ -435,37 +434,38 @@ let PositionButtons = () => {
 
 
 
-    // BOUTON MUSIQUE DANS LES SETTINGS
+    // Bouton MUSIQUE dans les paramètres
     ButtonYMusic = 450;
     ButtonHMusic = 50;
 
     ForButYMusic = ButtonYMusic + ButtonHMusic / 2 + 5
 
 
-    //#endregion settings
+    //#endregion
 
 
-    //#region DIE
-    // BOUTON DE RETOUR QUAND ON EST DANS LE MENU DE MORT
+    //#region //~DIE
+    
+    // Bouton RETOUR dans le menu de mort
     ButtonYMenuInDie = 310;
     ButtonHMenuInDie = 50;
 
 
-    // BOUTON DE RETOUR QUAND ON EST DANS LES STATS DU MENU DE MORT
+    // Bouton RETOUR dans les stats du menu de mort
     ButtonYStatsInDie = 615;
     ButtonHStatsInDie = 50;
 
 
-    // BOUTON DE STATS DANS LE MENU DE MORT
+    // Bouton STATS dans le menu de mort
     ButtonYStats = 450;
     ButtonHStats = 50;
 
 
-    //#endregion DIE
+    //#endregion
 
 }
 
-//#endregion POSITIONS BUTTONS
+//#endregion
 
 
 
@@ -577,4 +577,4 @@ function mousePressed() {
         }
     }
 }
-//#endregion CLIQUE DE SOURIS
+//#endregion

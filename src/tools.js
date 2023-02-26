@@ -62,7 +62,9 @@ function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, r
             rect1Height + rect1Y > rect2Y);
   }
 
-
+function pointIsInRect(x, y, rectX, rectY, rectW, rectH) {
+    return x >= rectX && x <= rectX + rectW && y >= rectY && y <= rectY + rectH;
+}
 
 
 // contraindre les position X, Y dans le containeur

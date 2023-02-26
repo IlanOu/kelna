@@ -1,13 +1,12 @@
 function setup() {
-  let viewportDisplayWidth = 1920
-  let viewportDisplayHeight = 1080
+  
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
   }
 
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
-  PositionButtons()
+  // PositionButtons()
 
 
 }
@@ -56,46 +55,14 @@ function preload() {
 
 
 function draw() {
-  if (gameIsPlaying === false) {
-    WaitToPlay()
-  }
-  if (gameIsPaused === false && gameIsPlaying === true && CinematicIsStart === true) {
-    StartOpeningCinematic()
-  }
-  if (gameIsPaused === false && gameIsPlaying === true && CinematicIsStart === false) {
-    if (engineOne) {
-      drawGrid()
-      ForPNJ1()
-      displayVie();
-      PlayerCanBeSearched()
-      displayInventory()
-      character()
-    } else {
-      drawHouse()
-      characterView2()
-    }
 
-  }
-  if (gameIsPaused === true && gameIsPlaying === true && isSettingsEchap === false) {
-    MenuEscape()
-  }
-  if (isSettingsEchap === true && gameIsPlaying === true) {
-    Setting()
-  }
-  if (isSettingsWait === true && gameIsPlaying === false) {
-    Setting()
-  }
-  if (HealthPlayer === 0 && gameIsPlaying === true) {
-    PlayerIsDie()
-  }
-  if (isStats === true && HealthPlayer === 0) {
-    Stats()
-  }
+  setupUI()
 
-
-  
-    
-        
+  if (gameIsPlaying){
+    inGame = true
+    drawGrid()
+    character() 
+  }
 
 }
 
