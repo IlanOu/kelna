@@ -32,6 +32,7 @@ function preload() {
   characterTextureIdle = loadImage("assets/animations/IdleBase.png")
   characterTextureWalk = loadImage("assets/animations/WalkBase.png")
   characterTextureJump = loadImage("assets/animations/JumpBase.png")
+  characterTextureDash = loadImage("assets/animations/RollBase.png")
 
   // JSON preload
   Maps = loadJSON("json/Maps.json");
@@ -41,9 +42,7 @@ function preload() {
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
 }
-let dashForce = 2;
-let velocityX = 0;
-let dashMaxLength = 5;
+
 
 function draw() {
 
@@ -78,36 +77,8 @@ function draw() {
   } 
 
 
-  if (isDashing){
-    if (LeftArrowPressed || RightArrowPressed){
-
-      velocityX += dashForce
-      
-      if (LeftArrowPressed){
-        characterPositionX -= velocityX
-      }else if (RightArrowPressed){
-        
-        characterPositionX += velocityX
-      }
-
-      
-
-      if (velocityX > dashMaxLength){
-          isDashing = false
-      }
-    }
-      
-  }else if (velocityX > 0){
-    velocityX -= dashForce
-
-    if (LeftArrowPressed){
-      velocityX += dashForce
-      characterPositionX -= velocityX
-    }else if (RightArrowPressed){
-      velocityX += dashForce
-      characterPositionX += velocityX
-    }
-  }
+  
+    
         
 
 }

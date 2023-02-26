@@ -11,6 +11,7 @@ let sky;
 let characterTextureIdle;
 let characterTextureWalk;
 let characterTextureJump;
+let characterTextureDash;
 
 let characterTextureList = [];
 
@@ -21,6 +22,8 @@ let characterDirection = "";
 let characterLastDirection = "right";
 
 let characterMovement = "idle";
+
+let animationSpeed = 100
 
 //#endregion
 
@@ -82,9 +85,15 @@ let characterJumpCount = 0;
 let characterMaxJumps = 2;
 let characterDoubleJumping = false;
 
-let isJumping = false;
+let characterIsJumping = false;
 
-let isDashing = false;
+
+let characterIsDashing = false;
+let lastDashTime = 0;
+const dashCooldown = 1000;
+const dashTime = 200;
+const dashForce = 2;
+
 
 //#endregion
 
@@ -140,7 +149,7 @@ let PlayerCanMove = true
 
 //#endregion
 
-//#region Interfaces
+//#region //~ Interfaces
 
 // Pour les interfaces
 let IsWidthForAllInterfaces = 800;
@@ -193,6 +202,7 @@ let Houses;
 let spaceKeyIsPressed = false;
 let RightArrowPressed = false;
 let LeftArrowPressed = false;
+let DashKeyIsPressed = false;
 
 let EngineOne = true;
 

@@ -29,16 +29,9 @@ function keyPressed(key) {
     }
 
 
-
-
+    //^ Touche R
     if (keyCode === 82) {
-        if (LeftArrowPressed || RightArrowPressed) {
-            if (!isDashing) {
-                isDashing = true
-            }
-        }
-
-
+        DashKeyIsPressed = true
     }
 
 
@@ -88,6 +81,13 @@ function keyReleased() {
     if ((keyCode === 37 || keyCode === 81)) {
         LeftArrowPressed = false;
     }
+
+    //^ Touche R
+    if (keyCode === 82) {
+        DashKeyIsPressed = false
+    }
+
+
 
     if (keyCode === 97) {
         Pressing = false;

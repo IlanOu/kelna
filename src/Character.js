@@ -112,7 +112,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
   if (PlayerCanMove === true) {
-    //? animation MARCHER
+    //~ animation MARCHER
     if (movement == "walk") {
 
       for (let y = 0; y < 320; y += 320) {
@@ -121,7 +121,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         }
       }
 
-      //? animation IDLE
+      //~ animation IDLE
     } else if (movement == "idle") {
 
       for (let y = 0; y < 320; y += 320) {
@@ -131,12 +131,22 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       }
 
     }
-    //? animation JUMP
+    //~ animation JUMP
     else if (movement == "jump") {
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 960; x += 320) {
           characterTextureList.push(characterTextureJump.get(x, y, 320, 320));
+        }
+      }
+
+    }
+    //~ animation DASH
+    else if (movement == "dash") {
+
+      for (let y = 0; y < 320; y += 320) {
+        for (let x = 0; x < 960; x += 320) {
+          characterTextureList.push(characterTextureDash.get(x, y, 320, 320));
         }
       }
 
@@ -195,7 +205,7 @@ function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objec
         //! est relatif au perso
         characterJumpCount = 0;
         //! est relatif au perso
-        isJumping = false
+        characterIsJumping = false
         //! est relatif au perso
         if (!spaceKeyIsPressed)
           characterVelocityY = 0
@@ -327,9 +337,9 @@ function character() {
   //#region //~ saut du personnage
   if (spaceKeyIsPressed) {
     //^ le saut du personnage
-    if (!isJumping && characterJumpCount < characterMaxJumps) {
+    if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
 
-      isJumping = true;
+      characterIsJumping = true;
       characterDoubleJumping = false;
       characterJumpCount++;
 
@@ -357,18 +367,10 @@ function character() {
 
     }
   }
-  //^ vérifie si le joueur touche le sol
-  // characterIsGrounded = isGrounded( characterPositionX,
-  //                                   characterPositionY,
-  //                                   characterWidth,
-  //                                   characterHeight,
-  //                                   0,
-  //                                   100,
-  //                                   width)
-
+ 
   //^ si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
-    isJumping = false;
+    characterIsJumping = false;
     characterJumpCount = 0
     characterVelocityY = 0
   }
@@ -470,9 +472,28 @@ function character() {
   //#endregion
 
 
+  //#region //~ roulade du perso
+  
+  const currentTime = millis();
+  if (DashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)){
+    characterIsDashing = true;
+    
+    lastDashTime = currentTime;
+    
+    characterMovesSpeed *= dashForce
+
+    setTimeout(function(){
+      characterIsDashing = false;
+      characterMovesSpeed /= dashForce
+    }, dashTime)
+  }
+
+  //#endregion
+
+
   //#region //~ affichage du personnage
 
-  if (isJumping) {
+  if (characterIsJumping) {
     if (RightArrowPressed) {
       characterDirection = "right"
       characterMovement = "jump"
@@ -484,16 +505,27 @@ function character() {
       characterMovement = "jump"
     }
   } else {
-    if (RightArrowPressed) {
-      characterDirection = "right"
-      characterMovement = "walk"
-    } else if (LeftArrowPressed) {
-      characterDirection = "left"
-      characterMovement = "walk"
-    } else {
-      characterDirection = characterLastDirection
-      characterMovement = "idle"
+    if (characterIsDashing){
+      if (RightArrowPressed) {
+        characterDirection = "right"
+        characterMovement = "dash"
+      } else if (LeftArrowPressed) {
+        characterDirection = "left"
+        characterMovement = "dash"
+      }
+    }else{
+      if (RightArrowPressed) {
+        characterDirection = "right"
+        characterMovement = "walk"
+      } else if (LeftArrowPressed) {
+        characterDirection = "left"
+        characterMovement = "walk"
+      } else {
+        characterDirection = characterLastDirection
+        characterMovement = "idle"
+      }
     }
+    
   }
 
 
@@ -508,7 +540,12 @@ function character() {
     characterMovement)
 
   //#endregion
+  
 }
+
+
+
+
 
 //& Système du personnage pour le moteur de vue 2
 function characterView2() {
