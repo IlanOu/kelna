@@ -108,6 +108,12 @@ let viewportDisplayHeight = 1080
 let buttonWidthClassic = 50
 let buttonHeightClassic = 20
 
+
+let ColorForRectMusic = 255
+let MusicIsActivate = false
+
+let Pressing = false
+
 let buttonWidthBIG = 50
 let buttonHeightBIG = 20
 
@@ -117,10 +123,15 @@ let gameIsPlaying = false
 let playerCanMove = false
 
 let isSettingsWait = false
+let isSettingsPause = false
+
+let YouCanPlayMusic = false
 
 // Life Bar
 
-let healthPlayer = 0
+let MargeBarVie = 30;
+let VieLarg;
+let healthPlayer = 3
 let maxHealth = 6
 
 

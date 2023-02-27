@@ -56,13 +56,14 @@ function preload() {
 
 function draw() {
 
-  setupUI()
+  
 
   if (gameIsPlaying){
     inGame = true
     drawGrid()
     character() 
   }
+  setupUI()
 
 }
 
