@@ -130,7 +130,6 @@ let YouCanPlayMusic = false
 // Life Bar
 
 let MargeBarVie = 30;
-let VieLarg;
 let healthPlayer = 3
 let maxHealth = 6
 

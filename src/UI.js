@@ -84,8 +84,8 @@ function drawHomeMenu() {
 
 //~ MENU PAUSE
 function drawPauseMenu() {
-
-
+    gameIsPaused = true
+    playerCanMove = false
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
@@ -136,16 +136,17 @@ function drawPauseMenu() {
 
 
     if (buttonClicked(buttonExit)) {
+        console.log("jejzejusde")
         inGame = false
+        gameIsPlaying = false
+        gameIsPaused = false
     }
     if (buttonClicked(buttonSettings)) {
         isSettingsPause = true
-        gameIsPaused = false
 
     }
     if (buttonClicked(buttonReturn)) {
         gameIsPaused = false
-        gameIsPlaying = true
     }
 }
 
@@ -243,14 +244,14 @@ function drawSettingInPause() {
     let buttonMusicW = 150
     let buttonMusicH = 20
     let buttonMusicX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonMusicW / 2)
-    let buttonMusicY = interfaceMenuY + (interfaceMenuHeight / 2.2)
+    let buttonMusicY = interfaceMenuY + (interfaceMenuHeight / 2.5)
     let textMusicX = buttonMusicX + (buttonMusicW / 2)
 
 
     let buttonExitW = 150
     let buttonExitH = 20
     let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
-    let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.5)
+    let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
     let textExitX = buttonExitX + (buttonMusicW / 2)
 
 
@@ -291,17 +292,18 @@ function setupUI() {
 
     //~ Si je suis en jeu
     if (inGame) {
+        
         //~ Si je fait echap (dans le menu pause)
         if (gameIsPaused) {
             
             gameIsPlaying = false
+            playerCanMove = false
             drawPauseMenu()
-            
         } 
         if (isSettingsPause) {
             drawSettingInPause()
         }
-         else {
+        else {
             //~ sinon je joue
             
             gameIsPlaying = true
@@ -321,7 +323,6 @@ function setupUI() {
 
         gameIsPaused = false
         gameIsPlaying = false
-        
     }
 
 

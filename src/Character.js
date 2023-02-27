@@ -78,7 +78,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
 
 //& Mouvements gauche/droite et haut/bas
-//#region 
+//#region
 function moveLeft(positionX, speed) {
   return positionX - speed
 }
