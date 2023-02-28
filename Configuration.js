@@ -114,11 +114,6 @@ let MusicIsActivate = false
 
 let Pressing = false
 
-let i = 5
-
-
-
-
 let buttonWidthBIG = 50
 let buttonHeightBIG = 20
 
@@ -131,6 +126,15 @@ let isSettingsPause = false
 
 let PlayerInSettings = false
 let YouCanPlayMusic = false
+
+
+
+// For PNJ
+
+let EndX = 1000;
+let Direction = "Avancer";
+
+
 
 // Life Bar
 

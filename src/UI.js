@@ -135,7 +135,6 @@ function drawPauseMenu() {
 
 
     if (buttonClicked(buttonExit)) {
-        console.log("jejzejusde")
         inGame = false
         gameIsPlaying = false
         gameIsPaused = false
@@ -289,11 +288,9 @@ function drawSettingInPause() {
 
 function setupUI() {
 
-    //console.log(gameIsPlaying)
-    //console.log(PlayerInSettings)
-    console.log(isSettingsPause)
-
     //~ Si je suis en jeu
+
+    //i += 5
     if (inGame && PlayerInSettings === false) {
         //~ Si je fait echap (dans le menu pause)
         if (gameIsPaused) {
@@ -314,6 +311,9 @@ function setupUI() {
         }
         drawLifeBar()
         ForPNJ1()
+        //ForCarre2()
+        //drawPNJ()
+        
         
     } else {
 
@@ -324,10 +324,11 @@ function setupUI() {
             drawSettingInHome()
         } 
         
-
+        
         gameIsPaused = false
         gameIsPlaying = false
     }
 
 
 }
+

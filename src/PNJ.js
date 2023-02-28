@@ -1,27 +1,44 @@
 
 //#region  PNJ ATTRIBUT
 let PNJ1 = {
-    x: 600,
     y: 575,
     Direction: 1,
     IMG: null,
     Taille: 100,
     Speed: 5,
-    PNJStartX: 600 // position de départ en X du PNJ
+    PNJStartX: 600,
+    PNJDistance: 20
+
+};
+
+
+
+let LeCarre = {
+    id:"Carre",
+    y: 500,
+    StartX: 100,
+    Distance: 20,
+    Avancer : 0
 };
 
 
 
 
-// let PNJ1 = {
-//     x: 600,
-//     y: 575,
-//     Direction: 1,
-//     IMG: null,
-//     Taille: 100,
-//     Speed: 5,
-// };
+let Carre2 = {
+    x: 100,
+    y: 800,
+    TailleW: 50,
+    TailleH: 50,
+    NbrePas: 0
+};
 
+
+let ArrayPNJ = []
+
+
+
+
+ArrayPNJ.push(LeCarre)
 
 
 //#endregion
@@ -30,17 +47,112 @@ let PNJ1 = {
 
 //#region APPARAITRE PNJ
 
-let ForPNJ1 = () => {
-    let CurentX = xStartWorld + PNJ1.PNJStartX + i; // position X du PNJ par rapport au monde
 
-    rect(CurentX, 80 , 50,50)
+let ForCarre2 = () => {
 
-    for (let index = 0; index < 500; index++) {
-        console.log("yey")
-        CurentX + 1
+    let CurentX = xStartWorld + Carre2.x + Carre2.NbrePas;
+    let Direction = "Avancer";
+    let EndX = CurentX + Carre2.NbrePas;
+
+    CarreRevien = EndX
+    //console.log(CarreRevien)
+
+    if (CurentX > EndX) {
+        Direction = "Reculer"
     }
+    if (CurentX < Carre2.x) {
+        Direction = "Avancer"
+    }
+    if (Direction === "Avancer") {
+        rect(CurentX, Carre2.y, Carre2.TailleW, Carre2.TailleH);
+        Carre2.NbrePas += 2;
+    }
+    if (Direction === "Reculer") {
+        rect(CurentX, Carre2.y, Carre2.TailleW, Carre2.TailleH);
+        Carre2.NbrePas -= 2;
+    }
+    // if (characterPositionY > height - height / 4) {
+    //     toto.x - mouvementSpeed
+    // }
+}
 
-    drawPNJ(CurentX, PNJ1.y, PNJ1.Taille, PNJ1.Direction, PNJ1.IMG);
+
+
+// let ForPNJ = () => {
+
+//     console.log("dssdd")
+//     drawPNJ(100, 500, 50, 50, 0, 1000)
+
+// }
+
+
+
+
+let ForPNJ1 = () => {
+
+    let CurentX = xStartWorld + LeCarre.StartX + LeCarre.Avancer;
+
+    // let EndX = CurentX + LeCarre.Distance;
+
+    if (CurentX > EndX) {
+        Direction = "Reculer"
+    }
+    if (CurentX < LeCarre.StartX){
+        Direction = "Avancer"
+    }
+    if (Direction === "Avancer"){
+        rect(CurentX, LeCarre.y, 50, 50);
+        LeCarre.Avancer += 2;
+    }
+    if (Direction === "Reculer") {
+        rect(CurentX, LeCarre.y, 50, 50);
+        LeCarre.Avancer -= 2;
+    } 
+    if (characterPositionY > height - height / 4) {
+        //toto.x - mouvementSpeed
+    }
+}
+
+
+
+
+
+//#endregion
+
+//#region FONCTION POUR PNJ
+
+let drawPNJ = (img, x, y, TailleW, TailleH, NbrePas, End) => {
+
+    let CurentX = xStartWorld + x + NbrePas;
+
+    if (CurentX > End) {
+        Direction = "Reculer"
+    }
+    if (CurentX < x) {
+        Direction = "Avancer"
+    }
+    if (Direction === "Avancer") {
+        rect(CurentX, y, TailleW, 50);
+        NbrePas += 2;
+    }
+    if (Direction === "Reculer") {
+        rect(CurentX, y, TailleW, 50);
+       NbrePas -= 2;
+    } 
+
+}
+
+
+
+//#region  BACK Up
+
+    //PNJEndX: PNJStartX + PNJDistance,
+
+    // PNJEndX = Ditance + PNJStart
+    // if (CurentX => PNJEnd) alors reculer et inversement
+
+
+    //drawPNJ(CurentX, PNJ1.y, PNJ1.Taille, PNJ1.Direction, PNJ1.IMG);
 
     // PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction);
 
@@ -50,8 +162,6 @@ let ForPNJ1 = () => {
 
     //     PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction); // corriger la position pour éviter qu'il reste collé
     // }
-}
-
 
 
 
@@ -67,16 +177,6 @@ let ForPNJ1 = () => {
 //     }
 
 // }
-
-//#endregion
-
-//#region FONCTION POUR PNJ
-
-let drawPNJ = (x, y, Taille, Direction, IMG) => {
-    
-}
-
-
 
 
 
@@ -97,5 +197,7 @@ let drawPNJ = (x, y, Taille, Direction, IMG) => {
 
 //     pop();
 // }
+
+//#endregion
 
 //#endregion
