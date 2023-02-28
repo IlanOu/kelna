@@ -110,74 +110,73 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
-  if (playerCanMove === true) {
-    //~ animation MARCHER
-    if (movement == "walk") {
+  //~ animation MARCHER
+  if (movement == "walk") {
 
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Walk.get(x, y, 320, 320));
-        }
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Walk.get(x, y, 320, 320));
       }
+    }
 
-      //~ animation IDLE
-    } else if (movement == "idle") {
+    //~ animation IDLE
+  } else if (movement == "idle") {
 
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
-        }
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
       }
-
-    }
-    //~ animation JUMP
-    else if (movement == "jump") {
-
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
-        }
-      }
-
-    }
-    //~ animation DASH
-    else if (movement == "dash") {
-
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
-        }
-      }
-
-    }
-
-    //? Changer de frame
-    if (timer && !characterAnimationFramePassed) {
-      characterAnimationIndex++
-      characterAnimationFramePassed = true
-    }
-    if (!timer) {
-      characterAnimationFramePassed = false
-    }
-    //? Remettre l'index au début 
-    if (characterAnimationIndex >= characterTextureList.length) {
-      characterAnimationIndex = 0
-    }
-
-    let characterCurrentTexture = characterTextureList[characterAnimationIndex]
-
-
-    //? direction DROITE
-    if (direction == "right") {
-      image(characterCurrentTexture, positionX, positionY, width, height)
-
-      //? direction GAUCHE
-    } else if (direction == "left") {
-      scale(-1, 1)
-      image(characterCurrentTexture, -positionX - width, positionY, width, height)
     }
 
   }
+  //~ animation JUMP
+  else if (movement == "jump") {
+
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
+      }
+    }
+
+  }
+  //~ animation DASH
+  else if (movement == "dash") {
+
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
+      }
+    }
+
+  }
+
+  //? Changer de frame
+  if (timer && !characterAnimationFramePassed) {
+    characterAnimationIndex++
+    characterAnimationFramePassed = true
+  }
+  if (!timer) {
+    characterAnimationFramePassed = false
+  }
+  //? Remettre l'index au début 
+  if (characterAnimationIndex >= characterTextureList.length) {
+    characterAnimationIndex = 0
+  }
+
+  let characterCurrentTexture = characterTextureList[characterAnimationIndex]
+
+
+  //? direction DROITE
+  if (direction == "right") {
+    image(characterCurrentTexture, positionX, positionY, width, height)
+
+    //? direction GAUCHE
+  } else if (direction == "left") {
+    scale(-1, 1)
+    image(characterCurrentTexture, -positionX - width, positionY, width, height)
+    scale(-1, 1)
+  }
+  
 }
 
 

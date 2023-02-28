@@ -85,7 +85,6 @@ function drawHomeMenu() {
 //~ MENU PAUSE
 function drawPauseMenu() {
     gameIsPaused = true
-    playerCanMove = false
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
@@ -143,6 +142,7 @@ function drawPauseMenu() {
     }
     if (buttonClicked(buttonSettings)) {
         isSettingsPause = true
+        PlayerInSettings = true
 
     }
     if (buttonClicked(buttonReturn)) {
@@ -153,12 +153,10 @@ function drawPauseMenu() {
 
 //~ BARRE VIE
 function drawLifeBar() {
-    // Dessiner la vie
-    
     let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
-    for (let i = 0; i < VieLarg; i++) {
-        let ForX = 400
-        image(GamerHeart, MargeBarVie * i + ForX / 2, MargeBarVie, 30, 30);
+    
+    for (let i = 0; i < VieLarg; i++) {        
+        image(GamerHeart, MargeBarVie * i + 400 / 2, MargeBarVie, 30, 30);
     }
 }
 
@@ -193,14 +191,13 @@ function drawSettingInHome() {
     let textExitX = buttonExitX + (buttonMusicW / 2)
 
 
-    let buttonExit = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
+    let ButtonExitP = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
 
     let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH]
 
     let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH]
 
 
-    //fill(255)
     drawInterface(interfaceMenu, GUIParameters)
 
     fill(255)
@@ -210,13 +207,14 @@ function drawSettingInHome() {
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
     fill(255)
-    drawButton(buttonExit)
+    drawButton(ButtonExitP)
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
 
 
 
-    if (buttonClicked(buttonExit)) {
+    if (buttonClicked(ButtonExitP)) {
         isSettingsWait = false
+        //PlayerInSettings = false
     }
     if (buttonClicked(buttonMusic)) {
        PlayMusic()
@@ -279,6 +277,7 @@ function drawSettingInPause() {
 
     if (buttonClicked(buttonExit)) {
         isSettingsPause = false
+        //PlayerInSettings = false
     }
     if (buttonClicked(buttonMusic) && YouCanPlayMusic === true) {
         PlayMusic()
@@ -290,26 +289,31 @@ function drawSettingInPause() {
 
 function setupUI() {
 
+    //console.log(gameIsPlaying)
+    //console.log(PlayerInSettings)
+    console.log(isSettingsPause)
+
     //~ Si je suis en jeu
-    if (inGame) {
-        
+    if (inGame && PlayerInSettings === false) {
         //~ Si je fait echap (dans le menu pause)
         if (gameIsPaused) {
             
             gameIsPlaying = false
-            playerCanMove = false
             drawPauseMenu()
         } 
-        if (isSettingsPause) {
+        else if (isSettingsPause) {
             drawSettingInPause()
         }
         else {
             //~ sinon je joue
+        
             
             gameIsPlaying = true
-            playerCanMove = true
-            drawLifeBar()
+            
+            
         }
+        drawLifeBar()
+        ForPNJ1()
         
     } else {
 

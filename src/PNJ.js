@@ -31,13 +31,25 @@ let PNJ1 = {
 //#region APPARAITRE PNJ
 
 let ForPNJ1 = () => {
-    let worldX = PNJ1.PNJStartX - xStartWorld; // position X du PNJ par rapport au monde
-    drawPNJ(worldX, PNJ1.y, PNJ1.Taille, PNJ1.Direction, PNJ1.IMG);
-    PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction);
-    if (PNJ1.PNJStartX >= 800 - PNJ1.Taille || PNJ1.PNJStartX <= 400) {
-        PNJ1.Direction *= -1;
-        PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction); // corriger la position pour éviter qu'il reste collé
+    let CurentX = xStartWorld + PNJ1.PNJStartX + i; // position X du PNJ par rapport au monde
+
+    rect(CurentX, 80 , 50,50)
+
+    for (let index = 0; index < 500; index++) {
+        console.log("yey")
+        CurentX + 1
     }
+
+    drawPNJ(CurentX, PNJ1.y, PNJ1.Taille, PNJ1.Direction, PNJ1.IMG);
+
+    // PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction);
+
+    // if (PNJ1.PNJStartX >= 800 - PNJ1.Taille || PNJ1.PNJStartX <= 400) {
+
+    //     PNJ1.Direction *= -1;
+
+    //     PNJ1.PNJStartX += (PNJ1.Speed * PNJ1.Direction); // corriger la position pour éviter qu'il reste collé
+    // }
 }
 
 
@@ -61,13 +73,7 @@ let ForPNJ1 = () => {
 //#region FONCTION POUR PNJ
 
 let drawPNJ = (x, y, Taille, Direction, IMG) => {
-    push();
-    translate(PNJ1.PNJStartX, y + Taille / 2); // utiliser PNJStartX pour dessiner le PNJ
-    if (Direction == -1) {
-        scale(-1, 1);
-    }
-    image(IMG, -Taille / 2, -Taille / 2, Taille, Taille);
-    pop();
+    
 }
 
 
