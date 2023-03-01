@@ -264,7 +264,7 @@ function character() {
       xStartWorld -= characterMovesSpeed
 
       // ! Changement pour PNJ se fais ici
-      EndX -= characterMovesSpeed
+      LeCarre.EndX -= characterMovesSpeed
       LeCarre.StartX -= characterMovesSpeed
 
       characterPositionX -= characterMovesSpeed
@@ -283,7 +283,7 @@ function character() {
       xStartWorld += characterMovesSpeed
 
       // ! Changement pour PNJ se fais ici
-      EndX += characterMovesSpeed
+      LeCarre.EndX += characterMovesSpeed
       LeCarre.StartX +=characterMovesSpeed
 
       characterPositionX += characterMovesSpeed
@@ -296,7 +296,7 @@ function character() {
   //? si mon perso est en BAS de l'écran
   if (characterPositionY > height - height / 4) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
-      yStartWorld -= characterVelocityY
+      yStartWorld -= characterVelocityY 
 
       // ! Changement pour PNJ se fais ici
       LeCarre.y -= characterVelocityY

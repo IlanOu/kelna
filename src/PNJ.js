@@ -13,15 +13,23 @@ let PNJ1 = {
 
 
 
-let LeCarre = {
-    id:"Carre",
+// let LeCarre = {
+//     id:"Carre",
+//     y: 500,
+//     StartX: 100,
+//     Avancer : 0,
+//     Direction: "Avancer"
+// };
+
+
+
+LeCarre = {
     y: 500,
     StartX: 100,
-    Distance: 20,
-    Avancer : 0
+    Avancer: 0,
+    EndX : 1000,
+    Direction: "Avancer"
 };
-
-
 
 
 let Carre2 = {
@@ -33,87 +41,74 @@ let Carre2 = {
 };
 
 
-let ArrayPNJ = []
 
-
-
-
-ArrayPNJ.push(LeCarre)
 
 
 //#endregion
 
 
 
-//#region APPARAITRE PNJ
+//#region MANAGER 
+
+function PNJManager(){
+
+    // LeCarre = {
+    //     y: 500,
+    //     StartX: 100,
+    //     Avancer: 0,
+    //     EndX: 1000,
+    //     Direction: "Avancer"
+    // };
+
+    ForPNJ1()
+
+    // ArrayPNJ.push(LeCarre)
+    // const map1 = ArrayPNJ.find(Elm => Elm.StartX === LeCarre.StartX);
+    // console.log(map1.StartX)
+    
 
 
-let ForCarre2 = () => {
+    // createPNJ(100, 500, 50, 50, 1000);
+    // movePNJ();
 
-    let CurentX = xStartWorld + Carre2.x + Carre2.NbrePas;
-    let Direction = "Avancer";
-    let EndX = CurentX + Carre2.NbrePas;
 
-    CarreRevien = EndX
-    //console.log(CarreRevien)
+    // ArrayPNJ.push(LeCarre)
+    // ForPNJ1()
 
-    if (CurentX > EndX) {
-        Direction = "Reculer"
-    }
-    if (CurentX < Carre2.x) {
-        Direction = "Avancer"
-    }
-    if (Direction === "Avancer") {
-        rect(CurentX, Carre2.y, Carre2.TailleW, Carre2.TailleH);
-        Carre2.NbrePas += 2;
-    }
-    if (Direction === "Reculer") {
-        rect(CurentX, Carre2.y, Carre2.TailleW, Carre2.TailleH);
-        Carre2.NbrePas -= 2;
-    }
-    // if (characterPositionY > height - height / 4) {
-    //     toto.x - mouvementSpeed
-    // }
+
+    // drawPNJ(100,500,50,50,1000)
+
+
+
+
 }
 
 
 
-// let ForPNJ = () => {
+//#endregion
 
-//     console.log("dssdd")
-//     drawPNJ(100, 500, 50, 50, 0, 1000)
-
-// }
-
-
+//#region APPARAITRE PNJ
 
 
 let ForPNJ1 = () => {
 
-    let CurentX = xStartWorld + LeCarre.StartX + LeCarre.Avancer;
+    let CurentX = LeCarre.StartX + LeCarre.Avancer;
 
-    // let EndX = CurentX + LeCarre.Distance;
-
-    if (CurentX > EndX) {
-        Direction = "Reculer"
+    if (CurentX > LeCarre.EndX) {
+        LeCarre.Direction = "Reculer"
     }
-    if (CurentX < LeCarre.StartX){
-        Direction = "Avancer"
+    if (CurentX < LeCarre.StartX) {
+        LeCarre.Direction = "Avancer"
     }
-    if (Direction === "Avancer"){
+    if (LeCarre.Direction === "Avancer") {
         rect(CurentX, LeCarre.y, 50, 50);
         LeCarre.Avancer += 2;
     }
-    if (Direction === "Reculer") {
+    if (LeCarre.Direction === "Reculer") {
         rect(CurentX, LeCarre.y, 50, 50);
         LeCarre.Avancer -= 2;
-    } 
-    if (characterPositionY > height - height / 4) {
-        //toto.x - mouvementSpeed
     }
 }
-
-
 
 
 
@@ -121,26 +116,92 @@ let ForPNJ1 = () => {
 
 //#region FONCTION POUR PNJ
 
-let drawPNJ = (img, x, y, TailleW, TailleH, NbrePas, End) => {
 
-    let CurentX = xStartWorld + x + NbrePas;
 
-    if (CurentX > End) {
-        Direction = "Reculer"
+let drawPNJ = (x, y, TailleW, TailleH, End) => {
+
+
+    let PNJ = {
+        x: x,
+        y: y,
+        TailleH: TailleH,
+        TailleW: TailleW,
+        End: End,
+        ForDirection: "Avancer"
     }
-    if (CurentX < x) {
-        Direction = "Avancer"
+
+    //console.log(PNJ)
+
+    let CurentX = PNJ.x + NbrePas;
+
+    if (CurentX > PNJ.End) {
+        PNJ.ForDirection = "Reculer"
     }
-    if (Direction === "Avancer") {
-        rect(CurentX, y, TailleW, 50);
+    if (CurentX < PNJ.x) {
+        PNJ.ForDirection = "Avancer"
+    }
+    if (PNJ.ForDirection === "Avancer") {
+        rect(CurentX, PNJ.y, PNJ.TailleW, PNJ.TailleH);
         NbrePas += 2;
     }
-    if (Direction === "Reculer") {
-        rect(CurentX, y, TailleW, 50);
-       NbrePas -= 2;
-    } 
-
+    if (PNJ.ForDirection === "Reculer") {
+        
+        rect(CurentX, PNJ.y, PNJ.TailleW, PNJ.TailleH);
+        NbrePas -= 2;
+    }
+    
 }
+
+
+
+
+// let createPNJ = (x, y, tailleW, tailleH, end) => {
+//     let pnj = {
+//         x: x,
+//         y: y,
+//         direction : "avancer",
+//         tailleW: tailleW,
+//         tailleH: tailleH,
+//         end: end,
+//         NbrePas: 0 
+//     };
+
+//     ArrayPNJ.push(pnj);
+
+//     // return pnj;
+// };
+
+
+// let movePNJ = () => {
+//     ArrayPNJ.forEach((pnj) => {
+
+//         let CurentX = pnj.x + pnj.NbrePas;
+        
+
+//         if (CurentX > pnj.end) {
+//             pnj.direction = "reculer";
+//         }
+//         if (CurentX < pnj.x) {
+//             pnj.direction = "avancer";
+//         }
+//         if (pnj.direction === "avancer") {
+//             rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
+//             pnj.NbrePas += 2;
+//             console.log(pnj.NbrePas)
+//         }
+//         if (pnj.direction === "reculer") {
+//             rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
+//             pnj.NbrePas -= 2;
+//         }
+//     });
+// };
+
+
+
+
+//#endregion
+
+
 
 
 

@@ -131,10 +131,8 @@ let YouCanPlayMusic = false
 
 // For PNJ
 
-let EndX = 1000;
-let Direction = "Avancer";
 
-
+//let NbrePas = 0
 
 // Life Bar
 

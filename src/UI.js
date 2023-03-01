@@ -109,7 +109,7 @@ function drawPauseMenu() {
     let buttonReturn = [buttonReturnX, buttonReturnY, buttonReturnW, buttonReturnH]
 
 
-    
+
     let buttonSettingsW = 150
     let buttonSettingsH = 20
     let buttonSettingsX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonSettingsW / 2)
@@ -153,8 +153,8 @@ function drawPauseMenu() {
 //~ BARRE VIE
 function drawLifeBar() {
     let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
-    
-    for (let i = 0; i < VieLarg; i++) {        
+
+    for (let i = 0; i < VieLarg; i++) {
         image(GamerHeart, MargeBarVie * i + 400 / 2, MargeBarVie, 30, 30);
     }
 }
@@ -172,7 +172,7 @@ function drawSettingInHome() {
 
     let buttonSonW = 150
     let buttonSonH = 20
-    let buttonSonX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonSonW/2)
+    let buttonSonX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonSonW / 2)
     let buttonSonY = interfaceMenuY + (interfaceMenuHeight / 4)
     let textSonX = buttonSonX + (buttonSonW / 2)
 
@@ -201,7 +201,7 @@ function drawSettingInHome() {
 
     fill(255)
     drawButton(buttonSon)
-    drawText("SON", 15, [textSonX , buttonSonY], "center")
+    drawText("SON", 15, [textSonX, buttonSonY], "center")
     fill(ColorForRectMusic)
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
@@ -216,14 +216,14 @@ function drawSettingInHome() {
         //PlayerInSettings = false
     }
     if (buttonClicked(buttonMusic)) {
-       PlayMusic()
+        PlayMusic()
     }
 }
 
 //~ MENU PAUSE SETTINGS 
 function drawSettingInPause() {
 
-    
+
     let YouCanPlayMusic = true
 
     let interfaceMenuWidth = 500
@@ -294,37 +294,38 @@ function setupUI() {
     if (inGame && PlayerInSettings === false) {
         //~ Si je fait echap (dans le menu pause)
         if (gameIsPaused) {
-            
+
             gameIsPlaying = false
             drawPauseMenu()
-        } 
+        }
         else if (isSettingsPause) {
             drawSettingInPause()
         }
         else {
             //~ sinon je joue
-        
-            
+
+
             gameIsPlaying = true
-            
-            
+
+
         }
         drawLifeBar()
-        ForPNJ1()
+        PNJManager()
+        //ForPNJ1()
         //ForCarre2()
         //drawPNJ()
-        
-        
+
+
     } else {
 
         drawHomeMenu()
 
-        
+
         if (isSettingsWait) {
             drawSettingInHome()
-        } 
-        
-        
+        }
+
+
         gameIsPaused = false
         gameIsPlaying = false
     }

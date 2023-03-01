@@ -7,7 +7,7 @@ function setup() {
 
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
   // PositionButtons()
-
+  ArrayPNJ = []
 
 }
 
