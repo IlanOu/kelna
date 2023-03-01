@@ -78,7 +78,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
 
 //& Mouvements gauche/droite et haut/bas
-//#region 
+//#region
 function moveLeft(positionX, speed) {
   return positionX - speed
 }
@@ -110,9 +110,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
-  if (playerCanMove === true) {
-    //~ animation MARCHER
-    if (movement == "walk") {
+  //~ animation MARCHER
+  if (movement == "walk") {
 
       for (let y = 0; y < 320; y += 320) {
         for (let x = 0; x < 1920; x += 320) {
@@ -120,64 +119,64 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         }
       }
 
-      //~ animation IDLE
-    } else if (movement == "idle") {
+    //~ animation IDLE
+  } else if (movement == "idle") {
 
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
-        }
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
       }
-
-    }
-    //~ animation JUMP
-    else if (movement == "jump") {
-
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
-        }
-      }
-
-    }
-    //~ animation DASH
-    else if (movement == "dash") {
-
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
-          characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
-        }
-      }
-
-    }
-
-    //? Changer de frame
-    if (timer && !characterAnimationFramePassed) {
-      characterAnimationIndex++
-      characterAnimationFramePassed = true
-    }
-    if (!timer) {
-      characterAnimationFramePassed = false
-    }
-    //? Remettre l'index au début 
-    if (characterAnimationIndex >= characterTextureList.length) {
-      characterAnimationIndex = 0
-    }
-
-    let characterCurrentTexture = characterTextureList[characterAnimationIndex]
-
-
-    //? direction DROITE
-    if (direction == "right") {
-      image(characterCurrentTexture, positionX, positionY, width, height)
-
-      //? direction GAUCHE
-    } else if (direction == "left") {
-      scale(-1, 1)
-      image(characterCurrentTexture, -positionX - width, positionY, width, height)
     }
 
   }
+  //~ animation JUMP
+  else if (movement == "jump") {
+
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
+      }
+    }
+
+  }
+  //~ animation DASH
+  else if (movement == "dash") {
+
+    for (let y = 0; y < 320; y += 320) {
+      for (let x = 0; x < 960; x += 320) {
+        characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
+      }
+    }
+
+  }
+
+  //? Changer de frame
+  if (timer && !characterAnimationFramePassed) {
+    characterAnimationIndex++
+    characterAnimationFramePassed = true
+  }
+  if (!timer) {
+    characterAnimationFramePassed = false
+  }
+  //? Remettre l'index au début 
+  if (characterAnimationIndex >= characterTextureList.length) {
+    characterAnimationIndex = 0
+  }
+
+  let characterCurrentTexture = characterTextureList[characterAnimationIndex]
+
+
+  //? direction DROITE
+  if (direction == "right") {
+    image(characterCurrentTexture, positionX, positionY, width, height)
+
+    //? direction GAUCHE
+  } else if (direction == "left") {
+    scale(-1, 1)
+    image(characterCurrentTexture, -positionX - width, positionY, width, height)
+    scale(-1, 1)
+  }
+  
 }
 
 
@@ -263,6 +262,11 @@ function character() {
 
       //? le monde bouge vers la gauche (la caméra se décale vers la droite)
       xStartWorld -= characterMovesSpeed
+
+      // ! Changement pour PNJ se fais ici
+      EndX -= characterMovesSpeed
+      LeCarre.StartX -= characterMovesSpeed
+
       characterPositionX -= characterMovesSpeed
     }
   }
@@ -277,6 +281,11 @@ function character() {
 
       //? le monde bouge vers la droite (la caméra se décale vers la gauche)
       xStartWorld += characterMovesSpeed
+
+      // ! Changement pour PNJ se fais ici
+      EndX += characterMovesSpeed
+      LeCarre.StartX +=characterMovesSpeed
+
       characterPositionX += characterMovesSpeed
     }
   }
@@ -288,6 +297,10 @@ function character() {
   if (characterPositionY > height - height / 4) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
       yStartWorld -= characterVelocityY
+
+      // ! Changement pour PNJ se fais ici
+      LeCarre.y -= characterVelocityY
+
       characterPositionY -= characterVelocityY
     }
 
@@ -295,6 +308,10 @@ function character() {
   if (characterPositionY > height - height / 3) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
       yStartWorld -= characterMovesSpeed
+
+      // ! Changement pour PNJ se fais ici
+      LeCarre.y -= characterMovesSpeed
+
       characterPositionY -= characterMovesSpeed
     }
 
@@ -307,12 +324,20 @@ function character() {
   if (characterPositionY < height / 3) {
     if (yStartWorld < 0) {
       yStartWorld += characterMovesSpeed
+
+      // ! Changement pour PNJ se fais ici
+      LeCarre.y += characterMovesSpeed
+
       characterPositionY += characterMovesSpeed
     }
   }
   if (characterPositionY < height / 4) {
     if (yStartWorld < 0) {
       yStartWorld += characterMovesSpeed
+      
+      // ! Changement pour PNJ se fais ici
+      LeCarre.y += characterMovesSpeed
+
       characterPositionY += characterMovesSpeed
     }
   }

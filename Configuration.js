@@ -30,8 +30,8 @@ let animationSpeed = 50
 //^ Grille
 
 //#region //~ caractéristique de la grille
-let rectWidth = 75;
-let rectHeight = 75;
+let rectWidth = 60;
+let rectHeight = 60;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
@@ -71,12 +71,12 @@ let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
 
-let characterMovesSpeed = 7.5;
+let characterMovesSpeed = 6;
 
 
 //? Saut
 let characterMass = 60;
-let characterJumpHeight = 35;
+let characterJumpHeight = 20;
 
 let characterVelocityY = 0;
 let characterVelocityYMin = -80
@@ -108,24 +108,45 @@ let viewportDisplayHeight = 1080
 let buttonWidthClassic = 50
 let buttonHeightClassic = 20
 
+
+let ColorForRectMusic = 255
+let MusicIsActivate = false
+
+let Pressing = false
+
 let buttonWidthBIG = 50
 let buttonHeightBIG = 20
 
 let inGame = false
 let gameIsPaused = false
 let gameIsPlaying = false
-let playerCanMove = false
+
+let isSettingsWait = false
+let isSettingsPause = false
+
+let PlayerInSettings = false
+let YouCanPlayMusic = false
+
+
+
+// For PNJ
+
+let EndX = 1000;
+let Direction = "Avancer";
+
+
 
 // Life Bar
 
-let healthPlayer = 0
+let MargeBarVie = 30;
+let healthPlayer = 3
 let maxHealth = 6
 
 
 //^ Autres
 
 //#region //~ physique
-const gravityForce = 0.81;
+const gravityForce = 0.5;
 
 //#endregion
 
