@@ -23,7 +23,7 @@ let characterLastDirection = "right";
 
 let characterMovement = "idle";
 
-let animationSpeed = 100
+let animationSpeed = 50
 
 //#endregion
 

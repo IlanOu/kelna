@@ -32,7 +32,7 @@ function preload() {
 
   // Personnage
   characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
-  characterTexture_Walk = loadImage("assets/animations/WalkBase.png")
+  characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
   characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
   characterTexture_Dash = loadImage("assets/animations/RollBase.png")
 

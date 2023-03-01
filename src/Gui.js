@@ -348,15 +348,6 @@ let FunctionForSong = () => {
 
 }
 
-
-
-// SI LE JOUEUR FAIS F5 EN PLEIN JEU
-// window.onbeforeunload = () => {
-//     console.log("sa passe")
-//     return "Êtes-vous sûr de vouloir quitter cette page ? Vous allez perdre toute votre progression !";
-// };
-
-
 //#endregion
 
 

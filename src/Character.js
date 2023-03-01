@@ -106,7 +106,7 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce) {
 
 //& dessiner le perso
 function drawCharacter(positionX, positionY, width, height, direction, movement) {
-  let timer = (round(millis() / 100)) % 2
+  let timer = (round(millis() / animationSpeed)) % 2
 
   characterTextureList = []
 
@@ -115,7 +115,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     if (movement == "walk") {
 
       for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 960; x += 320) {
+        for (let x = 0; x < 1920; x += 320) {
           characterTextureList.push(characterTexture_Walk.get(x, y, 320, 320));
         }
       }
