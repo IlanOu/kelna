@@ -40,7 +40,6 @@ let ForPNJ1 = () => {
 function PNJManager() {
 
     drawPNJ(ForPNJ.PNJS.PNJ1);
-    //ForPNJ1()
 
 }
 
@@ -53,62 +52,27 @@ function PNJManager() {
 
 
 let drawPNJ = (pnj) => {
-    // image(IMG, -Taille / 2, -Taille / 2, Taille, Taille);
-    let CurentX = pnj.x + pnj.NbrePas;
-
-    //characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
 
 
-    if (CurentX > pnj.end) {
+    let PNJEnd = pnj.end + xStartWorld;
+    let PNJStart = pnj.x + xStartWorld
+    let CurentX = pnj.x + pnj.NbrePas + xStartWorld;
+
+    if (CurentX > PNJEnd) {
         pnj.direction = "reculer";
     };
-    if (CurentX < pnj.x) {
+    if (CurentX < PNJStart) {
         pnj.direction = "avancer";
     };
     if (pnj.direction === "avancer") {
         rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
+        //image(IMGTest, 100, 100, 50, 50);
         pnj.NbrePas += pnj.vitesse;
     };
     if (pnj.direction === "reculer") {
         rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
         pnj.NbrePas -= pnj.vitesse;
     };
-
-
-    if (characterPositionX > width - width / 2) {
-        if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
-            pnj.end -= characterMovesSpeed
-            pnj.x -= characterMovesSpeed
-        }
-    };
-    if (characterPositionX < width / 4) {
-        if (xStartWorld < 0) {
-            pnj.end += characterMovesSpeed
-            pnj.x += characterMovesSpeed
-        }
-    };
-    if (characterPositionY > height - height / 4) {
-        if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
-            pnj.y -= characterVelocityY //
-        }
-    };
-    if (characterPositionY > height - height / 3) {
-        if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
-            pnj.y -= characterMovesSpeed
-        }
-    };
-    if (characterPositionY < height / 3) {
-        if (yStartWorld < 0) {
-            pnj.y += characterMovesSpeed
-        }
-    };
-    if (characterPositionY < height / 4) {
-        if (yStartWorld < 0) {
-            pnj.y += characterMovesSpeed
-        }
-    };
-
-    console.log(characterPositionX)
 }
 
 

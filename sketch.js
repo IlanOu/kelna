@@ -1,5 +1,6 @@
 function setup() {
   
+
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
@@ -13,6 +14,7 @@ function setup() {
 
 
 function preload() {
+  
   // Images preload
   GamerHeart = loadImage("assets/GamerHeart.webp")
   GUIParameters = loadImage("assets/GUIParameters.png")
@@ -22,7 +24,7 @@ function preload() {
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
-  //PNJ1.IMG = loadImage("assets/PNJ.png");
+  IMGTest = loadImage("assets/PNJ.png");
   WantedPoster = loadImage("assets/WantedPoster.png")
 
   // Textures
@@ -61,6 +63,7 @@ function draw() {
 
   if (gameIsPlaying){
     inGame = true
+    noSmooth()
     drawGrid()
     character() 
   }
