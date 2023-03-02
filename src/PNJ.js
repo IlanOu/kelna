@@ -132,17 +132,17 @@ function animationPNJ(CurrentPNJ, positionX, positionY, width, height, direction
 
     if (movement == "walk") {
 
-        for (let y = 0; y < 32; y += 32) {
-            for (let x = 0; x < 128; x += 32) {
-                PNJTexturesList.push(WalkPNJ.get(x, y, 32, 32));
+        for (let y = 32; y < 64; y += 32) {
+            for (let x = 0; x < 192; x += 32) {
+                PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
             }
         }
     }
     else if (movement == "idle") {
 
-        for (let y = 0; y < 26; y += 26) {
-            for (let x = 0; x < 88; x += 22) {
-                PNJTexturesList.push(IdlePNJ.get(x, y, 22, 26));
+        for (let y = 0; y < 32; y += 32) {
+            for (let x = 0; x < 192; x += 32) {
+                PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
             }
         }
     }

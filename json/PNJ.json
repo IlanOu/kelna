@@ -2,7 +2,7 @@
     "PNJS": {
         "PNJ1": {
             "x": 300,
-            "y": 470,
+            "y": 460,
             "tailleW": 80,
             "tailleH": 80,
             "distance":290,
@@ -16,7 +16,7 @@
         },
         "PNJ2": {
             "x": 1250,
-            "y": 470,
+            "y": 460,
             "tailleW": 80,
             "tailleH": 80,
             "distance": 500,

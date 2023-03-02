@@ -10,6 +10,9 @@ function setup() {
   // PositionButtons()
 
 
+  // Ma tileset fait 256x256 px et chaque tile fait du 32x32px
+  tilesList = cutTileset(tileSet, [32, 32], [256, 256])
+
 }
 
 
@@ -27,19 +30,26 @@ function preload() {
   WantedPoster = loadImage("assets/WantedPoster.png")
 
   // Animation PNJ
-  WalkPNJ = loadImage("assets/animations/PNJWalk.png")
-  IdlePNJ = loadImage("assets/animations/IdleBoi.png")
+  PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
+
+  // WalkPNJ = loadImage("assets/animations/PNJWalk.png")
+  // IdlePNJ = loadImage("assets/animations/IdleBoi.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
+  tileSet = loadImage("assets/textures/floortilesetTransparent.png")
 
   // Personnage
-  characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
-  characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
-  characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
+  characterTextures = loadImage("assets/animations/spriteSheetCharacter.png")
+  
+  // characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
+  // characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
+  // characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
   characterTexture_Dash = loadImage("assets/animations/RollBase.png")
+
+  
 
   // JSON preload
   ForPNJ = loadJSON("json/PNJ.json");
@@ -63,18 +73,23 @@ function preload() {
 function draw() {
   noSmooth()
 
-
   if (gameIsPlaying) {
     inGame = true
+    
     if (engineOne) {
+      
       drawGrid()
+      PNJManager()
       character()
+      drawGridForeground()
 
     }else{
       drawHouse()
+      PNJManager()
       characterView2()
+      drawHouseForeground()
     }
-    PNJManager()
+    
 
   }
   setupUI()

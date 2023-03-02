@@ -119,18 +119,18 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //~ animation MARCHER
   if (movement == "walk") {
 
-      for (let y = 0; y < 320; y += 320) {
-        for (let x = 0; x < 1920; x += 320) {
-          characterTextureList.push(characterTexture_Walk.get(x, y, 320, 320));
+      for (let y = 32; y < 64; y += 32) {
+        for (let x = 0; x < 192; x += 32) {
+          characterTextureList.push(characterTextures.get(x, y, 32, 32));
         }
       }
 
     //~ animation IDLE
   } else if (movement == "idle") {
 
-    for (let y = 0; y < 320; y += 320) {
-      for (let x = 0; x < 960; x += 320) {
-        characterTextureList.push(characterTexture_Idle.get(x, y, 320, 320));
+    for (let y = 0; y < 32; y += 32) {
+      for (let x = 0; x < 192; x += 32) {
+        characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }
 
@@ -138,9 +138,9 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //~ animation JUMP
   else if (movement == "jump") {
 
-    for (let y = 0; y < 320; y += 320) {
-      for (let x = 0; x < 960; x += 320) {
-        characterTextureList.push(characterTexture_Jump.get(x, y, 320, 320));
+    for (let y = 64; y < 96; y += 32) {
+      for (let x = 0; x < 128; x += 32) {
+        characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }
 
@@ -148,9 +148,15 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //~ animation DASH
   else if (movement == "dash") {
 
-    for (let y = 0; y < 320; y += 320) {
-      for (let x = 0; x < 960; x += 320) {
-        characterTextureList.push(characterTexture_Dash.get(x, y, 320, 320));
+    // for (let y = 0; y < 32; y += 32) {
+    //   for (let x = 0; x < 96; x += 32) {
+    //     characterTextureList.push(characterTexture_Dash.get(x, y, 32, 32));
+    //   }
+    // }
+
+    for (let y = 64; y < 96; y += 32) {
+      for (let x = 0; x < 128; x += 32) {
+        characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }
 

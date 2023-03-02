@@ -9,12 +9,12 @@ let stone;
 let stoneBrick;
 let sky;
 
+let tileSet;
+let tilesList;
 //#endregion
 
 //#region //~ Textures Perso
-let characterTexture_Idle;
-let characterTexture_Walk;
-let characterTexture_Jump;
+
 let characterTexture_Dash;
 
 let characterTextureList = [];
@@ -27,7 +27,7 @@ let characterLastDirection = "right";
 
 let characterMovement = "idle";
 
-let animationSpeed = 50
+let animationSpeed = 60
 
 //#endregion
 
