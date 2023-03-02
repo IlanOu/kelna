@@ -1,83 +1,55 @@
 //#region MANAGER 
-
-
-LeCarre = {
-    y: 500,
-    StartX: 100,
-    Avancer: 0,
-    EndX: 1000,
-    Direction: "Avancer"
-};
-
-
-
-
-let ForPNJ1 = () => {
-
-    let CurentX = LeCarre.StartX + LeCarre.Avancer;
-
-    if (CurentX > LeCarre.EndX) {
-        LeCarre.Direction = "Reculer"
-    }
-    if (CurentX < LeCarre.StartX) {
-        LeCarre.Direction = "Avancer"
-    }
-    if (LeCarre.Direction === "Avancer") {
-        rect(CurentX, LeCarre.y, 50, 50);
-        LeCarre.Avancer += 2;
-    }
-    if (LeCarre.Direction === "Reculer") {
-        rect(CurentX, LeCarre.y, 50, 50);
-        LeCarre.Avancer -= 2;
-    }
-}
-
-
-
-
-
-
 function PNJManager() {
 
+    // ~ Draw des PNJ
     drawPNJ(ForPNJ.PNJS.PNJ1);
+    drawPNJ(ForPNJ.PNJS.PNJ2);
+    drawPNJ(ForPNJ.PNJS.PNJ3);
 
 }
-
-
-
 //#endregion
 
+
 //#region FONCTION POUR PNJ
-
-
-
 let drawPNJ = (pnj) => {
 
-
-    let PNJEnd = pnj.end + xStartWorld;
+    // ~ Variables positions PNJ
+    let PNJDistance = pnj.distance + pnj.x
+    let PNJY = pnj.y + yStartWorld
+    let PNJEnd = PNJDistance + xStartWorld;
     let PNJStart = pnj.x + xStartWorld
     let CurentX = pnj.x + pnj.NbrePas + xStartWorld;
 
+    // ~ Variables Collisions / HitBox PNJ
+    let VillagerBoundingBox = expandRect(CurentX, PNJY, pnj.tailleW, pnj.tailleH, 4)
+    let entreEnContact = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
+
+    // ~ Debug Mod
+    if (debugMod) {
+        fill(255, 0, 0, 70)
+        rect(VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
+        fill(255)
+    }
+    // ~ Direction Reculer
     if (CurentX > PNJEnd) {
         pnj.direction = "reculer";
     };
+    // ~ Direction Avancer
     if (CurentX < PNJStart) {
         pnj.direction = "avancer";
     };
-    if (pnj.direction === "avancer") {
-        rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
-        //image(IMGTest, 100, 100, 50, 50);
-        pnj.NbrePas += pnj.vitesse;
-    };
-    if (pnj.direction === "reculer") {
-        rect(CurentX, pnj.y, pnj.tailleW, pnj.tailleH);
-        pnj.NbrePas -= pnj.vitesse;
-    };
+    // ~ Hitbox / Collisions
+    if (entreEnContact === false) {
+
+        if (pnj.direction === "avancer") {
+            pnj.NbrePas += pnj.vitesse;
+        };
+        if (pnj.direction === "reculer") {
+            pnj.NbrePas -= pnj.vitesse;
+        };
+
+    }
+    // ~ Creation du PNJ
+    rect(CurentX, PNJY, pnj.tailleW, pnj.tailleH);
 }
-
-
-
-
-
-
 //#endregion

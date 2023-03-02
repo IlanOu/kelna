@@ -304,11 +304,7 @@ function setupUI() {
         }
         else {
             //~ sinon je joue
-
-
             gameIsPlaying = true
-
-
         }
         drawLifeBar()
         PNJManager()

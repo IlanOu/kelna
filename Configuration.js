@@ -1,3 +1,7 @@
+//^ DEBUG MOD
+let debugMod = true;
+
+
 //^ Textures
 
 //#region //~ Textures

@@ -110,6 +110,12 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
+
+  if (debugMod) {
+    fill(255, 0, 0, 70)
+    rect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight)
+  }
+
   //~ animation MARCHER
   if (movement == "walk") {
 

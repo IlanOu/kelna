@@ -132,3 +132,15 @@ function mouseClicked() {
         Pressing = false;
     }
 }
+
+
+
+// ~ Agrandir un carré
+function expandRect(x,y,width,height,value){
+    let NewWidth = width * value
+    let NewHeight = height * value
+    x = x - (NewWidth / 2) + (width / 2)
+    y = y - (NewHeight / 2) + (height / 2)
+
+    return [x, y, NewWidth, NewHeight]
+}
