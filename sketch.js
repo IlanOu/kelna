@@ -7,7 +7,7 @@ function setup() {
 
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
   // PositionButtons()
-  ArrayPNJ = []
+
 
 }
 
@@ -22,7 +22,7 @@ function preload() {
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
-  PNJ1.IMG = loadImage("assets/PNJ.png");
+  //PNJ1.IMG = loadImage("assets/PNJ.png");
   WantedPoster = loadImage("assets/WantedPoster.png")
 
   // Textures
@@ -37,6 +37,7 @@ function preload() {
   characterTexture_Dash = loadImage("assets/animations/RollBase.png")
 
   // JSON preload
+  ForPNJ = loadJSON("json/PNJ.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");

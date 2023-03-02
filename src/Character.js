@@ -262,11 +262,6 @@ function character() {
 
       //? le monde bouge vers la gauche (la caméra se décale vers la droite)
       xStartWorld -= characterMovesSpeed
-
-      // ! Changement pour PNJ se fais ici
-      LeCarre.EndX -= characterMovesSpeed
-      LeCarre.StartX -= characterMovesSpeed
-
       characterPositionX -= characterMovesSpeed
     }
   }
@@ -281,11 +276,6 @@ function character() {
 
       //? le monde bouge vers la droite (la caméra se décale vers la gauche)
       xStartWorld += characterMovesSpeed
-
-      // ! Changement pour PNJ se fais ici
-      LeCarre.EndX += characterMovesSpeed
-      LeCarre.StartX +=characterMovesSpeed
-
       characterPositionX += characterMovesSpeed
     }
   }
@@ -297,10 +287,6 @@ function character() {
   if (characterPositionY > height - height / 4) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
       yStartWorld -= characterVelocityY 
-
-      // ! Changement pour PNJ se fais ici
-      LeCarre.y -= characterVelocityY
-
       characterPositionY -= characterVelocityY
     }
 
@@ -308,10 +294,6 @@ function character() {
   if (characterPositionY > height - height / 3) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
       yStartWorld -= characterMovesSpeed
-
-      // ! Changement pour PNJ se fais ici
-      LeCarre.y -= characterMovesSpeed
-
       characterPositionY -= characterMovesSpeed
     }
 
@@ -324,20 +306,12 @@ function character() {
   if (characterPositionY < height / 3) {
     if (yStartWorld < 0) {
       yStartWorld += characterMovesSpeed
-
-      // ! Changement pour PNJ se fais ici
-      LeCarre.y += characterMovesSpeed
-
       characterPositionY += characterMovesSpeed
     }
   }
   if (characterPositionY < height / 4) {
     if (yStartWorld < 0) {
       yStartWorld += characterMovesSpeed
-      
-      // ! Changement pour PNJ se fais ici
-      LeCarre.y += characterMovesSpeed
-
       characterPositionY += characterMovesSpeed
     }
   }

@@ -1,0 +1,25 @@
+{
+    "PNJS": {
+        "PNJ1": {
+            "x": 100,
+            "y": 500,
+            "tailleW": 50,
+            "tailleH": 50,
+            "end":1000,
+            "vitesse":3,
+            "NbrePas":0,
+            "direction":"avancer"
+        },
+        "PNJ2": {
+            "x": 100,
+            "y": 500,
+            "tailleW": 50,
+            "tailleH": 50,
+            "end": 1000,
+            "vitesse": 3,
+            "NbrePas": 0,
+            "direction": "avancer",
+            "img":""
+        }
+    }
+}

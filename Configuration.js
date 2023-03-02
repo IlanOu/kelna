@@ -130,9 +130,9 @@ let YouCanPlayMusic = false
 
 
 // For PNJ
+let ForPNJ;
 
 
-//let NbrePas = 0
 
 // Life Bar
 

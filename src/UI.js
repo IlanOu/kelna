@@ -290,16 +290,17 @@ function setupUI() {
 
     //~ Si je suis en jeu
 
-    //i += 5
     if (inGame && PlayerInSettings === false) {
         //~ Si je fait echap (dans le menu pause)
+
+
+        if (isSettingsPause) {
+            drawSettingInPause()
+        }
         if (gameIsPaused) {
 
             gameIsPlaying = false
             drawPauseMenu()
-        }
-        else if (isSettingsPause) {
-            drawSettingInPause()
         }
         else {
             //~ sinon je joue
@@ -311,9 +312,6 @@ function setupUI() {
         }
         drawLifeBar()
         PNJManager()
-        //ForPNJ1()
-        //ForCarre2()
-        //drawPNJ()
 
 
     } else {
@@ -324,7 +322,6 @@ function setupUI() {
         if (isSettingsWait) {
             drawSettingInHome()
         }
-
 
         gameIsPaused = false
         gameIsPlaying = false
