@@ -26,6 +26,8 @@ function preload() {
   IMGSet = loadImage("assets/Settings.png")
   IMGTest = loadImage("assets/PNJ.png");
   WantedPoster = loadImage("assets/WantedPoster.png")
+  WalkPNJ = loadImage("assets/RunBoi.png")
+  IdlePNJ = loadImage("assets/IdleBoi.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")

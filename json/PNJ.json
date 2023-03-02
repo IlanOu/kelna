@@ -3,35 +3,44 @@
         "PNJ1": {
             "x": 100,
             "y": 500,
-            "tailleW": 50,
-            "tailleH": 50,
+            "tailleW": 80,
+            "tailleH": 80,
             "distance":500,
             "vitesse":3,
             "NbrePas":0,
-            "direction":"avancer",
-            "img":""
+            "direction":"right",
+            "img":"",
+            "currentFrame":0,
+            "indexFrame":0,
+            "movement":"walk"
         },
         "PNJ2": {
             "x": 800,
             "y": 500,
-            "tailleW": 50,
-            "tailleH": 50,
+            "tailleW": 80,
+            "tailleH": 80,
             "distance": 500,
             "vitesse": 3,
             "NbrePas": 0,
-            "direction": "avancer",
-            "img":""
+            "direction": "right",
+            "img":"",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
         },
         "PNJ3": {
             "x": 1000,
             "y": 500,
-            "tailleW": 50,
-            "tailleH": 50,
+            "tailleW": 80,
+            "tailleH": 80,
             "distance": 500,
             "vitesse": 3,
             "NbrePas": 0,
-            "direction": "avancer",
-            "img": ""
+            "direction": "right",
+            "img": "",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
         }
     }
 }
