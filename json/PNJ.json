@@ -1,8 +1,8 @@
 {
     "PNJS": {
         "PNJ1": {
-            "x": 100,
-            "y": 500,
+            "x": 50,
+            "y": 200,
             "tailleW": 80,
             "tailleH": 80,
             "distance":500,
@@ -15,8 +15,8 @@
             "movement":"walk"
         },
         "PNJ2": {
-            "x": 800,
-            "y": 500,
+            "x": 100,
+            "y": 300,
             "tailleW": 80,
             "tailleH": 80,
             "distance": 500,
@@ -29,8 +29,8 @@
             "movement": "walk"
         },
         "PNJ3": {
-            "x": 1000,
-            "y": 500,
+            "x": 150,
+            "y": 400,
             "tailleW": 80,
             "tailleH": 80,
             "distance": 500,

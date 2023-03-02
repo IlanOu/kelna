@@ -1,5 +1,5 @@
 function setup() {
-  
+
 
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
@@ -14,7 +14,7 @@ function setup() {
 
 
 function preload() {
-  
+
   // Images preload
   GamerHeart = loadImage("assets/GamerHeart.webp")
   GUIParameters = loadImage("assets/GUIParameters.png")
@@ -24,10 +24,11 @@ function preload() {
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
-  IMGTest = loadImage("assets/PNJ.png");
   WantedPoster = loadImage("assets/WantedPoster.png")
-  WalkPNJ = loadImage("assets/RunBoi.png")
-  IdlePNJ = loadImage("assets/IdleBoi.png")
+
+  // Animation PNJ
+  WalkPNJ = loadImage("assets/animations/PNJWalk.png")
+  IdlePNJ = loadImage("assets/animations/IdleBoi.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -60,14 +61,21 @@ function preload() {
 
 
 function draw() {
+  noSmooth()
 
-  
 
-  if (gameIsPlaying){
+  if (gameIsPlaying) {
     inGame = true
-    noSmooth()
-    drawGrid()
-    character() 
+    if (engineOne) {
+      drawGrid()
+      character()
+
+    }else{
+      drawHouse()
+      characterView2()
+      PNJManager()
+    }
+
   }
   setupUI()
 

@@ -19,14 +19,14 @@ let drawPNJ = (pnj) => {
 
     // ~ Variables positions PNJ
     let PNJDistance = pnj.distance + pnj.x
-    let PNJY = pnj.y + yStartWorld
-    let PNJEnd = PNJDistance + xStartWorld;
-    let PNJStart = pnj.x + xStartWorld
-    let CurrentX = pnj.x + pnj.NbrePas + xStartWorld;
+    let PNJY = pnj.y + yStartHouse
+    let PNJEnd = PNJDistance + xStartHouse;
+    let PNJStart = pnj.x + xStartHouse
+    let CurrentX = pnj.x + pnj.NbrePas + xStartHouse;
 
     // ~ Variables Collisions / HitBox PNJ
-    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 4)
-    let entreEnContact = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
+    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2)
+    let entreEnContact = rectIsInRect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
 
     // ~ Debug Mod
     if (debugMod) {
@@ -45,7 +45,7 @@ let drawPNJ = (pnj) => {
     // ~ Hitbox / Collisions
     if (entreEnContact === false) {
         pnj.movement = "walk"
-        
+
         if (pnj.direction === "right") {
             pnj.NbrePas += pnj.vitesse;
         };
@@ -80,9 +80,9 @@ function animationPNJ(CurrentPNJ,positionX, positionY, width, height, direction,
 
     if (movement == "walk"){
 
-        for (let y = 0; y < 26; y += 26) {
-            for (let x = 0; x < 88; x += 22) {
-                PNJTexturesList.push(WalkPNJ.get(x, y, 22, 26));
+        for (let y = 0; y < 32; y += 32) {
+            for (let x = 0; x < 128; x += 32) {
+                PNJTexturesList.push(WalkPNJ.get(x, y, 32, 32));
             }
         }
     }

@@ -1,5 +1,5 @@
 //^ DEBUG MOD
-let debugMod = true;
+let debugMod = false;
 
 
 //^ Textures
