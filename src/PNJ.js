@@ -2,10 +2,13 @@
 function PNJManager() {
 
     // ~ Draw des PNJ en EXTERIEUR
-    drawPNJ(ForPNJ.PNJS.PNJ1);
-    drawPNJ(ForPNJ.PNJS.PNJ2);
-    drawPNJ(ForPNJ.PNJS.PNJ3);
-
+    if (engineOne) {
+        drawPNJ(ForPNJ.PNJS.PNJ1);
+        drawPNJ(ForPNJ.PNJS.PNJ2);
+    }
+    else {
+        drawPNJInside(ForPNJ.PNJS.PNJ3);
+    }
 }
 //#endregion
 
@@ -15,7 +18,7 @@ function PNJManager() {
 
 
 // DRAW PNJ
-let drawPNJ = (pnj) => {
+let drawPNJInside = (pnj) => {
 
     // ~ Variables positions PNJ
     let PNJDistance = pnj.distance + pnj.x
@@ -53,32 +56,81 @@ let drawPNJ = (pnj) => {
             pnj.NbrePas -= pnj.vitesse;
         };
 
-    }else {
+    } else {
         pnj.movement = "idle"
-        if (characterPositionX >= CurrentX){
+        if (characterInsidePosX >= CurrentX) {
             pnj.direction = "right"
-        }else{
+        } else {
             pnj.direction = "left"
         }
     }
     //~ Creation du PNJ
-    animationPNJ(pnj,CurrentX, PNJY, pnj.tailleW, pnj.tailleH, pnj.direction, pnj.movement)
+    animationPNJ(pnj, CurrentX, PNJY, pnj.tailleW, pnj.tailleH, pnj.direction, pnj.movement)
 }
 
 
+let drawPNJ = (pnj) => {
+
+    // ~ Variables positions PNJ
+    let PNJDistance = pnj.distance + pnj.x
+    let PNJY = pnj.y + yStartWorld
+    let PNJEnd = PNJDistance + xStartWorld;
+    let PNJStart = pnj.x + xStartWorld
+    let CurrentX = pnj.x + pnj.NbrePas + xStartWorld;
+
+    // ~ Variables Collisions / HitBox PNJ
+    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2)
+    let entreEnContact = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
+
+    // ~ Debug Mod
+    if (debugMod) {
+        fill(255, 0, 0, 70)
+        rect(VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
+        fill(255)
+    }
+    // ~ Direction left
+    if (CurrentX > PNJEnd) {
+        pnj.direction = "left";
+    };
+    // ~ Direction right
+    if (CurrentX < PNJStart) {
+        pnj.direction = "right";
+    };
+    // ~ Hitbox / Collisions
+    if (entreEnContact === false) {
+        pnj.movement = "walk"
+
+        if (pnj.direction === "right") {
+            pnj.NbrePas += pnj.vitesse;
+        };
+        if (pnj.direction === "left") {
+            pnj.NbrePas -= pnj.vitesse;
+        };
+
+    } else {
+        pnj.movement = "idle"
+        if (characterPositionX >= CurrentX) {
+            pnj.direction = "right"
+        } else {
+            pnj.direction = "left"
+        }
+    }
+    //~ Creation du PNJ
+    animationPNJ(pnj, CurrentX, PNJY, pnj.tailleW, pnj.tailleH, pnj.direction, pnj.movement)
+}
 
 
 
 
 // ANIMATION PNJ
 
-function animationPNJ(CurrentPNJ,positionX, positionY, width, height, direction, movement){
+function animationPNJ(CurrentPNJ, positionX, positionY, width, height, direction, movement) {
 
     let timer = (round(millis() / animationSpeed)) % 2
 
     let PNJTexturesList = []
 
-    if (movement == "walk"){
+    if (movement == "walk") {
 
         for (let y = 0; y < 32; y += 32) {
             for (let x = 0; x < 128; x += 32) {

@@ -73,8 +73,8 @@ function draw() {
     }else{
       drawHouse()
       characterView2()
-      PNJManager()
     }
+    PNJManager()
 
   }
   setupUI()
