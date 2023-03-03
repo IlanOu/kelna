@@ -1,0 +1,46 @@
+{
+    "PNJS": {
+        "PNJ1": {
+            "x": 300,
+            "y": 460,
+            "tailleW": 80,
+            "tailleH": 80,
+            "distance":290,
+            "vitesse":3,
+            "NbrePas":0,
+            "direction":"right",
+            "img":"",
+            "currentFrame":0,
+            "indexFrame":0,
+            "movement":"walk"
+        },
+        "PNJ2": {
+            "x": 1250,
+            "y": 460,
+            "tailleW": 80,
+            "tailleH": 80,
+            "distance": 500,
+            "vitesse": 3,
+            "NbrePas": 0,
+            "direction": "right",
+            "img":"",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
+        },
+        "PNJ3": {
+            "x": 150,
+            "y": 400,
+            "tailleW": 80,
+            "tailleH": 80,
+            "distance": 500,
+            "vitesse": 3,
+            "NbrePas": 0,
+            "direction": "right",
+            "img": "",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
+        }
+    }
+}

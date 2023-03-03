@@ -1,3 +1,7 @@
+//^ DEBUG MOD
+let debugMod = false;
+
+
 //^ Textures
 
 //#region //~ Textures
@@ -5,12 +9,13 @@ let stone;
 let stoneBrick;
 let sky;
 
+let tileSet;
+let tilesList;
 //#endregion
 
 //#region //~ Textures Perso
-let characterTextureIdle;
-let characterTextureWalk;
-let characterTextureJump;
+
+let characterTexture_Dash;
 
 let characterTextureList = [];
 
@@ -22,13 +27,15 @@ let characterLastDirection = "right";
 
 let characterMovement = "idle";
 
+let animationSpeed = 60
+
 //#endregion
 
 //^ Grille
 
 //#region //~ caractéristique de la grille
-let rectWidth = 75;
-let rectHeight = 75;
+let rectWidth = 60;
+let rectHeight = 60;
 
 let xStartWorld = 0;
 let yStartWorld = 0;
@@ -46,9 +53,10 @@ let yStartHouse = 0;
 //^ Perso
 
 //#region //~ caractéristiques du perso
-let characterInMapX = 0;
-let characterInMapY = 0;
 
+//? Positions
+// let characterInMapX = 0;
+// let characterInMapY = 0;
 
 let characterInsidePosX = 1;
 let characterInsidePosY = 1;
@@ -67,10 +75,12 @@ let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
 
-let characterMass = 60;
-let characterJumpHeight = 35;
+let characterMovesSpeed = 6;
 
-let characterMovesSpeed = 7.5;
+
+//? Saut
+let characterMass = 60;
+let characterJumpHeight = 20;
 
 let characterVelocityY = 0;
 let characterVelocityYMin = -80
@@ -82,71 +92,66 @@ let characterJumpCount = 0;
 let characterMaxJumps = 2;
 let characterDoubleJumping = false;
 
-let isJumping = false;
+let characterIsJumping = false;
 
-let isDashing = false;
+//? Dash
+let characterIsDashing = false;
+let lastDashTime = 0;
+const dashCooldown = 1000;
+const dashTime = 200;
+const dashForce = 2;
+
 
 //#endregion
 
 //^ Interfaces
 
-//#region //~ Interactions Joueur - Machine
+let viewportDisplayWidth = 1920
+let viewportDisplayHeight = 1080
 
-// Pouvoir faire echap
-let YouCanEscape = true;
-
-
-// Pour que le joueur fasse echap
-let PlayerIsInPaused = false;
-let isSettingsEchap = false;
+let buttonWidthClassic = 50
+let buttonHeightClassic = 20
 
 
+let ColorForRectMusic = 255
+let MusicIsActivate = false
 
-// Attente du joueur pour joueur
-let PlayerIsInPlay = false;
-let isSettingsWait = false;
+let Pressing = false
 
+let buttonWidthBIG = 50
+let buttonHeightBIG = 20
 
-// Quand le joueur est mort
-let isStats = false;
-let isMenu = false;
+let inGame = false
+let gameIsPaused = false
+let gameIsPlaying = false
 
+let isSettingsWait = false
+let isSettingsPause = false
 
-// pour coeur
-let HealthMax = 3; // largeur de la barre de vie
-let MargeBarVie = 30; // marge de la barre de vie
-let Pressing = false; // Quand on appuie
-let Degating = false; // Pour les degats
-let Regening = false; // Pour regen
-let AddHeart = false; // Pour ajouter un coeur
-let DeleteHeart = false; // Pour enlever un coeur
-let HealthPlayer = 3; // vie du perso
+let PlayerInSettings = false
+let YouCanPlayMusic = false
 
 
 
-// STATS
-let ForStat = false;
+// For PNJ
+let ForPNJ;
 
-// MUSIC / SETTINGS
-let MusicIsActivateOrNot = false;
-let ColorForRectMusic = 200
-let SongIsActivateOrNot = false;
-let ColorForRectSong = 200
 
-//#endregion
 
-//#region //~ Debut Game
-let isPlay = false;
-let ButXPlay, ButYPlay, ButWPlay, ButHPlay, ButXRetW, ButYRetW, ButWRetW ,ButHRetW;
+// Life Bar
 
-//#endregion
+let MargeBarVie = 30;
+let healthPlayer = 3
+let maxHealth = 6
+
 
 //^ Autres
 
 //#region //~ physique
-const gravityForce = 0.81;
+const gravityForce = 0.5;
 
 //#endregion
+
 
 //#region //~ cartes du jeu
 let Maps;
@@ -155,11 +160,29 @@ let Houses;
 
 //#endregion
 
-//#region //~ Evenements 
-let spaceKeyIsPressed = false;
-let RightArrowPressed = false;
-let LeftArrowPressed = false;
 
-let EngineOne = true;
+//#region //~ Evenements 
+
+let spaceKeyIsPressed = false;
+let rightArrowPressed = false;
+let leftArrowPressed = false;
+let dashKeyIsPressed = false;
+
+let engineOne = true;
+
+//#endregion
+
+
+//#region //~ CINEMATIC
+
+let StartCinematic;
+
+let CinematicIsStart = true;
+let MusicForCinematic = false;
+
+let CinematicForEnd = false;
+
+//#endregion
+
 
 //#endregion

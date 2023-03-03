@@ -1,11 +1,8 @@
-<a name="readme-top"></a>
+## Welcome to "developpement" branch !
 
-![GitHub contributors](https://img.shields.io/github/contributors/IlanOu/projet-jeu-2D?color=0d0&style=for-the-badge)
-![GitHub release](https://img.shields.io/github/v/release/IlanOu/projet-jeu-2D?style=for-the-badge)
-![GitHub watchers](https://img.shields.io/github/watchers/IlanOu/projet-jeu-2D?style=for-the-badge)
-![GitHub Repo stars](https://img.shields.io/github/stars/IlanOu/projet-jeu-2D?color=%23fa0&style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/IlanOu/projet-jeu-2D?style=for-the-badge)
+__This is where we preview the latest features of the game !__
 
+*(Take a look at our other branches)*
 
 
 <!-- LOGO -->

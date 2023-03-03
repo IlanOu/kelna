@@ -1,18 +1,23 @@
 function setup() {
-  let viewportDisplayWidth = 1920
-  let viewportDisplayHeight = 1080
-  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight){
+
+
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
   }
 
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
-  PositionButtons()
+  // PositionButtons()
+
+
+  // Ma tileset fait 256x256 px et chaque tile fait du 32x32px
+  tilesList = cutTileset(tileSet, [32, 32], [256, 256])
 
 }
 
 
 function preload() {
+
   // Images preload
   GamerHeart = loadImage("assets/GamerHeart.webp")
   GUIParameters = loadImage("assets/GUIParameters.png")
@@ -20,93 +25,75 @@ function preload() {
   GUIOfDeath = loadImage("assets/GUIOfDeath.png")
   GUIForStats = loadImage("assets/GUIForStats.png")
   Background = loadImage("assets/Background.gif")
+  IMGPlay = loadImage("assets/Play.png")
+  IMGSet = loadImage("assets/Settings.png")
+  WantedPoster = loadImage("assets/WantedPoster.png")
+
+  // Animation PNJ
+  PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
+
+  // WalkPNJ = loadImage("assets/animations/PNJWalk.png")
+  // IdlePNJ = loadImage("assets/animations/IdleBoi.png")
 
   // Textures
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
+  tileSet = loadImage("assets/textures/floortilesetTransparent.png")
 
   // Personnage
-  characterTextureIdle = loadImage("assets/animations/IdleBase.png")
-  characterTextureWalk = loadImage("assets/animations/WalkBase.png")
-  characterTextureJump = loadImage("assets/animations/JumpBase.png")
+  characterTextures = loadImage("assets/animations/spriteSheetCharacter.png")
+  
+  // characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
+  // characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
+  // characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
+  characterTexture_Dash = loadImage("assets/animations/RollBase.png")
+
+  
 
   // JSON preload
+  ForPNJ = loadJSON("json/PNJ.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
+
+
+  //CINEMATIC
+  StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
+  StartCinematic.hide();
+  StartCinematic.volume(0);
 }
-let dashForce = 2;
-let velocityX = 0;
-let dashMaxLength = 5;
+
+
+
 
 function draw() {
+  noSmooth()
 
-  if (PlayerIsInPlay === false) {
-    WaitToPlay()
-    // SongBackground.play()
-  }
-  if (PlayerIsInPaused === false && PlayerIsInPlay === true) {
-    if (EngineOne) {
+  if (gameIsPlaying) {
+    inGame = true
+    
+    if (engineOne) {
+      
       drawGrid()
-      displayVie();
+      PNJManager()
       character()
-    } else {
+      drawGridForeground()
+
+    }else{
       drawHouse()
+      PNJManager()
       characterView2()
+      drawHouseForeground()
     }
+    
 
   }
-  if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
-    MenuEscape()
-  }
-  if (isSettingsEchap === true && PlayerIsInPlay === true) {
-    Setting()
-  }
-  if (isSettingsWait === true && PlayerIsInPlay === false) {
-    Setting()
-  }
-  if (HealthPlayer === 0 && PlayerIsInPlay === true && PlayerIsInPlay === true) {
-    PlayerIsDie()
-  }
-  if (isStats === true && HealthPlayer === 0) {
-    Stats()
-  } 
-
-
-  if (isDashing){
-    if (LeftArrowPressed || RightArrowPressed){
-
-      velocityX += dashForce
-      
-      if (LeftArrowPressed){
-        characterPositionX -= velocityX
-      }else if (RightArrowPressed){
-        
-        characterPositionX += velocityX
-      }
-
-      
-
-      if (velocityX > dashMaxLength){
-          isDashing = false
-      }
-    }
-      
-  }else if (velocityX > 0){
-    velocityX -= dashForce
-
-    if (LeftArrowPressed){
-      velocityX += dashForce
-      characterPositionX -= velocityX
-    }else if (RightArrowPressed){
-      velocityX += dashForce
-      characterPositionX += velocityX
-    }
-  }
-        
+  setupUI()
 
 }
+
+

@@ -1,4 +1,4 @@
-// Rect pour le fond pour une interaction joueur 
+//#region Rect pour le fond pour une interaction joueur 
 let BackOfTheBackground = () => {
 
     fill(0, 0, 0, 50)
@@ -6,10 +6,10 @@ let BackOfTheBackground = () => {
 
 }
 
+//#endregion 
 
 
-
-//#region FOR ECHAP
+//#region //~ ECHAP
 
 let MenuEscape = () => {
 
@@ -17,40 +17,43 @@ let MenuEscape = () => {
     BackOfTheBackground()
 
     // Interface 
-    image(GUIForEscape, 485, 105, 800, 600)
+    image(GUIForEscape, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
+
+    // ALL BOUTTONS
+    stroke(0);
 
 
     // Boutton QUIT
     fill(200);
-    rect(ButtonXQuitInEchap, ButtonYQuitInEchap, ButtonWQuitInEchap, ButtonHQuitInEchap);
+    rect(IsXForAllButtons, ButtonYQuitInEchap, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(0);
     textAlign(CENTER);
     textSize(16);
-    text("QUIT", ForButtonXForQuitInEchap, ForButtonYForQuitInEchap);
+    text("QUIT", IsXForTextAllButtons, ForButtonYForQuitInEchap);
 
     // Boutton SETTINGS
     fill(200);
-    rect(ButtonXTextSettingsOfEchap, ButtonYTextSettingsOfEchap, ButtonWTextSettingsOfEchap, ButtonHTextSettingsOfEchap);
+    rect(IsXForAllButtons, ButtonYTextSettingsOfEchap, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(0);
     textAlign(CENTER);
     textSize(16);
-    text("Settings", ForButXGoToSetToEchap, ForButYGoToSetToEchap);
+    text("Settings", IsXForTextAllButtons, ForButYGoToSetToEchap);
 
     // Boutton RETURN
     fill(200);
-    rect(ButtonXReturnToGameInEchap, ButtonYReturnToGameInEchap, ButtonWReturnToGameInEchap, ButtonHReturnToGameInEchap);
+    rect(IsXForAllButtons, ButtonYReturnToGameInEchap, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(0);
     textAlign(CENTER);
     textSize(14);
-    text("Return to game", ForButtonXReturnInEchap, ForButtonYReturnInEchap);
+    text("Return to game", IsXForTextAllButtons, ForButtonYReturnInEchap);
 
 
 }
 
-//#endregion FOR ECHAP
+//#endregion 
 
 
-//#region FOR SETTINGS
+//#region //~ SETTINGS
 
 let Setting = () => {
 
@@ -58,44 +61,42 @@ let Setting = () => {
     BackOfTheBackground()
 
     // Interface
-    image(GUIParameters, 485, 105, 800, 600)
+    image(GUIParameters, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
 
     // Boutton SON
     fill(ColorForRectSong);
-    rect(ButtonXSon, ButtonYSon, ButtonWSon, ButtonHSon);
+    rect(IsXForAllButtons, ButtonYSon, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(0);
-    textAlign(CENTER);
     textSize(16);
-    text("SON", ForButXSon, ForButYSon);
+    text("SON", IsXForTextAllButtons, ForButYSon);
 
 
     // Boutton MUSIC
     fill(ColorForRectMusic);
-    rect(ButtonXMusic, ButtonYMusic, ButtonWMusic, ButtonHMusic);
+    rect(IsXForAllButtons, ButtonYMusic, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(0);
-    textAlign(CENTER);
     textSize(16);
-    text("MUSIC", ForButXMusic, ForButYMusic);
+    text("MUSIC", IsXForTextAllButtons, ForButYMusic);
 
 
-    if (PlayerIsInPlay === false) {
-        // Boutton du return quand le joueur ne joue => Retour au wait to play
+    if (gameIsPlaying === false) {
+        // Boutton du return quand le joueur ne joue pas => Retour au wait to play
         fill(0);
-        rect(ButtonXReturnInPausedW, ButtonYReturnInPausedW, ButtonWReturnInPausedW, ButtonHReturnInPausedW);
+        rect(IsXForAllButtons, ButtonYReturnInPausedW, IsWidthForAllButtons, IsHeightForAllButtons);
         fill(255);
         textAlign(CENTER);
         textSize(14);
-        text("Return to menu", ForButtonXReturnInWait, ForButtonYReturnInWait);
+        text("Return to menu", IsXForTextAllButtons, ForButtonYReturnInWait);
     }
-    if (PlayerIsInPlay === true) {
+    if (gameIsPlaying === true) {
         // Boutton du return quand le joueur joue => Retour au echap
         fill(0);
-        rect(ButtonXReturnToMenuOfSettingOfEchap, ButtonYReturnToMenuOfSettingOfEchap, ButtonWReturnToMenuOfSettingOfEchap, ButtonHReturnToMenuOfSettingOfEchap);
+        rect(IsXForAllButtons, ButtonYReturnToMenuOfSettingOfEchap, IsWidthForAllButtons, IsHeightForAllButtons);
         fill(255);
         textAlign(CENTER);
         textSize(14);
-        text("Return to menu", ForButXReturnFromSett, ForButYReturnFromSett);
+        text("Return to menu", IsXForTextAllButtons, ForButYReturnFromSett);
 
 
     }
@@ -104,14 +105,21 @@ let Setting = () => {
 
 }
 
-//#endregion FOR SETTINGS
+//#endregion
 
 
-//#region FOR WAIT TO PLAY
+//#region //~ WAIT TO PLAY
 let WaitToPlay = () => {
 
 
 
+    // Boutton PLAY
+    fill(200);
+    rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
+    fill(0);
+    textAlign(CENTER);
+    textSize(16);
+    text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
 
     // Arriere plan
     image(Background, 0, 0, width, height)
@@ -122,21 +130,33 @@ let WaitToPlay = () => {
     textSize(32);
     text("WAIT", width / 2, height / 2);
 
-    // Boutton PLAY
-    fill(200);
-    rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
-    fill(0);
-    textAlign(CENTER);
-    textSize(16);
-    text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
 
-    // Boutton SETTINGS
-    fill(200);
-    rect(ButXSetW, ButYSetW, ButWSetW, ButHSetW);
-    fill(0);
-    textAlign(CENTER);
-    textSize(16);
-    text("Settings", ButXSetW + ButWSetW / 2, ButYSetW + ButHSetW / 2 + 5);
+
+
+
+    // PLAY AVEC UNE IMAGE
+    image(IMGPlay, ButXPlay, ButYPlay, IsWidthForWaitButtons, IsHeightForWaitButtons)
+
+    // SETTINGS AVEC UNE IMAGE
+    image(IMGSet, ButXSetW, ButYSetW, IsWidthForWaitButtons, IsHeightForWaitButtons);
+
+
+
+    ////  Boutton PLAY
+    //// fill(200);
+    //// rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
+    //// fill(0);
+    //// textAlign(CENTER);
+    //// textSize(16);
+    //// text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
+
+    ////  Boutton SETTINGS
+    //// fill(200);
+    //// rect(ButXSetW, ButYSetW, ButWSetW, ButHSetW);
+    //// fill(0);
+    //// textAlign(CENTER);
+    //// textSize(16);
+    //// text("Settings", ButXSetW + ButWSetW / 2, ButYSetW + ButHSetW / 2 + 5);
 
 
 }
@@ -144,77 +164,101 @@ let WaitToPlay = () => {
 //#endregion
 
 
-//#region FOR STATS
+//#region //~ STATS
 let Stats = () => {
 
     // Fond d'arriere plan
     BackOfTheBackground()
 
     // INTERFACE
-    image(GUIForStats, 485, 105, 800, 600)
+    image(GUIForStats, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
 
     // Boutton RETURN
     fill(0);
-    rect(ButtonXStatsInDie, ButtonYStatsInDie, ButtonWStatsInDie, ButtonHStatsInDie);
+    rect(IsXForAllButtons, ButtonYStatsInDie, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(255);
     textAlign(CENTER);
     textSize(16);
-    text("RETURN TO MENU", ButtonXStatsInDie + ButtonWStatsInDie / 2, ButtonYStatsInDie + ButtonHStatsInDie / 2 + 5);
+    text("RETURN TO MENU", IsXForTextAllButtons, ButtonYStatsInDie + ButtonHStatsInDie / 2 + 5);
 }
 
-//#endregion FOR STATS
+//#endregion 
 
 
-//#region INTERACTIONS
-
-// FOR DIE
+//#region //~ DIE
 let PlayerIsDie = () => {
 
     // Menu de mort est donc vrai
     isMenu = true;
+    PlayerCanMove = false
 
     // Fond d'arriere plan
     BackOfTheBackground()
 
     // Interface 
-    image(GUIOfDeath, 485, 105, 800, 600)
+    image(GUIOfDeath, IsXForAllInterfaces, IsYForAllInterfaces, IsWidthForAllInterfaces, IsHeightForAllInterfaces)
+
+    // ALL BOUTTONS
+    stroke(0);
 
     // Boutton STATS
     fill(0);
-    rect(ButtonXStats, ButtonYStats, ButtonWStats, ButtonHStats);
+    rect(IsXForAllButtons, ButtonYStats, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(255);
     textAlign(CENTER);
     textSize(16);
-    text("STATS", ButtonXStats + ButtonWStats / 2, ButtonYStats + ButtonHStats / 2 + 5);
+    text("STATS", IsXForTextAllButtons, ButtonYStats + ButtonHStats / 2 + 5);
 
     // Boutton RETURN
     fill(0);
-    rect(ButtonXMenuInDie, ButtonYMenuInDie, ButtonWMenuInDie, ButtonHMenuInDie);
+    rect(IsXForAllButtons, ButtonYMenuInDie, IsWidthForAllButtons, IsHeightForAllButtons);
     fill(255);
     textAlign(CENTER);
     textSize(14);
-    text("RETURN TO MENU", ButtonXMenuInDie + ButtonWMenuInDie / 2, ButtonYMenuInDie + ButtonHMenuInDie / 2 + 5);
+    text("RETURN TO MENU", IsXForTextAllButtons, ButtonYMenuInDie + ButtonHMenuInDie / 2 + 5);
 
 }
+
+//#endregion
+
+
+//#region //~ WANTED 
+
+let PlayerCanBeSearched = () => {
+    if (PlayerIsRecherche === true) {
+        textSize(16);
+        fill(0)
+        image(WantedPoster, PositionXPoster, PositionYPoster, WidthPoster, HeightPoster);
+        text(playerReward + " " + 'PIECES', PositionXTextOfPoster, PositionYTextOfPoster);
+    } else {
+        return
+    }
+}
+
+
+//#endregion
+
+
+//#region //~ INTERACTIONS
 
 let ForInteract = () => {
 
     //Interaction avec les pavés tactiles
-    if (Degating) {
+    if (gettingHurt) {
         Degat(1);
-        Degating = false;
+        gettingHurt = false;
     }
-    if (Regening) {
+    if (gettingHeal) {
         Regen(1);
-        Regening = false;
+        gettingHeal = false;
     }
-    if (AddHeart) {
+    if (addHeart) {
         OneHeart(1);
-        AddHeart = false;
+        addHeart = false;
     }
-    if (DeleteHeart) {
+    if (removeHeart) {
         DownHeart(1);
-        DeleteHeart = false;
+        removeHeart = false;
     }
 
 
@@ -257,29 +301,42 @@ let DownHeart = () => {
     HealthPlayer = constrain(HealthPlayer, 0, HealthMax);
 
 
+    //#endregion DIE
+
 }
+
+//#endregion POSITIONS BUTTONS
 
 
 let FunctionForMusic = () => {
-    if (MusicIsActivateOrNot === false) {
-        //Si est en false = musique activé
 
-        MusicIsActivateOrNot = true
-        // SongBackground.pause()
-        console.log("Musique desactivé")
-        ColorForRectMusic = 50
+    if (MusicForCinematic === true) {
+
+        MusicIsActivateOrNot = undefined
+        SongBackground.pause()
+        //console.log("Musique bloqué par la cinematique")
+        ColorForRectMusic = 200
 
     }
-    else if (MusicIsActivateOrNot === true) {
-        //Si est en true = musique desactivé
+    if (MusicIsActivateOrNot === true) {
 
         MusicIsActivateOrNot = false
-        console.log("Musique activé")
-        // SongBackground.play()
+        SongBackground.loop()
+        //console.log("Musique activé")
         ColorForRectMusic = 200
+
+    }
+    else if (MusicIsActivateOrNot === false && IsNot === true) {
+
+        MusicIsActivateOrNot = true
+        //console.log("Musique desactivé")
+        SongBackground.pause()
+        ColorForRectMusic = 50
     }
 
 }
+
+
 
 
 let FunctionForSong = () => {
@@ -301,250 +358,224 @@ let FunctionForSong = () => {
 
 }
 
+//#endregion
 
 
-//#endregion INTERACTIONS
-
-
-//#region POSITIONS BUTTONS
+//#region //~ Positions BUTTONS
 let PositionButtons = () => {
 
 
-    //#region BUTTON WAIT
+    //#region //~ Bouton WAIT
 
-    // BOUTON DE PLAY QUAND ON EST AU WAIT
-    ButXPlay = 889.5;
-    ButYPlay = 515.5;
+    // Bouton PLAY QUAND ON EST AU WAIT EN IMAGE
+    ButXPlay = width / 2;
+    ButYPlay = height / 2;
     ButWPlay = 100;
-    ButHPlay = 50;
+    ButHPlay = 80;
 
 
-    //BOUTON DE SETTINGS QUAND ON EST AU WAIT 
-    ButXSetW = 1189.5;
-    ButYSetW = 665.5;
+    //BOUTON DE SETTINGS QUAND ON EST AU WAIT EN IMAGE
+
+    ButXSetW = width - 500 / 2;
+    ButYSetW = height - 500 / 2;
     ButWSetW = 100;
-    ButHSetW = 50;
-
+    ButHSetW = 75;
 
 
     // BOUTON DE RETOUR DE SETTING QUAND ON EST AU WAIT
-    ButtonXReturnInPausedW = 745;
     ButtonYReturnInPausedW = 615;
-    ButtonWReturnInPausedW = 290;
     ButtonHReturnInPausedW = 50;
-
-    ForButtonXReturnInWait = ButtonXReturnInPausedW + ButtonWReturnInPausedW / 2
 
     ForButtonYReturnInWait = ButtonYReturnInPausedW + ButtonHReturnInPausedW / 2 + 5
 
-    //#endregion BUTTON WAIT
+    //#endregion
 
 
-    //#region BUTTON SETTING DE ECHAP
+    //#region //~ Bouton PARAMETRES du menu de pause
 
-    ButtonXTextSettingsOfEchap = 750;
     ButtonYTextSettingsOfEchap = 400;
-    ButtonWTextSettingsOfEchap = 290;
     ButtonHTextSettingsOfEchap = 50;
-
-
-    ForButXGoToSetToEchap = ButtonXTextSettingsOfEchap + ButtonWTextSettingsOfEchap / 2
 
     ForButYGoToSetToEchap = ButtonYTextSettingsOfEchap + ButtonHTextSettingsOfEchap / 2 + 5
 
 
-    // BOUTON DE RETOUR AU MENU QUAND ON EST DANS LES SETTINGS DE L'ECHAP
-    ButtonXReturnToMenuOfSettingOfEchap = 745;
+    // Bouton RETOUR AU MENU dans le menu de pause
     ButtonYReturnToMenuOfSettingOfEchap = 615;
-    ButtonWReturnToMenuOfSettingOfEchap = 290;
     ButtonHReturnToMenuOfSettingOfEchap = 50;
-
-
-    ForButXReturnFromSett = ButtonXReturnToMenuOfSettingOfEchap + ButtonWReturnToMenuOfSettingOfEchap / 2
 
     ForButYReturnFromSett = ButtonYReturnToMenuOfSettingOfEchap + ButtonHReturnToMenuOfSettingOfEchap / 2 + 5;
 
-
-    // BOUTON DE RETOUR AU JEU QUAND ON EST DANS L'ECHAP
-    ButtonXReturnToGameInEchap = 750;
+    // Bouton RETOUR AU JEU dans le menu de pause
     ButtonYReturnToGameInEchap = 290;
-    ButtonWReturnToGameInEchap = 290;
     ButtonHReturnToGameInEchap = 50;
-
-    ForButtonXReturnInEchap = ButtonXReturnToGameInEchap + ButtonWReturnToGameInEchap / 2
 
     ForButtonYReturnInEchap = ButtonYReturnToGameInEchap + ButtonHReturnToGameInEchap / 2 + 5
 
 
 
-    // BOUTON DE QUIT DANS ECHAP
-    ButtonXQuitInEchap = 750;
+    // Bouton QUIT dans le menu de pause
     ButtonYQuitInEchap = 500;
-    ButtonWQuitInEchap = 290;
     ButtonHQuitInEchap = 50;
-
-
-
-    ForButtonXForQuitInEchap = ButtonXQuitInEchap + ButtonWQuitInEchap / 2
 
     ForButtonYForQuitInEchap = ButtonYQuitInEchap + ButtonHQuitInEchap / 2 + 5
 
 
 
-    //#endregion BUTTON ECHAP
+    //#endregion
 
 
-    //#region PARAMETRE DANS SETTINGS
-    // BOUTON DE SON DANS LES SETTINGS
-    ButtonXSon = 745;
+    //#region //~ PARAMETRE DANS SETTINGS
+    // Bouton SON dans les paramètres
     ButtonYSon = 325;
-    ButtonWSon = 290;
     ButtonHSon = 50;
 
 
-    ForButXSon = ButtonXSon + ButtonWSon / 2
+
     ForButYSon = ButtonYSon + ButtonHSon / 2 + 5
 
 
 
-    // BOUTON MUSIQUE DANS LES SETTINGS
-    ButtonXMusic = 745;
+    // Bouton MUSIQUE dans les paramètres
     ButtonYMusic = 450;
-    ButtonWMusic = 290;
     ButtonHMusic = 50;
 
-    ForButXMusic = ButtonXMusic + ButtonWMusic / 2
     ForButYMusic = ButtonYMusic + ButtonHMusic / 2 + 5
 
 
-    //#endregion settings
+    //#endregion
 
 
-    //#region DIE
-    // BOUTON DE RETOUR QUAND ON EST DANS LE MENU DE MORT
-    ButtonXMenuInDie = 745;
+    //#region //~DIE
+    
+    // Bouton RETOUR dans le menu de mort
     ButtonYMenuInDie = 310;
-    ButtonWMenuInDie = 290;
     ButtonHMenuInDie = 50;
 
 
-    // BOUTON DE RETOUR QUAND ON EST DANS LES STATS DU MENU DE MORT
-    ButtonXStatsInDie = 745;
+    // Bouton RETOUR dans les stats du menu de mort
     ButtonYStatsInDie = 615;
-    ButtonWStatsInDie = 290;
     ButtonHStatsInDie = 50;
 
 
-    // BOUTON DE STATS DANS LE MENU DE MORT
-    ButtonXStats = 745;
+    // Bouton STATS dans le menu de mort
     ButtonYStats = 450;
-    ButtonWStats = 290;
     ButtonHStats = 50;
 
 
-    //#endregion DIE
+    //#endregion
 
 }
 
-//#endregion POSITIONS BUTTONS
+//#endregion
+
 
 
 //#region CLIQUE DE SOURIS
 function mousePressed() {
 
     // Boutton Music
-    if (PlayerIsInPlay === false && isSettingsWait === true || PlayerIsInPaused === true && isSettingsEchap === true) {
-        if (mouseX > ButtonXMusic && mouseX < ButtonXMusic + ButtonWMusic && mouseY > ButtonYMusic && mouseY < ButtonYMusic + ButtonHMusic) {
+    if (gameIsPlaying === false && isSettingsWait === true || gameIsPaused === true && isSettingsEchap === true) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMusic && mouseY < ButtonYMusic + IsHeightForAllButtons) {
             FunctionForMusic()
         }
     }
     // Button song
-    if (PlayerIsInPlay != false && isSettingsWait != true || PlayerIsInPaused === true && isSettingsEchap === true) {
-        if (mouseX > ButtonXSon && mouseX < ButtonXSon + ButtonWSon && mouseY > ButtonYSon && mouseY < ButtonYSon + ButtonHSon) {
+    if (gameIsPlaying === false && isSettingsWait === true || gameIsPaused === true && isSettingsEchap === true) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYSon && mouseY < ButtonYSon + IsHeightForAllButtons) {
             FunctionForSong()
         }
     }
     // Quand on appuie sur play
-    if (PlayerIsInPlay === false && PlayerIsInPaused === false) {
+    if (gameIsPlaying === false && gameIsPaused === false && isSettingsWait === false) {
         if (mouseX > ButXPlay && mouseX < ButXPlay + ButWPlay && mouseY > ButYPlay && mouseY < ButYPlay + ButHPlay) {
-            PlayerIsInPlay = true;
+            gameIsPlaying = true;
         }
     }
 
     // Quand on appuie sur settings
-    if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsWait === false && isSettingsEchap === false) {
-        if (mouseX > ButtonXTextSettingsOfEchap && mouseX < ButtonXTextSettingsOfEchap + ButtonWTextSettingsOfEchap && mouseY > ButtonYTextSettingsOfEchap && mouseY < ButtonYTextSettingsOfEchap + ButtonHTextSettingsOfEchap) {
+    if (gameIsPaused === true && gameIsPlaying === true && isSettingsWait === false && isSettingsEchap === false) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYTextSettingsOfEchap && mouseY < ButtonYTextSettingsOfEchap + IsHeightForAllButtons) {
             isSettingsEchap = true;
             YouCanEscape = false;
         }
     }
 
     // Quit de echap
-    if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsWait === false) {
-        if (mouseX > ButtonXQuitInEchap && mouseX < ButtonXQuitInEchap + ButtonWQuitInEchap && mouseY > ButtonYQuitInEchap && mouseY < ButtonYQuitInEchap + ButtonHQuitInEchap) {
+    if (gameIsPaused === true && gameIsPlaying === true && isSettingsWait === false) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYQuitInEchap && mouseY < ButtonYQuitInEchap + IsHeightForAllButtons) {
             isSettingsEchap = false;
-            PlayerIsInPlay = false;
-            PlayerIsInPaused = false
+            gameIsPlaying = false;
+            gameIsPaused = false
+            CinematicIsStart = true
             YouCanEscape = true;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
     // Quand on appuie sur return des parametres
     if (isSettingsEchap === true) {
-        if (mouseX > ButtonXReturnToMenuOfSettingOfEchap && mouseX < ButtonXReturnToMenuOfSettingOfEchap + ButtonWReturnToMenuOfSettingOfEchap && mouseY > ButtonYReturnToMenuOfSettingOfEchap && mouseY < ButtonYReturnToMenuOfSettingOfEchap + ButtonHReturnToMenuOfSettingOfEchap) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYReturnToMenuOfSettingOfEchap && mouseY < ButtonYReturnToMenuOfSettingOfEchap + IsHeightForAllButtons) {
             isSettingsEchap = false;
             YouCanEscape = true;
         }
 
         // Retour au jeu  
-    } if (PlayerIsInPaused === true && PlayerIsInPlay === true && isSettingsEchap === false) {
-        if (mouseX > ButtonXReturnToGameInEchap && mouseX < ButtonXReturnToGameInEchap + ButtonWReturnToGameInEchap && mouseY > ButtonYReturnToGameInEchap && mouseY < ButtonYReturnToGameInEchap + ButtonHReturnToGameInEchap) {
-            PlayerIsInPaused = false;
+    } if (gameIsPaused === true && gameIsPlaying === true && isSettingsEchap === false) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYReturnToGameInEchap && mouseY < ButtonYReturnToGameInEchap + IsHeightForAllButtons) {
+            gameIsPaused = false;
         }
     }
 
     //Parametre au wait to play en true
-    if (isSettingsWait === false && PlayerIsInPlay === false) {
+    if (isSettingsWait === false && gameIsPlaying === false) {
         if (mouseX > ButXSetW && mouseX < ButXSetW + ButWSetW && mouseY > ButYSetW && mouseY < ButYSetW + ButHSetW) {
             isSettingsWait = true;
         }
     }
 
     //Parametre au wait to play en false
-    if (isSettingsWait === true && PlayerIsInPlay === false) {
-        if (mouseX > ButtonXReturnInPausedW && mouseX < ButtonXReturnInPausedW + ButtonWReturnInPausedW && mouseY > ButtonYReturnInPausedW && mouseY < ButtonYReturnInPausedW + ButtonHReturnInPausedW) {
+    if (isSettingsWait === true && gameIsPlaying === false) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYReturnInPausedW && mouseY < ButtonYReturnInPausedW + IsHeightForAllButtons) {
             isSettingsWait = false;
         }
     }
 
     //Stats en true
     if (isStats === false && isMenu === true) {
-        if (mouseX > ButtonXStats && mouseX < ButtonXStats + ButtonWStats && mouseY > ButtonYStats && mouseY < ButtonYStats + ButtonHStats) {
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYStats && mouseY < ButtonYStats + IsHeightForAllButtons) {
             isStats = true;
         }
     }
 
     if (isStats === true) {
-        if (mouseX > ButtonXStatsInDie && mouseX < ButtonXStatsInDie + ButtonWStatsInDie && mouseY > ButtonYStatsInDie && mouseY < ButtonYStatsInDie + ButtonHStatsInDie) {
-            PlayerIsInPlay = false;
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYStatsInDie && mouseY < ButtonYStatsInDie + IsHeightForAllButtons) {
+            gameIsPlaying = false;
             isStats = false;
             isMenu = false;
+            CinematicIsStart = true
             YouCanEscape = true;
+            PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
         }
     }
 
     //Retours au menu apres la mort
     if (isMenu === true) {
-        if (mouseX > ButtonXMenuInDie && mouseX < ButtonXMenuInDie + ButtonWMenuInDie && mouseY > ButtonYMenuInDie && mouseY < ButtonYMenuInDie + ButtonHMenuInDie) {
-            PlayerIsInPlay = false;
+        if (mouseX > IsXForAllButtons && mouseX < IsXForAllButtons + IsWidthForAllButtons && mouseY > ButtonYMenuInDie && mouseY < ButtonYMenuInDie + IsHeightForAllButtons) {
+            gameIsPlaying = false;
+            CinematicIsStart = true
             isStats = false;
             isMenu = false;
             YouCanEscape = true;
+            PlayerCanMove = true
             HealthPlayer = 3;
+            MusicIsActivateOrNot = false
+            FunctionForMusic()
 
         }
     }
 }
-
-//#endregion CLIQUE DE SOURIS
+//#endregion
