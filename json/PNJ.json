@@ -3,6 +3,7 @@
         "PNJ1": {
             "x": 300,
             "y": 460,
+            "Color": "blue",
             "tailleW": 80,
             "tailleH": 80,
             "distance":290,
@@ -17,6 +18,7 @@
         "PNJ2": {
             "x": 1250,
             "y": 460,
+            "Color": "blue",
             "tailleW": 80,
             "tailleH": 80,
             "distance": 500,
@@ -31,6 +33,7 @@
         "PNJ3": {
             "x": 150,
             "y": 400,
+            "Color": "blue",
             "tailleW": 80,
             "tailleH": 80,
             "distance": 500,

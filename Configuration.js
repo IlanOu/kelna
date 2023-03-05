@@ -1,5 +1,5 @@
 //^ DEBUG MOD
-let debugMod = false;
+let debugMod = true;
 
 
 //^ Textures
@@ -137,6 +137,8 @@ let YouCanPlayMusic = false
 let ForPNJ;
 
 
+// For ENNEMIS
+let ForEnnemis;
 
 // Life Bar
 

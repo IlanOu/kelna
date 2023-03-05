@@ -116,7 +116,7 @@ let drawPNJ = (pnj) => {
         }
     }
     //~ Creation du PNJ
-    animationPNJ(pnj, CurrentX, PNJY, pnj.tailleW, pnj.tailleH, pnj.direction, pnj.movement)
+    animationPNJ(pnj, CurrentX, PNJY, pnj.tailleW, pnj.tailleH, pnj.direction, pnj.movement, pnj.Color)
 }
 
 
@@ -124,7 +124,10 @@ let drawPNJ = (pnj) => {
 
 // ANIMATION PNJ
 
-function animationPNJ(CurrentPNJ, positionX, positionY, width, height, direction, movement) {
+function animationPNJ(CurrentPNJ, positionX, positionY, width, height, direction, movement, color) {
+
+    fill(color)
+    circle(positionX + 35, positionY - 25, 20);
 
     let timer = (round(millis() / animationSpeed)) % 2
 

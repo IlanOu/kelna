@@ -1,0 +1,38 @@
+{
+    "Ennemis": {
+        "Enn1": {
+            "type":"Archer",
+            "Degat":5,
+            "Color":"red",
+            "x": 300,
+            "y": 2270,
+            "tailleW": 80,
+            "tailleH": 80,
+            "distance": 290,
+            "vitesse": 3,
+            "NbrePas": 0,
+            "direction": "right",
+            "img": "",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
+        },
+        "Enn2": {
+            "type": "Chevalier",
+            "Degat": 10,
+            "Color": "red",
+            "x": 1250,
+            "y": 470,
+            "tailleW": 80,
+            "tailleH": 80,
+            "distance": 500,
+            "vitesse": 3,
+            "NbrePas": 0,
+            "direction": "right",
+            "img": "",
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
+        }
+    }
+}

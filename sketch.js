@@ -56,6 +56,7 @@ function preload() {
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
+  ForEnnemis = loadJSON("json/Ennemis.json");
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
@@ -81,6 +82,7 @@ function draw() {
       drawGrid()
       PNJManager()
       character()
+      ennemiManager()
       drawGridForeground()
 
     }else{
