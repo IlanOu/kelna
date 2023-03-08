@@ -193,7 +193,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
 //& Collisions
-function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
+function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -403,47 +403,10 @@ function character() {
 
   //#region //~ collisions
 
-  let mapsToCheck = []
+  
 
 
-  //? map actuelle
-  let currentMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(currentMapInWorld)
-
-  //? map à DROITE du perso
-  let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atRightMapInWorld)
-
-  //? map à GAUCHE du perso
-  let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atLeftMapInWorld)
-
-  //? map en HAUT du perso
-  let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopMapInWorld)
-
-  //? map en BAS du perso
-  let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomMapInWorld)
-
-  //? map en BAS à DROITE du perso
-  let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomRightMapInWorld)
-
-  //? map en BAS à GAUCHE du perso
-  let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomLeftMapInWorld)
-
-  //? map en HAUT à DROITE du perso
-  let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopRightMapInWorld)
-
-  //? map en HAUT à GAUCHE du perso
-  let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopLeftMapInWorld)
-
-
-  mapsToCheck = removeDuplicates(mapsToCheck)
+  let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
 
   //^ Ajoute les collisions pour toute les maps autour du perso 
@@ -471,7 +434,7 @@ function character() {
 
 
         if (thisObject > 0) {
-          [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          [characterPositionX, characterPositionY] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
         }
       }
     }
@@ -635,7 +598,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY] = handleCollision(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }

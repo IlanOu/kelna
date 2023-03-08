@@ -1,9 +1,7 @@
 {
     "worldsMap": [
-        ["map1", "map2", "map3"],
-        ["map4", "map5", "map6"],
-        ["map7", "map8", "map9"],
-        ["ground1", "ground2", "ground3"]
+        ["map1", "map2", "map3"]
+        
     ]
     
 }

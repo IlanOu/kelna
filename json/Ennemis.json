@@ -3,11 +3,25 @@
         "Enn1": {
             "type":"Archer",
             "Degat":5,
+
+            "detectRayX":8,
+            "detectRayY":3,
+
             "Color":"red",
+
             "x": 300,
-            "y": 2270,
+            "y": 200,
+            "xStart":0,
+            "xEnd":0,
+            "velocityY":0,
+            "mass": 60,
+
+            "jumpCount":0,
+            "isJumping":false,
+
             "tailleW": 80,
             "tailleH": 80,
+
             "distance": 290,
             "vitesse": 3,
             "NbrePas": 0,
@@ -20,11 +34,25 @@
         "Enn2": {
             "type": "Chevalier",
             "Degat": 10,
+
+            "detectRayX":8,
+            "detectRayY":3,
+
             "Color": "red",
-            "x": 1250,
+
+            "x": 200,
             "y": 470,
+            "xStart":0,
+            "xEnd":0,
+            "velocityY":0,
+            "mass": 60,
+
+            "jumpCount":0,
+            "isJumping":false,
+
             "tailleW": 80,
             "tailleH": 80,
+
             "distance": 500,
             "vitesse": 3,
             "NbrePas": 0,

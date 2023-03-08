@@ -28,7 +28,7 @@ let drawPNJInside = (pnj) => {
     let CurrentX = pnj.x + pnj.NbrePas + xStartHouse;
 
     // ~ Variables Collisions / HitBox PNJ
-    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2)
+    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2, 2)
     let entreEnContact = rectIsInRect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
 
     // ~ Debug Mod
@@ -79,7 +79,7 @@ let drawPNJ = (pnj) => {
     let CurrentX = pnj.x + pnj.NbrePas + xStartWorld;
 
     // ~ Variables Collisions / HitBox PNJ
-    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2)
+    let VillagerBoundingBox = expandRect(CurrentX, PNJY, pnj.tailleW, pnj.tailleH, 2,2)
     let entreEnContact = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, VillagerBoundingBox[0], VillagerBoundingBox[1], VillagerBoundingBox[2], VillagerBoundingBox[3])
 
     // ~ Debug Mod
