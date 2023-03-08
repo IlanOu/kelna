@@ -9,7 +9,7 @@
 
             "Color":"red",
 
-            "x": 300,
+            "x": 0,
             "y": 200,
             "xStart":0,
             "xEnd":0,
@@ -18,12 +18,16 @@
 
             "jumpCount":0,
             "isJumping":false,
+            "haveToJump": false,
 
             "tailleW": 80,
             "tailleH": 80,
 
-            "distance": 290,
+            "distance": 400,
             "vitesse": 3,
+            "followSpeed": 4,
+            "isFollowing": false,
+
             "NbrePas": 0,
             "direction": "right",
             "img": "",
@@ -49,12 +53,16 @@
 
             "jumpCount":0,
             "isJumping":false,
+            "haveToJump": false,
 
             "tailleW": 80,
             "tailleH": 80,
 
             "distance": 500,
             "vitesse": 3,
+            "followSpeed": 4,
+            "isFollowing": false,
+
             "NbrePas": 0,
             "direction": "right",
             "img": "",

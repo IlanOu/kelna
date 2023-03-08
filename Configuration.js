@@ -102,6 +102,13 @@ const dashTime = 200;
 const dashForce = 2;
 
 
+
+
+let haveToJump = false;
+
+
+
+
 //#endregion
 
 //^ Interfaces
