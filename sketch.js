@@ -80,9 +80,12 @@ function draw() {
     if (engineOne) {
       
       drawGrid()
+
       PNJManager()
+      MobManager()
+      //* le perso passe devant les PNJ
       character()
-      ennemiManager()
+      
       drawGridForeground()
 
     }else{

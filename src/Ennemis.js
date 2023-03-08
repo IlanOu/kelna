@@ -1,7 +1,7 @@
 //#region MANAGER 
-function ennemiManager() {
+function MobManager() {
 
-    // ~ Draw des Ennemis en EXTERIEUR
+    // ~ Draw des Mobs en EXTERIEUR
     if (engineOne) {
 
         mob(ForEnnemis.Ennemis.Enn1, characterPositionX, characterPositionY);
@@ -11,68 +11,9 @@ function ennemiManager() {
 //#endregion
 
 
-//#region FONCTION POUR ENNEMI
-
-
-
-// DRAW ENNEMI
-
-// let drawEnnemiInside = (Ennemis) => {
-
-//     // ~ Variables positions Ennemis
-//     let EnnemiDistance = Ennemis.distance + Ennemis.x
-//     let EnnemiY = Ennemis.y + yStartHouse
-//     let EnnemiEnd = EnnemiDistance + xStartHouse;
-//     let EnnemiStart = Ennemis.x + xStartHouse
-//     let CurrentX = Ennemis.x + Ennemis.NbrePas + xStartHouse;
-
-//     // ~ Variables Collisions / HitBox Ennemis
-//     let EnnemiBoundingBox = expandRect(CurrentX, EnnemiY, Ennemis.tailleW, Ennemis.tailleH, 2)
-//     let entreEnContact = rectIsInRect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, EnnemiBoundingBox[0], EnnemiBoundingBox[1], EnnemiBoundingBox[2], EnnemiBoundingBox[3])
-
-//     // ~ Debug Mod
-//     if (debugMod) {
-//         fill(255, 0, 0, 70)
-//         rect(EnnemiBoundingBox[0], EnnemiBoundingBox[1], EnnemiBoundingBox[2], EnnemiBoundingBox[3])
-//         fill(255)
-//     }
-//     // ~ Direction left
-//     if (CurrentX > EnnemiEnd) {
-//         Ennemis.direction = "left";
-//     };
-//     // ~ Direction right
-//     if (CurrentX < EnnemiStart) {
-//         Ennemis.direction = "right";
-//     };
-//     // ~ Hitbox / Collisions
-//     if (entreEnContact === false) {
-//         Ennemis.movement = "walk"
-
-//         if (Ennemis.direction === "right") {
-//             Ennemis.NbrePas += Ennemis.vitesse;
-//         };
-//         if (Ennemis.direction === "left") {
-//             Ennemis.NbrePas -= Ennemis.vitesse;
-//         };
-
-//     } else {
-//         Ennemis.movement = "idle"
-//         if (characterInsidePosX >= CurrentX) {
-//             Ennemis.direction = "right"
-//         } else {
-//             Ennemis.direction = "left"
-//         }
-//     }
-//     //~ Creation du Ennemis
-//     animationEnnemis(Ennemis, CurrentX, EnnemiY, Ennemis.tailleW, Ennemis.tailleH, Ennemis.direction, Ennemis.movement)
-// }
-
-
 
 //& Collisions
-
-
-function handleCollisionMobs(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight, velocityY, jumpCount, isJumping) {
+function handleCollisionMobs(agentX, agentY, agentWidth, agentHeight, agentDirection, objectX, objectY, objectWidth, objectHeight, velocityY, jumpCount, isJumping) {
 
     //* Vérifier si les boîtes se chevauchent
     if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -97,9 +38,11 @@ function handleCollisionMobs(agentX, agentY, agentWidth, agentHeight, objectX, o
                     velocityY = 0
                 }
 
-            }
+            }   
+            
             return [agentX, agentY, velocityY, jumpCount, isJumping, haveToJump]
         }
+
   
         //~ Collisions gauche / droite de l'objet
         //? si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
@@ -109,21 +52,30 @@ function handleCollisionMobs(agentX, agentY, agentWidth, agentHeight, objectX, o
             if (agentX + agentWidth > objectX && agentX > objectX) {
                 agentX = objectX + objectWidth
 
+                if (agentDirection == "left"){
+
+                    haveToJump = true
+                }else{
+                    haveToJump = false
+                }
     
             //? collisions à gauche de l'objet
             } else if (agentX < objectX + objectWidth && agentX < objectX) {
                 agentX = objectX - agentWidth
 
+                if (agentDirection == "right"){
+                    haveToJump = true
+                }else{
+                    haveToJump = false
+                }
+
             }
             
-            haveToJump = true
 
             
-            fill (255,0,0)
-            rect(objectX, objectY-25, 50, 50)
-
             return [agentX, agentY, velocityY, jumpCount, isJumping, haveToJump]
         }  
+
     }
     return [agentX, agentY, velocityY, jumpCount, isJumping, haveToJump]
 }
@@ -131,49 +83,137 @@ function handleCollisionMobs(agentX, agentY, agentWidth, agentHeight, objectX, o
 
 
 
-function mob(Ennemis, characterPositionX, characterPositionY){
+function followPlayer(Mobs){
+
+    Mobs.isFollowing = true
+
+    let distance = characterPositionX - Mobs.x;
+    let followSpeed = Mobs.followSpeed
+    let MobsHaveToJump = Mobs.haveToJump
+
+    Mobs.movement = "walk"
+
+    Mobs.direction = "right";
+
+    if (distance < 0){
+        Mobs.direction = "left";
+        followSpeed *= -1
+    }
+
+    if (!MobsHaveToJump){
+        Mobs.stepCount += followSpeed;
+    }else{
+        Mobs.haveToJump = false
+    }
+
+
+}
+
+function doRound(Mobs){
+    Mobs.movement = "walk"
+
+    Mobs.isFollowing = false
+
+    let CurrentX = Mobs.x
+    let walkAmount = Mobs.stepCount
+
+    let MobEnd = Mobs.xEnd
+    let MobStart = Mobs.xStart
+
+    let MobsHaveToJump = Mobs.haveToJump
+
+
+
+    //& FAIRE UNE RONDE
+    if (CurrentX >= MobEnd){
+        Mobs.direction = "left"
+    }else if (CurrentX <= MobStart){
+        Mobs.direction = "right"
+    }
     
 
-
-
-    let EnnemiDistance = Ennemis.distance + Ennemis.xStart
-    let EnnemiStart = Ennemis.xStart + xStartWorld
-    let EnnemiEnd = EnnemiDistance + xStartWorld;
-
-    let EnnemisX = Ennemis.xStart + Ennemis.x + xStartWorld;
-    let EnnemisY = Ennemis.y + yStartWorld
-
-
-    let EnnemisHaveToJump = Ennemis.haveToJump
-
-
-    let EnnemisMovesSpeed = Ennemis.vitesse
-
-
-    let EnnemisWidth = Ennemis.tailleW;
-    let EnnemisHeight = Ennemis.tailleH;
-
-    let EnnemisVelocityY = Ennemis.velocityY;
-    let EnnemisMass = Ennemis.mass;
-
-    let EnnemisIsJumping = Ennemis.isJumping;
-    let EnnemisJumpCount = Ennemis.jumpCount;
     
-    let EnnemisCollideOn = Ennemis.collideOn
-    let detectRayY = Ennemis.detectRayY
+    //& Se déplacer
+    if (Mobs.direction == "right"){
+        
+        if (haveToJump){
+            Mobs.direction = "left"
+            // Mobs.distance -= 10
+            walkAmount -= Mobs.speed
+            haveToJump = false
+            
+        }else{
+            
+            walkAmount += Mobs.speed
+            
+        }
+    }else{
+        if (haveToJump){
+            Mobs.direction = "right"
+
+            // Mobs.xStart += 10
+            // Mobs.distance -= 10
+
+            walkAmount += Mobs.speed
+
+            // MobStart = CurrentX
+            haveToJump = false
+            
+
+        }else{
+            walkAmount -= Mobs.speed
+            
+        }
+        
+    }
+
+     
+    Mobs.haveToJump = MobsHaveToJump
+    Mobs.stepCount = walkAmount
+    Mobs.xStart = MobStart
+    Mobs.xEnd = MobEnd
+}
+
+
+function mob(Mobs, characterPositionX, characterPositionY){
+    
+
+    let MobStart = Mobs.globalStartX + xStartWorld
+    let MobDistance = Mobs.distance + Mobs.globalStartX
+    let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
+
+    Mobs.x = xStartWorld + Mobs.stepCount;
+    Mobs.y = Mobs.y + yStartWorld
+
+    let MobsX = Mobs.x
+    let MobsY = Mobs.y
+
+    
+
+    let MobsHaveToJump = Mobs.haveToJump
+
+
+    let MobsWidth = Mobs.width;
+    let MobsHeight = Mobs.height;
+
+    let MobsVelocityY = Mobs.velocityY;
+    let MobsMass = Mobs.mass;
+
+    let MobsIsJumping = Mobs.isJumping;
+    let MobsJumpCount = Mobs.jumpCount;
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
 
-    //^ Ajout de la gravité à l'ennemis
-    let gravityReturns = getPositionWithGravity(EnnemisY,
-        EnnemisVelocityY,
+    //& Ajout de la gravité à l'Mobs
+    let gravityReturns = getPositionWithGravity(MobsY,
+        MobsVelocityY,
         gravityForce,
-        EnnemisMass)
-    EnnemisY = gravityReturns[0]
-    EnnemisVelocityY = gravityReturns[1]
+        MobsMass)
+    MobsY = gravityReturns[0]
+    MobsVelocityY = gravityReturns[1]
     
-    //^ Ajoute les collisions pour toute les maps autour du perso 
+    //& Ajoute les collisions pour toute les maps autour du perso 
     for (let i = 0; i < mapsToCheck.length; i++) {
 
 
@@ -196,209 +236,145 @@ function mob(Ennemis, characterPositionX, characterPositionY){
 
 
                 if (thisObject > 0) {
-                    [EnnemisX, EnnemisY, EnnemisVelocityY, EnnemisJumpCount, EnnemisIsJumping, EnnemisHaveToJump] = handleCollisionMobs(EnnemisX, EnnemisY, EnnemisWidth, EnnemisHeight, thisObjectX, thisObjectY, rectWidth, rectHeight, EnnemisVelocityY, EnnemisJumpCount, EnnemisIsJumping)
+                    [MobsX, MobsY, MobsVelocityY, MobsJumpCount, MobsIsJumping, MobsHaveToJump] = handleCollisionMobs(MobsX, MobsY, MobsWidth, MobsHeight, Mobs.direction, thisObjectX, thisObjectY, rectWidth, rectHeight, MobsVelocityY, MobsJumpCount, MobsIsJumping)
                 }
             }
         }
     }
 
-    if (EnnemisHaveToJump && Ennemis.isFollowing){
+    //& Ajouter le saut au mob
+    if (MobsHaveToJump && Mobs.isFollowing){
         
-        if (!EnnemisIsJumping && EnnemisJumpCount < 1){
+        if (!MobsIsJumping && MobsJumpCount < 1){
 
-            let jumpReturns = addJump(EnnemisY,
+            let jumpReturns = addJump(MobsY,
                 characterJumpHeight,
-                EnnemisVelocityY,
+                MobsVelocityY,
                 gravityForce)
         
-            EnnemisY = jumpReturns[0];
-            EnnemisVelocityY = jumpReturns[1];
-            EnnemisIsJumping = true
-            EnnemisJumpCount += 1
+            MobsY = jumpReturns[0];
+            MobsVelocityY = jumpReturns[1];
+            MobsIsJumping = true
+            MobsJumpCount += 1
+            Mobs.movement = "jump"
         }else{
-            EnnemisJumpCount = 0
+            MobsJumpCount = 0
         }
     }
     
     
     
-    Ennemis.x = EnnemisX
-    Ennemis.y = EnnemisY
-    Ennemis.velocityY = EnnemisVelocityY
-    Ennemis.isJumping = EnnemisIsJumping
-    Ennemis.jumpCount = EnnemisJumpCount
+    Mobs.x = MobsX
+    Mobs.y = MobsY
+    Mobs.velocityY = MobsVelocityY
+    Mobs.isJumping = MobsIsJumping
+    Mobs.jumpCount = MobsJumpCount
 
-    Ennemis.distance = EnnemiDistance
-    Ennemis.xStart = EnnemiStart
-    Ennemis.xEnd = EnnemiEnd
-    Ennemis.y = EnnemisY
-    Ennemis.haveToJump = EnnemisHaveToJump;
-
-
-    drawEnnemi(Ennemis)
-}
+    Mobs.distance = MobDistance
+    Mobs.xStart = MobStart
+    Mobs.xEnd = MobEnd
+    Mobs.y = MobsY
+    Mobs.haveToJump = MobsHaveToJump;
 
 
+    drawMob(Mobs)
 
-function followPlayer(Ennemis){
-
-    Ennemis.isFollowing = true
-
-    // let distance = characterPositionX - Ennemis.x;
-    // let followSpeed = Ennemis.followSpeed
-    // let EnnemisHaveToJump = Ennemis.haveToJump
-
-    // Ennemis.movement = "walk"
-
-    // if (distance > 0) {
-    //     //* Le joueur est à droite de l'ennemi
-    //     Ennemis.direction = "right";
-    //     if (!EnnemisHaveToJump){
-    //         Ennemis.NbrePas += followSpeed;
-             
-    //     }
-    // } else {
-    //     //* Le joueur est à gauche de l'ennemi
-    //     Ennemis.direction = "left";
-    //     if (!EnnemisHaveToJump){
-    //         Ennemis.NbrePas -= followSpeed;
-             
-    //     }
-    // }
-}
-
-function doRound(Ennemis){
-    Ennemis.movement = "walk"
-
-    Ennemis.isFollowing = false
-
-    let CurrentX = Ennemis.x
-    let EnnemiEnd = Ennemis.xEnd
-    let EnnemiStart = Ennemis.xStart
-    let EnnemisHaveToJump = Ennemis.haveToJump
-
-
-
-    //& FAIRE UNE RONDE
-    if (CurrentX >= EnnemiEnd){
-        Ennemis.direction = "left"
-    }else if (CurrentX <= EnnemiStart){
-        Ennemis.direction = "right"
-    }
     
-    if (Ennemis.direction == "right"){
-        if (haveToJump){
-            haveToJump = false
-            EnnemiEnd = CurrentX
-            Ennemis.direction = "left"
-        }else{
-            CurrentX += Ennemis.vitesse
-        }
+}
+
+
+
+
+let drawMob = (Mobs) => {
+
+    // ~ Variables positions Mobs
+    let CurrentX = Mobs.x;
+    let MobY = Mobs.y
+    
+    
+
+    // ~ Variables Collisions / HitBox Mobs
+    let MobBoundingBox = expandRect(CurrentX, MobY, Mobs.width, Mobs.height, Mobs.detectDistX, Mobs.detectDistY)
+    let seePlayer = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, MobBoundingBox[0], MobBoundingBox[1], MobBoundingBox[2], MobBoundingBox[3])
+
+
+    if (seePlayer){
+        followPlayer(Mobs)
     }else{
-        if (haveToJump){
-            haveToJump = false
-            EnnemiStart = CurrentX
-            Ennemis.direction = "right"
-        }else{
-            CurrentX -= Ennemis.vitesse
-        }
-        
+        doRound(Mobs)
     }
-
-     
-    Ennemis.haveToJump = EnnemisHaveToJump
-    Ennemis.x = CurrentX
-    Ennemis.xstart = EnnemiStart
-    Ennemis.xEnd = EnnemiEnd
-}
-
-
-
-let drawEnnemi = (Ennemis) => {
-
-    // ~ Variables positions Ennemis
-    let CurrentX = Ennemis.x;
-    let EnnemiY = Ennemis.y
-    
-    
-
-    // ~ Variables Collisions / HitBox Ennemis
-    let EnnemiBoundingBox = expandRect(CurrentX, EnnemiY, Ennemis.tailleW, Ennemis.tailleH, 8, 3)
-    let seePlayer = rectIsInRect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, EnnemiBoundingBox[0], EnnemiBoundingBox[1], EnnemiBoundingBox[2], EnnemiBoundingBox[3])
-
-
-    doRound(Ennemis)
-
-    // if (seePlayer){
-    //     followPlayer(Ennemis)
-    // }else{
-    //     doRound(Ennemis)
-    // }
 
     // ~ Debug Mod
     if (debugMod) {
         fill(255, 0, 0, 70)
-        rect(EnnemiBoundingBox[0], EnnemiBoundingBox[1], EnnemiBoundingBox[2], EnnemiBoundingBox[3])
+        rect(MobBoundingBox[0], MobBoundingBox[1], MobBoundingBox[2], MobBoundingBox[3])
         fill(255)
     }
     
 
-    //~ Creation du Ennemis
-    animationEnnemis(Ennemis, CurrentX, EnnemiY, Ennemis.tailleW, Ennemis.tailleH, Ennemis.direction, Ennemis.movement, Ennemis.Color)
+    //~ Creation du Mobs
+    animationMobs(Mobs, CurrentX, MobY, Mobs.width, Mobs.height, Mobs.direction, Mobs.movement, Mobs.color)
 }
 
 
 
 
-// ANIMATION ENNEMI
+// ANIMATION Mob
 
-function animationEnnemis(CurrentEnnemi, positionX, positionY, width, height, direction, movement, color) {
+function animationMobs(CurrentMob, positionX, positionY, width, height, direction, movement, color) {
 
     fill(color)
     circle(positionX + 35, positionY - 25, 20);
 
     let timer = (round(millis() / animationSpeed)) % 2
 
-    let EnnemiTexturesList = []
+    let MobTexturesList = []
 
     if (movement == "walk") {
-
-        for (let y = 0; y < 32; y += 32) {
+        for (let y = 32; y < 64; y += 32) {
             for (let x = 0; x < 128; x += 32) {
-                EnnemiTexturesList.push(PNJTextures.get(x, y, 32, 32));
+                MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
             }
         }
     }
     else if (movement == "idle") {
 
-        for (let y = 0; y < 26; y += 26) {
-            for (let x = 0; x < 88; x += 22) {
-                EnnemiTexturesList.push(PNJTextures.get(x, y, 22, 26));
+        for (let y = 0; y < 32; y += 32) {
+            for (let x = 0; x < 128; x += 32) {
+                MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+            }
+        }
+    }
+    else if (movement == "jump") {
+
+        for (let y = 64; y < 96; y += 32) {
+            for (let x = 0; x < 128; x += 32) {
+                MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
             }
         }
     }
     //? Changer de frame
-    if (timer && !CurrentEnnemi.currentFrame) {
-        CurrentEnnemi.indexFrame++
-        CurrentEnnemi.currentFrame = true
+    if (timer && !CurrentMob.currentFrame) {
+        CurrentMob.indexFrame++
+        CurrentMob.currentFrame = true
     }
     if (!timer) {
-        CurrentEnnemi.currentFrame = false
+        CurrentMob.currentFrame = false
     }
     //? Remettre l'index au début 
-    if (CurrentEnnemi.indexFrame >= EnnemiTexturesList.length) {
-        CurrentEnnemi.indexFrame = 0
+    if (CurrentMob.indexFrame >= MobTexturesList.length) {
+        CurrentMob.indexFrame = 0
     }
 
-    let EnnemiCurrentTextures = EnnemiTexturesList[CurrentEnnemi.indexFrame]
+    let MobCurrentTextures = MobTexturesList[CurrentMob.indexFrame]
 
     if (direction == "right") {
-        image(EnnemiCurrentTextures, positionX, positionY, width, height)
+        image(MobCurrentTextures, positionX, positionY, width, height)
 
         //? direction GAUCHE
     } else if (direction == "left") {
         scale(-1, 1)
-        image(EnnemiCurrentTextures, -positionX - width, positionY, width, height)
+        image(MobCurrentTextures, -positionX - width, positionY, width, height)
         scale(-1, 1)
     }
 }
