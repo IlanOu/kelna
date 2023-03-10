@@ -1,49 +1,76 @@
 {
     "PNJS": {
         "PNJ1": {
-            "x": 300,
-            "y": 460,
-            "Color": "blue",
-            "tailleW": 80,
-            "tailleH": 80,
-            "distance":290,
-            "vitesse":3,
-            "NbrePas":0,
-            "direction":"right",
-            "img":"",
-            "currentFrame":0,
-            "indexFrame":0,
-            "movement":"walk"
+            "img": "",
+
+            "color": "blue",
+
+            "detectDistX":2,
+            "detectDistY":2,
+
+            "x": 800,
+            "y": 400,
+
+            "xStart":0,
+            "xEnd":0,
+            "globalStartX":700,
+
+            "velocityY":0,
+            "mass": 60,
+
+            "jumpCount":0,
+            "isJumping":false,
+            "haveToJump": false,
+
+            "width": 80,
+            "height": 80,
+
+            "distance": 100,
+            "speed": 3,
+            "followSpeed": 4,
+
+            "stepCount": 0,
+            "direction": "right",
+
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
         },
         "PNJ2": {
-            "x": 1250,
-            "y": 460,
-            "Color": "blue",
-            "tailleW": 80,
-            "tailleH": 80,
-            "distance": 500,
-            "vitesse": 3,
-            "NbrePas": 0,
-            "direction": "right",
-            "img":"",
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
-        },
-        "PNJ3": {
-            "x": 150,
-            "y": 400,
-            "Color": "blue",
-            "tailleW": 80,
-            "tailleH": 80,
-            "distance": 500,
-            "vitesse": 3,
-            "NbrePas": 0,
-            "direction": "right",
             "img": "",
+
+            "color": "green",
+
+            "detectDistX":2,
+            "detectDistY":2,
+
+            "x": 0,
+            "y": 200,
+
+            "xStart":0,
+            "xEnd":0,
+            "globalStartX":0,
+
+            "velocityY":0,
+            "mass": 60,
+
+            "jumpCount":0,
+            "isJumping":false,
+            "haveToJump": false,
+
+            "width": 80,
+            "height": 80,
+
+            "distance": 500,
+            "speed": 3,
+            "followSpeed": 4,
+
+            "stepCount": 0,
+            "direction": "right",
+
             "currentFrame": 0,
             "indexFrame": 0,
             "movement": "walk"
-        }
+        }        
     }
 }
