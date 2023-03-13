@@ -4,7 +4,7 @@
 function MobManager() {
   // ~ Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    // mob(ForEnnemis.Ennemis.Enn1);
+    mob(ForEnnemis.Ennemis.Enn1);
   }
 }
 
@@ -49,6 +49,7 @@ function mob(Mobs) {
   MobsY = gravityReturns[0];
   MobsVelocityY = gravityReturns[1];
 
+  let collide = false;
   //& Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
@@ -97,12 +98,16 @@ function mob(Mobs) {
             MobsJumpCount,
             MobsIsJumping
           );
+
+          if (MobsHaveToJump){
+            collide = true
+          }
         }
       }
     }
   }
   //& Ajouter le saut au mob
-  if (MobsHaveToJump && Mobs.isFollowing) {
+  if (collide && Mobs.isFollowing) {
     if (!MobsIsJumping && MobsJumpCount < 1) {
       let jumpReturns = addJump(
         MobsY,
@@ -132,7 +137,7 @@ function mob(Mobs) {
   Mobs.distance = MobDistance;
   Mobs.xStart = MobStart;
   Mobs.xEnd = MobEnd;
-  Mobs.haveToJump = MobsHaveToJump;
+  Mobs.haveToJump = collide;
 
 
   //& Dessiner le Mob
@@ -173,7 +178,7 @@ let mobMovements = (Mobs) => {
   //& Si je vois le joueur, le suivre. Sinon, faire une ronde.
   if (Mobs.seePlayer) {
     followPlayer(Mobs);
-    
+    lookThePlayer(Mobs);
   } else {
     doRound(Mobs);
   }

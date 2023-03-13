@@ -66,13 +66,22 @@ function handleCollisionMobs(
       if (agentX + agentWidth > objectX && agentX > objectX) {
         agentX = objectX + objectWidth;
 
+        if (agentDirection == "left") {
+          haveToJump = true;
+        }
+
+
         //? collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
         agentX = objectX - agentWidth;
+        
+        if (agentDirection == "right") {
+          haveToJump = true;
+        }
+      
       }
 
 
-      haveToJump = true;
 
     }
 
@@ -91,7 +100,7 @@ function handleCollisionMobs(
 function followPlayer(Mobs) {
 
   //& Initialisation des variables
-
+  let walkAmount = Mobs.stepCount;
   Mobs.isFollowing = true;
 
   let distance = characterPositionX - Mobs.x;
@@ -104,13 +113,18 @@ function followPlayer(Mobs) {
   //& Se diriger vers le perso
   if (distance < 0) {
     Mobs.direction = "left";
-    followSpeed *= -1;
   }
 
   //& Si je dois sauter, ... . Sinon, marcher.
-  if (MobsHaveToJump) {} else {
-    Mobs.stepCount += followSpeed;
+  if (!MobsHaveToJump){
+    if (Mobs.direction == "right") {
+      walkAmount += followSpeed;
+    }else{
+      walkAmount -= followSpeed;
+    }
   }
+
+  Mobs.stepCount = walkAmount;
 }
 
 
@@ -177,9 +191,28 @@ function doRound(Mobs) {
     }
   }
 
+
   //& Retourner les variables
   Mobs.haveToJump = haveToJump;
   Mobs.stepCount = walkAmount;
   Mobs.xStart = MobStart;
   Mobs.xEnd = MobEnd;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                             Regarder le joueur                             */
+/* -------------------------------------------------------------------------- */
+function lookThePlayer(Mobs) {
+
+    //& Initialisation des variables
+    let CurrentX = Mobs.x;
+
+   //& Regarder le joueur
+   if (characterPositionX > CurrentX) {
+    Mobs.direction = "right";
+  } else if (characterPositionX < CurrentX) {
+    Mobs.direction = "left";
+  }
 }

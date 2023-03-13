@@ -196,26 +196,7 @@ function PNJ(pnj) {
     }
   }
 
-  //& Ajouter le saut au PNJ
-  if (collide) {
-    if (!PNJIsJumping && PNJJumpCount < 1) {
-      let jumpReturns = addJump(
-        PNJY,
-        characterJumpHeight,
-        PNJVelocityY,
-        gravityForce
-      );
-
-      PNJY = jumpReturns[0];
-      PNJVelocityY = jumpReturns[1];
-      PNJIsJumping = true;
-      PNJJumpCount += 1;
-      pnj.movement = "jump";
-      
-    } else {
-      PNJJumpCount = 0;
-    }
-  }
+  
 
   //& Retourne les variables
   pnj.x = PNJX;
@@ -266,8 +247,30 @@ let PNJMovements = (pnj) => {
 
   //& Si le perso n'est pas vu, faire une ronde
   if (!pnj.seePlayer) {
-    if (!pnj.haveToJump) {
-      doRound(pnj);
+    doRound(pnj);
+  }else{
+    lookThePlayer(pnj);
+  }
+
+
+  //& Ajouter le saut au PNJ
+  if (pnj.haveToJump) {
+    if (!pnj.isJumping && pnj.jumpCount < 1) {
+      let jumpReturns = addJump(
+        PNJY,
+        characterJumpHeight,
+        pnj.velocityY,
+        gravityForce
+      );
+
+      PNJY = jumpReturns[0];
+      pnj.velocityY = jumpReturns[1];
+      pnj.isJumping = true;
+      pnj.jumpCount += 1;
+      pnj.movement = "jump";
+      
+    } else {
+      pnj.jumpCount = 0;
     }
   }
 
