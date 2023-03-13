@@ -98,7 +98,6 @@ function drawGrid(){
 
 
 
-  background(220);
   
   // fill(255)
 

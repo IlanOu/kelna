@@ -263,34 +263,102 @@ function character() {
   // fill(255, 0, 0)
   // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
 
+  
 
-  //^ caméra mouvements droite
 
-  //? si mon perso est à DROITE de l'écran
-  if (characterPositionX > width - width / 2) {
+  
 
-    //? si mon écran n'est pas le plus à gauche possible
-    if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+  //! ========= Si le mode SMOOTH est activé =========
+  if (smoothCamera){
 
-      //? le monde bouge vers la gauche (la caméra se décale vers la droite)
-      xStartWorld -= characterMovesSpeed
-      characterPositionX -= characterMovesSpeed
+    //^ caméra mouvements droite
+    //? si mon perso est à DROITE de l'écran
+    if (characterPositionX > width / 2 + 1) {
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+
+
+
+        //? le monde bouge vers la gauche (la caméra se décale vers la droite)
+
+        cameraSpeedR = lerp(cameraSpeedR, characterMovesSpeed, smoothCameraSpeed)
+        newCharacterMovesSpeedR = lerp(newCharacterMovesSpeedR, characterMovesSpeed, smoothCameraSpeed)
+
+        xStartWorld -= cameraSpeedR
+        characterPositionX -= newCharacterMovesSpeedR
+        
+      }
+    }else{
+      cameraSpeedR = 0
+      newCharacterMovesSpeedR= 0
+    }
+
+
+
+    //^ caméra mouvements gauche
+
+    //? si mon perso est à GAUCHE de l'écran
+    if (characterPositionX < width / 2 - 1) {
+      
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld < 0) {
+
+        //? le monde bouge vers la droite (la caméra se décale vers la gauche)
+        
+        cameraSpeedL = lerp(cameraSpeedL, characterMovesSpeed, smoothCameraSpeed)
+        newCharacterMovesSpeedL = lerp(newCharacterMovesSpeedL, characterMovesSpeed, smoothCameraSpeed)
+
+        xStartWorld += cameraSpeedL
+        characterPositionX += newCharacterMovesSpeedL
+        
+      }
+    }else{
+      cameraSpeedL = 0
+      newCharacterMovesSpeedL= 0
+    }
+
+  //! ========= Si le mode SMOOTH n'est pas activé =========
+  }else{
+
+    //^ caméra mouvements droite
+    //? si mon perso est à DROITE de l'écran
+    if (characterPositionX > width - width / 2) {
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+
+
+
+        //? le monde bouge vers la gauche (la caméra se décale vers la droite)
+        xStartWorld -= characterMovesSpeed
+        characterPositionX -= characterMovesSpeed
+
+        
+        
+      }
+    }
+
+
+    //^ caméra mouvements gauche
+
+    //? si mon perso est à GAUCHE de l'écran
+    if (characterPositionX < width / 4) {
+      
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld < 0) {
+
+        //? le monde bouge vers la droite (la caméra se décale vers la gauche)
+        xStartWorld += characterMovesSpeed
+        characterPositionX += characterMovesSpeed
+      }
     }
   }
 
-  //^ caméra mouvements gauche
 
-  //? si mon perso est à GAUCHE de l'écran
-  if (characterPositionX < width / 4) {
-
-    //? si mon écran n'est pas le plus à gauche possible
-    if (xStartWorld < 0) {
-
-      //? le monde bouge vers la droite (la caméra se décale vers la gauche)
-      xStartWorld += characterMovesSpeed
-      characterPositionX += characterMovesSpeed
-    }
-  }
+  
 
 
   //^ caméra mouvements bas

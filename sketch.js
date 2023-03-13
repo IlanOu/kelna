@@ -29,6 +29,10 @@ function preload() {
   IMGSet = loadImage("assets/Settings.png")
   WantedPoster = loadImage("assets/WantedPoster.png")
 
+  // Background
+
+  backgroundImage = loadImage('assets/Background/Sky2.jpg');
+
   // Animation PNJ
   PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
 
@@ -78,14 +82,20 @@ function draw() {
     inGame = true
     
     if (engineOne) {
+
+      //* Afficher le fond du jeu
+      drawBackgroundImage(backgroundImage)
       
+      //* Afficher la map
       drawGrid()
 
+      //* Afficher les entités
       PNJManager()
       MobManager()
-      //* le perso passe devant les PNJ
+      //* Afficher le joueur (le perso passe devant les entités)
       character()
       
+      //* Afficher l'avant plan de la map
       drawGridForeground()
 
     }else{

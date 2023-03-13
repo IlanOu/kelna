@@ -107,7 +107,7 @@ function PNJ(pnj) {
   let PNJEnd = PNJDistance;
 
   pnj.x = pnj.globalStartX + xStartWorld + pnj.stepCount;
-  pnj.y = pnj.y + yStartWorld;
+  pnj.y = pnj.y;
 
   let PNJX = pnj.x;
   let PNJY = pnj.y;

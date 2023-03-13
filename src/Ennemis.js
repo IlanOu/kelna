@@ -19,7 +19,7 @@ function mob(Mobs) {
   let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
 
   Mobs.x = xStartWorld + Mobs.stepCount;
-  Mobs.y = Mobs.y + yStartWorld;
+  Mobs.y = Mobs.y;
 
   let MobsX = Mobs.x;
   let MobsY = Mobs.y;
