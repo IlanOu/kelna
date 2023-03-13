@@ -107,22 +107,25 @@ function mob(Mobs) {
     }
   }
   //& Ajouter le saut au mob
-  if (collide && Mobs.isFollowing) {
-    if (!MobsIsJumping && MobsJumpCount < 1) {
-      let jumpReturns = addJump(
-        MobsY,
-        characterJumpHeight,
-        MobsVelocityY,
-        gravityForce
-      );
+  if (collide){
 
-      MobsY = jumpReturns[0];
-      MobsVelocityY = jumpReturns[1];
-      MobsIsJumping = true;
-      MobsJumpCount += 1;
-      Mobs.movement = "jump";
-    } else {
-      MobsJumpCount = 0;
+    if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
+      if (!MobsIsJumping && MobsJumpCount < 1) {
+        let jumpReturns = addJump(
+          MobsY,
+          characterJumpHeight,
+          MobsVelocityY,
+          gravityForce
+        );
+  
+        MobsY = jumpReturns[0];
+        MobsVelocityY = jumpReturns[1];
+        MobsIsJumping = true;
+        MobsJumpCount += 1;
+        Mobs.movement = "jump";
+      } else {
+        MobsJumpCount = 0;
+      }
     }
   }
 
