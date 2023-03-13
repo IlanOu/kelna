@@ -5,21 +5,22 @@
 
             "color": "blue",
 
-            "detectDistX":2,
-            "detectDistY":2,
+            "detectDistX": 2,
+            "detectDistY": 2,
+            "seePlayer": false,
 
             "x": 800,
             "y": 400,
 
-            "xStart":0,
-            "xEnd":0,
-            "globalStartX":700,
+            "xStart": 0,
+            "xEnd": 0,
+            "globalStartX": 700,
 
-            "velocityY":0,
+            "velocityY": 0,
             "mass": 60,
 
-            "jumpCount":0,
-            "isJumping":false,
+            "jumpCount": 0,
+            "isJumping": false,
             "haveToJump": false,
 
             "width": 80,
@@ -41,21 +42,22 @@
 
             "color": "green",
 
-            "detectDistX":2,
-            "detectDistY":2,
+            "detectDistX": 2,
+            "detectDistY": 2,
+            "seePlayer": false,
 
             "x": 0,
             "y": 200,
 
-            "xStart":0,
-            "xEnd":0,
-            "globalStartX":0,
+            "xStart": 0,
+            "xEnd": 0,
+            "globalStartX": 0,
 
-            "velocityY":0,
+            "velocityY": 0,
             "mass": 60,
 
-            "jumpCount":0,
-            "isJumping":false,
+            "jumpCount": 0,
+            "isJumping": false,
             "haveToJump": false,
 
             "width": 80,
@@ -71,6 +73,6 @@
             "currentFrame": 0,
             "indexFrame": 0,
             "movement": "walk"
-        }        
+        }
     }
 }

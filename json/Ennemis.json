@@ -1,27 +1,28 @@
 {
     "Ennemis": {
         "Enn1": {
-            "type":"Archer",
+            "type": "Archer",
             "img": "",
-            "damages":5,
+            "damages": 5,
 
             "color": "red",
 
-            "detectDistX":8,
-            "detectDistY":8,
+            "detectDistX": 8,
+            "detectDistY": 8,
+            "seePlayer": false,
 
             "x": 0,
             "y": 200,
 
-            "xStart":0,
-            "xEnd":0,
-            "globalStartX":0,
+            "xStart": 0,
+            "xEnd": 0,
+            "globalStartX": 0,
 
-            "velocityY":0,
+            "velocityY": 0,
             "mass": 60,
 
-            "jumpCount":0,
-            "isJumping":false,
+            "jumpCount": 0,
+            "isJumping": false,
             "haveToJump": false,
 
             "width": 80,
@@ -40,27 +41,28 @@
             "movement": "walk"
         },
         "Enn2": {
-            "type":"Chevalier",
+            "type": "Chevalier",
             "img": "",
-            "damages":10,
+            "damages": 10,
 
             "color": "red",
 
-            "detectDistX":8,
-            "detectDistY":8,
+            "detectDistX": 8,
+            "detectDistY": 8,
+            "seePlayer": false,
 
             "x": 600,
             "y": 200,
 
-            "xStart":0,
-            "xEnd":0,
-            "globalStartX":0,
+            "xStart": 0,
+            "xEnd": 0,
+            "globalStartX": 0,
 
-            "velocityY":0,
+            "velocityY": 0,
             "mass": 60,
 
-            "jumpCount":0,
-            "isJumping":false,
+            "jumpCount": 0,
+            "isJumping": false,
             "haveToJump": false,
 
             "width": 80,
