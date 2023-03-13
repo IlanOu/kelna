@@ -18,7 +18,7 @@
   <h3 align="center">VIDEO GAME 2D</h3>
 
   <p align="center">
-    Welcome to the project : " " from the studio Sunflower !
+    Welcome to the project : Kelna from the studio Sunflower !
     <br>
     You are currently reading the documentation, happy reading :)
   </p>
@@ -58,7 +58,7 @@
 
 Currently, these are the two developers as contributors who occupy this project on GitHub
 
-This is a 2D game called : " " produced by our studio " ", you play a ...
+This is a 2D game called : Kelna produced by our studio Sunflower
 
 *Note : This project is a student project*
 
@@ -79,7 +79,7 @@ This section lists the main framework used to start your project. This is p5.js 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To be able to play " ", you must stick to it as follows :
+To be able to play Kelna, you must stick to it as follows :
 
 ### Prerequisites
 
