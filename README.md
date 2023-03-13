@@ -54,7 +54,7 @@
 
 <!--[![Product Name Screen Shot](images/screenshot.png)  -->
 
-" " is a video game project to deepen our knowledge of programming in alliance with developers and designers !
+Kelna is a video game project to deepen our knowledge of programming in alliance with developers and designers !
 
 Currently, these are the two developers as contributors who occupy this project on GitHub
 
