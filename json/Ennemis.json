@@ -1,49 +1,14 @@
 {
-    "PNJS": {
-        "PNJ1": {
+    "Ennemis": {
+        "Enn1": {
+            "type": "Archer",
             "img": "",
+            "damages": 5,
 
-            "color": "blue",
+            "color": "red",
 
-            "detectDistX": 2,
-            "detectDistY": 2,
-            "seePlayer": false,
-
-            "x": 800,
-            "y": 400,
-
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 700,
-
-            "velocityY": 0,
-            "mass": 60,
-
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
-
-            "width": 80,
-            "height": 80,
-
-            "distance": 100,
-            "speed": 3,
-            "followSpeed": 4,
-
-            "stepCount": 0,
-            "direction": "right",
-
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
-        },
-        "PNJ2": {
-            "img": "",
-
-            "color": "green",
-
-            "detectDistX": 2,
-            "detectDistY": 2,
+            "detectDistX": 8,
+            "detectDistY": 8,
             "seePlayer": false,
 
             "x": 0,
@@ -66,6 +31,47 @@
             "distance": 500,
             "speed": 3,
             "followSpeed": 4,
+            "isFollowing": false,
+
+            "stepCount": 0,
+            "direction": "right",
+
+            "currentFrame": 0,
+            "indexFrame": 0,
+            "movement": "walk"
+        },
+        "Enn2": {
+            "type": "Chevalier",
+            "img": "",
+            "damages": 10,
+
+            "color": "red",
+
+            "detectDistX": 8,
+            "detectDistY": 8,
+            "seePlayer": false,
+
+            "x": 600,
+            "y": 200,
+
+            "xStart": 0,
+            "xEnd": 0,
+            "globalStartX": 0,
+
+            "velocityY": 0,
+            "mass": 60,
+
+            "jumpCount": 0,
+            "isJumping": false,
+            "haveToJump": false,
+
+            "width": 80,
+            "height": 80,
+
+            "distance": 500,
+            "speed": 3,
+            "followSpeed": 4,
+            "isFollowing": false,
 
             "stepCount": 0,
             "direction": "right",

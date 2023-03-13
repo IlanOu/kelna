@@ -193,7 +193,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
 //& Collisions
-function handleCollision(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
+function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -263,34 +263,102 @@ function character() {
   // fill(255, 0, 0)
   // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
 
+  
 
-  //^ caméra mouvements droite
 
-  //? si mon perso est à DROITE de l'écran
-  if (characterPositionX > width - width / 2) {
+  
 
-    //? si mon écran n'est pas le plus à gauche possible
-    if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+  //! ========= Si le mode SMOOTH est activé =========
+  if (smoothCamera){
 
-      //? le monde bouge vers la gauche (la caméra se décale vers la droite)
-      xStartWorld -= characterMovesSpeed
-      characterPositionX -= characterMovesSpeed
+    //^ caméra mouvements droite
+    //? si mon perso est à DROITE de l'écran
+    if (characterPositionX > width / 2 + 1) {
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+
+
+
+        //? le monde bouge vers la gauche (la caméra se décale vers la droite)
+
+        cameraSpeedR = lerp(cameraSpeedR, characterMovesSpeed, smoothCameraSpeed)
+        newCharacterMovesSpeedR = lerp(newCharacterMovesSpeedR, characterMovesSpeed, smoothCameraSpeed)
+
+        xStartWorld -= cameraSpeedR
+        characterPositionX -= newCharacterMovesSpeedR
+        
+      }
+    }else{
+      cameraSpeedR = 0
+      newCharacterMovesSpeedR= 0
+    }
+
+
+
+    //^ caméra mouvements gauche
+
+    //? si mon perso est à GAUCHE de l'écran
+    if (characterPositionX < width / 2 - 1) {
+      
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld < 0) {
+
+        //? le monde bouge vers la droite (la caméra se décale vers la gauche)
+        
+        cameraSpeedL = lerp(cameraSpeedL, characterMovesSpeed, smoothCameraSpeed)
+        newCharacterMovesSpeedL = lerp(newCharacterMovesSpeedL, characterMovesSpeed, smoothCameraSpeed)
+
+        xStartWorld += cameraSpeedL
+        characterPositionX += newCharacterMovesSpeedL
+        
+      }
+    }else{
+      cameraSpeedL = 0
+      newCharacterMovesSpeedL= 0
+    }
+
+  //! ========= Si le mode SMOOTH n'est pas activé =========
+  }else{
+
+    //^ caméra mouvements droite
+    //? si mon perso est à DROITE de l'écran
+    if (characterPositionX > width - width / 2) {
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
+
+
+
+        //? le monde bouge vers la gauche (la caméra se décale vers la droite)
+        xStartWorld -= characterMovesSpeed
+        characterPositionX -= characterMovesSpeed
+
+        
+        
+      }
+    }
+
+
+    //^ caméra mouvements gauche
+
+    //? si mon perso est à GAUCHE de l'écran
+    if (characterPositionX < width / 4) {
+      
+
+      //? si mon écran n'est pas le plus à gauche possible
+      if (xStartWorld < 0) {
+
+        //? le monde bouge vers la droite (la caméra se décale vers la gauche)
+        xStartWorld += characterMovesSpeed
+        characterPositionX += characterMovesSpeed
+      }
     }
   }
 
-  //^ caméra mouvements gauche
 
-  //? si mon perso est à GAUCHE de l'écran
-  if (characterPositionX < width / 4) {
-
-    //? si mon écran n'est pas le plus à gauche possible
-    if (xStartWorld < 0) {
-
-      //? le monde bouge vers la droite (la caméra se décale vers la gauche)
-      xStartWorld += characterMovesSpeed
-      characterPositionX += characterMovesSpeed
-    }
-  }
+  
 
 
   //^ caméra mouvements bas
@@ -403,47 +471,10 @@ function character() {
 
   //#region //~ collisions
 
-  let mapsToCheck = []
+  
 
 
-  //? map actuelle
-  let currentMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(currentMapInWorld)
-
-  //? map à DROITE du perso
-  let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atRightMapInWorld)
-
-  //? map à GAUCHE du perso
-  let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atLeftMapInWorld)
-
-  //? map en HAUT du perso
-  let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopMapInWorld)
-
-  //? map en BAS du perso
-  let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomMapInWorld)
-
-  //? map en BAS à DROITE du perso
-  let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomRightMapInWorld)
-
-  //? map en BAS à GAUCHE du perso
-  let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atBottomLeftMapInWorld)
-
-  //? map en HAUT à DROITE du perso
-  let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopRightMapInWorld)
-
-  //? map en HAUT à GAUCHE du perso
-  let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  mapsToCheck.push(atTopLeftMapInWorld)
-
-
-  mapsToCheck = removeDuplicates(mapsToCheck)
+  let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
 
   //^ Ajoute les collisions pour toute les maps autour du perso 
@@ -471,7 +502,7 @@ function character() {
 
 
         if (thisObject > 0) {
-          [characterPositionX, characterPositionY] = handleCollision(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          [characterPositionX, characterPositionY] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
         }
       }
     }
@@ -635,7 +666,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY] = handleCollision(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }

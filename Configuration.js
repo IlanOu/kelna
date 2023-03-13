@@ -13,6 +13,14 @@ let tileSet;
 let tilesList;
 //#endregion
 
+//^ Background
+//#region 
+
+let backgroundImage;
+let backgroundX = 0;
+
+//#endregion
+
 //#region //~ Textures Perso
 
 let characterTexture_Dash;
@@ -42,6 +50,27 @@ let yStartWorld = 0;
 
 let arrayMap = [];
 
+
+
+// Camera movements
+//! ========= Mode SMOOTH ========= 
+let smoothCamera = false
+
+let smoothCameraSpeed = 0.04
+
+let cameraSpeedR = 0;
+let newCharacterMovesSpeedR = 0
+
+let cameraSpeedL = 0;
+let newCharacterMovesSpeedL = 0
+
+
+
+let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
+let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
+
+
+
 //#endregion
 
 //#region //~ caractéristiques des maisons
@@ -55,8 +84,7 @@ let yStartHouse = 0;
 //#region //~ caractéristiques du perso
 
 //? Positions
-// let characterInMapX = 0;
-// let characterInMapY = 0;
+
 
 let characterInsidePosX = 1;
 let characterInsidePosY = 1;
@@ -102,6 +130,13 @@ const dashTime = 200;
 const dashForce = 2;
 
 
+
+
+let haveToJump = false;
+
+
+
+
 //#endregion
 
 //^ Interfaces
@@ -137,6 +172,8 @@ let YouCanPlayMusic = false
 let ForPNJ;
 
 
+// For ENNEMIS
+let ForEnnemis;
 
 // Life Bar
 

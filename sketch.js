@@ -29,6 +29,10 @@ function preload() {
   IMGSet = loadImage("assets/Settings.png")
   WantedPoster = loadImage("assets/WantedPoster.png")
 
+  // Background
+
+  backgroundImage = loadImage('assets/Background/Sky2.jpg');
+
   // Animation PNJ
   PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
 
@@ -56,6 +60,7 @@ function preload() {
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
+  ForEnnemis = loadJSON("json/Ennemis.json");
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")
@@ -77,10 +82,20 @@ function draw() {
     inGame = true
     
     if (engineOne) {
+
+      //* Afficher le fond du jeu
+      drawBackgroundImage(backgroundImage)
       
+      //* Afficher la map
       drawGrid()
+
+      //* Afficher les entités
       PNJManager()
+      MobManager()
+      //* Afficher le joueur (le perso passe devant les entités)
       character()
+      
+      //* Afficher l'avant plan de la map
       drawGridForeground()
 
     }else{

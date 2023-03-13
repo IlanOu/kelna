@@ -98,7 +98,6 @@ function drawGrid(){
 
 
 
-  background(220);
   
   // fill(255)
 
@@ -160,6 +159,8 @@ function drawHouse(){
 
 
 }
+
+
 function drawHouseForeground(){
-  displayGrid(Houses["house1"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
+    displayGrid(Houses["house1"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
 }

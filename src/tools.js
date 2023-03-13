@@ -134,11 +134,58 @@ function mouseClicked() {
 }
 
 
+function getMapsToCheck (characterPositionX, characterPositionY){
+    let mapsToCheck = []
+
+
+    //? map actuelle
+    let currentMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(currentMapInWorld)
+
+    //? map à DROITE du perso
+    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atRightMapInWorld)
+
+    //? map à GAUCHE du perso
+    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atLeftMapInWorld)
+
+    //? map en HAUT du perso
+    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atTopMapInWorld)
+
+    //? map en BAS du perso
+    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atBottomMapInWorld)
+
+    //? map en BAS à DROITE du perso
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atBottomRightMapInWorld)
+
+    //? map en BAS à GAUCHE du perso
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atBottomLeftMapInWorld)
+
+    //? map en HAUT à DROITE du perso
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atTopRightMapInWorld)
+
+    //? map en HAUT à GAUCHE du perso
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    mapsToCheck.push(atTopLeftMapInWorld)
+
+
+    mapsToCheck = removeDuplicates(mapsToCheck)
+
+    return mapsToCheck
+}
+
+
 
 // ~ Agrandir un carré
-function expandRect(x,y,width,height,value){
-    let NewWidth = width * value
-    let NewHeight = height * value
+function expandRect(x,y,width,height,valueX, valueY){
+    let NewWidth = width * valueX
+    let NewHeight = height * valueY
     x = x - (NewWidth / 2) + (width / 2)
     y = y - (NewHeight / 2) + (height / 2)
 

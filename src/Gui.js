@@ -113,13 +113,8 @@ let WaitToPlay = () => {
 
 
 
-    // Boutton PLAY
-    fill(200);
-    rect(ButXPlay, ButYPlay, ButWPlay, ButHPlay);
-    fill(0);
-    textAlign(CENTER);
-    textSize(16);
-    text("PLAY", ButXPlay + ButWPlay / 2, ButYPlay + ButHPlay / 2 + 5);
+    // Arriere plan
+    image(Background, 0, 0, width, height)
 
     // Arriere plan
     image(Background, 0, 0, width, height)
@@ -301,11 +296,12 @@ let DownHeart = () => {
     HealthPlayer = constrain(HealthPlayer, 0, HealthMax);
 
 
-    //#endregion DIE
+    //#endregion
 
 }
 
-//#endregion POSITIONS BUTTONS
+//#endregion
+
 
 
 let FunctionForMusic = () => {
