@@ -119,7 +119,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //~ animation MARCHER
   if (movement == "walk") {
 
-      for (let y = 32; y < 64; y += 32) {
+      for (let y = 192; y < 224; y += 32) {
         for (let x = 0; x < 192; x += 32) {
           characterTextureList.push(characterTextures.get(x, y, 32, 32));
         }
@@ -128,8 +128,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     //~ animation IDLE
   } else if (movement == "idle") {
 
-    for (let y = 0; y < 32; y += 32) {
-      for (let x = 0; x < 192; x += 32) {
+    for (let y = 64; y < 96; y += 32) {
+      for (let x = 0; x < 64; x += 32) {
         characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }
@@ -138,7 +138,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //~ animation JUMP
   else if (movement == "jump") {
 
-    for (let y = 64; y < 96; y += 32) {
+    for (let y = 160; y < 192; y += 32) {
       for (let x = 0; x < 128; x += 32) {
         characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
@@ -154,8 +154,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     //   }
     // }
 
-    for (let y = 64; y < 96; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
+    for (let y = 96; y < 128; y += 32) {
+      for (let x = 0; x < 64; x += 32) {
         characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }

@@ -46,7 +46,7 @@ function preload() {
   tileSet = loadImage("assets/textures/floortilesetTransparent.png")
 
   // Personnage
-  characterTextures = loadImage("assets/animations/spriteSheetCharacter.png")
+  characterTextures = loadImage("assets/animations/spritesheetYvo.png")
   
   // characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
   // characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
