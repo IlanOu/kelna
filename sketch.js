@@ -10,8 +10,8 @@ function setup() {
   // PositionButtons()
 
 
-  // Ma tileset fait 256x256 px et chaque tile fait du 32x32px
-  tilesList = cutTileset(tileSet, [32, 32], [256, 256])
+  // Ma tileset fait 256x256 px et chaque tile fait du 16x16
+  tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
 
 }
 
@@ -43,7 +43,7 @@ function preload() {
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
-  tileSet = loadImage("assets/textures/floortilesetTransparent.png")
+  tileSet = loadImage("assets/textures/tilesetUgo3.png")
 
   // Personnage
   characterTextures = loadImage("assets/animations/spritesheetYvo.png")
