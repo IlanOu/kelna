@@ -32,7 +32,6 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
       
 
       image(tilesList[grid[x][y]], positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
-
       
     }
   }

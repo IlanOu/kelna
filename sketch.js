@@ -18,44 +18,39 @@ function setup() {
 
 function preload() {
 
-  // Images preload
-  GamerHeart = loadImage("assets/GamerHeart.webp")
+  //^ Interfaces
   GUIParameters = loadImage("assets/GUIParameters.png")
   GUIForEscape = loadImage("assets/GUIForEscape.png")
   GUIOfDeath = loadImage("assets/GUIOfDeath.png")
-  GUIForStats = loadImage("assets/GUIForStats.png")
   Background = loadImage("assets/Background.gif")
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
-  WantedPoster = loadImage("assets/WantedPoster.png")
+  GamerHeart = loadImage("assets/GamerHeart.webp")
+  //// WantedPoster = loadImage("assets/WantedPoster.png")
+  //// GUIForStats = loadImage("assets/GUIForStats.png")
 
-  // Background
+  //^ Background
 
   backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
-  // Animation PNJ
+  //^ Animation PNJ
   PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
 
-  // WalkPNJ = loadImage("assets/animations/PNJWalk.png")
-  // IdlePNJ = loadImage("assets/animations/IdleBoi.png")
 
-  // Textures
+
+  //^ Textures
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
   tileSet = loadImage("assets/textures/tilesetUgo3.png")
 
-  // Personnage
+  //^ Personnage
   characterTextures = loadImage("assets/animations/spritesheetYvo.png")
   
-  // characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
-  // characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
-  // characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
-  characterTexture_Dash = loadImage("assets/animations/RollBase.png")
 
-  
 
-  // JSON preload
+
+  //^ JSON preload
   ForPNJ = loadJSON("json/PNJ.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
@@ -63,13 +58,13 @@ function preload() {
   ForEnnemis = loadJSON("json/Ennemis.json");
 
   // SONG
-  SongBackground = loadSound("music/SongBackground.mp3")
+  // SongBackground = loadSound("music/SongBackground.mp3")
 
 
   //CINEMATIC
-  StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
-  StartCinematic.hide();
-  StartCinematic.volume(0);
+  // StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
+  // StartCinematic.hide();
+  // StartCinematic.volume(0);
 }
 
 

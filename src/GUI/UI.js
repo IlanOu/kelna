@@ -6,8 +6,7 @@ function drawInterface([x, y, w, h], img = undefined) {
 
     if (img != undefined) {
         image(img, x, y, w, h)
-    }
-    else {
+    } else {
         rect(x, y, w, h)
     }
 }
@@ -17,8 +16,7 @@ function drawButton([x, y, w, h], img = undefined) {
     stroke(0)
     if (img != undefined) {
         image(img, x, y, w, h)
-    }
-    else {
+    } else {
         rect(x, y, w, h)
     }
 }
@@ -53,12 +51,23 @@ function buttonHover([x, y, h, w]) {
 function drawHomeMenu() {
     gameIsPaused = false
 
-    let interfaceMenu = [0, 0, viewportDisplayWidth, viewportDisplayHeight]
+    let interfaceMenu = [(viewportDisplayWidth-Background.width)/2, (viewportDisplayHeight-Background.height)/2, Background.width, Background.height]
 
-    let buttonPlay = [(viewportDisplayWidth / 2) - (buttonWidthClassic / 2), (viewportDisplayHeight / 2) - (buttonHeightClassic / 2), buttonWidthClassic, buttonHeightClassic]
-    let textPlay = [(viewportDisplayWidth / 2), (viewportDisplayHeight / 2) - (buttonHeightClassic / 2)]
+    let buttonPlay = [  (viewportDisplayWidth / 2) - (buttonWidthBIG / 2), 
+                        (viewportDisplayHeight / 2) - (buttonHeightBIG / 2), 
+                        buttonWidthBIG, 
+                        buttonHeightBIG]
 
-    let buttonParameters = [(viewportDisplayWidth) - (500 / 2), (viewportDisplayHeight) - (500 / 2), 100, 75]
+    let textPlay = [(viewportDisplayWidth / 2), 
+                    (viewportDisplayHeight / 2) - (buttonHeightClassic / 3)]
+
+    let buttonParameters = [(viewportDisplayWidth/2) - (buttonWidthClassic / 2), 
+                            (viewportDisplayHeight/2) + (buttonHeightClassic), 
+                            buttonWidthClassic, 
+                            buttonHeightClassic]
+
+    let textParameters = [  (viewportDisplayWidth/2), 
+                            buttonParameters[1] + (buttonHeightClassic/8)]
 
 
     fill(255, 220, 205)
@@ -66,9 +75,12 @@ function drawHomeMenu() {
 
     fill(0, 255, 0)
     drawButton(buttonPlay)
-    drawButton(buttonParameters, IMGSet)
-
     drawText("Play", 15, textPlay, "center")
+    fill(0)
+
+    fill(120, 120, 120)
+    drawButton(buttonParameters)
+    drawText("Paramètres", 15, textParameters, "center")
     fill(0)
 
     if (buttonClicked(buttonPlay)) {
@@ -301,13 +313,12 @@ function setupUI() {
 
             gameIsPlaying = false
             drawPauseMenu()
-        }
-        else {
+        } else {
             //~ sinon je joue
             gameIsPlaying = true
         }
         drawLifeBar()
-        
+
 
 
     } else {
@@ -325,4 +336,3 @@ function setupUI() {
 
 
 }
-

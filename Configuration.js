@@ -144,8 +144,8 @@ let haveToJump = false;
 let viewportDisplayWidth = 1920
 let viewportDisplayHeight = 1080
 
-let buttonWidthClassic = 50
-let buttonHeightClassic = 20
+let buttonWidthClassic = 80
+let buttonHeightClassic = 30
 
 
 let ColorForRectMusic = 255
@@ -153,8 +153,8 @@ let MusicIsActivate = false
 
 let Pressing = false
 
-let buttonWidthBIG = 50
-let buttonHeightBIG = 20
+let buttonWidthBIG = 120
+let buttonHeightBIG = 50
 
 let inGame = false
 let gameIsPaused = false
