@@ -111,14 +111,14 @@ let PlayMusic = () => {
 
     if (MusicIsActivate === false && Pressing === false) {
         MusicIsActivate = true
-        SongBackground.loop()
+        //SongBackground.loop()
         ColorForRectMusic = 50
         Pressing = true
 
     } 
     else if (MusicIsActivate === true && Pressing === false) {
         MusicIsActivate = false
-        SongBackground.pause()
+        //SongBackground.pause()
         ColorForRectMusic = 255
         Pressing = true
 
@@ -126,6 +126,26 @@ let PlayMusic = () => {
 
 }
 
+
+
+// PLAY SONG 
+
+let PlaySong = () => {
+
+    if (SongIsActivate === false && Pressing === false) {
+        SongIsActivate = true
+        ColorForRectSong = 50
+        Pressing = true
+
+    }
+    else if (SongIsActivate === true && Pressing === false) {
+        SongIsActivate = false
+        ColorForRectSong = 255
+        Pressing = true
+
+    }
+
+}
 
 function mouseClicked() {
     if (Pressing === true) {

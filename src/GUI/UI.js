@@ -89,14 +89,13 @@ function drawHomeMenu() {
         gameIsPaused = false
     }
     if (buttonClicked(buttonParameters)) {
-        isSettingsWait = true
+        settingsHome = true
     }
 }
 
 
 //~ MENU PAUSE
 function drawPauseMenu() {
-    gameIsPaused = true
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
@@ -152,8 +151,7 @@ function drawPauseMenu() {
         gameIsPaused = false
     }
     if (buttonClicked(buttonSettings)) {
-        isSettingsPause = true
-        PlayerInSettings = true
+        settingsPause = true
 
     }
     if (buttonClicked(buttonReturn)) {
@@ -211,12 +209,14 @@ function drawSettingInHome() {
 
     drawInterface(interfaceMenu, GUIParameters)
 
-    fill(255)
+    fill(ColorForRectSong)
     drawButton(buttonSon)
     drawText("SON", 15, [textSonX, buttonSonY], "center")
+
     fill(ColorForRectMusic)
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
+
     fill(255)
     drawButton(ButtonExitP)
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
@@ -224,18 +224,25 @@ function drawSettingInHome() {
 
 
     if (buttonClicked(ButtonExitP)) {
-        isSettingsWait = false
-        //PlayerInSettings = false
+        settingsHome = false
+        gameIsPlaying = false
+        inGame = false
+        gameIsPaused = false
     }
     if (buttonClicked(buttonMusic)) {
         PlayMusic()
+    }
+    if (buttonClicked(buttonSon)) {
+        PlaySong()
     }
 }
 
 //~ MENU PAUSE SETTINGS 
 function drawSettingInPause() {
 
-
+    gameIsPlaying = false
+    gameIsPaused = false
+    
     let YouCanPlayMusic = true
 
     let interfaceMenuWidth = 500
@@ -271,15 +278,17 @@ function drawSettingInPause() {
     let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH]
 
 
-    //fill(255)
+    fill(255)
     drawInterface(interfaceMenu, GUIParameters)
 
-    fill(255)
+    fill(ColorForRectSong)
     drawButton(buttonSon)
     drawText("SON", 15, [textSonX, buttonSonY], "center")
+
     fill(ColorForRectMusic)
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
+
     fill(255)
     drawButton(buttonExit)
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
@@ -287,11 +296,14 @@ function drawSettingInPause() {
 
 
     if (buttonClicked(buttonExit)) {
-        isSettingsPause = false
-        //PlayerInSettings = false
+        gameIsPaused = false
+        settingsPause = false
     }
     if (buttonClicked(buttonMusic) && YouCanPlayMusic === true) {
         PlayMusic()
+    }
+    if (buttonClicked(buttonSon)) {
+        PlaySong()
     }
 }
 
@@ -302,15 +314,16 @@ function setupUI() {
 
     //~ Si je suis en jeu
 
-    if (inGame && PlayerInSettings === false) {
+    if (inGame && settingsHome === false) {
         //~ Si je fait echap (dans le menu pause)
 
 
-        if (isSettingsPause) {
+        if (settingsPause) {
+            gameIsPlaying = false
+            settingsPause = true
             drawSettingInPause()
         }
         if (gameIsPaused) {
-
             gameIsPlaying = false
             drawPauseMenu()
         } else {
@@ -326,7 +339,8 @@ function setupUI() {
         drawHomeMenu()
 
 
-        if (isSettingsWait) {
+        if (settingsHome) {
+            settingsHome = true
             drawSettingInHome()
         }
 

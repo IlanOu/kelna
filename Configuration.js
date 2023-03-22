@@ -151,6 +151,9 @@ let buttonHeightClassic = 30
 let ColorForRectMusic = 255
 let MusicIsActivate = false
 
+let ColorForRectSong = 255
+let SongIsActivate = false
+
 let Pressing = false
 
 let buttonWidthBIG = 120
@@ -160,10 +163,10 @@ let inGame = false
 let gameIsPaused = false
 let gameIsPlaying = false
 
-let isSettingsWait = false
-let isSettingsPause = false
+let settingsHome = false
+let settingsPause = false
 
-let PlayerInSettings = false
+let PlayerInSettingsPause = false
 let YouCanPlayMusic = false
 
 
