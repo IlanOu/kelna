@@ -14,17 +14,20 @@ let displayInventory = () => {
     noFill();
 
     if (currentSlot === 0) {
-        stroke(255, 0, 0);
+        // stroke(255, 0, 0);
+        stroke(0, 204, 204);
         rect(ForSlotOneX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);
        
     } if (currentSlot === 1) {
-        stroke(255, 0, 0);
+        // stroke(255, 0, 0);
+        stroke(0, 204, 204);
         rect(ForSlotTwoX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);
     } 
     if (currentSlot === 2) {
-        stroke(255, 0, 0);
+        // stroke(255, 0, 0);
+        stroke(0, 204, 204);
         rect(ForSlotThreeX, ForAllSlotY, WidthSlot, HeightSlot);
         stroke(255);
     }

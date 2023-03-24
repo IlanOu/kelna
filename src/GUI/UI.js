@@ -43,7 +43,6 @@ function buttonHover([x, y, h, w]) {
 
 
 
-
 //^ INTERFACES
 
 
@@ -51,23 +50,23 @@ function buttonHover([x, y, h, w]) {
 function drawHomeMenu() {
     gameIsPaused = false
 
-    let interfaceMenu = [(viewportDisplayWidth-Background.width)/2, (viewportDisplayHeight-Background.height)/2, Background.width, Background.height]
+    let interfaceMenu = [(viewportDisplayWidth - Background.width) / 2, (viewportDisplayHeight - Background.height) / 2, Background.width, Background.height]
 
-    let buttonPlay = [  (viewportDisplayWidth / 2) - (buttonWidthBIG / 2), 
-                        (viewportDisplayHeight / 2) - (buttonHeightBIG / 2), 
-                        buttonWidthBIG, 
-                        buttonHeightBIG]
+    let buttonPlay = [(viewportDisplayWidth / 2) - (buttonWidthBIG / 2),
+    (viewportDisplayHeight / 2) - (buttonHeightBIG / 2),
+        buttonWidthBIG,
+        buttonHeightBIG]
 
-    let textPlay = [(viewportDisplayWidth / 2), 
-                    (viewportDisplayHeight / 2) - (buttonHeightClassic / 3)]
+    let textPlay = [(viewportDisplayWidth / 2),
+    (viewportDisplayHeight / 2) - (buttonHeightClassic / 3)]
 
-    let buttonParameters = [(viewportDisplayWidth/2) - (buttonWidthClassic / 2), 
-                            (viewportDisplayHeight/2) + (buttonHeightClassic), 
-                            buttonWidthClassic, 
-                            buttonHeightClassic]
+    let buttonParameters = [(viewportDisplayWidth / 2) - (buttonWidthClassic / 2),
+    (viewportDisplayHeight / 2) + (buttonHeightClassic),
+        buttonWidthClassic,
+        buttonHeightClassic]
 
-    let textParameters = [  (viewportDisplayWidth/2), 
-                            buttonParameters[1] + (buttonHeightClassic/8)]
+    let textParameters = [(viewportDisplayWidth / 2),
+    buttonParameters[1] + (buttonHeightClassic / 8)]
 
 
     fill(255, 220, 205)
@@ -242,7 +241,7 @@ function drawSettingInPause() {
 
     gameIsPlaying = false
     gameIsPaused = false
-    
+
     let YouCanPlayMusic = true
 
     let interfaceMenuWidth = 500
@@ -308,6 +307,71 @@ function drawSettingInPause() {
 }
 
 
+//~ MENU DEATH
+function drawDeath() {
+
+    let interfaceMenuWidth = 500
+    let interfaceMenuHeight = 500
+    let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+    let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+    let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+
+    let buttonStatW = 150
+    let buttonStatH = 20
+    let buttonStatX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonStatW / 2)
+    let buttonStatY = interfaceMenuY + (interfaceMenuHeight / 4)
+    let textStatX = buttonStatX + (buttonStatW / 2)
+
+
+    let buttonExitW = 150
+    let buttonExitH = 20
+    let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
+    let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
+    let textExitX = buttonExitX + (buttonMusicW / 2)
+
+
+    let buttonReturnToHomeEndGame = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
+
+    let buttonStat = [buttonStatX, buttonStatY, buttonStatW, buttonStatH]
+
+
+    fill(255)
+    drawInterface(interfaceMenu, GUIOfDeath)
+
+    fill(255)
+    drawButton(buttonStat)
+    drawText("STATS", 15, [textStatX, buttonStatY], "center")
+
+    fill(255)
+    drawButton(buttonReturnToHomeEndGame)
+    drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+
+
+
+    if (buttonClicked(buttonReturnToHomeEndGame)) {
+        // gameIsPlaying = false;
+        // isStats = false;
+        // isMenu = false;
+        // CinematicIsStart = true
+        // YouCanEscape = true;
+        // PlayerCanMove = true
+        // HealthPlayer = 3;
+        // MusicIsActivateOrNot = false
+        // FunctionForMusic()
+    }
+    if (buttonClicked(buttonStat)) {
+        // gameIsPlaying = false;
+        // isStats = false;
+        // isMenu = false;
+        // CinematicIsStart = true
+        // YouCanEscape = true;
+        // PlayerCanMove = true
+        // HealthPlayer = 3;
+        // MusicIsActivateOrNot = false
+        // FunctionForMusic()
+    }
+}
+
 //^ LANCER
 
 function setupUI() {
@@ -326,11 +390,16 @@ function setupUI() {
         if (gameIsPaused) {
             gameIsPlaying = false
             drawPauseMenu()
+        }
+        if (healthPlayer === 0) {
+            gameIsPlaying = false
+            drawDeath()
         } else {
             //~ sinon je joue
             gameIsPlaying = true
         }
         drawLifeBar()
+        displayInventory();
 
 
 

@@ -26,8 +26,8 @@ function preload() {
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
   GamerHeart = loadImage("assets/GamerHeart.webp")
-  //// WantedPoster = loadImage("assets/WantedPoster.png")
-  //// GUIForStats = loadImage("assets/GUIForStats.png")
+  // WantedPoster = loadImage("assets/WantedPoster.png")
+  GUIForStats = loadImage("assets/GUIForStats.png")
 
   //^ Background
 

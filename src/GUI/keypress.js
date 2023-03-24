@@ -48,6 +48,7 @@ function keyPressed() {
 
     if (keyCode === 97) { // 1 du pavé
         if (!pressingKey) {
+            console.log("ksdkd")
             gettingHurt = true;
         }
         pressingKey = true;
@@ -71,10 +72,10 @@ function keyPressed() {
         pressingKey = true;
     }
 
-    if (keyCode === 79) { // O du clavier
-        playerReward += 50
+    // if (keyCode === 79) { // O du clavier
+    //     playerReward += 50
 
-    }
+    // }
 
 }
 

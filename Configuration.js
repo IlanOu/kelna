@@ -183,6 +183,15 @@ let ForEnnemis;
 let MargeBarVie = 30;
 let healthPlayer = 3
 let maxHealth = 6
+let pressingKey = false
+
+
+// INVENTAIRE
+let Inventory = [];
+let WidthSlot = 85;
+let HeightSlot = 85;
+let ForSlotOneX = 750;
+let currentSlot = 0;
 
 
 //^ Autres
