@@ -48,7 +48,6 @@ function keyPressed() {
 
     if (keyCode === 97) { // 1 du pavé
         if (!pressingKey) {
-            console.log("ksdkd")
             gettingHurt = true;
         }
         pressingKey = true;

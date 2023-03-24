@@ -58,7 +58,7 @@ function preload() {
   ForEnnemis = loadJSON("json/Ennemis.json");
 
   // SONG
-  // SongBackground = loadSound("music/SongBackground.mp3")
+  SongBackground = loadSound("music/SongBackground.mp3")
 
 
   //CINEMATIC
@@ -75,6 +75,8 @@ function draw() {
 
   if (gameIsPlaying) {
     inGame = true
+    //playerDead = false
+    playerStat = false
     
     if (engineOne) {
 

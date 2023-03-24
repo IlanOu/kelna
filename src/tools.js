@@ -106,19 +106,18 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 // PLAY MUSIC 
-
 let PlayMusic = () => {
 
     if (MusicIsActivate === false && Pressing === false) {
         MusicIsActivate = true
-        //SongBackground.loop()
+        SongBackground.loop()
         ColorForRectMusic = 50
         Pressing = true
 
     } 
     else if (MusicIsActivate === true && Pressing === false) {
         MusicIsActivate = false
-        //SongBackground.pause()
+        SongBackground.pause()
         ColorForRectMusic = 255
         Pressing = true
 
@@ -129,7 +128,6 @@ let PlayMusic = () => {
 
 
 // PLAY SONG 
-
 let PlaySong = () => {
 
     if (SongIsActivate === false && Pressing === false) {
@@ -144,6 +142,64 @@ let PlaySong = () => {
         Pressing = true
 
     }
+
+}
+
+
+
+// interact health
+
+
+let ForInteract = () => {
+
+    //Interaction avec les pavés tactiles
+    if (gettingHurt) {
+        Degat(1);
+        gettingHurt = false;
+    }
+    if (gettingHeal) {
+        Regen(1);
+        gettingHeal = false;
+    }
+    if (addHeart) {
+        OneHeart(1);
+        addHeart = false;
+    }
+    if (removeHeart) {
+        DownHeart(1);
+        removeHeart = false;
+    }
+
+
+}
+
+
+let Degat = (NbreDeDegat) => {
+    healthPlayer -= NbreDeDegat; // Enlever point de vie
+    healthPlayer = constrain(healthPlayer, 0, maxHealth); // Depasse pas la vie, de 0 et de la vie max
+}
+
+
+let Regen = () => {
+    if (healthPlayer < maxHealth) {
+        healthPlayer += 1;
+        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+    }
+}
+
+
+let OneHeart = () => {
+    healthPlayer += 1;
+    maxHealth += 1;
+    healthPlayer = constrain(healthPlayer, 0, maxHealth);
+}
+
+
+let DownHeart = () => {
+    healthPlayer -= 1;
+    maxHealth -= 1;
+    healthPlayer = constrain(healthPlayer, 0, maxHealth);
+
 
 }
 
