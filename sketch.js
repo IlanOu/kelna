@@ -27,8 +27,8 @@ function preload() {
   IMGPlay = loadImage("assets/Play.png")
   IMGSet = loadImage("assets/Settings.png")
   GamerHeart = loadImage("assets/GamerHeart.webp")
-  //// WantedPoster = loadImage("assets/WantedPoster.png")
-  //// GUIForStats = loadImage("assets/GUIForStats.png")
+  // WantedPoster = loadImage("assets/WantedPoster.png")
+  GUIForStats = loadImage("assets/GUIForStats.png")
 
   //^ Background
 
@@ -60,7 +60,7 @@ function preload() {
   allDoors = loadJSON("json/Doors.json");
 
   // SONG
-  // SongBackground = loadSound("music/SongBackground.mp3")
+  SongBackground = loadSound("music/SongBackground.mp3")
 
 
   //CINEMATIC
@@ -77,6 +77,8 @@ function draw() {
 
   if (gameIsPlaying) {
     inGame = true
+    //playerDead = false
+    playerStat = false
     
     if (engineOne) {
 

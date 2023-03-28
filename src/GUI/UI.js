@@ -50,7 +50,6 @@ function buttonHover([x, y, h, w]) {
 
 
 
-
 //^ INTERFACES
 
 
@@ -58,23 +57,23 @@ function buttonHover([x, y, h, w]) {
 function drawHomeMenu() {
     gameIsPaused = false
 
-    let interfaceMenu = [(viewportDisplayWidth-Background.width)/2, (viewportDisplayHeight-Background.height)/2, Background.width, Background.height]
+    let interfaceMenu = [(viewportDisplayWidth - Background.width) / 2, (viewportDisplayHeight - Background.height) / 2, Background.width, Background.height]
 
-    let buttonPlay = [  (viewportDisplayWidth / 2) - (buttonWidthBIG / 2), 
-                        (viewportDisplayHeight / 2) - (buttonHeightBIG / 2), 
-                        buttonWidthBIG, 
-                        buttonHeightBIG]
+    let buttonPlay = [(viewportDisplayWidth / 2) - (buttonWidthBIG / 2),
+    (viewportDisplayHeight / 2) - (buttonHeightBIG / 2),
+        buttonWidthBIG,
+        buttonHeightBIG]
 
-    let textPlay = [(viewportDisplayWidth / 2), 
-                    (viewportDisplayHeight / 2) - (buttonHeightClassic / 3)]
+    let textPlay = [(viewportDisplayWidth / 2),
+    (viewportDisplayHeight / 2) - (buttonHeightClassic / 3)]
 
-    let buttonParameters = [(viewportDisplayWidth/2) - (buttonWidthClassic / 2), 
-                            (viewportDisplayHeight/2) + (buttonHeightClassic), 
-                            buttonWidthClassic, 
-                            buttonHeightClassic]
+    let buttonParameters = [(viewportDisplayWidth / 2) - (buttonWidthClassic / 2),
+    (viewportDisplayHeight / 2) + (buttonHeightClassic),
+        buttonWidthClassic,
+        buttonHeightClassic]
 
-    let textParameters = [  (viewportDisplayWidth/2), 
-                            buttonParameters[1] + (buttonHeightClassic/8)]
+    let textParameters = [(viewportDisplayWidth / 2),
+    buttonParameters[1] + (buttonHeightClassic / 8)]
 
 
     fill(255, 220, 205)
@@ -96,14 +95,13 @@ function drawHomeMenu() {
         gameIsPaused = false
     }
     if (buttonClicked(buttonParameters)) {
-        isSettingsWait = true
+        settingsHome = true
     }
 }
 
 
 //~ MENU PAUSE
 function drawPauseMenu() {
-    gameIsPaused = true
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
@@ -159,8 +157,7 @@ function drawPauseMenu() {
         gameIsPaused = false
     }
     if (buttonClicked(buttonSettings)) {
-        isSettingsPause = true
-        PlayerInSettings = true
+        settingsPause = true
 
     }
     if (buttonClicked(buttonReturn)) {
@@ -176,13 +173,14 @@ function drawLifeBar() {
     for (let i = 0; i < VieLarg; i++) {
         image(GamerHeart, MargeBarVie * i + 400 / 2, MargeBarVie, 30, 30);
     }
+    ForInteract()
 }
 
 
 //~ MENU HOME SETTINGS 
 function drawSettingInHome() {
 
-
+    playerDead = false
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
     let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
@@ -218,12 +216,14 @@ function drawSettingInHome() {
 
     drawInterface(interfaceMenu, GUIParameters)
 
-    fill(255)
+    fill(ColorForRectSong)
     drawButton(buttonSon)
     drawText("SON", 15, [textSonX, buttonSonY], "center")
+
     fill(ColorForRectMusic)
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
+
     fill(255)
     drawButton(ButtonExitP)
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
@@ -231,17 +231,24 @@ function drawSettingInHome() {
 
 
     if (buttonClicked(ButtonExitP)) {
-        isSettingsWait = false
-        //PlayerInSettings = false
+        settingsHome = false
+        gameIsPlaying = false
+        inGame = false
+        gameIsPaused = false
     }
     if (buttonClicked(buttonMusic)) {
         PlayMusic()
+    }
+    if (buttonClicked(buttonSon)) {
+        PlaySong()
     }
 }
 
 //~ MENU PAUSE SETTINGS 
 function drawSettingInPause() {
 
+    gameIsPlaying = false
+    gameIsPaused = false
 
     let YouCanPlayMusic = true
 
@@ -278,15 +285,17 @@ function drawSettingInPause() {
     let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH]
 
 
-    //fill(255)
+    fill(255)
     drawInterface(interfaceMenu, GUIParameters)
 
-    fill(255)
+    fill(ColorForRectSong)
     drawButton(buttonSon)
     drawText("SON", 15, [textSonX, buttonSonY], "center")
+
     fill(ColorForRectMusic)
     drawButton(buttonMusic)
     drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center")
+
     fill(255)
     drawButton(buttonExit)
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
@@ -294,11 +303,14 @@ function drawSettingInPause() {
 
 
     if (buttonClicked(buttonExit)) {
-        isSettingsPause = false
-        //PlayerInSettings = false
+        gameIsPaused = false
+        settingsPause = false
     }
     if (buttonClicked(buttonMusic) && YouCanPlayMusic === true) {
         PlayMusic()
+    }
+    if (buttonClicked(buttonSon)) {
+        PlaySong()
     }
 }
 
@@ -322,28 +334,168 @@ function setupInteractions() {
 }
 
 
+function setupInteractions() {
+    fill(255);
+
+
+    if (engineOne){
+
+        if(canEnterInHouse){
+            drawKey("E")
+        }
+
+        if(canInteractWithPNJ){
+            drawKey("E")
+        }
+    }
+}
+
+//~ MENU DEATH
+function drawDeath() {
+
+
+    if (playerDead === false) {
+        fill(0, 0, 0, 50)
+        rect(0, 0, width, height)
+
+        endInventory = true
+        let interfaceMenuWidth = 500
+        let interfaceMenuHeight = 500
+        let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+        let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+        let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+
+        let buttonStatW = 150
+        let buttonStatH = 20
+        let buttonStatX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonStatW / 2)
+        let buttonStatY = interfaceMenuY + (interfaceMenuHeight / 4)
+        let textStatX = buttonStatX + (buttonStatW / 2)
+
+
+        let buttonExitW = 150
+        let buttonExitH = 20
+        let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
+        let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
+        let textExitX = buttonExitX + (buttonExitW / 2)
+
+
+        let buttonReturnToHomeEndGame = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
+
+        let buttonStat = [buttonStatX, buttonStatY, buttonStatW, buttonStatH]
+
+
+        fill(255)
+        drawInterface(interfaceMenu, GUIOfDeath)
+
+        fill(255)
+        drawButton(buttonStat)
+        drawText("STATS", 15, [textStatX, buttonStatY], "center")
+
+        fill(255)
+        drawButton(buttonReturnToHomeEndGame)
+        drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+
+
+
+        if (buttonClicked(buttonReturnToHomeEndGame)) {
+            //playerDead = true
+            inGame = false
+            gameIsPlaying = false
+            gameIsPaused = false
+            endInventory = false
+            settingsHome = false
+            // isStats = false;
+            // isMenu = false;
+            // CinematicIsStart = true
+            // YouCanEscape = true;
+            // PlayerCanMove = true
+            healthPlayer = 3;
+        }
+        if (buttonClicked(buttonStat)) {
+            //playerDead = true
+            //drawStats()
+        }
+    }
+}
+
+//~ MENU STAT
+// function drawStats() {
+
+//     if (playerStat === false) {
+
+//         fill(0, 0, 0, 50)
+//         rect(0, 0, width, height)
+
+//         let interfaceMenuWidth = 500
+//         let interfaceMenuHeight = 500
+//         let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+//         let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+//         let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+
+//         let buttonExitW = 150
+//         let buttonExitH = 20
+//         let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
+//         let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
+//         let textExitX = buttonExitX + (buttonExitW / 2)
+
+
+//         let buttonReturnToHome = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
+
+//         fill(255)
+//         drawInterface(interfaceMenu, GUIForStats)
+
+//         fill(255)
+//         drawButton(buttonReturnToHome)
+//         drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+
+
+
+//         if (buttonClicked(buttonReturnToHome)) {
+//             console.log("zsjjsdj")
+//             playerStat = true
+//             inGame = false
+//             gameIsPlaying = false
+//             gameIsPaused = false
+//             endInventory = false
+//             settingsHome = false
+//             // isStats = false;
+//             // isMenu = false;
+//             // CinematicIsStart = true
+//             // YouCanEscape = true;
+//             // PlayerCanMove = true
+//             healthPlayer = 3;
+//         }
+//     }
+// }
+
 //^ LANCER
 
 function setupUI() {
 
     //~ Si je suis en jeu
 
-    if (inGame && PlayerInSettings === false) {
+    if (inGame && settingsHome === false) {
         //~ Si je fait echap (dans le menu pause)
 
 
-        if (isSettingsPause) {
+        if (settingsPause) {
+            gameIsPlaying = false
+            settingsPause = true
             drawSettingInPause()
         }
         if (gameIsPaused) {
-
             gameIsPlaying = false
             drawPauseMenu()
+        }
+        if (healthPlayer === 0) {
+            gameIsPlaying = false
+            drawDeath()
         } else {
             //~ sinon je joue
             gameIsPlaying = true
         }
         drawLifeBar()
+        displayInventory();
 
 
 
@@ -352,7 +504,8 @@ function setupUI() {
         drawHomeMenu()
 
 
-        if (isSettingsWait) {
+        if (settingsHome && playerDead === false) {
+            settingsHome = true
             drawSettingInHome()
         }
 

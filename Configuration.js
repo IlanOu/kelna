@@ -152,24 +152,31 @@ let viewportDisplayHeight = 1080
 let buttonWidthClassic = 80
 let buttonHeightClassic = 30
 
-
-let ColorForRectMusic = 255
-let MusicIsActivate = false
-
-let Pressing = false
-
 let buttonWidthBIG = 120
 let buttonHeightBIG = 50
+
+// FOR MUSIC
+let ColorForRectMusic = 255
+let MusicIsActivate = false
+let YouCanPlayMusic = false
+
+// FOR SONG
+let ColorForRectSong = 255
+let SongIsActivate = false
+
+// FOR PRESS
+let Pressing = false
+
 
 let inGame = false
 let gameIsPaused = false
 let gameIsPlaying = false
 
-let isSettingsWait = false
-let isSettingsPause = false
+let settingsHome = false
+let settingsPause = false
 
-let PlayerInSettings = false
-let YouCanPlayMusic = false
+let PlayerInSettingsPause = false
+
 
 
 
@@ -189,11 +196,27 @@ let behindThisDoor = "";
 
 
 // Life Bar
-
 let MargeBarVie = 30;
 let healthPlayer = 3
 let maxHealth = 6
+let pressingKey = false
+let gettingHurt = false; // Pour les degatsd
+let gettingHeal = false; // Pour regen
+let addHeart = false; // Pour ajouter un coeur
+let removeHeart = false; // Pour enlever un coeur
 
+
+// INVENTAIRE
+let Inventory = [];
+let WidthSlot = 85;
+let HeightSlot = 85;
+let ForSlotOneX = 750;
+let currentSlot = 0;
+let endInventory = false;
+
+
+let playerDead = false
+//let playerStat = false
 
 //^ Autres
 

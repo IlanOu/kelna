@@ -73,10 +73,10 @@ function keyPressed() {
         pressingKey = true;
     }
 
-    if (keyCode == 79) { // O du clavier
-        playerReward += 50
+    // if (keyCode === 79) { // O du clavier
+    //     playerReward += 50
 
-    }
+    // }
 
 }
 
