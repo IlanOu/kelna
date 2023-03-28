@@ -12,6 +12,7 @@ function keyPressed() {
         spaceKeyIsPressed = true;
     }
 
+    //^ Flèche de droite
     if ((keyCode == 39 || keyCode == 68)) {
         rightArrowPressed = true;
     }
@@ -110,4 +111,12 @@ function keyReleased() {
     }
     
 
+}
+
+
+function mousePressed() {
+    if (mouseButton === LEFT) {
+        console.log("jsdjsjd")
+        leftClickPressed = true
+    }
 }

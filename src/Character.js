@@ -161,6 +161,16 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     }
 
   }
+  //~ animation  ATTACK
+  else if (movement == "attack") {
+
+    for (let y = 64; y < 96; y += 32) {
+      for (let x = 0; x < 180; x += 32) {
+        characterTextureList.push(characterTextures.get(x, y, 32, 32));
+      }
+    }
+
+  }
 
   //? Changer de frame
   if (timer && !characterAnimationFramePassed) {
@@ -558,9 +568,12 @@ function character() {
       if (rightArrowPressed) {
         characterDirection = "right"
         characterMovement = "walk"
-      } else if (leftArrowPressed) {
+      } if (leftArrowPressed) {
         characterDirection = "left"
         characterMovement = "walk"
+      } else if (leftClickPressed){
+        characterDirection = "left"
+        characterMovement = "attack"
       } else {
         characterDirection = characterLastDirection
         characterMovement = "idle"

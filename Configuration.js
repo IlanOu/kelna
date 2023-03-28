@@ -240,6 +240,7 @@ let spaceKeyIsPressed = false;
 let rightArrowPressed = false;
 let leftArrowPressed = false;
 let dashKeyIsPressed = false;
+let leftClickPressed = false
 
 let engineOne = true;
 
