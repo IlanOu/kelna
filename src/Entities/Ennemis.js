@@ -166,6 +166,17 @@ let mobMovements = (Mobs) => {
     Mobs.detectDistY
   );
 
+
+  //& Quand le mob s'arrête ?
+  let MobLittleBoundingBox = expandRect(
+    CurrentX,
+    MobY,
+    Mobs.width,
+    Mobs.height,
+    1,
+    1
+  );
+
   //& Détéction du joueur
   Mobs.seePlayer = rectIsInRect(
     characterPositionX,
@@ -178,23 +189,51 @@ let mobMovements = (Mobs) => {
     MobBoundingBox[3]
   );
 
+  
+
+  //& Détéction du joueur
+  let touchPlayer = rectIsInRect(
+    characterPositionX,
+    characterPositionY,
+    characterBoundingBoxWidth,
+    characterBoundingBoxHeight,
+    MobLittleBoundingBox[0],
+    MobLittleBoundingBox[1],
+    MobLittleBoundingBox[2],
+    MobLittleBoundingBox[3]
+  );
+
   //& Si je vois le joueur, le suivre. Sinon, faire une ronde.
-  if (Mobs.seePlayer) {
-    followPlayer(Mobs);
+  if (touchPlayer){
     lookThePlayer(Mobs);
-  } else {
-    doRound(Mobs);
+    //attaquer
+
+    //^ Afficher un !
+    fill(255, 0, 0)
+    drawKeyAt("!", CurrentX, MobY)
+  }else{
+    if (Mobs.seePlayer) {
+      followPlayer(Mobs);
+      lookThePlayer(Mobs);
+  
+      //^ Afficher un !
+      fill(255, 0, 0)
+      drawKeyAt("!", CurrentX, MobY)
+    } else {
+      doRound(Mobs);
+    }
   }
+  
 
 
   //& Debug Mod
   if (debugMod) {
     fill(255, 0, 0, 70);
     rect(
-      MobBoundingBox[0],
-      MobBoundingBox[1],
-      MobBoundingBox[2],
-      MobBoundingBox[3]
+      MobLittleBoundingBox[0],
+      MobLittleBoundingBox[1],
+      MobLittleBoundingBox[2],
+      MobLittleBoundingBox[3]
     );
     fill(255);
   }

@@ -141,6 +141,11 @@ let haveToJump = false;
 
 //^ Interfaces
 
+let interactionWidth = 30;
+let interactionHeight = 30;
+
+
+
 let viewportDisplayWidth = 1920
 let viewportDisplayHeight = 1080
 
@@ -171,9 +176,17 @@ let YouCanPlayMusic = false
 // For PNJ
 let ForPNJ;
 
+let canInteractWithPNJ = false;
+
 
 // For ENNEMIS
 let ForEnnemis;
+
+// DOORS
+let allDoors;
+
+let behindThisDoor = "";
+
 
 // Life Bar
 
@@ -206,6 +219,8 @@ let leftArrowPressed = false;
 let dashKeyIsPressed = false;
 
 let engineOne = true;
+
+let canEnterInHouse = false;
 
 //#endregion
 

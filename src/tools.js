@@ -183,11 +183,88 @@ function getMapsToCheck (characterPositionX, characterPositionY){
 
 
 // ~ Agrandir un carré
-function expandRect(x,y,width,height,valueX, valueY){
+function expandRect(x,y,width,height,valueX = 1, valueY = 1){
     let NewWidth = width * valueX
     let NewHeight = height * valueY
     x = x - (NewWidth / 2) + (width / 2)
     y = y - (NewHeight / 2) + (height / 2)
 
     return [x, y, NewWidth, NewHeight]
+}
+
+
+//? positions d'un caré en x et y, pas en pixel.
+function getPositionAt(mapName = "", positionX = 0, positionY = 0){
+    let mapExist = false;
+
+    let numberOfCasesX = Maps.numberOfRow
+    let numberOfCasesY = Maps.numberOfColumns
+    
+    // rectWidth
+    // rectHeight
+
+    let indexMapX = 0;
+    let indexMapY = 0;
+    
+    World.worldsMap.forEach(row => {
+        if (row.includes(mapName)){
+            mapExist = true;
+
+            indexMapX = row.indexOf(mapName);
+            
+        }else{
+
+            indexMapY++
+        }
+        
+    });
+    
+    if (mapExist){
+        
+        
+        let pixelsX = (indexMapX * numberOfCasesX * rectWidth) + (positionX * rectWidth)
+        let pixelsY = (indexMapY * numberOfCasesY * rectHeight) + (positionY * rectHeight)
+        
+        return {"pixelX": pixelsX, "pixelY": pixelsY}
+
+
+    }else{
+        throw new Error("Map name not found in World.json : " + mapName);
+    }
+}
+
+function drawKey(key){
+    let keyBackground = [   (characterPositionX), 
+                            characterPositionY - 50, 
+                            interactionWidth, 
+                            interactionHeight]
+
+    let textKey = [ characterPositionX + (keyBackground[2] / 2), 
+                    characterPositionY - 50 + (keyBackground[3] / 8)]
+
+    drawButton(keyBackground)
+    drawText(key, 20, textKey, "center")
+}
+
+
+function drawKeyAt(key, positionX, positionY, haveBackground = false){
+    let keyBackground = [   (positionX), 
+                            positionY - 50, 
+                            interactionWidth, 
+                            interactionHeight]
+
+    let textKey = [ positionX + (keyBackground[2] / 2), 
+                    positionY - 50 + (keyBackground[3] / 8)]
+
+    if (haveBackground){
+        drawButton(keyBackground, undefined, false)
+    }
+
+    if (key == "!"){
+        drawText(key, 30, textKey, "center", [255, 0, 0])
+
+    }else{
+        drawText(key, 20, textKey, "center", [0, 0, 0])
+    }
+        
 }

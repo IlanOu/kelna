@@ -1,4 +1,4 @@
-function cutTileset(tileset, tileResolution = [0,0], tilesetResolution = [0,0]){
+function cutTileset(tileset, tileResolution = [0,0], tilesetResolution = [1,1]){
   let tilesList = []
   
   horizontalSquareCount = tilesetResolution[0] / tileResolution[0];
@@ -26,10 +26,11 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){
 
   gridWidth = positionX + grid.length * rectWidth;
   gridHeight = positionY + grid[0].length * rectHeight;
+
+  
   
   for (let x=0; x<grid.length; x++){
     for(let y=0; y<grid[x].length; y++){
-      
 
       image(tilesList[grid[x][y]], positionY+y*rectWidth, positionX+x*rectHeight, rectWidth, rectHeight)
       
@@ -153,9 +154,15 @@ function drawHouse(){
     height
   )
 
+  
+
   displayGrid(Houses["house1"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  
+  
+  
   displayGrid(Houses["house1"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
 
+  
 
 }
 

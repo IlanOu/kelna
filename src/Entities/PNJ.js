@@ -64,21 +64,25 @@ let drawPNJInside = (pnj) => {
     pnj.direction = "right";
   }
   // ~ Hitbox / Collisions
-  if (seePlayer === false) {
-    pnj.movement = "walk";
+  if (seePlayer) {
     
-    if (pnj.direction === "right") {
-      pnj.NbrePas += pnj.vitesse;
-    }
-    if (pnj.direction === "left") {
-      pnj.NbrePas -= pnj.vitesse;
-    }
-  } else {
+    canInteractWithPNJ = true
+
     pnj.movement = "idle";
     if (characterInsidePosX >= CurrentX) {
       pnj.direction = "right";
     } else {
       pnj.direction = "left";
+    }
+    
+  } else {
+    pnj.movement = "walk";
+    
+    if (pnj.direction == "right") {
+      pnj.NbrePas += pnj.vitesse;
+    }
+    if (pnj.direction == "left") {
+      pnj.NbrePas -= pnj.vitesse;
     }
   }
   //~ Creation du PNJ
@@ -248,8 +252,12 @@ let PNJMovements = (pnj) => {
   //& Si le perso n'est pas vu, faire une ronde
   if (!pnj.seePlayer) {
     doRound(pnj);
+    pnj.movement = "walk"
+    canInteractWithPNJ = false
   }else{
     lookThePlayer(pnj);
+    pnj.movement = "idle"
+    canInteractWithPNJ = true
   }
 
 
@@ -331,6 +339,7 @@ function animationPNJ(
       }
     }
   } else if (movement == "idle") {
+    console.log("idle")
     for (let y = 0; y < 32; y += 32) {
       for (let x = 0; x < 128; x += 32) {
         PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));

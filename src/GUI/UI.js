@@ -12,8 +12,15 @@ function drawInterface([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher un bouton
-function drawButton([x, y, w, h], img = undefined) {
-    stroke(0)
+function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
+    
+    if (strokeToggle){
+        stroke(0)
+    }else{
+        noStroke()
+    }
+
+
     if (img != undefined) {
         image(img, x, y, w, h)
     } else {
@@ -22,8 +29,8 @@ function drawButton([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher du texte
-function drawText(Text, fontSize, [x, y], textAlignment) {
-    fill(0)
+function drawText(Text, fontSize, [x, y], textAlignment, color = [0, 0, 0]) {
+    fill(color[0], color[1], color[2])
     noStroke()
     textSize(fontSize);
     textAlign(textAlignment);
@@ -296,6 +303,25 @@ function drawSettingInPause() {
 }
 
 
+function setupInteractions() {
+    fill(255);
+
+
+    if (engineOne){
+
+        if(canEnterInHouse){
+            drawKey("E")
+        }
+
+        if(canInteractWithPNJ){
+            drawKey("E")
+        }
+    }
+
+
+}
+
+
 //^ LANCER
 
 function setupUI() {
@@ -333,6 +359,8 @@ function setupUI() {
         gameIsPaused = false
         gameIsPlaying = false
     }
+
+    setupInteractions()
 
 
 }

@@ -650,7 +650,7 @@ function characterView2() {
   //#region //~ Collisions 
 
   //^ Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses["house1"].layers[1]
+  let currentMapTableColliders = Houses[behindThisDoor].layers[1]
 
   //^ Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {

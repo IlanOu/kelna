@@ -1,0 +1,14 @@
+{
+    "Doors": {
+        "door1": {
+
+            "map": "map1",
+            "x" : 10,
+            "y": 11,
+            "detectDist": 2,
+            "house": "house1"
+
+        }
+
+    }
+}

@@ -13,6 +13,7 @@ function setup() {
   // Ma tileset fait 256x256 px et chaque tile fait du 16x16
   tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
 
+
 }
 
 
@@ -51,11 +52,12 @@ function preload() {
 
 
   //^ JSON preload
-  ForPNJ = loadJSON("json/PNJ.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
+  ForPNJ = loadJSON("json/PNJ.json");
   ForEnnemis = loadJSON("json/Ennemis.json");
+  allDoors = loadJSON("json/Doors.json");
 
   // SONG
   // SongBackground = loadSound("music/SongBackground.mp3")
@@ -85,6 +87,7 @@ function draw() {
       drawGrid()
 
       //* Afficher les entités
+      doorsManager()
       PNJManager()
       MobManager()
       //* Afficher le joueur (le perso passe devant les entités)
@@ -93,10 +96,14 @@ function draw() {
       //* Afficher l'avant plan de la map
       drawGridForeground()
 
+
     }else{
+      
       drawHouse()
+
       PNJManager()
       characterView2()
+      
       drawHouseForeground()
     }
     
