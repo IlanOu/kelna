@@ -29,6 +29,7 @@ function preload() {
   GamerHeart = loadImage("assets/GamerHeart.webp")
   // WantedPoster = loadImage("assets/WantedPoster.png")
   GUIForStats = loadImage("assets/GUIForStats.png")
+  GUIInteract = loadImage("assets/GUIInt.png")
 
   //^ Background
 
@@ -49,7 +50,8 @@ function preload() {
   characterTextures = loadImage("assets/animations/spritesheetYvo.png")
   
 
-
+  //^ Items
+  Sword = loadImage("assets/sword.png")
 
   //^ JSON preload
   Maps = loadJSON("json/Maps.json");
@@ -58,6 +60,7 @@ function preload() {
   ForPNJ = loadJSON("json/PNJ.json");
   ForEnnemis = loadJSON("json/Ennemis.json");
   allDoors = loadJSON("json/Doors.json");
+  Items = loadJSON("json/Items.json")
 
   // SONG
   SongBackground = loadSound("music/SongBackground.mp3")

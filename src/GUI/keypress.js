@@ -29,6 +29,12 @@ function keyPressed() {
         }
     }
 
+    if (canInteractWithPNJ) {
+        //^ Touche E
+        if (keyCode == 69) {
+            PressInteractPNJ = true
+        }
+    }
 
     //^ Touche R
     if (keyCode == 82) {
@@ -74,11 +80,6 @@ function keyPressed() {
         pressingKey = true;
     }
 
-    // if (keyCode === 79) { // O du clavier
-    //     playerReward += 50
-
-    // }
-
 }
 
 //~ vérifier si une touche est relâchée 
@@ -116,7 +117,7 @@ function keyReleased() {
 
 function mousePressed() {
     if (mouseButton === LEFT) {
-        console.log("jsdjsjd")
+        console.log("Clic gauche")
         leftClickPressed = true
     }
 }

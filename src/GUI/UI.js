@@ -171,7 +171,7 @@ function drawLifeBar() {
     let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
 
     for (let i = 0; i < VieLarg; i++) {
-        image(GamerHeart, MargeBarVie * i + 400 / 2, MargeBarVie, 30, 30);
+        image(GamerHeart, MargeBarVie * i + 1800 / 2, MargeBarVie, 30, 30);
     }
     ForInteract()
 }
@@ -315,6 +315,7 @@ function drawSettingInPause() {
 }
 
 
+//~ INTERACTIONS 
 function setupInteractions() {
     fill(255);
 
@@ -327,6 +328,7 @@ function setupInteractions() {
 
         if(canInteractWithPNJ){
             drawKey("E")
+            
         }
     }
 
@@ -334,19 +336,36 @@ function setupInteractions() {
 }
 
 
-function setupInteractions() {
-    fill(255);
+//~ INTERACTION PNJ SWORD
+function InteractionSword(){
+
+    let interfaceMenuWidth = 500
+    let interfaceMenuHeight = 500
+    let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+    let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+    let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+
+    let buttonAddSwordW = 150
+    let buttonAddSwordH = 20
+    let buttonAddSwordX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonAddSwordW / 2)
+    let buttonAddSwordY = interfaceMenuY + (interfaceMenuHeight / 4)
+    let textAddSwordX = buttonAddSwordX + (buttonAddSwordW / 2)
+
+    let buttonSword = [buttonAddSwordX, buttonAddSwordY, buttonAddSwordW, buttonAddSwordH]
+
+    fill(255)
+    drawInterface(interfaceMenu, GUIInteract)
+
+    fill(255)
+    drawButton(buttonSword)
+    drawText("ADD SWORD", 15, [textAddSwordX, buttonAddSwordY], "center")
 
 
-    if (engineOne){
+    if (buttonClicked(buttonSword)) {
+        addItemToInventory(Sword);
+        PressInteractPNJ = false
+        SwordAlreadyTaken = true
 
-        if(canEnterInHouse){
-            drawKey("E")
-        }
-
-        if(canInteractWithPNJ){
-            drawKey("E")
-        }
     }
 }
 
@@ -477,7 +496,10 @@ function setupUI() {
     if (inGame && settingsHome === false) {
         //~ Si je fait echap (dans le menu pause)
 
-
+        if (PressInteractPNJ === true && SwordAlreadyTaken === false){
+            gameIsPlaying = false
+            InteractionSword()
+        }
         if (settingsPause) {
             gameIsPlaying = false
             settingsPause = true
@@ -496,6 +518,7 @@ function setupUI() {
         }
         drawLifeBar()
         displayInventory();
+        setupInteractions()
 
 
 
@@ -513,7 +536,7 @@ function setupUI() {
         gameIsPlaying = false
     }
 
-    setupInteractions()
+    
 
 
 }

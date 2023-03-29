@@ -184,6 +184,8 @@ let PlayerInSettingsPause = false
 let ForPNJ;
 
 let canInteractWithPNJ = false;
+let PressInteractPNJ = false
+let SwordAlreadyTaken = false
 
 
 // For ENNEMIS
@@ -210,7 +212,7 @@ let removeHeart = false; // Pour enlever un coeur
 let Inventory = [];
 let WidthSlot = 85;
 let HeightSlot = 85;
-let ForSlotOneX = 750;
+let ForSlotOneX = 0;
 let currentSlot = 0;
 let endInventory = false;
 
