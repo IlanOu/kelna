@@ -3,7 +3,6 @@ let debugMod = false;
 
 
 //^ Textures
-
 //#region //~ Textures
 let stone;
 let stoneBrick;
@@ -21,8 +20,15 @@ let backgroundX = 0;
 
 //#endregion
 
-//#region //~ Textures Perso
 
+//^ Personnages
+//#region Personnages
+
+
+
+//#region  Textures / Outils du Personnage
+
+//~ Textures / Outils du Personnage
 let characterTexture_Dash;
 
 let characterTextureList = [];
@@ -37,49 +43,8 @@ let characterMovement = "idle";
 
 let animationSpeed = 60
 
-//#endregion
+//#endregion Textures / Outils du Personnage
 
-//^ Grille
-
-//#region //~ caractéristique de la grille
-let rectWidth = 60;
-let rectHeight = 60;
-
-let xStartWorld = 0;
-let yStartWorld = 0;
-
-let arrayMap = [];
-
-
-
-// Camera movements
-//! ========= Mode SMOOTH ========= 
-let smoothCamera = false
-
-let smoothCameraSpeed = 0.04
-
-let cameraSpeedR = 0;
-let newCharacterMovesSpeedR = 0
-
-let cameraSpeedL = 0;
-let newCharacterMovesSpeedL = 0
-
-
-
-let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
-let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
-
-
-
-//#endregion
-
-//#region //~ caractéristiques des maisons
-let xStartHouse = 0;
-let yStartHouse = 0;
-
-//#endregion
-
-//^ Perso
 
 //#region //~ caractéristiques du perso
 
@@ -129,21 +94,60 @@ const dashCooldown = 1000;
 const dashTime = 200;
 const dashForce = 2;
 
-
-
-
 let haveToJump = false;
+//#endregion //~ caractéristiques du perso
 
 
 
+
+//#endregion Personnages
+
+
+//^ Grille
+//#region //~ caractéristique de la grille
+let rectWidth = 60;
+let rectHeight = 60;
+
+let xStartWorld = 0;
+let yStartWorld = 0;
+
+let arrayMap = [];
+//#endregion
+
+
+//^ Camera
+//#region //~ Camera movements
+//! ========= Mode SMOOTH ========= 
+let smoothCamera = false
+
+let smoothCameraSpeed = 0.04
+
+let cameraSpeedR = 0;
+let newCharacterMovesSpeedR = 0
+
+let cameraSpeedL = 0;
+let newCharacterMovesSpeedL = 0
+
+
+
+let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
+let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
 
 //#endregion
 
+
+//^ Maisons
+//#region //~ caractéristiques des maisons
+let xStartHouse = 0;
+let yStartHouse = 0;
+//#endregion
+
+
 //^ Interfaces
 
+//~ Interfaces
 let interactionWidth = 30;
 let interactionHeight = 30;
-
 
 
 let viewportDisplayWidth = 1920
@@ -155,49 +159,49 @@ let buttonHeightClassic = 30
 let buttonWidthBIG = 120
 let buttonHeightBIG = 50
 
-// FOR MUSIC
+//~  Variables pour la musique
 let ColorForRectMusic = 255
 let MusicIsActivate = false
 let YouCanPlayMusic = false
 
-// FOR SONG
+//~  Variables pour les sons
 let ColorForRectSong = 255
 let SongIsActivate = false
 
-// FOR PRESS
+
+//~  Variable a la pression d'un key event
 let Pressing = false
 
 
+//~  Variables pour le jeu
 let inGame = false
 let gameIsPaused = false
 let gameIsPlaying = false
 
+
+//~  Variables pour les parametres
 let settingsHome = false
 let settingsPause = false
-
 let PlayerInSettingsPause = false
 
 
-
-
-// For PNJ
+//~  Variables pour les PNJ
 let ForPNJ;
-
 let canInteractWithPNJ = false;
 let PressInteractPNJ = false
 let SwordAlreadyTaken = false
 
 
-// For ENNEMIS
+//~  Variables pour les ennemis
 let ForEnnemis;
 
-// DOORS
-let allDoors;
 
+//~  Variables pour les portes
+let allDoors;
 let behindThisDoor = "";
 
 
-// Life Bar
+//~  Variables pour la barre de vie
 let MargeBarVie = 30;
 let healthPlayer = 3
 let maxHealth = 6
@@ -208,7 +212,7 @@ let addHeart = false; // Pour ajouter un coeur
 let removeHeart = false; // Pour enlever un coeur
 
 
-// INVENTAIRE
+//~  Variables pour l'inventaire
 let Inventory = [];
 let WidthSlot = 85;
 let HeightSlot = 85;
@@ -216,12 +220,15 @@ let ForSlotOneX = 0;
 let currentSlot = 0;
 let endInventory = false;
 
-
+//~  Variables pour la mort et stats
 let playerDead = false
 //let playerStat = false
 
-//^ Autres
 
+//~  Variables pour le JSON des items
+let ForItems;
+
+//^ Autres
 //#region //~ physique
 const gravityForce = 0.5;
 

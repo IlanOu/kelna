@@ -1,5 +1,6 @@
 //^ OUTILS
 
+
 //~ Afficher une interface
 function drawInterface([x, y, w, h], img = undefined) {
     stroke(0)
@@ -362,7 +363,7 @@ function InteractionSword(){
 
 
     if (buttonClicked(buttonSword)) {
-        addItemToInventory(Sword);
+        addItemToInventory(Sword1);
         PressInteractPNJ = false
         SwordAlreadyTaken = true
 

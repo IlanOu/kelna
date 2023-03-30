@@ -116,7 +116,7 @@ function keyReleased() {
 
 
 function mousePressed() {
-    if (mouseButton === LEFT) {
+    if (mouseButton === LEFT && inGame && settingsHome === false) {
         console.log("Clic gauche")
         leftClickPressed = true
     }
