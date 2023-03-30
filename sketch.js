@@ -49,6 +49,8 @@ function preload() {
 
   //^ Items Images
   Sword1 = loadImage("assets/items/sword.png")
+  SwordBois = loadImage("assets/items/swordb.webp")
+  SwordPierre = loadImage("assets/items/swordp.webp")
 
   //^ JSON preload
   ForItems = loadJSON("json/IsItems.json");

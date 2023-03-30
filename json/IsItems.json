@@ -1,8 +1,10 @@
 {
     "Items": {
         "Swords": {
-            "img": "",
-            "degat":"10"
+            "Sword_1":{
+                "img": "",
+                "degat": "10"
+            }
         }
     }
 }

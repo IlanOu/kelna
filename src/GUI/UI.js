@@ -363,12 +363,13 @@ function InteractionSword(){
 
 
     if (buttonClicked(buttonSword)) {
-        addItemToInventory(Sword1);
+        addItemToInventory(SwordBois, "Swords");
         PressInteractPNJ = false
         SwordAlreadyTaken = true
 
     }
 }
+
 
 //~ MENU DEATH
 function drawDeath() {
@@ -438,58 +439,59 @@ function drawDeath() {
     }
 }
 
+
 //~ MENU STAT
-// function drawStats() {
+function drawStats() {
 
-//     if (playerStat === false) {
+    if (playerStat === false) {
 
-//         fill(0, 0, 0, 50)
-//         rect(0, 0, width, height)
+        fill(0, 0, 0, 50)
+        rect(0, 0, width, height)
 
-//         let interfaceMenuWidth = 500
-//         let interfaceMenuHeight = 500
-//         let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
-//         let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
-//         let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+        let interfaceMenuWidth = 500
+        let interfaceMenuHeight = 500
+        let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+        let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+        let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
 
-//         let buttonExitW = 150
-//         let buttonExitH = 20
-//         let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
-//         let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
-//         let textExitX = buttonExitX + (buttonExitW / 2)
-
-
-//         let buttonReturnToHome = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
-
-//         fill(255)
-//         drawInterface(interfaceMenu, GUIForStats)
-
-//         fill(255)
-//         drawButton(buttonReturnToHome)
-//         drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+        let buttonExitW = 150
+        let buttonExitH = 20
+        let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
+        let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
+        let textExitX = buttonExitX + (buttonExitW / 2)
 
 
+        let buttonReturnToHome = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
 
-//         if (buttonClicked(buttonReturnToHome)) {
-//             console.log("zsjjsdj")
-//             playerStat = true
-//             inGame = false
-//             gameIsPlaying = false
-//             gameIsPaused = false
-//             endInventory = false
-//             settingsHome = false
-//             // isStats = false;
-//             // isMenu = false;
-//             // CinematicIsStart = true
-//             // YouCanEscape = true;
-//             // PlayerCanMove = true
-//             healthPlayer = 3;
-//         }
-//     }
-// }
+        fill(255)
+        drawInterface(interfaceMenu, GUIForStats)
+
+        fill(255)
+        drawButton(buttonReturnToHome)
+        drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+
+
+
+        if (buttonClicked(buttonReturnToHome)) {
+            console.log("zsjjsdj")
+            playerStat = true
+            inGame = false
+            gameIsPlaying = false
+            gameIsPaused = false
+            endInventory = false
+            settingsHome = false
+            // isStats = false;
+            // isMenu = false;
+            // CinematicIsStart = true
+            // YouCanEscape = true;
+            // PlayerCanMove = true
+            healthPlayer = 3;
+        }
+    }
+}
+
 
 //^ LANCER
-
 function setupUI() {
 
     //~ Si je suis en jeu

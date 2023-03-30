@@ -1,12 +1,25 @@
-
-
-let addItemToInventory = (image) => {
+let addItemToInventory = (image, filtre) => {
     if (Inventory.length < 3) {
-        if (currentSlot === 0) {
-            Inventory[0] = image;
-        } else if (currentSlot === 1) {
+
+        if (currentSlot === 0 && filtre === "Swords") {
+            if (Inventory[0] && Inventory[0].filtre === "Swords") {
+                Inventory[0] = image;
+            } else {
+                Inventory[0] = image;
+
+            }
+        } if (currentSlot === 1 && filtre === "Bows") {
             Inventory[1] = image;
-        } else if (currentSlot === 2) {
+        } if (currentSlot === 2 && filtre === "Potions") {
+            Inventory[2] = image;
+        }
+
+
+        else if (filtre === "Swords") {
+            Inventory[0] = image;
+        } else if (filtre === "Bows") {
+            Inventory[1] = image;
+        } else if (filtre === "Potions") {
             Inventory[2] = image;
         }
     }
@@ -50,14 +63,14 @@ let displayInventory = () => {
                 let x, y;
                 if (i === 0) {
                     x = ForSlotOneX
-                    y = ForAllSlotY 
+                    y = ForAllSlotY
                 } if (i === 1) {
                     x = ForSlotTwoX
                     y = ForAllSlotY + 87
                 }
                 if (i === 2) {
                     x = ForSlotThreeX
-                    y = ForAllSlotY + 174 
+                    y = ForAllSlotY + 174
                 }
                 image(Inventory[i], x, y, WidthSlot, HeightSlot);
             }
@@ -66,9 +79,6 @@ let displayInventory = () => {
 };
 
 
-
-
-console.log(ForItems.Items)
 
 
 //#region BACKUP
@@ -140,6 +150,36 @@ console.log(ForItems.Items)
 //     }
 // }
 
+
+
+// "img": "",
+//     "degat": "10"
+
+
+
+
+
+// let addItemToInventory = (image, filtre) => {
+//     if (Inventory.length < 3) {
+
+//         if (currentSlot === 0 && filtre === "Swords") {
+//             Inventory[0] = image;
+//         } if (currentSlot === 1 && filtre === "Bows") {
+//             Inventory[1] = image;
+//         } if (currentSlot === 2 && filtre === "Potions") {
+//             Inventory[2] = image;
+//         }
+
+
+//         else if (filtre === "Swords"){
+//             Inventory[0] = image;
+//         } else if (filtre === "Bows"){
+//             Inventory[1] = image;
+//         } else if (filtre === "Potions"){
+//             Inventory[2] = image;
+//         }
+//     }
+// };
 
 
 
