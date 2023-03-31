@@ -1,20 +1,3 @@
-function cutTileset(tileset, tileResolution = [0,0], tilesetResolution = [1,1]){
-  let tilesList = []
-  
-  horizontalSquareCount = tilesetResolution[0] / tileResolution[0];
-  verticalSquareCount = tilesetResolution[1] / tileResolution[1];
-
-
-  for (let y = 0; y < tilesetResolution[1]; y += tileResolution[1]) {
-    for (let x = 0; x < tilesetResolution[0]; x += tileResolution[0]) {
-      tilesList.push(tileset.get(x, y, tileResolution[0], tileResolution[1]));
-    }
-  }
-
-  return tilesList
-}
-
-
 
 // Affichage d'une grille à la position x et y, de la taille N par M;
 function displayGrid(grid, positionY, positionX, rectWidth, rectHeight){

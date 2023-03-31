@@ -1,5 +1,6 @@
 //^ OUTILS
 
+
 //~ Afficher une interface
 function drawInterface([x, y, w, h], img = undefined) {
     stroke(0)
@@ -13,10 +14,10 @@ function drawInterface([x, y, w, h], img = undefined) {
 
 //~ Afficher un bouton
 function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
-    
-    if (strokeToggle){
+
+    if (strokeToggle) {
         stroke(0)
-    }else{
+    } else {
         noStroke()
     }
 
@@ -171,7 +172,7 @@ function drawLifeBar() {
     let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
 
     for (let i = 0; i < VieLarg; i++) {
-        image(GamerHeart, MargeBarVie * i + 400 / 2, MargeBarVie, 30, 30);
+        image(GamerHeart, MargeBarVie * i + 1800 / 2, MargeBarVie, 30, 30);
     }
     ForInteract()
 }
@@ -314,6 +315,8 @@ function drawSettingInPause() {
     }
 }
 
+
+//~ INTERACTIONS 
 function setupInteractions() {
     fill(255);
 
@@ -326,12 +329,136 @@ function setupInteractions() {
         if(canInteractWithPNJ){
             drawKey("E")
         }
-    }else{
-        if(canGoOutTheHouse){
-            drawKey("E")
-        }
     }
 }
+
+function drawTroc(x, y, w, h) {
+
+    
+    //? Affichage de la ligne troc
+    let currentPNJ = getPNJName()
+    let PNJSeePlayer = getPNJSeePlayer(currentPNJ)
+    let echangePNJ = getEchangePNJ(currentPNJ)
+
+
+    //? Lignes
+    let widthRow = w
+    let heightRow = h / echangePNJ.length//& <- nombre de ligne 
+    let postionXRow = x
+
+
+    //? Elements d'échange
+    let widthElement = 20
+    let heightElement = 20
+
+
+
+    //? Affichage du trocBloc
+    fill(255, 223, 15)
+    rect(x, y, w, h)
+
+    if (!PNJSeePlayer){
+        PressInteractPNJ = false
+    }
+
+    let buttonHasBeenClicked = false;
+
+
+    echangePNJ.forEach(echange => {
+
+        //? Declaration de variables
+        let indexEchange = echangePNJ.indexOf(echange)
+        let positionYRow = y + (heightRow * indexEchange)
+        let positionYElement = positionYRow + heightRow / 2 - heightElement / 2
+
+        //? Lignes
+        fill(255, 43, 15)
+        let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
+
+        if (buttonClicked(positionRow)) {
+            buttonHasBeenClicked = true;
+            popUpShown = true
+        } else if (!buttonHasBeenClicked){
+
+            rect(postionXRow, positionYRow, widthRow, heightRow)
+
+            //? Pour chaque ligne creation d'un slot
+            Object.entries(echange).forEach(items => {
+                if (items[0] == "demande") {
+                    items[1].forEach(element => {
+    
+                        //? Declaration
+                        let indexElement = items[1].indexOf(element)
+                        let positionXElement = x + (widthElement * indexElement)
+                        let currentItem = getItems(element)
+    
+                        //? Affichage d'un item
+                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                    });
+                } else if (items[0] == "donne") {
+                    items[1].forEach(element => {
+    
+                        //? Declaration
+                        let indexElement = items[1].indexOf(element)
+                        let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
+                        let currentItem = getItems(element)
+                        
+                        //? Affichage d'un item
+                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);  
+                    });
+                }
+            });
+        } 
+    });
+
+    if (popUpShown){
+        troc(getItems("sword_1"), getItems('sword_2'))
+    }
+
+}
+
+//~ INTERACTION PNJ SWORD
+function InteractionSword() {
+
+    let interfaceMenuWidth = 500
+    let interfaceMenuHeight = 500
+    let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+    let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+    let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+
+    // let buttonAddSwordW = 150
+    // let buttonAddSwordH = 20
+    // let buttonAddSwordX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonAddSwordW / 2)
+    // let buttonAddSwordY = interfaceMenuY + (interfaceMenuHeight / 4)
+    // let textAddSwordX = buttonAddSwordX + (buttonAddSwordW / 2)
+
+    // let buttonSword = [buttonAddSwordX, buttonAddSwordY, buttonAddSwordW, buttonAddSwordH]
+
+    // let upgradeSword = [buttonAddSwordX, buttonAddSwordY + 50, buttonAddSwordW, buttonAddSwordH];
+
+    fill(255)
+    drawInterface(interfaceMenu, GUIInteract)
+
+    // fill(255)
+    // drawButton(buttonSword)
+    // drawText("Add Sword", 15, [textAddSwordX, buttonAddSwordY], "center")
+
+    // fill(255)
+    // drawButton(upgradeSword)
+    // drawText("Upgrade Sword", 15, [upgradeSword[0] + upgradeSword[2] / 2, upgradeSword[1]], "center")
+
+
+    // if (buttonClicked(buttonSword)) {
+    //     addItemToInventory(ForItems.Items.sword_1);
+    //     PressInteractPNJ = false
+    //     SwordAlreadyTaken = true
+    // }else if (buttonClicked(upgradeSword)){
+    //     PressInteractPNJ = false
+    // }
+
+    drawTroc(interfaceMenuX, interfaceMenuY, interfaceMenuWidth / 2, interfaceMenuHeight)
+}
+
 
 //~ MENU DEATH
 function drawDeath() {
@@ -401,58 +528,59 @@ function drawDeath() {
     }
 }
 
+
 //~ MENU STAT
-// function drawStats() {
+function drawStats() {
 
-//     if (playerStat === false) {
+    if (playerStat === false) {
 
-//         fill(0, 0, 0, 50)
-//         rect(0, 0, width, height)
+        fill(0, 0, 0, 50)
+        rect(0, 0, width, height)
 
-//         let interfaceMenuWidth = 500
-//         let interfaceMenuHeight = 500
-//         let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
-//         let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
-//         let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
+        let interfaceMenuWidth = 500
+        let interfaceMenuHeight = 500
+        let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+        let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
+        let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
 
-//         let buttonExitW = 150
-//         let buttonExitH = 20
-//         let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
-//         let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
-//         let textExitX = buttonExitX + (buttonExitW / 2)
-
-
-//         let buttonReturnToHome = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
-
-//         fill(255)
-//         drawInterface(interfaceMenu, GUIForStats)
-
-//         fill(255)
-//         drawButton(buttonReturnToHome)
-//         drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+        let buttonExitW = 150
+        let buttonExitH = 20
+        let buttonExitX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonExitW / 2)
+        let buttonExitY = interfaceMenuY + (interfaceMenuHeight / 1.8)
+        let textExitX = buttonExitX + (buttonExitW / 2)
 
 
+        let buttonReturnToHome = [buttonExitX, buttonExitY, buttonExitW, buttonExitH]
 
-//         if (buttonClicked(buttonReturnToHome)) {
-//             console.log("zsjjsdj")
-//             playerStat = true
-//             inGame = false
-//             gameIsPlaying = false
-//             gameIsPaused = false
-//             endInventory = false
-//             settingsHome = false
-//             // isStats = false;
-//             // isMenu = false;
-//             // CinematicIsStart = true
-//             // YouCanEscape = true;
-//             // PlayerCanMove = true
-//             healthPlayer = 3;
-//         }
-//     }
-// }
+        fill(255)
+        drawInterface(interfaceMenu, GUIForStats)
+
+        fill(255)
+        drawButton(buttonReturnToHome)
+        drawText("Retour au menu", 15, [textExitX, buttonExitY], "center")
+
+
+
+        if (buttonClicked(buttonReturnToHome)) {
+            // console.log("zsjjsdj")
+            playerStat = true
+            inGame = false
+            gameIsPlaying = false
+            gameIsPaused = false
+            endInventory = false
+            settingsHome = false
+            // isStats = false;
+            // isMenu = false;
+            // CinematicIsStart = true
+            // YouCanEscape = true;
+            // PlayerCanMove = true
+            healthPlayer = 3;
+        }
+    }
+}
+
 
 //^ LANCER
-
 function setupUI() {
 
     //~ Si je suis en jeu
@@ -460,7 +588,9 @@ function setupUI() {
     if (inGame && settingsHome === false) {
         //~ Si je fait echap (dans le menu pause)
 
-
+        if (PressInteractPNJ && !SwordAlreadyTaken) {
+            InteractionSword()
+        }
         if (settingsPause) {
             gameIsPlaying = false
             settingsPause = true
@@ -479,6 +609,7 @@ function setupUI() {
         }
         drawLifeBar()
         displayInventory();
+        setupInteractions()
 
 
 
@@ -496,7 +627,7 @@ function setupUI() {
         gameIsPlaying = false
     }
 
-    setupInteractions()
+
 
 
 }

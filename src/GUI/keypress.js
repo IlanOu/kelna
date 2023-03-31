@@ -3,8 +3,9 @@
 function keyPressed() {
     //^ Bouton echap
     if (keyCode == ESCAPE) {
-        if (inGame)
-        gameIsPaused = !gameIsPaused
+        if (inGame){
+            gameIsPaused = !gameIsPaused
+        }
     }
 
     //^ Barre espace
@@ -29,55 +30,66 @@ function keyPressed() {
         }
     }
 
+    if (canInteractWithPNJ) {
+        //^ Touche E
+        if (keyCode == 69) {
+            PressInteractPNJ = !PressInteractPNJ
+        }
+    }
 
     //^ Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
     }
 
-    if (keyCode == 49) { // Touche 1 au dessus
+    //^ Touche 1 du clavier au dessus
+    if (keyCode == 49) { 
         currentSlot = 0;
     } 
     
-    if (keyCode == 50) { // Touche 2 au dessus
+    //^ Touche 2 du clavier au dessus
+    if (keyCode == 50) { 
         currentSlot = 1;
     }
 
-    if (keyCode == 51) { // Touche 3 au dessus
+    //^ Touche 3 du clavier au dessus
+    if (keyCode == 51) { 
         currentSlot = 2;
     }
 
+    ///^ Touche O du clavier
+    if(keyCode == 79){
+        addItemToInventory(ForItems.Items.sword_1);
+    }
 
-
-    if (keyCode == 97) { // 1 du pavé
+    //^ Touche 1 du pavé des nombres
+    if (keyCode == 97) { 
         if (!pressingKey) {
             gettingHurt = true;
         }
         pressingKey = true;
     }
-    if (keyCode == 98) { // 2 du pavé
+    //^ Touche 2 du pavé des nombres
+    if (keyCode == 98) { 
         if (!pressingKey) {
             gettingHeal = true;
         }
         pressingKey = true;
     }
-    if (keyCode == 99) { // 3 du pavé
+    //^ Touche 3 du pavé des nombres
+    if (keyCode == 99) {
         if (!pressingKey) {
             addHeart = true;
         }
         pressingKey = true;
     }
-    if (keyCode == 100) { // 4 du pavé
+    //^ Touche 4 du pavé des nombres
+    if (keyCode == 100) {
         if (!pressingKey) {
             removeHeart = true;
         }
         pressingKey = true;
     }
-
-    // if (keyCode === 79) { // O du clavier
-    //     playerReward += 50
-
-    // }
 
 }
 

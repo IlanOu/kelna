@@ -35,7 +35,34 @@
 
             "currentFrame": 0,
             "indexFrame": 0,
-            "movement": "walk"
+            "movement": "walk",
+
+            "echange": [
+                    {
+                        "demande": [
+                            "sword_1"
+                        ],
+                        "donne": [
+                            "bow_1"
+                        ]
+                    },
+                    {
+                        "demande": [
+                            "sword_1"
+                        ],
+                        "donne": [
+                            "bow_1"
+                        ]
+                    },
+                    {
+                        "demande": [
+                            "sword_1"
+                        ],
+                        "donne": [
+                            "bow_1"
+                        ]
+                    }
+                ]
         },
         "PNJ2": {
             "img": "",
@@ -72,7 +99,73 @@
 
             "currentFrame": 0,
             "indexFrame": 0,
-            "movement": "walk"
+            "movement": "walk",
+
+
+            "echange": [
+                {
+                    "demande": [
+                        "sword_1"
+                    ],
+                    "donne": [
+                        "bow_1"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_1", "sword_2"
+                    ],
+                    "donne": [
+                        "bow_1"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_1",
+                        "sword_2"
+                    ],
+                    "donne": [
+                        "bow_1"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_1",
+                        "sword_2",
+                        "sword_3",
+                        "sword_4"
+                    ],
+                    "donne": [
+                        "bow_1",
+                        "sword_1",
+                        "sword_2",
+                        "sword_3",
+                        "sword_4"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_1",
+                        "sword_2",
+                        "sword_3",
+                        "sword_4"
+                    ],
+                    "donne": [
+                        "bow_1"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_1",
+                        "sword_2",
+                        "sword_3",
+                        "sword_4"
+                    ],
+                    "donne": [
+                        "bow_1"
+                    ]
+                }
+            ]
         }
     }
 }
