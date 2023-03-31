@@ -2,11 +2,22 @@
     "Doors": {
         "door1": {
 
-            "map": "map1",
+            "location": "map1",
             "x" : 10,
             "y": 11,
             "detectDist": 2,
-            "house": "house1"
+            "destination": "house1",
+            "inHouse": false
+
+        },
+        "door1-i": {
+
+            "location": "house1",
+            "x" : 10,
+            "y": 11,
+            "detectDist": 2,
+            "destination": "",
+            "inHouse": true
 
         }
 

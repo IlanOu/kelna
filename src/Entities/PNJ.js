@@ -1,6 +1,10 @@
+
+
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                 PNJ MANAGER                                */
 //^ /* -------------------------------------------------------------------------- */
+
+
 function PNJManager() {
   // ~ Draw des PNJ en EXTERIEUR
   if (engineOne) {
@@ -12,11 +16,13 @@ function PNJManager() {
 }
 
 
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                              DRAW PNJ INSIDE                               */
 //^ /* -------------------------------------------------------------------------- */
+
+
 let drawPNJInside = (pnj) => {
+
   // ~ Variables positions PNJ
   let PNJDistance = pnj.distance + pnj.x;
   let PNJY = pnj.y + yStartHouse;
@@ -33,6 +39,7 @@ let drawPNJInside = (pnj) => {
     2,
     2
   );
+
   let seePlayer = rectIsInRect(
     characterInsidePosX,
     characterInsidePosY,
@@ -55,6 +62,7 @@ let drawPNJInside = (pnj) => {
     );
     fill(255);
   }
+
   // ~ Direction left
   if (CurrentX > PNJEnd) {
     pnj.direction = "left";
@@ -63,9 +71,9 @@ let drawPNJInside = (pnj) => {
   if (CurrentX < PNJStart) {
     pnj.direction = "right";
   }
+
   // ~ Hitbox / Collisions
-  if (seePlayer) {
-    
+  if (seePlayer) {    
     canInteractWithPNJ = true
 
     pnj.movement = "idle";
@@ -74,8 +82,7 @@ let drawPNJInside = (pnj) => {
     } else {
       pnj.direction = "left";
     }
-    
-  } else {
+  }else{
     pnj.movement = "walk";
     
     if (pnj.direction == "right") {
@@ -116,16 +123,13 @@ function PNJ(pnj) {
   let PNJX = pnj.x;
   let PNJY = pnj.y;
 
-  let PNJHaveToJump = pnj.haveToJump;
-
   let PNJWidth = pnj.width;
   let PNJHeight = pnj.height;
-
   let PNJVelocityY = pnj.velocityY;
   let PNJMass = pnj.mass;
-
   let PNJIsJumping = pnj.isJumping;
   let PNJJumpCount = pnj.jumpCount;
+  let PNJHaveToJump = pnj.haveToJump;
 
   //& Ajout de la gravité au PNJ
   let gravityReturns = getPositionWithGravity(
@@ -138,17 +142,15 @@ function PNJ(pnj) {
   PNJVelocityY = gravityReturns[1];
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-
   let collide = false;
     
   //& Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
-    let currentMapToCheckName =
-      World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
-
+    let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
     //~ Récupère la couche des collisions sur la map
     let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+
 
     
     //~ Pour chaque carré dans le tableau
@@ -208,7 +210,6 @@ function PNJ(pnj) {
   pnj.velocityY = PNJVelocityY;
   pnj.isJumping = PNJIsJumping;
   pnj.jumpCount = PNJJumpCount;
-
   pnj.xStart = PNJStart;
   pnj.xEnd = PNJEnd;
   pnj.haveToJump = collide;
@@ -220,6 +221,7 @@ function PNJ(pnj) {
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                PNJ MOVEMENTS                               */
 //^ /* -------------------------------------------------------------------------- */
+
 
 let PNJMovements = (pnj) => {
   //& Variables positions PNJ
@@ -312,9 +314,12 @@ let PNJMovements = (pnj) => {
   );
 };
 
+
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                              // ANIMATION PNJ                              */
 //^ /* -------------------------------------------------------------------------- */
+
+
 function animationPNJ(
   CurrentPNJ,
   positionX,
@@ -329,9 +334,9 @@ function animationPNJ(
   circle(positionX + 35, positionY - 25, 20);
 
   let timer = round(millis() / animationSpeed) % 2;
-
   let PNJTexturesList = [];
 
+  //& Animation en fonction des mouvements
   if (movement == "walk") {
     for (let y = 32; y < 64; y += 32) {
       for (let x = 0; x < 128; x += 32) {
@@ -339,7 +344,6 @@ function animationPNJ(
       }
     }
   } else if (movement == "idle") {
-    console.log("idle")
     for (let y = 0; y < 32; y += 32) {
       for (let x = 0; x < 128; x += 32) {
         PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
@@ -352,14 +356,17 @@ function animationPNJ(
       }
     }
   }
+
   //? Changer de frame
   if (timer && !CurrentPNJ.currentFrame) {
     CurrentPNJ.indexFrame++;
     CurrentPNJ.currentFrame = true;
   }
+
   if (!timer) {
     CurrentPNJ.currentFrame = false;
   }
+
   //? Remettre l'index au début
   if (CurrentPNJ.indexFrame >= PNJTexturesList.length) {
     CurrentPNJ.indexFrame = 0;

@@ -24,17 +24,12 @@ let backgroundX = 0;
 //#region //~ Textures Perso
 
 let characterTexture_Dash;
-
 let characterTextureList = [];
-
 let characterAnimationIndex = 0
 let characterAnimationFramePassed = false;
-
 let characterDirection = "";
 let characterLastDirection = "right";
-
 let characterMovement = "idle";
-
 let animationSpeed = 60
 
 //#endregion
@@ -44,10 +39,8 @@ let animationSpeed = 60
 //#region //~ caractéristique de la grille
 let rectWidth = 60;
 let rectHeight = 60;
-
 let xStartWorld = 0;
 let yStartWorld = 0;
-
 let arrayMap = [];
 
 
@@ -55,17 +48,11 @@ let arrayMap = [];
 // Camera movements
 //! ========= Mode SMOOTH ========= 
 let smoothCamera = false
-
 let smoothCameraSpeed = 0.04
-
 let cameraSpeedR = 0;
 let newCharacterMovesSpeedR = 0
-
 let cameraSpeedL = 0;
 let newCharacterMovesSpeedL = 0
-
-
-
 let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
 let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
 
@@ -85,42 +72,30 @@ let yStartHouse = 0;
 
 //? Positions
 
-
 let characterInsidePosX = 1;
 let characterInsidePosY = 1;
-
-
 let characterPositionX = 1;
 let characterPositionY = 1;
-
 let previousPlayerX = 0;
 let previousPlayerY = 0
-
-
 let characterWidth = 80;
 let characterHeight = 80;
-
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
-
 let characterMovesSpeed = 6;
-
 
 //? Saut
 let characterMass = 60;
 let characterJumpHeight = 20;
-
 let characterVelocityY = 0;
 let characterVelocityYMin = -80
 let characterVelocityYMax = 100
-
 let characterIsGrounded = false;
-
 let characterJumpCount = 0;
 let characterMaxJumps = 2;
 let characterDoubleJumping = false;
-
 let characterIsJumping = false;
+let haveToJump = false;
 
 //? Dash
 let characterIsDashing = false;
@@ -129,38 +104,27 @@ const dashCooldown = 1000;
 const dashTime = 200;
 const dashForce = 2;
 
-
-
-
-let haveToJump = false;
-
-
-
-
 //#endregion
 
 //^ Interfaces
 
+let viewportDisplayWidth = 1920
+let viewportDisplayHeight = 1080
 let interactionWidth = 30;
 let interactionHeight = 30;
 
-
-
-let viewportDisplayWidth = 1920
-let viewportDisplayHeight = 1080
-
+//? Boutons
 let buttonWidthClassic = 80
 let buttonHeightClassic = 30
-
 let buttonWidthBIG = 120
 let buttonHeightBIG = 50
 
-// FOR MUSIC
+//? Musique
 let ColorForRectMusic = 255
 let MusicIsActivate = false
 let YouCanPlayMusic = false
 
-// FOR SONG
+//? Sons
 let ColorForRectSong = 255
 let SongIsActivate = false
 
@@ -178,8 +142,6 @@ let settingsPause = false
 let PlayerInSettingsPause = false
 
 
-
-
 // For PNJ
 let ForPNJ;
 
@@ -191,8 +153,12 @@ let ForEnnemis;
 
 // DOORS
 let allDoors;
-
 let behindThisDoor = "";
+let engine1WidthDoors = rectWidth
+let engine1HeightDoors = rectHeight * 2
+
+let engine2WidthDoors = rectWidth
+let engine2HeightDoors = rectHeight / 2
 
 
 // Life Bar
@@ -245,6 +211,7 @@ let leftClickPressed = false
 let engineOne = true;
 
 let canEnterInHouse = false;
+let canGoOutTheHouse = false;
 
 //#endregion
 

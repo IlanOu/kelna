@@ -116,7 +116,6 @@ function keyReleased() {
 
 function mousePressed() {
     if (mouseButton === LEFT) {
-        console.log("jsdjsjd")
         leftClickPressed = true
     }
 }

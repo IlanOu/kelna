@@ -314,13 +314,11 @@ function drawSettingInPause() {
     }
 }
 
-
 function setupInteractions() {
     fill(255);
 
 
     if (engineOne){
-
         if(canEnterInHouse){
             drawKey("E")
         }
@@ -328,23 +326,8 @@ function setupInteractions() {
         if(canInteractWithPNJ){
             drawKey("E")
         }
-    }
-
-
-}
-
-
-function setupInteractions() {
-    fill(255);
-
-
-    if (engineOne){
-
-        if(canEnterInHouse){
-            drawKey("E")
-        }
-
-        if(canInteractWithPNJ){
+    }else{
+        if(canGoOutTheHouse){
             drawKey("E")
         }
     }

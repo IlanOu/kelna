@@ -102,7 +102,7 @@ function draw() {
     }else{
       
       drawHouse()
-
+      doorsManager()
       PNJManager()
       characterView2()
       

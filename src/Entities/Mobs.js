@@ -87,8 +87,6 @@ function handleCollisionMobs(
 
 
   }
-  // console.log(haveToJump)
-
 
   return [agentX, agentY, velocityY, jumpCount, isJumping, haveToJump];
 }
@@ -147,7 +145,6 @@ function doRound(Mobs) {
   let MobStart = Mobs.xStart;
 
   let haveToJump = Mobs.haveToJump;
-  // console.log(haveToJump);
 
   //& FAIRE UNE RONDE
   if (CurrentX >= MobEnd) {
