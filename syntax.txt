@@ -1,0 +1,11 @@
+Syntaxe a prendre pour la comprehension des feuilles de codes : 
+
+//^ () = Grand titre / theme 
+
+//~ () = Informations sur la fonction
+
+//* () = Informations en grand theme dans la fonction
+
+//? () = Informations de la ligne dans la fonction
+
+//& () = Informations precices

@@ -1,10 +1,6 @@
 //^ DEBUG MOD
 let debugMod = false;
 
-
-let tilesetItems;
-
-
 //^ Textures
 //#region //~ Textures
 let stone;
@@ -15,21 +11,17 @@ let tileSet;
 let tilesList;
 //#endregion
 
+
 //^ Background
 //#region 
-
 let backgroundImage;
 let backgroundX = 0;
-
 //#endregion
 
 
 //^ Personnages
 //#region Personnages
-
-
-
-//#region  Textures / Outils du Personnage
+//#region Textures / Outils du Personnage
 
 //~ Textures / Outils du Personnage
 let characterTexture_Dash;
@@ -41,14 +33,13 @@ let characterLastDirection = "right";
 let characterMovement = "idle";
 let animationSpeed = 60
 
-//#endregion
+//#endregion Textures / Outils du Personnage
 
 
 
-//#region //~ caractéristiques du perso
+//~ caractéristiques du perso
 
 //? Positions
-
 let characterInsidePosX = 1;
 let characterInsidePosY = 1;
 let characterPositionX = 1;
@@ -60,6 +51,7 @@ let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
 let characterMovesSpeed = 6;
+
 
 //? Saut
 let characterMass = 60;
@@ -74,14 +66,13 @@ let characterDoubleJumping = false;
 let characterIsJumping = false;
 let haveToJump = false;
 
+
 //? Dash
 let characterIsDashing = false;
 let lastDashTime = 0;
 const dashCooldown = 1000;
 const dashTime = 200;
 const dashForce = 2;
-
-
 //#endregion Personnages
 
 
@@ -126,7 +117,7 @@ let yStartHouse = 0;
 
 
 //^ Interfaces
-
+//#region Interfaces
 
 //~ Interfaces
 let interactionWidth = 30;
@@ -192,10 +183,10 @@ let MargeBarVie = 30;
 let healthPlayer = 3
 let maxHealth = 6
 let pressingKey = false
-let gettingHurt = false; // Pour les degatsd
-let gettingHeal = false; // Pour regen
-let addHeart = false; // Pour ajouter un coeur
-let removeHeart = false; // Pour enlever un coeur
+let gettingHurt = false; //& Pour les degats
+let gettingHeal = false; //& Pour regen
+let addHeart = false; //& Pour ajouter un coeur
+let removeHeart = false; //& Pour enlever un coeur
 
 
 //~  Variables pour l'inventaire
@@ -206,8 +197,12 @@ let ForSlotOneX = 0;
 let currentSlot = 0;
 let endInventory = false;
 
-//~  Variables pour la mort et stats
+
+//~  Variables pour la mort
 let playerDead = false
+
+
+//~  Variables pour les stats
 //let playerStat = false
 
 
@@ -220,26 +215,28 @@ let itemList = [];
 let popUpShown = false;
 
 
+//~ Variable pour la tileset des items
+let tilesetItems;
+
+//#endregion Interfaces
 
 
-
-//^ Autres
-//#region //~ physique
-const gravityForce = 0.5;
-
-//#endregion
-
-
+//^ Cartes
 //#region //~ cartes du jeu
 let Maps;
 let World;
 let Houses;
-
 //#endregion
 
 
-//#region //~ Evenements 
+//^ Physique
+//#region //~ physique
+const gravityForce = 0.5;
+//#endregion
 
+
+//^ Evenements
+//#region //~ Evenements 
 let spaceKeyIsPressed = false;
 let rightArrowPressed = false;
 let leftArrowPressed = false;
@@ -250,18 +247,16 @@ let engineOne = true;
 
 let canEnterInHouse = false;
 let canGoOutTheHouse = false;
-
 //#endregion
 
 
+//^ Cinematic
 //#region //~ CINEMATIC
-
 let StartCinematic;
 
 let CinematicIsStart = true;
 let MusicForCinematic = false;
 
 let CinematicForEnd = false;
-
 //#endregion
 

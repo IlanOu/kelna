@@ -2,7 +2,7 @@
 //^ /*                                 MOB MANAGER                                */
 //^ /* -------------------------------------------------------------------------- */
 function MobManager() {
-  // ~ Draw des Mobs en EXTERIEUR
+  // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
     mob(ForEnnemis.Ennemis.Enn1);
   }
@@ -12,7 +12,7 @@ function MobManager() {
 //^ /*                                     MOB                                    */
 //^ /* -------------------------------------------------------------------------- */
 function mob(Mobs) {
-  //& Initialisation des variables
+  //* Initialisation des variables
 
   let MobStart = Mobs.globalStartX + xStartWorld;
   let MobDistance = Mobs.distance + Mobs.globalStartX;
@@ -39,7 +39,7 @@ function mob(Mobs) {
 
 
 
-  //& Ajout de la gravité au Mob
+  //* Ajout de la gravité au Mob
   let gravityReturns = getPositionWithGravity(
     MobsY,
     MobsVelocityY,
@@ -50,21 +50,21 @@ function mob(Mobs) {
   MobsVelocityY = gravityReturns[1];
 
   let collide = false;
-  //& Ajoute les collisions pour toute les maps autour du perso
+  //* Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
     let currentMapToCheckName =
       World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
 
-    //^ Récupère la couche des collisions sur la map
+    //? Récupère la couche des collisions sur la map
     let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
 
-    //^ Pour chaque carré dans le tableau
+    //? Pour chaque carré dans le tableau
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (
         let column = 0; column < currentMapTableColliders[row].length; column++
       ) {
-        //^ Lui donner une collision
+        //? Lui donner une collision
         let thisObject = currentMapTableColliders[row][column];
 
         let thisObjectX =
@@ -75,7 +75,7 @@ function mob(Mobs) {
           (yStartWorld + rectHeight * row);
 
 
-          //& Collisions
+          //? Collisions
         if (thisObject > 0) {
           [
             MobsX,
@@ -106,7 +106,7 @@ function mob(Mobs) {
       }
     }
   }
-  //& Ajouter le saut au mob
+  //* Ajouter le saut au mob
   if (collide){
 
     if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
@@ -130,7 +130,7 @@ function mob(Mobs) {
   }
 
 
-  //& Retourner les variables
+  //* Retourner les variables
   Mobs.x = MobsX;
   Mobs.y = MobsY;
   Mobs.velocityY = MobsVelocityY;
@@ -143,7 +143,7 @@ function mob(Mobs) {
   Mobs.haveToJump = collide;
 
 
-  //& Dessiner le Mob
+  //* Dessiner le Mob
   mobMovements(Mobs);
 }
 
@@ -152,11 +152,11 @@ function mob(Mobs) {
 //^ /*                                  DRAW MOB                                  */
 //^ /* -------------------------------------------------------------------------- */
 let mobMovements = (Mobs) => {
-  //& Variables positions Mobs
+  //* Variables positions Mobs
   let CurrentX = Mobs.x;
   let MobY = Mobs.y;
 
-  //& Variables Collisions / HitBox Mobs
+  //* Variables Collisions / HitBox Mobs
   let MobBoundingBox = expandRect(
     CurrentX,
     MobY,
@@ -167,7 +167,7 @@ let mobMovements = (Mobs) => {
   );
 
 
-  //& Quand le mob s'arrête ?
+  //* Quand le mob s'arrête ?
   let MobLittleBoundingBox = expandRect(
     CurrentX,
     MobY,
@@ -177,7 +177,7 @@ let mobMovements = (Mobs) => {
     1
   );
 
-  //& Détéction du joueur
+  //* Détéction du joueur
   Mobs.seePlayer = rectIsInRect(
     characterPositionX,
     characterPositionY,
@@ -191,7 +191,7 @@ let mobMovements = (Mobs) => {
 
   
 
-  //& Détéction du joueur
+  //* Détéction du joueur
   let touchPlayer = rectIsInRect(
     characterPositionX,
     characterPositionY,
@@ -203,12 +203,12 @@ let mobMovements = (Mobs) => {
     MobLittleBoundingBox[3]
   );
 
-  //& Si je vois le joueur, le suivre. Sinon, faire une ronde.
+  //* Si je vois le joueur, le suivre. Sinon, faire une ronde.
   if (touchPlayer){
     lookThePlayer(Mobs);
-    //attaquer
+    //? attaquer
 
-    //^ Afficher un !
+    //? Afficher un !
     fill(255, 0, 0)
     drawKeyAt("!", CurrentX, MobY)
   }else{
@@ -216,7 +216,7 @@ let mobMovements = (Mobs) => {
       followPlayer(Mobs);
       lookThePlayer(Mobs);
   
-      //^ Afficher un !
+      //? Afficher un !
       fill(255, 0, 0)
       drawKeyAt("!", CurrentX, MobY)
     } else {
@@ -226,7 +226,7 @@ let mobMovements = (Mobs) => {
   
 
 
-  //& Debug Mod
+  //* Debug Mod
   if (debugMod) {
     fill(255, 0, 0, 70);
     rect(
@@ -238,7 +238,7 @@ let mobMovements = (Mobs) => {
     fill(255);
   }
 
-  //& Afficher le Mob
+  //* Afficher le Mob
   animationMobs(
     Mobs,
     CurrentX,
@@ -294,7 +294,7 @@ function animationMobs(
     }
   }
 
-  //? Changer de frame
+  //* Changer de frame
   if (timer && !CurrentMob.currentFrame) {
     CurrentMob.indexFrame++;
     CurrentMob.currentFrame = true;
@@ -304,7 +304,7 @@ function animationMobs(
     CurrentMob.currentFrame = false;
   }
 
-  //? Remettre l'index au début
+  //* Remettre l'index au début
   if (CurrentMob.indexFrame >= MobTexturesList.length) {
     CurrentMob.indexFrame = 0;
   }
@@ -314,7 +314,7 @@ function animationMobs(
   if (direction == "right") {
     image(MobCurrentTextures, positionX, positionY, width, height);
 
-    //? direction GAUCHE
+    //* direction GAUCHE
   } else if (direction == "left") {
     scale(-1, 1);
     image(MobCurrentTextures, -positionX - width, positionY, width, height);

@@ -1,10 +1,10 @@
-//& ajouter des controles à l'objet  
+//~ ajouter des controles à l'objet  
 function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
   if (engineOne) {
 
-    //~ Gauche Droite
-    //* éviter de pouvoir aller à droite et à gauche en meme temps
+    //* Gauche Droite
+    //? éviter de pouvoir aller à droite et à gauche en meme temps
     if ((keyIsDown(38) && keyIsDown(81))
       || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))
       || (keyIsDown(38) && keyIsDown(LEFT_ARROW))
@@ -21,7 +21,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     return objectPositionX
   } else {
 
-    //^ réduire la vitesse des diagonales
+    //* réduire la vitesse des diagonales
     if ((keyIsDown(68) && keyIsDown(83)) ||
       keyIsDown(68) && keyIsDown(DOWN_ARROW) ||
       keyIsDown(68) && keyIsDown(90) ||
@@ -42,7 +42,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     }
 
 
-    //~ Gauche Droite
+    //* Gauche Droite
     if ((keyIsDown(68) && keyIsDown(81))
       || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))
       || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
@@ -56,7 +56,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
       objectPositionX = moveRight(objectPositionX, speed)
     }
 
-    //~Haut Bas
+    //*Haut Bas
     if ((keyIsDown(90) && keyIsDown(83))
       || (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW))
       || (keyIsDown(90) && keyIsDown(DOWN_ARROW))
@@ -77,7 +77,7 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 }
 
 
-//& Mouvements gauche/droite et haut/bas
+//* Mouvements gauche/droite et haut/bas
 //#region
 function moveLeft(positionX, speed) {
   return positionX - speed
@@ -94,7 +94,7 @@ function moveDown(positionY, speed) {
 //#endregion
 
 
-//& ajouter un saut à l'objet
+//* ajouter un saut à l'objet
 function addJump(positionY, jumpHeight, velocityY, gravityForce) {
   velocityY = -gravityForce;
   velocityY -= jumpHeight;
@@ -104,7 +104,7 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce) {
 }
 
 
-//& dessiner le perso
+//* dessiner le perso
 function drawCharacter(positionX, positionY, width, height, direction, movement) {
   let timer = (round(millis() / animationSpeed)) % 2
 
@@ -116,7 +116,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     rect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight)
   }
 
-  //~ animation MARCHER
+  //* animation MARCHER
   if (movement == "walk") {
 
       for (let y = 192; y < 224; y += 32) {
@@ -125,7 +125,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         }
       }
 
-    //~ animation IDLE
+    //* animation IDLE
   } else if (movement == "idle") {
 
     for (let y = 64; y < 96; y += 32) {
@@ -135,7 +135,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     }
 
   }
-  //~ animation JUMP
+  //* animation JUMP
   else if (movement == "jump") {
 
     for (let y = 160; y < 192; y += 32) {
@@ -145,7 +145,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     }
 
   }
-  //~ animation DASH
+  //* animation DASH
   else if (movement == "dash") {
 
     // for (let y = 0; y < 32; y += 32) {
@@ -162,7 +162,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   }
 
-  //? Changer de frame
+  //* Changer de frame
   if (timer && !characterAnimationFramePassed) {
     characterAnimationIndex++
     characterAnimationFramePassed = true
@@ -170,7 +170,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (!timer) {
     characterAnimationFramePassed = false
   }
-  //? Remettre l'index au début 
+  //* Remettre l'index au début 
   if (characterAnimationIndex >= characterTextureList.length) {
     characterAnimationIndex = 0
   }
@@ -178,11 +178,11 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   let characterCurrentTexture = characterTextureList[characterAnimationIndex]
 
 
-  //? direction DROITE
+  //* direction DROITE
   if (direction == "right") {
     image(characterCurrentTexture, positionX, positionY, width, height)
 
-    //? direction GAUCHE
+    //* direction GAUCHE
   } else if (direction == "left") {
     scale(-1, 1)
     image(characterCurrentTexture, -positionX - width, positionY, width, height)
@@ -192,47 +192,47 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 }
 
 
-//& Collisions
+//~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
 
-    //~ Collisions dessus / dessous de l'objet
+    //* Collisions dessus / dessous de l'objet
     if ((agentX < objectX + objectWidth - (objectWidth / 10)) && (agentX + agentWidth > objectX + (objectWidth / 10))) {
-      //? collisions en dessous de l'objet
+      //* collisions en dessous de l'objet
       if (agentY < objectY + objectHeight && agentY > objectY) {
         agentY = objectY + objectHeight
 
-        //! est relatif au perso
+        //? est relatif au perso
         characterVelocityY = 0;
       }
-      //? collision au dessus de l'objet
+      //* collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY) {
 
         agentY = objectY - agentHeight
 
-        //! est relatif au perso
+        //? est relatif au perso
         characterJumpCount = 0;
-        //! est relatif au perso
+        //? est relatif au perso
         characterIsJumping = false
-        //! est relatif au perso
+        //? est relatif au perso
         if (!spaceKeyIsPressed)
           characterVelocityY = 0
       }
     }
 
 
-    //~ Collisions gauche / droite de l'objet
-    //? si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
+    //* Collisions gauche / droite de l'objet
+    //& si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
     if ((agentY < objectY + objectHeight - (objectHeight / 10)) && (agentY + agentHeight > objectY + (objectHeight / 10))) {
 
-      //? collisions à droite de l'objet
+      //* collisions à droite de l'objet
       if (agentX + agentWidth > objectX && agentX > objectX) {
 
         agentX = objectX + objectWidth
 
-        //? collisions à gauche de l'objet
+        //* collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
 
         agentX = objectX - agentWidth
@@ -243,20 +243,20 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 }
 
 
-//& Système du personnage pour le moteur de vue 1
+//~ Système du personnage pour le moteur de vue 1
 function character() {
-  //~ Ancienne positions du perso
+  //* Ancienne positions du perso
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
 
-  //~ Contrôles du perso (gauche, droite)
+  //* Contrôles du perso (gauche, droite)
   characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
 
-  //~ Limites de la velocité Y du perso
+  //* Limites de la velocité Y du perso
   characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
 
 
-  //#region //~ Mouvement de caméra
+  //#region //* Mouvement de caméra
 
 
   // rect(0, yStartWorld, 20, ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length))
@@ -268,10 +268,10 @@ function character() {
 
   
 
-  //! ========= Si le mode SMOOTH est activé =========
+  //* ========= Si le mode SMOOTH est activé =========
   if (smoothCamera){
 
-    //^ caméra mouvements droite
+    //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
     if (characterPositionX > width / 2 + 1) {
 
@@ -296,7 +296,7 @@ function character() {
 
 
 
-    //^ caméra mouvements gauche
+    //* caméra mouvements gauche
 
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 2 - 1) {
@@ -319,10 +319,10 @@ function character() {
       newCharacterMovesSpeedL= 0
     }
 
-  //! ========= Si le mode SMOOTH n'est pas activé =========
+  //* ========= Si le mode SMOOTH n'est pas activé =========
   }else{
 
-    //^ caméra mouvements droite
+    //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
     if (characterPositionX > width - width / 2) {
 
@@ -341,7 +341,7 @@ function character() {
     }
 
 
-    //^ caméra mouvements gauche
+    //* caméra mouvements gauche
 
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 4) {
@@ -361,7 +361,7 @@ function character() {
   
 
 
-  //^ caméra mouvements bas
+  //* caméra mouvements bas
 
   //? si mon perso est en BAS de l'écran
   if (characterPositionY > height - height / 4) {
@@ -380,7 +380,7 @@ function character() {
   }
 
 
-  //^ caméra mouvements haut
+  //* caméra mouvements haut
 
   //? si mon perso est en HAUT de l'écran
   if (characterPositionY < height / 3) {
@@ -401,20 +401,21 @@ function character() {
   //#endregion
 
 
-  //#region //~ Gravité du personnage
+  //#region 
+  //~ Gravité du personnage
   let gravityReturns = getPositionWithGravity(characterPositionY,
                                               characterVelocityY,
                                               gravityForce,
                                               characterMass)
   characterPositionY = gravityReturns[0]
   characterVelocityY = gravityReturns[1]
-
   //#endregion
 
 
-  //#region //~ saut du personnage
+  //#region 
+  //~ saut du personnage
   if (spaceKeyIsPressed) {
-    //^ le saut du personnage
+    //* le saut du personnage
     if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
 
       characterIsJumping = true;
@@ -431,7 +432,7 @@ function character() {
       characterVelocityY = jumpReturns[1];
       
 
-      //^ le double saut du personnage  
+      //* le double saut du personnage  
     } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
       characterDoubleJumping = false;
       characterJumpCount++;
@@ -446,7 +447,7 @@ function character() {
     }
   }
  
-  //^ si le joueur touche le sol, reset le nombre de saut 
+  //* si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
     characterIsJumping = false;
     characterJumpCount = 0
@@ -456,7 +457,8 @@ function character() {
   //#endregion
 
 
-  //#region //~ contraintes des positions du perso
+  //#region 
+  //~ contraintes des positions du perso
   let positions = containedPositionsIn(characterPositionX,
     characterPositionY,
     characterWidth,
@@ -469,7 +471,8 @@ function character() {
   //#endregion
 
 
-  //#region //~ collisions
+//#region 
+  //~ collisions
 
   
 
@@ -477,21 +480,21 @@ function character() {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
 
-  //^ Ajoute les collisions pour toute les maps autour du perso 
+  //* Ajoute les collisions pour toute les maps autour du perso 
   for (let i = 0; i < mapsToCheck.length; i++) {
 
 
     let currentMapToCheck = mapsToCheck[i]
     let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]]
 
-    //^ Récupère la couche des collisions sur la map
+    //* Récupère la couche des collisions sur la map
     let currentMapTableColliders = Maps[currentMapToCheckName].layers[1]
 
-    //^ Pour chaque carré dans le tableau 
+    //* Pour chaque carré dans le tableau 
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (let column = 0; column < currentMapTableColliders[row].length; column++) {
 
-        //^ Lui donner une collision
+        //? Lui donner une collision
         let thisObject = currentMapTableColliders[row][column]
 
 
@@ -513,7 +516,8 @@ function character() {
   //#endregion
 
 
-  //#region //~ roulade du perso
+  //#region 
+  //~ roulade du perso
   
   const currentTime = millis();
   if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)){
@@ -532,7 +536,8 @@ function character() {
   //#endregion
 
 
-  //#region //~ affichage du personnage
+  //#region 
+  //~ affichage du personnage
 
   if (characterIsJumping) {
     if (rightArrowPressed) {
@@ -588,10 +593,11 @@ function character() {
 
 
 
-//& Système du personnage pour le moteur de vue 2
+//^ Système du personnage pour le moteur de vue 2
 function characterView2() {
 
-  //#region //~ Contrôles du perso (gauche, droite, haut, bas)
+  //#region 
+  //~ Contrôles du perso (gauche, droite, haut, bas)
 
   let positionsControls = getMovementsControls(characterInsidePosX, characterInsidePosY, characterMovesSpeed)
   characterInsidePosX = positionsControls[0]
@@ -599,11 +605,11 @@ function characterView2() {
 
   //#endregion
 
-  //#region //~ Mouvement de caméra
+  //#region 
+  //~ Mouvement de caméra
 
 
-  //^ caméra mouvements droite
-
+  //* caméra mouvements droite
   //? si mon perso est à DROITE de l'écran
   if (characterInsidePosX > width - width / 4) {
 
@@ -614,7 +620,7 @@ function characterView2() {
 
   }
 
-  //^ caméra mouvements gauche
+  //* caméra mouvements gauche
 
   //? si mon perso est à GAUCHE de l'écran
   if (characterInsidePosX < width / 4) {
@@ -627,7 +633,7 @@ function characterView2() {
   }
 
 
-  //^ caméra mouvements bas
+  //* caméra mouvements bas
 
   //? si mon perso est en BAS de l'écran
   if (characterInsidePosY > height - height / 3) {
@@ -636,7 +642,7 @@ function characterView2() {
   }
 
 
-  //^ caméra mouvements haut
+  //* caméra mouvements haut
 
   //? si mon perso est en HAUT de l'écran
   if (characterInsidePosY < height / 4) {
@@ -647,16 +653,17 @@ function characterView2() {
 
   //#endregion
 
-  //#region //~ Collisions 
+  //#region 
+  //~ Collisions 
 
-  //^ Récupère la couche des collisions sur la map
+  //* Récupère la couche des collisions sur la map
   let currentMapTableColliders = Houses[behindThisDoor].layers[1]
 
-  //^ Pour chaque carré dans le tableau 
+  //* Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {
     for (let column = 0; column < currentMapTableColliders[row].length; column++) {
 
-      //^ Lui donner une collision
+      //? Lui donner une collision
       let thisObject = currentMapTableColliders[row][column]
 
 
@@ -674,7 +681,8 @@ function characterView2() {
 
   //#endregion
 
-  //#region //~ Affichage du perso
+  //#region 
+  //~ Affichage du perso
 
   fill(255, 0, 0)
   rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight)

@@ -6,9 +6,8 @@
 
 
 function PNJManager() {
-  // ~ Draw des PNJ en EXTERIEUR
+  //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(ForPNJ.PNJS.PNJ1);
     PNJ(ForPNJ.PNJS.PNJ2);
   } else {
     drawPNJInside(ForPNJ.PNJS.PNJ1);
@@ -23,14 +22,14 @@ function PNJManager() {
 
 let drawPNJInside = (pnj) => {
 
-  // ~ Variables positions PNJ
+  // ? Variables positions PNJ
   let PNJDistance = pnj.distance + pnj.x;
   let PNJY = pnj.y + yStartHouse;
   let PNJEnd = PNJDistance + xStartHouse;
   let PNJStart = pnj.x + xStartHouse;
   let CurrentX = pnj.x + pnj.NbrePas + xStartHouse;
 
-  // ~ Variables Collisions / HitBox PNJ
+  // ? Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
     CurrentX,
     PNJY,
@@ -51,7 +50,7 @@ let drawPNJInside = (pnj) => {
     VillagerBoundingBox[3]
   );
 
-  // ~ Debug Mod
+  // ? Debug Mod
   if (debugMod) {
     fill(255, 0, 0, 70);
     rect(
@@ -63,16 +62,16 @@ let drawPNJInside = (pnj) => {
     fill(255);
   }
 
-  // ~ Direction left
+  // ? Direction left
   if (CurrentX > PNJEnd) {
     pnj.direction = "left";
   }
-  // ~ Direction right
+  // ? Direction right
   if (CurrentX < PNJStart) {
     pnj.direction = "right";
   }
 
-  // ~ Hitbox / Collisions
+  // ? Hitbox / Collisions
   if (seePlayer) {    
     canInteractWithPNJ = true
 
@@ -92,7 +91,7 @@ let drawPNJInside = (pnj) => {
       pnj.NbrePas -= pnj.vitesse;
     }
   }
-  //~ Creation du PNJ
+  //? Creation du PNJ
   animationPNJ(
     pnj,
     CurrentX,
@@ -111,7 +110,7 @@ let drawPNJInside = (pnj) => {
 //^ /* -------------------------------------------------------------------------- */
 function PNJ(pnj) {
 
-  //& Initialisation des variables
+  //* Initialisation des variables
 
   let PNJStart = pnj.globalStartX + xStartWorld;
   let PNJDistance = pnj.distance + PNJStart;
@@ -131,7 +130,7 @@ function PNJ(pnj) {
   let PNJJumpCount = pnj.jumpCount;
   let PNJHaveToJump = pnj.haveToJump;
 
-  //& Ajout de la gravité au PNJ
+  //* Ajout de la gravité au PNJ
   let gravityReturns = getPositionWithGravity(
     PNJY,
     PNJVelocityY,
@@ -144,21 +143,21 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
     
-  //& Ajoute les collisions pour toute les maps autour du perso
+  //* Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
     let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
-    //~ Récupère la couche des collisions sur la map
+    //? Récupère la couche des collisions sur la map
     let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
 
 
     
-    //~ Pour chaque carré dans le tableau
+    //? Pour chaque carré dans le tableau
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (
         let column = 0; column < currentMapTableColliders[row].length; column++
       ) {
-        //~ Lui donner une collision
+        //& Lui donner une collision
         let thisObject = currentMapTableColliders[row][column];
 
         let thisObjectX =
@@ -204,7 +203,7 @@ function PNJ(pnj) {
 
   
 
-  //& Retourne les variables
+  //* Retourne les variables
   pnj.x = PNJX;
   pnj.y = PNJY;
   pnj.velocityY = PNJVelocityY;
@@ -224,11 +223,11 @@ function PNJ(pnj) {
 
 
 let PNJMovements = (pnj) => {
-  //& Variables positions PNJ
+  //* Variables positions PNJ
   let CurrentX = pnj.x;
   let PNJY = pnj.y;
 
-  //& Variables Collisions / HitBox PNJ
+  //* Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
     CurrentX,
     PNJY,
@@ -239,7 +238,7 @@ let PNJMovements = (pnj) => {
   );
 
 
-  //& Zone de détection du PNJ
+  //* Zone de détection du PNJ
   pnj.seePlayer = rectIsInRect(
     characterPositionX,
     characterPositionY,
@@ -251,7 +250,7 @@ let PNJMovements = (pnj) => {
     VillagerBoundingBox[3]
   );
 
-  //& Si le perso n'est pas vu, faire une ronde
+  //* Si le perso n'est pas vu, faire une ronde
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk"
@@ -263,7 +262,7 @@ let PNJMovements = (pnj) => {
   }
 
 
-  //& Ajouter le saut au PNJ
+  //* Ajouter le saut au PNJ
   if (pnj.haveToJump) {
     if (!pnj.isJumping && pnj.jumpCount < 1) {
       let jumpReturns = addJump(
@@ -287,7 +286,7 @@ let PNJMovements = (pnj) => {
 
 
 
-  //& Debug Mod
+  //* Debug Mod
   if (debugMod) {
     fill(0, 0, 255, 70);
     rect(CurrentX, PNJY, pnj.width, pnj.height);
@@ -301,7 +300,7 @@ let PNJMovements = (pnj) => {
     fill(255);
   }
 
-  //& Afficher le PNJ
+  //* Afficher le PNJ
   animationPNJ(
     pnj,
     CurrentX,
@@ -336,7 +335,7 @@ function animationPNJ(
   let timer = round(millis() / animationSpeed) % 2;
   let PNJTexturesList = [];
 
-  //& Animation en fonction des mouvements
+  //* Animation en fonction des mouvements
   if (movement == "walk") {
     for (let y = 32; y < 64; y += 32) {
       for (let x = 0; x < 128; x += 32) {
@@ -357,7 +356,7 @@ function animationPNJ(
     }
   }
 
-  //? Changer de frame
+  //* Changer de frame
   if (timer && !CurrentPNJ.currentFrame) {
     CurrentPNJ.indexFrame++;
     CurrentPNJ.currentFrame = true;
@@ -367,7 +366,7 @@ function animationPNJ(
     CurrentPNJ.currentFrame = false;
   }
 
-  //? Remettre l'index au début
+  //* Remettre l'index au début
   if (CurrentPNJ.indexFrame >= PNJTexturesList.length) {
     CurrentPNJ.indexFrame = 0;
   }
@@ -377,7 +376,7 @@ function animationPNJ(
   if (direction == "right") {
     image(PNJCurrentTextures, positionX, positionY, width, height);
 
-    //? direction GAUCHE
+    //* direction GAUCHE
   } else if (direction == "left") {
     scale(-1, 1);
     image(PNJCurrentTextures, -positionX - width, positionY, width, height);

@@ -32,7 +32,7 @@ function handleCollisionMobs(
   ) {
 
 
-    //& Collisions dessus / dessous de l'objet
+    //* Collisions dessus / dessous de l'objet
     if (
       agentX < objectX + objectWidth - objectWidth / 10 &&
       agentX + agentWidth > objectX + objectWidth / 10
@@ -57,7 +57,7 @@ function handleCollisionMobs(
 
 
 
-    //& Collisions sur les côtés de l'objet
+    //* Collisions sur les côtés de l'objet
     if (
       agentY < objectY + objectHeight - objectHeight / 10 &&
       agentY + agentHeight > objectY + objectHeight / 10
@@ -97,7 +97,7 @@ function handleCollisionMobs(
 //^ /* -------------------------------------------------------------------------- */
 function followPlayer(Mobs) {
 
-  //& Initialisation des variables
+  //* Initialisation des variables
   let walkAmount = Mobs.stepCount;
   Mobs.isFollowing = true;
 
@@ -108,12 +108,12 @@ function followPlayer(Mobs) {
   Mobs.movement = "walk";
   Mobs.direction = "right";
 
-  //& Se diriger vers le perso
+  //* Se diriger vers le perso
   if (distance < 0) {
     Mobs.direction = "left";
   }
 
-  //& Si je dois sauter, ... . Sinon, marcher.
+  //* Si je dois sauter, ... . Sinon, marcher.
   if (!MobsHaveToJump){
     if (Mobs.direction == "right") {
       walkAmount += followSpeed;
@@ -133,7 +133,7 @@ function doRound(Mobs) {
 
 
 
-  //& Initialisation des variables
+  //* Initialisation des variables
 
   Mobs.movement = "walk";
   Mobs.isFollowing = false;
@@ -146,7 +146,7 @@ function doRound(Mobs) {
 
   let haveToJump = Mobs.haveToJump;
 
-  //& FAIRE UNE RONDE
+  //* FAIRE UNE RONDE
   if (CurrentX >= MobEnd) {
     Mobs.direction = "left";
   } else if (CurrentX <= MobStart) {
@@ -154,11 +154,11 @@ function doRound(Mobs) {
   }
 
 
-  //& Se déplacer
-  //* Si je vais à droite
+  //* Se déplacer
+  //? Si je vais à droite
   if (Mobs.direction == "right") {
 
-    //* Si je dois sauter, s'orienter dans l'autre sens
+    //? Si je dois sauter, s'orienter dans l'autre sens
     if (haveToJump) {
       Mobs.direction = "left";
       haveToJump = false;
@@ -166,30 +166,30 @@ function doRound(Mobs) {
 
 
 
-      //* Sinon, marcher
+      //? Sinon, marcher
     } else {
       walkAmount += Mobs.speed;
     }
 
 
-    //* Si je vais à gauche
+    //? Si je vais à gauche
   } else {
 
-    //* Si je dois sauter, s'orienter dans l'autre sens
+    //? Si je dois sauter, s'orienter dans l'autre sens
     if (haveToJump) {
       Mobs.direction = "right";
       haveToJump = false;
       walkAmount += Mobs.speed
 
 
-      //* Sinon, marcher
+      //? Sinon, marcher
     } else {
       walkAmount -= Mobs.speed;
     }
   }
 
 
-  //& Retourner les variables
+  //* Retourner les variables
   Mobs.haveToJump = haveToJump;
   Mobs.stepCount = walkAmount;
   Mobs.xStart = MobStart;
@@ -203,10 +203,10 @@ function doRound(Mobs) {
 /* -------------------------------------------------------------------------- */
 function lookThePlayer(Mobs) {
 
-    //& Initialisation des variables
+    //* Initialisation des variables
     let CurrentX = Mobs.x;
 
-   //& Regarder le joueur
+   //* Regarder le joueur
    if (characterPositionX > CurrentX) {
     Mobs.direction = "right";
   } else if (characterPositionX < CurrentX) {

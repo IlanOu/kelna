@@ -1,4 +1,4 @@
-// Obtenir le nombre maximum de cases dans le rectangle
+//~ Obtenir le nombre maximum de cases dans le rectangle
 function getNumberOfCasesInRect(bigRectWidth, bigRectHeight, rectWidth, rectHeight) {
     let numberOfCasesX = Math.floor(bigRectWidth / rectWidth)
     let numberOfCasesY = Math.floor(bigRectHeight / rectHeight)
@@ -7,10 +7,9 @@ function getNumberOfCasesInRect(bigRectWidth, bigRectHeight, rectWidth, rectHeig
 }
 
 
-// création d'une grille de N colonnes et M lignes 
+//~ création d'une grille de N colonnes et M lignes 
 function createTable(columnNumber, rowNumber) {
     let grid = []
-
     for (let x = 0; x < columnNumber; x++) {
         let row = []
         for (let y = 0; y < rowNumber; y++) {
@@ -22,12 +21,12 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
+//~ Trouve la valeur de l'index de la 2eme array 
 function findIndexValueIn2dArray(array, value) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
             if (value === array[column][row]) {
                 return [column, row];
-
             }
         }
     }
@@ -35,6 +34,7 @@ function findIndexValueIn2dArray(array, value) {
 }
 
 
+//~ Trouve l'index de la position du 2eme array
 let previous_index_pos;
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
@@ -55,6 +55,7 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 }
 
 
+//~ Rect in is Rect
 function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, rect2Width, rect2Height) {
     return (rect1X < rect2X + rect2Width &&
         rect1X + rect1Width > rect2X &&
@@ -62,12 +63,14 @@ function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, r
         rect1Height + rect1Y > rect2Y);
 }
 
+
+//~ Point dans le rect
 function pointIsInRect(x, y, rectX, rectY, rectW, rectH) {
     return x >= rectX && x <= rectX + rectW && y >= rectY && y <= rectY + rectH;
 }
 
 
-// contraindre les position X, Y dans le containeur
+//~ contraindre les position X, Y dans le containeur
 function containedPositionsIn(objectPositionX,
     objectPositionY,
     objectWidth,
@@ -82,22 +85,29 @@ function containedPositionsIn(objectPositionX,
         containerHeight - objectHeight)]
 }
 
-// ajouter la gravité à la positionY !! ATTENTION, la velocité doit être ACTUALISEE !
+
+//~ ajouter la gravité à la positionY !! ATTENTION, la velocité doit être ACTUALISEE !
 function getPositionWithGravity(positionY, velocityY, gravityForce, objectMass) {
     velocityY += (gravityForce * objectMass) / 20;
     positionY += velocityY;
     return [positionY, velocityY]
 }
 
+
+//~ Est mis à la terre
 function isGrounded(objectPositionX, objectPositionY, objectWidth, objectHeight, groundX1, groundY1, groundX2) {
     return rectIsInRect(objectPositionX, objectPositionY + objectHeight - 1, objectWidth, objectHeight, groundX1, groundY1, groundX2, groundY1)
 }
 
+
+//~ supprimer les doublons
 function removeDuplicates(array) {
     return array.filter((item,
         index) => array.indexOf(item) === index);
 }
 
+
+//~ nombre limite dans la plage
 function limitNumberWithinRange(number, minimum, maximum) {
     let parsed = parseInt(number)
     return Math.min(Math.max(parsed, minimum), maximum)
@@ -105,7 +115,7 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 
-// PLAY MUSIC 
+//~ Joue de la music 
 let PlayMusic = () => {
 
     if (MusicIsActivate === false && Pressing === false) {
@@ -126,8 +136,7 @@ let PlayMusic = () => {
 }
 
 
-
-// PLAY SONG 
+//~ Joue les songs
 let PlaySong = () => {
 
     if (SongIsActivate === false && Pressing === false) {
@@ -146,11 +155,10 @@ let PlaySong = () => {
 }
 
 
-
-// interact health
+//~ interact health
 let ForInteract = () => {
 
-    //Interaction avec les pavés tactiles
+    //? Interaction avec les pavés tactiles
     if (gettingHurt) {
         Degat(1);
         gettingHurt = false;
@@ -167,17 +175,17 @@ let ForInteract = () => {
         DownHeart(1);
         removeHeart = false;
     }
-
-
 }
 
 
+//~ Degat
 let Degat = (NbreDeDegat) => {
-    healthPlayer -= NbreDeDegat; // Enlever point de vie
-    healthPlayer = constrain(healthPlayer, 0, maxHealth); // Depasse pas la vie, de 0 et de la vie max
+    healthPlayer -= NbreDeDegat; //& Enlever point de vie
+    healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
 }
 
 
+//~ Regeneration
 let Regen = () => {
     if (healthPlayer < maxHealth) {
         healthPlayer += 1;
@@ -186,6 +194,7 @@ let Regen = () => {
 }
 
 
+//~ Ajout des coeurs
 let OneHeart = () => {
     healthPlayer += 1;
     maxHealth += 1;
@@ -193,14 +202,15 @@ let OneHeart = () => {
 }
 
 
+//~ Supprime des coeurs
 let DownHeart = () => {
     healthPlayer -= 1;
     maxHealth -= 1;
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
-
-
 }
 
+
+//~ Au clic de la souris pressing est lis a false automatiquement
 function mouseClicked() {
     if (Pressing === true) {
         Pressing = false;
@@ -208,6 +218,7 @@ function mouseClicked() {
 }
 
 
+//~ obtenir des cartes à vérifier
 function getMapsToCheck (characterPositionX, characterPositionY){
     let mapsToCheck = []
 
@@ -255,7 +266,6 @@ function getMapsToCheck (characterPositionX, characterPositionY){
 }
 
 
-
 // ~ Agrandir un carré
 function expandRect(x,y,width,height,valueX = 1, valueY = 1){
     let NewWidth = width * valueX
@@ -267,7 +277,7 @@ function expandRect(x,y,width,height,valueX = 1, valueY = 1){
 }
 
 
-//? positions d'un caré en x et y, pas en pixel.
+//~ positions d'un caré en x et y, pas en pixel.
 function getPositionAt(mapName = "", positionX = 0, positionY = 0){
     let mapExist = false;
     let numberOfCasesX = Maps.numberOfRow
@@ -306,6 +316,8 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0){
     }
 }
 
+
+//~ Dessine les touches pour les interactions
 function drawKey(key){
     let keyBackground = [   (characterPositionX), 
                             characterPositionY - 50, 
@@ -320,6 +332,8 @@ function drawKey(key){
     drawText(key, 20, textKey, "center")
 }
 
+
+//~ Dessine les touches pour les interactions
 function drawKeyAt(key, positionX, positionY, haveBackground = false){
     let keyBackground = [   (positionX), 
                             positionY - 50, 
@@ -343,6 +357,7 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false){
 }
 
 
+//~ Recupere le nom du PNJ a l'interaction 
 function getPNJName(){
     let namePNJ = ""
 
@@ -355,7 +370,7 @@ function getPNJName(){
 }
 
 
-
+//~ Recupere si le PNJ regarde le joueur
 function getPNJSeePlayer(namePNJ) {
     let echangePNJ = false
 
@@ -368,9 +383,7 @@ function getPNJSeePlayer(namePNJ) {
 }
 
 
-
-
-
+//~ Recupere si le PNJ peut faire un echange 
 function getEchangePNJ(namePNJ){
 
     let echangePNJ = []
@@ -381,9 +394,10 @@ function getEchangePNJ(namePNJ){
         }
     });
     return echangePNJ
-
 }
 
+
+//~ Recupere les items et son nom
 function getItems(nameItem){
 
     let item = {}
@@ -393,31 +407,27 @@ function getItems(nameItem){
             item = element[1]
         }
     });
-    
     return item
-
 }
 
 
-
+//~ Coupe un tileset
 function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]) {
     let tilesList = []
 
     horizontalSquareCount = tilesetResolution[0] / tileResolution[0];
     verticalSquareCount = tilesetResolution[1] / tileResolution[1];
 
-
     for (let y = 0; y < tilesetResolution[1]; y += tileResolution[1]) {
         for (let x = 0; x < tilesetResolution[0]; x += tileResolution[0]) {
             tilesList.push(tileset.get(x, y, tileResolution[0], tileResolution[1]));
         }
     }
-
     return tilesList
 }
 
 
-
+//~ Troc
 function troc(requis,gain){
     if (Inventory.includes(requis)){
         popUp("Voulez vous vraiment echanger cet objet ?", "choice")
@@ -429,6 +439,8 @@ function troc(requis,gain){
 }
 
 
+
+//~ Pop up
 function popUp(message, options = "info" ){
 
     let interfacePopUpWidth = 800

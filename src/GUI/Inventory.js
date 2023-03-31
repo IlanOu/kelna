@@ -1,5 +1,5 @@
-let addItemToInventory = (item) => {
-    
+//^ Ajouter a l'inventaire
+let addItemToInventory = (item) => { 
 
     if (Inventory.length < 3) {
 
@@ -24,8 +24,7 @@ let addItemToInventory = (item) => {
 };
 
 
-
-
+//^ Creation de l'inventaire
 let displayInventory = () => {
     if (endInventory === false) {
         let ForSlotTwoX = ForSlotOneX;
@@ -79,8 +78,7 @@ let displayInventory = () => {
 };
 
 
-
-
+//^ BACKUP
 //#region BACKUP
 
 

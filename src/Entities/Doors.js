@@ -21,7 +21,7 @@ function doorsManager(){
 
 
 
-//! Dessiner la porte devant la maison
+//~ Dessiner la porte devant la maison
 function drawDoor (door){
     fill(255);
 
@@ -32,7 +32,7 @@ function drawDoor (door){
     let heightDoor = engine1HeightDoors
 
     
-    //& Variables Collisions / HitBox Mobs
+    //* Variables Collisions / HitBox Mobs
     let doorBoundingBox = expandRect(
         doorX,
         doorY,
@@ -42,7 +42,7 @@ function drawDoor (door){
         door.detectDist
     );
 
-    //& Détéction du joueur
+    //* Détéction du joueur
     canEnterInHouse = rectIsInRect(
         characterPositionX,
         characterPositionY,
@@ -57,16 +57,16 @@ function drawDoor (door){
     if (canEnterInHouse){
         behindThisDoor = door.destination
         
-        //& Remettre la maison en position
+        //? Remettre la maison en position
         xStartHouse = 0
         yStartHouse = 200
 
-        //& Remettre le spawn du perso en position
+        //? Remettre le spawn du perso en position
         characterInsidePosX = (Houses[behindThisDoor].xStart * rectWidth) + xStartHouse
         characterInsidePosY = (Houses[behindThisDoor].yStart * rectHeight) + yStartHouse
     }
 
-    //& Debug Mod
+    //* Debug Mod
     if (debugMod) {
         stroke(255)
         fill(255, 0, 0, 70);
@@ -84,7 +84,7 @@ function drawDoor (door){
 
 
 
-//! Dessiner la porte dans la maison
+//~ Dessiner la porte dans la maison
 function drawDoorInside (door){
     fill(255);
 
@@ -95,7 +95,7 @@ function drawDoorInside (door){
     let heightDoor = engine2HeightDoors
     
 
-    //& Variables Collisions / HitBox Mobs
+    //* Variables Collisions / HitBox Mobs
     let doorBoundingBox = expandRect(
         doorX,
         doorY,
@@ -105,7 +105,7 @@ function drawDoorInside (door){
         door.detectDist
     );
 
-    //& Détéction du joueur
+    //* Détéction du joueur
     canGoOutTheHouse = rectIsInRect(
         characterPositionX,
         characterPositionY,
@@ -117,7 +117,7 @@ function drawDoorInside (door){
         doorBoundingBox[3]
     );
 
-    //& Debug Mod
+    //* Debug Mod
     if (debugMod) {
         fill(255, 0, 0, 70);
         rect(
@@ -129,6 +129,6 @@ function drawDoorInside (door){
         fill(255);
     }
 
-    //& Dessiner la porte
+    //* Dessiner la porte
     rect(doorX, doorY-heightDoor/2, widthDoor, heightDoor)
 }
