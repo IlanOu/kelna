@@ -3,8 +3,9 @@
 function keyPressed() {
     //^ Bouton echap
     if (keyCode == ESCAPE) {
-        if (inGame)
-        gameIsPaused = !gameIsPaused
+        if (inGame){
+            gameIsPaused = !gameIsPaused
+        }
     }
 
     //^ Barre espace
@@ -32,7 +33,7 @@ function keyPressed() {
     if (canInteractWithPNJ) {
         //^ Touche E
         if (keyCode == 69) {
-            PressInteractPNJ = true
+            PressInteractPNJ = !PressInteractPNJ
         }
     }
 
@@ -58,7 +59,7 @@ function keyPressed() {
 
     ///^ Touche O du clavier
     if(keyCode == 79){
-        addItemToInventory(SwordPierre, "Swords");
+        addItemToInventory(ForItems.Items.sword_1);
     }
 
     //^ Touche 1 du pavé des nombres
@@ -127,7 +128,7 @@ function keyReleased() {
 
 function mousePressed() {
     if (mouseButton === LEFT && inGame && settingsHome === false) {
-        console.log("Personnage qui attaque")
+        // console.log("Personnage qui attaque")
         leftClickPressed = true
     }
 }

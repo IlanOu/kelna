@@ -14,10 +14,10 @@ function drawInterface([x, y, w, h], img = undefined) {
 
 //~ Afficher un bouton
 function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
-    
-    if (strokeToggle){
+
+    if (strokeToggle) {
         stroke(0)
-    }else{
+    } else {
         noStroke()
     }
 
@@ -320,16 +320,14 @@ function drawSettingInPause() {
 function setupInteractions() {
     fill(255);
 
+    if (engineOne) {
 
-    if (engineOne){
-
-        if(canEnterInHouse){
+        if (canEnterInHouse) {
             drawKey("E")
         }
 
-        if(canInteractWithPNJ){
+        if (canInteractWithPNJ) {
             drawKey("E")
-            
         }
     }
 
@@ -337,8 +335,94 @@ function setupInteractions() {
 }
 
 
+function drawTroc(x, y, w, h) {
+
+    
+    //? Affichage de la ligne troc
+    let currentPNJ = getPNJName()
+    let PNJSeePlayer = getPNJSeePlayer(currentPNJ)
+    let echangePNJ = getEchangePNJ(currentPNJ)
+
+
+    //? Lignes
+    let widthRow = w
+    let heightRow = h / echangePNJ.length//& <- nombre de ligne 
+    let postionXRow = x
+
+
+    //? Elements d'échange
+    let widthElement = 20
+    let heightElement = 20
+
+
+
+    //? Affichage du trocBloc
+    fill(255, 223, 15)
+    rect(x, y, w, h)
+
+    if (!PNJSeePlayer){
+        PressInteractPNJ = false
+    }
+
+    let buttonHasBeenClicked = false;
+
+
+    echangePNJ.forEach(echange => {
+
+        //? Declaration de variables
+        let indexEchange = echangePNJ.indexOf(echange)
+        let positionYRow = y + (heightRow * indexEchange)
+        let positionYElement = positionYRow + heightRow / 2 - heightElement / 2
+
+        //? Lignes
+        fill(255, 43, 15)
+        let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
+
+        if (buttonClicked(positionRow)) {
+            buttonHasBeenClicked = true;
+            popUpShown = true
+        } else if (!buttonHasBeenClicked){
+
+            rect(postionXRow, positionYRow, widthRow, heightRow)
+
+            //? Pour chaque ligne creation d'un slot
+            Object.entries(echange).forEach(items => {
+                if (items[0] == "demande") {
+                    items[1].forEach(element => {
+    
+                        //? Declaration
+                        let indexElement = items[1].indexOf(element)
+                        let positionXElement = x + (widthElement * indexElement)
+                        let currentItem = getItems(element)
+    
+                        //? Affichage d'un item
+                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                    });
+                } else if (items[0] == "donne") {
+                    items[1].forEach(element => {
+    
+                        //? Declaration
+                        let indexElement = items[1].indexOf(element)
+                        let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
+                        let currentItem = getItems(element)
+                        
+                        //? Affichage d'un item
+                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);  
+                    });
+                }
+            });
+        } 
+    });
+
+    if (popUpShown){
+        troc(getItems("sword_1"), getItems('sword_2'))
+    }
+
+}
+
+
 //~ INTERACTION PNJ SWORD
-function InteractionSword(){
+function InteractionSword() {
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
@@ -346,28 +430,37 @@ function InteractionSword(){
     let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
     let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
 
-    let buttonAddSwordW = 150
-    let buttonAddSwordH = 20
-    let buttonAddSwordX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonAddSwordW / 2)
-    let buttonAddSwordY = interfaceMenuY + (interfaceMenuHeight / 4)
-    let textAddSwordX = buttonAddSwordX + (buttonAddSwordW / 2)
+    // let buttonAddSwordW = 150
+    // let buttonAddSwordH = 20
+    // let buttonAddSwordX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonAddSwordW / 2)
+    // let buttonAddSwordY = interfaceMenuY + (interfaceMenuHeight / 4)
+    // let textAddSwordX = buttonAddSwordX + (buttonAddSwordW / 2)
 
-    let buttonSword = [buttonAddSwordX, buttonAddSwordY, buttonAddSwordW, buttonAddSwordH]
+    // let buttonSword = [buttonAddSwordX, buttonAddSwordY, buttonAddSwordW, buttonAddSwordH]
+
+    // let upgradeSword = [buttonAddSwordX, buttonAddSwordY + 50, buttonAddSwordW, buttonAddSwordH];
 
     fill(255)
     drawInterface(interfaceMenu, GUIInteract)
 
-    fill(255)
-    drawButton(buttonSword)
-    drawText("ADD SWORD", 15, [textAddSwordX, buttonAddSwordY], "center")
+    // fill(255)
+    // drawButton(buttonSword)
+    // drawText("Add Sword", 15, [textAddSwordX, buttonAddSwordY], "center")
+
+    // fill(255)
+    // drawButton(upgradeSword)
+    // drawText("Upgrade Sword", 15, [upgradeSword[0] + upgradeSword[2] / 2, upgradeSword[1]], "center")
 
 
-    if (buttonClicked(buttonSword)) {
-        addItemToInventory(SwordBois, "Swords");
-        PressInteractPNJ = false
-        SwordAlreadyTaken = true
+    // if (buttonClicked(buttonSword)) {
+    //     addItemToInventory(ForItems.Items.sword_1);
+    //     PressInteractPNJ = false
+    //     SwordAlreadyTaken = true
+    // }else if (buttonClicked(upgradeSword)){
+    //     PressInteractPNJ = false
+    // }
 
-    }
+    drawTroc(interfaceMenuX, interfaceMenuY, interfaceMenuWidth / 2, interfaceMenuHeight)
 }
 
 
@@ -473,7 +566,7 @@ function drawStats() {
 
 
         if (buttonClicked(buttonReturnToHome)) {
-            console.log("zsjjsdj")
+            // console.log("zsjjsdj")
             playerStat = true
             inGame = false
             gameIsPlaying = false
@@ -499,8 +592,7 @@ function setupUI() {
     if (inGame && settingsHome === false) {
         //~ Si je fait echap (dans le menu pause)
 
-        if (PressInteractPNJ === true && SwordAlreadyTaken === false){
-            gameIsPlaying = false
+        if (PressInteractPNJ && !SwordAlreadyTaken) {
             InteractionSword()
         }
         if (settingsPause) {
@@ -539,7 +631,7 @@ function setupUI() {
         gameIsPlaying = false
     }
 
-    
+
 
 
 }

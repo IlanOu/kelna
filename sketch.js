@@ -12,7 +12,7 @@ function setup() {
 
   // Ma tileset fait 256x256 px et chaque tile fait du 16x16
   tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
-
+  itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
 
 }
 
@@ -36,6 +36,7 @@ function preload() {
   PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
 
 
+  tilesetItems = loadImage("assets/items/tileiteam.png")
 
   //^ Textures
   stone = loadImage("assets/textures/Pierre.jpg")
@@ -45,12 +46,6 @@ function preload() {
 
   //^ Personnage
   characterTextures = loadImage("assets/animations/spritesheetYvo.png")
-  
-
-  //^ Items Images
-  Sword1 = loadImage("assets/items/sword.png")
-  SwordBois = loadImage("assets/items/swordb.webp")
-  SwordPierre = loadImage("assets/items/swordp.webp")
 
   //^ JSON preload
   ForItems = loadJSON("json/IsItems.json");
@@ -82,34 +77,35 @@ function draw() {
     inGame = true
     //playerDead = false
     playerStat = false
-    
-    if (engineOne) {
-
-      //* Afficher le fond du jeu
-      drawBackgroundImage(backgroundImage)
-      
-      //* Afficher la map
-      drawGrid()
-
-      //* Afficher les entités
-      doorsManager()
-      PNJManager()
-      MobManager()
-      //* Afficher le joueur (le perso passe devant les entités)
-      character()
-      
-      //* Afficher l'avant plan de la map
-      drawGridForeground()
-
-
-    }else{
-      
-      drawHouse()
-
-      PNJManager()
-      characterView2()
-      
-      drawHouseForeground()
+    if (!gameIsPaused){
+      if (engineOne) {
+  
+        //* Afficher le fond du jeu
+        drawBackgroundImage(backgroundImage)
+        
+        //* Afficher la map
+        drawGrid()
+  
+        //* Afficher les entités
+        doorsManager()
+        PNJManager()
+        MobManager()
+        //* Afficher le joueur (le perso passe devant les entités)
+        character()
+        
+        //* Afficher l'avant plan de la map
+        drawGridForeground()
+  
+  
+      }else{
+        
+        drawHouse()
+  
+        PNJManager()
+        characterView2()
+        
+        drawHouseForeground()
+      }
     }
     
 

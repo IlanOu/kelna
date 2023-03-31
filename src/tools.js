@@ -148,8 +148,6 @@ let PlaySong = () => {
 
 
 // interact health
-
-
 let ForInteract = () => {
 
     //Interaction avec les pavés tactiles
@@ -343,4 +341,162 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false){
         drawText(key, 20, textKey, "center", [0, 0, 0])
     }
         
+}
+
+
+function getPNJName(){
+    let namePNJ = ""
+
+    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+        if (PNJ[1].seePlayer){
+            namePNJ = PNJ[0]
+        }
+    });
+    return namePNJ
+}
+
+
+
+function getPNJSeePlayer(namePNJ) {
+    let echangePNJ = false
+
+    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+        if (PNJ[0] == namePNJ) {
+            echangePNJ = PNJ[1].seePlayer
+        }
+    });
+    return echangePNJ
+}
+
+
+
+
+
+function getEchangePNJ(namePNJ){
+
+    let echangePNJ = []
+
+    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+        if (PNJ[0] == namePNJ) {
+            echangePNJ = PNJ[1].echange
+        }
+    });
+    return echangePNJ
+
+}
+
+function getItems(nameItem){
+
+    let item = {}
+
+    Object.entries(ForItems.Items).forEach(element => {
+        if (element[0] == nameItem) {
+            item = element[1]
+        }
+    });
+    
+    return item
+
+}
+
+
+
+function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]) {
+    let tilesList = []
+
+    horizontalSquareCount = tilesetResolution[0] / tileResolution[0];
+    verticalSquareCount = tilesetResolution[1] / tileResolution[1];
+
+
+    for (let y = 0; y < tilesetResolution[1]; y += tileResolution[1]) {
+        for (let x = 0; x < tilesetResolution[0]; x += tileResolution[0]) {
+            tilesList.push(tileset.get(x, y, tileResolution[0], tileResolution[1]));
+        }
+    }
+
+    return tilesList
+}
+
+
+
+function troc(requis,gain){
+    if (Inventory.includes(requis)){
+        popUp("Voulez vous vraiment echanger cet objet ?", "choice")
+        Inventory[Inventory.indexOf(requis)] = gain
+    }else{
+        popUp("Vous n'avez pas les objets requis !")
+        return
+    }
+}
+
+
+function popUp(message, options = "info" ){
+
+    let interfacePopUpWidth = 800
+    let interfacePopUpHeight = 800
+    let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
+    let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
+    let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
+
+
+    fill(255)
+    drawInterface(interfacePopUp)
+
+    if (options == "info"){
+        let buttonPopUpW = 150
+        let buttonPopUpH = 20
+        let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
+        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
+
+        let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
+
+        fill(255)
+        drawButton(buttonPopUp)
+        drawText("OK", 15, [textPopUpX, buttonPopUpY], "center")
+
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+
+
+        if (buttonClicked(buttonPopUp)) {
+            popUpShown = false
+        }
+    }else if (options == "choice"){
+        console.log("yey")
+        let buttonPopUpWYes = 150
+        let buttonPopUpHYes = 20
+        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
+        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
+
+        let buttonPopUpYes = [buttonPopUpXYes, buttonPopUpYYes, buttonPopUpWYes, buttonPopUpHYes]
+
+
+        let buttonPopUpWNo = 150
+        let buttonPopUpHNo = 20
+        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWNo / 2)
+        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.8) + buttonPopUpHYes
+        let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
+
+        let buttonPopUpNo = [buttonPopUpXNo, buttonPopUpYNo, buttonPopUpWNo, buttonPopUpHNo]
+
+
+        fill(255)
+        drawButton(buttonPopUpYes)
+        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], "center")
+
+        fill(255)
+        drawButton(buttonPopUpNo)
+        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], "center")
+
+
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+
+
+        if (buttonClicked(buttonPopUpYes) || buttonClicked(buttonPopUpNo)) {
+            popUpShown = false
+        }
+    }
+
+
 }

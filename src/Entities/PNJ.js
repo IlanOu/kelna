@@ -339,7 +339,6 @@ function animationPNJ(
       }
     }
   } else if (movement == "idle") {
-    console.log("idle")
     for (let y = 0; y < 32; y += 32) {
       for (let x = 0; x < 128; x += 32) {
         PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));

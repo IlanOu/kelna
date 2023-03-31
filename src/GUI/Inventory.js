@@ -1,36 +1,32 @@
-let addItemToInventory = (image, filtre) => {
+let addItemToInventory = (item) => {
+    
+
     if (Inventory.length < 3) {
 
-        if (currentSlot === 0 && filtre === "Swords") {
-            if (Inventory[0] && Inventory[0].filtre === "Swords") {
-                Inventory[0] = image;
-            } else {
-                Inventory[0] = image;
+        switch (item.category) {
+            case "weapon":
+                Inventory[0] = item
+                
+                break;
 
-            }
-        } if (currentSlot === 1 && filtre === "Bows") {
-            Inventory[1] = image;
-        } if (currentSlot === 2 && filtre === "Potions") {
-            Inventory[2] = image;
+            case "food":
+                Inventory[1] = item
+
+                break;
+
+            case "other":
+                Inventory[2] = item
+
+                break;
         }
-
-
-        else if (filtre === "Swords") {
-            Inventory[0] = image;
-        } else if (filtre === "Bows") {
-            Inventory[1] = image;
-        } else if (filtre === "Potions") {
-            Inventory[2] = image;
-        }
-    }
+        
+    }    
 };
 
 
 
 
 let displayInventory = () => {
-
-
     if (endInventory === false) {
         let ForSlotTwoX = ForSlotOneX;
         let ForSlotThreeX = ForSlotTwoX;
@@ -55,8 +51,8 @@ let displayInventory = () => {
         }
 
         rect(ForSlotOneX, ForAllSlotY, WidthSlot, HeightSlot);
-        rect(ForSlotTwoX, ForAllSlotY + 87, WidthSlot, HeightSlot);
-        rect(ForSlotThreeX, ForAllSlotY + 174, WidthSlot, HeightSlot);
+        rect(ForSlotTwoX, ForAllSlotY + HeightSlot, WidthSlot, HeightSlot);
+        rect(ForSlotThreeX, ForAllSlotY + HeightSlot*2, WidthSlot, HeightSlot);
 
         for (let i = 0; i < Inventory.length; i++) {
             if (Inventory[i]) {
@@ -72,7 +68,11 @@ let displayInventory = () => {
                     x = ForSlotThreeX
                     y = ForAllSlotY + 174
                 }
-                image(Inventory[i], x, y, WidthSlot, HeightSlot);
+                // let imageItem = createImg(Inventory[i].img, "item");
+                // imageItem.hide();
+                // image(imageItem, x, y, WidthSlot, HeightSlot);
+
+                image(itemList[Inventory[i].itemNumber], x, y, WidthSlot, HeightSlot);  
             }
         }
     }
@@ -82,6 +82,33 @@ let displayInventory = () => {
 
 
 //#region BACKUP
+
+
+
+// if (Inventory.length < 3) {
+
+//     if (currentSlot === 0 && filtre === "Swords") {
+//         if (Inventory[0] && Inventory[0].filtre === "Swords") {
+//             Inventory[0] = image;
+//         } else {
+//             Inventory[0] = image;
+
+//         }
+//     } if (currentSlot === 1 && filtre === "Bows") {
+//         Inventory[1] = image;
+//     } if (currentSlot === 2 && filtre === "Potions") {
+//         Inventory[2] = image;
+//     }
+
+
+//     else if (filtre === "Swords") {
+//         Inventory[0] = image;
+//     } else if (filtre === "Bows") {
+//         Inventory[1] = image;
+//     } else if (filtre === "Potions") {
+//         Inventory[2] = image;
+//     }
+// }
 
 // let displayInventory = () => {
 

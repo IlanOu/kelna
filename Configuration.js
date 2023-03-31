@@ -2,6 +2,9 @@
 let debugMod = false;
 
 
+let tilesetItems;
+
+
 //^ Textures
 //#region //~ Textures
 let stone;
@@ -145,6 +148,7 @@ let yStartHouse = 0;
 
 //^ Interfaces
 
+
 //~ Interfaces
 let interactionWidth = 30;
 let interactionHeight = 30;
@@ -227,6 +231,15 @@ let playerDead = false
 
 //~  Variables pour le JSON des items
 let ForItems;
+let itemList = [];
+
+
+//~ Variables pour les popup
+let popUpShown = false;
+
+
+
+
 
 //^ Autres
 //#region //~ physique
