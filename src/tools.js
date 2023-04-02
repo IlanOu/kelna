@@ -430,8 +430,13 @@ function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]
 //~ Troc
 function troc(requis,gain){
     if (Inventory.includes(requis)){
-        popUp("Voulez vous vraiment echanger cet objet ?", "choice")
-        Inventory[Inventory.indexOf(requis)] = gain
+        popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
+
+        if (playerAnswersYes){
+            Inventory[Inventory.indexOf(requis)] = gain
+            playerAnswersYes = false
+        }
+        
     }else{
         popUp("Vous n'avez pas les objets requis !")
         return
@@ -448,7 +453,6 @@ function popUp(message, options = "info" ){
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
     let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
-
 
     fill(255)
     drawInterface(interfacePopUp)
@@ -472,8 +476,9 @@ function popUp(message, options = "info" ){
         if (buttonClicked(buttonPopUp)) {
             popUpShown = false
         }
-    }else if (options == "choice"){
-        console.log("yey")
+
+    }
+    else if (options == "choice"){
         let buttonPopUpWYes = 150
         let buttonPopUpHYes = 20
         let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
@@ -502,12 +507,14 @@ function popUp(message, options = "info" ){
 
 
         drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+        // pour qu'il sois au milieu faut qu'il fasse : 800
 
-
-        if (buttonClicked(buttonPopUpYes) || buttonClicked(buttonPopUpNo)) {
+        if (buttonClicked(buttonPopUpYes)) {
+            playerAnswersYes = true
+            popUpShown = false
+        }
+        if (buttonClicked(buttonPopUpNo)) {
             popUpShown = false
         }
     }
-
-
 }

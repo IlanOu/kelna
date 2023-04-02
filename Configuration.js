@@ -208,6 +208,7 @@ let itemList = [];
 
 //~ Variables pour les popup
 let popUpShown = false;
+let playerAnswersYes = false;
 
 
 //~ Variable pour la tileset des items

@@ -7,17 +7,15 @@ let addItemToInventory = (item) => {
             case "weapon":
                 Inventory[0] = item
                 
-                break;
-
+            break;
             case "food":
                 Inventory[1] = item
 
-                break;
-
+            break;
             case "other":
                 Inventory[2] = item
 
-                break;
+            break;
         }
         
     }    
@@ -67,10 +65,6 @@ let displayInventory = () => {
                     x = ForSlotThreeX
                     y = ForAllSlotY + 174
                 }
-                // let imageItem = createImg(Inventory[i].img, "item");
-                // imageItem.hide();
-                // image(imageItem, x, y, WidthSlot, HeightSlot);
-
                 image(itemList[Inventory[i].itemNumber], x, y, WidthSlot, HeightSlot);  
             }
         }
