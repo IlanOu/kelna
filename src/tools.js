@@ -55,7 +55,7 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 }
 
 
-//~ Rect in is Rect
+//~ Rect is in Rect
 function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, rect2Width, rect2Height) {
     return (rect1X < rect2X + rect2Width &&
         rect1X + rect1Width > rect2X &&

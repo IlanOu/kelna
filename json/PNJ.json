@@ -1,20 +1,19 @@
 {
     "PNJS": {
         "PNJ1": {
-            "img": "",
-
             "color": "blue",
 
             "detectDistX": 2,
             "detectDistY": 2,
             "seePlayer": false,
 
-            "x": 800,
-            "y": 400,
+            "x": -100,
+            "y": 100,
 
             "xStart": 0,
             "xEnd": 0,
-            "globalStartX": 700,
+            "globalStartX": 50,
+            "globalStartY": 50,
 
             "velocityY": 0,
             "mass": 60,
@@ -26,8 +25,8 @@
             "width": 80,
             "height": 80,
 
-            "distance": 100,
-            "speed": 3,
+            "distance": 200,
+            "speed": 2,
             "followSpeed": 4,
 
             "stepCount": 0,
@@ -65,8 +64,6 @@
                 ]
         },
         "PNJ2": {
-            "img": "",
-
             "color": "green",
 
             "detectDistX": 2,

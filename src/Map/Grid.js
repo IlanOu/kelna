@@ -83,6 +83,18 @@ function drawGrid(){
     //? Afficher le plan du millieu
     displayGrid(Maps[element].layers[1], xStartWorld+(gridWidthPx*indexMap[1]), yStartWorld+(gridHeightPx*indexMap[0]), rectWidth, rectHeight)
   
+    if (debugMode){
+      fill(0,0,255)
+      noStroke()
+      textSize(15);
+      textAlign("left")
+      text(Maps[element].name, xStartWorld+(gridWidthPx*indexMap[1]) + 15, yStartWorld+(gridHeightPx*indexMap[0]) + 15)
+      noFill()
+      stroke(0, 0, 255)
+      rect(xStartWorld+(gridWidthPx*indexMap[1]), yStartWorld+(gridHeightPx*indexMap[0]), gridWidthPx, gridHeightPx)
+      fill(255)
+    }
+
   });
 }
 
