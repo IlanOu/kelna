@@ -35,7 +35,7 @@ function drawDoor (door){
     //* Variables Collisions / HitBox Mobs
     let doorBoundingBox = expandRect(
         doorX,
-        doorY,
+        doorY-heightDoor/2,
         widthDoor,
         heightDoor,
         door.detectDist,
@@ -68,7 +68,7 @@ function drawDoor (door){
 
     //* Debug Mod
     if (debugMod) {
-        stroke(255)
+        stroke(255,0,0)
         fill(255, 0, 0, 70);
         rect(
             doorBoundingBox[0],
@@ -77,6 +77,7 @@ function drawDoor (door){
             doorBoundingBox[3]
         );
         fill(255);
+        noStroke()
     }
 
   rect(doorX, doorY-heightDoor/2, widthDoor, heightDoor)

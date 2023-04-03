@@ -21,87 +21,26 @@ function PNJManager() {
 
 
 let drawPNJInside = (pnj) => {
+  //* Initialisation des variables
 
-  // ? Variables positions PNJ
-  let PNJDistance = pnj.distance + pnj.x;
-  let PNJY = pnj.y + yStartHouse;
-  let PNJEnd = PNJDistance + xStartHouse;
-  let PNJStart = pnj.x + xStartHouse;
-  let CurrentX = pnj.x + pnj.NbrePas + xStartHouse;
+  let PNJStart = pnj.globalStartX + xStartHouse;
+  let PNJDistance = pnj.distance + PNJStart;
+  let PNJEnd = PNJDistance;
 
-  // ? Variables Collisions / HitBox PNJ
-  let VillagerBoundingBox = expandRect(
-    CurrentX,
-    PNJY,
-    pnj.width,
-    pnj.height,
-    2,
-    2
-  );
+  pnj.x = pnj.globalStartX + xStartHouse + pnj.stepCount;
+  pnj.y = pnj.globalStartY + yStartHouse;
 
-  let seePlayer = rectIsInRect(
-    characterInsidePosX,
-    characterInsidePosY,
-    characterBoundingBoxWidth,
-    characterBoundingBoxHeight,
-    VillagerBoundingBox[0],
-    VillagerBoundingBox[1],
-    VillagerBoundingBox[2],
-    VillagerBoundingBox[3]
-  );
+  let PNJX = pnj.x;
+  let PNJY = pnj.y;
+  
 
-  // ? Debug Mod
-  if (debugMod) {
-    fill(255, 0, 0, 70);
-    rect(
-      VillagerBoundingBox[0],
-      VillagerBoundingBox[1],
-      VillagerBoundingBox[2],
-      VillagerBoundingBox[3]
-    );
-    fill(255);
-  }
+  //* Retourne les variables
+  pnj.x = PNJX;
+  pnj.y = PNJY;
+  pnj.xStart = PNJStart;
+  pnj.xEnd = PNJEnd;
 
-  // ? Direction left
-  if (CurrentX > PNJEnd) {
-    pnj.direction = "left";
-  }
-  // ? Direction right
-  if (CurrentX < PNJStart) {
-    pnj.direction = "right";
-  }
-
-  // ? Hitbox / Collisions
-  if (seePlayer) {    
-    canInteractWithPNJ = true
-
-    pnj.movement = "idle";
-    if (characterInsidePosX >= CurrentX) {
-      pnj.direction = "right";
-    } else {
-      pnj.direction = "left";
-    }
-  }else{
-    pnj.movement = "walk";
-    
-    if (pnj.direction == "right") {
-      pnj.NbrePas += pnj.vitesse;
-    }
-    if (pnj.direction == "left") {
-      pnj.NbrePas -= pnj.vitesse;
-    }
-  }
-  //? Creation du PNJ
-  animationPNJ(
-    pnj,
-    CurrentX,
-    PNJY,
-    pnj.width,
-    pnj.height,
-    pnj.direction,
-    pnj.movement,
-    pnj.color,
-  );
+  PNJMovementsInside(pnj);
 };
 
 
@@ -284,13 +223,14 @@ let PNJMovements = (pnj) => {
   }
 
 
-
-
   //* Debug Mod
   if (debugMod) {
-    fill(0, 0, 255, 70);
-    rect(CurrentX, PNJY, pnj.width, pnj.height);
+    stroke(255,0,0)
     fill(255, 0, 0, 70);
+    rect(CurrentX, PNJY, pnj.width, pnj.height);
+    
+    stroke(0,255,0)
+    fill(0, 255, 0, 10);
     rect(
       VillagerBoundingBox[0],
       VillagerBoundingBox[1],
@@ -298,6 +238,7 @@ let PNJMovements = (pnj) => {
       VillagerBoundingBox[3]
     );
     fill(255);
+    noStroke()
   }
 
   //* Afficher le PNJ
@@ -312,6 +253,93 @@ let PNJMovements = (pnj) => {
     pnj.color
   );
 };
+
+
+let PNJMovementsInside = (pnj) => {
+
+  console.log(pnj.haveToJump)
+
+  //* Variables positions PNJ
+  let CurrentX = pnj.x;
+  let PNJY = pnj.y;
+
+  //* Variables Collisions / HitBox PNJ
+  let VillagerBoundingBox = expandRect(
+    CurrentX,
+    PNJY,
+    pnj.width,
+    pnj.height,
+    pnj.detectDistX,
+    pnj.detectDistY
+  );
+
+
+  //* Zone de détection du PNJ
+  pnj.seePlayer = rectIsInRect(
+    characterInsidePosX,
+    characterInsidePosY,
+    characterBoundingBoxWidth,
+    characterBoundingBoxHeight,
+    VillagerBoundingBox[0],
+    VillagerBoundingBox[1],
+    VillagerBoundingBox[2],
+    VillagerBoundingBox[3]
+  );
+
+  //* Si le perso n'est pas vu, faire une ronde
+  if (!pnj.seePlayer) {
+    doRound(pnj);
+    pnj.movement = "walk"
+    canInteractWithPNJ = false
+  }else{
+    lookThePlayer(pnj);
+    pnj.movement = "idle"
+    canInteractWithPNJ = true
+  }
+
+
+  //* Ajouter le saut au PNJ
+  if (pnj.haveToJump) {
+    
+    if (pnj.direction == "left") {
+      pnj.direction = "right"
+    }else if (pnj.direction == "right"){
+      pnj.direction = "left";
+    }
+  }
+
+
+  //* Debug Mod
+  if (debugMod) {
+    stroke(255,0,0)
+    fill(255, 0, 0, 70);
+    rect(CurrentX, PNJY, pnj.width, pnj.height);
+    
+    stroke(0,255,0)
+    fill(0, 255, 0, 10);
+    rect(
+      VillagerBoundingBox[0],
+      VillagerBoundingBox[1],
+      VillagerBoundingBox[2],
+      VillagerBoundingBox[3]
+    );
+    fill(255);
+    noStroke()
+  }
+
+  //* Afficher le PNJ
+  animationPNJ(
+    pnj,
+    CurrentX,
+    PNJY,
+    pnj.width,
+    pnj.height,
+    pnj.direction,
+    pnj.movement,
+    pnj.color
+  );
+};
+
 
 
 //^ /* -------------------------------------------------------------------------- */

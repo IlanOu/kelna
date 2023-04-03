@@ -23,15 +23,11 @@ function mob(Mobs) {
 
   let MobsX = Mobs.x;
   let MobsY = Mobs.y;
-
   let MobsHaveToJump = Mobs.haveToJump;
-
   let MobsWidth = Mobs.width;
   let MobsHeight = Mobs.height;
-
   let MobsVelocityY = Mobs.velocityY;
   let MobsMass = Mobs.mass;
-
   let MobsIsJumping = Mobs.isJumping;
   let MobsJumpCount = Mobs.jumpCount;
 
@@ -211,6 +207,8 @@ let mobMovements = (Mobs) => {
     //? Afficher un !
     fill(255, 0, 0)
     drawKeyAt("!", CurrentX, MobY)
+
+    Mobs.movement = "idle";
   }else{
     if (Mobs.seePlayer) {
       followPlayer(Mobs);
@@ -228,6 +226,7 @@ let mobMovements = (Mobs) => {
 
   //* Debug Mod
   if (debugMod) {
+    stroke(255,0,0)
     fill(255, 0, 0, 70);
     rect(
       MobLittleBoundingBox[0],
@@ -235,7 +234,18 @@ let mobMovements = (Mobs) => {
       MobLittleBoundingBox[2],
       MobLittleBoundingBox[3]
     );
+
+    stroke(0,255,0)
+    fill(0, 255, 0, 10);
+    rect(
+      MobBoundingBox[0],
+      MobBoundingBox[1],
+      MobBoundingBox[2],
+      MobBoundingBox[3]
+    );
+    
     fill(255);
+    noStroke();
   }
 
   //* Afficher le Mob

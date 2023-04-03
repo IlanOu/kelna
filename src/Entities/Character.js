@@ -112,8 +112,10 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
   if (debugMod) {
+    stroke(255,0,0)
     fill(255, 0, 0, 70)
     rect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight)
+    noStroke()
   }
 
   //* animation MARCHER

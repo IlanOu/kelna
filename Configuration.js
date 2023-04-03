@@ -1,5 +1,5 @@
 //^ DEBUG MOD
-let debugMod = false;
+let debugMod = true;
 
 //^ Textures
 //#region //~ Textures
@@ -92,16 +92,11 @@ let arrayMap = [];
 //#region //~ Camera movements
 //! ========= Mode SMOOTH ========= 
 let smoothCamera = false
-
 let smoothCameraSpeed = 0.04
-
 let cameraSpeedR = 0;
 let newCharacterMovesSpeedR = 0
-
 let cameraSpeedL = 0;
 let newCharacterMovesSpeedL = 0
-
-
 
 let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
 let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
@@ -267,4 +262,5 @@ let MusicForCinematic = false;
 
 let CinematicForEnd = false;
 //#endregion
+
 
