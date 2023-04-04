@@ -124,7 +124,7 @@ let PlayMusic = () => {
         ColorForRectMusic = 50
         Pressing = true
 
-    } 
+    }
     else if (MusicIsActivate === true && Pressing === false) {
         MusicIsActivate = false
         SongBackground.pause()
@@ -219,7 +219,7 @@ function mouseClicked() {
 
 
 //~ obtenir des cartes à vérifier
-function getMapsToCheck (characterPositionX, characterPositionY){
+function getMapsToCheck(characterPositionX, characterPositionY) {
     let mapsToCheck = []
 
 
@@ -267,7 +267,7 @@ function getMapsToCheck (characterPositionX, characterPositionY){
 
 
 // ~ Agrandir un carré
-function expandRect(x,y,width,height,valueX = 1, valueY = 1){
+function expandRect(x, y, width, height, valueX = 1, valueY = 1) {
     let NewWidth = width * valueX
     let NewHeight = height * valueY
     x = x - (NewWidth / 2) + (width / 2)
@@ -278,54 +278,54 @@ function expandRect(x,y,width,height,valueX = 1, valueY = 1){
 
 
 //~ positions d'un caré en x et y, pas en pixel.
-function getPositionAt(mapName = "", positionX = 0, positionY = 0){
+function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let mapExist = false;
     let numberOfCasesX = Maps.numberOfRow
     let numberOfCasesY = Maps.numberOfColumns
     let indexMapX = 0;
     let indexMapY = 0;
-    
+
     World.worldsMap.forEach(row => {
-        if (row.includes(mapName)){
+        if (row.includes(mapName)) {
             mapExist = true;
             indexMapX = row.indexOf(mapName);
-        }else{
+        } else {
             indexMapY++
         }
     });
 
-    if (!mapExist){
+    if (!mapExist) {
         Object.entries(Houses).forEach(row => {
             row = row[0]
-            if (row.includes(mapName)){
+            if (row.includes(mapName)) {
                 mapExist = true;
                 indexMapX = row.indexOf(mapName);
-            }else{
+            } else {
                 indexMapY++
             }
         });
     }
-    
-    if (mapExist){
+
+    if (mapExist) {
         let pixelsX = (indexMapX * numberOfCasesX * rectWidth) + (positionX * rectWidth)
         let pixelsY = (indexMapY * numberOfCasesY * rectHeight) + (positionY * rectHeight)
-        
-        return {"pixelX": pixelsX, "pixelY": pixelsY}
-    }else{
+
+        return { "pixelX": pixelsX, "pixelY": pixelsY }
+    } else {
         throw new Error("Map name not found in World.json : " + mapName);
     }
 }
 
 
 //~ Dessine les touches pour les interactions
-function drawKey(key){
-    let keyBackground = [   (characterPositionX), 
-                            characterPositionY - 50, 
-                            interactionWidth, 
-                            interactionHeight]
+function drawKey(key) {
+    let keyBackground = [(characterPositionX),
+    characterPositionY - 50,
+        interactionWidth,
+        interactionHeight]
 
-    let textKey = [ characterPositionX + (keyBackground[2] / 2), 
-                    characterPositionY - 50 + (keyBackground[3] / 8)]
+    let textKey = [characterPositionX + (keyBackground[2] / 2),
+    characterPositionY - 50 + (keyBackground[3] / 8)]
 
     fill(255)
     drawButton(keyBackground)
@@ -334,35 +334,35 @@ function drawKey(key){
 
 
 //~ Dessine les touches pour les interactions
-function drawKeyAt(key, positionX, positionY, haveBackground = false){
-    let keyBackground = [   (positionX), 
-                            positionY - 50, 
-                            interactionWidth, 
-                            interactionHeight]
+function drawKeyAt(key, positionX, positionY, haveBackground = false) {
+    let keyBackground = [(positionX),
+    positionY - 50,
+        interactionWidth,
+        interactionHeight]
 
-    let textKey = [ positionX + (keyBackground[2] / 2), 
-                    positionY - 50 + (keyBackground[3] / 8)]
+    let textKey = [positionX + (keyBackground[2] / 2),
+    positionY - 50 + (keyBackground[3] / 8)]
 
-    if (haveBackground){
+    if (haveBackground) {
         drawButton(keyBackground, undefined, false)
     }
 
-    if (key == "!"){
+    if (key == "!") {
         drawText(key, 30, textKey, "center", [255, 0, 0])
 
-    }else{
+    } else {
         drawText(key, 20, textKey, "center", [0, 0, 0])
     }
-        
+
 }
 
 
 //~ Recupere le nom du PNJ a l'interaction 
-function getPNJName(){
+function getPNJName() {
     let namePNJ = ""
 
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
-        if (PNJ[1].seePlayer){
+        if (PNJ[1].seePlayer) {
             namePNJ = PNJ[0]
         }
     });
@@ -384,7 +384,7 @@ function getPNJSeePlayer(namePNJ) {
 
 
 //~ Recupere si le PNJ peut faire un echange 
-function getEchangePNJ(namePNJ){
+function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
 
@@ -398,7 +398,7 @@ function getEchangePNJ(namePNJ){
 
 
 //~ Recupere les items et son nom
-function getItems(nameItem){
+function getItems(nameItem) {
 
     let item = {}
 
@@ -427,32 +427,84 @@ function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]
 }
 
 
-//~ Troc
-function troc(requis,gain){
-    if (Inventory.includes(requis)){
-        popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
 
-        if (playerAnswersYes){
-            Inventory[Inventory.indexOf(requis)] = gain
-            playerAnswersYes = false
+function getIndexOfItemCategory(itemCategory) {
+
+    let index = null;
+
+    switch (itemCategory) {
+        case 'weapon':
+
+            index = 0;
+
+            break;
+
+        case "food":
+
+            index = 1
+
+            break;
+
+        case "other":
+
+            index = 2
+
+            break;
+
+    }
+
+    return index
+
+}
+
+
+
+
+//~ Troc
+function troc(requis, gain) {
+    let canTradeThisObject = false
+    // console.log(Inventory, requis, gain)
+    requis.every(objRequis => {
+
+
+        if (Inventory.includes(objRequis)) {
+            canTradeThisObject = true
+        } else {
+            canTradeThisObject = false
+
+            return false
         }
-        
-    }else{
+
+    })
+    if (canTradeThisObject) {
+        popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
+        if (playerAnswersYes) {
+
+            requis.forEach(objRequis => {
+                removeItemFromInventory(getIndexOfItemCategory(objRequis.category))
+            })
+
+            gain.forEach(objGain => {
+                addItemToInventory(objGain)
+            })
+            playerAnswersYes = false
+            haveToTrade = false
+        }
+    } else {
         popUp("Vous n'avez pas les objets requis !")
-        return
     }
 }
 
 
 
 //~ Pop up
-function popUp(message, options = "info" ){
+function popUp(message, options = "info") {
 
     let interfacePopUpWidth = 400
     let interfacePopUpHeight = 400
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
-    let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
+    // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
     image(BackPop, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
@@ -460,7 +512,7 @@ function popUp(message, options = "info" ){
     // drawInterface(interfacePopUp)
 
 
-    if (options == "info"){
+    if (options == "info") {
 
         waitingAnswer = true;
 
@@ -485,7 +537,7 @@ function popUp(message, options = "info" ){
         }
 
     }
-    else if (options == "choice"){
+    else if (options == "choice") {
 
         waitingAnswer = true;
 

@@ -467,6 +467,12 @@ function drawTroc(x, y, w, h) {
     let echangePNJ = getEchangePNJ(currentPNJ)
 
 
+    let TestGain;
+    let TestRequis;
+    let TestEncore;
+    let getTrade;
+
+
     //? Lignes
     let widthRow = w
     let heightRow = h / echangePNJ.length //& <- nombre de ligne 
@@ -477,12 +483,6 @@ function drawTroc(x, y, w, h) {
     let widthElement = 20
     let heightElement = 20
 
-
-
-    //? Affichage du trocBloc
-    // fill(255, 223, 15)
-    // rect(x, y, w, h)
-    //image(BackTroc, x,y,w,h)
 
     if (!PNJSeePlayer) {
         PressInteractPNJ = false
@@ -502,7 +502,13 @@ function drawTroc(x, y, w, h) {
         fill(255, 43, 15)
         let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
 
+        // ! ECHANGE NE SE MET PAS A 0 (gettrade) / POPUP QUI DISPAWN (apres l'echange)
+        if (haveToTrade) {
+
+            getTrade = echange
+        }
         if (buttonClicked(positionRow)) {
+            haveToTrade = true
             buttonHasBeenClicked = true;
             popUpShown = true
         } else if (!buttonHasBeenClicked) {
@@ -523,6 +529,8 @@ function drawTroc(x, y, w, h) {
                             let positionXElement = x + (widthElement * indexElement)
                             let currentItem = getItems(element)
 
+                            TestRequis = currentItem
+
 
                             //? Affichage du slot
                             image(Slot, positionXElement, positionYElement - 2, widthElement + 5, heightElement + 5);
@@ -537,6 +545,11 @@ function drawTroc(x, y, w, h) {
                             let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
                             let currentItem = getItems(element)
 
+
+                            TestGain = currentItem;
+
+
+
                             //? Affichage du slot
                             image(Slot, positionXElement - 6, positionYElement - 2, widthElement + 5, heightElement + 5);
                             //? Affichage d'un item
@@ -548,8 +561,32 @@ function drawTroc(x, y, w, h) {
         }
     });
 
+
+
     if (popUpShown) {
-        troc(getItems("sword_1"), getItems('sword_2'))
+
+
+
+        if (getTrade != undefined) {
+
+            let objectListDemande = [];
+
+            getTrade.demande.forEach(demandeObj => {
+
+                objectListDemande.push(getItems(demandeObj))
+
+            })
+
+            let objectListDonne = [];
+
+            getTrade.donne.forEach(donneObj => {
+
+                objectListDonne.push(getItems(donneObj))
+
+            })
+
+            troc(objectListDemande, objectListDonne)
+        }
     }
 
 }
