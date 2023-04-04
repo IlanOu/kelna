@@ -150,14 +150,16 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   //* animation DASH
   else if (movement == "dash") {
 
-    // for (let y = 0; y < 32; y += 32) {
-    //   for (let x = 0; x < 96; x += 32) {
-    //     characterTextureList.push(characterTexture_Dash.get(x, y, 32, 32));
-    //   }
-    // }
-
     for (let y = 128; y < 160; y += 32) {
       for (let x = 0; x < 64; x += 32) {
+        characterTextureList.push(characterTextures.get(x, y, 32, 32));
+      }
+    }
+
+  }else if (movement == "hit") {
+
+    for (let y = 32; y < 64; y += 32) {
+      for (let x = 0; x < 128; x += 32) {
         characterTextureList.push(characterTextures.get(x, y, 32, 32));
       }
     }
@@ -336,8 +338,6 @@ function character() {
         //? le monde bouge vers la gauche (la caméra se décale vers la droite)
         xStartWorld -= characterMovesSpeed
         characterPositionX -= characterMovesSpeed
-
-        
         
       }
     }
@@ -562,15 +562,28 @@ function character() {
         characterMovement = "dash"
       }
     }else{
-      if (rightArrowPressed) {
-        characterDirection = "right"
-        characterMovement = "walk"
-      } else if (leftArrowPressed) {
-        characterDirection = "left"
-        characterMovement = "walk"
-      } else {
-        characterDirection = characterLastDirection
-        characterMovement = "idle"
+      if (characterHitting){
+        if (rightArrowPressed) {
+          characterDirection = "right"
+          characterMovement = "hit"
+        } else if (leftArrowPressed) {
+          characterDirection = "left"
+          characterMovement = "hit"
+        } else {
+          characterDirection = characterLastDirection
+          characterMovement = "idle"
+        }
+      }else{
+        if (rightArrowPressed) {
+          characterDirection = "right"
+          characterMovement = "walk"
+        } else if (leftArrowPressed) {
+          characterDirection = "left"
+          characterMovement = "walk"
+        } else {
+          characterDirection = characterLastDirection
+          characterMovement = "idle"
+        }
       }
     }
     

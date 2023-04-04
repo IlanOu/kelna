@@ -91,6 +91,10 @@ function keyPressed() {
         }
         pressingKey = true;
     }
+
+    if (!gameIsPaused && gameIsPlaying){
+        characterHitting
+    }
 }
 
 
