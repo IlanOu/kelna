@@ -138,6 +138,9 @@ function drawPauseMenu() {
     let buttonSettings = [buttonSettingsX, buttonSettingsY, buttonSettingsW, buttonSettingsH]
 
 
+    fill(0,0,0,50)
+    rect(0,0,viewportDisplayWidth,viewportDisplayHeight);
+
     fill(255)
     drawInterface(interfaceMenu, GUIForEscape)
 
