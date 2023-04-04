@@ -58,8 +58,17 @@ function keyPressed() {
         currentSlot = 2;
     }
 
-    ///* Touche O du clavier
+    //* Touche O du clavier
     if(keyCode == 79){
+        addItemToInventory(ForItems.Items.food_1);
+    }
+
+    //* Touche P du clavier
+    if (keyCode == 80) {
+        addItemToInventory(ForItems.Items.bow_1);
+    }
+
+    if (keyCode == 73) {
         addItemToInventory(ForItems.Items.sword_1);
     }
 

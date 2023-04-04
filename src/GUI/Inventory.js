@@ -1,7 +1,7 @@
 //^ Ajouter a l'inventaire
 let addItemToInventory = (item) => { 
 
-    if (Inventory.length < 3) {
+    if (Inventory.length <= 3) {
 
         switch (item.category) {
             case "weapon":
@@ -18,8 +18,22 @@ let addItemToInventory = (item) => {
             break;
         }
         
+    }else {
+        console.error("Trop d'objet dans l'inventaire !", Inventory.length)
     }    
 };
+
+
+
+
+let removeItemFromInventory = (index) => {
+
+    if (index < 3  && index >= 0 ){
+        Inventory[index] = {};
+    }
+
+}
+
 
 
 //^ Creation de l'inventaire
@@ -65,7 +79,9 @@ let displayInventory = () => {
                     x = ForSlotThreeX
                     y = ForAllSlotY + 174
                 }
-                image(itemList[Inventory[i].itemNumber], x, y, WidthSlot, HeightSlot);  
+                if (Inventory[i].itemNumber != undefined){
+                    image(itemList[Inventory[i].itemNumber], x, y, WidthSlot, HeightSlot);  
+                }
             }
         }
     }

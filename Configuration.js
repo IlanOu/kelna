@@ -185,7 +185,7 @@ let removeHeart = false; //& Pour enlever un coeur
 
 
 //~  Variables pour l'inventaire
-let Inventory = [];
+let Inventory = [{},{},{}];
 let WidthSlot = 85;
 let HeightSlot = 85;
 let ForSlotOneX = 0;
@@ -220,6 +220,7 @@ let BackTroc;
 let Slot;
 let waitingAnswer = false;
 let BackPop;
+let haveToTrade = false;
 
 //#endregion Interfaces
 

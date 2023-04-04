@@ -102,7 +102,7 @@
             "echange": [
                 {
                     "demande": [
-                        "briquet"
+                        "food_1", "sword_1"
                     ],
                     "donne": [
                         "bow_1"
@@ -110,56 +110,42 @@
                 },
                 {
                     "demande": [
-                        "sword_1", "sword_2"
-                    ],
-                    "donne": [
-                        "bow_1"
-                    ]
-                },
-                {
-                    "demande": [
-                        "sword_1",
                         "sword_2"
                     ],
                     "donne": [
-                        "bow_1"
+                        "sword_3"
                     ]
                 },
                 {
                     "demande": [
-                        "sword_1",
-                        "sword_2",
-                        "sword_3",
-                        "sword_4"
+                        "sword_1"
                     ],
                     "donne": [
-                        "bow_1",
-                        "sword_1",
-                        "sword_2",
-                        "sword_3",
+                        "sword_2"
+                    ]
+                },
+                {
+                    "demande": [
+                        "sword_3"
+                    ],
+                    "donne": [
                         "sword_4"
                     ]
                 },
                 {
                     "demande": [
-                        "sword_1",
-                        "sword_2",
-                        "sword_3",
-                        "sword_4"
+                        "sword_1"
                     ],
                     "donne": [
-                        "bow_1"
+                        "sword_2"
                     ]
                 },
                 {
                     "demande": [
-                        "sword_1",
-                        "sword_2",
-                        "sword_3",
-                        "sword_4"
+                        "food_1"
                     ],
                     "donne": [
-                        "bow_1"
+                        "sword_1"
                     ]
                 }
             ]

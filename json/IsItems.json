@@ -28,19 +28,26 @@
             "name": "sword_4",
             "category": "weapon"
         },
-        "bow_1": {
+        "sword_5": {
             "degat": "7",
             "itemNumber": 4,
-            "type": "bow",
-            "name": "bow_1",
+            "type": "sword",
+            "name": "sword_5",
             "category": "weapon"
         },
-        "briquet": {
+        "bow_1": {
             "degat": "7",
             "itemNumber": 5,
             "type": "bow",
-            "name": "briquet",
-            "category": "weapon"
+            "name": "bow_1",
+            "category": "other"
+        },
+        "food_1": {
+            "degat": "7",
+            "itemNumber": 6,
+            "type": "steak",
+            "name": "food_1",
+            "category": "food"
         }
     }
 }
