@@ -463,6 +463,7 @@ function setupInteractions() {
 function drawTroc(x, y, w, h) {
 
 
+
     //? Affichage de la ligne troc
     let currentPNJ = getPNJName()
     let PNJSeePlayer = getPNJSeePlayer(currentPNJ)
@@ -471,7 +472,7 @@ function drawTroc(x, y, w, h) {
 
     //? Lignes
     let widthRow = w
-    let heightRow = h / echangePNJ.length//& <- nombre de ligne 
+    let heightRow = h / echangePNJ.length //& <- nombre de ligne 
     let postionXRow = x
 
 
@@ -482,8 +483,9 @@ function drawTroc(x, y, w, h) {
 
 
     //? Affichage du trocBloc
-    fill(255, 223, 15)
-    rect(x, y, w, h)
+    // fill(255, 223, 15)
+    // rect(x, y, w, h)
+    //image(BackTroc, x,y,w,h)
 
     if (!PNJSeePlayer) {
         PressInteractPNJ = false
@@ -507,35 +509,45 @@ function drawTroc(x, y, w, h) {
             buttonHasBeenClicked = true;
             popUpShown = true
         } else if (!buttonHasBeenClicked) {
+            if (waitingAnswer == false) {
 
-            rect(postionXRow, positionYRow, widthRow, heightRow)
+                //rect(postionXRow, positionYRow, widthRow, heightRow)
+                //? Affichage du background du troc
+                image(BackTroc, postionXRow, positionYRow, widthRow, heightRow)
 
-            //? Pour chaque ligne creation d'un slot
-            Object.entries(echange).forEach(items => {
-                if (items[0] == "demande") {
-                    items[1].forEach(element => {
 
-                        //? Declaration
-                        let indexElement = items[1].indexOf(element)
-                        let positionXElement = x + (widthElement * indexElement)
-                        let currentItem = getItems(element)
+                //? Pour chaque ligne creation d'un slot
+                Object.entries(echange).forEach(items => {
+                    if (items[0] == "demande") {
+                        items[1].forEach(element => {
 
-                        //? Affichage d'un item
-                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
-                    });
-                } else if (items[0] == "donne") {
-                    items[1].forEach(element => {
+                            //? Declaration
+                            let indexElement = items[1].indexOf(element)
+                            let positionXElement = x + (widthElement * indexElement)
+                            let currentItem = getItems(element)
 
-                        //? Declaration
-                        let indexElement = items[1].indexOf(element)
-                        let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
-                        let currentItem = getItems(element)
 
-                        //? Affichage d'un item
-                        image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
-                    });
-                }
-            });
+                            //? Affichage du slot
+                            image(Slot, positionXElement, positionYElement - 2, widthElement + 5, heightElement + 5);
+                            //? Affichage d'un item
+                            image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                        });
+                    } else if (items[0] == "donne") {
+                        items[1].forEach(element => {
+
+                            //? Declaration
+                            let indexElement = items[1].indexOf(element)
+                            let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
+                            let currentItem = getItems(element)
+
+                            //? Affichage du slot
+                            image(Slot, positionXElement - 6, positionYElement - 2, widthElement + 5, heightElement + 5);
+                            //? Affichage d'un item
+                            image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                        });
+                    }
+                });
+            }
         }
     });
 
@@ -551,40 +563,8 @@ function InteractionSword() {
 
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
-    let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
+    let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2) + 110.5
     let interfaceMenuY = (viewportDisplayHeight / 2) - (interfaceMenuHeight / 2)
-    let interfaceMenu = [interfaceMenuX, interfaceMenuY, interfaceMenuWidth, interfaceMenuHeight]
-
-    // let buttonAddSwordW = 150
-    // let buttonAddSwordH = 20
-    // let buttonAddSwordX = interfaceMenuX + (interfaceMenuWidth / 2) - (buttonAddSwordW / 2)
-    // let buttonAddSwordY = interfaceMenuY + (interfaceMenuHeight / 4)
-    // let textAddSwordX = buttonAddSwordX + (buttonAddSwordW / 2)
-
-    // let buttonSword = [buttonAddSwordX, buttonAddSwordY, buttonAddSwordW, buttonAddSwordH]
-
-    // let upgradeSword = [buttonAddSwordX, buttonAddSwordY + 50, buttonAddSwordW, buttonAddSwordH];
-
-    fill(255)
-    drawInterface(interfaceMenu, GUIInteract)
-
-    // fill(255)
-    // drawButton(buttonSword)
-    // drawText("Add Sword", 15, [textAddSwordX, buttonAddSwordY], "center")
-
-    // fill(255)
-    // drawButton(upgradeSword)
-    // drawText("Upgrade Sword", 15, [upgradeSword[0] + upgradeSword[2] / 2, upgradeSword[1]], "center")
-
-
-    // if (buttonClicked(buttonSword)) {
-    //     addItemToInventory(ForItems.Items.sword_1);
-    //     PressInteractPNJ = false
-    //     SwordAlreadyTaken = true
-    // }else if (buttonClicked(upgradeSword)){
-    //     PressInteractPNJ = false
-    // }
-
     drawTroc(interfaceMenuX, interfaceMenuY, interfaceMenuWidth / 2, interfaceMenuHeight)
 }
 

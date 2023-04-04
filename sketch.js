@@ -47,6 +47,9 @@ function preload() {
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
   tileSet = loadImage("assets/textures/tilesetUgo3.png")
+  BackTroc = loadImage("assets/textures/planches.png")
+  Slot = loadImage("assets/textures/Slot.png")
+  BackPop = loadImage("assets/textures/BackPop.png")
 
 
   //? Personnage

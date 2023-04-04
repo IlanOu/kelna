@@ -1,5 +1,5 @@
 //^ DEBUG MOD
-let debugMod = true;
+let debugMod = false;
 
 //^ Textures
 //#region //~ Textures
@@ -213,6 +213,13 @@ let playerAnswersYes = false;
 
 //~ Variable pour la tileset des items
 let tilesetItems;
+
+
+//~ Variable pour le troc
+let BackTroc;
+let Slot;
+let waitingAnswer = false;
+let BackPop;
 
 //#endregion Interfaces
 

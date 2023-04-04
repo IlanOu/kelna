@@ -34,8 +34,14 @@
             "type": "bow",
             "name": "bow_1",
             "category": "weapon"
+        },
+        "briquet": {
+            "degat": "7",
+            "itemNumber": 5,
+            "type": "bow",
+            "name": "briquet",
+            "category": "weapon"
         }
-        
     }
 }
 
