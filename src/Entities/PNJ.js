@@ -195,6 +195,7 @@ let PNJMovements = (pnj) => {
     pnj.movement = "walk"
     canInteractWithPNJ = false
   }else{
+
     lookThePlayer(pnj);
     pnj.movement = "idle"
     canInteractWithPNJ = true
@@ -257,7 +258,7 @@ let PNJMovements = (pnj) => {
 
 let PNJMovementsInside = (pnj) => {
 
-  console.log(pnj.haveToJump)
+  // console.log(pnj.haveToJump)
 
   //* Variables positions PNJ
   let CurrentX = pnj.x;

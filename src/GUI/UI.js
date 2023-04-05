@@ -106,6 +106,11 @@ function drawHomeMenu() {
 //~ MENU PAUSE
 function drawPauseMenu() {
 
+
+    //? Cacher le troc si il s'affiche
+    PressInteractPNJ = false
+
+
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
     let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
@@ -138,8 +143,8 @@ function drawPauseMenu() {
     let buttonSettings = [buttonSettingsX, buttonSettingsY, buttonSettingsW, buttonSettingsH]
 
 
-    fill(0,0,0,50)
-    rect(0,0,viewportDisplayWidth,viewportDisplayHeight);
+    // fill(0, 0, 0, 50)
+    // rect(0, 0, viewportDisplayWidth, viewportDisplayHeight);
 
     fill(255)
     drawInterface(interfaceMenu, GUIForEscape)
@@ -176,6 +181,7 @@ function drawPauseMenu() {
 function drawSettingInHome() {
 
     playerDead = false
+
     let interfaceMenuWidth = 500
     let interfaceMenuHeight = 500
     let interfaceMenuX = (viewportDisplayWidth / 2) - (interfaceMenuWidth / 2)
@@ -242,9 +248,6 @@ function drawSettingInHome() {
 
 //~ MENU PAUSE SETTINGS 
 function drawSettingInPause() {
-
-    gameIsPlaying = false
-    gameIsPaused = false
 
     let YouCanPlayMusic = true
 
@@ -452,6 +455,7 @@ function setupInteractions() {
     if (engineOne) {
         if (canEnterInHouse) {
             drawKey("E")
+            PressInteractPNJ = false
         }
 
         if (canInteractWithPNJ) {
@@ -482,10 +486,13 @@ function drawTroc(x, y, w, h) {
     let heightElement = 20
 
 
+    //? Affichage du troc
     if (!PNJSeePlayer) {
         PressInteractPNJ = false
     }
 
+
+    //? Bouton au clic
     let buttonHasBeenClicked = false;
 
 
@@ -500,25 +507,17 @@ function drawTroc(x, y, w, h) {
         fill(255, 43, 15)
         let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
 
-      
-        
-        if(popUpShown){
-            fill(255)
-            rect(0,0,50,50)
-
-        }
-
         if (buttonClicked(positionRow) && !popUpShown) {
             haveToTrade = true
             buttonHasBeenClicked = true;
             popUpShown = true
             getTrade = echange
-            
+
         } else if (!buttonHasBeenClicked) {
             if (waitingAnswer == false) {
 
-                //? Affichage du background du troc
                 image(BackTroc, postionXRow, positionYRow, widthRow, heightRow)
+                //? Affichage du background du troc
 
 
                 //? Pour chaque ligne creation d'un slot
@@ -528,28 +527,28 @@ function drawTroc(x, y, w, h) {
 
                             //? Declaration
                             let indexElement = items[1].indexOf(element)
-                            let positionXElement = x + (widthElement * indexElement)
+                            let positionXElement = x + (widthElement * slotSize * indexElement)
                             let currentItem = getItems(element)
 
 
                             //? Affichage du slot
-                            image(Slot, positionXElement, positionYElement - 2, widthElement + 5, heightElement + 5);
+                            image(Slot, positionXElement, positionYElement - heightElement/4, widthElement * slotSize, heightElement * slotSize);
                             //? Affichage d'un item
-                            image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                            image(itemList[currentItem.itemNumber], positionXElement + widthElement/4, positionYElement, widthElement * itemSize, heightElement * itemSize);
                         });
                     } else if (items[0] == "donne") {
                         items[1].forEach(element => {
 
                             //? Declaration
                             let indexElement = items[1].indexOf(element)
-                            let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
+                            let positionXElement = x + widthRow - (widthElement * itemSize * indexElement) - widthElement * itemSize
                             let currentItem = getItems(element)
 
 
                             //? Affichage du slot
-                            image(Slot, positionXElement - 6, positionYElement - 2, widthElement + 5, heightElement + 5);
+                            image(Slot, positionXElement - widthElement/2, positionYElement - heightElement/4, widthElement * slotSize, heightElement * slotSize);
                             //? Affichage d'un item
-                            image(itemList[currentItem.itemNumber], positionXElement, positionYElement, widthElement, heightElement);
+                            image(itemList[currentItem.itemNumber], positionXElement - widthElement/4, positionYElement, widthElement * itemSize, heightElement * itemSize);
                         });
                     }
                 });
@@ -561,7 +560,7 @@ function drawTroc(x, y, w, h) {
 
     if (popUpShown) {
 
-        
+
         if (getTrade != undefined) {
 
             let objectListDemande = [];

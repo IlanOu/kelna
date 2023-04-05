@@ -23,17 +23,28 @@ function keyPressed() {
         leftArrowPressed = true;
     }
 
+    //* Flèche de haut
+    if ((keyCode == 38 || keyCode == 90 )) {
+        highArrowPressed = true;
+    }
+
+    //* Flèche de bas
+    if ((keyCode == 40 || keyCode == 83)) {
+        downArrowPressed = true;
+    }
+
 
     if (canEnterInHouse){
         //* Touche E
         if (keyCode == 69) {
+            PressInteractPNJ = false
             engineOne = !engineOne;
         }
     }
 
     if (canInteractWithPNJ) {
         //* Touche E
-        if (keyCode == 69) {
+        if (keyCode == 69 && engineOne) {
             PressInteractPNJ = !PressInteractPNJ
         }
     }
@@ -41,21 +52,6 @@ function keyPressed() {
     //* Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
-    }
-
-    //* Touche 1 du clavier au dessus
-    if (keyCode == 49) { 
-        currentSlot = 0;
-    } 
-    
-    //* Touche 2 du clavier au dessus
-    if (keyCode == 50) { 
-        currentSlot = 1;
-    }
-
-    //* Touche 3 du clavier au dessus
-    if (keyCode == 51) { 
-        currentSlot = 2;
     }
 
     //* Touche O du clavier
@@ -119,6 +115,16 @@ function keyReleased() {
     //* Flèche de gauche
     if ((keyCode == 37 || keyCode == 81)) {
         leftArrowPressed = false;
+    }
+
+    //* Flèche de haut
+    if ((keyCode == 38 || keyCode == 90)) {
+        highArrowPressed = false;
+    }
+
+    //* Flèche de bas
+    if ((keyCode == 40 || keyCode == 83)) {
+        downArrowPressed = false;
     }
 
     //* Touche R

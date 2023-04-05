@@ -479,7 +479,6 @@ function troc(requis, gain) {
         if (playerAnswersYes) {
 
             requis.forEach(objRequis => {
-                console.log(objRequis)
                 removeItemFromInventory(getIndexOfItemCategory(objRequis.category))
             })
 
@@ -572,7 +571,6 @@ function popUp(message, options = "info") {
 
 
         drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
-        // pour qu'il sois au milieu faut qu'il fasse : 800
 
         if (buttonClicked(buttonPopUpYes)) {
             playerAnswersYes = true
