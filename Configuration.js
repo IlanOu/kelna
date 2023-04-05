@@ -35,7 +35,7 @@ let characterLastMovement = characterMovement
 let characterSpriteWidth = 32;
 let characterSpriteHeight = 32;
 
-let animationSpeed = 60
+let animationSpeed = 120
 
 
 //#endregion Textures / Outils du Personnage

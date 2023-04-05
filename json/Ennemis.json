@@ -2,9 +2,10 @@
     "Ennemis": {
         "Enn1": {
             "type": "Archer",
-            "img": "",
             "damages": 5,
             "hit": false,
+            "haveBeenHit": false,
+            "life": 3,
 
             "color": "red",
 
@@ -44,9 +45,10 @@
         },
         "Enn2": {
             "type": "Chevalier",
-            "img": "",
             "damages": 10,
             "hit": false,
+            "haveBeenHit": false,
+            "life": 2,
 
             "color": "red",
 

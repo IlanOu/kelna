@@ -11,136 +11,144 @@ function MobManager() {
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                     MOB                                    */
 //^ /* -------------------------------------------------------------------------- */
+
+/**
+ * 
+ * @param {object} Mobs 
+ */
 function mob(Mobs) {
-  //* Initialisation des variables
+  if (Mobs.life){
 
-  let MobStart = Mobs.globalStartX + xStartWorld;
-  let MobDistance = Mobs.distance + Mobs.globalStartX;
-  let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
-
-  Mobs.x = xStartWorld + Mobs.stepCount;
-  Mobs.y = Mobs.y;
-
-  let MobsX = Mobs.x;
-  let MobsY = Mobs.y;
-  let MobsHaveToJump = Mobs.haveToJump;
-  let MobsWidth = Mobs.width;
-  let MobsHeight = Mobs.height;
-  let MobsVelocityY = Mobs.velocityY;
-  let MobsMass = Mobs.mass;
-  let MobsIsJumping = Mobs.isJumping;
-  let MobsJumpCount = Mobs.jumpCount;
-
-  let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-
-
-
-  //* Ajout de la gravité au Mob
-  let gravityReturns = getPositionWithGravity(
-    MobsY,
-    MobsVelocityY,
-    gravityForce,
-    MobsMass
-  );
-  MobsY = gravityReturns[0];
-  MobsVelocityY = gravityReturns[1];
-
-  let collide = false;
-  //* Ajoute les collisions pour toute les maps autour du perso
-  for (let i = 0; i < mapsToCheck.length; i++) {
-    let currentMapToCheck = mapsToCheck[i];
-    let currentMapToCheckName =
-      World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
-
-    //? Récupère la couche des collisions sur la map
-    let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
-
-    //? Pour chaque carré dans le tableau
-    for (let row = 0; row < currentMapTableColliders.length; row++) {
-      for (
-        let column = 0; column < currentMapTableColliders[row].length; column++
-      ) {
-        //? Lui donner une collision
-        let thisObject = currentMapTableColliders[row][column];
-
-        let thisObjectX =
-          rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
-          (xStartWorld + rectWidth * column);
-        let thisObjectY =
-          rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
-          (yStartWorld + rectHeight * row);
-
-
-          //? Collisions
-        if (thisObject > 0) {
-          [
-            MobsX,
-            MobsY,
-            MobsVelocityY,
-            MobsJumpCount,
-            MobsIsJumping,
-            MobsHaveToJump,
-          ] = handleCollisionMobs(
-            MobsX,
-            MobsY,
-            MobsWidth,
-            MobsHeight,
-            Mobs.direction,
-            thisObjectX,
-            thisObjectY,
-            rectWidth,
-            rectHeight,
-            MobsVelocityY,
-            MobsJumpCount,
-            MobsIsJumping
-          );
-
-          if (MobsHaveToJump){
-            collide = true
+    //* Initialisation des variables
+  
+    let MobStart = Mobs.globalStartX + xStartWorld;
+    let MobDistance = Mobs.distance + Mobs.globalStartX;
+    let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
+  
+    Mobs.x = xStartWorld + Mobs.stepCount;
+    Mobs.y = Mobs.y;
+  
+    let MobsX = Mobs.x;
+    let MobsY = Mobs.y;
+    let MobsHaveToJump = Mobs.haveToJump;
+    let MobsWidth = Mobs.width;
+    let MobsHeight = Mobs.height;
+    let MobsVelocityY = Mobs.velocityY;
+    let MobsMass = Mobs.mass;
+    let MobsIsJumping = Mobs.isJumping;
+    let MobsJumpCount = Mobs.jumpCount;
+  
+    let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+  
+  
+  
+    //* Ajout de la gravité au Mob
+    let gravityReturns = getPositionWithGravity(
+      MobsY,
+      MobsVelocityY,
+      gravityForce,
+      MobsMass
+    );
+    MobsY = gravityReturns[0];
+    MobsVelocityY = gravityReturns[1];
+  
+    let collide = false;
+    //* Ajoute les collisions pour toute les maps autour du perso
+    for (let i = 0; i < mapsToCheck.length; i++) {
+      let currentMapToCheck = mapsToCheck[i];
+      let currentMapToCheckName =
+        World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
+  
+      //? Récupère la couche des collisions sur la map
+      let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+  
+      //? Pour chaque carré dans le tableau
+      for (let row = 0; row < currentMapTableColliders.length; row++) {
+        for (
+          let column = 0; column < currentMapTableColliders[row].length; column++
+        ) {
+          //? Lui donner une collision
+          let thisObject = currentMapTableColliders[row][column];
+  
+          let thisObjectX =
+            rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
+            (xStartWorld + rectWidth * column);
+          let thisObjectY =
+            rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
+            (yStartWorld + rectHeight * row);
+  
+  
+            //? Collisions
+          if (thisObject > 0) {
+            [
+              MobsX,
+              MobsY,
+              MobsVelocityY,
+              MobsJumpCount,
+              MobsIsJumping,
+              MobsHaveToJump,
+            ] = handleCollisionMobs(
+              MobsX,
+              MobsY,
+              MobsWidth,
+              MobsHeight,
+              Mobs.direction,
+              thisObjectX,
+              thisObjectY,
+              rectWidth,
+              rectHeight,
+              MobsVelocityY,
+              MobsJumpCount,
+              MobsIsJumping
+            );
+  
+            if (MobsHaveToJump){
+              collide = true
+            }
           }
         }
       }
     }
-  }
-  //* Ajouter le saut au mob
-  if (collide){
-
-    if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
-      if (!MobsIsJumping && MobsJumpCount < 1) {
-        let jumpReturns = addJump(
-          MobsY,
-          characterJumpHeight,
-          MobsVelocityY,
-          gravityForce
-        );
+    //* Ajouter le saut au mob
+    if (collide){
   
-        MobsY = jumpReturns[0];
-        MobsVelocityY = jumpReturns[1];
-        MobsIsJumping = true;
-        MobsJumpCount += 1;
-        Mobs.movement = "jump";
-      } else {
-        MobsJumpCount = 0;
+      if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
+        if (!MobsIsJumping && MobsJumpCount < 1) {
+          let jumpReturns = addJump(
+            MobsY,
+            characterJumpHeight,
+            MobsVelocityY,
+            gravityForce
+          );
+    
+          MobsY = jumpReturns[0];
+          MobsVelocityY = jumpReturns[1];
+          MobsIsJumping = true;
+          MobsJumpCount += 1;
+          Mobs.movement = "jump";
+        } else {
+          MobsJumpCount = 0;
+        }
       }
     }
+  
+  
+    //* Retourner les variables
+    Mobs.x = MobsX;
+    Mobs.y = MobsY;
+    Mobs.velocityY = MobsVelocityY;
+    Mobs.isJumping = MobsIsJumping;
+    Mobs.jumpCount = MobsJumpCount;
+  
+    Mobs.distance = MobDistance;
+    Mobs.xStart = MobStart;
+    Mobs.xEnd = MobEnd;
+    Mobs.haveToJump = collide;
+  
+  
+    //* Dessiner le Mob
+    mobMovements(Mobs);
   }
-
-
-  //* Retourner les variables
-  Mobs.x = MobsX;
-  Mobs.y = MobsY;
-  Mobs.velocityY = MobsVelocityY;
-  Mobs.isJumping = MobsIsJumping;
-  Mobs.jumpCount = MobsJumpCount;
-
-  Mobs.distance = MobDistance;
-  Mobs.xStart = MobStart;
-  Mobs.xEnd = MobEnd;
-  Mobs.haveToJump = collide;
-
-
-  //* Dessiner le Mob
-  mobMovements(Mobs);
 }
 
 
@@ -221,26 +229,36 @@ let mobMovements = (Mobs) => {
     }
   }
 
+
   if (touchPlayer && characterHitting)
   {
     if (characterDirection == "right"){
-      if (characterPositionX < CurrentX){
+      if (characterPositionX+characterWidth/4 < CurrentX+Mobs.width/2){
         Mobs.hit = true;
         console.log("Frappé !")
         Mobs.movement = "hit"
       }
     }else{
-      if (characterPositionX > CurrentX){
+      if (characterPositionX+characterWidth/4 > CurrentX+Mobs.width/2){
         Mobs.hit = true;
         console.log("Frappé !")
         Mobs.movement = "hit"
       }
     }
-  }  
+  }
 
   if (!characterHitting){
     Mobs.hit = false;
+    Mobs.haveBeenHit = false
   }
+
+  if (Mobs.hit && !Mobs.haveBeenHit){
+    if (Mobs.life > 0){
+      Mobs.life--
+      Mobs.haveBeenHit = true
+    }
+  }
+  console.log(Mobs.life)
 
 
   //* Debug Mod
@@ -296,6 +314,7 @@ function animationMobs(
   movement,
   color,
 ) {
+  
   CurrentMob.lastMovement = movement
 
   fill(color);
