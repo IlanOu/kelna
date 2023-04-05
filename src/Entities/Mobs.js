@@ -202,14 +202,13 @@ function doRound(Mobs) {
 /*                             Regarder le joueur                             */
 /* -------------------------------------------------------------------------- */
 function lookThePlayer(Mobs) {
-
     //* Initialisation des variables
     let CurrentX = Mobs.x;
 
    //* Regarder le joueur
-   if (characterPositionX > CurrentX) {
+  if (characterPositionX > CurrentX || characterInsidePosX > CurrentX) {
     Mobs.direction = "right";
-  } else if (characterPositionX < CurrentX) {
+  } else if (characterPositionX < CurrentX || characterInsidePosX < CurrentX) {
     Mobs.direction = "left";
   }
 }

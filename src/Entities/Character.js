@@ -65,10 +65,12 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     }
     if (keyIsDown(90) || keyIsDown(UP_ARROW)) {
       objectPositionY = moveUp(objectPositionY, speed)
+      highArrowPressed
 
     }
     if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
       objectPositionY = moveDown(objectPositionY, speed)
+      downArrowPressed
     }
 
     return [objectPositionX, objectPositionY]
@@ -95,6 +97,14 @@ function moveDown(positionY, speed) {
 
 
 //* ajouter un saut à l'objet
+/**
+ * 
+ * @param {*} positionY 
+ * @param {*} jumpHeight 
+ * @param {*} velocityY 
+ * @param {*} gravityForce 
+ * @returns 
+ */
 function addJump(positionY, jumpHeight, velocityY, gravityForce) {
   velocityY = -gravityForce;
   velocityY -= jumpHeight;
@@ -113,14 +123,14 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   //& Debug mod
   if (debugMod) {
-    stroke(255,0,0)
+    stroke(255, 0, 0)
     fill(255, 0, 0, 70)
     rect(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight)
     noStroke()
   }
 
 
-  switch (movement){
+  switch (movement) {
     //* animation MARCHER
     case "walk":
       for (let y = 192; y < 224; y += characterSpriteHeight) {
@@ -130,7 +140,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       }
       break;
     //* animation IDLE
-    case "idle": 
+    case "idle":
       for (let y = 64; y < 96; y += characterSpriteHeight) {
         for (let x = 0; x < 64; x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
@@ -162,9 +172,9 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       }
       break;
   }
-  
+
   //? Remettre l'animation au début quand on change d'animation
-  if (characterLastMovement != characterMovement){
+  if (characterLastMovement != characterMovement) {
     characterAnimationIndex = 0
   }
 
@@ -183,7 +193,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (characterAnimationIndex >= characterTextureList.length) {
     characterAnimationIndex = 0
 
-    if (characterHitting){
+    if (characterHitting) {
       characterHitting = false
     }
   }
@@ -201,7 +211,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     image(characterCurrentTexture, -positionX - width, positionY, width, height)
     scale(-1, 1)
   }
-  
+
 }
 
 
@@ -279,13 +289,13 @@ function character() {
   // fill(255, 0, 0)
   // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
 
-  
 
 
-  
+
+
 
   //* ========= Si le mode SMOOTH est activé =========
-  if (smoothCamera){
+  if (smoothCamera) {
 
     //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
@@ -303,11 +313,11 @@ function character() {
 
         xStartWorld -= cameraSpeedR
         characterPositionX -= newCharacterMovesSpeedR
-        
+
       }
-    }else{
+    } else {
       cameraSpeedR = 0
-      newCharacterMovesSpeedR= 0
+      newCharacterMovesSpeedR = 0
     }
 
 
@@ -316,27 +326,27 @@ function character() {
 
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 2 - 1) {
-      
+
 
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld < 0) {
 
         //? le monde bouge vers la droite (la caméra se décale vers la gauche)
-        
+
         cameraSpeedL = lerp(cameraSpeedL, characterMovesSpeed, smoothCameraSpeed)
         newCharacterMovesSpeedL = lerp(newCharacterMovesSpeedL, characterMovesSpeed, smoothCameraSpeed)
 
         xStartWorld += cameraSpeedL
         characterPositionX += newCharacterMovesSpeedL
-        
+
       }
-    }else{
+    } else {
       cameraSpeedL = 0
-      newCharacterMovesSpeedL= 0
+      newCharacterMovesSpeedL = 0
     }
 
-  //* ========= Si le mode SMOOTH n'est pas activé =========
-  }else{
+    //* ========= Si le mode SMOOTH n'est pas activé =========
+  } else {
 
     //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
@@ -350,7 +360,7 @@ function character() {
         //? le monde bouge vers la gauche (la caméra se décale vers la droite)
         xStartWorld -= characterMovesSpeed
         characterPositionX -= characterMovesSpeed
-        
+
       }
     }
 
@@ -359,7 +369,7 @@ function character() {
 
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 4) {
-      
+
 
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld < 0) {
@@ -372,7 +382,7 @@ function character() {
   }
 
 
-  
+
 
 
   //* caméra mouvements bas
@@ -380,7 +390,7 @@ function character() {
   //? si mon perso est en BAS de l'écran
   if (characterPositionY > height - height / 4) {
     if (yStartWorld + ((rectHeight * Maps.numberOfColumns) * World.worldsMap.length) - height > 0) {
-      yStartWorld -= characterVelocityY 
+      yStartWorld -= characterVelocityY
       characterPositionY -= characterVelocityY
     }
 
@@ -418,9 +428,9 @@ function character() {
   //#region 
   //~ Gravité du personnage
   let gravityReturns = getPositionWithGravity(characterPositionY,
-                                              characterVelocityY,
-                                              gravityForce,
-                                              characterMass)
+    characterVelocityY,
+    gravityForce,
+    characterMass)
   characterPositionY = gravityReturns[0]
   characterVelocityY = gravityReturns[1]
   //#endregion
@@ -444,7 +454,7 @@ function character() {
 
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
-      
+
 
       //* le double saut du personnage  
     } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
@@ -452,15 +462,15 @@ function character() {
       characterJumpCount++;
 
       let jumpReturns = addJump(characterPositionY,
-                                characterJumpHeight,
-                                characterVelocityY,
-                                gravityForce)
+        characterJumpHeight,
+        characterVelocityY,
+        gravityForce)
       characterPositionY = jumpReturns[0];
       characterVelocityY = jumpReturns[1];
 
     }
   }
- 
+
   //* si le joueur touche le sol, reset le nombre de saut 
   if (characterIsGrounded) {
     characterIsJumping = false;
@@ -485,10 +495,10 @@ function character() {
   //#endregion
 
 
-//#region 
+  //#region 
   //~ collisions
 
-  
+
 
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
@@ -532,16 +542,16 @@ function character() {
 
   //#region 
   //~ roulade du perso
-  
+
   const currentTime = millis();
-  if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)){
+  if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)) {
     characterIsDashing = true;
-    
+
     lastDashTime = currentTime;
-    
+
     characterMovesSpeed *= dashForce
 
-    setTimeout(function(){
+    setTimeout(function () {
       characterIsDashing = false;
       characterMovesSpeed /= dashForce
     }, dashTime)
@@ -565,7 +575,7 @@ function character() {
       characterMovement = "jump"
     }
   } else {
-    if (characterIsDashing){
+    if (characterIsDashing) {
       if (rightArrowPressed) {
         characterDirection = "right"
         characterMovement = "dash"
@@ -573,8 +583,8 @@ function character() {
         characterDirection = "left"
         characterMovement = "dash"
       }
-    }else{
-      if (characterHitting){
+    } else {
+      if (characterHitting) {
         if (rightArrowPressed) {
           characterDirection = "right"
           characterMovement = "hit"
@@ -585,7 +595,7 @@ function character() {
           characterDirection = characterLastDirection
           characterMovement = "hit"
         }
-      }else{
+      } else {
         if (rightArrowPressed) {
           characterDirection = "right"
           characterMovement = "walk"
@@ -598,7 +608,7 @@ function character() {
         }
       }
     }
-    
+
   }
 
 
@@ -613,7 +623,7 @@ function character() {
     characterMovement)
 
   //#endregion
-  
+
 }
 
 
@@ -622,6 +632,7 @@ function character() {
 
 //^ Système du personnage pour le moteur de vue 2
 function characterView2() {
+  let timer = (round(millis() / animationSpeed)) % 2
 
   //#region 
   //~ Contrôles du perso (gauche, droite, haut, bas)
@@ -706,14 +717,51 @@ function characterView2() {
     }
   }
 
+
+
+
+  //* Changer de frame
+  if (timer && !characterAnimationFramePassed) {
+    characterAnimationIndex++
+    characterAnimationFramePassed = true
+  }
+  if (!timer) {
+    characterAnimationFramePassed = false
+  }
+
+
+
+
+  if (rightArrowPressed) {
+    characterDirection = "right"
+    characterMovement = "walk"
+  } else if (leftArrowPressed) {
+    characterDirection = "left"
+    characterMovement = "walk"
+  } else if(highArrowPressed){
+    characterDirection = characterLastDirection
+    characterMovement = "walk"
+  } 
+  else if (downArrowPressed) {
+    characterDirection = characterLastDirection
+    characterMovement = "walk"
+
+  } 
+  else {
+    characterDirection = characterLastDirection
+    characterMovement = "idle"
+  }
+
+  characterLastDirection = characterDirection
   //#endregion
 
   //#region 
   //~ Affichage du perso
 
-  fill(255, 0, 0)
-  rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight)
+  // fill(255, 0, 0)
+  // rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight)
 
+  drawCharacter(characterInsidePosX, characterInsidePosY, characterWidth, characterHeight, characterDirection,characterMovement)
   //#endregion
 
 }

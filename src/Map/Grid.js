@@ -113,6 +113,8 @@ function drawGridForeground(){
 
 //~ Maison 
 function drawHouse(){
+
+  //? Fond noir de la maison
   fill(0)
   rect(
     0,

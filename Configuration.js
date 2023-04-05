@@ -252,6 +252,8 @@ const gravityForce = 0.5;
 let spaceKeyIsPressed = false;
 let rightArrowPressed = false;
 let leftArrowPressed = false;
+let highArrowPressed = false;
+let downArrowPressed = false;
 let dashKeyIsPressed = false;
 let leftClickPressed = false
 

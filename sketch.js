@@ -117,7 +117,7 @@ function draw() {
         doorsManager()
         PNJManager()
         characterView2()
-        
+        // character()  
         drawHouseForeground()
       }
     }
