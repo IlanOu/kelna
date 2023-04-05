@@ -481,10 +481,12 @@ function troc(requis, gain) {
         if (playerAnswersYes) {
 
             requis.forEach(objRequis => {
+                console.log("objet supprimé !", objRequis);
                 removeItemFromInventory(getIndexOfItemCategory(objRequis.category))
             })
 
             gain.forEach(objGain => {
+                console.log("objet donné !", objGain);
                 addItemToInventory(objGain)
             })
             playerAnswersYes = false

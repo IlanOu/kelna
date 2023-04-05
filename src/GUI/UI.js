@@ -470,11 +470,6 @@ function drawTroc(x, y, w, h) {
     let echangePNJ = getEchangePNJ(currentPNJ)
 
 
-    let TestGain;
-    let TestRequis;
-    let TestEncore;
-    let getTrade;
-
 
     //? Lignes
     let widthRow = w
@@ -505,19 +500,16 @@ function drawTroc(x, y, w, h) {
         fill(255, 43, 15)
         let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
 
-        // ! ECHANGE NE SE MET PAS A 0 (gettrade) / POPUP QUI DISPAWN (apres l'echange)
-        if (haveToTrade) {
-
-            getTrade = echange
-        }
-        if (buttonClicked(positionRow)) {
+      
+        if (buttonClicked(positionRow) && !popUpShown) {
             haveToTrade = true
             buttonHasBeenClicked = true;
             popUpShown = true
+            getTrade = echange
+            
         } else if (!buttonHasBeenClicked) {
             if (waitingAnswer == false) {
 
-                //rect(postionXRow, positionYRow, widthRow, heightRow)
                 //? Affichage du background du troc
                 image(BackTroc, postionXRow, positionYRow, widthRow, heightRow)
 
@@ -568,7 +560,7 @@ function drawTroc(x, y, w, h) {
 
     if (popUpShown) {
 
-
+        console.log(getTrade)
 
         if (getTrade != undefined) {
 
@@ -579,6 +571,8 @@ function drawTroc(x, y, w, h) {
                 objectListDemande.push(getItems(demandeObj))
 
             })
+
+            console.log(objectListDemande)
 
             let objectListDonne = [];
 

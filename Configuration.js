@@ -223,6 +223,8 @@ let waitingAnswer = false;
 let BackPop;
 let haveToTrade = false;
 
+let getTrade;
+
 //#endregion Interfaces
 
 
