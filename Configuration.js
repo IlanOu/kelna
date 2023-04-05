@@ -51,6 +51,7 @@ let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 80;
 let characterMovesSpeed = 6;
+let characterHitting = false;
 
 
 //? Saut
