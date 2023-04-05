@@ -467,37 +467,43 @@ function setupInteractions() {
 
 //~ TROC
 function drawTroc(x, y, w, h) {
+    
+    image(GUITroc, x / 1.23, y/1.78, w*2, h*1.4)
+    // 800 215.5 250 500
 
     //? Affichage de la ligne troc
     let currentPNJ = getPNJName()
     let PNJSeePlayer = getPNJSeePlayer(currentPNJ)
     let echangePNJ = getEchangePNJ(currentPNJ)
-
-
-
-    //? Lignes
+    
+    
+    
+    //? Lignes de slot
     let widthRow = w
     let heightRow = h / echangePNJ.length //& <- nombre de ligne 
     let postionXRow = x
-
-
-    //? Elements d'échange
+    
+    
+    //? Position pour d'échange
     let widthElement = 20
     let heightElement = 20
-
-
+    
+    
     //? Affichage du troc
     if (!PNJSeePlayer) {
         PressInteractPNJ = false
     }
-
-
+    
+    
     //? Bouton au clic
     let buttonHasBeenClicked = false;
-
-
+    
+    
     echangePNJ.forEach(echange => {
 
+        
+        
+        
         //? Declaration de variables
         let indexEchange = echangePNJ.indexOf(echange)
         let positionYRow = y + (heightRow * indexEchange)
@@ -516,12 +522,15 @@ function drawTroc(x, y, w, h) {
         } else if (!buttonHasBeenClicked) {
             if (waitingAnswer == false) {
 
-                image(BackTroc, postionXRow, positionYRow, widthRow, heightRow)
                 //? Affichage du background du troc
+                fill(252, 208, 117)
+                rect(postionXRow, positionYRow, widthRow, heightRow)
 
-
+                
+                
                 //? Pour chaque ligne creation d'un slot
                 Object.entries(echange).forEach(items => {
+                    
                     if (items[0] == "demande") {
                         items[1].forEach(element => {
 
@@ -550,11 +559,13 @@ function drawTroc(x, y, w, h) {
                             //? Affichage d'un item
                             image(itemList[currentItem.itemNumber], positionXElement - widthElement/4, positionYElement, widthElement * itemSize, heightElement * itemSize);
                         });
+                        
                     }
                 });
             }
         }
     });
+
 
 
 
@@ -580,7 +591,7 @@ function drawTroc(x, y, w, h) {
             troc(objectListDemande, objectListDonne)
         }
     }
-
+    
 }
 
 

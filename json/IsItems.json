@@ -1,7 +1,9 @@
+
+
 {
     "Items": {
-        "sword_1":{
-            "itemNumber":64,
+        "sword_1": {
+            "itemNumber": 64,
             "degat": "10",
             "type": "sword",
             "name": "sword_1",
@@ -21,7 +23,7 @@
             "name": "sword_3",
             "category": "weapon"
         },
-        "sword_4": {           
+        "sword_4": {
             "degat": "10",
             "itemNumber": 67,
             "type": "sword",
@@ -51,5 +53,3 @@
         }
     }
 }
-
-

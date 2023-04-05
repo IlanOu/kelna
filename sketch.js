@@ -14,7 +14,7 @@ function setup() {
   //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
   tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
   itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
-
+  tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 }
 
 
@@ -29,6 +29,7 @@ function preload() {
   GamerHeart = loadImage("assets/GUI/GamerHeart.webp")
   GUIForStats = loadImage("assets/GUI/GUIForStats.png")
   GUIInteract = loadImage("assets/GUI/GUIInt.png")
+  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
 
   //? Background
   backgroundImage = loadImage('assets/Background/Sky2.jpg');
@@ -39,7 +40,8 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/tileiteam.png")
+  tilesetItems = loadImage("assets/items/tilesetitem1.png")
+  tileSetTaverne = loadImage("assets/textures/taverne.png")
 
 
   //? Textures
@@ -117,7 +119,6 @@ function draw() {
         doorsManager()
         PNJManager()
         characterView2()
-        // character()  
         drawHouseForeground()
       }
     }

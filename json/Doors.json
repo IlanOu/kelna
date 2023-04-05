@@ -16,7 +16,7 @@
             "x" : 10,
             "y": 11,
             "detectDist": 2,
-            "destination": "",
+            "destination": "map1",
             "inHouse": true
 
         }

@@ -9,6 +9,12 @@ let sky;
 
 let tileSet;
 let tilesList;
+
+
+let tileSetForTaverne;
+let tileSetTaverne;
+
+
 //#endregion
 
 
@@ -132,6 +138,7 @@ let buttonHeightClassic = 30
 let buttonWidthBIG = 120
 let buttonHeightBIG = 50
 
+let GUITroc;
 //~  Variables pour la musique
 let ColorForRectMusic = 255
 let MusicIsActivate = false
