@@ -134,14 +134,6 @@
                 },
                 {
                     "demande": [
-                        "sword_1"
-                    ],
-                    "donne": [
-                        "sword_2"
-                    ]
-                },
-                {
-                    "demande": [
                         "food_1"
                     ],
                     "donne": [
