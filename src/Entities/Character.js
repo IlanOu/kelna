@@ -111,6 +111,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   characterTextureList = []
 
 
+  //& Debug mod
   if (debugMod) {
     stroke(255,0,0)
     fill(255, 0, 0, 70)
@@ -118,53 +119,55 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     noStroke()
   }
 
-  //* animation MARCHER
-  if (movement == "walk") {
 
-      for (let y = 192; y < 224; y += 32) {
-        for (let x = 0; x < 192; x += 32) {
-          characterTextureList.push(characterTextures.get(x, y, 32, 32));
+  switch (movement){
+    //* animation MARCHER
+    case "walk":
+      for (let y = 192; y < 224; y += characterSpriteHeight) {
+        for (let x = 0; x < 192; x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
-
+      break;
     //* animation IDLE
-  } else if (movement == "idle") {
-
-    for (let y = 64; y < 96; y += 32) {
-      for (let x = 0; x < 64; x += 32) {
-        characterTextureList.push(characterTextures.get(x, y, 32, 32));
+    case "idle": 
+      for (let y = 64; y < 96; y += characterSpriteHeight) {
+        for (let x = 0; x < 64; x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
       }
-    }
-
+      break;
+    //* animation JUMP
+    case "jump":
+      for (let y = 160; y < 192; y += characterSpriteHeight) {
+        for (let x = 0; x < 128; x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation DASH
+    case "dash":
+      for (let y = 128; y < 160; y += characterSpriteHeight) {
+        for (let x = 0; x < 64; x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation FRAPPER
+    case "hit":
+      for (let y = 32; y < 64; y += characterSpriteHeight) {
+        for (let x = 0; x < 128; x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
   }
-  //* animation JUMP
-  else if (movement == "jump") {
-
-    for (let y = 160; y < 192; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        characterTextureList.push(characterTextures.get(x, y, 32, 32));
-      }
-    }
-
+  
+  //? Remettre l'animation au début quand on change d'animation
+  if (characterLastMovement != characterMovement){
+    characterAnimationIndex = 0
   }
-  //* animation DASH
-  else if (movement == "dash") {
 
-    for (let y = 128; y < 160; y += 32) {
-      for (let x = 0; x < 64; x += 32) {
-        characterTextureList.push(characterTextures.get(x, y, 32, 32));
-      }
-    }
-
-  }else if (movement == "hit") {
-
-    for (let y = 32; y < 64; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        characterTextureList.push(characterTextures.get(x, y, 32, 32));
-      }
-    }
-
-  }
 
   //* Changer de frame
   if (timer && !characterAnimationFramePassed) {
@@ -174,9 +177,15 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (!timer) {
     characterAnimationFramePassed = false
   }
+
+
   //* Remettre l'index au début 
   if (characterAnimationIndex >= characterTextureList.length) {
     characterAnimationIndex = 0
+
+    if (characterHitting){
+      characterHitting = false
+    }
   }
 
   let characterCurrentTexture = characterTextureList[characterAnimationIndex]
@@ -249,6 +258,9 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
 //~ Système du personnage pour le moteur de vue 1
 function character() {
+
+  characterLastMovement = characterMovement
+
   //* Ancienne positions du perso
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
@@ -571,7 +583,7 @@ function character() {
           characterMovement = "hit"
         } else {
           characterDirection = characterLastDirection
-          characterMovement = "idle"
+          characterMovement = "hit"
         }
       }else{
         if (rightArrowPressed) {
