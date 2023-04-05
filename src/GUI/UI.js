@@ -301,6 +301,8 @@ function drawSettingInPause() {
     if (buttonClicked(buttonExit)) {
         gameIsPaused = false
         settingsPause = false
+        gameIsPlaying = false
+        inGame = false
     }
     if (buttonClicked(buttonMusic) && YouCanPlayMusic === true) {
         PlayMusic()
@@ -462,8 +464,6 @@ function setupInteractions() {
 //~ TROC
 function drawTroc(x, y, w, h) {
 
-
-
     //? Affichage de la ligne troc
     let currentPNJ = getPNJName()
     let PNJSeePlayer = getPNJSeePlayer(currentPNJ)
@@ -501,6 +501,13 @@ function drawTroc(x, y, w, h) {
         let positionRow = [postionXRow, positionYRow, widthRow, heightRow]
 
       
+        
+        if(popUpShown){
+            fill(255)
+            rect(0,0,50,50)
+
+        }
+
         if (buttonClicked(positionRow) && !popUpShown) {
             haveToTrade = true
             buttonHasBeenClicked = true;
@@ -524,8 +531,6 @@ function drawTroc(x, y, w, h) {
                             let positionXElement = x + (widthElement * indexElement)
                             let currentItem = getItems(element)
 
-                            TestRequis = currentItem
-
 
                             //? Affichage du slot
                             image(Slot, positionXElement, positionYElement - 2, widthElement + 5, heightElement + 5);
@@ -539,10 +544,6 @@ function drawTroc(x, y, w, h) {
                             let indexElement = items[1].indexOf(element)
                             let positionXElement = x + widthRow - (widthElement * indexElement) - widthElement
                             let currentItem = getItems(element)
-
-
-                            TestGain = currentItem;
-
 
 
                             //? Affichage du slot
@@ -560,8 +561,7 @@ function drawTroc(x, y, w, h) {
 
     if (popUpShown) {
 
-        console.log(getTrade)
-
+        
         if (getTrade != undefined) {
 
             let objectListDemande = [];
@@ -571,9 +571,6 @@ function drawTroc(x, y, w, h) {
                 objectListDemande.push(getItems(demandeObj))
 
             })
-
-            console.log(objectListDemande)
-
             let objectListDonne = [];
 
             getTrade.donne.forEach(donneObj => {
@@ -581,7 +578,6 @@ function drawTroc(x, y, w, h) {
                 objectListDonne.push(getItems(donneObj))
 
             })
-
             troc(objectListDemande, objectListDonne)
         }
     }

@@ -463,44 +463,44 @@ function getIndexOfItemCategory(itemCategory) {
 //~ Troc
 function troc(requis, gain) {
     let canTradeThisObject = false
-    // console.log(Inventory, requis, gain)
+
     requis.every(objRequis => {
-
-
         if (Inventory.includes(objRequis)) {
             canTradeThisObject = true
         } else {
             canTradeThisObject = false
-
             return false
         }
-
     })
+
     if (canTradeThisObject) {
+
         popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
         if (playerAnswersYes) {
 
             requis.forEach(objRequis => {
-                console.log("objet supprimé !", objRequis);
+                console.log(objRequis)
                 removeItemFromInventory(getIndexOfItemCategory(objRequis.category))
             })
 
             gain.forEach(objGain => {
-                console.log("objet donné !", objGain);
                 addItemToInventory(objGain)
             })
+
             playerAnswersYes = false
             haveToTrade = false
         }
-    } else {
+    }
+    else {
         popUp("Vous n'avez pas les objets requis !")
     }
+
 }
-
-
 
 //~ Pop up
 function popUp(message, options = "info") {
+
+
 
     let interfacePopUpWidth = 400
     let interfacePopUpHeight = 400
@@ -510,8 +510,6 @@ function popUp(message, options = "info") {
 
 
     image(BackPop, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
-    // fill(255)
-    // drawInterface(interfacePopUp)
 
 
     if (options == "info") {
@@ -535,8 +533,10 @@ function popUp(message, options = "info") {
 
         if (buttonClicked(buttonPopUp)) {
             waitingAnswer = false
+            PressInteractPNJ = false
             popUpShown = false
         }
+
 
     }
     else if (options == "choice") {
@@ -564,6 +564,7 @@ function popUp(message, options = "info") {
         fill(128, 128, 128)
         drawButton(buttonPopUpYes)
         drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], "center")
+        //
 
         fill(128, 128, 128)
         drawButton(buttonPopUpNo)
@@ -577,10 +578,12 @@ function popUp(message, options = "info") {
             playerAnswersYes = true
             waitingAnswer = false
             popUpShown = false
+            PressInteractPNJ = false
         }
         if (buttonClicked(buttonPopUpNo)) {
-            popUpShown = false
             waitingAnswer = false
+            popUpShown = false
+            PressInteractPNJ = false
         }
     }
 }

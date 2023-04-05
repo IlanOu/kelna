@@ -192,7 +192,7 @@ let HeightSlot = 85;
 let ForSlotOneX = 0;
 let currentSlot = 0;
 let endInventory = false;
-
+let waitingButton = false;
 
 //~  Variables pour la mort
 let playerDead = false
@@ -222,7 +222,6 @@ let Slot;
 let waitingAnswer = false;
 let BackPop;
 let haveToTrade = false;
-
 let getTrade;
 
 //#endregion Interfaces
