@@ -31,7 +31,12 @@ let characterAnimationFramePassed = false;
 let characterDirection = "";
 let characterLastDirection = "right";
 let characterMovement = "idle";
+let characterLastMovement = characterMovement
+let characterSpriteWidth = 32;
+let characterSpriteHeight = 32;
+
 let animationSpeed = 60
+
 
 //#endregion Textures / Outils du Personnage
 

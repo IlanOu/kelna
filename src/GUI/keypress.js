@@ -101,10 +101,6 @@ function keyPressed() {
         }
         pressingKey = true;
     }
-
-    if (!gameIsPaused && gameIsPlaying){
-        characterHitting
-    }
 }
 
 
@@ -136,8 +132,6 @@ function keyReleased() {
     if (keyCode) {
         pressingKey = false;
     }
-    
-
 }
 
 
@@ -145,5 +139,11 @@ function keyReleased() {
 function mousePressed() {
     if (mouseButton === LEFT) {
         leftClickPressed = true
+
+        if (!gameIsPaused && gameIsPlaying){
+            characterHitting = true
+        }
     }
 }
+
+    

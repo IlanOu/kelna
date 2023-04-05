@@ -202,7 +202,6 @@ let mobMovements = (Mobs) => {
   //* Si je vois le joueur, le suivre. Sinon, faire une ronde.
   if (touchPlayer){
     lookThePlayer(Mobs);
-    //? attaquer
 
     //? Afficher un !
     fill(255, 0, 0)
@@ -221,7 +220,27 @@ let mobMovements = (Mobs) => {
       doRound(Mobs);
     }
   }
-  
+
+  if (touchPlayer && characterHitting)
+  {
+    if (characterDirection == "right"){
+      if (characterPositionX < CurrentX){
+        Mobs.hit = true;
+        console.log("Frappé !")
+        Mobs.movement = "hit"
+      }
+    }else{
+      if (characterPositionX > CurrentX){
+        Mobs.hit = true;
+        console.log("Frappé !")
+        Mobs.movement = "hit"
+      }
+    }
+  }  
+
+  if (!characterHitting){
+    Mobs.hit = false;
+  }
 
 
   //* Debug Mod
@@ -257,7 +276,7 @@ let mobMovements = (Mobs) => {
     Mobs.height,
     Mobs.direction,
     Mobs.movement,
-    Mobs.color
+    Mobs.color,
   );
 };
 
@@ -275,8 +294,10 @@ function animationMobs(
   height,
   direction,
   movement,
-  color
+  color,
 ) {
+  CurrentMob.lastMovement = movement
+
   fill(color);
   circle(positionX + 35, positionY - 25, 20);
 
@@ -284,24 +305,42 @@ function animationMobs(
 
   let MobTexturesList = [];
 
-  if (movement == "walk") {
-    for (let y = 32; y < 64; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+
+  //~ Changer d'animation en fonction du mouvement
+  switch (movement){
+    case "walk":
+      for (let y = 32; y < 64; y += 32) {
+        for (let x = 0; x < 128; x += 32) {
+          MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        }
       }
-    }
-  } else if (movement == "idle") {
-    for (let y = 0; y < 32; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+      break
+    case "idle":
+      for (let y = 0; y < 32; y += 32) {
+        for (let x = 0; x < 128; x += 32) {
+          MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        }
       }
-    }
-  } else if (movement == "jump") {
-    for (let y = 64; y < 96; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+      break
+    case "jump":
+      for (let y = 64; y < 96; y += 32) {
+        for (let x = 0; x < 128; x += 32) {
+          MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        }
       }
-    }
+      break
+    case "hit":
+      for (let y = 96; y < 128; y += 32) {
+        for (let x = 0; x < 128; x += 32) {
+          MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        }
+      }
+      break
+  }
+
+  //? Remettre l'animation au début quand on change d'animation
+  if (CurrentMob.lastMovement != movement){
+    CurrentMob.indexFrame = 0
   }
 
   //* Changer de frame

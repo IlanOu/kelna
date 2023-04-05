@@ -35,7 +35,7 @@ function preload() {
 
 
   //? Animation PNJ
-  PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
+  PNJTextures = loadImage("assets/animations/spriteSheetGuardsHit.png")
 
 
   //? Tileset

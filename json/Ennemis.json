@@ -4,6 +4,7 @@
             "type": "Archer",
             "img": "",
             "damages": 5,
+            "hit": false,
 
             "color": "red",
 
@@ -36,14 +37,16 @@
             "stepCount": 0,
             "direction": "right",
 
-            "currentFrame": 0,
+            "currentFrame": false,
             "indexFrame": 0,
-            "movement": "walk"
+            "movement": "walk",
+            "lastMovement": "idle"
         },
         "Enn2": {
             "type": "Chevalier",
             "img": "",
             "damages": 10,
+            "hit": false,
 
             "color": "red",
 
@@ -76,9 +79,10 @@
             "stepCount": 0,
             "direction": "right",
 
-            "currentFrame": 0,
+            "currentFrame": false,
             "indexFrame": 0,
-            "movement": "walk"
+            "movement": "walk",
+            "lastMovement": "idle"
         }
     }
 }
