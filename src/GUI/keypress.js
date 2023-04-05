@@ -27,13 +27,14 @@ function keyPressed() {
     if (canEnterInHouse){
         //* Touche E
         if (keyCode == 69) {
+            PressInteractPNJ = false
             engineOne = !engineOne;
         }
     }
 
     if (canInteractWithPNJ) {
         //* Touche E
-        if (keyCode == 69) {
+        if (keyCode == 69 && engineOne) {
             PressInteractPNJ = !PressInteractPNJ
         }
     }

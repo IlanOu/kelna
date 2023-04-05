@@ -190,7 +190,6 @@ let Inventory = [{},{},{}];
 let WidthSlot = 85;
 let HeightSlot = 85;
 let ForSlotOneX = 0;
-let currentSlot = 0;
 let endInventory = false;
 let waitingButton = false;
 
@@ -223,6 +222,8 @@ let waitingAnswer = false;
 let BackPop;
 let haveToTrade = false;
 let getTrade;
+let slotSize = 2
+let itemSize = 1.6
 
 //#endregion Interfaces
 

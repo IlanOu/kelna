@@ -39,7 +39,7 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/tileiteam2.png")
+  tilesetItems = loadImage("assets/items/tileiteam.png")
 
 
   //? Textures
