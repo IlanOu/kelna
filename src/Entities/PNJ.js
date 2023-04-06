@@ -23,6 +23,7 @@ let drawPNJInside = (pnj) => {
   let PNJDistance = pnj.distance + PNJStart;
   let PNJEnd = PNJDistance;
 
+
   pnj.x = pnj.globalStartX + xStartHouse + pnj.stepCount;
   pnj.y = pnj.globalStartY + yStartHouse;
 
@@ -179,19 +180,13 @@ let PNJMovements = (pnj) => {
     doRound(pnj);
     pnj.movement = "walk";
     canInteractWithPNJ = false;
-    // pnj.canInteractWithPNJ = false
-    // if(pnj.canInteractWithPNJ = false){
-    //   canInteractWithPNJ = false
-    // }
-  } else {
+  }
+  if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    canInteractWithPNJ = true;
-    if (pnj.echange != undefined) {
-      // pnj.canInteractWithPNJ = true
-      // if( pnj.canInteractWithPNJ = true){
-      //   canInteractWithPNJ = true
-      // }
+    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
+      // console.log(pnj.canInteractPNJ, pnj.echange);
+      canInteractWithPNJ = true;
     }
   }
 
@@ -244,6 +239,8 @@ let PNJMovements = (pnj) => {
     pnj.movement,
     pnj.color
   );
+
+  // console.log(canInteractWithPNJ);
 };
 
 let PNJMovementsInside = (pnj) => {
@@ -279,11 +276,14 @@ let PNJMovementsInside = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    pnj.canInteractWithPNJ = false;
-  } else {
+    canInteractWithPNJ = false;
+  }
+  if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    pnj.canInteractWithPNJ = true;
+    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
+      canInteractWithPNJ = true;
+    }
   }
 
   //* Ajouter le saut au PNJ
@@ -346,7 +346,7 @@ function animationPNJ(
   let timer = round(millis() / animationSpeed) % 2;
   let PNJTexturesList = [];
 
-
+  //* Animation en fonction des mouvements
   switch (CurrentPNJ.name) {
     case "PNJ2":
       if (movement == "walk") {
@@ -380,7 +380,7 @@ function animationPNJ(
         }
       } else if (movement == "idle") {
         for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 32; x += 32) {
+          for (let x = 0; x < 64; x += 32) {
             PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
           }
         }
@@ -403,7 +403,7 @@ function animationPNJ(
         }
       } else if (movement == "idle") {
         for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
+          for (let x = 0; x < 64; x += 32) {
             PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
           }
         }
@@ -416,30 +416,6 @@ function animationPNJ(
       }
 
       break;
-  }
-
-
-
-
-  //* Animation en fonction des mouvements
-  if (movement == "walk") {
-    for (let y = 32; y < 64; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
-      }
-    }
-  } else if (movement == "idle") {
-    for (let y = 0; y < 32; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
-      }
-    }
-  } else if (movement == "jump") {
-    for (let y = 64; y < 96; y += 32) {
-      for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
-      }
-    }
   }
 
   //* Changer de frame

@@ -12,5 +12,6 @@ function drawBackgroundImage (background){
     backgroundX += background.width
   }else{
     backgroundX = xStartWorld/8;
+    
   }
 }

@@ -11,6 +11,8 @@ function drawInterface([x, y, w, h], img = undefined) {
   }
 }
 
+
+
 //~ Afficher un bouton
 function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
   if (strokeToggle) {
@@ -26,6 +28,8 @@ function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
   }
 }
 
+
+
 //~ Afficher du texte
 function drawText(Text, fontSize, [x, y], textAlignment, color = [0, 0, 0]) {
   fill(color[0], color[1], color[2]);
@@ -35,6 +39,8 @@ function drawText(Text, fontSize, [x, y], textAlignment, color = [0, 0, 0]) {
 
   text(Text, x, y + fontSize);
 }
+
+
 
 //~  Au clic du bouton
 function buttonClicked([x, y, h, w]) {
@@ -46,8 +52,9 @@ function buttonHover([x, y, h, w]) {
   return pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
-//^ INTERFACES
 
+
+//^ INTERFACES
 //~ MENU HOME
 function drawHomeMenu() {
   gameIsPaused = false;
@@ -61,7 +68,7 @@ function drawHomeMenu() {
 
   let buttonParameters = [
     viewportDisplayWidth / 2 - buttonWidthClassic / 2,
-    viewportDisplayHeight / 2 + buttonHeightClassic,
+    viewportDisplayHeight / 2 + buttonHeightClassic + 50,
     buttonWidthClassic,
     buttonHeightClassic,
   ];
@@ -83,7 +90,8 @@ function drawHomeMenu() {
   ];
 
 
- drawInterface(play, GUIStart)
+  image(GUIStart,play[0],play[1],play[2],play[3])
+
 
   fill(120, 120, 120);
   drawButton(buttonParameters);
@@ -99,8 +107,6 @@ function drawHomeMenu() {
     settingsHome = true;
   }
 }
-
-
 
 
 
@@ -177,11 +183,14 @@ function drawPauseMenu() {
   }
   if (buttonClicked(buttonSettings)) {
     settingsPause = true;
+    gameIsPlaying = false;
   }
   if (buttonClicked(buttonReturn)) {
     gameIsPaused = false;
   }
 }
+
+
 
 //~ MENU HOME SETTINGS
 function drawSettingInHome() {
@@ -250,8 +259,11 @@ function drawSettingInHome() {
   }
 }
 
+
+
 //~ MENU PAUSE SETTINGS
 function drawSettingInPause() {
+
   let YouCanPlayMusic = true;
 
   let interfaceMenuWidth = 500;
@@ -307,8 +319,9 @@ function drawSettingInPause() {
   if (buttonClicked(buttonExit)) {
     gameIsPaused = false;
     settingsPause = false;
-    gameIsPlaying = false;
-    inGame = false;
+    gameIsPlaying = true;
+    PlayerInSettingsPause = false;
+    inGame = true;
   }
   if (buttonClicked(buttonMusic) && YouCanPlayMusic === true) {
     PlayMusic();
@@ -317,6 +330,8 @@ function drawSettingInPause() {
     PlaySong();
   }
 }
+
+
 
 //~ MENU DEATH
 function drawDeath() {
@@ -389,6 +404,8 @@ function drawDeath() {
   }
 }
 
+
+
 //~ MENU STAT
 function drawStats() {
   if (playerStat === false) {
@@ -443,12 +460,16 @@ function drawStats() {
   }
 }
 
+
+
 //~ BARRE DE VIE
 function drawLifeBar() {
+  let HeartX = 1800 / 2;
+  let HeartY = MargeBarVie + 750
   let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
 
   for (let i = 0; i < VieLarg; i++) {
-    image(GamerHeart, MargeBarVie * i + 1800 / 2, MargeBarVie, 30, 30);
+    image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
   }
   ForInteract();
 }
@@ -469,15 +490,8 @@ function setupInteractions() {
 
     if (canInteractWithPNJ) {
       drawKey("E");
+      // console.log(canInteractWithPNJ);
     }
-    
-    // Object.entries(ForPNJ.PNJS).forEach((currentpnj) => {
-    //   if (currentpnj[1].canInteractWithPNJ) {
-    //     drawKey("E");
-    //     console.log("eel")
-    //   }
-    // });
-
 
   } else {
     if (canGoOutTheHouse) {
@@ -486,7 +500,6 @@ function setupInteractions() {
     }
   }
 }
-
 
 
 
@@ -504,6 +517,9 @@ function drawTroc(x, y, w, h) {
     image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
     // 800 215.5 250 500
 
+    // console.log(PNJSeePlayer)
+
+
     //? Lignes de slot
     let widthRow = w;
     let heightRow = h / echangePNJ.length; //& <- nombre de ligne
@@ -520,6 +536,8 @@ function drawTroc(x, y, w, h) {
 
     //? Bouton au clic
     let buttonHasBeenClicked = false;
+
+
 
     echangePNJ.forEach((echange) => {
       //? Declaration de variables
@@ -620,6 +638,8 @@ function drawTroc(x, y, w, h) {
   }
 }
 
+
+
 //~ INTERACTION PNJ SWORD
 function InteractionSword() {
   let interfaceMenuWidth = 500;
@@ -635,6 +655,8 @@ function InteractionSword() {
   );
 }
 
+
+
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
@@ -646,11 +668,10 @@ function setupUI() {
       InteractionSword();
     }
     if (settingsPause) {
-      gameIsPlaying = false;
-      settingsPause = true;
+      PlayerInSettingsPause = true
       drawSettingInPause();
     }
-    if (gameIsPaused) {
+    if (gameIsPaused && !PlayerInSettingsPause) {
       gameIsPlaying = false;
       drawPauseMenu();
     }

@@ -5,14 +5,13 @@
 
       "detectDistX": 2,
       "detectDistY": 2,
-      "seePlayer": true,
+      "seePlayer": false,
 
-      "x": -200,
-      "y": 300,
+      "x": 0,
+      "y": 0,
 
       "xStart": 0,
-      "xEnd": 0,
-      "globalStartX": 50,
+      "globalStartX": 250,
       "globalStartY": 80,
 
       "velocityY": 0,
@@ -25,7 +24,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 200,
+      "distance": 50,
       "speed": 2,
       "followSpeed": 4,
 
@@ -38,25 +37,14 @@
 
       "name":"Charle",
 
-      "echange": [
-        {
-          "demande": ["sword_1"],
-          "donne": ["bow_1"]
-        },
-        {
-          "demande": ["sword_1"],
-          "donne": ["bow_1"]
-        },
-        {
-          "demande": ["sword_1"],
-          "donne": ["bow_1"]
-        }
-      ]
+      "canInteractPNJ":false
     },
-    "PNJ2": {
+    "Marjo": {
       "color": "green",
 
-      "name": "PNJ2",
+      
+      "name": "Marjo",
+
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
@@ -88,11 +76,10 @@
       "currentFrame": 0,
       "indexFrame": 0,
       "movement": "walk",
+
+      "canInteractPNJ": true,
+
       "echange": [
-        {
-          "demande": ["food_1", "sword_1"],
-          "donne": ["bow_1"]
-        },
         {
           "demande": ["sword_2"],
           "donne": ["sword_3"]
@@ -102,19 +89,15 @@
           "donne": ["sword_2"]
         },
         {
-          "demande": ["sword_3"],
-          "donne": ["sword_4"]
-        },
-        {
           "demande": ["food_1"],
           "donne": ["sword_1"]
         }
       ]
     },
-    "Marjo": {
+    "PNJ2": {
       "color": "purple",
 
-      "name":"Marjo",
+      "name":"PNJ2",
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
@@ -145,7 +128,9 @@
 
       "currentFrame": 0,
       "indexFrame": 0,
-      "movement": "walk"
+      "movement": "walk",
+
+      "canInteractPNJ":false
     }
   }
 }

@@ -175,9 +175,12 @@ let SwordAlreadyTaken = false
 let marjoTexture;
 let charleTexture;
 
+
 //~  Variables pour les ennemis
 let ForEnnemis;
-
+let malade1Sprite;
+let malade2Sprite;
+let pointEnnemis;
 
 //~  Variables pour les portes
 let allDoors;
@@ -209,6 +212,7 @@ let HeightSlot = 85;
 let ForSlotOneX = 0;
 let endInventory = false;
 let waitingButton = false;
+
 
 //~  Variables pour la mort
 let playerDead = false

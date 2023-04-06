@@ -1,16 +1,14 @@
-
-
 {
     "Items": {
         "sword_1": {
-            "itemNumber": 64,
+            "itemNumber": 0,
             "degat": "10",
             "type": "sword",
             "name": "sword_1",
             "category": "weapon"
         },
         "sword_2": {
-            "itemNumber": 65,
+            "itemNumber": 1,
             "degat": "10",
             "type": "sword",
             "name": "sword_2",
@@ -18,35 +16,14 @@
         },
         "sword_3": {
             "degat": "10",
-            "itemNumber": 66,
+            "itemNumber": 2,
             "type": "sword",
             "name": "sword_3",
             "category": "weapon"
         },
-        "sword_4": {
-            "degat": "10",
-            "itemNumber": 67,
-            "type": "sword",
-            "name": "sword_4",
-            "category": "weapon"
-        },
-        "sword_5": {
-            "degat": "7",
-            "itemNumber": 68,
-            "type": "sword",
-            "name": "sword_5",
-            "category": "weapon"
-        },
-        "bow_1": {
-            "degat": "7",
-            "itemNumber": 21,
-            "type": "bow",
-            "name": "bow_1",
-            "category": "other"
-        },
         "food_1": {
             "degat": "7",
-            "itemNumber": 87,
+            "itemNumber": 3,
             "type": "steak",
             "name": "food_1",
             "category": "food"
