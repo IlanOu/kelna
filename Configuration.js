@@ -60,7 +60,8 @@ let previousPlayerY = 0
 let characterWidth = 80;
 let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
-let characterBoundingBoxHeight = 80;
+let characterBoundingBoxHeight = 60;
+let characterBoundingBoxHeightInside;
 let characterMovesSpeed = 6;
 let characterHitting = false;
 
@@ -136,9 +137,10 @@ let viewportDisplayHeight = 1080
 let buttonWidthClassic = 80
 let buttonHeightClassic = 30
 let buttonWidthBIG = 120
-let buttonHeightBIG = 50
+let buttonHeightBIG = 80
 
 let GUITroc;
+let GUIStart;
 //~  Variables pour la musique
 let ColorForRectMusic = 255
 let MusicIsActivate = false
@@ -170,7 +172,8 @@ let ForPNJ;
 let canInteractWithPNJ = false;
 let PressInteractPNJ = false
 let SwordAlreadyTaken = false
-
+let marjoTexture;
+let charleTexture;
 
 //~  Variables pour les ennemis
 let ForEnnemis;
@@ -184,6 +187,8 @@ let engine1HeightDoors = rectHeight * 2
 
 let engine2WidthDoors = rectWidth
 let engine2HeightDoors = rectHeight / 2
+
+let doorInTaverne = false;
 
 
 //~  Variables pour la barre de vie

@@ -616,7 +616,7 @@ function character() {
   characterLastDirection = characterDirection
 
   drawCharacter(characterPositionX - (characterWidth - characterBoundingBoxWidth) / 2,
-    characterPositionY,
+    characterPositionY-(characterHeight - characterBoundingBoxHeight),
     characterWidth,
     characterHeight,
     characterDirection,
@@ -758,10 +758,15 @@ function characterView2() {
   //#region 
   //~ Affichage du perso
 
-  // fill(255, 0, 0)
-  // rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight)
+  characterBoundingBoxHeightInside = 30
 
-  drawCharacter(characterInsidePosX, characterInsidePosY, characterWidth, characterHeight, characterDirection,characterMovement)
+  drawCharacter(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+  if(debugMod){
+    stroke(50,50,50,50)
+    fill(255,0,0,70)
+    rect(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+  }
+
   //#endregion
 
 }

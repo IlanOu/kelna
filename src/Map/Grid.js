@@ -2,28 +2,31 @@
 function displayGrid(grid, positionY, positionX, rectWidth, rectHeight) {
   let gridWidth = 0
   let gridHeight = 0
+  let thisTileSet;
 
   gridWidth = positionX + grid.length * rectWidth;
   gridHeight = positionY + grid[0].length * rectHeight;
 
-  if (engineOne){
-    for (let x = 0; x < grid.length; x++) {
-      for (let y = 0; y < grid[x].length; y++) {
-  
-        image(tilesList[grid[x][y]], positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
-        
-      }
-    }
-  }if (!engineOne){
-    for (let x = 0; x < grid.length; x++) {
-      for (let y = 0; y < grid[x].length; y++) {
+  if (engineOne) {
+    thisTileSet = tilesList
 
-        image(tileSetForTaverne[grid[x][y]], positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
-        // image(tilesList[grid[x][y]], positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
+  } else {
+    thisTileSet = tileSetForTaverne
+  }
+
+  for (let x = 0; x < grid.length; x++) {
+    for (let y = 0; y < grid[x].length; y++) {
+
+      image(thisTileSet[grid[x][y]], positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
+
+      if(debugMod){
+        stroke(50,50,50,50)
+        noFill()
+        rect(positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
+
       }
     }
   }
-
 
   return [positionX, positionY, gridWidth, gridHeight]
 }
@@ -94,7 +97,7 @@ function drawGrid() {
     //? Afficher le plan du millieu
     displayGrid(Maps[element].layers[1], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight)
 
-    if (debugMode) {
+    if (debugMod) {
       fill(0, 0, 255)
       noStroke()
       textSize(15);
@@ -133,26 +136,16 @@ function drawHouse() {
     width,
     height
   )
-  if(engineOne){
-    displayGrid(Houses["house1"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
-    displayGrid(Houses["house1"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  }else if(!engineOne){
 
-    displayGrid(Houses["taverne"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
-    displayGrid(Houses["taverne"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  }
+  displayGrid(Houses["taverne"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  displayGrid(Houses["taverne"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
 }
 
 
 //~ dessine le premier plan de la maison
 function drawHouseForeground() {
 
-  if (engineOne){
+  displayGrid(Houses["taverne"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
 
-    displayGrid(Houses["house1"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  } else if (!engineOne){
-    // displayGrid(Houses["taverne"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
-
-  }
 
 }

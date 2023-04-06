@@ -1,146 +1,151 @@
 {
-    "PNJS": {
-        "PNJ1": {
-            "color": "blue",
+  "PNJS": {
+    "PNJ1": {
+      "color": "blue",
 
-            "detectDistX": 2,
-            "detectDistY": 2,
-            "seePlayer": true,
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": true,
 
-            "x": -100,
-            "y": 100,
+      "x": -200,
+      "y": 300,
 
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 50,
-            "globalStartY": 50,
+      "xStart": 0,
+      "xEnd": 0,
+      "globalStartX": 50,
+      "globalStartY": 80,
 
-            "velocityY": 0,
-            "mass": 60,
+      "velocityY": 0,
+      "mass": 60,
 
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
 
-            "width": 80,
-            "height": 80,
+      "width": 80,
+      "height": 80,
 
-            "distance": 200,
-            "speed": 2,
-            "followSpeed": 4,
+      "distance": 200,
+      "speed": 2,
+      "followSpeed": 4,
 
-            "stepCount": 0,
-            "direction": "right",
+      "stepCount": 0,
+      "direction": "right",
 
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk",
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
 
-            "echange": [
-                    {
-                        "demande": [
-                            "sword_1"
-                        ],
-                        "donne": [
-                            "bow_1"
-                        ]
-                    },
-                    {
-                        "demande": [
-                            "sword_1"
-                        ],
-                        "donne": [
-                            "bow_1"
-                        ]
-                    },
-                    {
-                        "demande": [
-                            "sword_1"
-                        ],
-                        "donne": [
-                            "bow_1"
-                        ]
-                    }
-                ]
+      "name":"Charle",
+
+      "echange": [
+        {
+          "demande": ["sword_1"],
+          "donne": ["bow_1"]
         },
-        "PNJ2": {
-            "color": "green",
-
-            "detectDistX": 2,
-            "detectDistY": 2,
-            "seePlayer": false,
-
-            "x": 0,
-            "y": 200,
-
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 0,
-
-            "velocityY": 0,
-            "mass": 60,
-
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
-
-            "width": 80,
-            "height": 80,
-
-            "distance": 500,
-            "speed": 3,
-            "followSpeed": 4,
-
-            "stepCount": 0,
-            "direction": "right",
-
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk",
-
-
-            "echange": [
-                {
-                    "demande": [
-                        "food_1", "sword_1"
-                    ],
-                    "donne": [
-                        "bow_1"
-                    ]
-                },
-                {
-                    "demande": [
-                        "sword_2"
-                    ],
-                    "donne": [
-                        "sword_3"
-                    ]
-                },
-                {
-                    "demande": [
-                        "sword_1"
-                    ],
-                    "donne": [
-                        "sword_2"
-                    ]
-                },
-                {
-                    "demande": [
-                        "sword_3"
-                    ],
-                    "donne": [
-                        "sword_4"
-                    ]
-                },
-                {
-                    "demande": [
-                        "food_1"
-                    ],
-                    "donne": [
-                        "sword_1"
-                    ]
-                }
-            ]
+        {
+          "demande": ["sword_1"],
+          "donne": ["bow_1"]
+        },
+        {
+          "demande": ["sword_1"],
+          "donne": ["bow_1"]
         }
+      ]
+    },
+    "PNJ2": {
+      "color": "green",
+
+      "name": "PNJ2",
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 200,
+
+      "xStart": 0,
+      "xEnd": 0,
+      "globalStartX": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 500,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+      "echange": [
+        {
+          "demande": ["food_1", "sword_1"],
+          "donne": ["bow_1"]
+        },
+        {
+          "demande": ["sword_2"],
+          "donne": ["sword_3"]
+        },
+        {
+          "demande": ["sword_1"],
+          "donne": ["sword_2"]
+        },
+        {
+          "demande": ["sword_3"],
+          "donne": ["sword_4"]
+        },
+        {
+          "demande": ["food_1"],
+          "donne": ["sword_1"]
+        }
+      ]
+    },
+    "Marjo": {
+      "color": "purple",
+
+      "name":"Marjo",
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 500,
+      "y": 200,
+
+      "xStart": 10,
+      "xEnd": 20,
+      "globalStartX": 800,
+
+      "velocityY": 0,
+      "mass": 10,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 500,
+      "speed": 1.5,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk"
     }
+  }
 }

@@ -9,7 +9,7 @@ function keyPressed() {
     }
 
     //* Barre espace
-    if (keyCode == 32) {
+    if (keyCode == 32 || keyCode==38) {
         spaceKeyIsPressed = true;
     }
 
@@ -102,7 +102,7 @@ function keyPressed() {
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
     //* Barre espace
-    if (keyCode == 32) {
+    if (keyCode == 32 || keyCode ==38) {
         spaceKeyIsPressed = false;
         characterDoubleJumping = true;
     }

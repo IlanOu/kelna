@@ -391,6 +391,9 @@ function getEchangePNJ(namePNJ) {
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].echange
+
+        } else if(echangePNJ != undefined ){
+            return undefined
         }
     });
     return echangePNJ

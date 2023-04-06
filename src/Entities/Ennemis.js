@@ -258,7 +258,7 @@ let mobMovements = (Mobs) => {
       Mobs.haveBeenHit = true
     }
   }
-  console.log(Mobs.life)
+  // console.log(Mobs.life)
 
 
   //* Debug Mod

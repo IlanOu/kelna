@@ -1,24 +1,20 @@
-
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                 PNJ MANAGER                                */
 //^ /* -------------------------------------------------------------------------- */
 
-
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    PNJ(ForPNJ.PNJS.PNJ2);
+    // PNJ(ForPNJ.PNJS.PNJ2);
+    PNJ(ForPNJ.PNJS.Marjo);
   } else {
     drawPNJInside(ForPNJ.PNJS.PNJ1);
   }
 }
 
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                              DRAW PNJ INSIDE                               */
 //^ /* -------------------------------------------------------------------------- */
-
 
 let drawPNJInside = (pnj) => {
   //* Initialisation des variables
@@ -32,23 +28,19 @@ let drawPNJInside = (pnj) => {
 
   let PNJX = pnj.x;
   let PNJY = pnj.y;
-  
 
   //* Retourne les variables
   pnj.x = PNJX;
   pnj.y = PNJY;
-  pnj.xStart = PNJStart;
   pnj.xEnd = PNJEnd;
 
   PNJMovementsInside(pnj);
 };
 
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                    DRAW PNJ                                */
 //^ /* -------------------------------------------------------------------------- */
 function PNJ(pnj) {
-
   //* Initialisation des variables
 
   let PNJStart = pnj.globalStartX + xStartWorld;
@@ -81,20 +73,21 @@ function PNJ(pnj) {
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
-    
+
   //* Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
-    let currentMapToCheckName = World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
+    let currentMapToCheckName =
+      World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
     //? Récupère la couche des collisions sur la map
     let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
 
-
-    
     //? Pour chaque carré dans le tableau
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (
-        let column = 0; column < currentMapTableColliders[row].length; column++
+        let column = 0;
+        column < currentMapTableColliders[row].length;
+        column++
       ) {
         //& Lui donner une collision
         let thisObject = currentMapTableColliders[row][column];
@@ -105,7 +98,6 @@ function PNJ(pnj) {
         let thisObjectY =
           rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
           (yStartWorld + rectHeight * row);
-
 
         //& Collisions
         if (thisObject > 0) {
@@ -131,16 +123,13 @@ function PNJ(pnj) {
             PNJIsJumping
           );
 
-          if (PNJHaveToJump){
-            collide = true
+          if (PNJHaveToJump) {
+            collide = true;
           }
         }
-        
       }
     }
   }
-
-  
 
   //* Retourne les variables
   pnj.x = PNJX;
@@ -148,18 +137,15 @@ function PNJ(pnj) {
   pnj.velocityY = PNJVelocityY;
   pnj.isJumping = PNJIsJumping;
   pnj.jumpCount = PNJJumpCount;
-  pnj.xStart = PNJStart;
   pnj.xEnd = PNJEnd;
   pnj.haveToJump = collide;
 
   PNJMovements(pnj);
 }
 
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                PNJ MOVEMENTS                               */
 //^ /* -------------------------------------------------------------------------- */
-
 
 let PNJMovements = (pnj) => {
   //* Variables positions PNJ
@@ -176,7 +162,6 @@ let PNJMovements = (pnj) => {
     pnj.detectDistY
   );
 
-
   //* Zone de détection du PNJ
   pnj.seePlayer = rectIsInRect(
     characterPositionX,
@@ -192,15 +177,23 @@ let PNJMovements = (pnj) => {
   //* Si le perso n'est pas vu, faire une ronde
   if (!pnj.seePlayer) {
     doRound(pnj);
-    pnj.movement = "walk"
-    canInteractWithPNJ = false
-  }else{
-
+    pnj.movement = "walk";
+    canInteractWithPNJ = false;
+    // pnj.canInteractWithPNJ = false
+    // if(pnj.canInteractWithPNJ = false){
+    //   canInteractWithPNJ = false
+    // }
+  } else {
     lookThePlayer(pnj);
-    pnj.movement = "idle"
-    canInteractWithPNJ = true
+    pnj.movement = "idle";
+    canInteractWithPNJ = true;
+    if (pnj.echange != undefined) {
+      // pnj.canInteractWithPNJ = true
+      // if( pnj.canInteractWithPNJ = true){
+      //   canInteractWithPNJ = true
+      // }
+    }
   }
-
 
   //* Ajouter le saut au PNJ
   if (pnj.haveToJump) {
@@ -217,20 +210,18 @@ let PNJMovements = (pnj) => {
       pnj.isJumping = true;
       pnj.jumpCount += 1;
       pnj.movement = "jump";
-      
     } else {
       pnj.jumpCount = 0;
     }
   }
 
-
   //* Debug Mod
   if (debugMod) {
-    stroke(255,0,0)
+    stroke(255, 0, 0);
     fill(255, 0, 0, 70);
     rect(CurrentX, PNJY, pnj.width, pnj.height);
-    
-    stroke(0,255,0)
+
+    stroke(0, 255, 0);
     fill(0, 255, 0, 10);
     rect(
       VillagerBoundingBox[0],
@@ -239,7 +230,7 @@ let PNJMovements = (pnj) => {
       VillagerBoundingBox[3]
     );
     fill(255);
-    noStroke()
+    noStroke();
   }
 
   //* Afficher le PNJ
@@ -255,9 +246,7 @@ let PNJMovements = (pnj) => {
   );
 };
 
-
 let PNJMovementsInside = (pnj) => {
-
   // console.log(pnj.haveToJump)
 
   //* Variables positions PNJ
@@ -274,7 +263,6 @@ let PNJMovementsInside = (pnj) => {
     pnj.detectDistY
   );
 
-
   //* Zone de détection du PNJ
   pnj.seePlayer = rectIsInRect(
     characterInsidePosX,
@@ -290,33 +278,30 @@ let PNJMovementsInside = (pnj) => {
   //* Si le perso n'est pas vu, faire une ronde
   if (!pnj.seePlayer) {
     doRound(pnj);
-    pnj.movement = "walk"
-    canInteractWithPNJ = false
-  }else{
+    pnj.movement = "walk";
+    pnj.canInteractWithPNJ = false;
+  } else {
     lookThePlayer(pnj);
-    pnj.movement = "idle"
-    canInteractWithPNJ = true
+    pnj.movement = "idle";
+    pnj.canInteractWithPNJ = true;
   }
-
 
   //* Ajouter le saut au PNJ
   if (pnj.haveToJump) {
-    
     if (pnj.direction == "left") {
-      pnj.direction = "right"
-    }else if (pnj.direction == "right"){
+      pnj.direction = "right";
+    } else if (pnj.direction == "right") {
       pnj.direction = "left";
     }
   }
 
-
   //* Debug Mod
   if (debugMod) {
-    stroke(255,0,0)
+    stroke(255, 0, 0);
     fill(255, 0, 0, 70);
     rect(CurrentX, PNJY, pnj.width, pnj.height);
-    
-    stroke(0,255,0)
+
+    stroke(0, 255, 0);
     fill(0, 255, 0, 10);
     rect(
       VillagerBoundingBox[0],
@@ -325,7 +310,7 @@ let PNJMovementsInside = (pnj) => {
       VillagerBoundingBox[3]
     );
     fill(255);
-    noStroke()
+    noStroke();
   }
 
   //* Afficher le PNJ
@@ -341,12 +326,9 @@ let PNJMovementsInside = (pnj) => {
   );
 };
 
-
-
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                              // ANIMATION PNJ                              */
 //^ /* -------------------------------------------------------------------------- */
-
 
 function animationPNJ(
   CurrentPNJ,
@@ -364,23 +346,98 @@ function animationPNJ(
   let timer = round(millis() / animationSpeed) % 2;
   let PNJTexturesList = [];
 
+
+  switch (CurrentPNJ.name) {
+    case "PNJ2":
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 64; y < 96; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break;
+
+    case "Marjo":
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 32; x += 32) {
+            PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 64; y < 96; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break;
+
+    case "Charle":
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 64; y < 96; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break;
+  }
+
+
+
+
   //* Animation en fonction des mouvements
   if (movement == "walk") {
     for (let y = 32; y < 64; y += 32) {
       for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
       }
     }
   } else if (movement == "idle") {
     for (let y = 0; y < 32; y += 32) {
       for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
       }
     }
   } else if (movement == "jump") {
     for (let y = 64; y < 96; y += 32) {
       for (let x = 0; x < 128; x += 32) {
-        PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
+        PNJTexturesList.push(marjoTexture.get(x, y, 32, 32));
       }
     }
   }

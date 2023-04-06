@@ -1,6 +1,8 @@
 function doorsManager(){
 
     let canGoInside = [];
+    let canGoOutside = [];
+
     Object.entries(allDoors.Doors).forEach(door => {
         if (engineOne){
             if (!door.inHouse){
@@ -8,13 +10,18 @@ function doorsManager(){
                 canGoInside.push(canEnterInHouse);
             }
         }else{
-            if (door.inHouse){
+            if (!door.inHouse){
                 drawDoorInside(door[1]);
+                canGoOutside.push(canGoOutTheHouse);
             }
         }
     });
     if (canGoInside.includes(true)){
         canEnterInHouse = true;
+    }
+    if (canGoOutside.includes(true)){
+        canGoOutTheHouse = true
+        console.log("Out",canGoOutTheHouse)
     }
 
 }
@@ -94,7 +101,6 @@ function drawDoorInside (door){
     let doorY = positions.pixelY + yStartHouse
     let widthDoor = engine2WidthDoors
     let heightDoor = engine2HeightDoors
-    
 
     //* Variables Collisions / HitBox Mobs
     let doorBoundingBox = expandRect(
@@ -117,6 +123,19 @@ function drawDoorInside (door){
         doorBoundingBox[2],
         doorBoundingBox[3]
     );
+
+
+    if (canGoOutTheHouse) {
+        behindThisDoor = door.destination
+
+        //? Remettre la maison en position
+        xStartHouse = 0
+        yStartHouse = 200
+
+        //? Remettre le spawn du perso en position
+        characterInsidePosX = (Houses[behindThisDoor].xStart * rectWidth) + xStartHouse
+        characterInsidePosY = (Houses[behindThisDoor].yStart * rectHeight) + yStartHouse
+    }
 
     //* Debug Mod
     if (debugMod) {

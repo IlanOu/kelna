@@ -30,18 +30,21 @@ function preload() {
   GUIForStats = loadImage("assets/GUI/GUIForStats.png")
   GUIInteract = loadImage("assets/GUI/GUIInt.png")
   GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
+  GUIStart = loadImage("assets/GUI/start.png")
 
   //? Background
-  backgroundImage = loadImage('assets/Background/Sky2.jpg');
+  backgroundImage = loadImage('assets/Background/sky2.jpg');
 
 
   //? Animation PNJ
   PNJTextures = loadImage("assets/animations/spriteSheetGuardsHit.png")
+  marjoTexture = loadImage("assets/animations/marjoSprite.png")
+  charleTexture = loadImage("assets/animations/charleSprite.png")
 
 
   //? Tileset
   tilesetItems = loadImage("assets/items/tilesetitem1.png")
-  tileSetTaverne = loadImage("assets/textures/taverne.png")
+  tileSetTaverne = loadImage("assets/textures/taverne2.png")
 
 
   //? Textures

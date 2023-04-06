@@ -6,13 +6,13 @@
             "x" : 10,
             "y": 11,
             "detectDist": 2,
-            "destination": "house1",
+            "destination": "taverne",
             "inHouse": false
 
         },
         "door1-i": {
 
-            "location": "house1",
+            "location": "taverne",
             "x" : 10,
             "y": 11,
             "detectDist": 2,
