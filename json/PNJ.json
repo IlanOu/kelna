@@ -1,78 +1,136 @@
 {
-    "PNJS": {
-        "PNJ1": {
-            "img": "",
+  "PNJS": {
+    "PNJ1": {
+      "color": "blue",
 
-            "color": "blue",
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
 
-            "detectDistX": 2,
-            "detectDistY": 2,
-            "seePlayer": false,
+      "x": 0,
+      "y": 0,
 
-            "x": 800,
-            "y": 400,
+      "xStart": 0,
+      "globalStartX": 250,
+      "globalStartY": 80,
 
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 700,
+      "velocityY": 0,
+      "mass": 60,
 
-            "velocityY": 0,
-            "mass": 60,
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
 
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
+      "width": 80,
+      "height": 80,
 
-            "width": 80,
-            "height": 80,
+      "distance": 50,
+      "speed": 2,
+      "followSpeed": 4,
 
-            "distance": 100,
-            "speed": 3,
-            "followSpeed": 4,
+      "stepCount": 0,
+      "direction": "right",
 
-            "stepCount": 0,
-            "direction": "right",
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
 
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
+      "name":"Charle",
+
+      "canInteractPNJ":false
+    },
+    "Marjo": {
+      "color": "green",
+
+      
+      "name": "Marjo",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 200,
+
+      "xStart": 0,
+      "xEnd": 0,
+      "globalStartX": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 500,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canInteractPNJ": true,
+
+      "echange": [
+        {
+          "demande": ["sword_2"],
+          "donne": ["sword_3"]
         },
-        "PNJ2": {
-            "img": "",
-
-            "color": "green",
-
-            "detectDistX": 2,
-            "detectDistY": 2,
-            "seePlayer": false,
-
-            "x": 0,
-            "y": 200,
-
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 0,
-
-            "velocityY": 0,
-            "mass": 60,
-
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
-
-            "width": 80,
-            "height": 80,
-
-            "distance": 500,
-            "speed": 3,
-            "followSpeed": 4,
-
-            "stepCount": 0,
-            "direction": "right",
-
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
+        {
+          "demande": ["sword_1"],
+          "donne": ["sword_2"]
+        },
+        {
+          "demande": ["food_1"],
+          "donne": ["sword_1"]
         }
+      ]
+    },
+    "PNJ2": {
+      "color": "purple",
+
+      "name":"PNJ2",
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 500,
+      "y": 200,
+
+      "xStart": 10,
+      "xEnd": 20,
+      "globalStartX": 800,
+
+      "velocityY": 0,
+      "mass": 10,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 500,
+      "speed": 1.5,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canInteractPNJ":false
     }
+  }
 }

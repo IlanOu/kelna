@@ -1,84 +1,180 @@
 {
     "Ennemis": {
-        "Enn1": {
-            "type": "Archer",
-            "img": "",
-            "damages": 5,
 
-            "color": "red",
+      "Malade1": {
+        "type": "Malade1",
+        "damages": 5,
+        "hit": false,
+        "haveBeenHit": false,
+        "life": 3,
 
-            "detectDistX": 8,
-            "detectDistY": 8,
-            "seePlayer": false,
+        "color": "red",
 
-            "x": 0,
-            "y": 200,
+        "detectDistX": 8,
+        "detectDistY": 8,
+        "seePlayer": false,
 
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 0,
+        "x": 900,
+        "y": 200,
 
-            "velocityY": 0,
-            "mass": 60,
+        "xStart": 0,
+        "xEnd": 0,
+        "globalStartX": 0,
 
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
+        "velocityY": 0,
+        "mass": 60,
 
-            "width": 80,
-            "height": 80,
+        "jumpCount": 0,
+        "isJumping": false,
+        "haveToJump": false,
 
-            "distance": 500,
-            "speed": 3,
-            "followSpeed": 4,
-            "isFollowing": false,
+        "width": 80,
+        "height": 80,
 
-            "stepCount": 0,
-            "direction": "right",
+        "distance": 500,
+        "speed": 3,
+        "followSpeed": 3,
+        "isFollowing": false,
 
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
-        },
-        "Enn2": {
-            "type": "Chevalier",
-            "img": "",
-            "damages": 10,
+        "stepCount": 0,
+        "direction": "right",
 
-            "color": "red",
+        "currentFrame": false,
+        "indexFrame": 0,
+        "movement": "walk",
+        "lastMovement": "idle"
+      },
 
-            "detectDistX": 8,
-            "detectDistY": 8,
-            "seePlayer": false,
+      "Malade2": {
+        "type": "Malade2",
+        "damages": 5,
+        "hit": false,
+        "haveBeenHit": false,
+        "life": 3,
 
-            "x": 600,
-            "y": 200,
+        "color": "red",
 
-            "xStart": 0,
-            "xEnd": 0,
-            "globalStartX": 0,
+        "detectDistX": 8,
+        "detectDistY": 8,
+        "seePlayer": false,
 
-            "velocityY": 0,
-            "mass": 60,
+        "x": 0,
+        "y": 200,
 
-            "jumpCount": 0,
-            "isJumping": false,
-            "haveToJump": false,
+        "xStart": 0,
+        "xEnd": 0,
+        "globalStartX": 400,
 
-            "width": 80,
-            "height": 80,
+        "velocityY": 0,
+        "mass": 60,
 
-            "distance": 500,
-            "speed": 3,
-            "followSpeed": 4,
-            "isFollowing": false,
+        "jumpCount": 0,
+        "isJumping": false,
+        "haveToJump": false,
 
-            "stepCount": 0,
-            "direction": "right",
+        "width": 80,
+        "height": 80,
 
-            "currentFrame": 0,
-            "indexFrame": 0,
-            "movement": "walk"
-        }
+        "distance": 500,
+        "speed": 3,
+        "followSpeed": 4,
+        "isFollowing": false,
+
+        "stepCount": 0,
+        "direction": "right",
+
+        "currentFrame": false,
+        "indexFrame": 0,
+        "movement": "walk",
+        "lastMovement": "idle"
+      },
+
+      "Enn2": {
+        "type": "Chevalier",
+        "damages": 10,
+        "hit": false,
+        "haveBeenHit": false,
+        "life": 2,
+
+        "color": "red",
+
+        "detectDistX": 8,
+        "detectDistY": 8,
+        "seePlayer": false,
+
+        "x": 600,
+        "y": 200,
+
+        "xStart": 0,
+        "xEnd": 0,
+        "globalStartX": 0,
+
+        "velocityY": 0,
+        "mass": 60,
+
+        "jumpCount": 0,
+        "isJumping": false,
+        "haveToJump": false,
+
+        "width": 80,
+        "height": 80,
+
+        "distance": 500,
+        "speed": 3,
+        "followSpeed": 4,
+        "isFollowing": false,
+
+        "stepCount": 0,
+        "direction": "right",
+
+        "currentFrame": false,
+        "indexFrame": 0,
+        "movement": "walk",
+        "lastMovement": "idle"
+      },
+
+      "Enn1": {
+        "type": "Archer",
+        "damages": 10,
+        "hit": false,
+        "haveBeenHit": false,
+        "life": 2,
+
+        "color": "red",
+
+        "detectDistX": 8,
+        "detectDistY": 8,
+        "seePlayer": false,
+
+        "x": 600,
+        "y": 200,
+
+        "xStart": 0,
+        "xEnd": 0,
+        "globalStartX": 0,
+
+        "velocityY": 0,
+        "mass": 60,
+
+        "jumpCount": 0,
+        "isJumping": false,
+        "haveToJump": false,
+
+        "width": 80,
+        "height": 80,
+
+        "distance": 500,
+        "speed": 3,
+        "followSpeed": 4,
+        "isFollowing": false,
+
+        "stepCount": 0,
+        "direction": "right",
+
+        "currentFrame": false,
+        "indexFrame": 0,
+        "movement": "walk",
+        "lastMovement": "idle"
+      }
     }
 }

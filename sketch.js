@@ -1,114 +1,134 @@
+//~ Setup 
 function setup() {
 
-
+  //? Viewport
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
     viewportDisplayHeight = windowHeight
   }
 
+  //? Canvas
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
-  // PositionButtons()
 
 
-  // Ma tileset fait 256x256 px et chaque tile fait du 32x32px
-  tilesList = cutTileset(tileSet, [32, 32], [256, 256])
-
+  //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
+  tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
+  itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
+  tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 }
 
 
+//~ Preload 
 function preload() {
 
-  // Images preload
-  GamerHeart = loadImage("assets/GamerHeart.webp")
-  GUIParameters = loadImage("assets/GUIParameters.png")
-  GUIForEscape = loadImage("assets/GUIForEscape.png")
-  GUIOfDeath = loadImage("assets/GUIOfDeath.png")
-  GUIForStats = loadImage("assets/GUIForStats.png")
-  Background = loadImage("assets/Background.gif")
-  IMGPlay = loadImage("assets/Play.png")
-  IMGSet = loadImage("assets/Settings.png")
-  WantedPoster = loadImage("assets/WantedPoster.png")
+  //? Interfaces
+  GUIParameters = loadImage("assets/GUI/GUIParameters.png")
+  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png")
+  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png")
+  Background = loadImage("assets/Background/Background.gif")
+  GamerHeart = loadImage("assets/GUI/GamerHeart.webp")
+  GUIForStats = loadImage("assets/GUI/GUIForStats.png")
+  GUIInteract = loadImage("assets/GUI/GUIInt.png")
+  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
+  GUIStart = loadImage("assets/GUI/start.png")
 
-  // Background
+  //? Background
+  backgroundImage = loadImage('assets/Background/sky4.jpg');
 
-  backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
-  // Animation PNJ
-  PNJTextures = loadImage("assets/animations/spriteSheetGuards.png")
+  //? Animation PNJ
+  PNJTextures = loadImage("assets/animations/spriteSheetGuardsHit.png")
+  marjoTexture = loadImage("assets/animations/marjoSprite.png")
+  charleTexture = loadImage("assets/animations/charleSprite.png")
+  malade1Sprite = loadImage("assets/animations/malade1.png")
+  malade2Sprite = loadImage("assets/animations/malade2.png")
 
-  // WalkPNJ = loadImage("assets/animations/PNJWalk.png")
-  // IdlePNJ = loadImage("assets/animations/IdleBoi.png")
 
-  // Textures
+  //? Tileset
+  tilesetItems = loadImage("assets/items/TileSetItems.png");
+  tileSetTaverne = loadImage("assets/textures/taverne2.png")
+
+
+  //? Textures
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
-  tileSet = loadImage("assets/textures/floortilesetTransparent.png")
+  tileSet = loadImage("assets/textures/tilesetUgo4.png")
+  BackTroc = loadImage("assets/textures/planches.png")
+  Slot = loadImage("assets/textures/Slot.png")
+  BackPop = loadImage("assets/textures/BackPop.png")
+  pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
-  // Personnage
-  characterTextures = loadImage("assets/animations/spriteSheetCharacter.png")
-  
-  // characterTexture_Idle = loadImage("assets/animations/IdleBase.png")
-  // characterTexture_Walk = loadImage("assets/animations/WalkBaseNew.png")
-  // characterTexture_Jump = loadImage("assets/animations/JumpBase.png")
-  characterTexture_Dash = loadImage("assets/animations/RollBase.png")
 
-  
+  //? Personnage
+  characterTextures = loadImage("assets/animations/spritesheetYvo.png")
 
-  // JSON preload
-  ForPNJ = loadJSON("json/PNJ.json");
+
+  //? JSON preload
+  ForItems = loadJSON("json/IsItems.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");
+  ForPNJ = loadJSON("json/PNJ.json");
   ForEnnemis = loadJSON("json/Ennemis.json");
+  allDoors = loadJSON("json/Doors.json");
+  
 
-  // SONG
+  //? SONG
   SongBackground = loadSound("music/SongBackground.mp3")
 
 
-  //CINEMATIC
-  StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
-  StartCinematic.hide();
-  StartCinematic.volume(0);
+  //? CINEMATIC
+  // StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
+  // StartCinematic.hide();
+  // StartCinematic.volume(0);
 }
 
 
-
-
+//~ Draw 
 function draw() {
   noSmooth()
-
+  
+  //? Si le jeu joue
   if (gameIsPlaying) {
+
+    //? Variables
     inGame = true
-    
-    if (engineOne) {
 
-      //* Afficher le fond du jeu
-      drawBackgroundImage(backgroundImage)
-      
-      //* Afficher la map
-      drawGrid()
+    //~ Si le jeu n'est pas en pause
+    if (!gameIsPaused){
+      if (engineOne) {
+  
+        //? Afficher le fond du jeu
+        drawBackgroundImage(backgroundImage)
+        
 
-      //* Afficher les entités
-      PNJManager()
-      MobManager()
-      //* Afficher le joueur (le perso passe devant les entités)
-      character()
-      
-      //* Afficher l'avant plan de la map
-      drawGridForeground()
+        //? Afficher la map
+        drawGrid()
+  
 
-    }else{
-      drawHouse()
-      PNJManager()
-      characterView2()
-      drawHouseForeground()
+        //? Afficher les entités
+        doorsManager()
+        PNJManager()
+        MobManager()
+        
+        //? Afficher le joueur (le perso passe devant les entités)
+        character()
+        
+
+        //? Afficher l'avant plan de la map
+        drawGridForeground()
+  
+      }else{
+        drawHouse()
+        doorsManager()
+        PNJManager()
+        characterView2()
+        drawHouseForeground()
+      }
     }
-    
-
   }
   setupUI()
-
 }
 
 
