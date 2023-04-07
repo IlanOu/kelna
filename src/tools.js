@@ -285,13 +285,18 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapX = 0;
     let indexMapY = 0;
 
-    World.worldsMap.forEach(row => {
+    World.worldsMap.every(row => {
+       
         if (row.includes(mapName)) {
             mapExist = true;
             indexMapX = row.indexOf(mapName);
+
+            return false
         } else {
             indexMapY++
         }
+        
+
     });
 
     if (!mapExist) {

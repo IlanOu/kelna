@@ -3,7 +3,7 @@
         "door1": {
 
             "location": "Tileset-1",
-            "x" : 10,
+            "x" : 13.5,
             "y": 11,
             "detectDist": 2,
             "destination": "taverne",
