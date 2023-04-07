@@ -93,6 +93,52 @@
           "donne": ["sword_1"]
         }
       ]
+    },
+    "Toto": {
+      "color": "green",
+
+
+      "name": "Toto",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 200,
+
+      "xStart": 0,
+      "xEnd": 0,
+      "globalStartX": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 500,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canInteractPNJ": false,
+
+      "discussions": 
+      [
+        "Yo"
+        
+      ]
     }
   }
 }

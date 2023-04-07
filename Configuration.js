@@ -180,6 +180,8 @@ let PressInteractPNJ = false
 let SwordAlreadyTaken = false
 let marjoTexture;
 let charleTexture;
+let canDiscussionsWithPNJ = false;
+let PressInteractPNJD = false
 
 
 //~  Variables pour les ennemis
@@ -224,9 +226,10 @@ let waitingButton = false;
 let playerDead = false
 
 
+
 //~  Variables pour les stats
 //let playerStat = false
-
+let numberOfSteps = 0;
 
 //~  Variables pour le JSON des items
 let ForItems;
@@ -251,6 +254,13 @@ let haveToTrade = false;
 let getTrade;
 let slotSize = 2
 let itemSize = 1.6
+
+
+//~ Variables pour le FPS
+let fps;
+let fpsActivate = false
+let ColorForRectFPS = 255
+
 
 //#endregion Interfaces
 

@@ -292,8 +292,15 @@ function drawSettingInPause() {
   let buttonExitW = 150;
   let buttonExitH = 20;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
+  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.4;
   let textExitX = buttonExitX + buttonMusicW / 2;
+
+
+  let buttonFPSW = 150;
+  let buttonFPSH = 20;
+  let buttonFPSX = interfaceMenuX + interfaceMenuWidth / 2 - buttonFPSW / 2;
+  let buttonFPSY = interfaceMenuY + interfaceMenuHeight / 1.8;
+  let textFPSX = buttonFPSX + buttonMusicW / 2;
 
   let buttonExit = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
 
@@ -301,8 +308,17 @@ function drawSettingInPause() {
 
   let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH];
 
+  let buttonFPS = [buttonFPSX, buttonFPSY, buttonFPSW, buttonFPSH];
+
+
   fill(255);
   drawInterface(interfaceMenu, GUIParameters);
+
+
+  fill(ColorForRectFPS);
+  drawButton(buttonFPS);
+  drawText("FPS", 15, [textFPSX, buttonFPSY], "center");
+
 
   fill(ColorForRectSong);
   drawButton(buttonSon);
@@ -328,6 +344,9 @@ function drawSettingInPause() {
   }
   if (buttonClicked(buttonSon)) {
     PlaySong();
+  }
+  if (buttonClicked(buttonFPS)) {
+    gameFPS();
   }
 }
 
@@ -493,6 +512,10 @@ function setupInteractions() {
       // console.log(canInteractWithPNJ);
     }
 
+    if (canDiscussionsWithPNJ) {
+      drawKey("E");
+    }
+
   } else {
     if (canGoOutTheHouse) {
       drawKey("E");
@@ -516,8 +539,6 @@ function drawTroc(x, y, w, h) {
   if (echangePNJ != undefined) {
     image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
     // 800 215.5 250 500
-
-    // console.log(PNJSeePlayer)
 
 
     //? Lignes de slot
@@ -657,15 +678,62 @@ function InteractionSword() {
 
 
 
+//~ INTERACTION PNJ DISCU
+function InteractionDiscu(){
+  let interfaceMenuWidth = 500;
+  let interfaceMenuHeight = 500;
+  let interfaceMenuX =
+    viewportDisplayWidth / 2 - interfaceMenuWidth / 2 + 110.5;
+  let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
+  drawDiscussion(
+    interfaceMenuX,
+    interfaceMenuY,
+    interfaceMenuWidth / 2,
+    interfaceMenuHeight
+  );
+
+}
+
+
+
+//~ DISCUSSION
+function drawDiscussion(x,y,w,h){
+
+  //? Fonction comme conditions pour la discussions
+  let currentPNJ = getPNJName();
+  let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
+  let discussionPNJ = getDiscussionPNJ(currentPNJ)
+
+  console.log(discussionPNJ)
+
+  if (discussionPNJ != undefined){
+
+    //? Affichage du troc
+    if (!PNJSeePlayer) {
+      PressInteractPNJD = false;
+    }
+
+    console.log(discussionPNJ)
+
+  }
+
+}
+
+
+
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
+
 
   if (inGame && settingsHome === false) {
     //? Si je fait echap (dans le menu pause)
 
     if (PressInteractPNJ && !SwordAlreadyTaken) {
       InteractionSword();
+    }
+    if (PressInteractPNJD) {
+      InteractionDiscu();
     }
     if (settingsPause) {
       PlayerInSettingsPause = true

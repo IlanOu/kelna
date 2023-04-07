@@ -226,13 +226,13 @@ let mobMovements = (Mobs) => {
     if (characterDirection == "right") {
       if (characterPositionX + characterWidth / 4 < CurrentX + Mobs.width / 2) {
         Mobs.hit = true;
-        console.log("Frappé !");
+        // console.log("Frappé !");
         Mobs.movement = "hit";
       }
     } else {
       if (characterPositionX + characterWidth / 4 > CurrentX + Mobs.width / 2) {
         Mobs.hit = true;
-        console.log("Frappé !");
+        // console.log("Frappé !");
         Mobs.movement = "hit";
       }
     }

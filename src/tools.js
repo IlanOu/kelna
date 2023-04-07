@@ -36,6 +36,7 @@ function findIndexValueIn2dArray(array, value) {
 
 //~ Trouve l'index de la position du 2eme array
 let previous_index_pos;
+
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -78,11 +79,12 @@ function containedPositionsIn(objectPositionX,
     containerWidth,
     containerHeight) {
     return [constrain(objectPositionX,
-        0,
-        containerWidth - objectWidth),
-    constrain(objectPositionY,
-        0,
-        containerHeight - objectHeight)]
+            0,
+            containerWidth - objectWidth),
+        constrain(objectPositionY,
+            0,
+            containerHeight - objectHeight)
+    ]
 }
 
 
@@ -124,8 +126,7 @@ let PlayMusic = () => {
         ColorForRectMusic = 50
         Pressing = true
 
-    }
-    else if (MusicIsActivate === true && Pressing === false) {
+    } else if (MusicIsActivate === true && Pressing === false) {
         MusicIsActivate = false
         SongBackground.pause()
         ColorForRectMusic = 255
@@ -144,8 +145,7 @@ let PlaySong = () => {
         ColorForRectSong = 50
         Pressing = true
 
-    }
-    else if (SongIsActivate === true && Pressing === false) {
+    } else if (SongIsActivate === true && Pressing === false) {
         SongIsActivate = false
         ColorForRectSong = 255
         Pressing = true
@@ -286,7 +286,7 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapY = 0;
 
     World.worldsMap.every(row => {
-       
+
         if (row.includes(mapName)) {
             mapExist = true;
             indexMapX = row.indexOf(mapName);
@@ -295,7 +295,7 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         } else {
             indexMapY++
         }
-        
+
 
     });
 
@@ -315,7 +315,10 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         let pixelsX = (indexMapX * numberOfCasesX * rectWidth) + (positionX * rectWidth)
         let pixelsY = (indexMapY * numberOfCasesY * rectHeight) + (positionY * rectHeight)
 
-        return { "pixelX": pixelsX, "pixelY": pixelsY }
+        return {
+            "pixelX": pixelsX,
+            "pixelY": pixelsY
+        }
     } else {
         throw new Error("Map name not found in World.json : " + mapName);
     }
@@ -325,12 +328,14 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
 //~ Dessine les touches pour les interactions
 function drawKey(key) {
     let keyBackground = [(characterPositionX),
-    characterPositionY - 50,
+        characterPositionY - 50,
         interactionWidth,
-        interactionHeight]
+        interactionHeight
+    ]
 
     let textKey = [characterPositionX + (keyBackground[2] / 2),
-    characterPositionY - 50 + (keyBackground[3] / 8)]
+        characterPositionY - 50 + (keyBackground[3] / 8)
+    ]
 
     fill(255)
     drawButton(keyBackground)
@@ -341,12 +346,14 @@ function drawKey(key) {
 //~ Dessine les touches pour les interactions
 function drawKeyAt(key, positionX, positionY, haveBackground = false) {
     let keyBackground = [(positionX),
-    positionY - 50,
+        positionY - 50,
         interactionWidth,
-        interactionHeight]
+        interactionHeight
+    ]
 
     let textKey = [positionX + (keyBackground[2] / 2),
-    positionY - 50 + (keyBackground[3] / 8)]
+        positionY - 50 + (keyBackground[3] / 8)
+    ]
 
     if (haveBackground) {
         drawButton(keyBackground, undefined, false)
@@ -379,6 +386,8 @@ function getPNJName() {
 function getPNJSeePlayer(namePNJ) {
     let echangePNJ = false
 
+
+
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].seePlayer
@@ -393,15 +402,33 @@ function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
 
+    
+
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].echange
-
-        } else if(echangePNJ != undefined ){
+        } else if (echangePNJ != undefined) {
             return undefined
         }
     });
     return echangePNJ
+}
+
+
+
+//~ Recupere si le PNJ peut faire une discussion
+function getDiscussionPNJ(namePNJ){
+
+    let discussionPNJ = []
+
+    Object.entries(ForPNJ.PNJS).forEach(PNJ =>{
+        if (PNJ[0] == namePNJ) {
+            discussionPNJ = PNJ[1].discussions
+        } else if (discussionPNJ != undefined) {
+            return undefined
+        }
+        return discussionPNJ
+    })
 }
 
 
@@ -497,12 +524,13 @@ function troc(requis, gain) {
             playerAnswersYes = false
             haveToTrade = false
         }
-    }
-    else {
+    } else {
         popUp("Vous n'avez pas les objets requis !")
     }
 
 }
+
+
 
 //~ Pop up
 function popUp(message, options = "info") {
@@ -545,8 +573,7 @@ function popUp(message, options = "info") {
         }
 
 
-    }
-    else if (options == "choice") {
+    } else if (options == "choice") {
 
         waitingAnswer = true;
 
@@ -592,4 +619,27 @@ function popUp(message, options = "info") {
             PressInteractPNJ = false
         }
     }
+}
+
+
+//~ Affiche les FPS
+let gameFPS = () => {
+
+    if (fpsActivate === false && Pressing === false) {
+        fpsActivate = true
+        ColorForRectFPS = 50
+        Pressing = true
+
+        if (fpsActivate === true) {
+            textSize(16);
+            fill(255);
+            text("FPS: " + fps.toFixed(0), 50, 50);
+        }
+
+    } else if (fpsActivate === true && Pressing === false) {
+        fpsActivate = false
+        ColorForRectFPS = 255
+        Pressing = true
+    }
+
 }

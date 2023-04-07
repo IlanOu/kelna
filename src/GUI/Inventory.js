@@ -44,7 +44,7 @@ let displayInventory = () => {
         let ForAllSlotY = 250;
 
         noFill();
-        stroke(255);
+        stroke(0);
 
         rect(ForSlotOneX, ForAllSlotY, WidthSlot, HeightSlot);
         rect(ForSlotTwoX, ForAllSlotY + HeightSlot, WidthSlot, HeightSlot);

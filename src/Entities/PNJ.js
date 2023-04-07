@@ -6,7 +6,8 @@ function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
     // PNJ(ForPNJ.PNJS.PNJ2);
-    PNJ(ForPNJ.PNJS.Marjo);
+    // PNJ(ForPNJ.PNJS.Marjo);
+      PNJ(ForPNJ.PNJS.Toto);
   } else {
     drawPNJInside(ForPNJ.PNJS.PNJ1);
   }
@@ -180,13 +181,16 @@ let PNJMovements = (pnj) => {
     doRound(pnj);
     pnj.movement = "walk";
     canInteractWithPNJ = false;
+    PressInteractPNJD = false
   }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
-      // console.log(pnj.canInteractPNJ, pnj.echange);
+
+    if (pnj.canInteractPNJ === true && pnj.echange !== undefined ) {
       canInteractWithPNJ = true;
+    } else if (PressInteractPNJD = true && pnj.discussions !== undefined) {
+      canInteractWithPNJD = true;
     }
   }
 
@@ -372,6 +376,30 @@ function animationPNJ(
       break;
 
     case "Charle":
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 64; y < 96; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break;
+
+
+      case "Toto":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
           for (let x = 0; x < 128; x += 32) {

@@ -37,10 +37,10 @@ function preload() {
 
 
   //? Animation PNJ
-  marjoTexture = loadImage("assets/animations/marjoSprite.png")
-  charleTexture = loadImage("assets/animations/charleSprite.png")
-  malade1Sprite = loadImage("assets/animations/malade1.png")
-  malade2Sprite = loadImage("assets/animations/malade2.png")
+  marjoTexture = loadImage("assets/entities/marjoSprite.png")
+  charleTexture = loadImage("assets/entities/charleSprite.png")
+  malade1Sprite = loadImage("assets/entities/malade1.png")
+  malade2Sprite = loadImage("assets/entities/malade2.png")
 
 
   //? Tileset
@@ -60,7 +60,7 @@ function preload() {
 
 
   //? Personnage
-  characterTextures = loadImage("assets/animations/spritesheetYvo.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvo.png")
 
 
   //? JSON preload
@@ -88,12 +88,16 @@ function preload() {
 //~ Draw 
 function draw() {
   noSmooth()
+  frameRate(60)
+  fps = frameRate();
+
   
   //? Si le jeu joue
   if (gameIsPlaying) {
 
     //? Variables
     inGame = true
+ 
 
     //~ Si le jeu n'est pas en pause
     if (!gameIsPaused){

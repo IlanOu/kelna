@@ -16,11 +16,13 @@ function keyPressed() {
     //* Flèche de droite
     if ((keyCode == 39 || keyCode == 68)) {
         rightArrowPressed = true;
+        numberOfSteps++
     }
 
     //* Flèche de gauche
     if ((keyCode == 37 || keyCode == 81)) {
         leftArrowPressed = true;
+        numberOfSteps++
     }
 
     //* Flèche de haut
@@ -46,6 +48,14 @@ function keyPressed() {
         //* Touche E
         if (keyCode == 69 && engineOne) {
             PressInteractPNJ = !PressInteractPNJ
+        }
+    }
+
+
+    if (canDiscussionsWithPNJ) {
+        //* Touche E
+        if (keyCode == 69 && engineOne) {
+            PressInteractPNJD = !PressInteractPNJD
         }
     }
 
