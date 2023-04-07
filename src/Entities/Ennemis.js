@@ -315,28 +315,6 @@ function animationMobs(
   //~ Changer d'animation en fonction du type
 
   switch (CurrentMob.type) {
-    case "Archer":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "hit") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
-
-      break;
 
     case "Malade1":
       if (movement == "walk") {
@@ -359,22 +337,6 @@ function animationMobs(
         }
       }
 
-      break;
-
-    case "Chevalier":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 64; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
       break;
 
     case "Malade2":

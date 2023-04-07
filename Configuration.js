@@ -1,6 +1,13 @@
 //^ DEBUG MOD
 let debugMod = false;
 
+
+//^ ADMIN MOD
+let username = "";
+let password = "";
+let adminJSON;
+
+
 //^ Textures
 //#region //~ Textures
 let stone;
@@ -13,8 +20,6 @@ let tilesList;
 
 let tileSetForTaverne;
 let tileSetTaverne;
-
-
 //#endregion
 
 
@@ -81,6 +86,7 @@ let haveToJump = false;
 
 
 //? Dash
+let dashSystem = false
 let characterIsDashing = false;
 let lastDashTime = 0;
 const dashCooldown = 1000;

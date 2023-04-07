@@ -465,7 +465,7 @@ function drawStats() {
 //~ BARRE DE VIE
 function drawLifeBar() {
   let HeartX = 1800 / 2;
-  let HeartY = MargeBarVie + 750
+  let HeartY = MargeBarVie + 900
   let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
 
   for (let i = 0; i < VieLarg; i++) {

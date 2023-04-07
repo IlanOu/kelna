@@ -348,29 +348,6 @@ function animationPNJ(
 
   //* Animation en fonction des mouvements
   switch (CurrentPNJ.name) {
-    case "PNJ2":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "jump") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
-
-      break;
-
     case "Marjo":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {

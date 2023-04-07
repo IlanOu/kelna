@@ -33,11 +33,10 @@ function preload() {
   GUIStart = loadImage("assets/GUI/start.png")
 
   //? Background
-  backgroundImage = loadImage('assets/Background/sky4.jpg');
+  backgroundImage = loadImage('assets/Background/sky2.jpg');
 
 
   //? Animation PNJ
-  PNJTextures = loadImage("assets/animations/spriteSheetGuardsHit.png")
   marjoTexture = loadImage("assets/animations/marjoSprite.png")
   charleTexture = loadImage("assets/animations/charleSprite.png")
   malade1Sprite = loadImage("assets/animations/malade1.png")
@@ -53,7 +52,7 @@ function preload() {
   stone = loadImage("assets/textures/Pierre.jpg")
   stoneBrick = loadImage("assets/textures/BriqueRouge.png")
   sky = loadImage("assets/textures/Sky.jpg")
-  tileSet = loadImage("assets/textures/tilesetUgo4.png")
+  tileSet = loadImage("assets/textures/tilesetKelna.png")
   BackTroc = loadImage("assets/textures/planches.png")
   Slot = loadImage("assets/textures/Slot.png")
   BackPop = loadImage("assets/textures/BackPop.png")
@@ -72,6 +71,7 @@ function preload() {
   ForPNJ = loadJSON("json/PNJ.json");
   ForEnnemis = loadJSON("json/Ennemis.json");
   allDoors = loadJSON("json/Doors.json");
+  adminJSON = loadJSON("json/Admin.json")
   
 
   //? SONG

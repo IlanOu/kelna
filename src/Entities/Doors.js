@@ -4,12 +4,12 @@ function doorsManager() {
 
   Object.entries(allDoors.Doors).forEach((door) => {
     if (engineOne) {
-      if (!door.inHouse) {
+      if (!door[1].inHouse) {
         drawDoor(door[1]);
         canGoInside.push(canEnterInHouse);
       }
     } else {
-      if (door.inHouse) {
+      if (door[1].inHouse) {
         drawDoorInside(door[1]);
         canGoOutside.push(canGoOutTheHouse);
       }
@@ -20,7 +20,6 @@ function doorsManager() {
   }
   if (canGoOutside.includes(true)) {
     canGoOutTheHouse = true;
-    // console.log("Out",canGoOutTheHouse)
   }
 }
 
@@ -93,6 +92,7 @@ function drawDoor(door) {
 
 //~ Dessiner la porte dans la maison
 function drawDoorInside(door) {
+  stroke(255)
   fill(255);
 
   let positions = getPositionAt(door.location, door.x, door.y);

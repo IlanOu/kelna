@@ -544,17 +544,26 @@ function character() {
   //~ roulade du perso
 
   const currentTime = millis();
-  if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)) {
-    characterIsDashing = true;
 
-    lastDashTime = currentTime;
+  if (dashSystem){
+    if (
+      dashKeyIsPressed &&
+      !characterIsDashing &&
+      !characterIsJumping &&
+      characterVelocityY == 0 &&
+      currentTime - lastDashTime > dashCooldown
+    ) {
+      characterIsDashing = true;
 
-    characterMovesSpeed *= dashForce
+      lastDashTime = currentTime;
 
-    setTimeout(function () {
-      characterIsDashing = false;
-      characterMovesSpeed /= dashForce
-    }, dashTime)
+      characterMovesSpeed *= dashForce;
+
+      setTimeout(function () {
+        characterIsDashing = false;
+        characterMovesSpeed /= dashForce;
+      }, dashTime);
+    }
   }
 
   //#endregion
@@ -745,12 +754,13 @@ function characterView2() {
   else if (downArrowPressed) {
     characterDirection = characterLastDirection
     characterMovement = "walk"
-
   } 
   else {
     characterDirection = characterLastDirection
     characterMovement = "idle"
   }
+
+
 
   characterLastDirection = characterDirection
   //#endregion
@@ -761,6 +771,9 @@ function characterView2() {
   characterBoundingBoxHeightInside = 30
 
   drawCharacter(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+
+
+  
   if(debugMod){
     stroke(50,50,50,50)
     fill(255,0,0,70)
