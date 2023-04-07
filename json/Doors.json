@@ -2,7 +2,7 @@
     "Doors": {
         "door1": {
 
-            "location": "map1",
+            "location": "Tileset-1",
             "x" : 10,
             "y": 11,
             "detectDist": 2,
@@ -16,7 +16,7 @@
             "x" : 10,
             "y": 11,
             "detectDist": 2,
-            "destination": "map1",
+            "destination": "Tileset-1",
             "inHouse": true
 
         }

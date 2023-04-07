@@ -374,31 +374,31 @@ function animationMobs(
             MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
           }
         }
-      } else if (movement == "hit") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
       }
-
       break;
 
     case "Malade2":
       if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 192; x += 32) {
             MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
           }
         }
       } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
+        for (let y = 64; y < 96; y += 32) {
           for (let x = 0; x < 64; x += 32) {
             MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
           }
         }
       } else if (movement == "hit") {
-        for (let y = 64; y < 96; y += 32) {
+        for (let y = 96; y < 128; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
+          }
+        }
+      }
+      else if (movement == "jump") {
+        for (let y = 128; y < 160; y += 32) {
           for (let x = 0; x < 128; x += 32) {
             MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
           }

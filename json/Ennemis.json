@@ -33,7 +33,7 @@
 
         "distance": 500,
         "speed": 3,
-        "followSpeed": 4,
+        "followSpeed": 3,
         "isFollowing": false,
 
         "stepCount": 0,
