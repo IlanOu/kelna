@@ -68,7 +68,7 @@ function drawHomeMenu() {
 
   let buttonParameters = [
     viewportDisplayWidth / 2 - buttonWidthClassic / 2,
-    viewportDisplayHeight / 2 + buttonHeightClassic + 50,
+    viewportDisplayHeight / 2 + buttonHeightClassic + 70,
     buttonWidthClassic,
     buttonHeightClassic,
   ];

@@ -7,10 +7,10 @@
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 0,
+      "x": 600,
       "y": 0,
 
-      "xStart": 0,
+      "xStart": 600,
       "globalStartX": 250,
       "globalStartY": 80,
 
@@ -24,7 +24,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 50,
+      "distance": 100,
       "speed": 2,
       "followSpeed": 4,
 

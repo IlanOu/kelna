@@ -70,7 +70,6 @@ function handleCollisionMobs(
           haveToJump = true;
         }
 
-
         //? collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
         agentX = objectX - agentWidth;
