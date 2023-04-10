@@ -40,7 +40,7 @@ function preload() {
   marjoTexture = loadImage("assets/entities/marjoSprite.png")
   charleTexture = loadImage("assets/entities/charleSprite.png")
   malade1Sprite = loadImage("assets/entities/malade1.png")
-  malade2Sprite = loadImage("assets/entities/malade2.png")
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest.png")
 
 
   //? Tileset
@@ -60,7 +60,7 @@ function preload() {
 
 
   //? Personnage
-  characterTextures = loadImage("assets/entities/spritesheetYvo.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk3.png")
 
 
   //? JSON preload

@@ -4,11 +4,13 @@
       "Malade1": {
         "type": "Malade1",
         "damages": 5,
+        "isAThreat": false,
         "hit": false,
         "haveBeenHit": false,
         "life": 3,
+        "isDead": false,
 
-        "color": "red",
+        "color": "yellow",
 
         "detectDistX": 8,
         "detectDistY": 8,
@@ -48,11 +50,13 @@
       "Malade2": {
         "type": "Malade2",
         "damages": 5,
+        "isAThreat": true,
         "hit": false,
         "haveBeenHit": false,
         "life": 3,
+        "isDead": false,
 
-        "color": "red",
+        "color": "blue",
 
         "detectDistX": 8,
         "detectDistY": 8,

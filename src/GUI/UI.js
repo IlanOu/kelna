@@ -704,7 +704,7 @@ function drawDiscussion(x,y,w,h){
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
   let discussionPNJ = getDiscussionPNJ(currentPNJ)
 
-  console.log(discussionPNJ)
+  // console.log(discussionPNJ)
 
   if (discussionPNJ != undefined){
 
@@ -713,7 +713,7 @@ function drawDiscussion(x,y,w,h){
       PressInteractPNJD = false;
     }
 
-    console.log(discussionPNJ)
+    // console.log(discussionPNJ)
 
   }
 

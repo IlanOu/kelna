@@ -35,7 +35,6 @@ function keyPressed() {
         downArrowPressed = true;
     }
 
-
     if (canEnterInHouse){
         //* Touche E
         if (keyCode == 69) {
@@ -50,7 +49,6 @@ function keyPressed() {
             PressInteractPNJ = !PressInteractPNJ
         }
     }
-
 
     if (canDiscussionsWithPNJ) {
         //* Touche E
@@ -108,7 +106,6 @@ function keyPressed() {
     }
 }
 
-
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
     //* Barre espace
@@ -142,7 +139,6 @@ function keyReleased() {
         dashKeyIsPressed = false
     }
 
-
     //* Si n'importe quelle touche est relachée
     if (keyCode) {
         pressingKey = false;
@@ -156,7 +152,21 @@ function mousePressed() {
         leftClickPressed = true
 
         if (!gameIsPaused && gameIsPlaying){
-            characterHitting = true
+
+            if (!characterHitting && !characterComboHitting && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+                characterHitting = true
+                characterComboHitting = false
+                characterComboHittingDouble = false
+            }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+                characterHitting = false
+                characterComboHitting = true
+                characterComboHittingDouble = false
+            }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+                characterHitting = false
+                characterComboHitting = false
+                characterComboHittingDouble = true
+                console.log("3")
+            }
         }
     }
 }

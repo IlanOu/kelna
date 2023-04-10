@@ -69,7 +69,8 @@ let characterBoundingBoxHeight = 60;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed = 6;
 let characterHitting = false;
-
+let characterComboHitting = false;
+let characterComboHittingDouble = false;
 
 //? Saut
 let characterMass = 60;
