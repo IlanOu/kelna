@@ -5,10 +5,11 @@
         "type": "Malade1",
         "damages": 5,
         "isAThreat": false,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 3,
         "isDead": false,
+        "beingHit": false,
 
         "color": "yellow",
 
@@ -51,10 +52,13 @@
         "type": "Malade2",
         "damages": 5,
         "isAThreat": true,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
+        
+        "life": 5,
+
         "isDead": false,
+        "beingHit": false,
 
         "color": "blue",
 
@@ -96,7 +100,7 @@
       "Enn2": {
         "type": "Chevalier",
         "damages": 10,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 
@@ -140,7 +144,7 @@
       "Enn1": {
         "type": "Archer",
         "damages": 10,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 

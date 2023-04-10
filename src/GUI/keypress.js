@@ -151,21 +151,22 @@ function mousePressed() {
     if (mouseButton === LEFT) {
         leftClickPressed = true
 
-        if (!gameIsPaused && gameIsPlaying){
-
-            if (!characterHitting && !characterComboHitting && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+        if (!gameIsPaused && gameIsPlaying  && characterAnimationIndex <= characterTextureList.length-1){
+            if (!characterHitting && !characterComboHitting && !characterComboHittingDouble){
                 characterHitting = true
                 characterComboHitting = false
                 characterComboHittingDouble = false
-            }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+                lastHit = "1"
+            }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble){
                 characterHitting = false
                 characterComboHitting = true
                 characterComboHittingDouble = false
-            }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble && characterAnimationIndex <= characterTextureList.length-1){
+                lastHit = "2"
+            }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble){
                 characterHitting = false
                 characterComboHitting = false
                 characterComboHittingDouble = true
-                console.log("3")
+                lastHit = "3"
             }
         }
     }

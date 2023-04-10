@@ -46,7 +46,7 @@ let characterLastMovement = characterMovement
 let characterSpriteWidth = 32;
 let characterSpriteHeight = 32;
 
-let animationSpeed = 120
+let animationSpeed = 100
 
 
 //#endregion Textures / Outils du Personnage
@@ -71,6 +71,8 @@ let characterMovesSpeed = 6;
 let characterHitting = false;
 let characterComboHitting = false;
 let characterComboHittingDouble = false;
+let lastHit = "";
+
 
 //? Saut
 let characterMass = 60;

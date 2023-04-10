@@ -199,9 +199,10 @@ let mobMovements = (Mobs) => {
     lookThePlayer(Mobs);
 
     //? Afficher un !
-    fill(255, 0, 0);
-    drawKeyAt("!", CurrentX, MobY);
-
+    if (Mobs.isAThreat) {
+      fill(255, 0, 0);
+      drawKeyAt("!", CurrentX, MobY);
+    }
     Mobs.movement = "idle";
   } else {
     if (Mobs.seePlayer) {
@@ -218,35 +219,60 @@ let mobMovements = (Mobs) => {
     }
   }
 
-  //* Si le mob est une menace (s'il peut t'attaquer)
+  // Si le mob est une menace (s'il peut t'attaquer)
   if (Mobs.isAThreat) {
-    if (touchPlayer && characterHitting) {
-      if (characterDirection == "right") {
-        if (characterPositionX + characterWidth / 4 < CurrentX + Mobs.width / 2) {
-          Mobs.hit = true;
-          Mobs.movement = "hit";
+    let characterCenterX = characterPositionX + characterWidth / 4;
+    let mobsCenterX = CurrentX + Mobs.width / 2;
+
+
+    if (characterComboHitting && lastHit == "2"){
+      Mobs.haveBeenHit = false
+      Mobs.beingHit = false
+      Mobs.getHit = false;
+      lastHit = ""
+    }
+    
+    if (characterComboHittingDouble && lastHit == "3"){
+      Mobs.haveBeenHit = false
+      Mobs.beingHit = false
+      Mobs.getHit = false;
+      lastHit = ""
+    }
+
+    if (characterHitting || characterComboHitting || characterComboHittingDouble){
+      if (touchPlayer && !Mobs.haveBeenHit && !Mobs.beingHit) {
+        if (characterDirection == "right" && characterCenterX < mobsCenterX) {
+          Mobs.getHit = true;
+          Mobs.beingHit = true;
+          Mobs.movement = "getHit";
+         
+        } else if (characterDirection == "left" && characterCenterX > mobsCenterX) {
+          Mobs.getHit = true;
+          Mobs.beingHit = true;
+          Mobs.movement = "getHit";
+          
         }
-      } else {
-        if (characterPositionX + characterWidth / 4 > CurrentX + Mobs.width / 2) {
-          Mobs.hit = true;
-          Mobs.movement = "hit";
+        if (Mobs.life > 0) {
+          Mobs.indexFrame = 0
+          Mobs.life--;
+          Mobs.haveBeenHit = true;
         }
       }
     }
 
-    if (!characterHitting) {
-      Mobs.hit = false;
+
+    if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
+      Mobs.getHit = false;
       Mobs.haveBeenHit = false;
+      Mobs.beingHit = false;
     }
 
-    if (Mobs.hit && !Mobs.haveBeenHit) {
-      // console.log(Mobs.life, Mobs.isDead);
-      if (Mobs.life > 0) {
-        Mobs.life--;
-        Mobs.haveBeenHit = true;
-      } else {
-        Mobs.movement = "die";
-      }
+    if (Mobs.getHit) {
+      Mobs.movement = "getHit";
+    }
+
+    if (Mobs.life <= 0) {
+      Mobs.movement = "die";
     }
   }
 
@@ -304,8 +330,6 @@ function animationMobs(
 ) {
   CurrentMob.lastMovement = movement;
 
-  // fill(color);
-  // circle(positionX + 35, positionY - 25, 20);
   image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
   let timer = round(millis() / animationSpeed) % 2;
@@ -328,43 +352,42 @@ function animationMobs(
   //& Selectionner la bonne ligne en fonction du mouvement
   switch (movement) {
     case "walk":
-      for (let y = 0; y < (1*32); y += 32) {
-        for (let x = 0; x < (4*32); x += 32) {
+      for (let y = 0; y < (1 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
           MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
         }
       }
       break;
     case "idle":
-      for (let y = (1*32); y < (2*32); y += 32) {
-        for (let x = 0; x < (2*32); x += 32) {
+      for (let y = (1 * 32); y < (2 * 32); y += 32) {
+        for (let x = 0; x < (2 * 32); x += 32) {
           MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
         }
       }
       break;
-    case "hit":
-      if (CurrentMob.isAThreat){
-        for (let y = (3*32); y < (4*32); y += 32) {
-          for (let x = 0; x < (5*32); x += 32) {
+    case "getHit":
+      if (CurrentMob.isAThreat) {
+        for (let y = (3 * 32); y < (4 * 32); y += 32) {
+          for (let x = 0; x < (2 * 32); x += 32) {
             MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
           }
         }
       }
       break;
     case "jump":
-      for (let y = (4*32); y < (5*32); y += 32) {
-        for (let x = 0; x < (4*32); x += 32) {
+      for (let y = (4 * 32); y < (5 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
           MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
         }
       }
       break;
     case "die":
-      for (let y = (5*32); y < (6*32); y += 32) {
-        for (let x = 0; x < (4*32); x += 32) {
+      for (let y = (5 * 32); y < (6 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
           MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
         }
       }
-      console.log("lala")
-      if (CurrentMob.indexFrame >= MobTexturesList.length-1){
+      if (CurrentMob.indexFrame >= MobTexturesList.length - 2) {
         CurrentMob.isDead = true;
         console.log("FIN")
       }
@@ -376,17 +399,17 @@ function animationMobs(
   if (CurrentMob.lastMovement != movement) {
     CurrentMob.indexFrame = 0;
   }
-  
+
   //* Changer de frame
   if (timer && !CurrentMob.currentFrame) {
     CurrentMob.indexFrame++;
     CurrentMob.currentFrame = true;
   }
-  
+
   if (!timer) {
     CurrentMob.currentFrame = false;
   }
-  
+
   //* Remettre l'index au début
   if (CurrentMob.indexFrame >= MobTexturesList.length) {
     CurrentMob.indexFrame = 0;
