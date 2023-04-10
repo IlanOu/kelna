@@ -33,7 +33,7 @@ function preload() {
   GUIStart = loadImage("assets/GUI/start.png")
 
   //? Background
-  backgroundImage = loadImage('assets/Background/sky2.jpg');
+  backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
 
   //? Animation PNJ
@@ -54,7 +54,7 @@ function preload() {
   sky = loadImage("assets/textures/Sky.jpg")
   tileSet = loadImage("assets/textures/tilesetKelna.png")
   BackTroc = loadImage("assets/textures/planches.png")
-  Slot = loadImage("assets/textures/Slot.png")
+  Slot = loadImage("assets/textures/slot.png")
   BackPop = loadImage("assets/textures/BackPop.png")
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
