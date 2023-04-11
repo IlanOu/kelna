@@ -14,7 +14,13 @@ function MobManager() {
 //^ /* -------------------------------------------------------------------------- */
 
 function mob(Mobs) {
-  if (Mobs.life || !Mobs.isDead) {
+  
+  //? Le mob n'est plus calculé quand il n'est pas affiché
+  let mapsToCheckColliders = getMapsToCheck(characterPositionX, characterPositionY)
+  let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
+
+  if ((Mobs.life || !Mobs.isDead) && found) {
     //* Initialisation des variables
 
     let MobStart = Mobs.globalStartX + xStartWorld;
@@ -23,7 +29,6 @@ function mob(Mobs) {
 
 
     Mobs.x = xStartWorld + Mobs.stepCount;
-    Mobs.y = Mobs.y;
 
     let MobsX = Mobs.x;
     let MobsY = Mobs.y;
@@ -221,7 +226,7 @@ let mobMovements = (Mobs) => {
 
   // Si le mob est une menace (s'il peut t'attaquer)
   if (Mobs.isAThreat) {
-    let characterCenterX = characterPositionX + characterWidth / 4;
+    let characterCenterX = characterPositionX;
     let mobsCenterX = CurrentX + Mobs.width / 2;
 
 
@@ -276,6 +281,18 @@ let mobMovements = (Mobs) => {
     }
   }
 
+
+  //~ -------------------------------------------------------------------------
+  //~                          Attaquer le joueur                              
+  //~ -------------------------------------------------------------------------
+
+  // console.log(healthPlayer)
+
+  if (touchPlayer && Mobs.isAThreat) {
+    if (healthPlayer > 0){
+      // attackPlayer(Mobs)
+    }
+  }
 
   //* Debug Mod
   if (debugMod) {

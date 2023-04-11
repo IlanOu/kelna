@@ -22,10 +22,10 @@ function createTable(columnNumber, rowNumber) {
 
 
 //~ Trouve la valeur de l'index de la 2eme array 
-function findIndexValueIn2dArray(array, value) {
+function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
-            if (value === array[column][row]) {
+            if (mapName === array[column][row]) {
                 return [column, row];
             }
         }
@@ -236,27 +236,27 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
-    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopMapInWorld)
 
     //? map en BAS du perso
-    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 
@@ -277,7 +277,7 @@ function expandRect(x, y, width, height, valueX = 1, valueY = 1) {
 }
 
 
-//~ positions d'un caré en x et y, pas en pixel.
+//~ prend en param les positions d'un carré en x et y, pas en pixel. Ressort des pixels
 function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let mapExist = false;
     let numberOfCasesX = Maps.numberOfRow

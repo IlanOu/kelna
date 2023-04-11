@@ -3,13 +3,16 @@
 
       "Malade1": {
         "type": "Malade1",
-        "damages": 5,
         "isAThreat": false,
         "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
         "isDead": false,
         "beingHit": false,
+        
+        "life": 3,
+        
+        "damages": 1,
+        "attackSpeed": 1000,
 
         "color": "yellow",
 
@@ -54,11 +57,12 @@
         "isAThreat": true,
         "getHit": false,
         "haveBeenHit": false,
-        
-        "life": 5,
-
         "isDead": false,
         "beingHit": false,
+
+        "life": 5,
+        
+        "attackSpeed": 1000,
 
         "color": "blue",
 
