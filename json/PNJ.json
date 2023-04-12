@@ -10,7 +10,7 @@
       "x": 600,
       "y": 0,
 
-      "xStart": 600,
+      "xStart": 0,
       "globalStartX": 250,
       "globalStartY": 80,
 
@@ -24,8 +24,8 @@
       "width": 80,
       "height": 80,
 
-      "distance": 100,
-      "speed": 2,
+      "distance": 0,
+      "speed": 0,
       "followSpeed": 4,
 
       "stepCount": 0,

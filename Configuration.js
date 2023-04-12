@@ -200,7 +200,7 @@ let engine1WidthDoors = rectWidth
 let engine1HeightDoors = rectHeight * 2
 
 let engine2WidthDoors = rectWidth
-let engine2HeightDoors = rectHeight / 2
+let engine2HeightDoors = rectHeight / 1.5
 
 let doorInTaverne = false;
 
@@ -323,3 +323,7 @@ let CinematicForEnd = false;
 //#endregion
 
 
+
+
+
+let test = false;

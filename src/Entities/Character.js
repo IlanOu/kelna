@@ -707,7 +707,6 @@ function characterView2() {
   //? si mon perso est à DROITE de l'écran
   if (characterInsidePosX > width - width / 4) {
 
-
     //? le monde bouge vers la gauche (la caméra se décale vers la droite)
     xStartHouse -= characterMovesSpeed
     characterInsidePosX -= characterMovesSpeed
@@ -717,7 +716,7 @@ function characterView2() {
   //* caméra mouvements gauche
 
   //? si mon perso est à GAUCHE de l'écran
-  if (characterInsidePosX < width / 4) {
+  if (characterInsidePosX < width / 3.5) {
 
 
     //? le monde bouge vers la droite (la caméra se décale vers la gauche)

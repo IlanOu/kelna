@@ -20,13 +20,14 @@ function doorsManager() {
   }
   if (canGoOutside.includes(true)) {
     canGoOutTheHouse = true;
+    console.log("suis dedans")
   }
 }
 
 //~ Dessiner la porte devant la maison
 function drawDoor(door) {
-    noStroke()
-    fill(0,0,0,70);
+  noStroke()
+  fill(0,0,0,70);
 
   let positions = getPositionAt(door.location, door.x, door.y);
   let doorX = positions.pixelX + xStartWorld;
@@ -97,6 +98,7 @@ function drawDoorInside(door) {
 
   let positions = getPositionAt(door.location, door.x, door.y);
   let doorX = positions.pixelX + xStartHouse;
+  positions.pixelY = door.y
   let doorY = positions.pixelY + yStartHouse;
   let widthDoor = engine2WidthDoors;
   let heightDoor = engine2HeightDoors;
@@ -151,4 +153,5 @@ function drawDoorInside(door) {
 
   //* Dessiner la porte
   rect(doorX, doorY - heightDoor / 2, widthDoor, heightDoor);
+  // rect(doorX, door.y - heightDoor / 2, widthDoor, heightDoor);
 }
