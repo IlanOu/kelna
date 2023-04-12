@@ -25,7 +25,7 @@ let addItemToInventory = (item) => {
 
 
 
-
+//^ Suppresion d'un item
 let removeItemFromInventory = (index) => {
 
     if (index < 3  && index >= 0 ){
@@ -71,3 +71,7 @@ let displayInventory = () => {
         }
     }
 };
+
+
+
+//^ Jauge d'utilisation des food

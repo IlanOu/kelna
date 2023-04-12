@@ -1,6 +1,6 @@
 {
   "PNJS": {
-    "PNJ1": {
+    "Charle": {
       "color": "blue",
 
       "detectDistX": 2,
@@ -104,12 +104,12 @@
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 0,
+      "x": 800,
       "y": 200,
 
-      "xStart": 0,
-      "xEnd": 0,
-      "globalStartX": 0,
+      "xStart": 800,
+      "xEnd": 500,
+      "globalStartX": 800,
 
       "velocityY": 0,
       "mass": 60,

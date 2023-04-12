@@ -262,6 +262,19 @@ let fpsActivate = false
 let ColorForRectFPS = 255
 
 
+
+//~ Variables pour les credits
+let currentCredit = 0;
+let creditSpeed = 100; // Vitesse de défilement des crédits
+let TimeForCredit = true;
+
+
+
+//~ Variables pour la jauge
+let progress = 0;
+let progressTimer = 0;
+let progressTimeRequired = 1; // Temps requis pour remplir la jauge (en secondes)
+
 //#endregion Interfaces
 
 

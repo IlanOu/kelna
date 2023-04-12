@@ -5,11 +5,10 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(ForPNJ.PNJS.PNJ2);
-    // PNJ(ForPNJ.PNJS.Marjo);
+    PNJ(ForPNJ.PNJS.Marjo);
       PNJ(ForPNJ.PNJS.Toto);
   } else {
-    drawPNJInside(ForPNJ.PNJS.PNJ1);
+    drawPNJInside(ForPNJ.PNJS.Charle);
   }
 }
 
@@ -189,7 +188,8 @@ let PNJMovements = (pnj) => {
 
     if (pnj.canInteractPNJ === true && pnj.echange !== undefined ) {
       canInteractWithPNJ = true;
-    } else if (PressInteractPNJD = true && pnj.discussions !== undefined) {
+      console.log("oui")
+    } else if (PressInteractPNJD === true && pnj.discussions !== undefined) {
       canInteractWithPNJD = true;
     }
   }
