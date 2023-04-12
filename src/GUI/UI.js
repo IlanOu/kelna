@@ -116,6 +116,7 @@ function drawHomeMenu() {
 function drawPauseMenu() {
   //? Cacher le troc si il s'affiche
   PressInteractPNJ = false;
+  PressTalkPNJ = false
 
   let interfaceMenuWidth = 500;
   let interfaceMenuHeight = 500;
@@ -503,13 +504,16 @@ function setupInteractions() {
     if (canEnterInHouse) {
       drawKey("E");
       PressInteractPNJ = false;
+      canInteractWithPNJ = false
+      PressTalkPNJ = false
+      canTalkWithPNJ = false
     }
 
     if (canInteractWithPNJ) {
       drawKey("E");
     }
 
-    if (canDiscussionsWithPNJ) {
+    if (canTalkWithPNJ) {
       drawKey("E");
     }
 
@@ -517,6 +521,9 @@ function setupInteractions() {
     if (canGoOutTheHouse) {
       drawKey("E");
       PressInteractPNJ = false;
+      canInteractWithPNJ = false
+      PressTalkPNJ = false
+      canTalkWithPNJ = false
     }
   }
 }
@@ -657,13 +664,68 @@ function drawTroc(x, y, w, h) {
 }
 
 
+function drawTalk (x, y, w, h){
+
+  let currentPNJName = getPNJName();
+  let currentPNJ = ForPNJ.PNJS[currentPNJName]
+  let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
+  let talkPNJ = getTalkPNJ(currentPNJName);
+
+  let sentenceToTell = talkPNJ[currentPNJ.step]
+  
+  let fontSize = 20
+
+  //? Afficher la banière du fond
+  image(talkBackground, x, y, w, h)
+
+
+  if (sentenceToTell == undefined){
+
+    //// Recommence le texte s'il est terminé
+    //* Ferme la discution quand c'est finis
+    PressTalkPNJ = false
+    currentPNJ.step = 0;
+    currentIndexTextSpeaking = 0
+    currentTextSpeaking = ""
+
+  }else{
+    //? Couleur du texte
+    fill(0)
+
+    let timer = round(millis() / textDialogSpeed) % 2;
+    
+    //* Effet typewritter
+    if (timer && currentIndexTextSpeaking < sentenceToTell.length){
+      currentTextSpeaking += sentenceToTell[currentIndexTextSpeaking]
+      currentIndexTextSpeaking++
+    }
+    //? Afficher le texte
+    textSize(fontSize);
+    text(currentTextSpeaking, x, y+(h/2)-fontSize/2, w, h)
+
+    //* Changer de phrase
+    if (mouseIsPressed && currentIndexTextSpeaking){
+      mouseIsPressed = false
+      currentPNJ.step++
+      currentIndexTextSpeaking = 0
+      currentTextSpeaking = ""
+    }
+
+    //* Remettre la phrase au début
+    if (!PNJSeePlayer){
+      PressTalkPNJ = false;
+      currentIndexTextSpeaking = 0
+      currentTextSpeaking = ""
+
+    }
+  }
+}
 
 //~ INTERACTION PNJ SWORD
-function InteractionSword() {
+function openTrocMenu() {
   let interfaceMenuWidth = 500;
   let interfaceMenuHeight = 500;
-  let interfaceMenuX =
-    viewportDisplayWidth / 2 - interfaceMenuWidth / 2 + 110.5;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   drawTroc(
     interfaceMenuX,
@@ -676,39 +738,17 @@ function InteractionSword() {
 
 
 //~ INTERACTION PNJ DISCU
-function InteractionDiscu(){
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
-  let interfaceMenuX =
-    viewportDisplayWidth / 2 - interfaceMenuWidth / 2 + 110.5;
-  let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
-  drawDiscussion(
+function openTalkMenu(){
+  let interfaceMenuWidth = viewportDisplayWidth/2;
+  let interfaceMenuHeight = viewportDisplayHeight/5;
+  let interfaceMenuX = viewportDisplayWidth/2 - interfaceMenuWidth/2;
+  let interfaceMenuY = viewportDisplayHeight - interfaceMenuHeight;
+  drawTalk(
     interfaceMenuX,
     interfaceMenuY,
-    interfaceMenuWidth / 2,
+    interfaceMenuWidth,
     interfaceMenuHeight
   );
-
-}
-
-
-
-//~ DISCUSSION
-function drawDiscussion(x,y,w,h){
-
-  //? Fonction comme conditions pour la discussions
-  let currentPNJ = getPNJName();
-  let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
-  let discussionPNJ = getDiscussionPNJ(currentPNJ)
-
-
-  if (discussionPNJ != undefined){
-
-    //? Affichage du troc
-    if (!PNJSeePlayer) {
-      PressInteractPNJD = false;
-    }
-  }
 
 }
 
@@ -722,12 +762,14 @@ function setupUI() {
   if (inGame && settingsHome === false) {
     //? Si je fait echap (dans le menu pause)
 
-    if (PressInteractPNJ && !SwordAlreadyTaken) {
-      InteractionSword();
+    if (PressInteractPNJ) {
+      openTrocMenu();
     }
-    if (PressInteractPNJD) {
-      InteractionDiscu();
+
+    if (PressTalkPNJ) {
+      openTalkMenu();
     }
+
     if (settingsPause) {
       PlayerInSettingsPause = true
       drawSettingInPause();

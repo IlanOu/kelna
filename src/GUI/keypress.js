@@ -50,10 +50,10 @@ function keyPressed() {
         }
     }
 
-    if (canDiscussionsWithPNJ) {
+    if (canTalkWithPNJ) {
         //* Touche E
         if (keyCode == 69 && engineOne) {
-            PressInteractPNJD = !PressInteractPNJD
+            PressTalkPNJ = !PressTalkPNJ
         }
     }
 

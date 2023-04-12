@@ -586,85 +586,87 @@ function character() {
   //#region 
   //~ affichage du personnage
 
-  if (characterIsJumping) {
-    if (rightArrowPressed) {
-      characterDirection = "right"
-      characterMovement = "jump"
-    } else if (leftArrowPressed) {
-      characterDirection = "left"
-      characterMovement = "jump"
-    } else {
-      characterDirection = characterLastDirection
-      characterMovement = "jump"
-    }
-  } else {
-    if (characterIsDashing) {
+  if (characterMovement != "die"){
+    if (characterIsJumping) {
       if (rightArrowPressed) {
         characterDirection = "right"
-        characterMovement = "dash"
+        characterMovement = "jump"
       } else if (leftArrowPressed) {
         characterDirection = "left"
-        characterMovement = "dash"
+        characterMovement = "jump"
+      } else {
+        characterDirection = characterLastDirection
+        characterMovement = "jump"
       }
     } else {
-      if (characterHitting) {
+      if (characterIsDashing) {
         if (rightArrowPressed) {
           characterDirection = "right"
-          characterMovement = "hit"
-            
+          characterMovement = "dash"
         } else if (leftArrowPressed) {
           characterDirection = "left"
-          characterMovement = "hit"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit"
-            
+          characterMovement = "dash"
         }
-      } else if (characterComboHitting) {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "hit2"
-            
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "hit2"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit2"
-            
-        } 
-      } else if (characterComboHittingDouble) {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "hit3"
-            
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "hit3"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit3"
-            
-        } 
-      }else {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "walk"
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "walk"
-        } else {
-          characterDirection = characterLastDirection
-          if (characterMovement != "getHit" && healthPlayer){
-            characterMovement = "idle"
+      } else {
+        if (characterHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit"
+              
+          }
+        } else if (characterComboHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit2"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit2"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit2"
+              
+          } 
+        } else if (characterComboHittingDouble) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit3"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit3"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit3"
+              
+          } 
+        }else {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "walk"
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "walk"
+          } else {
+            characterDirection = characterLastDirection
+            if (characterMovement != "getHit" && healthPlayer){
+              characterMovement = "idle"
+            }
           }
         }
       }
+  
     }
-
   }
 
 

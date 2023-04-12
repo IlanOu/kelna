@@ -5,11 +5,11 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(ForPNJ.PNJS.PNJ2);
+    PNJ(ForPNJ.PNJS.Marjo);
     // PNJ(ForPNJ.PNJS.Marjo);
-      PNJ(ForPNJ.PNJS.Toto);
+    // PNJ(ForPNJ.PNJS.Toto);
   } else {
-    drawPNJInside(ForPNJ.PNJS.PNJ1);
+    drawPNJInside(ForPNJ.PNJS.Charle);
   }
 }
 
@@ -87,9 +87,7 @@ function PNJ(pnj) {
     //? Pour chaque carré dans le tableau
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (
-        let column = 0;
-        column < currentMapTableColliders[row].length;
-        column++
+        let column = 0; column < currentMapTableColliders[row].length; column++
       ) {
         //& Lui donner une collision
         let thisObject = currentMapTableColliders[row][column];
@@ -181,16 +179,19 @@ let PNJMovements = (pnj) => {
     doRound(pnj);
     pnj.movement = "walk";
     canInteractWithPNJ = false;
-    PressInteractPNJD = false
+    canTalkWithPNJ = false
   }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined ) {
-      canInteractWithPNJ = true;
-    } else if (PressInteractPNJD = true && pnj.discussions !== undefined) {
-      canInteractWithPNJD = true;
+    if (pnj.canInteractPNJ) {
+      if (pnj.echange != undefined) {
+        canInteractWithPNJ = true;
+      } else if (pnj.discussions != undefined) {
+        canTalkWithPNJ = true;
+      }
+
     }
   }
 
@@ -397,7 +398,7 @@ function animationPNJ(
       break;
 
 
-      case "Toto":
+    case "Toto":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
           for (let x = 0; x < 128; x += 32) {

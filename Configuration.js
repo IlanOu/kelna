@@ -47,7 +47,7 @@ let characterSpriteWidth = 32;
 let characterSpriteHeight = 32;
 
 let animationSpeed = 100
-
+let textDialogSpeed = 3
 
 //#endregion Textures / Outils du Personnage
 
@@ -178,14 +178,17 @@ let PlayerInSettingsPause = false
 
 //~  Variables pour les PNJ
 let ForPNJ;
-let canInteractWithPNJ = false;
-let PressInteractPNJ = false
-let SwordAlreadyTaken = false
 let marjoTexture;
 let charleTexture;
-let canDiscussionsWithPNJ = false;
-let PressInteractPNJD = false
 
+let canInteractWithPNJ = false;
+let PressInteractPNJ = false
+
+let canTalkWithPNJ = false;
+let PressTalkPNJ = false
+
+let currentTextSpeaking = ""
+let currentIndexTextSpeaking = 0
 
 //~  Variables pour les ennemis
 let ForEnnemis;

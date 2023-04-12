@@ -31,6 +31,7 @@ function preload() {
   GUIInteract = loadImage("assets/GUI/GUIInt.png")
   GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
   GUIStart = loadImage("assets/GUI/start.png")
+  talkBackground = loadImage("assets/GUI/talkBackground.png")
 
   //? Background
   backgroundImage = loadImage('assets/Background/Sky2.jpg');
@@ -79,9 +80,7 @@ function preload() {
 
 
   //? CINEMATIC
-  // StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
-  // StartCinematic.hide();
-  // StartCinematic.volume(0);
+
 }
 
 
@@ -131,5 +130,3 @@ function draw() {
   }
   setupUI()
 }
-
-

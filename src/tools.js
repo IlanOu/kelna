@@ -377,12 +377,10 @@ function getPNJSeePlayer(namePNJ) {
 }
 
 
-//~ Recupere si le PNJ peut faire un echange 
+//~ Recupere les echanges d'un PNJ 
 function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
-
-    
 
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
@@ -394,24 +392,20 @@ function getEchangePNJ(namePNJ) {
     return echangePNJ
 }
 
+//~ Recupere les discussions d'un PNJ 
+function getTalkPNJ(namePNJ) {
 
+    let talkPNJ = []
 
-//~ Recupere si le PNJ peut faire une discussion
-function getDiscussionPNJ(namePNJ){
-
-    let discussionPNJ = []
-
-    Object.entries(ForPNJ.PNJS).forEach(PNJ =>{
+    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
-            discussionPNJ = PNJ[1].discussions
-        } else if (discussionPNJ != undefined) {
+            talkPNJ = PNJ[1].discussions
+        } else if (talkPNJ != undefined) {
             return undefined
         }
-        return discussionPNJ
-    })
+    });
+    return talkPNJ
 }
-
-
 //~ Recupere les items et son nom
 function getItems(nameItem) {
 
