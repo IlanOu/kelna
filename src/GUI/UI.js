@@ -54,7 +54,9 @@ function buttonHover([x, y, h, w]) {
 
 
 
-//^ INTERFACES
+/*//^ -------------------------------------------------------------------------- */
+/*//^                                 INTERFACES                                 */
+/*//^ -------------------------------------------------------------------------- */
 //~ MENU HOME
 function drawHomeMenu() {
   gameIsPaused = false;
@@ -414,7 +416,7 @@ function drawDeath() {
       // CinematicIsStart = true
       // YouCanEscape = true;
       // PlayerCanMove = true
-      healthPlayer = 3;
+      healthPlayer = maxHealth;
     }
     if (buttonClicked(buttonStat)) {
       //playerDead = true
@@ -474,11 +476,10 @@ function drawStats() {
       // CinematicIsStart = true
       // YouCanEscape = true;
       // PlayerCanMove = true
-      healthPlayer = 3;
+      healthPlayer = maxHealth;
     }
   }
 }
-
 
 
 //~ BARRE DE VIE
@@ -490,10 +491,7 @@ function drawLifeBar() {
   for (let i = 0; i < VieLarg; i++) {
     image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
   }
-  ForInteract();
 }
-
-
 
 
 
@@ -509,7 +507,6 @@ function setupInteractions() {
 
     if (canInteractWithPNJ) {
       drawKey("E");
-      console.log("ksdkskd");
     }
 
     if (canDiscussionsWithPNJ) {
@@ -706,7 +703,6 @@ function drawDiscussion(x,y,w,h){
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
   let discussionPNJ = getDiscussionPNJ(currentPNJ)
 
-  console.log(discussionPNJ)
 
   if (discussionPNJ != undefined){
 
@@ -714,9 +710,6 @@ function drawDiscussion(x,y,w,h){
     if (!PNJSeePlayer) {
       PressInteractPNJD = false;
     }
-
-    console.log(discussionPNJ)
-
   }
 
 }
@@ -746,8 +739,7 @@ function setupUI() {
       drawPauseMenu();
     }
     if (healthPlayer === 0) {
-      gameIsPlaying = false;
-      drawDeath();
+      characterMovement = "die"
     } else {
       //? sinon je joue
       gameIsPlaying = true;

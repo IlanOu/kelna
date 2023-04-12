@@ -35,7 +35,6 @@ function keyPressed() {
         downArrowPressed = true;
     }
 
-
     if (canEnterInHouse){
         //* Touche E
         if (keyCode == 69) {
@@ -50,7 +49,6 @@ function keyPressed() {
             PressInteractPNJ = !PressInteractPNJ
         }
     }
-
 
     if (canDiscussionsWithPNJ) {
         //* Touche E
@@ -77,37 +75,7 @@ function keyPressed() {
     if (keyCode == 73) {
         addItemToInventory(ForItems.Items.sword_1);
     }
-
-    //* Touche 1 du pavé des nombres
-    if (keyCode == 97) { 
-        if (!pressingKey) {
-            gettingHurt = true;
-        }
-        pressingKey = true;
-    }
-    //* Touche 2 du pavé des nombres
-    if (keyCode == 98) { 
-        if (!pressingKey) {
-            gettingHeal = true;
-        }
-        pressingKey = true;
-    }
-    //* Touche 3 du pavé des nombres
-    if (keyCode == 99) {
-        if (!pressingKey) {
-            addHeart = true;
-        }
-        pressingKey = true;
-    }
-    //* Touche 4 du pavé des nombres
-    if (keyCode == 100) {
-        if (!pressingKey) {
-            removeHeart = true;
-        }
-        pressingKey = true;
-    }
 }
-
 
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
@@ -142,7 +110,6 @@ function keyReleased() {
         dashKeyIsPressed = false
     }
 
-
     //* Si n'importe quelle touche est relachée
     if (keyCode) {
         pressingKey = false;
@@ -155,8 +122,23 @@ function mousePressed() {
     if (mouseButton === LEFT) {
         leftClickPressed = true
 
-        if (!gameIsPaused && gameIsPlaying){
-            characterHitting = true
+        if (!gameIsPaused && gameIsPlaying  && characterAnimationIndex <= characterTextureList.length-1){
+            if (!characterHitting && !characterComboHitting && !characterComboHittingDouble){
+                characterHitting = true
+                characterComboHitting = false
+                characterComboHittingDouble = false
+                lastHit = "1"
+            }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble){
+                characterHitting = false
+                characterComboHitting = true
+                characterComboHittingDouble = false
+                lastHit = "2"
+            }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble){
+                characterHitting = false
+                characterComboHitting = false
+                characterComboHittingDouble = true
+                lastHit = "3"
+            }
         }
     }
 }

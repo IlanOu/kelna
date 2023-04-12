@@ -1,4 +1,4 @@
-function connect(username, password){
+function login(username, password){
 
     adminJSON.admins.forEach(user => {
         if(user.name == username && user.password == password){

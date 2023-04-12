@@ -244,11 +244,9 @@ let PNJMovements = (pnj) => {
     pnj.color
   );
 
-  // console.log(canInteractWithPNJ);
 };
 
 let PNJMovementsInside = (pnj) => {
-  // console.log(pnj.haveToJump)
 
   //* Variables positions PNJ
   let CurrentX = pnj.x;

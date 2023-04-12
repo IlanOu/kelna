@@ -46,7 +46,7 @@ let characterLastMovement = characterMovement
 let characterSpriteWidth = 32;
 let characterSpriteHeight = 32;
 
-let animationSpeed = 120
+let animationSpeed = 100
 
 
 //#endregion Textures / Outils du Personnage
@@ -69,6 +69,9 @@ let characterBoundingBoxHeight = 60;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed = 6;
 let characterHitting = false;
+let characterComboHitting = false;
+let characterComboHittingDouble = false;
+let lastHit = "";
 
 
 //? Saut
@@ -204,8 +207,8 @@ let doorInTaverne = false;
 
 //~  Variables pour la barre de vie
 let MargeBarVie = 30;
-let healthPlayer = 3
-let maxHealth = 6
+let healthPlayer = 5
+let maxHealth = 5
 let pressingKey = false
 let gettingHurt = false; //& Pour les degats
 let gettingHeal = false; //& Pour regen

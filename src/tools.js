@@ -22,10 +22,10 @@ function createTable(columnNumber, rowNumber) {
 
 
 //~ Trouve la valeur de l'index de la 2eme array 
-function findIndexValueIn2dArray(array, value) {
+function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
-            if (value === array[column][row]) {
+            if (mapName === array[column][row]) {
                 return [column, row];
             }
         }
@@ -155,57 +155,37 @@ let PlaySong = () => {
 }
 
 
-//~ interact health
-let ForInteract = () => {
-
-    //? Interaction avec les pavés tactiles
-    if (gettingHurt) {
-        Degat(1);
-        gettingHurt = false;
-    }
-    if (gettingHeal) {
-        Regen(1);
-        gettingHeal = false;
-    }
-    if (addHeart) {
-        OneHeart(1);
-        addHeart = false;
-    }
-    if (removeHeart) {
-        DownHeart(1);
-        removeHeart = false;
-    }
-}
-
-
-//~ Degat
-let Degat = (NbreDeDegat) => {
-    healthPlayer -= NbreDeDegat; //& Enlever point de vie
+//~ hurtPlayer
+function hurtPlayer (amount) {
+    healthPlayer -= amount; //& Enlever point de vie
     healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
 }
 
 
-//~ Regeneration
-let Regen = () => {
+//~ regenPlayer
+function regenPlayer (amount) {
     if (healthPlayer < maxHealth) {
-        healthPlayer += 1;
+        healthPlayer += amount;
         healthPlayer = constrain(healthPlayer, 0, maxHealth);
     }
 }
 
 
 //~ Ajout des coeurs
-let OneHeart = () => {
-    healthPlayer += 1;
-    maxHealth += 1;
+function upgradePlayerHealth (amount) {
+    maxHealth += amount;
+    if (healthPlayer == maxHealth) {
+        healthPlayer += amount;
+    }
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
 }
 
 
 //~ Supprime des coeurs
-let DownHeart = () => {
-    healthPlayer -= 1;
-    maxHealth -= 1;
+function downgradePlayerHealth (amount) {
+    maxHealth -= amount;
+    healthPlayer -= amount;
+    
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
 }
 
@@ -228,35 +208,35 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(currentMapInWorld)
 
     //? map à DROITE du perso
-    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atRightMapInWorld)
 
     //? map à GAUCHE du perso
-    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
-    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopMapInWorld)
 
     //? map en BAS du perso
-    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 
@@ -277,7 +257,7 @@ function expandRect(x, y, width, height, valueX = 1, valueY = 1) {
 }
 
 
-//~ positions d'un caré en x et y, pas en pixel.
+//~ prend en param les positions d'un carré en x et y, pas en pixel. Ressort des pixels
 function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let mapExist = false;
     let numberOfCasesX = Maps.numberOfRow

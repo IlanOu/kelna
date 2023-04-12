@@ -97,18 +97,9 @@ function moveDown(positionY, speed) {
 
 
 //* ajouter un saut à l'objet
-/**
- * 
- * @param {*} positionY 
- * @param {*} jumpHeight 
- * @param {*} velocityY 
- * @param {*} gravityForce 
- * @returns 
- */
 function addJump(positionY, jumpHeight, velocityY, gravityForce) {
   velocityY = -gravityForce;
   velocityY -= jumpHeight;
-
 
   return [positionY, velocityY]
 }
@@ -120,7 +111,6 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
-
   //& Debug mod
   if (debugMod) {
     stroke(255, 0, 0)
@@ -129,49 +119,84 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     noStroke()
   }
 
-
   switch (movement) {
     //* animation MARCHER
     case "walk":
-      for (let y = 192; y < 224; y += characterSpriteHeight) {
-        for (let x = 0; x < 192; x += characterSpriteWidth) {
+      for (let y = (8*32); y < (9*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (6*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation IDLE
     case "idle":
-      for (let y = 64; y < 96; y += characterSpriteHeight) {
-        for (let x = 0; x < 64; x += characterSpriteWidth) {
+      for (let y = (4*32); y < (5*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation JUMP
     case "jump":
-      for (let y = 160; y < 192; y += characterSpriteHeight) {
-        for (let x = 0; x < 128; x += characterSpriteWidth) {
+      for (let y = (7*32); y < (8*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (4*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation DASH
     case "dash":
-      for (let y = 128; y < 160; y += characterSpriteHeight) {
-        for (let x = 0; x < 64; x += characterSpriteWidth) {
+      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation FRAPPER
     case "hit":
-      for (let y = 32; y < 64; y += characterSpriteHeight) {
-        for (let x = 0; x < 128; x += characterSpriteWidth) {
+      for (let y = (1*32); y < (2*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-  }
+    //* animation FRAPPER
+    case "hit2":
+      for (let y = (2*32); y < (3*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation FRAPPER
+    case "hit3":
+      for (let y = (3*32); y < (4*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation se faire FRAPPER
+    case "getHit":
+      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation MOURIR
+    case "die":
+      for (let y = (6*32); y < (7*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      if (characterAnimationIndex >= characterTextureList.length-1) {
+        gameIsPlaying = false;
+        drawDeath();
+      }
+      break;
+    }
 
   //? Remettre l'animation au début quand on change d'animation
   if (characterLastMovement != characterMovement) {
@@ -188,13 +213,18 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     characterAnimationFramePassed = false
   }
 
-
   //* Remettre l'index au début 
   if (characterAnimationIndex >= characterTextureList.length) {
     characterAnimationIndex = 0
 
     if (characterHitting) {
       characterHitting = false
+    }
+    if (characterComboHitting){
+      characterComboHitting = false
+    }
+    if (characterComboHittingDouble){
+      characterComboHittingDouble = false
     }
   }
 
@@ -285,14 +315,6 @@ function character() {
   //#region //* Mouvement de caméra
 
 
-  // rect(0, yStartWorld, 20, ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length))
-  // fill(255, 0, 0)
-  // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
-
-
-
-
-
 
   //* ========= Si le mode SMOOTH est activé =========
   if (smoothCamera) {
@@ -304,10 +326,7 @@ function character() {
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
 
-
-
         //? le monde bouge vers la gauche (la caméra se décale vers la droite)
-
         cameraSpeedR = lerp(cameraSpeedR, characterMovesSpeed, smoothCameraSpeed)
         newCharacterMovesSpeedR = lerp(newCharacterMovesSpeedR, characterMovesSpeed, smoothCameraSpeed)
 
@@ -327,12 +346,10 @@ function character() {
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 2 - 1) {
 
-
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld < 0) {
 
         //? le monde bouge vers la droite (la caméra se décale vers la gauche)
-
         cameraSpeedL = lerp(cameraSpeedL, characterMovesSpeed, smoothCameraSpeed)
         newCharacterMovesSpeedL = lerp(newCharacterMovesSpeedL, characterMovesSpeed, smoothCameraSpeed)
 
@@ -345,8 +362,8 @@ function character() {
       newCharacterMovesSpeedL = 0
     }
 
-    //* ========= Si le mode SMOOTH n'est pas activé =========
   } else {
+    //* ========= Si le mode SMOOTH n'est pas activé =========
 
     //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
@@ -380,9 +397,6 @@ function character() {
       }
     }
   }
-
-
-
 
 
   //* caméra mouvements bas
@@ -597,14 +611,45 @@ function character() {
         if (rightArrowPressed) {
           characterDirection = "right"
           characterMovement = "hit"
+            
         } else if (leftArrowPressed) {
           characterDirection = "left"
           characterMovement = "hit"
+            
         } else {
           characterDirection = characterLastDirection
           characterMovement = "hit"
+            
         }
-      } else {
+      } else if (characterComboHitting) {
+        if (rightArrowPressed) {
+          characterDirection = "right"
+          characterMovement = "hit2"
+            
+        } else if (leftArrowPressed) {
+          characterDirection = "left"
+          characterMovement = "hit2"
+            
+        } else {
+          characterDirection = characterLastDirection
+          characterMovement = "hit2"
+            
+        } 
+      } else if (characterComboHittingDouble) {
+        if (rightArrowPressed) {
+          characterDirection = "right"
+          characterMovement = "hit3"
+            
+        } else if (leftArrowPressed) {
+          characterDirection = "left"
+          characterMovement = "hit3"
+            
+        } else {
+          characterDirection = characterLastDirection
+          characterMovement = "hit3"
+            
+        } 
+      }else {
         if (rightArrowPressed) {
           characterDirection = "right"
           characterMovement = "walk"
@@ -613,7 +658,9 @@ function character() {
           characterMovement = "walk"
         } else {
           characterDirection = characterLastDirection
-          characterMovement = "idle"
+          if (characterMovement != "getHit" && healthPlayer){
+            characterMovement = "idle"
+          }
         }
       }
     }
@@ -637,9 +684,9 @@ function character() {
 
 
 
-
-
-//^ Système du personnage pour le moteur de vue 2
+//^ --------------------------------------------------------------------------
+//^                 Système du personnage pour le moteur de vue 2             
+//^ --------------------------------------------------------------------------
 function characterView2() {
   let timer = (round(millis() / animationSpeed)) % 2
 

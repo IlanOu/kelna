@@ -3,12 +3,20 @@
 
       "Malade1": {
         "type": "Malade1",
-        "damages": 5,
-        "hit": false,
+        "isAThreat": false,
+        "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
+        "isDead": false,
+        "beingHit": false,
 
-        "color": "red",
+        
+        "life": 3,
+        
+        "damages": 1,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
+
+        "color": "yellow",
 
         "detectDistX": 8,
         "detectDistY": 8,
@@ -47,12 +55,19 @@
 
       "Malade2": {
         "type": "Malade2",
-        "damages": 5,
-        "hit": false,
+        "isAThreat": true,
+        "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
+        "isDead": false,
+        "beingHit": false,
+        
+        "life": 5,
+        
+        "damages": 1,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
 
-        "color": "red",
+        "color": "blue",
 
         "detectDistX": 8,
         "detectDistY": 8,
@@ -91,8 +106,8 @@
 
       "Enn2": {
         "type": "Chevalier",
-        "damages": 10,
-        "hit": false,
+        "damages": 1,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 
@@ -136,7 +151,7 @@
       "Enn1": {
         "type": "Archer",
         "damages": 10,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 

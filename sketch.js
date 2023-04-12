@@ -33,14 +33,14 @@ function preload() {
   GUIStart = loadImage("assets/GUI/start.png")
 
   //? Background
-  backgroundImage = loadImage('assets/Background/sky2.jpg');
+  backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
 
   //? Animation PNJ
   marjoTexture = loadImage("assets/entities/marjoSprite.png")
   charleTexture = loadImage("assets/entities/charleSprite.png")
   malade1Sprite = loadImage("assets/entities/malade1.png")
-  malade2Sprite = loadImage("assets/entities/malade2.png")
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png")
 
 
   //? Tileset
@@ -54,13 +54,13 @@ function preload() {
   sky = loadImage("assets/textures/Sky.jpg")
   tileSet = loadImage("assets/textures/tilesetKelna.png")
   BackTroc = loadImage("assets/textures/planches.png")
-  Slot = loadImage("assets/textures/Slot.png")
+  Slot = loadImage("assets/textures/slot.png")
   BackPop = loadImage("assets/textures/BackPop.png")
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
   //? Personnage
-  characterTextures = loadImage("assets/entities/spritesheetYvo.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk4.png")
 
 
   //? JSON preload
@@ -106,10 +106,8 @@ function draw() {
         //? Afficher le fond du jeu
         drawBackgroundImage(backgroundImage)
         
-
         //? Afficher la map
         drawGrid()
-  
 
         //? Afficher les entités
         doorsManager()
@@ -119,7 +117,6 @@ function draw() {
         //? Afficher le joueur (le perso passe devant les entités)
         character()
         
-
         //? Afficher l'avant plan de la map
         drawGridForeground()
   
