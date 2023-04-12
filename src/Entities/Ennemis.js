@@ -224,7 +224,7 @@ let mobMovements = (Mobs) => {
     }
   }
 
-  // Si le mob est une menace (s'il peut t'attaquer)
+  //* Si le mob est une menace (s'il peut t'attaquer)
   if (Mobs.isAThreat) {
     let characterCenterX = characterPositionX;
     let mobsCenterX = CurrentX + Mobs.width / 2;
@@ -281,17 +281,30 @@ let mobMovements = (Mobs) => {
     }
   }
 
-
   //~ -------------------------------------------------------------------------
   //~                          Attaquer le joueur                              
   //~ -------------------------------------------------------------------------
 
-  // console.log(healthPlayer)
+  let mobAttacking = false;
 
-  if (touchPlayer && Mobs.isAThreat) {
+  //? Si le MOB est une menace
+  if (touchPlayer && Mobs.isAThreat && !Mobs.getHit) {
     if (healthPlayer > 0){
-      // attackPlayer(Mobs)
+      
+        //? Attaquer toutes les Mobs.attackInterval secondes
+        if (millis() - Mobs.lastAttackTime > Mobs.attackInterval * 1000) {
+          Mobs.lastAttackTime = millis();
+          healthPlayer -= Mobs.damages
+        }
+        mobAttacking = true;
     }
+  }
+
+  if (mobAttacking){
+    //* Synchroniser l'animation du Joueur avec l'animation du Mob
+    characterAnimationIndex = Mobs.indexFrame
+    Mobs.movement = "attacking";
+    characterMovement = "getHit"
   }
 
   //* Debug Mod
@@ -391,6 +404,15 @@ function animationMobs(
         }
       }
       break;
+    case "attacking":
+      if (CurrentMob.isAThreat) {
+        for (let y = (2 * 32); y < (3 * 32); y += 32) {
+          for (let x = (0 * 32); x < (6 * 32); x += 32) {
+            MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+          }
+        }
+      }
+      break;
     case "jump":
       for (let y = (4 * 32); y < (5 * 32); y += 32) {
         for (let x = 0; x < (4 * 32); x += 32) {
@@ -406,7 +428,6 @@ function animationMobs(
       }
       if (CurrentMob.indexFrame >= MobTexturesList.length - 2) {
         CurrentMob.isDead = true;
-        console.log("FIN")
       }
       break;
   }

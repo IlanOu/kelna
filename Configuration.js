@@ -207,8 +207,8 @@ let doorInTaverne = false;
 
 //~  Variables pour la barre de vie
 let MargeBarVie = 30;
-let healthPlayer = 3
-let maxHealth = 6
+let healthPlayer = 5
+let maxHealth = 5
 let pressingKey = false
 let gettingHurt = false; //& Pour les degats
 let gettingHeal = false; //& Pour regen

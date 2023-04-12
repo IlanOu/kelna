@@ -8,11 +8,13 @@
         "haveBeenHit": false,
         "isDead": false,
         "beingHit": false,
+
         
         "life": 3,
         
         "damages": 1,
-        "attackSpeed": 1000,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
 
         "color": "yellow",
 
@@ -53,16 +55,17 @@
 
       "Malade2": {
         "type": "Malade2",
-        "damages": 5,
         "isAThreat": true,
         "getHit": false,
         "haveBeenHit": false,
         "isDead": false,
         "beingHit": false,
-
+        
         "life": 5,
         
-        "attackSpeed": 1000,
+        "damages": 1,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
 
         "color": "blue",
 
@@ -103,7 +106,7 @@
 
       "Enn2": {
         "type": "Chevalier",
-        "damages": 10,
+        "damages": 1,
         "getHit": false,
         "haveBeenHit": false,
         "life": 2,

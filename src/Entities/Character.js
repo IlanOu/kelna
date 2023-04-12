@@ -176,7 +176,27 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         }
       }
       break;
-  }
+    //* animation se faire FRAPPER
+    case "getHit":
+      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation MOURIR
+    case "die":
+      for (let y = (6*32); y < (7*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      if (characterAnimationIndex >= characterTextureList.length-1) {
+        gameIsPlaying = false;
+        drawDeath();
+      }
+      break;
+    }
 
   //? Remettre l'animation au début quand on change d'animation
   if (characterLastMovement != characterMovement) {
@@ -638,7 +658,9 @@ function character() {
           characterMovement = "walk"
         } else {
           characterDirection = characterLastDirection
-          characterMovement = "idle"
+          if (characterMovement != "getHit" && healthPlayer){
+            characterMovement = "idle"
+          }
         }
       }
     }

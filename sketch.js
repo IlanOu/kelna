@@ -40,7 +40,7 @@ function preload() {
   marjoTexture = loadImage("assets/entities/marjoSprite.png")
   charleTexture = loadImage("assets/entities/charleSprite.png")
   malade1Sprite = loadImage("assets/entities/malade1.png")
-  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest.png")
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png")
 
 
   //? Tileset
@@ -60,7 +60,7 @@ function preload() {
 
 
   //? Personnage
-  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk3.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk4.png")
 
 
   //? JSON preload
@@ -106,10 +106,8 @@ function draw() {
         //? Afficher le fond du jeu
         drawBackgroundImage(backgroundImage)
         
-
         //? Afficher la map
         drawGrid()
-  
 
         //? Afficher les entités
         doorsManager()
@@ -119,7 +117,6 @@ function draw() {
         //? Afficher le joueur (le perso passe devant les entités)
         character()
         
-
         //? Afficher l'avant plan de la map
         drawGridForeground()
   
