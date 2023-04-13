@@ -38,10 +38,12 @@ function keyPressed() {
 
     if (canEnterInHouse) {
         //* Touche E
-        if (keyCode == 69 && test === false) {
+        if (keyCode == 69 && canGotOut === false) {
             PressInteractPNJ = false
             engineOne = !engineOne;
-            test = true
+            canGotOut = true
+            console.log("suis dedans grace a toi", engineOne, canGotOut)
+            
         }
     }
 
@@ -79,16 +81,11 @@ function keyPressed() {
     }
 
     if (canGoOutTheHouse) {
-        if (keyCode == 69) {
-            test = false
+        if (keyCode == 69 && !engineOne && canGotOut === true) {
             engineOne = !engineOne;
+            canGotOut = false
+            console.log("suis sortie grace a toi", engineOne, canGotOut)
         }
-    }
-
-
-    if (keyCode == 220) {
-        test = false
-        engineOne = !engineOne;
     }
 }
 

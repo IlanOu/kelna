@@ -679,7 +679,6 @@ function character() {
     characterMovement)
 
   //#endregion
-
 }
 
 
@@ -750,7 +749,8 @@ function characterView2() {
   //~ Collisions 
 
   //* Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses[behindThisDoor].layers[1]
+  let currentMapTableColliders = Houses[behindThisDoorHouse].layers[1]
+
 
   //* Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {
@@ -766,7 +766,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }
@@ -814,17 +814,20 @@ function characterView2() {
   //#region 
   //~ Affichage du perso
 
-  characterBoundingBoxHeightInside = 30
 
-  drawCharacter(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+
+  drawCharacter(characterInsidePosX - characterBoundingBoxWidthInside/4, characterInsidePosY - characterHeight / 2 - characterHeight / 3, characterWidth, characterHeight, characterDirection,characterMovement)
 
 
   
   if(debugMod){
-    stroke(50,50,50,50)
-    fill(255,0,0,70)
-    rect(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+    stroke(255, 0, 0)
+    fill(255, 0, 0, 70)
+    rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside)
+    noStroke()
   }
+
+  //- (characterHeight - characterBoundingBoxHeightInside)
 
   //#endregion
 

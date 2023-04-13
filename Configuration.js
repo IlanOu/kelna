@@ -66,7 +66,8 @@ let characterWidth = 80;
 let characterHeight = 80;
 let characterBoundingBoxWidth = 40;
 let characterBoundingBoxHeight = 60;
-let characterBoundingBoxHeightInside;
+let characterBoundingBoxHeightInside = 30
+let characterBoundingBoxWidthInside = 56
 let characterMovesSpeed = 6;
 let characterHitting = false;
 let characterComboHitting = false;
@@ -204,6 +205,10 @@ let engine2HeightDoors = rectHeight / 1.5
 
 let doorInTaverne = false;
 
+let canGotOut = false
+
+let behindThisDoorHouse = "";
+
 
 //~  Variables pour la barre de vie
 let MargeBarVie = 30;
@@ -321,9 +326,3 @@ let MusicForCinematic = false;
 
 let CinematicForEnd = false;
 //#endregion
-
-
-
-
-
-let test = false;

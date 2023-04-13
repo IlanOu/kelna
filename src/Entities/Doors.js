@@ -59,17 +59,17 @@ function drawDoor(door) {
   );
 
   if (canEnterInHouse) {
-    behindThisDoor = door.destination;
-
+    behindThisDoorHouse = door.destination;
+    
     //? Remettre la maison en position
     xStartHouse = 0;
     yStartHouse = 200;
 
     //? Remettre le spawn du perso en position
     characterInsidePosX =
-      Houses[behindThisDoor].xStart * rectWidth + xStartHouse;
+      Houses[behindThisDoorHouse].xStart * rectWidth + xStartHouse;
     characterInsidePosY =
-      Houses[behindThisDoor].yStart * rectHeight + yStartHouse;
+      Houses[behindThisDoorHouse].yStart * rectHeight + yStartHouse;
   }
 
   //* Debug Mod
@@ -115,8 +115,8 @@ function drawDoorInside(door) {
 
   //* Détéction du joueur
   canGoOutTheHouse = rectIsInRect(
-    characterPositionX,
-    characterPositionY,
+    characterInsidePosX,
+    characterInsidePosY,
     characterBoundingBoxWidth,
     characterBoundingBoxHeight,
     doorBoundingBox[0],
@@ -125,18 +125,23 @@ function drawDoorInside(door) {
     doorBoundingBox[3]
   );
 
+
+      // characterInsidePosX, characterPositionX
+      // characterInsidePosY, characterPositionY
+
   if (canGoOutTheHouse) {
     behindThisDoor = door.destination;
+    
 
     //? Remettre la maison en position
-    xStartHouse = 0;
-    yStartHouse = 200;
+    // xStart = 0;
+    // yStart = 200;
 
-    //? Remettre le spawn du perso en position
-    characterInsidePosX =
-      Houses[behindThisDoor].xStart * rectWidth + xStartHouse;
-    characterInsidePosY =
-      Houses[behindThisDoor].yStart * rectHeight + yStartHouse;
+    // //? Remettre le spawn du perso en position
+    //   characterPositionX =
+    //   Maps[behindThisDoor].xStart * rectWidth + xStart;
+    //   characterPositionY =
+    //   Maps[behindThisDoor].yStart * rectHeight + yStart;
   }
 
   //* Debug Mod
@@ -155,3 +160,21 @@ function drawDoorInside(door) {
   rect(doorX, doorY - heightDoor / 2, widthDoor, heightDoor);
   // rect(doorX, door.y - heightDoor / 2, widthDoor, heightDoor);
 }
+
+
+//  if (canGoOutTheHouse) {
+//    behindThisDoor = door.destination;
+
+//    //? Remettre la maison en position
+//    xStart = 0;
+//    yStart = 200;
+
+//    //? Remettre le spawn du perso en position
+//    characterPositionX =
+//      Maps[behindThisDoor].xStart * rectWidth + xStart;
+//    characterPositionY =
+//      Maps[behindThisDoor].yStart * rectHeight + yStart;
+//  }
+
+
+
