@@ -95,7 +95,7 @@
       "canInteractPNJ": true,
 
       "step": 0,
-      "discussions": ["Bonjour jeune entrepreneur", "Quoi ?", "Que me veux-tu ?"]
+      "discussions": ["Bonjour jeune entrepreneur", "Quoi ?", "Que me veux-tu ?", "voici ma giga super mega phrase hyper longue qui permet au développeur qui travaille sur mon système de dialogue de tester si son code est fonctionnel ou pas du tout."]
     }
   }
 }

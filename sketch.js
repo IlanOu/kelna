@@ -90,6 +90,9 @@ function draw() {
   frameRate(60)
   fps = frameRate();
 
+  if (cameraShakeEnabled){
+    translate(random(-5,5),random(-5,5));
+  }
   
   //? Si le jeu joue
   if (gameIsPlaying) {

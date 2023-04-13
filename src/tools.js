@@ -208,11 +208,11 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(currentMapInWorld)
 
     //? map à DROITE du perso
-    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atRightMapInWorld)
 
     //? map à GAUCHE du perso
-    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
@@ -224,19 +224,19 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 

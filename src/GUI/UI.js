@@ -679,9 +679,10 @@ function drawTalk (x, y, w, h){
   image(talkBackground, x, y, w, h)
 
 
+  let textWidth = w / 1.5;
+
   if (sentenceToTell == undefined){
 
-    //// Recommence le texte s'il est terminé
     //* Ferme la discution quand c'est finis
     PressTalkPNJ = false
     currentPNJ.step = 0;
@@ -699,17 +700,23 @@ function drawTalk (x, y, w, h){
       currentTextSpeaking += sentenceToTell[currentIndexTextSpeaking]
       currentIndexTextSpeaking++
     }
-    //? Afficher le texte
-    textSize(fontSize);
-    text(currentTextSpeaking, x, y+(h/2)-fontSize/2, w, h)
-
+    
     //* Changer de phrase
     if (mouseIsPressed && currentIndexTextSpeaking){
       mouseIsPressed = false
-      currentPNJ.step++
-      currentIndexTextSpeaking = 0
-      currentTextSpeaking = ""
+      if (currentIndexTextSpeaking < sentenceToTell.length){
+        currentIndexTextSpeaking = sentenceToTell.length
+        currentTextSpeaking = sentenceToTell
+      }else{
+        currentPNJ.step++
+        currentIndexTextSpeaking = 0
+        currentTextSpeaking = ""
+      }
     }
+
+    //? Afficher le texte
+    textSize(fontSize);
+    text(currentTextSpeaking, x+(textWidth/4), y+(h/2.5)-fontSize/2, textWidth, h)
 
     //* Remettre la phrase au début
     if (!PNJSeePlayer){

@@ -7,6 +7,7 @@ let username = "";
 let password = "";
 let adminJSON;
 
+let cameraShakeEnabled = false;
 
 //^ Textures
 //#region //~ Textures
@@ -64,7 +65,7 @@ let previousPlayerX = 0;
 let previousPlayerY = 0
 let characterWidth = 80;
 let characterHeight = 80;
-let characterBoundingBoxWidth = 40;
+let characterBoundingBoxWidth = 45;
 let characterBoundingBoxHeight = 60;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed = 6;
