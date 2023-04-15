@@ -138,13 +138,27 @@ function doRound(Mobs) {
   Mobs.isFollowing = false;
 
   let CurrentX = Mobs.x;
+  
   let walkAmount = Mobs.stepCount;
-
+  
   let MobEnd = Mobs.xEnd;
   let MobStart = Mobs.xStart;
-
+  
   let haveToJump = Mobs.haveToJump;
+  
 
+
+  // if (engineOne){
+  //   CurrentX += xStartWorld
+  //   MobEnd += xStartWorld
+  //   MobStart += xStartWorld
+  // }else{
+  //   CurrentX += xStartHouse
+  //   MobEnd += xStartHouse
+  //   MobStart += xStartHouse
+  // }
+  
+  
   //* FAIRE UNE RONDE
   if (CurrentX >= MobEnd) {
     Mobs.direction = "left";
@@ -162,8 +176,6 @@ function doRound(Mobs) {
       Mobs.direction = "left";
       haveToJump = false;
       walkAmount -= Mobs.speed
-
-
 
       //? Sinon, marcher
     } else {
@@ -193,6 +205,7 @@ function doRound(Mobs) {
   Mobs.stepCount = walkAmount;
   Mobs.xStart = MobStart;
   Mobs.xEnd = MobEnd;
+  Mobs.x = CurrentX;
 }
 
 

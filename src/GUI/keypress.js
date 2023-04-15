@@ -28,6 +28,7 @@ function keyPressed() {
     //* Flèche de haut
     if ((keyCode == 38 || keyCode == 90 )) {
         highArrowPressed = true;
+        characterIsEating = true
     }
 
     //* Flèche de bas
@@ -62,19 +63,22 @@ function keyPressed() {
         dashKeyIsPressed = true
     }
 
+    //* Touche I
+    if (keyCode == 73) {
+        addItemToInventory(ForItems.Items.sword_1, 1);
+    }
+
     //* Touche O du clavier
     if(keyCode == 79){
-        addItemToInventory(ForItems.Items.food_1);
+        addItemToInventory(ForItems.Items.food_1, 1);
     }
 
     //* Touche P du clavier
     if (keyCode == 80) {
-        addItemToInventory(ForItems.Items.bow_1);
+        addItemToInventory(ForItems.Items.bow_1, 1);
     }
 
-    if (keyCode == 73) {
-        addItemToInventory(ForItems.Items.sword_1);
-    }
+    
 }
 
 //~ vérifier si une touche est relâchée 
@@ -98,6 +102,7 @@ function keyReleased() {
     //* Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = false;
+        characterIsEating = false
     }
 
     //* Flèche de bas
@@ -122,22 +127,24 @@ function mousePressed() {
     if (mouseButton === LEFT) {
         leftClickPressed = true
 
-        if (!gameIsPaused && gameIsPlaying  && characterAnimationIndex <= characterTextureList.length-1){
-            if (!characterHitting && !characterComboHitting && !characterComboHittingDouble){
-                characterHitting = true
-                characterComboHitting = false
-                characterComboHittingDouble = false
-                lastHit = "1"
-            }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble){
-                characterHitting = false
-                characterComboHitting = true
-                characterComboHittingDouble = false
-                lastHit = "2"
-            }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble){
-                characterHitting = false
-                characterComboHitting = false
-                characterComboHittingDouble = true
-                lastHit = "3"
+        if (!PressTalkPNJ){
+            if (!gameIsPaused && gameIsPlaying  && characterAnimationIndex <= characterTextureList.length-1){
+                if (!characterHitting && !characterComboHitting && !characterComboHittingDouble){
+                    characterHitting = true
+                    characterComboHitting = false
+                    characterComboHittingDouble = false
+                    lastHit = "1"
+                }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble){
+                    characterHitting = false
+                    characterComboHitting = true
+                    characterComboHittingDouble = false
+                    lastHit = "2"
+                }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble){
+                    characterHitting = false
+                    characterComboHitting = false
+                    characterComboHittingDouble = true
+                    lastHit = "3"
+                }
             }
         }
     }

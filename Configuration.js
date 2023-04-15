@@ -210,8 +210,8 @@ let doorInTaverne = false;
 
 
 //~  Variables pour la barre de vie
-let MargeBarVie = 30;
-let healthPlayer = 5
+let MargeBarVie = 40;
+let healthPlayer = 1
 let maxHealth = 5
 let pressingKey = false
 let gettingHurt = false; //& Pour les degats
@@ -224,10 +224,20 @@ let removeHeart = false; //& Pour enlever un coeur
 let Inventory = [{},{},{}];
 let WidthSlot = 85;
 let HeightSlot = 85;
-let ForSlotOneX = 0;
+let slotX = 0;
 let endInventory = false;
 let waitingButton = false;
 
+//~ Jauge quand on mange
+let characterIsEating = false;
+
+let gaugeSize = 5;
+let gaugeSpeed = 5;
+
+let topGaugeLevel = 0;
+let rightGaugeLevel = 0;
+let bottomGaugeLevel = 0;
+let leftGaugeLevel = 0;
 
 //~  Variables pour la mort
 let playerDead = false
@@ -262,6 +272,7 @@ let getTrade;
 let slotSize = 2
 let itemSize = 1.6
 
+let stackSize = 5
 
 //~ Variables pour le FPS
 let fps;

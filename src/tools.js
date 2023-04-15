@@ -163,10 +163,11 @@ function hurtPlayer (amount) {
 
 
 //~ regenPlayer
-function regenPlayer (amount) {
-    if (healthPlayer < maxHealth) {
+function regenPlayer (amount = 1) {
+    if (healthPlayer + amount <= maxHealth) {
         healthPlayer += amount;
-        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+    }else{
+        healthPlayer = maxHealth
     }
 }
 
@@ -406,7 +407,7 @@ function getTalkPNJ(namePNJ) {
     });
     return talkPNJ
 }
-//~ Recupere les items et son nom
+//~ Recupere les items avec nom
 function getItems(nameItem) {
 
     let item = {}
@@ -465,8 +466,6 @@ function getIndexOfItemCategory(itemCategory) {
     return index
 
 }
-
-
 
 
 //~ Troc

@@ -92,7 +92,7 @@ function drawHomeMenu() {
   ];
 
 
-  image(GUIStart,play[0],play[1],play[2],play[3])
+  image(GUIStart, play[0], play[1], play[2], play[3])
 
 
   fill(120, 120, 120);
@@ -482,19 +482,22 @@ function drawStats() {
   }
 }
 
-
 //~ BARRE DE VIE
 function drawLifeBar() {
-  let HeartX = 1800 / 2;
-  let HeartY = MargeBarVie + 900
-  let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
+  let HeartX = (viewportDisplayWidth/2) - (maxHealth * MargeBarVie)/2;
+  let HeartY = viewportDisplayHeight - MargeBarVie*2
 
-  for (let i = 0; i < VieLarg; i++) {
-    image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
+
+  for (let i = 0; i < maxHealth; i++) {
+    if (i+1 <= healthPlayer){
+      image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
+    }else{
+      image(GamerHeartBlack, MargeBarVie * i + HeartX, HeartY, 30, 30);
+
+    }
+    
   }
 }
-
-
 
 //~ INTERACTIONS
 function setupInteractions() {
@@ -537,8 +540,6 @@ function drawTroc(x, y, w, h) {
   let currentPNJ = getPNJName();
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
   let echangePNJ = getEchangePNJ(currentPNJ);
-
-
 
   if (echangePNJ != undefined) {
     image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
@@ -664,50 +665,58 @@ function drawTroc(x, y, w, h) {
 }
 
 
-function drawTalk (x, y, w, h){
+function drawTalk(x, y, w, h) {
 
   let currentPNJName = getPNJName();
   let currentPNJ = ForPNJ.PNJS[currentPNJName]
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
   let talkPNJ = getTalkPNJ(currentPNJName);
 
-  let sentenceToTell = talkPNJ[currentPNJ.step]
-  
+  let sentenceToTell = ""
+  if (PNJSeePlayer){
+    sentenceToTell = talkPNJ[currentPNJ.step]
+  }
+
   let fontSize = 20
 
   //? Afficher la banière du fond
-  image(talkBackground, x, y, w, h)
+  let ratio = w/talkBackground.width
+  let heightImg = talkBackground.height * ratio 
+  y = y - heightImg
+
+
+  image(talkBackground, x, y, w, heightImg)
 
 
   let textWidth = w / 1.5;
 
-  if (sentenceToTell == undefined){
+  if (sentenceToTell == undefined) {
 
-    //* Ferme la discution quand c'est finis
+    //* Ferme la discussion quand c'est finis
     PressTalkPNJ = false
     currentPNJ.step = 0;
     currentIndexTextSpeaking = 0
     currentTextSpeaking = ""
 
-  }else{
+  } else {
     //? Couleur du texte
     fill(0)
 
     let timer = round(millis() / textDialogSpeed) % 2;
-    
+
     //* Effet typewritter
-    if (timer && currentIndexTextSpeaking < sentenceToTell.length){
+    if (timer && currentIndexTextSpeaking < sentenceToTell.length) {
       currentTextSpeaking += sentenceToTell[currentIndexTextSpeaking]
       currentIndexTextSpeaking++
     }
-    
+
     //* Changer de phrase
-    if (mouseIsPressed && currentIndexTextSpeaking){
+    if (mouseIsPressed && currentIndexTextSpeaking) {
       mouseIsPressed = false
-      if (currentIndexTextSpeaking < sentenceToTell.length){
+      if (currentIndexTextSpeaking < sentenceToTell.length) {
         currentIndexTextSpeaking = sentenceToTell.length
         currentTextSpeaking = sentenceToTell
-      }else{
+      } else {
         currentPNJ.step++
         currentIndexTextSpeaking = 0
         currentTextSpeaking = ""
@@ -716,10 +725,10 @@ function drawTalk (x, y, w, h){
 
     //? Afficher le texte
     textSize(fontSize);
-    text(currentTextSpeaking, x+(textWidth/4), y+(h/2.5)-fontSize/2, textWidth, h)
+    text(currentTextSpeaking, x + (textWidth / 4), y + (h / 2.5) - fontSize / 2, textWidth, h)
 
     //* Remettre la phrase au début
-    if (!PNJSeePlayer){
+    if (!PNJSeePlayer) {
       PressTalkPNJ = false;
       currentIndexTextSpeaking = 0
       currentTextSpeaking = ""
@@ -745,11 +754,11 @@ function openTrocMenu() {
 
 
 //~ INTERACTION PNJ DISCU
-function openTalkMenu(){
-  let interfaceMenuWidth = viewportDisplayWidth/2;
-  let interfaceMenuHeight = viewportDisplayHeight/5;
-  let interfaceMenuX = viewportDisplayWidth/2 - interfaceMenuWidth/2;
-  let interfaceMenuY = viewportDisplayHeight - interfaceMenuHeight;
+function openTalkMenu() {
+  let interfaceMenuWidth = viewportDisplayWidth / 2.5;
+  let interfaceMenuHeight = viewportDisplayHeight / 5;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
+  let interfaceMenuY = viewportDisplayHeight;
   drawTalk(
     interfaceMenuX,
     interfaceMenuY,
@@ -767,6 +776,8 @@ function setupUI() {
 
 
   if (inGame && settingsHome === false) {
+    drawLifeBar();
+
     //? Si je fait echap (dans le menu pause)
 
     if (PressInteractPNJ) {
@@ -791,7 +802,7 @@ function setupUI() {
       //? sinon je joue
       gameIsPlaying = true;
     }
-    drawLifeBar();
+    
     displayInventory();
     setupInteractions();
   } else {

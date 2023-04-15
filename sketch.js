@@ -26,7 +26,9 @@ function preload() {
   GUIForEscape = loadImage("assets/GUI/GUIForEscape.png")
   GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png")
   Background = loadImage("assets/Background/Background.gif")
-  GamerHeart = loadImage("assets/GUI/GamerHeart.webp")
+  GamerHeart = loadImage("assets/GUI/heart.png")
+  GamerHeartBlack = loadImage("assets/GUI/heartBlack.png")
+
   GUIForStats = loadImage("assets/GUI/GUIForStats.png")
   GUIInteract = loadImage("assets/GUI/GUIInt.png")
   GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
@@ -65,7 +67,7 @@ function preload() {
 
 
   //? JSON preload
-  ForItems = loadJSON("json/IsItems.json");
+  ForItems = loadJSON("json/Items.json");
   Maps = loadJSON("json/Maps.json");
   World = loadJSON("json/World.json");
   Houses = loadJSON("json/Houses.json");

@@ -181,6 +181,8 @@ let PNJMovements = (pnj) => {
     canInteractWithPNJ = false;
     canTalkWithPNJ = false
   }
+
+  //* Si le perso est vu s'arreter et le regarder
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
