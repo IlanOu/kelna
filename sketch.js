@@ -28,41 +28,41 @@ function windowResized() {
 function preload() {
 
   //? Interfaces
-  GUIParameters = loadImage("assets/GUI/GUIParameters.png")
-  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png")
-  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png")
-  Background = loadImage("assets/Background/Background.gif")
-  GamerHeart = loadImage("assets/GUI/heart.png")
-  GamerHeartBlack = loadImage("assets/GUI/heartBlack.png")
+  GUIParameters = loadImage("assets/GUI/GUIParameters.png");
+  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png");
+  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
+  Background = loadImage("assets/Background/Background.gif");
+  GamerHeart = loadImage("assets/GUI/heart.png");
+  GamerHeartBlack = loadImage("assets/GUI/heartBlack.png");
 
-  GUIForStats = loadImage("assets/GUI/GUIForStats.png")
-  GUIInteract = loadImage("assets/GUI/GUIInt.png")
-  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
-  GUIStart = loadImage("assets/GUI/start.png")
-  talkBackground = loadImage("assets/GUI/talkBackground.png")
+  GUIForStats = loadImage("assets/GUI/GUIForStats.png");
+  GUIInteract = loadImage("assets/GUI/GUIInt.png");
+  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg");
+  GUIStart = loadImage("assets/GUI/start.png");
+  talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
   backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
 
   //? Animation PNJ
-  marjoTexture = loadImage("assets/entities/marjoSprite.png")
-  charleTexture = loadImage("assets/entities/charleSprite.png")
-  malade1Sprite = loadImage("assets/entities/malade1.png")
-  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png")
+  marjoTexture = loadImage("assets/entities/marjoSprite.png");
+  charleTexture = loadImage("assets/entities/charleSprite.png");
+  malade1Sprite = loadImage("assets/entities/malade1.png");
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png");
 
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/taverne2.png")
+  tileSetTaverne = loadImage("assets/textures/taverne2.png");
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/tilesetKelna.png")
-  sky = loadImage("assets/textures/Sky.jpg")
-  BackTroc = loadImage("assets/textures/planches.png")
-  Slot = loadImage("assets/textures/slot.png")
-  BackPop = loadImage("assets/textures/BackPop.png")
+  tileSet = loadImage("assets/textures/tilesetKelna.png");
+  sky = loadImage("assets/textures/Sky.jpg");
+  BackTroc = loadImage("assets/textures/planches.png");
+  Slot = loadImage("assets/textures/slot.png");
+  BackPop = loadImage("assets/textures/BackPop.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
@@ -78,15 +78,11 @@ function preload() {
   ForPNJ = loadJSON("json/PNJ.json");
   ForEnnemis = loadJSON("json/Ennemis.json");
   allDoors = loadJSON("json/Doors.json");
-  adminJSON = loadJSON("json/Admin.json")
+  adminJSON = loadJSON("json/Admin.json");
   
 
   //? SONG
-  SongBackground = loadSound("music/SongBackground.mp3")
-
-
-  //? CINEMATIC
-
+  SongBackground = loadSound("music/SongBackground.mp3");
 }
 
 

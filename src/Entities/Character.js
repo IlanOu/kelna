@@ -462,7 +462,7 @@ function character() {
 
   //#region 
   //~ saut du personnage
-  if (spaceKeyIsPressed) {
+  if (spaceKeyIsPressed && healthPlayer) {
     //* le saut du personnage
     if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
 
@@ -476,10 +476,9 @@ function character() {
         gravityForce)
         
       //~ Empêcher le joueur de sauter s'il est mort
-      if (healthPlayer) {
-          characterPositionY = jumpReturns[0];
-          characterVelocityY = jumpReturns[1];
-        }
+        characterPositionY = jumpReturns[0];
+        characterVelocityY = jumpReturns[1];
+        
 
 
       //* le double saut du personnage  

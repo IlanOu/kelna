@@ -551,7 +551,7 @@ function drawTroc(x, y, w, h) {
     let heightRow = h / echangePNJ.length; //& <- nombre de ligne
     let postionXRow = x;
 
-    //? Position pour d'échange
+    //? Position pour échange
     let widthElement = 20;
     let heightElement = 20;
 
@@ -674,7 +674,22 @@ function drawTalk(x, y, w, h) {
 
   let sentenceToTell = ""
   if (PNJSeePlayer){
-    sentenceToTell = talkPNJ[currentPNJ.step]
+    if (talkPNJ[currentPNJ.step]){
+      //* Vérifier si l'item requis est dans l'inventaire
+      if (talkPNJ[currentPNJ.step].itemsNameRequired.includes("none") || Inventory.some(item => talkPNJ[currentPNJ.step].itemsNameRequired.includes(item.name))){
+        sentenceToTell = talkPNJ[currentPNJ.step].text
+      }else{
+        //* Si l'item requis n'est pas dans l'inventaire fermer la discussion
+        //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
+        PressTalkPNJ = false
+        currentPNJ.step -= 1;
+      }
+    }else{
+      //* Si la discussion est terminée, la fermer
+      //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
+      PressTalkPNJ = false
+      currentPNJ.step -= 1;
+    }
   }
 
   let fontSize = 20

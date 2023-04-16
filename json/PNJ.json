@@ -95,7 +95,28 @@
       "canInteractPNJ": true,
 
       "step": 0,
-      "discussions": ["Bonjour jeune entrepreneur", "Quoi ?", "Que me veux-tu ?", "voici ma giga super mega phrase hyper longue qui permet au développeur qui travaille sur mon système de dialogue de tester si son code est fonctionnel ou pas du tout."]
+      "discussions": [
+        {
+          "text": "Bonjour jeune entrepreneur", 
+          "itemsNameRequired": ["none"]
+        }, 
+        {
+          "text": "j'ai besoin que tu me ramène une épée ! Ou une pomme !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text" : "C'est très gentil, je vais te donner une information géniale en échange !",
+          "itemsNameRequired": ["sword_1", "food_1"]
+        }, 
+        {
+         "text": "Un combat entre deux trans, c'est un combat sans gland !",
+         "itemsNameRequired": ["none"]  
+        }, 
+        {
+         "text": "Hahahahahahahaha",
+         "itemsNameRequired": ["none"]  
+        }
+      ]
     }
   }
 }

@@ -33,7 +33,7 @@ let removeItemFromInventory = (index) => {
             }else{
                 Inventory[index].amount--
             }
-            console.log(Inventory[index].amount)
+            // console.log(Inventory[index].amount)
         }else{
             Inventory[index] = {};
         }

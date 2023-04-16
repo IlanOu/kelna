@@ -1,6 +1,7 @@
 //^ DEBUG MOD
 let debugMod = false;
 
+//* Le bloc qui tue (littéralement)
 let killingBlock = 238;
 
 //^ ADMIN MOD
