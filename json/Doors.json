@@ -13,8 +13,8 @@
         "door1-i": {
 
             "location": "taverne",
-            "x" : -100,
-            "y": -50,
+            "x" : 1.2,
+            "y": 444,
             "detectDist": 2,
             "destination": "Tileset-1",
             "inHouse": true

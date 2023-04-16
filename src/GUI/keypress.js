@@ -3,13 +3,13 @@ function keyPressed() {
 
     //* Bouton echap
     if (keyCode == ESCAPE) {
-        if (inGame){
+        if (inGame) {
             gameIsPaused = !gameIsPaused
         }
     }
 
     //* Barre espace
-    if (keyCode == 32 || keyCode==38) {
+    if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = true;
     }
 
@@ -26,7 +26,7 @@ function keyPressed() {
     }
 
     //* Flèche de haut
-    if ((keyCode == 38 || keyCode == 90 )) {
+    if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
         characterIsEating = true
     }
@@ -36,11 +36,15 @@ function keyPressed() {
         downArrowPressed = true;
     }
 
-    if (canEnterInHouse){
+
+    if (canEnterInHouse) {
         //* Touche E
-        if (keyCode == 69) {
+        if (keyCode == 69 && canGotOut === false) {
             PressInteractPNJ = false
             engineOne = !engineOne;
+            canGotOut = true
+            console.log("suis dedans grace a toi", engineOne, canGotOut)
+            
         }
     }
 
@@ -78,13 +82,23 @@ function keyPressed() {
         addItemToInventory(ForItems.Items.bow_1, 1);
     }
 
-    
+    if (keyCode == 73) {
+        addItemToInventory(ForItems.Items.sword_1);
+    }
+
+    if (canGoOutTheHouse) {
+        if (keyCode == 69 && !engineOne && canGotOut === true) {
+            engineOne = !engineOne;
+            canGotOut = false
+            console.log("suis sortie grace a toi", engineOne, canGotOut)
+        }
+    }
 }
 
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
     //* Barre espace
-    if (keyCode == 32 || keyCode ==38) {
+    if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = false;
         characterDoubleJumping = true;
     }
