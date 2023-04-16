@@ -92,7 +92,7 @@ function drawHomeMenu() {
   ];
 
 
-  image(GUIStart,play[0],play[1],play[2],play[3])
+  image(GUIStart, play[0], play[1], play[2], play[3])
 
 
   fill(120, 120, 120);
@@ -116,6 +116,7 @@ function drawHomeMenu() {
 function drawPauseMenu() {
   //? Cacher le troc si il s'affiche
   PressInteractPNJ = false;
+  PressTalkPNJ = false
 
   let interfaceMenuWidth = 500;
   let interfaceMenuHeight = 500;
@@ -481,19 +482,22 @@ function drawStats() {
   }
 }
 
-
 //~ BARRE DE VIE
 function drawLifeBar() {
-  let HeartX = 1800 / 2;
-  let HeartY = MargeBarVie + 900
-  let VieLarg = map(healthPlayer, 0, maxHealth, 0, maxHealth);
+  let HeartX = (viewportDisplayWidth/2) - (maxHealth * MargeBarVie)/2;
+  let HeartY = viewportDisplayHeight - MargeBarVie*2
 
-  for (let i = 0; i < VieLarg; i++) {
-    image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
+
+  for (let i = 0; i < maxHealth; i++) {
+    if (i+1 <= healthPlayer){
+      image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
+    }else{
+      image(GamerHeartBlack, MargeBarVie * i + HeartX, HeartY, 30, 30);
+
+    }
+    
   }
 }
-
-
 
 //~ INTERACTIONS
 function setupInteractions() {
@@ -503,13 +507,16 @@ function setupInteractions() {
     if (canEnterInHouse) {
       drawKey("E");
       PressInteractPNJ = false;
+      canInteractWithPNJ = false
+      PressTalkPNJ = false
+      canTalkWithPNJ = false
     }
 
     if (canInteractWithPNJ) {
       drawKey("E");
     }
 
-    if (canDiscussionsWithPNJ) {
+    if (canTalkWithPNJ) {
       drawKey("E");
     }
 
@@ -517,6 +524,9 @@ function setupInteractions() {
     if (canGoOutTheHouse) {
       drawKey("E");
       PressInteractPNJ = false;
+      canInteractWithPNJ = false
+      PressTalkPNJ = false
+      canTalkWithPNJ = false
     }
   }
 }
@@ -531,8 +541,6 @@ function drawTroc(x, y, w, h) {
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
   let echangePNJ = getEchangePNJ(currentPNJ);
 
-
-
   if (echangePNJ != undefined) {
     console.log("je peut echanger")
 
@@ -545,7 +553,7 @@ function drawTroc(x, y, w, h) {
     let heightRow = h / echangePNJ.length; //& <- nombre de ligne
     let postionXRow = x;
 
-    //? Position pour d'échange
+    //? Position pour échange
     let widthElement = 20;
     let heightElement = 20;
 
@@ -659,13 +667,98 @@ function drawTroc(x, y, w, h) {
 }
 
 
+function drawTalk(x, y, w, h) {
+
+  let currentPNJName = getPNJName();
+  let currentPNJ = ForPNJ.PNJS[currentPNJName]
+  let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
+  let talkPNJ = getTalkPNJ(currentPNJName);
+
+  let sentenceToTell = ""
+  if (PNJSeePlayer){
+    if (talkPNJ[currentPNJ.step]){
+      //* Vérifier si l'item requis est dans l'inventaire
+      if (talkPNJ[currentPNJ.step].itemsNameRequired.includes("none") || Inventory.some(item => talkPNJ[currentPNJ.step].itemsNameRequired.includes(item.name))){
+        sentenceToTell = talkPNJ[currentPNJ.step].text
+      }else{
+        //* Si l'item requis n'est pas dans l'inventaire fermer la discussion
+        //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
+        PressTalkPNJ = false
+        currentPNJ.step -= 1;
+      }
+    }else{
+      //* Si la discussion est terminée, la fermer
+      //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
+      PressTalkPNJ = false
+      currentPNJ.step -= 1;
+    }
+  }
+
+  let fontSize = 20
+
+  //? Afficher la banière du fond
+  let ratio = w/talkBackground.width
+  let heightImg = talkBackground.height * ratio 
+  y = y - heightImg
+
+
+  image(talkBackground, x, y, w, heightImg)
+
+
+  let textWidth = w / 1.5;
+
+  if (sentenceToTell == undefined) {
+
+    //* Ferme la discussion quand c'est finis
+    PressTalkPNJ = false
+    currentPNJ.step = 0;
+    currentIndexTextSpeaking = 0
+    currentTextSpeaking = ""
+
+  } else {
+    //? Couleur du texte
+    fill(0)
+
+    let timer = round(millis() / textDialogSpeed) % 2;
+
+    //* Effet typewritter
+    if (timer && currentIndexTextSpeaking < sentenceToTell.length) {
+      currentTextSpeaking += sentenceToTell[currentIndexTextSpeaking]
+      currentIndexTextSpeaking++
+    }
+
+    //* Changer de phrase
+    if (mouseIsPressed && currentIndexTextSpeaking) {
+      mouseIsPressed = false
+      if (currentIndexTextSpeaking < sentenceToTell.length) {
+        currentIndexTextSpeaking = sentenceToTell.length
+        currentTextSpeaking = sentenceToTell
+      } else {
+        currentPNJ.step++
+        currentIndexTextSpeaking = 0
+        currentTextSpeaking = ""
+      }
+    }
+
+    //? Afficher le texte
+    textSize(fontSize);
+    text(currentTextSpeaking, x + (textWidth / 4), y + (h / 2.5) - fontSize / 2, textWidth, h)
+
+    //* Remettre la phrase au début
+    if (!PNJSeePlayer) {
+      PressTalkPNJ = false;
+      currentIndexTextSpeaking = 0
+      currentTextSpeaking = ""
+
+    }
+  }
+}
 
 //~ INTERACTION PNJ SWORD
-function InteractionSword() {
+function openTrocMenu() {
   let interfaceMenuWidth = 500;
   let interfaceMenuHeight = 500;
-  let interfaceMenuX =
-    viewportDisplayWidth / 2 - interfaceMenuWidth / 2 + 110.5;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   drawTroc(
     interfaceMenuX,
@@ -678,39 +771,17 @@ function InteractionSword() {
 
 
 //~ INTERACTION PNJ DISCU
-function InteractionDiscu(){
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
-  let interfaceMenuX =
-    viewportDisplayWidth / 2 - interfaceMenuWidth / 2 + 110.5;
-  let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
-  drawDiscussion(
+function openTalkMenu() {
+  let interfaceMenuWidth = viewportDisplayWidth / 2.5;
+  let interfaceMenuHeight = viewportDisplayHeight / 5;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
+  let interfaceMenuY = viewportDisplayHeight;
+  drawTalk(
     interfaceMenuX,
     interfaceMenuY,
-    interfaceMenuWidth / 2,
+    interfaceMenuWidth,
     interfaceMenuHeight
   );
-
-}
-
-
-
-//~ DISCUSSION
-function drawDiscussion(x,y,w,h){
-
-  //? Fonction comme conditions pour la discussions
-  let currentPNJ = getPNJName();
-  let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
-  let discussionPNJ = getDiscussionPNJ(currentPNJ)
-
-
-  if (discussionPNJ != undefined){
-
-    //? Affichage du troc
-    if (!PNJSeePlayer) {
-      PressInteractPNJD = false;
-    }
-  }
 
 }
 
@@ -722,14 +793,18 @@ function setupUI() {
 
 
   if (inGame && settingsHome === false) {
+    drawLifeBar();
+
     //? Si je fait echap (dans le menu pause)
 
-    if (PressInteractPNJ && !SwordAlreadyTaken) {
-      InteractionSword();
+    if (PressInteractPNJ) {
+      openTrocMenu();
     }
-    if (PressInteractPNJD) {
-      InteractionDiscu();
+
+    if (PressTalkPNJ) {
+      openTalkMenu();
     }
+
     if (settingsPause) {
       PlayerInSettingsPause = true
       drawSettingInPause();
@@ -744,7 +819,7 @@ function setupUI() {
       //? sinon je joue
       gameIsPlaying = true;
     }
-    drawLifeBar();
+    
     displayInventory();
     setupInteractions();
   } else {

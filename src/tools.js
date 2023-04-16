@@ -163,10 +163,11 @@ function hurtPlayer (amount) {
 
 
 //~ regenPlayer
-function regenPlayer (amount) {
-    if (healthPlayer < maxHealth) {
+function regenPlayer (amount = 1) {
+    if (healthPlayer + amount <= maxHealth) {
         healthPlayer += amount;
-        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+    }else{
+        healthPlayer = maxHealth
     }
 }
 
@@ -208,11 +209,11 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(currentMapInWorld)
 
     //? map à DROITE du perso
-    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atRightMapInWorld)
 
     //? map à GAUCHE du perso
-    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
@@ -224,19 +225,19 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 
@@ -377,12 +378,10 @@ function getPNJSeePlayer(namePNJ) {
 }
 
 
-//~ Recupere si le PNJ peut faire un echange 
+//~ Recupere les echanges d'un PNJ 
 function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
-
-    
 
     Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
@@ -394,25 +393,21 @@ function getEchangePNJ(namePNJ) {
     return echangePNJ
 }
 
+//~ Recupere les discussions d'un PNJ 
+function getTalkPNJ(namePNJ) {
 
+    let talkPNJ = []
 
-//~ Recupere si le PNJ peut faire une discussion
-function getDiscussionPNJ(namePNJ){
-
-    let discussionPNJ = []
-
-    Object.entries(ForPNJ.PNJS).forEach(PNJ =>{
+    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
-            discussionPNJ = PNJ[1].discussions
-        } else if (discussionPNJ != undefined) {
+            talkPNJ = PNJ[1].discussions
+        } else if (talkPNJ != undefined) {
             return undefined
         }
-        return discussionPNJ
-    })
+    });
+    return talkPNJ
 }
-
-
-//~ Recupere les items et son nom
+//~ Recupere les items avec nom
 function getItems(nameItem) {
 
     let item = {}
@@ -471,8 +466,6 @@ function getIndexOfItemCategory(itemCategory) {
     return index
 
 }
-
-
 
 
 //~ Troc

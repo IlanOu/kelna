@@ -247,6 +247,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 //~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
+  let touchThisObject = false;
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -259,6 +260,7 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
         //? est relatif au perso
         characterVelocityY = 0;
+        touchThisObject = true
       }
       //* collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY) {
@@ -269,9 +271,13 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
         characterJumpCount = 0;
         //? est relatif au perso
         characterIsJumping = false
+        
         //? est relatif au perso
-        if (!spaceKeyIsPressed)
+        if (!spaceKeyIsPressed){
           characterVelocityY = 0
+        }
+
+        touchThisObject = true
       }
     }
 
@@ -284,15 +290,17 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
       if (agentX + agentWidth > objectX && agentX > objectX) {
 
         agentX = objectX + objectWidth
+        touchThisObject = true
 
         //* collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
 
         agentX = objectX - agentWidth
+        touchThisObject = true
       }
     }
   }
-  return [agentX, agentY]
+  return [agentX, agentY, touchThisObject]
 }
 
 
@@ -305,12 +313,14 @@ function character() {
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
 
-  //* Contrôles du perso (gauche, droite)
-  characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
+  //~ Empêcher le joueur de bouger s'il est mort
+  if (healthPlayer) {
+    //* Contrôles du perso (gauche, droite)
+    characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
 
-  //* Limites de la velocité Y du perso
-  characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
-
+    //* Limites de la velocité Y du perso
+    characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
+  }
 
   //#region //* Mouvement de caméra
 
@@ -452,7 +462,7 @@ function character() {
 
   //#region 
   //~ saut du personnage
-  if (spaceKeyIsPressed) {
+  if (spaceKeyIsPressed && healthPlayer) {
     //* le saut du personnage
     if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
 
@@ -464,10 +474,11 @@ function character() {
         characterJumpHeight,
         characterVelocityY,
         gravityForce)
-
-
-      characterPositionY = jumpReturns[0];
-      characterVelocityY = jumpReturns[1];
+        
+      //~ Empêcher le joueur de sauter s'il est mort
+        characterPositionY = jumpReturns[0];
+        characterVelocityY = jumpReturns[1];
+        
 
 
       //* le double saut du personnage  
@@ -531,7 +542,7 @@ function character() {
     //* Pour chaque carré dans le tableau 
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (let column = 0; column < currentMapTableColliders[row].length; column++) {
-
+        let touchThisObject = false
         //? Lui donner une collision
         let thisObject = currentMapTableColliders[row][column]
 
@@ -543,8 +554,15 @@ function character() {
 
 
         if (thisObject > 0) {
-          [characterPositionX, characterPositionY] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          
+          
+          //~ Tuer le joueur quand il marche sur le bloc 238
+          if (thisObject == killingBlock && touchThisObject){
+            hurtPlayer(1)
+          }
         }
+
       }
     }
   }
@@ -586,85 +604,87 @@ function character() {
   //#region 
   //~ affichage du personnage
 
-  if (characterIsJumping) {
-    if (rightArrowPressed) {
-      characterDirection = "right"
-      characterMovement = "jump"
-    } else if (leftArrowPressed) {
-      characterDirection = "left"
-      characterMovement = "jump"
-    } else {
-      characterDirection = characterLastDirection
-      characterMovement = "jump"
-    }
-  } else {
-    if (characterIsDashing) {
+  if (characterMovement != "die"){
+    if (characterIsJumping) {
       if (rightArrowPressed) {
         characterDirection = "right"
-        characterMovement = "dash"
+        characterMovement = "jump"
       } else if (leftArrowPressed) {
         characterDirection = "left"
-        characterMovement = "dash"
+        characterMovement = "jump"
+      } else {
+        characterDirection = characterLastDirection
+        characterMovement = "jump"
       }
     } else {
-      if (characterHitting) {
+      if (characterIsDashing) {
         if (rightArrowPressed) {
           characterDirection = "right"
-          characterMovement = "hit"
-            
+          characterMovement = "dash"
         } else if (leftArrowPressed) {
           characterDirection = "left"
-          characterMovement = "hit"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit"
-            
+          characterMovement = "dash"
         }
-      } else if (characterComboHitting) {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "hit2"
-            
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "hit2"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit2"
-            
-        } 
-      } else if (characterComboHittingDouble) {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "hit3"
-            
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "hit3"
-            
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit3"
-            
-        } 
-      }else {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "walk"
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "walk"
-        } else {
-          characterDirection = characterLastDirection
-          if (characterMovement != "getHit" && healthPlayer){
-            characterMovement = "idle"
+      } else {
+        if (characterHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit"
+              
+          }
+        } else if (characterComboHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit2"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit2"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit2"
+              
+          } 
+        } else if (characterComboHittingDouble) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit3"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit3"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit3"
+              
+          } 
+        }else {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "walk"
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "walk"
+          } else {
+            characterDirection = characterLastDirection
+            if (characterMovement != "getHit" && healthPlayer){
+              characterMovement = "idle"
+            }
           }
         }
       }
+  
     }
-
   }
 
 
@@ -756,7 +776,7 @@ function characterView2() {
   //* Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {
     for (let column = 0; column < currentMapTableColliders[row].length; column++) {
-
+      let touchThisObject = false
       //? Lui donner une collision
       let thisObject = currentMapTableColliders[row][column]
 
@@ -767,7 +787,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }

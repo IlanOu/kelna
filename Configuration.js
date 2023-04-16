@@ -1,17 +1,18 @@
 //^ DEBUG MOD
 let debugMod = false;
 
+//* Le bloc qui tue (littéralement)
+let killingBlock = 238;
 
 //^ ADMIN MOD
 let username = "";
 let password = "";
 let adminJSON;
 
+let cameraShakeEnabled = false;
 
 //^ Textures
 //#region //~ Textures
-let stone;
-let stoneBrick;
 let sky;
 
 let tileSet;
@@ -47,7 +48,7 @@ let characterSpriteWidth = 32;
 let characterSpriteHeight = 32;
 
 let animationSpeed = 100
-
+let textDialogSpeed = 3
 
 //#endregion Textures / Outils du Personnage
 
@@ -64,7 +65,7 @@ let previousPlayerX = 0;
 let previousPlayerY = 0
 let characterWidth = 80;
 let characterHeight = 80;
-let characterBoundingBoxWidth = 40;
+let characterBoundingBoxWidth = 45;
 let characterBoundingBoxHeight = 60;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed = 6;
@@ -178,14 +179,17 @@ let PlayerInSettingsPause = false
 
 //~  Variables pour les PNJ
 let ForPNJ;
-let canInteractWithPNJ = false;
-let PressInteractPNJ = false
-let SwordAlreadyTaken = false
 let marjoTexture;
 let charleTexture;
-let canDiscussionsWithPNJ = false;
-let PressInteractPNJD = false
 
+let canInteractWithPNJ = false;
+let PressInteractPNJ = false
+
+let canTalkWithPNJ = false;
+let PressTalkPNJ = false
+
+let currentTextSpeaking = ""
+let currentIndexTextSpeaking = 0
 
 //~  Variables pour les ennemis
 let ForEnnemis;
@@ -206,8 +210,8 @@ let doorInTaverne = false;
 
 
 //~  Variables pour la barre de vie
-let MargeBarVie = 30;
-let healthPlayer = 5
+let MargeBarVie = 40;
+let healthPlayer = 1
 let maxHealth = 5
 let pressingKey = false
 let gettingHurt = false; //& Pour les degats
@@ -220,10 +224,20 @@ let removeHeart = false; //& Pour enlever un coeur
 let Inventory = [{},{},{}];
 let WidthSlot = 85;
 let HeightSlot = 85;
-let ForSlotOneX = 0;
+let slotX = 0;
 let endInventory = false;
 let waitingButton = false;
 
+//~ Jauge quand on mange
+let characterIsEating = false;
+
+let gaugeSize = 5;
+let gaugeSpeed = 5;
+
+let topGaugeLevel = 0;
+let rightGaugeLevel = 0;
+let bottomGaugeLevel = 0;
+let leftGaugeLevel = 0;
 
 //~  Variables pour la mort
 let playerDead = false
@@ -258,6 +272,7 @@ let getTrade;
 let slotSize = 2
 let itemSize = 1.6
 
+let stackSize = 5
 
 //~ Variables pour le FPS
 let fps;
