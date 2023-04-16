@@ -52,8 +52,6 @@ let textDialogSpeed = 3
 
 //#endregion Textures / Outils du Personnage
 
-
-
 //~ caractéristiques du perso
 
 //? Positions
@@ -172,9 +170,7 @@ let gameIsPlaying = false
 
 
 //~  Variables pour les parametres
-let settingsHome = false
 let settingsPause = false
-let PlayerInSettingsPause = false
 
 
 //~  Variables pour les PNJ
@@ -186,7 +182,7 @@ let canInteractWithPNJ = false;
 let PressInteractPNJ = false
 
 let canTalkWithPNJ = false;
-let PressTalkPNJ = false
+let PressTalkPNJ = false;
 
 let currentTextSpeaking = ""
 let currentIndexTextSpeaking = 0
@@ -325,3 +321,15 @@ let CinematicForEnd = false;
 //#endregion
 
 
+
+let statistiques = {
+    distanceWalked: 0,
+    totalJumpCount: 0,
+    mobsKilled: 0,
+    damagesDones: 0,
+    damagesGet: 0,
+    healCount: 0,
+    deathCount: 0,
+    timeSpentInGame: 0,
+    playerSpeed: 0
+}

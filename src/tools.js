@@ -616,3 +616,24 @@ let gameFPS = () => {
     }
 
 }
+
+
+function timeConversion(seconds) {
+    const heures = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondes = seconds % 60;
+  
+    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
+  
+    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+}
+
+function getSpeed(seconds, meters) {
+    const distanceEnKm = meters / 1000;
+    const tempsEnHeures = seconds / 3600;
+    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
+    return Math.round(vitesseEnKmh);
+  }
+  

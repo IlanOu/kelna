@@ -99,14 +99,13 @@ function draw() {
   //? Si le jeu joue
   if (gameIsPlaying) {
 
-    //? Variables
-    inGame = true
- 
-
     //~ Si le jeu n'est pas en pause
     if (!gameIsPaused){
       if (engineOne) {
-  
+        statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+        statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
+
+
         //? Afficher le fond du jeu
         drawBackgroundImage(backgroundImage)
         

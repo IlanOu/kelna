@@ -4,8 +4,8 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    // mob(ForEnnemis.Ennemis.Malade1);
-    // mob(ForEnnemis.Ennemis.Malade2);
+    mob(ForEnnemis.Ennemis.Malade1);
+    mob(ForEnnemis.Ennemis.Malade2);
   }
 }
 
@@ -261,6 +261,7 @@ let mobMovements = (Mobs) => {
           Mobs.indexFrame = 0
           Mobs.life--;
           Mobs.haveBeenHit = true;
+          statistiques.damagesDones++
         }
       }
     }
@@ -295,6 +296,8 @@ let mobMovements = (Mobs) => {
         if (millis() - Mobs.lastAttackTime > Mobs.attackInterval * 1000) {
           Mobs.lastAttackTime = millis();
           healthPlayer -= Mobs.damages
+          statistiques.damagesGet += Mobs.damages
+          
         }
         mobAttacking = true;
     }
@@ -428,6 +431,7 @@ function animationMobs(
       }
       if (CurrentMob.indexFrame >= MobTexturesList.length - 2) {
         CurrentMob.isDead = true;
+        statistiques.mobsKilled++
       }
       break;
   }
