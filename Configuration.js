@@ -1,6 +1,7 @@
 //^ DEBUG MOD
 let debugMod = false;
 
+let killingBlock = 238;
 
 //^ ADMIN MOD
 let username = "";
@@ -11,8 +12,6 @@ let cameraShakeEnabled = false;
 
 //^ Textures
 //#region //~ Textures
-let stone;
-let stoneBrick;
 let sky;
 
 let tileSet;

@@ -17,6 +17,12 @@ function setup() {
   tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 }
 
+//~ Adapte l'écran à la page
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  viewportDisplayWidth = windowWidth
+  viewportDisplayHeight = windowHeight
+}
 
 //~ Preload 
 function preload() {
@@ -52,10 +58,8 @@ function preload() {
 
 
   //? Textures
-  stone = loadImage("assets/textures/Pierre.jpg")
-  stoneBrick = loadImage("assets/textures/BriqueRouge.png")
-  sky = loadImage("assets/textures/Sky.jpg")
   tileSet = loadImage("assets/textures/tilesetKelna.png")
+  sky = loadImage("assets/textures/Sky.jpg")
   BackTroc = loadImage("assets/textures/planches.png")
   Slot = loadImage("assets/textures/slot.png")
   BackPop = loadImage("assets/textures/BackPop.png")
