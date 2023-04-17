@@ -3,7 +3,7 @@
 //~ Afficher une interface
 function drawInterface([x, y, w, h], img = undefined) {
   stroke(0);
-
+  fill(255)
   if (img != undefined) {
     image(img, x, y, w, h);
   } else {
@@ -264,13 +264,22 @@ function drawSettingsMenu() {
   let buttonExitH = 20;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
-  let textExitX = buttonExitX + buttonMusicW / 2;
+  let textExitX = buttonExitX + buttonExitW / 2;
 
+  let buttonToggleFPSW = 150;
+  let buttonToggleFPSH = 20;
+  let buttonToggleFPSX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleFPSW / 2;
+  let buttonToggleFPSY = interfaceMenuY + interfaceMenuHeight / 3;
+  let textToggleFPSX = buttonToggleFPSX + buttonMusicW / 2;
+
+  
+  let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH];
+  
+  let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH];
+  
   let ButtonBack = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
 
-  let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH];
-
-  let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH];
+  let ButtonToggleFPS = [buttonToggleFPSX, buttonToggleFPSY, buttonToggleFPSW, buttonToggleFPSH];
 
 
   //& --------------------------------
@@ -291,6 +300,10 @@ function drawSettingsMenu() {
   drawButton(ButtonBack);
   drawText("Retour", 15, [textExitX, buttonExitY], "center");
 
+  fill(255);
+  drawButton(ButtonToggleFPS);
+  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], "center");
+
 
   //& --------------------------------
   //& ---------- Evenements ----------
@@ -304,6 +317,10 @@ function drawSettingsMenu() {
   }
   if (buttonClicked(ButtonBack)) {
     settingsPause = false
+  }
+
+  if (buttonClicked(ButtonToggleFPS)) {
+    fpsActivate = !fpsActivate
   }
 }
 
@@ -435,7 +452,6 @@ function drawStats() {
 
 
 
-
 //^ --------------------------------------------------------------------------
 //^                      Affichage des éléments à l'écran                     
 //^ --------------------------------------------------------------------------
@@ -500,18 +516,20 @@ function drawTroc(x, y, w, h) {
   let echangePNJ = getEchangePNJ(currentPNJ);
 
   if (echangePNJ != undefined) {
-    image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
-    // 800 215.5 250 500
-
+    // image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
+    // fill(255)
+    // rect(x, y, w, h)
+    image(GUITroc, x, y, w, h);
 
     //? Lignes de slot
-    let widthRow = w;
-    let heightRow = h / echangePNJ.length; //& <- nombre de ligne
-    let postionXRow = x;
+    let widthRow = w/2;
+    let heightRow = h *0.75 / echangePNJ.length; //& <- nombre de ligne
+    let postionXRow = x - widthRow/2 + w / 2;
+    // let positionYRow = y - heightRow/2 + h / 2;
 
     //? Position pour échange
-    let widthElement = 20;
-    let heightElement = 20;
+    let widthElement = 30;
+    let heightElement = 30;
 
     //? Affichage du troc
     if (!PNJSeePlayer) {
@@ -521,12 +539,11 @@ function drawTroc(x, y, w, h) {
     //? Bouton au clic
     let buttonHasBeenClicked = false;
 
-
-
     echangePNJ.forEach((echange) => {
+      // console.log((h-heightRow * echangePNJ.length)/2)
       //? Declaration de variables
       let indexEchange = echangePNJ.indexOf(echange);
-      let positionYRow = y + heightRow * indexEchange;
+      let positionYRow = ((h-heightRow * echangePNJ.length)/2) + y + heightRow * indexEchange;
       let positionYElement = positionYRow + heightRow / 2 - heightElement / 2;
 
       //? Lignes
@@ -540,8 +557,8 @@ function drawTroc(x, y, w, h) {
       } else if (!buttonHasBeenClicked) {
         if (waitingAnswer == false) {
           //? Affichage du background du troc
-          fill(252, 208, 117);
-          rect(postionXRow, positionYRow, widthRow, heightRow);
+          // fill(252, 208, 117);
+          // rect(postionXRow, positionYRow, widthRow, heightRow);
 
           //? Pour chaque ligne creation d'un slot
           Object.entries(echange).forEach((items) => {
@@ -549,8 +566,7 @@ function drawTroc(x, y, w, h) {
               items[1].forEach((element) => {
                 //? Declaration
                 let indexElement = items[1].indexOf(element);
-                let positionXElement =
-                  x + widthElement * slotSize * indexElement;
+                let positionXElement = postionXRow + (widthElement * slotSize * indexElement);
                 let currentItem = getItems(element);
 
                 //? Affichage du slot
@@ -574,11 +590,7 @@ function drawTroc(x, y, w, h) {
               items[1].forEach((element) => {
                 //? Declaration
                 let indexElement = items[1].indexOf(element);
-                let positionXElement =
-                  x +
-                  widthRow -
-                  widthElement * itemSize * indexElement -
-                  widthElement * itemSize;
+                let positionXElement = postionXRow + widthRow - (widthElement * itemSize * indexElement) - (widthElement * itemSize);
                 let currentItem = getItems(element);
 
                 //? Affichage du slot
@@ -619,6 +631,7 @@ function drawTroc(x, y, w, h) {
         troc(objectListDemande, objectListDonne);
       }
     }
+    
   }
 }
 
@@ -712,16 +725,18 @@ function drawTalk(x, y, w, h) {
 
 //~ INTERACTION PNJ SWORD
 function openTrocMenu() {
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
+  let interfaceMenuWidth = 600;
+  let interfaceMenuHeight = 600;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
+  
   drawTroc(
     interfaceMenuX,
     interfaceMenuY,
-    interfaceMenuWidth / 2,
+    interfaceMenuWidth,
     interfaceMenuHeight
   );
+  
 }
 
 //~ INTERACTION PNJ DISCU
@@ -737,6 +752,16 @@ function openTalkMenu() {
     interfaceMenuHeight
   );
 
+}
+
+//~ Affiche les FPS
+function gameFPS () {
+  if (fpsActivate) {
+      textSize(13);
+      noStroke()
+      fill(255);
+      text("FPS: " + fpsLevel.toFixed(0), 50, 50);
+  }
 }
 
 
@@ -785,7 +810,7 @@ function setupUI() {
 
     //& Affichage des Intéractions
     setupInteractions();
-
+    gameFPS()
 
   } else {
     //* Le jeu n'est pas lancé
@@ -800,8 +825,6 @@ function setupUI() {
     if (settingsPause) {
       drawSettingsMenu();
     }
-
-    
   }
 
   if (leftClickPressed) {

@@ -4,7 +4,7 @@ const init_debugMod = false;
 
 //& Moteur de jeu
 const init_engineOne = true;
-
+const init_fpsLevel = 60
 
 //& Le bloc qui tue (littéralement)
 const init_killingBlock = 238;

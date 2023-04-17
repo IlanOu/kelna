@@ -20,6 +20,8 @@ function setup() {
   // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
   // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 
+
+  frameRate(fpsLevel);
 }
 
 //~ Adapte l'écran à la page
@@ -42,7 +44,7 @@ function preload() {
 
   GUIForStats = loadImage("assets/GUI/GUIForStats.png");
   GUIInteract = loadImage("assets/GUI/GUIInt.png");
-  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg");
+  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
   GUIStart = loadImage("assets/GUI/start.png");
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
@@ -97,8 +99,6 @@ function preload() {
 //~ Draw 
 function draw() {
   noSmooth()
-  frameRate(60)
-  fps = frameRate();
 
   if (cameraShakeEnabled){
     translate(random(-5,5),random(-5,5));

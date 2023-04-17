@@ -4,7 +4,7 @@ let debugMod;
 
 //& Moteur de jeu
 let engineOne;
-
+let fpsLevel;
 
 //& Le bloc qui tue (littéralement)
 let killingBlock;

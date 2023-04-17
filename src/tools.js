@@ -35,8 +35,9 @@ function findIndexValueIn2dArray(array, mapName) {
 
 
 //~ Trouve l'index de la position du 2eme array
-let previous_index_pos;
 
+
+let previous_index_pos = null;
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -595,28 +596,6 @@ function popUp(message, options = "info") {
 }
 
 
-//~ Affiche les FPS
-let gameFPS = () => {
-
-    if (fpsActivate === false && Pressing === false) {
-        fpsActivate = true
-        ColorForRectFPS = 50
-        Pressing = true
-
-        if (fpsActivate === true) {
-            textSize(16);
-            fill(255);
-            text("FPS: " + fps.toFixed(0), 50, 50);
-        }
-
-    } else if (fpsActivate === true && Pressing === false) {
-        fpsActivate = false
-        ColorForRectFPS = 255
-        Pressing = true
-    }
-
-}
-
 
 function timeConversion(seconds) {
     const heures = Math.floor(seconds / 3600);
@@ -661,7 +640,7 @@ function initVariables() {
 
     //& Moteur de jeu
     engineOne = init_engineOne;
-
+    fpsLevel = init_fpsLevel
 
     //& Le bloc qui tue (littéralement)
     killingBlock = init_killingBlock;
