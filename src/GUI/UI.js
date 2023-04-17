@@ -38,7 +38,7 @@ function drawText(Text, fontSize, [x, y], textAlignment, color = [0, 0, 0]) {
 
 //~  Au clic du bouton
 function buttonClicked([x, y, h, w]) {
-  return mouseIsPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
+  return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
 //~ Hover du bouton
@@ -112,6 +112,9 @@ function drawHomeMenu() {
   //& --------------------------------
 
   if (buttonClicked(play)) {
+    if (playerDead){
+      initVariables()
+    }
     inGame = true
   }
   if (buttonClicked(buttonParameters)) {
@@ -214,7 +217,7 @@ function drawPauseMenu() {
   //& --------------------------------
 
   if (buttonClicked(buttonBack)) {
-    
+    gameIsPaused = false
   }
 
   if (buttonClicked(buttonSettings)) {
@@ -263,7 +266,7 @@ function drawSettingsMenu() {
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
   let textExitX = buttonExitX + buttonMusicW / 2;
 
-  let ButtonExitP = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
+  let ButtonBack = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
 
   let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH];
 
@@ -285,8 +288,8 @@ function drawSettingsMenu() {
   drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center");
 
   fill(255);
-  drawButton(ButtonExitP);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
+  drawButton(ButtonBack);
+  drawText("Retour", 15, [textExitX, buttonExitY], "center");
 
 
   //& --------------------------------
@@ -299,7 +302,7 @@ function drawSettingsMenu() {
   if (buttonClicked(buttonMusic)) {
    
   }
-  if (buttonClicked(ButtonExitP)) {
+  if (buttonClicked(ButtonBack)) {
     settingsPause = false
   }
 }
@@ -307,9 +310,11 @@ function drawSettingsMenu() {
 
 //~ MENU DEATH
 function drawDeath() {
-  if (!playerDead) {
+    playerDead = true
     fill(0, 0, 0, 50);
     rect(0, 0, width, height);
+
+    gameIsPaused = true;
 
     //& --------------------------------
     //& ---------- Variables -----------
@@ -327,11 +332,6 @@ function drawDeath() {
                           interfaceMenuHeight,
                         ];
 
-    let buttonStatW = 150;
-    let buttonStatH = 20;
-    let buttonStatX = interfaceMenuX + interfaceMenuWidth / 2 - buttonStatW / 2;
-    let buttonStatY = interfaceMenuY + interfaceMenuHeight / 4;
-    let textStatX = buttonStatX + buttonStatW / 2;
 
     let buttonExitW = 150;
     let buttonExitH = 20;
@@ -346,7 +346,6 @@ function drawDeath() {
                                     buttonExitH,
                                   ];
 
-    let buttonStat = [buttonStatX, buttonStatY, buttonStatW, buttonStatH];
 
 
     //& --------------------------------
@@ -358,10 +357,6 @@ function drawDeath() {
     drawInterface(interfaceMenu, GUIOfDeath);
 
     fill(255);
-    drawButton(buttonStat);
-    drawText("STATS", 15, [textStatX, buttonStatY], "center");
-
-    fill(255);
     drawButton(buttonBackToHomeEndGame);
     drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
 
@@ -371,12 +366,9 @@ function drawDeath() {
     //& --------------------------------
 
     if (buttonClicked(buttonBackToHomeEndGame)) {
-      
+      inGame = false
     }
-    if (buttonClicked(buttonStat)) {
-      
-    }
-  }
+  
 }
 
 
@@ -753,7 +745,6 @@ function openTalkMenu() {
 function setupUI() {
   //? Si je suis en jeu
 
-
   if (inGame) {
     gameIsPlaying = true;
 
@@ -772,7 +763,7 @@ function setupUI() {
     if (gameIsPaused) {
       if (settingsPause) {
         drawSettingsMenu();
-      }else{
+      }else if (healthPlayer > 0) {
         drawPauseMenu();
       }
     }
@@ -780,6 +771,11 @@ function setupUI() {
     //& Mort du joueur
     if (healthPlayer < 1) {
       characterMovement = "die"
+
+      if (playerDead){
+        drawDeath()
+      }
+      
     } else {
       gameIsPlaying = true;
     }
@@ -806,5 +802,9 @@ function setupUI() {
     }
 
     
+  }
+
+  if (leftClickPressed) {
+    leftClickPressed = false; 
   }
 }

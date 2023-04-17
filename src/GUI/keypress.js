@@ -125,6 +125,7 @@ function keyReleased() {
 //~ Clique de souris
 function mousePressed() {
     if (mouseButton === LEFT) {
+        
         leftClickPressed = true
 
         if (!PressTalkPNJ){
@@ -147,5 +148,7 @@ function mousePressed() {
                 }
             }
         }
+        
     }
+    
 }

@@ -1,5 +1,9 @@
+p5.disableFriendlyErrors = true;
+
 //~ Setup 
 function setup() {
+  
+  initVariables()
 
   //? Viewport
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
@@ -12,9 +16,10 @@ function setup() {
 
 
   //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
-  tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
-  itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
-  tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+  // tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
+  // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
+  // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+
 }
 
 //~ Adapte l'écran à la page
@@ -71,18 +76,21 @@ function preload() {
 
 
   //? JSON preload
+  adminJSON = loadJSON("json/Admin.json");
+  allDoors = loadJSON("json/Doors.json");
+  ForEnnemis = loadJSON("json/Ennemis.json");
+  Houses = loadJSON("json/Houses.json");
   ForItems = loadJSON("json/Items.json");
   Maps = loadJSON("json/Maps.json");
-  World = loadJSON("json/World.json");
-  Houses = loadJSON("json/Houses.json");
   ForPNJ = loadJSON("json/PNJ.json");
-  ForEnnemis = loadJSON("json/Ennemis.json");
-  allDoors = loadJSON("json/Doors.json");
-  adminJSON = loadJSON("json/Admin.json");
+  World = loadJSON("json/World.json");
   
+  init_ForPNJ = ForPNJ
 
   //? SONG
-  SongBackground = loadSound("music/SongBackground.mp3");
+  // SongBackground = loadSound("music/SongBackground.mp3");
+
+
 }
 
 

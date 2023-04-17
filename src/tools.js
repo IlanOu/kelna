@@ -636,4 +636,294 @@ function getSpeed(seconds, meters) {
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
     return Math.round(vitesseEnKmh);
   }
-  
+
+
+
+function resetJsons(){
+    ForEnnemis = loadJSON("json/Ennemis.json");
+    ForPNJ = loadJSON("json/PNJ.json");
+    
+    //? Pas besoin de reload les json dont les donnees ne changent pas 
+    // allDoors = loadJSON("json/Doors.json");
+    // adminJSON = loadJSON("json/Admin.json");
+    // Houses = loadJSON("json/Houses.json");
+    ForItems = loadJSON("json/Items.json");
+    // Maps = loadJSON("json/Maps.json");
+    // World = loadJSON("json/World.json");
+}
+
+
+    
+function initVariables() {
+    //& Debug Mod
+    debugMod = init_debugMod;
+
+
+    //& Moteur de jeu
+    engineOne = init_engineOne;
+
+
+    //& Le bloc qui tue (littéralement)
+    killingBlock = init_killingBlock;
+
+
+    //& Admins
+    username = init_username;
+    password = init_password;
+
+
+    //& Camera
+    cameraShakeEnabled = init_cameraShakeEnabled;
+
+    //~ ========= Mode SMOOTH ========= 
+    smoothCamera = init_smoothCamera;
+    smoothCameraSpeed = init_smoothCameraSpeed;
+    cameraSpeedR = init_cameraSpeedR;
+    newCharacterMovesSpeedR = init_newCharacterMovesSpeedR;
+    cameraSpeedL = init_cameraSpeedL;
+    newCharacterMovesSpeedL = init_newCharacterMovesSpeedL;
+    backgroundSpeed = init_backgroundSpeed;
+    backgroundSmoothSpeed = init_backgroundSmoothSpeed;
+
+
+    //& Background
+    backgroundX = init_backgroundX;
+
+
+    //& Character
+    //~ Textures / Outils du Personnage
+    characterTextureList = init_characterTextureList;
+    characterAnimationIndex = init_characterAnimationIndex;
+    characterAnimationFramePassed = init_characterAnimationFramePassed;
+    characterDirection = init_characterDirection;
+    characterLastDirection = init_characterLastDirection;
+    characterMovement = init_characterMovement;
+    characterLastMovement = init_characterLastMovement;
+    characterSpriteWidth = init_characterSpriteWidth;
+    characterSpriteHeight = init_characterSpriteHeight;
+
+    //~ caractéristiques du perso
+    //? Positions
+    characterInsidePosX = init_characterInsidePosX;
+    characterInsidePosY = init_characterInsidePosY;
+    characterPositionX = init_characterPositionX;
+    characterPositionY = init_characterPositionY;
+    previousPlayerX = init_previousPlayerX;
+    previousPlayerY = init_previousPlayerY;
+    characterWidth = init_characterWidth;
+    characterHeight = init_characterHeight;
+    characterBoundingBoxWidth = init_characterBoundingBoxWidth;
+    characterBoundingBoxHeight = init_characterBoundingBoxHeight;
+    characterBoundingBoxHeightInside = init_characterBoundingBoxHeightInside;
+    characterMovesSpeed = init_characterMovesSpeed;
+    characterHitting = init_characterHitting;
+    characterComboHitting = init_characterComboHitting;
+    characterComboHittingDouble = init_characterComboHittingDouble;
+    lastHit = init_lastHit;
+
+    //? Saut
+    characterMass = init_characterMass;
+    characterJumpHeight = init_characterJumpHeight;
+    characterVelocityY = init_characterVelocityY;
+    characterVelocityYMin = init_characterVelocityYMin;
+    characterVelocityYMax = init_characterVelocityYMax;
+    characterIsGrounded = init_characterIsGrounded;
+    characterJumpCount = init_characterJumpCount;
+    characterMaxJumps = init_characterMaxJumps;
+    characterDoubleJumping = init_characterDoubleJumping;
+    characterIsJumping = init_characterIsJumping;
+    haveToJump = init_haveToJump;
+
+    //? Dash
+    dashSystem = init_dashSystem;
+    characterIsDashing = init_characterIsDashing;
+    lastDashTime = init_lastDashTime;
+    dashCooldown = init_dashCooldown;
+    dashTime = init_dashTime;
+    dashForce = init_dashForce;
+
+
+    //& Animations
+    animationSpeed = init_animationSpeed;
+    textDialogSpeed = init_textDialogSpeed;
+
+
+    //& Grille
+    rectWidth = init_rectWidth;
+    rectHeight = init_rectHeight;
+
+    xStartWorld = init_xStartWorld;
+    yStartWorld = init_yStartWorld;
+
+    arrayMap = init_arrayMap;
+
+
+    //& Maisons
+    xStartHouse = init_xStartHouse;
+    yStartHouse = init_yStartHouse;
+
+
+    //& Interfaces
+    //~ Interfaces
+    interactionWidth = init_interactionWidth;
+    interactionHeight = init_interactionHeight;
+
+    viewportDisplayWidth = init_viewportDisplayWidth;
+    viewportDisplayHeight = init_viewportDisplayHeight;
+
+    buttonWidthClassic = init_buttonWidthClassic;
+    buttonHeightClassic = init_buttonHeightClassic;
+    buttonWidthBIG = init_buttonWidthBIG;
+    buttonHeightBIG = init_buttonHeightBIG;
+
+    //~ Jeu
+    inGame = init_inGame;
+    gameIsPaused = init_gameIsPaused;
+    gameIsPlaying = init_gameIsPlaying;
+
+    //~ Parametres
+    settingsPause = init_settingsPause;
+
+    //~ Barre de vie
+    MargeBarVie = init_MargeBarVie;
+    healthPlayer = init_healthPlayer;
+    maxHealth = init_maxHealth;
+    pressingKey = init_pressingKey;
+    gettingHurt = init_gettingHurt;
+    gettingHeal = init_gettingHeal;
+    addHeart = init_addHeart;
+    removeHeart = init_removeHeart;
+
+    //~ Inventaire
+    Inventory[0] = init_Inventory[0];
+    Inventory[1] = init_Inventory[1];
+    Inventory[2] = init_Inventory[2];
+    console.log(Inventory)
+    WidthSlot = init_WidthSlot;
+    HeightSlot = init_HeightSlot;
+    slotX = init_slotX;
+    endInventory = init_endInventory;
+    waitingButton = init_waitingButton;
+
+    //~ Jauge quand on mange
+    characterIsEating = init_characterIsEating;
+
+    gaugeSize = init_gaugeSize;
+    gaugeSpeed = init_gaugeSpeed;
+
+    topGaugeLevel = init_topGaugeLevel;
+    rightGaugeLevel = init_rightGaugeLevel;
+    bottomGaugeLevel = init_bottomGaugeLevel;
+    leftGaugeLevel = init_leftGaugeLevel;
+
+
+    //& Audio
+    //~ Musique
+    ColorForRectMusic = init_ColorForRectMusic;
+    MusicIsActivate = init_MusicIsActivate;
+    YouCanPlayMusic = init_YouCanPlayMusic;
+
+    //~ Sons
+    ColorForRectSong = init_ColorForRectSong;
+    SongIsActivate = init_SongIsActivate;
+
+
+    //& Evenements
+    //~ Touches
+    Pressing = init_Pressing;
+    spaceKeyIsPressed = init_spaceKeyIsPressed;
+    rightArrowPressed = init_rightArrowPressed;
+    leftArrowPressed = init_leftArrowPressed;
+    highArrowPressed = init_highArrowPressed;
+    downArrowPressed = init_downArrowPressed;
+    dashKeyIsPressed = init_dashKeyIsPressed;
+    leftClickPressed = init_leftClickPressed;
+    leftClickWasPressed = init_leftClickWasPressed;
+
+    canEnterInHouse = init_canEnterInHouse;
+    canGoOutTheHouse = init_canGoOutTheHouse;
+
+    //~ PNJ
+    canInteractWithPNJ = init_canInteractWithPNJ;
+    PressInteractPNJ = init_PressInteractPNJ;
+    canTalkWithPNJ = init_canTalkWithPNJ;
+    PressTalkPNJ = init_PressTalkPNJ;
+    currentTextSpeaking = init_currentTextSpeaking;
+    currentIndexTextSpeaking = init_currentIndexTextSpeaking;
+
+    //~  Portes
+    behindThisDoor = init_behindThisDoor;
+    engine1WidthDoors = init_engine1WidthDoors;
+    engine1HeightDoors = init_engine1HeightDoors;
+    engine2WidthDoors = init_engine2WidthDoors;
+    engine2HeightDoors = init_engine2HeightDoors;
+    doorInTaverne = init_doorInTaverne;
+
+    //~ Mort
+    playerDead = init_playerDead;
+
+    //~ Popups
+    popUpShown = init_popUpShown;
+    playerAnswersYes = init_playerAnswersYes;
+
+
+    //& Statistiques
+    numberOfSteps = init_numberOfSteps;
+
+
+    //& Items
+    itemList = init_itemList;
+
+
+    //& Troc
+    waitingAnswer = init_waitingAnswer;
+    haveToTrade = init_haveToTrade;
+    slotSize = init_slotSize;
+    itemSize = init_itemSize;
+    stackSize = init_stackSize;
+
+
+    //& FPS
+    fpsActivate = init_fpsActivate;
+    ColorForRectFPS = init_ColorForRectFPS;
+
+
+    //& Physique
+    gravityForce = init_gravityForce;
+
+
+    //& Cinématiques
+    CinematicIsStart = init_CinematicIsStart;
+    MusicForCinematic = init_MusicForCinematic;
+    CinematicForEnd = init_CinematicForEnd;
+
+
+    statistiques = init_statistiques;
+
+
+    //? Viewport
+    if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
+        viewportDisplayWidth = windowWidth
+        viewportDisplayHeight = windowHeight
+    }
+
+    //* Reset toutes les statistiques sauf le nombre de morts 
+    statistiques.distanceWalked = init_statistiques.distanceWalked
+    statistiques.totalJumpCount = init_statistiques.totalJumpCount
+    statistiques.mobsKilled = init_statistiques.mobsKilled
+    statistiques.damagesDones = init_statistiques.damagesDones
+    statistiques.damagesGet = init_statistiques.damagesGet
+    statistiques.healCount = init_statistiques.healCount
+    ////statistiques.deathCount = init_statistiques.deathCount
+    statistiques.timeSpentInGame = init_statistiques.timeSpentInGame
+    statistiques.playerSpeed = init_statistiques.playerSpeed
+
+
+    tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
+    itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
+    tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+
+    resetJsons()
+}
+
+

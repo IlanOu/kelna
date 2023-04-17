@@ -1,335 +1,277 @@
-//^ DEBUG MOD
-let debugMod = false;
-
-//* Le bloc qui tue (littéralement)
-let killingBlock = 238;
-
-//^ ADMIN MOD
-let username = "";
-let password = "";
-let adminJSON;
-
-let cameraShakeEnabled = false;
-
-//^ Textures
-//#region //~ Textures
-let sky;
-
-let tileSet;
-let tilesList;
+//& Debug Mod
+let debugMod;
 
 
-let tileSetForTaverne;
-let tileSetTaverne;
-//#endregion
+//& Moteur de jeu
+let engineOne;
 
 
-//^ Background
-//#region 
-let backgroundImage;
-let backgroundX = 0;
-//#endregion
+//& Le bloc qui tue (littéralement)
+let killingBlock;
 
 
-//^ Personnages
-//#region Personnages
-//#region Textures / Outils du Personnage
+//& Admins
+let username;
+let password;
 
+
+//& Camera
+let cameraShakeEnabled;
+
+//~ ========= Mode SMOOTH ========= 
+let smoothCamera;
+let smoothCameraSpeed;
+let cameraSpeedR;
+let newCharacterMovesSpeedR;
+let cameraSpeedL;
+let newCharacterMovesSpeedL;
+let backgroundSpeed;
+let backgroundSmoothSpeed;
+
+
+//& Background
+let backgroundX;
+
+
+//& Character
 //~ Textures / Outils du Personnage
-let characterTexture_Dash;
-let characterTextureList = [];
-let characterAnimationIndex = 0
-let characterAnimationFramePassed = false;
-let characterDirection = "";
-let characterLastDirection = "right";
-let characterMovement = "idle";
-let characterLastMovement = characterMovement
-let characterSpriteWidth = 32;
-let characterSpriteHeight = 32;
-
-let animationSpeed = 100
-let textDialogSpeed = 3
-
-//#endregion Textures / Outils du Personnage
+let characterTextureList;
+let characterAnimationIndex;
+let characterAnimationFramePassed;
+let characterDirection;
+let characterLastDirection;
+let characterMovement;
+let characterLastMovement;
+let characterSpriteWidth;
+let characterSpriteHeight;
 
 //~ caractéristiques du perso
-
 //? Positions
-let characterInsidePosX = 1;
-let characterInsidePosY = 1;
-let characterPositionX = 1;
-let characterPositionY = 1;
-let previousPlayerX = 0;
-let previousPlayerY = 0
-let characterWidth = 80;
-let characterHeight = 80;
-let characterBoundingBoxWidth = 45;
-let characterBoundingBoxHeight = 60;
+let characterInsidePosX;
+let characterInsidePosY;
+let characterPositionX;
+let characterPositionY;
+let previousPlayerX;
+let previousPlayerY;
+let characterWidth;
+let characterHeight;
+let characterBoundingBoxWidth;
+let characterBoundingBoxHeight;
 let characterBoundingBoxHeightInside;
-let characterMovesSpeed = 6;
-let characterHitting = false;
-let characterComboHitting = false;
-let characterComboHittingDouble = false;
-let lastHit = "";
-
+let characterMovesSpeed;
+let characterHitting;
+let characterComboHitting;
+let characterComboHittingDouble;
+let lastHit;
 
 //? Saut
-let characterMass = 60;
-let characterJumpHeight = 20;
-let characterVelocityY = 0;
-let characterVelocityYMin = -80
-let characterVelocityYMax = 100
-let characterIsGrounded = false;
-let characterJumpCount = 0;
-let characterMaxJumps = 2;
-let characterDoubleJumping = false;
-let characterIsJumping = false;
-let haveToJump = false;
-
+let characterMass;
+let characterJumpHeight;
+let characterVelocityY;
+let characterVelocityYMin;
+let characterVelocityYMax;
+let characterIsGrounded;
+let characterJumpCount;
+let characterMaxJumps;
+let characterDoubleJumping;
+let characterIsJumping;
+let haveToJump;
 
 //? Dash
-let dashSystem = false
-let characterIsDashing = false;
-let lastDashTime = 0;
-const dashCooldown = 1000;
-const dashTime = 200;
-const dashForce = 2;
-//#endregion Personnages
+let dashSystem;
+let characterIsDashing;
+let lastDashTime;
+let dashCooldown;
+let dashTime;
+let dashForce;
 
 
-//^ Grille
-//#region //~ caractéristique de la grille
-let rectWidth = 60;
-let rectHeight = 60;
-
-let xStartWorld = 0;
-let yStartWorld = 0;
-
-let arrayMap = [];
-//#endregion
+//& Animations
+let animationSpeed;
+let textDialogSpeed;
 
 
-//^ Camera
-//#region //~ Camera movements
-//! ========= Mode SMOOTH ========= 
-let smoothCamera = false
-let smoothCameraSpeed = 0.04
-let cameraSpeedR = 0;
-let newCharacterMovesSpeedR = 0
-let cameraSpeedL = 0;
-let newCharacterMovesSpeedL = 0
+//& Grille
+let rectWidth;
+let rectHeight;
 
-let backgroundSpeed = 8; //? Plus c'est haut, moins ca va vite
-let backgroundSmoothSpeed = 0.1 //? Plus c'est haut, plus ca va vite
+let xStartWorld;
+let yStartWorld;
 
-//#endregion
+let arrayMap;
 
 
-//^ Maisons
-//#region //~ caractéristiques des maisons
-let xStartHouse = 0;
-let yStartHouse = 0;
-//#endregion
+//& Maisons
+let xStartHouse;
+let yStartHouse;
 
 
-//^ Interfaces
-//#region Interfaces
-
+//& Interfaces
 //~ Interfaces
-let interactionWidth = 30;
-let interactionHeight = 30;
+let interactionWidth;
+let interactionHeight;
 
-let viewportDisplayWidth = 1920
-let viewportDisplayHeight = 1080
+let viewportDisplayWidth;
+let viewportDisplayHeight;
 
-let buttonWidthClassic = 80
-let buttonHeightClassic = 30
-let buttonWidthBIG = 120
-let buttonHeightBIG = 80
+let buttonWidthClassic;
+let buttonHeightClassic;
+let buttonWidthBIG;
+let buttonHeightBIG;
 
+//~ Jeu
+let inGame;
+let gameIsPaused;
+let gameIsPlaying;
+
+//~ Parametres
+let settingsPause;
+
+//~ Barre de vie
+let MargeBarVie;
+let healthPlayer;
+let maxHealth;
+let pressingKey;
+let gettingHurt;
+let gettingHeal;
+let addHeart;
+let removeHeart;
+
+//~ Inventaire
+let Inventory = [];
+let WidthSlot;
+let HeightSlot;
+let slotX;
+let endInventory;
+let waitingButton;
+
+//~ Jauge quand on mange
+let characterIsEating;
+
+let gaugeSize;
+let gaugeSpeed;
+
+let topGaugeLevel;
+let rightGaugeLevel;
+let bottomGaugeLevel;
+let leftGaugeLevel;
+
+
+//& Audio
+//~ Musique
+let ColorForRectMusic;
+let MusicIsActivate;
+let YouCanPlayMusic;
+
+//~ Sons
+let ColorForRectSong;
+let SongIsActivate;
+
+
+//& Evenements
+//~ Touches
+let Pressing;
+let spaceKeyIsPressed;
+let rightArrowPressed;
+let leftArrowPressed;
+let highArrowPressed;
+let downArrowPressed;
+let dashKeyIsPressed;
+let leftClickPressed;
+let leftClickWasPressed;
+
+let canEnterInHouse;
+let canGoOutTheHouse;
+
+//~ PNJ
+let canInteractWithPNJ;
+let PressInteractPNJ;
+let canTalkWithPNJ;
+let PressTalkPNJ;
+let currentTextSpeaking;
+let currentIndexTextSpeaking;
+
+//~  Portes
+let behindThisDoor;
+let engine1WidthDoors;
+let engine1HeightDoors;
+let engine2WidthDoors;
+let engine2HeightDoors;
+let doorInTaverne;
+
+//~ Mort
+let playerDead;
+
+//~ Popups
+let popUpShown;
+let playerAnswersYes;
+
+
+//& Statistiques
+let numberOfSteps;
+
+
+//& Items
+let itemList;
+
+
+//& Troc
+let waitingAnswer;
+let haveToTrade;
+let slotSize;
+let itemSize;
+let stackSize;
+
+
+//& FPS
+let fpsActivate;
+let ColorForRectFPS;
+
+
+//& Physique
+let gravityForce;
+
+
+//& Cinématiques
+let CinematicIsStart;
+let MusicForCinematic;
+let CinematicForEnd;
+
+
+//& Textures
+let sky;
+let tileSet;
+let tileSetForTaverne;
+let tileSetTaverne;
+let backgroundImage;
+let characterTexture_Dash;
 let GUITroc;
 let GUIStart;
-//~  Variables pour la musique
-let ColorForRectMusic = 255
-let MusicIsActivate = false
-let YouCanPlayMusic = false
-
-//~  Variables pour les sons
-let ColorForRectSong = 255
-let SongIsActivate = false
-
-
-//~  Variable a la pression d'un key event
-let Pressing = false
-
-
-//~  Variables pour le jeu
-let inGame = false
-let gameIsPaused = false
-let gameIsPlaying = false
-
-
-//~  Variables pour les parametres
-let settingsPause = false
-
-
-//~  Variables pour les PNJ
-let ForPNJ;
 let marjoTexture;
 let charleTexture;
-
-let canInteractWithPNJ = false;
-let PressInteractPNJ = false
-
-let canTalkWithPNJ = false;
-let PressTalkPNJ = false;
-
-let currentTextSpeaking = ""
-let currentIndexTextSpeaking = 0
-
-//~  Variables pour les ennemis
-let ForEnnemis;
 let malade1Sprite;
 let malade2Sprite;
 let pointEnnemis;
-
-//~  Variables pour les portes
-let allDoors;
-let behindThisDoor = "";
-let engine1WidthDoors = rectWidth
-let engine1HeightDoors = rectHeight * 2
-
-let engine2WidthDoors = rectWidth
-let engine2HeightDoors = rectHeight / 2
-
-let doorInTaverne = false;
-
-
-//~  Variables pour la barre de vie
-let MargeBarVie = 40;
-let healthPlayer = 1
-let maxHealth = 5
-let pressingKey = false
-let gettingHurt = false; //& Pour les degats
-let gettingHeal = false; //& Pour regen
-let addHeart = false; //& Pour ajouter un coeur
-let removeHeart = false; //& Pour enlever un coeur
-
-
-//~  Variables pour l'inventaire
-let Inventory = [{},{},{}];
-let WidthSlot = 85;
-let HeightSlot = 85;
-let slotX = 0;
-let endInventory = false;
-let waitingButton = false;
-
-//~ Jauge quand on mange
-let characterIsEating = false;
-
-let gaugeSize = 5;
-let gaugeSpeed = 5;
-
-let topGaugeLevel = 0;
-let rightGaugeLevel = 0;
-let bottomGaugeLevel = 0;
-let leftGaugeLevel = 0;
-
-//~  Variables pour la mort
-let playerDead = false
-
-
-
-//~  Variables pour les stats
-//let playerStat = false
-let numberOfSteps = 0;
-
-//~  Variables pour le JSON des items
-let ForItems;
-let itemList = [];
-
-
-//~ Variables pour les popup
-let popUpShown = false;
-let playerAnswersYes = false;
-
-
-//~ Variable pour la tileset des items
 let tilesetItems;
-
-
-//~ Variable pour le troc
 let BackTroc;
 let Slot;
-let waitingAnswer = false;
 let BackPop;
-let haveToTrade = false;
-let getTrade;
-let slotSize = 2
-let itemSize = 1.6
-
-let stackSize = 5
-
-//~ Variables pour le FPS
-let fps;
-let fpsActivate = false
-let ColorForRectFPS = 255
 
 
-//#endregion Interfaces
-
-
-//^ Cartes
-//#region //~ cartes du jeu
-let Maps;
-let World;
+//& JSONS
+let adminJSON;
+let allDoors;
+let ForEnnemis;
 let Houses;
-//#endregion
+let ForItems;
+let Maps;
+let ForPNJ;
+let World;
 
 
-//^ Physique
-//#region //~ physique
-const gravityForce = 0.5;
-//#endregion
-
-
-//^ Evenements
-//#region //~ Evenements 
-let spaceKeyIsPressed = false;
-let rightArrowPressed = false;
-let leftArrowPressed = false;
-let highArrowPressed = false;
-let downArrowPressed = false;
-let dashKeyIsPressed = false;
-let leftClickPressed = false
-
-let engineOne = true;
-
-let canEnterInHouse = false;
-let canGoOutTheHouse = false;
-//#endregion
-
-
-//^ Cinematic
-//#region //~ CINEMATIC
+//& Variables vides
+let getTrade;
+let fps;
 let StartCinematic;
-
-let CinematicIsStart = true;
-let MusicForCinematic = false;
-
-let CinematicForEnd = false;
-//#endregion
-
-
-
-let statistiques = {
-    distanceWalked: 0,
-    totalJumpCount: 0,
-    mobsKilled: 0,
-    damagesDones: 0,
-    damagesGet: 0,
-    healCount: 0,
-    deathCount: 0,
-    timeSpentInGame: 0,
-    playerSpeed: 0
-}
+let statistiques;
+let tilesList;

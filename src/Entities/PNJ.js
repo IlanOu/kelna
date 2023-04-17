@@ -5,9 +5,8 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    PNJ(ForPNJ.PNJS.Marjo);
     // PNJ(ForPNJ.PNJS.Marjo);
-    // PNJ(ForPNJ.PNJS.Toto);
+    PNJ(ForPNJ.PNJS.Toto);
   } else {
     drawPNJInside(ForPNJ.PNJS.Charle);
   }
@@ -75,6 +74,7 @@ function PNJ(pnj) {
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
+
 
   //* Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
