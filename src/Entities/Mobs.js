@@ -56,7 +56,6 @@ function handleCollisionMobs(
     }
 
 
-
     //* Collisions sur les côtés de l'objet
     if (
       agentY < objectY + objectHeight - objectHeight / 10 &&
@@ -80,10 +79,7 @@ function handleCollisionMobs(
       
       }
 
-
-
     }
-
 
   }
 

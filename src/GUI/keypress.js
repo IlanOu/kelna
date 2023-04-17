@@ -82,17 +82,7 @@ function keyPressed() {
         addItemToInventory(ForItems.Items.bow_1, 1);
     }
 
-    if (keyCode == 73) {
-        addItemToInventory(ForItems.Items.sword_1);
-    }
-
-    if (canGoOutTheHouse) {
-        if (keyCode == 69 && !engineOne && canGotOut === true) {
-            engineOne = !engineOne;
-            canGotOut = false
-            console.log("suis sortie grace a toi", engineOne, canGotOut)
-        }
-    }
+    
 }
 
 //~ vérifier si une touche est relâchée 
@@ -139,6 +129,7 @@ function keyReleased() {
 //~ Clique de souris
 function mousePressed() {
     if (mouseButton === LEFT) {
+        
         leftClickPressed = true
 
         if (!PressTalkPNJ){
@@ -161,7 +152,7 @@ function mousePressed() {
                 }
             }
         }
+        
     }
-}
-
     
+}
