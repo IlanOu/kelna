@@ -118,23 +118,23 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 //~ Joue de la music 
-let PlayMusic = () => {
+// let PlayMusic = () => {
 
-    if (MusicIsActivate === false && Pressing === false) {
-        MusicIsActivate = true
-        SongBackground.loop()
-        ColorForRectMusic = 50
-        Pressing = true
+//     if (MusicIsActivate === false && Pressing === false) {
+//         MusicIsActivate = true
+//         SongBackground.loop()
+//         ColorForRectMusic = 50
+//         Pressing = true
 
-    } else if (MusicIsActivate === true && Pressing === false) {
-        MusicIsActivate = false
-        SongBackground.pause()
-        ColorForRectMusic = 255
-        Pressing = true
+//     } else if (MusicIsActivate === true && Pressing === false) {
+//         MusicIsActivate = false
+//         SongBackground.pause()
+//         ColorForRectMusic = 255
+//         Pressing = true
 
-    }
+//     }
 
-}
+// }
 
 
 //~ Joue les songs

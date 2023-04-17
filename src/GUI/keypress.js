@@ -39,12 +39,14 @@ function keyPressed() {
 
     if (canEnterInHouse) {
         //* Touche E
-        if (keyCode == 69 && canGotOut === false) {
-            PressInteractPNJ = false
-            engineOne = !engineOne;
-            canGotOut = true
-            console.log("suis dedans grace a toi", engineOne, canGotOut)
-            
+        if (keyCode == 69 && engineOne) {
+            if(!canGotOut){
+                PressInteractPNJ = false
+                engineOne = !engineOne;
+                canGotOut = true
+                test = "suis dedans"
+                console.log("DEDANS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGotOut, "| Test" + " " + test)
+            }
         }
     }
 
@@ -87,10 +89,15 @@ function keyPressed() {
     }
 
     if (canGoOutTheHouse) {
-        if (keyCode == 69 && !engineOne && canGotOut === true) {
-            engineOne = !engineOne;
-            canGotOut = false
-            console.log("suis sortie grace a toi", engineOne, canGotOut)
+        if (keyCode == 69 && engineOne === false) {
+            if(canGotOut){
+
+                engineOne = !engineOne;
+                canGotOut = false
+                test = "suis dehors"
+                console.log("DEHORS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGotOut, "| Test" + " " + test)
+
+            }
         }
     }
 }

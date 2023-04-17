@@ -542,7 +542,6 @@ function drawTroc(x, y, w, h) {
   let echangePNJ = getEchangePNJ(currentPNJ);
 
   if (echangePNJ != undefined) {
-    console.log("je peut echanger")
 
     image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
     // 800 215.5 250 500

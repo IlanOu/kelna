@@ -214,6 +214,9 @@ let canGotOut = false
 let behindThisDoorHouse = "";
 
 
+let test = "";
+
+
 //~  Variables pour la barre de vie
 let MargeBarVie = 40;
 let healthPlayer = 1

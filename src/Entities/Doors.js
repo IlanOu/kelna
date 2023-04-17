@@ -20,7 +20,6 @@ function doorsManager() {
   }
   if (canGoOutside.includes(true)) {
     canGoOutTheHouse = true;
-    console.log("suis dedans")
   }
 }
 
