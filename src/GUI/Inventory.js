@@ -33,7 +33,6 @@ let removeItemFromInventory = (index) => {
             }else{
                 Inventory[index].amount--
             }
-            // console.log(Inventory[index].amount)
         }else{
             Inventory[index] = {};
         }
@@ -117,7 +116,6 @@ function displayInventory() {
                     fill(0)
                     stroke(0)
                     textSize(fontSize);
-                    console.log(Inventory[i].amount)
                     text(Inventory[i].amount, itemPosX, itemPosY+itemHeight)
                 }
             }
@@ -151,12 +149,9 @@ function displayInventory() {
 
     if (canEat && healthPlayer < maxHealth && Inventory[1].name){
         if (updateGauges()){
+            statistiques.healCount += parseInt(Inventory[1].healAmount)
             regenPlayer(Inventory[1].healAmount)
             removeItemFromInventory(1)
         }
     }
 };
-
-
-
-//^ Jauge d'utilisation des food

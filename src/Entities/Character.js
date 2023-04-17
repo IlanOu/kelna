@@ -193,6 +193,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       }
       if (characterAnimationIndex >= characterTextureList.length-1) {
         gameIsPlaying = false;
+        statistiques.deathCount++
         drawDeath();
       }
       break;
@@ -267,6 +268,12 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
         agentY = objectY - agentHeight
 
+        //? Augmenter les statistiques
+        if (characterVelocityY > 0){
+          statistiques.totalJumpCount += characterJumpCount
+        }
+
+        //* si le joueur touche le sol, reset le nombre de saut 
         //? est relatif au perso
         characterJumpCount = 0;
         //? est relatif au perso
@@ -317,7 +324,9 @@ function character() {
   if (healthPlayer) {
     //* Contrôles du perso (gauche, droite)
     characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
-
+    
+    statistiques.distanceWalked = round(-(xStartWorld / rectWidth)); 
+    
     //* Limites de la velocité Y du perso
     characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
   }
@@ -464,44 +473,46 @@ function character() {
   //~ saut du personnage
   if (spaceKeyIsPressed && healthPlayer) {
     //* le saut du personnage
-    if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
-
-      characterIsJumping = true;
-      characterDoubleJumping = false;
-      characterJumpCount++;
-
-      let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
-        
-      //~ Empêcher le joueur de sauter s'il est mort
+    if (characterJumpCount < characterMaxJumps){
+      
+      if (!characterIsJumping) {
+  
+        characterIsJumping = true;
+        characterDoubleJumping = false;
+        characterJumpCount++;
+  
+        let jumpReturns = addJump(characterPositionY,
+          characterJumpHeight,
+          characterVelocityY,
+          gravityForce)
+          
         characterPositionY = jumpReturns[0];
         characterVelocityY = jumpReturns[1];
+  
+        statistiques.totalJumpCount++
         
-
-
-      //* le double saut du personnage  
-    } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
-      characterDoubleJumping = false;
-      characterJumpCount++;
-
-      let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
-      characterPositionY = jumpReturns[0];
-      characterVelocityY = jumpReturns[1];
-
+          
+  
+  
+        //* le double saut du personnage  
+      } else if (characterDoubleJumping) {
+        characterDoubleJumping = false;
+        characterJumpCount++;
+  
+        let jumpReturns = addJump(characterPositionY,
+          characterJumpHeight,
+          characterVelocityY,
+          gravityForce)
+        characterPositionY = jumpReturns[0];
+        characterVelocityY = jumpReturns[1];
+          
+        statistiques.totalJumpCount++
+      }
     }
+    
+    
   }
 
-  //* si le joueur touche le sol, reset le nombre de saut 
-  if (characterIsGrounded) {
-    characterIsJumping = false;
-    characterJumpCount = 0
-    characterVelocityY = 0
-  }
 
   //#endregion
 
@@ -566,9 +577,6 @@ function character() {
       }
     }
   }
-
-
-
   //#endregion
 
 
