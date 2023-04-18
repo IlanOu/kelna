@@ -269,7 +269,7 @@ let ForItems;
 let Maps;
 let ForPNJ;
 let World;
-
+let creditsJson;
 
 //& Variables vides
 let getTrade;

@@ -84,6 +84,7 @@ function preload() {
   Maps = loadJSON("json/Maps.json");
   ForPNJ = loadJSON("json/PNJ.json");
   World = loadJSON("json/World.json");
+  creditsJson = loadJSON("json/Credits.json");
   
   init_ForPNJ = ForPNJ
 
