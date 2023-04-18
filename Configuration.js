@@ -57,6 +57,7 @@ let characterWidth;
 let characterHeight;
 let characterBoundingBoxWidth;
 let characterBoundingBoxHeight;
+let characterBoundingBoxWidthInside;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed;
 let characterHitting;
@@ -182,6 +183,7 @@ let leftClickWasPressed;
 
 let canEnterInHouse;
 let canGoOutTheHouse;
+let canGotOut;
 
 //~ PNJ
 let canInteractWithPNJ;

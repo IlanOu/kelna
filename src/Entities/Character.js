@@ -249,6 +249,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 //~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
   let touchThisObject = false;
+  
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -794,7 +795,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }
@@ -844,7 +845,7 @@ function characterView2() {
 
 
 
-  drawCharacter(characterInsidePosX - characterBoundingBoxWidthInside/4, characterInsidePosY - characterHeight / 2 - characterHeight / 3, characterWidth, characterHeight, characterDirection,characterMovement)
+  drawCharacter(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight, characterDirection, characterMovement)
 
 
   
@@ -852,6 +853,8 @@ function characterView2() {
     stroke(255, 0, 0)
     fill(255, 0, 0, 70)
     rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside)
+    fill(0,255,0,70)
+    rect(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight)
     noStroke()
   }
 

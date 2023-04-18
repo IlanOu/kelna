@@ -746,7 +746,7 @@ function openTalkMenu() {
 function setupUI() {
   //? Si je suis en jeu
 
-  if (inGame) {
+  if (inGame && !settingsPause) {
     gameIsPlaying = true;
 
     //& Barre de vie

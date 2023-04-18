@@ -17,9 +17,11 @@ function doorsManager() {
   });
   if (canGoInside.includes(true)) {
     canEnterInHouse = true;
+    canGoOutTheHouse = false
   }
   if (canGoOutside.includes(true)) {
     canGoOutTheHouse = true;
+    canEnterInHouse = false
   }
 }
 
