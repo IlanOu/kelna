@@ -126,23 +126,8 @@ function drawDoorInside(door) {
     doorBoundingBox[3]
   );
 
-
-      // characterInsidePosX, characterPositionX
-      // characterInsidePosY, characterPositionY
-
   if (canGoOutTheHouse) {
     behindThisDoor = door.destination;
-    
-
-    //? Remettre la maison en position
-    // xStart = 0;
-    // yStart = 200;
-
-    // //? Remettre le spawn du perso en position
-    //   characterPositionX =
-    //   Maps[behindThisDoor].xStart * rectWidth + xStart;
-    //   characterPositionY =
-    //   Maps[behindThisDoor].yStart * rectHeight + yStart;
   }
 
   //* Debug Mod
@@ -158,24 +143,8 @@ function drawDoorInside(door) {
   }
 
   //* Dessiner la porte
-  rect(doorX, doorY - heightDoor / 2, widthDoor, heightDoor);
-  // rect(doorX, door.y - heightDoor / 2, widthDoor, heightDoor);
+  rect(doorX, doorY, widthDoor, heightDoor);
 }
-
-
-//  if (canGoOutTheHouse) {
-//    behindThisDoor = door.destination;
-
-//    //? Remettre la maison en position
-//    xStart = 0;
-//    yStart = 200;
-
-//    //? Remettre le spawn du perso en position
-//    characterPositionX =
-//      Maps[behindThisDoor].xStart * rectWidth + xStart;
-//    characterPositionY =
-//      Maps[behindThisDoor].yStart * rectHeight + yStart;
-//  }
 
 
 

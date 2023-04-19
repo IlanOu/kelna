@@ -44,12 +44,15 @@ let drawPNJInside = (pnj) => {
 function PNJ(pnj) {
   //* Initialisation des variables
 
-  let PNJStart = pnj.globalStartX + xStartWorld;
-  let PNJDistance = pnj.distance + PNJStart;
-  let PNJEnd = PNJDistance;
+  let positionsStart = getPositionAt(pnj.mapName, pnj.globalStartX, pnj.globalStartY)
+  let positionsEnd = getPositionAt(pnj.mapName, pnj.globalStartX + pnj.distance, 0)
 
-  pnj.x = pnj.globalStartX + xStartWorld + pnj.stepCount;
-  pnj.y = pnj.y;
+  let PNJStart = positionsStart.pixelX;
+  let PNJEnd = positionsEnd.pixelX;
+
+  
+  pnj.x = PNJStart + xStartWorld + pnj.stepCount;
+  
 
   let PNJX = pnj.x;
   let PNJY = pnj.y;
@@ -243,8 +246,7 @@ let PNJMovements = (pnj) => {
     pnj.width,
     pnj.height,
     pnj.direction,
-    pnj.movement,
-    pnj.color
+    pnj.movement
   );
 
 };
@@ -326,8 +328,7 @@ let PNJMovementsInside = (pnj) => {
     pnj.width,
     pnj.height,
     pnj.direction,
-    pnj.movement,
-    pnj.color
+    pnj.movement
   );
 };
 
@@ -343,9 +344,7 @@ function animationPNJ(
   height,
   direction,
   movement,
-  color
 ) {
-  fill(color);
   circle(positionX + 35, positionY - 25, 20);
 
   let timer = round(millis() / animationSpeed) % 2;

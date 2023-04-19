@@ -128,7 +128,7 @@ const init_settingsPause = false
 
 //~ Barre de vie
 const init_MargeBarVie = 40;
-const init_healthPlayer = 1
+const init_healthPlayer = 5
 const init_maxHealth = 5
 const init_pressingKey = false
 const init_gettingHurt = false;
@@ -194,8 +194,8 @@ const init_currentIndexTextSpeaking = 0
 const init_behindThisDoor = "";
 const init_engine1WidthDoors = init_rectWidth
 const init_engine1HeightDoors = init_rectHeight * 2
-const init_engine2WidthDoors = init_rectWidth
-const init_engine2HeightDoors = init_rectHeight / 2
+const init_engine2WidthDoors = 10
+const init_engine2HeightDoors = init_rectHeight
 const init_doorInTaverne = false;
 
 //~ Mort

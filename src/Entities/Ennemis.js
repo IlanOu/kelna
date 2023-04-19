@@ -4,8 +4,8 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    // mob(ForEnnemis.Ennemis.Malade1);
-    // mob(ForEnnemis.Ennemis.Malade2);
+    mob(ForEnnemis.Ennemis.Malade1);
+    mob(ForEnnemis.Ennemis.Malade2);
   }
 }
 
@@ -23,12 +23,14 @@ function mob(Mobs) {
   if ((Mobs.life || !Mobs.isDead) && found) {
     //* Initialisation des variables
 
-    let MobStart = Mobs.globalStartX + xStartWorld;
-    let MobDistance = Mobs.distance + Mobs.globalStartX;
-    let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
+    let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+    let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
+
+    let MobStart = positionsStart.pixelX;
+    let MobEnd = positionsEnd.pixelX;
 
 
-    Mobs.x = xStartWorld + Mobs.stepCount;
+    Mobs.x = MobStart + xStartWorld + Mobs.stepCount;
 
     let MobsX = Mobs.x;
     let MobsY = Mobs.y;
@@ -137,7 +139,6 @@ function mob(Mobs) {
     Mobs.isJumping = MobsIsJumping;
     Mobs.jumpCount = MobsJumpCount;
 
-    Mobs.distance = MobDistance;
     Mobs.xStart = MobStart;
     Mobs.xEnd = MobEnd;
     Mobs.haveToJump = collide;

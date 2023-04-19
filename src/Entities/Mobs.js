@@ -126,8 +126,6 @@ function followPlayer(Mobs) {
 //^ /* -------------------------------------------------------------------------- */
 function doRound(Mobs) {
 
-
-
   //* Initialisation des variables
 
   Mobs.movement = "walk";
@@ -137,23 +135,22 @@ function doRound(Mobs) {
   
   let walkAmount = Mobs.stepCount;
   
-  let MobEnd = Mobs.xEnd;
-  let MobStart = Mobs.xStart;
-  
+  let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+  let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
+
+  let MobStart = 0;
+  let MobEnd = 0;
+
+  if (engineOne){
+    MobStart = positionsStart.pixelX + xStartWorld;
+    MobEnd = positionsEnd.pixelX + xStartWorld;
+  }else{
+    MobStart = positionsStart.pixelX + xStartHouse;
+    MobEnd = positionsEnd.pixelX + xStartHouse;
+
+  }
+
   let haveToJump = Mobs.haveToJump;
-  
-
-
-  // if (engineOne){
-  //   CurrentX += xStartWorld
-  //   MobEnd += xStartWorld
-  //   MobStart += xStartWorld
-  // }else{
-  //   CurrentX += xStartHouse
-  //   MobEnd += xStartHouse
-  //   MobStart += xStartHouse
-  // }
-  
   
   //* FAIRE UNE RONDE
   if (CurrentX >= MobEnd) {
