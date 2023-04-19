@@ -44,7 +44,7 @@ function preload() {
 
   GUIForStats = loadImage("assets/GUI/GUIForStats.png");
   GUIInteract = loadImage("assets/GUI/GUIInt.png");
-  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
+  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg");
   GUIStart = loadImage("assets/GUI/start.png");
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
@@ -86,6 +86,7 @@ function preload() {
   Maps = loadJSON("json/Maps.json");
   ForPNJ = loadJSON("json/PNJ.json");
   World = loadJSON("json/World.json");
+  creditsJson = loadJSON("json/Credits.json");
   
   init_ForPNJ = ForPNJ
 

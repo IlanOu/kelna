@@ -3,13 +3,13 @@ function keyPressed() {
 
     //* Bouton echap
     if (keyCode == ESCAPE) {
-        if (inGame){
+        if (inGame) {
             gameIsPaused = !gameIsPaused
         }
     }
 
     //* Barre espace
-    if (keyCode == 32 || keyCode==38) {
+    if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = true;
     }
 
@@ -26,7 +26,7 @@ function keyPressed() {
     }
 
     //* Flèche de haut
-    if ((keyCode == 38 || keyCode == 90 )) {
+    if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
         characterIsEating = true
     }
@@ -36,13 +36,7 @@ function keyPressed() {
         downArrowPressed = true;
     }
 
-    if (canEnterInHouse){
-        //* Touche E
-        if (keyCode == 69) {
-            PressInteractPNJ = false
-            engineOne = !engineOne;
-        }
-    }
+
 
     if (canInteractWithPNJ) {
         //* Touche E
@@ -69,7 +63,7 @@ function keyPressed() {
     }
 
     //* Touche O du clavier
-    if(keyCode == 79){
+    if (keyCode == 79) {
         addItemToInventory(ForItems.Items.food_1, 1);
     }
 
@@ -84,7 +78,7 @@ function keyPressed() {
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
     //* Barre espace
-    if (keyCode == 32 || keyCode ==38) {
+    if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = false;
         characterDoubleJumping = true;
     }
@@ -119,28 +113,54 @@ function keyReleased() {
     if (keyCode) {
         pressingKey = false;
     }
+
+
+    if (canEnterInHouse) {
+        //* Touche E
+        if (keyCode == 69 && engineOne) {
+
+            PressInteractPNJ = false
+            engineOne = !engineOne;
+            test = "suis dedans"
+            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log("DEDANS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
+
+        }
+    }
+
+
+    if (canGoOutTheHouse) {
+        if (keyCode == 69 && engineOne === false) {
+
+            engineOne = !engineOne;
+            test = "suis dehors"
+            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log("DEHORS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
+            
+        }
+    }
 }
 
 
 //~ Clique de souris
 function mousePressed() {
     if (mouseButton === LEFT) {
-        
+
         leftClickPressed = true
 
-        if (!PressTalkPNJ){
-            if (!gameIsPaused && gameIsPlaying  && characterAnimationIndex <= characterTextureList.length-1){
-                if (!characterHitting && !characterComboHitting && !characterComboHittingDouble){
+        if (!PressTalkPNJ) {
+            if (!gameIsPaused && gameIsPlaying && characterAnimationIndex <= characterTextureList.length - 1) {
+                if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
                     characterHitting = true
                     characterComboHitting = false
                     characterComboHittingDouble = false
                     lastHit = "1"
-                }else if (characterHitting && !characterComboHitting  && !characterComboHittingDouble){
+                } else if (characterHitting && !characterComboHitting && !characterComboHittingDouble) {
                     characterHitting = false
                     characterComboHitting = true
                     characterComboHittingDouble = false
                     lastHit = "2"
-                }else if (!characterHitting && characterComboHitting  && !characterComboHittingDouble){
+                } else if (!characterHitting && characterComboHitting && !characterComboHittingDouble) {
                     characterHitting = false
                     characterComboHitting = false
                     characterComboHittingDouble = true
@@ -148,7 +168,7 @@ function mousePressed() {
                 }
             }
         }
-        
+
     }
-    
+
 }

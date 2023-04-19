@@ -6,6 +6,7 @@ const init_debugMod = false;
 const init_engineOne = true;
 const init_fpsLevel = 60
 
+
 //& Le bloc qui tue (littéralement)
 const init_killingBlock = 238;
 
@@ -56,7 +57,8 @@ const init_characterWidth = 80;
 const init_characterHeight = 80;
 const init_characterBoundingBoxWidth = 45;
 const init_characterBoundingBoxHeight = 60;
-const init_characterBoundingBoxHeightInside = 60
+const init_characterBoundingBoxHeightInside = 40
+const init_characterBoundingBoxWidthInside = 60
 const init_characterMovesSpeed = 6;
 const init_characterHitting = false;
 const init_characterComboHitting = false;

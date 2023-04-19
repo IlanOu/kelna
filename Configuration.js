@@ -45,6 +45,7 @@ let characterLastMovement;
 let characterSpriteWidth;
 let characterSpriteHeight;
 
+
 //~ caractéristiques du perso
 //? Positions
 let characterInsidePosX;
@@ -57,13 +58,13 @@ let characterWidth;
 let characterHeight;
 let characterBoundingBoxWidth;
 let characterBoundingBoxHeight;
+let characterBoundingBoxWidthInside;
 let characterBoundingBoxHeightInside;
 let characterMovesSpeed;
 let characterHitting;
 let characterComboHitting;
 let characterComboHittingDouble;
 let lastHit;
-
 //? Saut
 let characterMass;
 let characterJumpHeight;
@@ -238,6 +239,7 @@ let MusicForCinematic;
 let CinematicForEnd;
 
 
+
 //& Textures
 let sky;
 let tileSet;
@@ -245,6 +247,7 @@ let tileSetForTaverne;
 let tileSetTaverne;
 let backgroundImage;
 let characterTexture_Dash;
+
 let GUITroc;
 let GUIStart;
 let marjoTexture;
@@ -264,9 +267,12 @@ let allDoors;
 let ForEnnemis;
 let Houses;
 let ForItems;
+
 let Maps;
 let ForPNJ;
+
 let World;
+let creditsJson;
 
 
 //& Variables vides

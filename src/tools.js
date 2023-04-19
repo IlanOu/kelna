@@ -35,8 +35,6 @@ function findIndexValueIn2dArray(array, mapName) {
 
 
 //~ Trouve l'index de la position du 2eme array
-
-
 let previous_index_pos = null;
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
@@ -119,23 +117,23 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 //~ Joue de la music 
-let PlayMusic = () => {
+// let PlayMusic = () => {
 
-    if (MusicIsActivate === false && Pressing === false) {
-        MusicIsActivate = true
-        SongBackground.loop()
-        ColorForRectMusic = 50
-        Pressing = true
+//     if (MusicIsActivate === false && Pressing === false) {
+//         MusicIsActivate = true
+//         SongBackground.loop()
+//         ColorForRectMusic = 50
+//         Pressing = true
 
-    } else if (MusicIsActivate === true && Pressing === false) {
-        MusicIsActivate = false
-        SongBackground.pause()
-        ColorForRectMusic = 255
-        Pressing = true
+//     } else if (MusicIsActivate === true && Pressing === false) {
+//         MusicIsActivate = false
+//         SongBackground.pause()
+//         ColorForRectMusic = 255
+//         Pressing = true
 
-    }
+//     }
 
-}
+// }
 
 
 //~ Joue les songs
@@ -157,24 +155,24 @@ let PlaySong = () => {
 
 
 //~ hurtPlayer
-function hurtPlayer (amount) {
+function hurtPlayer(amount) {
     healthPlayer -= amount; //& Enlever point de vie
     healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
 }
 
 
 //~ regenPlayer
-function regenPlayer (amount = 1) {
+function regenPlayer(amount = 1) {
     if (healthPlayer + amount <= maxHealth) {
         healthPlayer += amount;
-    }else{
+    } else {
         healthPlayer = maxHealth
     }
 }
 
 
 //~ Ajout des coeurs
-function upgradePlayerHealth (amount) {
+function upgradePlayerHealth(amount) {
     maxHealth += amount;
     if (healthPlayer == maxHealth) {
         healthPlayer += amount;
@@ -184,10 +182,10 @@ function upgradePlayerHealth (amount) {
 
 
 //~ Supprime des coeurs
-function downgradePlayerHealth (amount) {
+function downgradePlayerHealth(amount) {
     maxHealth -= amount;
     healthPlayer -= amount;
-    
+
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
 }
 
@@ -309,19 +307,33 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
 
 //~ Dessine les touches pour les interactions
 function drawKey(key) {
-    let keyBackground = [(characterPositionX),
-        characterPositionY - 50,
+
+    let PosX = 0
+    let PosY = 0
+
+    if (engineOne) {
+        PosX = characterPositionX
+        PosY = characterPositionY
+    } else {
+
+        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth/1.2
+        PosY = characterInsidePosY - characterHeight / 3
+    }
+
+    let keyBackground = [(PosX),
+        PosY - 50,
         interactionWidth,
         interactionHeight
     ]
 
-    let textKey = [characterPositionX + (keyBackground[2] / 2),
-        characterPositionY - 50 + (keyBackground[3] / 8)
+    let textKey = [PosX + (keyBackground[2] / 2),
+        PosY - 50 + (keyBackground[3] / 8)
     ]
 
     fill(255)
     drawButton(keyBackground)
     drawText(key, 20, textKey, "center")
+
 }
 
 
@@ -596,18 +608,19 @@ function popUp(message, options = "info") {
 }
 
 
+//~ Affiche les FPS
+let gameFPS = () => {
 
-function timeConversion(seconds) {
-    const heures = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secondes = seconds % 60;
-  
-    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
-    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
-    const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
-  
-    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
-}
+    if (fpsActivate === false && Pressing === false) {
+        fpsActivate = true
+        ColorForRectFPS = 50
+        Pressing = true
+
+        if (fpsActivate === true) {
+            textSize(16);
+            fill(255);
+            text("FPS: " + fps.toFixed(0), 50, 50);
+        }
 
 function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
@@ -632,7 +645,42 @@ function resetJsons(){
 }
 
 
-    
+function timeConversion(seconds) {
+    const heures = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondes = seconds % 60;
+
+    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
+
+    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+}
+
+function getSpeed(seconds, meters) {
+    const distanceEnKm = meters / 1000;
+    const tempsEnHeures = seconds / 3600;
+    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
+    return Math.round(vitesseEnKmh);
+}
+
+
+
+function resetJsons() {
+    ForEnnemis = loadJSON("json/Ennemis.json");
+    ForPNJ = loadJSON("json/PNJ.json");
+
+    //? Pas besoin de reload les json dont les donnees ne changent pas 
+    // allDoors = loadJSON("json/Doors.json");
+    // adminJSON = loadJSON("json/Admin.json");
+    // Houses = loadJSON("json/Houses.json");
+    ForItems = loadJSON("json/Items.json");
+    // Maps = loadJSON("json/Maps.json");
+    // World = loadJSON("json/World.json");
+}
+
+
+
 function initVariables() {
     //& Debug Mod
     debugMod = init_debugMod;
@@ -640,7 +688,7 @@ function initVariables() {
 
     //& Moteur de jeu
     engineOne = init_engineOne;
-    fpsLevel = init_fpsLevel
+
 
     //& Le bloc qui tue (littéralement)
     killingBlock = init_killingBlock;
@@ -694,6 +742,7 @@ function initVariables() {
     characterBoundingBoxWidth = init_characterBoundingBoxWidth;
     characterBoundingBoxHeight = init_characterBoundingBoxHeight;
     characterBoundingBoxHeightInside = init_characterBoundingBoxHeightInside;
+    characterBoundingBoxWidthInside = init_characterBoundingBoxWidthInside;
     characterMovesSpeed = init_characterMovesSpeed;
     characterHitting = init_characterHitting;
     characterComboHitting = init_characterComboHitting;
@@ -904,5 +953,3 @@ function initVariables() {
 
     resetJsons()
 }
-
-

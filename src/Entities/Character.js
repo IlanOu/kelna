@@ -249,6 +249,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 //~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
   let touchThisObject = false;
+  
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -279,7 +280,6 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
         //? est relatif au perso
         characterIsJumping = false
         
-
         //? est relatif au perso
         if (!spaceKeyIsPressed){
           characterVelocityY = 0
@@ -708,7 +708,6 @@ function character() {
     characterMovement)
 
   //#endregion
-
 }
 
 
@@ -736,7 +735,6 @@ function characterView2() {
   //? si mon perso est à DROITE de l'écran
   if (characterInsidePosX > width - width / 4) {
 
-
     //? le monde bouge vers la gauche (la caméra se décale vers la droite)
     xStartHouse -= characterMovesSpeed
     characterInsidePosX -= characterMovesSpeed
@@ -746,7 +744,7 @@ function characterView2() {
   //* caméra mouvements gauche
 
   //? si mon perso est à GAUCHE de l'écran
-  if (characterInsidePosX < width / 4) {
+  if (characterInsidePosX < width / 3.5) {
 
 
     //? le monde bouge vers la droite (la caméra se décale vers la gauche)
@@ -780,7 +778,8 @@ function characterView2() {
   //~ Collisions 
 
   //* Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses[behindThisDoor].layers[1]
+  let currentMapTableColliders = Houses[behindThisDoorHouse].layers[1]
+
 
   //* Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {
@@ -796,7 +795,7 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }
@@ -844,17 +843,22 @@ function characterView2() {
   //#region 
   //~ Affichage du perso
 
-  characterBoundingBoxHeightInside = 30
 
-  drawCharacter(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+
+  drawCharacter(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight, characterDirection, characterMovement)
 
 
   
   if(debugMod){
-    stroke(50,50,50,50)
-    fill(255,0,0,70)
-    rect(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+    stroke(255, 0, 0)
+    fill(255, 0, 0, 70)
+    rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside)
+    fill(0,255,0,70)
+    rect(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight)
+    noStroke()
   }
+
+  //- (characterHeight - characterBoundingBoxHeightInside)
 
   //#endregion
 

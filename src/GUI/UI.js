@@ -286,6 +286,7 @@ function drawSettingsMenu() {
   //& ---------- Affichage -----------
   //& --------------------------------
 
+
   drawInterface(interfaceMenu, GUIParameters);
 
   fill(ColorForRectSong);
@@ -318,7 +319,7 @@ function drawSettingsMenu() {
   if (buttonClicked(ButtonBack)) {
     settingsPause = false
   }
-
+ 
   if (buttonClicked(ButtonToggleFPS)) {
     fpsActivate = !fpsActivate
   }
@@ -764,6 +765,24 @@ function gameFPS () {
   }
 }
 
+//~ DISCUSSION
+function drawDiscussion(x,y,w,h){
+
+  //? Fonction comme conditions pour la discussions
+  let currentPNJ = getPNJName();
+  let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
+  let discussionPNJ = getDiscussionPNJ(currentPNJ)
+
+
+  if (discussionPNJ != undefined){
+
+    //? Affichage du troc
+    if (!PNJSeePlayer) {
+      PressInteractPNJD = false;
+    }
+  }
+
+}
 
 
 //^ LANCER
