@@ -608,20 +608,6 @@ function popUp(message, options = "info") {
 }
 
 
-//~ Affiche les FPS
-let gameFPS = () => {
-
-    if (fpsActivate === false && Pressing === false) {
-        fpsActivate = true
-        ColorForRectFPS = 50
-        Pressing = true
-
-        if (fpsActivate === true) {
-            textSize(16);
-            fill(255);
-            text("FPS: " + fps.toFixed(0), 50, 50);
-        }
-
 function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
@@ -688,7 +674,7 @@ function initVariables() {
 
     //& Moteur de jeu
     engineOne = init_engineOne;
-
+    fpsLevel = init_fpsLevel;
 
     //& Le bloc qui tue (littéralement)
     killingBlock = init_killingBlock;
@@ -952,4 +938,5 @@ function initVariables() {
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 
     resetJsons()
+
 }
