@@ -18,6 +18,9 @@ let password;
 //& Camera
 let cameraShakeEnabled;
 
+let shakeDuration;
+let shakeForce;
+
 //~ ========= Mode SMOOTH ========= 
 let smoothCamera;
 let smoothCameraSpeed;

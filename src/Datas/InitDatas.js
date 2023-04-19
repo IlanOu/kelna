@@ -17,7 +17,10 @@ const init_password = "";
 
 
 //& Camera
-const init_cameraShakeEnabled = false;
+const init_cameraShakeEnabled = true;
+
+const init_shakeDuration = 0;
+const init_shakeForce = 0;
 
 //~ ========= Mode SMOOTH ========= 
 const init_smoothCamera = false

@@ -28,7 +28,7 @@ function keyPressed() {
     //* Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
-        characterIsEating = true
+        characterIsEating = true 
     }
 
     //* Flèche de bas

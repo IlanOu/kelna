@@ -652,6 +652,12 @@ function getSpeed(seconds, meters) {
 
 
 
+function shakeCamera(durationSeconds, forcePixels) {
+    shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
+    shakeForce = forcePixels;
+}
+
+
 function resetJsons() {
     ForEnnemis = loadJSON("json/Ennemis.json");
     ForPNJ = loadJSON("json/PNJ.json");
@@ -664,6 +670,8 @@ function resetJsons() {
     // Maps = loadJSON("json/Maps.json");
     // World = loadJSON("json/World.json");
 }
+
+
 
 
 
@@ -687,6 +695,9 @@ function initVariables() {
 
     //& Camera
     cameraShakeEnabled = init_cameraShakeEnabled;
+
+    shakeDuration = init_shakeDuration
+    shakeForce = init_shakeForce
 
     //~ ========= Mode SMOOTH ========= 
     smoothCamera = init_smoothCamera;
@@ -812,7 +823,6 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
-    console.log(Inventory)
     WidthSlot = init_WidthSlot;
     HeightSlot = init_HeightSlot;
     slotX = init_slotX;

@@ -65,7 +65,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/tilesetKelna.png");
+  tileSet = loadImage("assets/textures/Tilesetgeneu.png");
   sky = loadImage("assets/textures/Sky.jpg");
   BackTroc = loadImage("assets/textures/planches.png");
   Slot = loadImage("assets/textures/slot.png");
@@ -101,8 +101,10 @@ function preload() {
 function draw() {
   noSmooth()
 
-  if (cameraShakeEnabled){
-    translate(random(-5,5),random(-5,5));
+  //* Effet de tremblement de la caméra
+  if (shakeDuration > 0 && cameraShakeEnabled) {
+    translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
+    shakeDuration--;
   }
   
   //? Si le jeu joue

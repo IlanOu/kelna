@@ -275,6 +275,9 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
         }
 
         //* si le joueur touche le sol, reset le nombre de saut 
+        if (characterJumpCount > 0 && characterVelocityY > 30){
+          shakeCamera(0.25, characterVelocityY/10)
+        }
         //? est relatif au perso
         characterJumpCount = 0;
         //? est relatif au perso

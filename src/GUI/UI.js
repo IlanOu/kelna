@@ -257,8 +257,20 @@ function drawSettingsMenu() {
   let buttonMusicW = 150;
   let buttonMusicH = 20;
   let buttonMusicX = interfaceMenuX + interfaceMenuWidth / 2 - buttonMusicW / 2;
-  let buttonMusicY = interfaceMenuY + interfaceMenuHeight / 2.2;
+  let buttonMusicY = interfaceMenuY + interfaceMenuHeight / 3
   let textMusicX = buttonMusicX + buttonMusicW / 2;
+
+  let buttonToggleFPSW = 150;
+  let buttonToggleFPSH = 20;
+  let buttonToggleFPSX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleFPSW / 2;
+  let buttonToggleFPSY = interfaceMenuY + interfaceMenuHeight / 2.5;
+  let textToggleFPSX = buttonToggleFPSX + buttonMusicW / 2;
+
+  let buttonToggleCameraShakeW = 150;
+  let buttonToggleCameraShakeH = 20;
+  let buttonToggleCameraShakeX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleCameraShakeW / 2;
+  let buttonToggleCameraShakeY = interfaceMenuY + interfaceMenuHeight / 2;
+  let textToggleCameraShakeX = buttonToggleCameraShakeX + buttonMusicW / 2;
 
   let buttonExitW = 150;
   let buttonExitH = 20;
@@ -266,20 +278,19 @@ function drawSettingsMenu() {
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
   let textExitX = buttonExitX + buttonExitW / 2;
 
-  let buttonToggleFPSW = 150;
-  let buttonToggleFPSH = 20;
-  let buttonToggleFPSX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleFPSW / 2;
-  let buttonToggleFPSY = interfaceMenuY + interfaceMenuHeight / 3;
-  let textToggleFPSX = buttonToggleFPSX + buttonMusicW / 2;
+  
 
   
   let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH];
   
   let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH];
   
-  let ButtonBack = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
-
   let ButtonToggleFPS = [buttonToggleFPSX, buttonToggleFPSY, buttonToggleFPSW, buttonToggleFPSH];
+  
+  let ButtonToggleCameraShake = [buttonToggleCameraShakeX, buttonToggleCameraShakeY, buttonToggleCameraShakeW, buttonToggleCameraShakeH];
+
+
+  let ButtonBack = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
 
 
   //& --------------------------------
@@ -291,19 +302,25 @@ function drawSettingsMenu() {
 
   fill(ColorForRectSong);
   drawButton(buttonSon);
-  drawText("SON", 15, [textSonX, buttonSonY], "center");
-
+  drawText("Sons", 15, [textSonX, buttonSonY], "center");
+  
   fill(ColorForRectMusic);
   drawButton(buttonMusic);
-  drawText("MUSIC", 15, [textMusicX, buttonMusicY], "center");
+  drawText("Musique", 15, [textMusicX, buttonMusicY], "center");
+  
+  fill(255);
+  drawButton(ButtonToggleFPS);
+  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], "center");
+
+  fill(255);
+  drawButton(ButtonToggleCameraShake);
+  drawText("Tremblements", 15, [textToggleCameraShakeX, buttonToggleCameraShakeY], "center");
 
   fill(255);
   drawButton(ButtonBack);
   drawText("Retour", 15, [textExitX, buttonExitY], "center");
 
-  fill(255);
-  drawButton(ButtonToggleFPS);
-  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], "center");
+
 
 
   //& --------------------------------
@@ -316,13 +333,17 @@ function drawSettingsMenu() {
   if (buttonClicked(buttonMusic)) {
    
   }
+  if (buttonClicked(ButtonToggleFPS)) {
+    fpsActivate = !fpsActivate
+  }
+  if (buttonClicked(ButtonToggleCameraShake)) {
+    cameraShakeEnabled = !cameraShakeEnabled
+  }
   if (buttonClicked(ButtonBack)) {
     settingsPause = false
   }
  
-  if (buttonClicked(ButtonToggleFPS)) {
-    fpsActivate = !fpsActivate
-  }
+  
 }
 
 
