@@ -261,7 +261,7 @@ let pointEnnemis;
 let tilesetItems;
 let backgroundImageTroc;
 let slot;
-let backgroundImagePopup;
+let backgroundImageTalk;
 
 
 //& JSONS

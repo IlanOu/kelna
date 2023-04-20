@@ -530,7 +530,7 @@ function popUp(message, options = "info") {
     // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(backgroundImagePopup, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {

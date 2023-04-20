@@ -68,7 +68,7 @@ function preload() {
   tileSet = loadImage("assets/textures/Tilesetgeneu.png");
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
-  backgroundImagePopup = loadImage("assets/textures/backgroundImagePopup.png");
+  backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
