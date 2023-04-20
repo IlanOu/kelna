@@ -127,7 +127,16 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   switch (movement) {
     //* animation MARCHER
     case "walk":
-      for (let y = (8 * 32); y < (9 * 32); y += characterSpriteHeight) {
+
+      if (inventoryIsEmpty(Inventory[0])){
+        annimationBeginY = 8*32
+        annimationEndY = 9*32
+      } else{
+        annimationBeginY = 20*32
+        annimationEndY = 21*32
+
+      }
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
         for (let x = 0; x < (6 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
