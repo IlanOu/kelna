@@ -1,0 +1,33 @@
+{
+    "Items": {
+        "sword_1": {
+            "name": "sword_1",
+            "itemNumber": 0,
+            "degat": "10",
+            "type": "sword",
+            "category": "weapon"
+        },
+        "sword_2": {
+            "name": "sword_2",
+            "itemNumber": 1,
+            "degat": "10",
+            "type": "sword",
+            "category": "weapon"
+        },
+        "sword_3": {
+            "name": "sword_3",
+            "degat": "10",
+            "itemNumber": 2,
+            "type": "sword",
+            "category": "weapon"
+        },
+        "food_1": {
+            "name": "food_1",
+            "healAmount": 2,
+            "itemNumber": 3,
+            "type": "steak",
+            "amount": 0,
+            "category": "food"
+        }
+    }
+}

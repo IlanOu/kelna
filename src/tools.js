@@ -22,10 +22,10 @@ function createTable(columnNumber, rowNumber) {
 
 
 //~ Trouve la valeur de l'index de la 2eme array 
-function findIndexValueIn2dArray(array, value) {
+function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
-            if (value === array[column][row]) {
+            if (mapName === array[column][row]) {
                 return [column, row];
             }
         }
@@ -35,7 +35,7 @@ function findIndexValueIn2dArray(array, value) {
 
 
 //~ Trouve l'index de la position du 2eme array
-let previous_index_pos;
+let previous_index_pos = null;
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -78,11 +78,12 @@ function containedPositionsIn(objectPositionX,
     containerWidth,
     containerHeight) {
     return [constrain(objectPositionX,
-        0,
-        containerWidth - objectWidth),
-    constrain(objectPositionY,
-        0,
-        containerHeight - objectHeight)]
+            0,
+            containerWidth - objectWidth),
+        constrain(objectPositionY,
+            0,
+            containerHeight - objectHeight)
+    ]
 }
 
 
@@ -116,38 +117,36 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 //~ Joue de la music 
-let PlayMusic = () => {
+// let PlayMusic = () => {
 
-    if (MusicIsActivate === false && Pressing === false) {
-        MusicIsActivate = true
-        SongBackground.loop()
-        ColorForRectMusic = 50
-        Pressing = true
+//     if (musicEnabled === false && Pressing === false) {
+//         musicEnabled = true
+//         SongBackground.loop()
+//         musicButtonColor = 50
+//         Pressing = true
 
-    }
-    else if (MusicIsActivate === true && Pressing === false) {
-        MusicIsActivate = false
-        SongBackground.pause()
-        ColorForRectMusic = 255
-        Pressing = true
+//     } else if (musicEnabled === true && Pressing === false) {
+//         musicEnabled = false
+//         SongBackground.pause()
+//         musicButtonColor = 255
+//         Pressing = true
 
-    }
+//     }
 
-}
+// }
 
 
 //~ Joue les songs
 let PlaySong = () => {
 
-    if (SongIsActivate === false && Pressing === false) {
-        SongIsActivate = true
-        ColorForRectSong = 50
+    if (soundEnabled === false && Pressing === false) {
+        soundEnabled = true
+        soundButtonColor = 50
         Pressing = true
 
-    }
-    else if (SongIsActivate === true && Pressing === false) {
-        SongIsActivate = false
-        ColorForRectSong = 255
+    } else if (soundEnabled === true && Pressing === false) {
+        soundEnabled = false
+        soundButtonColor = 255
         Pressing = true
 
     }
@@ -155,57 +154,38 @@ let PlaySong = () => {
 }
 
 
-//~ interact health
-let ForInteract = () => {
-
-    //? Interaction avec les pavés tactiles
-    if (gettingHurt) {
-        Degat(1);
-        gettingHurt = false;
-    }
-    if (gettingHeal) {
-        Regen(1);
-        gettingHeal = false;
-    }
-    if (addHeart) {
-        OneHeart(1);
-        addHeart = false;
-    }
-    if (removeHeart) {
-        DownHeart(1);
-        removeHeart = false;
-    }
-}
-
-
-//~ Degat
-let Degat = (NbreDeDegat) => {
-    healthPlayer -= NbreDeDegat; //& Enlever point de vie
+//~ hurtPlayer
+function hurtPlayer(amount) {
+    healthPlayer -= amount; //& Enlever point de vie
     healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
 }
 
 
-//~ Regeneration
-let Regen = () => {
-    if (healthPlayer < maxHealth) {
-        healthPlayer += 1;
-        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+//~ regenPlayer
+function regenPlayer(amount = 1) {
+    if (healthPlayer + amount <= maxHealth) {
+        healthPlayer += amount;
+    } else {
+        healthPlayer = maxHealth
     }
 }
 
 
 //~ Ajout des coeurs
-let OneHeart = () => {
-    healthPlayer += 1;
-    maxHealth += 1;
+function upgradePlayerHealth(amount) {
+    maxHealth += amount;
+    if (healthPlayer == maxHealth) {
+        healthPlayer += amount;
+    }
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
 }
 
 
 //~ Supprime des coeurs
-let DownHeart = () => {
-    healthPlayer -= 1;
-    maxHealth -= 1;
+function downgradePlayerHealth(amount) {
+    maxHealth -= amount;
+    healthPlayer -= amount;
+
     healthPlayer = constrain(healthPlayer, 0, maxHealth);
 }
 
@@ -236,27 +216,27 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
-    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopMapInWorld)
 
     //? map en BAS du perso
-    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomMapInWorld = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns) / 2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 
@@ -277,7 +257,7 @@ function expandRect(x, y, width, height, valueX = 1, valueY = 1) {
 }
 
 
-//~ positions d'un caré en x et y, pas en pixel.
+//~ prend en param les positions d'un carré en x et y, pas en pixel. Ressort des pixels
 function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let mapExist = false;
     let numberOfCasesX = Maps.numberOfRow
@@ -285,13 +265,18 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapX = 0;
     let indexMapY = 0;
 
-    World.worldsMap.forEach(row => {
+    World.worldsMap.every(row => {
+
         if (row.includes(mapName)) {
             mapExist = true;
             indexMapX = row.indexOf(mapName);
+
+            return false
         } else {
             indexMapY++
         }
+
+
     });
 
     if (!mapExist) {
@@ -310,7 +295,10 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         let pixelsX = (indexMapX * numberOfCasesX * rectWidth) + (positionX * rectWidth)
         let pixelsY = (indexMapY * numberOfCasesY * rectHeight) + (positionY * rectHeight)
 
-        return { "pixelX": pixelsX, "pixelY": pixelsY }
+        return {
+            "pixelX": pixelsX,
+            "pixelY": pixelsY
+        }
     } else {
         throw new Error("Map name not found in World.json : " + mapName);
     }
@@ -319,29 +307,47 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
 
 //~ Dessine les touches pour les interactions
 function drawKey(key) {
-    let keyBackground = [(characterPositionX),
-    characterPositionY - 50,
-        interactionWidth,
-        interactionHeight]
 
-    let textKey = [characterPositionX + (keyBackground[2] / 2),
-    characterPositionY - 50 + (keyBackground[3] / 8)]
+    let PosX = 0
+    let PosY = 0
+
+    if (engineOne) {
+        PosX = characterPositionX
+        PosY = characterPositionY
+    } else {
+
+        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth/1.2
+        PosY = characterInsidePosY - characterHeight / 3
+    }
+
+    let keyBackground = [(PosX),
+        PosY - 50,
+        interactionWidth,
+        interactionHeight
+    ]
+
+    let textKey = [PosX + (keyBackground[2] / 2),
+        PosY - 50 + (keyBackground[3] / 8)
+    ]
 
     fill(255)
     drawButton(keyBackground)
     drawText(key, 20, textKey, "center")
+
 }
 
 
 //~ Dessine les touches pour les interactions
 function drawKeyAt(key, positionX, positionY, haveBackground = false) {
     let keyBackground = [(positionX),
-    positionY - 50,
+        positionY - 50,
         interactionWidth,
-        interactionHeight]
+        interactionHeight
+    ]
 
     let textKey = [positionX + (keyBackground[2] / 2),
-    positionY - 50 + (keyBackground[3] / 8)]
+        positionY - 50 + (keyBackground[3] / 8)
+    ]
 
     if (haveBackground) {
         drawButton(keyBackground, undefined, false)
@@ -361,7 +367,7 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 function getPNJName() {
     let namePNJ = ""
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[1].seePlayer) {
             namePNJ = PNJ[0]
         }
@@ -374,7 +380,9 @@ function getPNJName() {
 function getPNJSeePlayer(namePNJ) {
     let echangePNJ = false
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+
+
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].seePlayer
         }
@@ -383,29 +391,41 @@ function getPNJSeePlayer(namePNJ) {
 }
 
 
-//~ Recupere si le PNJ peut faire un echange 
+//~ Recupere les echanges d'un PNJ 
 function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].echange
-
-        } else if(echangePNJ != undefined ){
+        } else if (echangePNJ != undefined) {
             return undefined
         }
     });
     return echangePNJ
 }
 
+//~ Recupere les discussions d'un PNJ 
+function getTalkPNJ(namePNJ) {
 
-//~ Recupere les items et son nom
+    let talkPNJ = []
+
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
+        if (PNJ[0] == namePNJ) {
+            talkPNJ = PNJ[1].discussions
+        } else if (talkPNJ != undefined) {
+            return undefined
+        }
+    });
+    return talkPNJ
+}
+//~ Recupere les items avec nom
 function getItems(nameItem) {
 
     let item = {}
 
-    Object.entries(ForItems.Items).forEach(element => {
+    Object.entries(itemsJSON.Items).forEach(element => {
         if (element[0] == nameItem) {
             item = element[1]
         }
@@ -461,8 +481,6 @@ function getIndexOfItemCategory(itemCategory) {
 }
 
 
-
-
 //~ Troc
 function troc(requis, gain) {
     let canTradeThisObject = false
@@ -492,12 +510,13 @@ function troc(requis, gain) {
             playerAnswersYes = false
             haveToTrade = false
         }
-    }
-    else {
+    } else {
         popUp("Vous n'avez pas les objets requis !")
     }
 
 }
+
+
 
 //~ Pop up
 function popUp(message, options = "info") {
@@ -511,7 +530,7 @@ function popUp(message, options = "info") {
     // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(BackPop, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {
@@ -540,8 +559,7 @@ function popUp(message, options = "info") {
         }
 
 
-    }
-    else if (options == "choice") {
+    } else if (options == "choice") {
 
         waitingAnswer = true;
 
@@ -587,4 +605,348 @@ function popUp(message, options = "info") {
             PressInteractPNJ = false
         }
     }
+}
+
+
+function getSpeed(seconds, meters) {
+    const distanceEnKm = meters / 1000;
+    const tempsEnHeures = seconds / 3600;
+    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
+    return Math.round(vitesseEnKmh);
+  }
+
+
+
+function resetJsons(){
+    ennemiesJSON = loadJSON("json/Ennemis.json");
+    pnjJSON = loadJSON("json/PNJ.json");
+    
+    //? Pas besoin de reload les json dont les donnees ne changent pas 
+    // allDoors = loadJSON("json/Doors.json");
+    // adminJSON = loadJSON("json/Admin.json");
+    // Houses = loadJSON("json/Houses.json");
+    itemsJSON = loadJSON("json/Items.json");
+    // Maps = loadJSON("json/Maps.json");
+    // World = loadJSON("json/World.json");
+}
+
+
+function timeConversion(seconds) {
+    const heures = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondes = seconds % 60;
+
+    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
+
+    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+}
+
+function getSpeed(seconds, meters) {
+    const distanceEnKm = meters / 1000;
+    const tempsEnHeures = seconds / 3600;
+    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
+    return Math.round(vitesseEnKmh);
+}
+
+
+
+function shakeCamera(durationSeconds, forcePixels) {
+    shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
+    shakeForce = forcePixels;
+}
+
+
+function resetJsons() {
+    ennemiesJSON = loadJSON("json/Ennemis.json");
+    pnjJSON = loadJSON("json/PNJ.json");
+
+    //? Pas besoin de reload les json dont les donnees ne changent pas 
+    // allDoors = loadJSON("json/Doors.json");
+    // adminJSON = loadJSON("json/Admin.json");
+    // Houses = loadJSON("json/Houses.json");
+    itemsJSON = loadJSON("json/Items.json");
+    // Maps = loadJSON("json/Maps.json");
+    // World = loadJSON("json/World.json");
+}
+
+
+
+
+
+function initVariables() {
+    //& Debug Mod
+    debugMod = init_debugMod;
+
+
+    //& Moteur de jeu
+    engineOne = init_engineOne;
+    fpsLevel = init_fpsLevel;
+
+    //& Le bloc qui tue (littéralement)
+    killingBlock = init_killingBlock;
+
+
+    //& Admins
+    username = init_username;
+    password = init_password;
+
+
+    //& Camera
+    cameraShakeEnabled = init_cameraShakeEnabled;
+
+    shakeDuration = init_shakeDuration
+    shakeForce = init_shakeForce
+
+    //~ ========= Mode SMOOTH ========= 
+    smoothCamera = init_smoothCamera;
+    smoothCameraSpeed = init_smoothCameraSpeed;
+    cameraSpeedR = init_cameraSpeedR;
+    newCharacterMovesSpeedR = init_newCharacterMovesSpeedR;
+    cameraSpeedL = init_cameraSpeedL;
+    newCharacterMovesSpeedL = init_newCharacterMovesSpeedL;
+    backgroundSpeed = init_backgroundSpeed;
+    backgroundSmoothSpeed = init_backgroundSmoothSpeed;
+
+
+    //& Background
+    backgroundX = init_backgroundX;
+
+
+    //& Character
+    //~ Textures / Outils du Personnage
+    characterTextureList = init_characterTextureList;
+    characterAnimationIndex = init_characterAnimationIndex;
+    characterAnimationFramePassed = init_characterAnimationFramePassed;
+    characterDirection = init_characterDirection;
+    characterLastDirection = init_characterLastDirection;
+    characterMovement = init_characterMovement;
+    characterLastMovement = init_characterLastMovement;
+    characterSpriteWidth = init_characterSpriteWidth;
+    characterSpriteHeight = init_characterSpriteHeight;
+
+    //~ caractéristiques du perso
+    //? Positions
+    characterInsidePosX = init_characterInsidePosX;
+    characterInsidePosY = init_characterInsidePosY;
+    characterPositionX = init_characterPositionX;
+    characterPositionY = init_characterPositionY;
+    previousPlayerX = init_previousPlayerX;
+    previousPlayerY = init_previousPlayerY;
+    characterWidth = init_characterWidth;
+    characterHeight = init_characterHeight;
+    characterBoundingBoxWidth = init_characterBoundingBoxWidth;
+    characterBoundingBoxHeight = init_characterBoundingBoxHeight;
+    characterBoundingBoxHeightInside = init_characterBoundingBoxHeightInside;
+    characterBoundingBoxWidthInside = init_characterBoundingBoxWidthInside;
+    characterMovesSpeed = init_characterMovesSpeed;
+    characterHitting = init_characterHitting;
+    characterComboHitting = init_characterComboHitting;
+    characterComboHittingDouble = init_characterComboHittingDouble;
+    lastHit = init_lastHit;
+
+    //? Saut
+    characterMass = init_characterMass;
+    characterJumpHeight = init_characterJumpHeight;
+    characterVelocityY = init_characterVelocityY;
+    characterVelocityYMin = init_characterVelocityYMin;
+    characterVelocityYMax = init_characterVelocityYMax;
+    characterIsGrounded = init_characterIsGrounded;
+    characterJumpCount = init_characterJumpCount;
+    characterMaxJumps = init_characterMaxJumps;
+    characterDoubleJumping = init_characterDoubleJumping;
+    characterIsJumping = init_characterIsJumping;
+    haveToJump = init_haveToJump;
+
+    //? Dash
+    dashSystem = init_dashSystem;
+    characterIsDashing = init_characterIsDashing;
+    lastDashTime = init_lastDashTime;
+    dashCooldown = init_dashCooldown;
+    dashTime = init_dashTime;
+    dashForce = init_dashForce;
+
+
+    //& Animations
+    animationSpeed = init_animationSpeed;
+    textDialogSpeed = init_textDialogSpeed;
+
+
+    //& Grille
+    rectWidth = init_rectWidth;
+    rectHeight = init_rectHeight;
+
+    xStartWorld = init_xStartWorld;
+    yStartWorld = init_yStartWorld;
+
+    arrayMap = init_arrayMap;
+
+
+    //& Maisons
+    xStartHouse = init_xStartHouse;
+    yStartHouse = init_yStartHouse;
+
+
+    //& Interfaces
+    //~ Interfaces
+    interactionWidth = init_interactionWidth;
+    interactionHeight = init_interactionHeight;
+
+    viewportDisplayWidth = init_viewportDisplayWidth;
+    viewportDisplayHeight = init_viewportDisplayHeight;
+
+    buttonWidthClassic = init_buttonWidthClassic;
+    buttonHeightClassic = init_buttonHeightClassic;
+    buttonWidthBIG = init_buttonWidthBIG;
+    buttonHeightBIG = init_buttonHeightBIG;
+
+    //~ Jeu
+    inGame = init_inGame;
+    gameIsPaused = init_gameIsPaused;
+    gameIsPlaying = init_gameIsPlaying;
+
+    //~ Parametres
+    settingsPause = init_settingsPause;
+
+    //~ Barre de vie
+    lifeBarSize = init_MargeBarVie;
+    healthPlayer = init_healthPlayer;
+    maxHealth = init_maxHealth;
+    pressingKey = init_pressingKey;
+    gettingHurt = init_gettingHurt;
+    gettingHeal = init_gettingHeal;
+    addHeart = init_addHeart;
+    removeHeart = init_removeHeart;
+
+    //~ Inventaire
+    Inventory[0] = init_Inventory[0];
+    Inventory[1] = init_Inventory[1];
+    Inventory[2] = init_Inventory[2];
+    widthSlot = init_WidthSlot;
+    heightSlot = init_HeightSlot;
+    slotX = init_slotX;
+    endInventory = init_endInventory;
+    waitingButton = init_waitingButton;
+
+    //~ Jauge quand on mange
+    characterIsEating = init_characterIsEating;
+
+    gaugeSize = init_gaugeSize;
+    gaugeSpeed = init_gaugeSpeed;
+
+    topGaugeLevel = init_topGaugeLevel;
+    rightGaugeLevel = init_rightGaugeLevel;
+    bottomGaugeLevel = init_bottomGaugeLevel;
+    leftGaugeLevel = init_leftGaugeLevel;
+
+
+    //& Audio
+    //~ Musique
+    musicButtonColor = init_ColorForRectMusic;
+    musicEnabled = init_MusicIsActivate;
+    canPlayMusic = init_YouCanPlayMusic;
+
+    //~ Sons
+    soundButtonColor = init_ColorForRectSong;
+    soundEnabled = init_SongIsActivate;
+
+
+    //& Evenements
+    //~ Touches
+    Pressing = init_Pressing;
+    spaceKeyIsPressed = init_spaceKeyIsPressed;
+    rightArrowPressed = init_rightArrowPressed;
+    leftArrowPressed = init_leftArrowPressed;
+    highArrowPressed = init_highArrowPressed;
+    downArrowPressed = init_downArrowPressed;
+    dashKeyIsPressed = init_dashKeyIsPressed;
+    leftClickPressed = init_leftClickPressed;
+    leftClickWasPressed = init_leftClickWasPressed;
+
+    canEnterInHouse = init_canEnterInHouse;
+    canGoOutTheHouse = init_canGoOutTheHouse;
+
+    //~ PNJ
+    canInteractWithPNJ = init_canInteractWithPNJ;
+    PressInteractPNJ = init_PressInteractPNJ;
+    canTalkWithPNJ = init_canTalkWithPNJ;
+    PressTalkPNJ = init_PressTalkPNJ;
+    currentTextSpeaking = init_currentTextSpeaking;
+    currentIndexTextSpeaking = init_currentIndexTextSpeaking;
+
+    //~  Portes
+    behindThisDoor = init_behindThisDoor;
+    engine1WidthDoors = init_engine1WidthDoors;
+    engine1HeightDoors = init_engine1HeightDoors;
+    engine2WidthDoors = init_engine2WidthDoors;
+    engine2HeightDoors = init_engine2HeightDoors;
+    doorInTaverne = init_doorInTaverne;
+
+    //~ Mort
+    playerDead = init_playerDead;
+
+    //~ Popups
+    popUpShown = init_popUpShown;
+    playerAnswersYes = init_playerAnswersYes;
+
+
+    //& Statistiques
+    numberOfSteps = init_numberOfSteps;
+
+
+    //& Items
+    itemList = init_itemList;
+
+
+    //& Troc
+    waitingAnswer = init_waitingAnswer;
+    haveToTrade = init_haveToTrade;
+    slotSize = init_slotSize;
+    itemSize = init_itemSize;
+    stackSize = init_stackSize;
+
+
+    //& FPS
+    fpsActivate = init_fpsActivate;
+    FPSButtonColor = init_FPSButtonColor;
+
+
+    //& Physique
+    gravityForce = init_gravityForce;
+
+
+    //& Cinématiques
+    cinematicStarted = init_cinematicStarted;
+    musicCinematic = init_musicCinematic;
+    endCinematic = init_endCinematic;
+
+
+    statistiques = init_statistiques;
+
+
+    //? Viewport
+    if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
+        viewportDisplayWidth = windowWidth
+        viewportDisplayHeight = windowHeight
+    }
+
+    //* Reset toutes les statistiques sauf le nombre de morts 
+    statistiques.distanceWalked = init_statistiques.distanceWalked
+    statistiques.totalJumpCount = init_statistiques.totalJumpCount
+    statistiques.mobsKilled = init_statistiques.mobsKilled
+    statistiques.damagesDones = init_statistiques.damagesDones
+    statistiques.damagesGet = init_statistiques.damagesGet
+    statistiques.healCount = init_statistiques.healCount
+    ////statistiques.deathCount = init_statistiques.deathCount
+    statistiques.timeSpentInGame = init_statistiques.timeSpentInGame
+    statistiques.playerSpeed = init_statistiques.playerSpeed
+
+
+    tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
+    itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
+    tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+
+    resetJsons()
+
 }

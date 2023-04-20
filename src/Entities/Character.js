@@ -97,18 +97,9 @@ function moveDown(positionY, speed) {
 
 
 //* ajouter un saut à l'objet
-/**
- * 
- * @param {*} positionY 
- * @param {*} jumpHeight 
- * @param {*} velocityY 
- * @param {*} gravityForce 
- * @returns 
- */
 function addJump(positionY, jumpHeight, velocityY, gravityForce) {
   velocityY = -gravityForce;
   velocityY -= jumpHeight;
-
 
   return [positionY, velocityY]
 }
@@ -118,8 +109,9 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce) {
 function drawCharacter(positionX, positionY, width, height, direction, movement) {
   let timer = (round(millis() / animationSpeed)) % 2
 
-  characterTextureList = []
+  
 
+  characterTextureList = []
 
   //& Debug mod
   if (debugMod) {
@@ -129,49 +121,85 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     noStroke()
   }
 
-
   switch (movement) {
     //* animation MARCHER
     case "walk":
-      for (let y = 192; y < 224; y += characterSpriteHeight) {
-        for (let x = 0; x < 192; x += characterSpriteWidth) {
+      for (let y = (8*32); y < (9*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (6*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation IDLE
     case "idle":
-      for (let y = 64; y < 96; y += characterSpriteHeight) {
-        for (let x = 0; x < 64; x += characterSpriteWidth) {
+      for (let y = (4*32); y < (5*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation JUMP
     case "jump":
-      for (let y = 160; y < 192; y += characterSpriteHeight) {
-        for (let x = 0; x < 128; x += characterSpriteWidth) {
+      for (let y = (7*32); y < (8*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (4*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation DASH
     case "dash":
-      for (let y = 128; y < 160; y += characterSpriteHeight) {
-        for (let x = 0; x < 64; x += characterSpriteWidth) {
+      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
     //* animation FRAPPER
     case "hit":
-      for (let y = 32; y < 64; y += characterSpriteHeight) {
-        for (let x = 0; x < 128; x += characterSpriteWidth) {
+      for (let y = (1*32); y < (2*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-  }
+    //* animation FRAPPER
+    case "hit2":
+      for (let y = (2*32); y < (3*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation FRAPPER
+    case "hit3":
+      for (let y = (3*32); y < (4*32); y += characterSpriteHeight) {
+        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation se faire FRAPPER
+    case "getHit":
+      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      break;
+    //* animation MOURIR
+    case "die":
+      for (let y = (6*32); y < (7*32); y += characterSpriteHeight) {
+        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+          characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
+        }
+      }
+      if (characterAnimationIndex >= characterTextureList.length-1) {
+        gameIsPlaying = false;
+        statistiques.deathCount++
+        drawDeath();
+      }
+      break;
+    }
 
   //? Remettre l'animation au début quand on change d'animation
   if (characterLastMovement != characterMovement) {
@@ -180,6 +208,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
   //* Changer de frame
+  
   if (timer && !characterAnimationFramePassed) {
     characterAnimationIndex++
     characterAnimationFramePassed = true
@@ -187,6 +216,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (!timer) {
     characterAnimationFramePassed = false
   }
+  
 
 
   //* Remettre l'index au début 
@@ -195,6 +225,12 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
     if (characterHitting) {
       characterHitting = false
+    }
+    if (characterComboHitting){
+      characterComboHitting = false
+    }
+    if (characterComboHittingDouble){
+      characterComboHittingDouble = false
     }
   }
 
@@ -217,6 +253,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 //~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
+  let touchThisObject = false;
+  
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -229,19 +267,33 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
         //? est relatif au perso
         characterVelocityY = 0;
+        touchThisObject = true
       }
       //* collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY) {
 
         agentY = objectY - agentHeight
 
+        //? Augmenter les statistiques
+        if (characterVelocityY > 0){
+          statistiques.totalJumpCount += characterJumpCount
+        }
+
+        //* si le joueur touche le sol, reset le nombre de saut 
+        if (characterJumpCount > 0 && characterVelocityY > 30){
+          shakeCamera(0.25, characterVelocityY/10)
+        }
         //? est relatif au perso
         characterJumpCount = 0;
         //? est relatif au perso
         characterIsJumping = false
+        
         //? est relatif au perso
-        if (!spaceKeyIsPressed)
+        if (!spaceKeyIsPressed){
           characterVelocityY = 0
+        }
+
+        touchThisObject = true
       }
     }
 
@@ -254,15 +306,17 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
       if (agentX + agentWidth > objectX && agentX > objectX) {
 
         agentX = objectX + objectWidth
+        touchThisObject = true
 
         //* collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
 
         agentX = objectX - agentWidth
+        touchThisObject = true
       }
     }
   }
-  return [agentX, agentY]
+  return [agentX, agentY, touchThisObject]
 }
 
 
@@ -275,22 +329,18 @@ function character() {
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
 
-  //* Contrôles du perso (gauche, droite)
-  characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
-
-  //* Limites de la velocité Y du perso
-  characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
-
+  //~ Empêcher le joueur de bouger s'il est mort
+  if (healthPlayer) {
+    //* Contrôles du perso (gauche, droite)
+    characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
+    
+    statistiques.distanceWalked = round(-(xStartWorld / rectWidth)); 
+    
+    //* Limites de la velocité Y du perso
+    characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
+  }
 
   //#region //* Mouvement de caméra
-
-
-  // rect(0, yStartWorld, 20, ((rectHeight*Maps.numberOfColumns)*World.worldsMap.length))
-  // fill(255, 0, 0)
-  // rect(10, yStartWorld, 20, rectHeight*Maps.numberOfColumns)
-
-
-
 
 
 
@@ -304,10 +354,7 @@ function character() {
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld + ((rectWidth * Maps.numberOfRow) * World.worldsMap[0].length) - width > 0) {
 
-
-
         //? le monde bouge vers la gauche (la caméra se décale vers la droite)
-
         cameraSpeedR = lerp(cameraSpeedR, characterMovesSpeed, smoothCameraSpeed)
         newCharacterMovesSpeedR = lerp(newCharacterMovesSpeedR, characterMovesSpeed, smoothCameraSpeed)
 
@@ -327,12 +374,10 @@ function character() {
     //? si mon perso est à GAUCHE de l'écran
     if (characterPositionX < width / 2 - 1) {
 
-
       //? si mon écran n'est pas le plus à gauche possible
       if (xStartWorld < 0) {
 
         //? le monde bouge vers la droite (la caméra se décale vers la gauche)
-
         cameraSpeedL = lerp(cameraSpeedL, characterMovesSpeed, smoothCameraSpeed)
         newCharacterMovesSpeedL = lerp(newCharacterMovesSpeedL, characterMovesSpeed, smoothCameraSpeed)
 
@@ -345,8 +390,8 @@ function character() {
       newCharacterMovesSpeedL = 0
     }
 
-    //* ========= Si le mode SMOOTH n'est pas activé =========
   } else {
+    //* ========= Si le mode SMOOTH n'est pas activé =========
 
     //* caméra mouvements droite
     //? si mon perso est à DROITE de l'écran
@@ -380,9 +425,6 @@ function character() {
       }
     }
   }
-
-
-
 
 
   //* caméra mouvements bas
@@ -438,45 +480,48 @@ function character() {
 
   //#region 
   //~ saut du personnage
-  if (spaceKeyIsPressed) {
+  if (spaceKeyIsPressed && healthPlayer) {
     //* le saut du personnage
-    if (!characterIsJumping && characterJumpCount < characterMaxJumps) {
-
-      characterIsJumping = true;
-      characterDoubleJumping = false;
-      characterJumpCount++;
-
-      let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
-
-
-      characterPositionY = jumpReturns[0];
-      characterVelocityY = jumpReturns[1];
-
-
-      //* le double saut du personnage  
-    } else if (characterDoubleJumping && characterJumpCount < characterMaxJumps) {
-      characterDoubleJumping = false;
-      characterJumpCount++;
-
-      let jumpReturns = addJump(characterPositionY,
-        characterJumpHeight,
-        characterVelocityY,
-        gravityForce)
-      characterPositionY = jumpReturns[0];
-      characterVelocityY = jumpReturns[1];
-
+    if (characterJumpCount < characterMaxJumps){
+      
+      if (!characterIsJumping) {
+  
+        characterIsJumping = true;
+        characterDoubleJumping = false;
+        characterJumpCount++;
+  
+        let jumpReturns = addJump(characterPositionY,
+          characterJumpHeight,
+          characterVelocityY,
+          gravityForce)
+          
+        characterPositionY = jumpReturns[0];
+        characterVelocityY = jumpReturns[1];
+  
+        statistiques.totalJumpCount++
+        
+          
+  
+  
+        //* le double saut du personnage  
+      } else if (characterDoubleJumping) {
+        characterDoubleJumping = false;
+        characterJumpCount++;
+  
+        let jumpReturns = addJump(characterPositionY,
+          characterJumpHeight,
+          characterVelocityY,
+          gravityForce)
+        characterPositionY = jumpReturns[0];
+        characterVelocityY = jumpReturns[1];
+          
+        statistiques.totalJumpCount++
+      }
     }
+    
+    
   }
 
-  //* si le joueur touche le sol, reset le nombre de saut 
-  if (characterIsGrounded) {
-    characterIsJumping = false;
-    characterJumpCount = 0
-    characterVelocityY = 0
-  }
 
   //#endregion
 
@@ -517,7 +562,7 @@ function character() {
     //* Pour chaque carré dans le tableau 
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (let column = 0; column < currentMapTableColliders[row].length; column++) {
-
+        let touchThisObject = false
         //? Lui donner une collision
         let thisObject = currentMapTableColliders[row][column]
 
@@ -529,14 +574,18 @@ function character() {
 
 
         if (thisObject > 0) {
-          [characterPositionX, characterPositionY] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+          
+          
+          //~ Tuer le joueur quand il marche sur le bloc 238
+          if (thisObject == killingBlock && touchThisObject){
+            hurtPlayer(1)
+          }
         }
+
       }
     }
   }
-
-
-
   //#endregion
 
 
@@ -544,17 +593,26 @@ function character() {
   //~ roulade du perso
 
   const currentTime = millis();
-  if (dashKeyIsPressed && !characterIsDashing && (!characterIsJumping && characterVelocityY == 0) && (currentTime - lastDashTime > dashCooldown)) {
-    characterIsDashing = true;
 
-    lastDashTime = currentTime;
+  if (dashSystem){
+    if (
+      dashKeyIsPressed &&
+      !characterIsDashing &&
+      !characterIsJumping &&
+      characterVelocityY == 0 &&
+      currentTime - lastDashTime > dashCooldown
+    ) {
+      characterIsDashing = true;
 
-    characterMovesSpeed *= dashForce
+      lastDashTime = currentTime;
 
-    setTimeout(function () {
-      characterIsDashing = false;
-      characterMovesSpeed /= dashForce
-    }, dashTime)
+      characterMovesSpeed *= dashForce;
+
+      setTimeout(function () {
+        characterIsDashing = false;
+        characterMovesSpeed /= dashForce;
+      }, dashTime);
+    }
   }
 
   //#endregion
@@ -563,52 +621,87 @@ function character() {
   //#region 
   //~ affichage du personnage
 
-  if (characterIsJumping) {
-    if (rightArrowPressed) {
-      characterDirection = "right"
-      characterMovement = "jump"
-    } else if (leftArrowPressed) {
-      characterDirection = "left"
-      characterMovement = "jump"
-    } else {
-      characterDirection = characterLastDirection
-      characterMovement = "jump"
-    }
-  } else {
-    if (characterIsDashing) {
+  if (characterMovement != "die"){
+    if (characterIsJumping) {
       if (rightArrowPressed) {
         characterDirection = "right"
-        characterMovement = "dash"
+        characterMovement = "jump"
       } else if (leftArrowPressed) {
         characterDirection = "left"
-        characterMovement = "dash"
+        characterMovement = "jump"
+      } else {
+        characterDirection = characterLastDirection
+        characterMovement = "jump"
       }
     } else {
-      if (characterHitting) {
+      if (characterIsDashing) {
         if (rightArrowPressed) {
           characterDirection = "right"
-          characterMovement = "hit"
+          characterMovement = "dash"
         } else if (leftArrowPressed) {
           characterDirection = "left"
-          characterMovement = "hit"
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "hit"
+          characterMovement = "dash"
         }
       } else {
-        if (rightArrowPressed) {
-          characterDirection = "right"
-          characterMovement = "walk"
-        } else if (leftArrowPressed) {
-          characterDirection = "left"
-          characterMovement = "walk"
-        } else {
-          characterDirection = characterLastDirection
-          characterMovement = "idle"
+        if (characterHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit"
+              
+          }
+        } else if (characterComboHitting) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit2"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit2"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit2"
+              
+          } 
+        } else if (characterComboHittingDouble) {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "hit3"
+              
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "hit3"
+              
+          } else {
+            characterDirection = characterLastDirection
+            characterMovement = "hit3"
+              
+          } 
+        }else {
+          if (rightArrowPressed) {
+            characterDirection = "right"
+            characterMovement = "walk"
+          } else if (leftArrowPressed) {
+            characterDirection = "left"
+            characterMovement = "walk"
+          } else {
+            characterDirection = characterLastDirection
+            if (characterMovement != "getHit" && healthPlayer){
+              characterMovement = "idle"
+            }
+          }
         }
       }
+  
     }
-
   }
 
 
@@ -623,16 +716,17 @@ function character() {
     characterMovement)
 
   //#endregion
-
 }
 
 
 
-
-
-//^ Système du personnage pour le moteur de vue 2
+//^ --------------------------------------------------------------------------
+//^                 Système du personnage pour le moteur de vue 2             
+//^ --------------------------------------------------------------------------
 function characterView2() {
   let timer = (round(millis() / animationSpeed)) % 2
+
+  characterLastMovement = characterMovement
 
   //#region 
   //~ Contrôles du perso (gauche, droite, haut, bas)
@@ -651,7 +745,6 @@ function characterView2() {
   //? si mon perso est à DROITE de l'écran
   if (characterInsidePosX > width - width / 4) {
 
-
     //? le monde bouge vers la gauche (la caméra se décale vers la droite)
     xStartHouse -= characterMovesSpeed
     characterInsidePosX -= characterMovesSpeed
@@ -661,7 +754,7 @@ function characterView2() {
   //* caméra mouvements gauche
 
   //? si mon perso est à GAUCHE de l'écran
-  if (characterInsidePosX < width / 4) {
+  if (characterInsidePosX < width / 3.5) {
 
 
     //? le monde bouge vers la droite (la caméra se décale vers la gauche)
@@ -695,12 +788,13 @@ function characterView2() {
   //~ Collisions 
 
   //* Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses[behindThisDoor].layers[1]
+  let currentMapTableColliders = Houses[behindThisDoorHouse].layers[1]
+
 
   //* Pour chaque carré dans le tableau 
   for (let row = 0; row < currentMapTableColliders.length; row++) {
     for (let column = 0; column < currentMapTableColliders[row].length; column++) {
-
+      let touchThisObject = false
       //? Lui donner une collision
       let thisObject = currentMapTableColliders[row][column]
 
@@ -711,46 +805,35 @@ function characterView2() {
       if (thisObject > 0) {
 
         //? pour faire en vue TOP DOWN -> rectHeight/3
-        [characterInsidePosX, characterInsidePosY] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+        [characterInsidePosX, characterInsidePosY, touchThisObject] = handleCollisionCharacter(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
       }
     }
   }
 
-
-
-
-  //* Changer de frame
-  if (timer && !characterAnimationFramePassed) {
-    characterAnimationIndex++
-    characterAnimationFramePassed = true
-  }
-  if (!timer) {
-    characterAnimationFramePassed = false
-  }
-
-
-
-
+  //~ Assigner les différents mouvements
   if (rightArrowPressed) {
     characterDirection = "right"
     characterMovement = "walk"
   } else if (leftArrowPressed) {
     characterDirection = "left"
     characterMovement = "walk"
-  } else if(highArrowPressed){
+  } else if (highArrowPressed) {
     characterDirection = characterLastDirection
     characterMovement = "walk"
-  } 
-  else if (downArrowPressed) {
+  } else if (downArrowPressed) {
     characterDirection = characterLastDirection
     characterMovement = "walk"
-
-  } 
-  else {
+  } else {
     characterDirection = characterLastDirection
-    characterMovement = "idle"
+    if (characterMovement != "getHit" && healthPlayer){
+      characterMovement = "idle"
+    }
   }
+        
+      
+
+
 
   characterLastDirection = characterDirection
   //#endregion
@@ -758,14 +841,22 @@ function characterView2() {
   //#region 
   //~ Affichage du perso
 
-  characterBoundingBoxHeightInside = 30
 
-  drawCharacter(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+
+  drawCharacter(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight, characterDirection, characterMovement)
+
+
+  
   if(debugMod){
-    stroke(50,50,50,50)
-    fill(255,0,0,70)
-    rect(characterInsidePosX, characterInsidePosY - (characterHeight - characterBoundingBoxHeightInside), characterWidth, characterHeight, characterDirection,characterMovement)
+    stroke(255, 0, 0)
+    fill(255, 0, 0, 70)
+    rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside)
+    fill(0,255,0,70)
+    rect(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight)
+    noStroke()
   }
+
+  //- (characterHeight - characterBoundingBoxHeightInside)
 
   //#endregion
 

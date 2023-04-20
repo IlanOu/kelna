@@ -3,12 +3,20 @@
 
       "Malade1": {
         "type": "Malade1",
-        "damages": 5,
-        "hit": false,
+        "isAThreat": false,
+        "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
+        "isDead": false,
+        "beingHit": false,
 
-        "color": "red",
+        
+        "life": 3,
+        
+        "damages": 1,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
+
+        "color": "yellow",
 
         "detectDistX": 8,
         "detectDistY": 8,
@@ -17,9 +25,8 @@
         "x": 900,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -31,7 +38,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 3,
         "isFollowing": false,
@@ -47,12 +54,19 @@
 
       "Malade2": {
         "type": "Malade2",
-        "damages": 5,
-        "hit": false,
+        "isAThreat": true,
+        "getHit": false,
         "haveBeenHit": false,
-        "life": 3,
+        "isDead": false,
+        "beingHit": false,
+        
+        "life": 5,
+        
+        "damages": 1,
+        "attackInterval": 1.2,
+        "lastAttackTime": 0,
 
-        "color": "red",
+        "color": "blue",
 
         "detectDistX": 8,
         "detectDistY": 8,
@@ -61,9 +75,8 @@
         "x": 0,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
-        "globalStartX": 400,
+        "globalStartX": 5,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -75,7 +88,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,
@@ -91,8 +104,8 @@
 
       "Enn2": {
         "type": "Chevalier",
-        "damages": 10,
-        "hit": false,
+        "damages": 1,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 
@@ -105,9 +118,8 @@
         "x": 600,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -119,7 +131,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,
@@ -136,7 +148,7 @@
       "Enn1": {
         "type": "Archer",
         "damages": 10,
-        "hit": false,
+        "getHit": false,
         "haveBeenHit": false,
         "life": 2,
 
@@ -149,9 +161,8 @@
         "x": 600,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -163,7 +174,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,

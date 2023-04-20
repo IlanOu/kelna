@@ -1,16 +1,15 @@
 {
   "PNJS": {
-    "PNJ1": {
-      "color": "blue",
+    "Charle": {
+      "mapName": "taverne",
 
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 0,
+      "x": 600,
       "y": 0,
 
-      "xStart": 0,
       "globalStartX": 250,
       "globalStartY": 80,
 
@@ -24,8 +23,8 @@
       "width": 80,
       "height": 80,
 
-      "distance": 50,
-      "speed": 2,
+      "distance": 0,
+      "speed": 0,
       "followSpeed": 4,
 
       "stepCount": 0,
@@ -37,10 +36,78 @@
 
       "name":"Charle",
 
-      "canInteractPNJ":false
+      "canInteractPNJ": true,
+
+      "echange": [
+        {
+          "demande": ["sword_2"],
+          "donne": ["sword_3"]
+        },
+        {
+          "demande": ["sword_1"],
+          "donne": ["sword_2"]
+        },
+        {
+          "demande": ["food_1"],
+          "donne": ["sword_1"]
+        }
+      ]
+    },
+    "Toto": {
+      "mapName": "Tileset-1",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 100,
+      "y": 0,
+
+      "globalStartX": 5,
+      "globalStartY": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 3,
+      "speed": 2,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "name":"Toto",
+
+      "canInteractPNJ": true,
+
+      "echange": [
+        {
+          "demande": ["sword_2"],
+          "donne": ["sword_3"]
+        },
+        {
+          "demande": ["sword_1"],
+          "donne": ["sword_2"]
+        },
+        {
+          "demande": ["food_1"],
+          "donne": ["sword_1"]
+        }
+      ]
     },
     "Marjo": {
-      "color": "green",
+      "mapName": "Tileset-2",
 
       
       "name": "Marjo",
@@ -52,8 +119,6 @@
       "x": 0,
       "y": 200,
 
-      "xStart": 0,
-      "xEnd": 0,
       "globalStartX": 0,
 
       "velocityY": 0,
@@ -79,58 +144,29 @@
 
       "canInteractPNJ": true,
 
-      "echange": [
+      "step": 0,
+      "discussions": [
         {
-          "demande": ["sword_2"],
-          "donne": ["sword_3"]
+          "text": "Bonjour jeune entrepreneur", 
+          "itemsNameRequired": ["none"]
+        }, 
+        {
+          "text": "j'ai besoin que tu me ramène une épée ! Ou une pomme !",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["sword_1"],
-          "donne": ["sword_2"]
-        },
+          "text" : "C'est très gentil, je vais te donner une information géniale en échange !",
+          "itemsNameRequired": ["sword_1", "food_1"]
+        }, 
         {
-          "demande": ["food_1"],
-          "donne": ["sword_1"]
+         "text": "Un combat entre deux trans, c'est un combat sans gland !",
+         "itemsNameRequired": ["none"]  
+        }, 
+        {
+         "text": "Hahahahahahahaha",
+         "itemsNameRequired": ["none"]  
         }
       ]
-    },
-    "PNJ2": {
-      "color": "purple",
-
-      "name":"PNJ2",
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 500,
-      "y": 200,
-
-      "xStart": 10,
-      "xEnd": 20,
-      "globalStartX": 800,
-
-      "velocityY": 0,
-      "mass": 10,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 500,
-      "speed": 1.5,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canInteractPNJ":false
     }
   }
 }

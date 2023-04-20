@@ -1,34 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="src/P5Lib/p5.js"></script>
     <script src="src/P5Lib/p5.sound.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
   </head>
   <body>
 
+    <!--& Utilitaires -->
+    <script src="src/Datas/InitDatas.js"></script>
     <script src="Configuration.js"></script>
+    <script src="src/Utilities/admins.js"></script>
     <script src="src/tools.js"></script>
     <script src="src/Map/Background.js"></script>
     <script src="src/Map/Grid.js"></script>
-    <script src="src/Entities/Character.js"></script>
     
     <!--& Interfaces -->
     <script src="src/GUI/UI.js"></script>
     <script src="src/GUI/keypress.js"></script>
     <script src="src/GUI/Cinematic.js"></script>
     <script src="src/GUI/Inventory.js"></script>
-
+    
     <!--& Entités -->
+    <script src="src/Entities/Character.js"></script>
     <script src="src/Entities/Mobs.js"></script>
     <script src="src/Entities/PNJ.js"></script>
     <script src="src/Entities/Ennemis.js"></script>
     <script src="src/Entities/Doors.js"></script>
 
     <script src="sketch.js"></script>
-    
+
   </body>
+
 </html>

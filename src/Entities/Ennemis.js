@@ -4,8 +4,8 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    mob(ForEnnemis.Ennemis.Malade1);
-    mob(ForEnnemis.Ennemis.Malade2);
+    mob(ennemiesJSON.Ennemis.Malade1);
+    mob(ennemiesJSON.Ennemis.Malade2);
   }
 }
 
@@ -13,21 +13,24 @@ function MobManager() {
 //^ /*                                     MOB                                    */
 //^ /* -------------------------------------------------------------------------- */
 
-/**
- *
- * @param {object} Mobs
- */
 function mob(Mobs) {
-  if (Mobs.life) {
+  
+  //? Le mob n'est plus calculé quand il n'est pas affiché
+  let mapsToCheckColliders = getMapsToCheck(characterPositionX, characterPositionY)
+  let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
+
+  if ((Mobs.life || !Mobs.isDead) && found) {
     //* Initialisation des variables
 
-    let MobStart = Mobs.globalStartX + xStartWorld;
-    let MobDistance = Mobs.distance + Mobs.globalStartX;
-    let MobEnd = Mobs.globalStartX + MobDistance + xStartWorld;
+    let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+    let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
+
+    let MobStart = positionsStart.pixelX;
+    let MobEnd = positionsEnd.pixelX;
 
 
-    Mobs.x = xStartWorld + Mobs.stepCount;
-    Mobs.y = Mobs.y;
+    Mobs.x = MobStart + xStartWorld + Mobs.stepCount;
 
     let MobsX = Mobs.x;
     let MobsY = Mobs.y;
@@ -64,9 +67,7 @@ function mob(Mobs) {
       //? Pour chaque carré dans le tableau
       for (let row = 0; row < currentMapTableColliders.length; row++) {
         for (
-          let column = 0;
-          column < currentMapTableColliders[row].length;
-          column++
+          let column = 0; column < currentMapTableColliders[row].length; column++
         ) {
           //? Lui donner une collision
           let thisObject = currentMapTableColliders[row][column];
@@ -138,7 +139,6 @@ function mob(Mobs) {
     Mobs.isJumping = MobsIsJumping;
     Mobs.jumpCount = MobsJumpCount;
 
-    Mobs.distance = MobDistance;
     Mobs.xStart = MobStart;
     Mobs.xEnd = MobEnd;
     Mobs.haveToJump = collide;
@@ -205,9 +205,10 @@ let mobMovements = (Mobs) => {
     lookThePlayer(Mobs);
 
     //? Afficher un !
-    fill(255, 0, 0);
-    drawKeyAt("!", CurrentX, MobY);
-
+    if (Mobs.isAThreat) {
+      fill(255, 0, 0);
+      drawKeyAt("!", CurrentX, MobY);
+    }
     Mobs.movement = "idle";
   } else {
     if (Mobs.seePlayer) {
@@ -215,41 +216,102 @@ let mobMovements = (Mobs) => {
       lookThePlayer(Mobs);
 
       //? Afficher un !
-      fill(255, 0, 0);
-      drawKeyAt("!", CurrentX, MobY);
+      if (Mobs.isAThreat) {
+        fill(255, 0, 0);
+        drawKeyAt("!", CurrentX, MobY);
+      }
     } else {
       doRound(Mobs);
     }
   }
 
-  if (touchPlayer && characterHitting) {
-    if (characterDirection == "right") {
-      if (characterPositionX + characterWidth / 4 < CurrentX + Mobs.width / 2) {
-        Mobs.hit = true;
-        console.log("Frappé !");
-        Mobs.movement = "hit";
+  //* Si le mob est une menace (s'il peut t'attaquer)
+  if (Mobs.isAThreat) {
+    let characterCenterX = characterPositionX;
+    let mobsCenterX = CurrentX + Mobs.width / 2;
+
+
+    if (characterComboHitting && lastHit == "2"){
+      Mobs.haveBeenHit = false
+      Mobs.beingHit = false
+      Mobs.getHit = false;
+      lastHit = ""
+    }
+    
+    if (characterComboHittingDouble && lastHit == "3"){
+      Mobs.haveBeenHit = false
+      Mobs.beingHit = false
+      Mobs.getHit = false;
+      lastHit = ""
+    }
+
+    if (characterHitting || characterComboHitting || characterComboHittingDouble){
+      if (touchPlayer && !Mobs.haveBeenHit && !Mobs.beingHit) {
+        if (characterDirection == "right" && characterCenterX < mobsCenterX) {
+          Mobs.getHit = true;
+          Mobs.beingHit = true;
+          Mobs.movement = "getHit";
+         
+        } else if (characterDirection == "left" && characterCenterX > mobsCenterX) {
+          Mobs.getHit = true;
+          Mobs.beingHit = true;
+          Mobs.movement = "getHit";
+          
+        }
+        if (Mobs.life > 0) {
+          Mobs.indexFrame = 0
+          Mobs.life--;
+          Mobs.haveBeenHit = true;
+          statistiques.damagesDones++
+        }
       }
-    } else {
-      if (characterPositionX + characterWidth / 4 > CurrentX + Mobs.width / 2) {
-        Mobs.hit = true;
-        console.log("Frappé !");
-        Mobs.movement = "hit";
-      }
+    }
+
+
+    if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
+      Mobs.getHit = false;
+      Mobs.haveBeenHit = false;
+      Mobs.beingHit = false;
+    }
+
+    if (Mobs.getHit) {
+      Mobs.movement = "getHit";
+    }
+
+    if (Mobs.life <= 0) {
+      Mobs.movement = "die";
     }
   }
 
-  if (!characterHitting) {
-    Mobs.hit = false;
-    Mobs.haveBeenHit = false;
-  }
+  //~ -------------------------------------------------------------------------
+  //~                          Attaquer le joueur                              
+  //~ -------------------------------------------------------------------------
 
-  if (Mobs.hit && !Mobs.haveBeenHit) {
-    if (Mobs.life > 0) {
-      Mobs.life--;
-      Mobs.haveBeenHit = true;
+  let mobAttacking = false;
+
+  //? Si le MOB est une menace
+  if (touchPlayer && Mobs.isAThreat && !Mobs.getHit) {
+    if (healthPlayer > 0){
+      
+        //? Attaquer toutes les Mobs.attackInterval secondes
+        if (millis() - Mobs.lastAttackTime > Mobs.attackInterval * 1000) {
+          Mobs.lastAttackTime = millis();
+          healthPlayer -= Mobs.damages
+          statistiques.damagesGet += Mobs.damages
+          shakeCamera(0.25, Mobs.damages/2)
+          Mobs.indexFrame = 3
+          
+        }
+        mobAttacking = true;
     }
   }
-  // console.log(Mobs.life)
+
+  if (mobAttacking){
+    //* Synchroniser l'animation du Joueur avec l'animation du Mob
+    characterAnimationIndex = Mobs.indexFrame
+    Mobs.movement = "attacking";
+    characterMovement = "getHit"
+  }
 
   //* Debug Mod
   if (debugMod) {
@@ -304,111 +366,81 @@ function animationMobs(
 ) {
   CurrentMob.lastMovement = movement;
 
-  // fill(color);
-  // circle(positionX + 35, positionY - 25, 20);
-  image(pointEnnemis,positionX + 15, positionY - 52, 50,50);
+  image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
   let timer = round(millis() / animationSpeed) % 2;
 
   let MobTexturesList = [];
-
   //~ Changer d'animation en fonction du type
 
+  //& Selectionner la bonne spritesheet en fonction du type de mob
+  let currentSpriteSheet;
   switch (CurrentMob.type) {
-    case "Archer":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "hit") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
-
-      break;
-
     case "Malade1":
-      if (movement == "walk") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(malade1Sprite.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 64; x += 32) {
-            MobTexturesList.push(malade1Sprite.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "hit") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(malade1Sprite.get(x, y, 32, 32));
-          }
-        }
-      }
-
-      break;
-
-    case "Chevalier":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 64; x += 32) {
-            MobTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
+      currentSpriteSheet = malade1Sprite;
       break;
 
     case "Malade2":
-      if (movement == "walk") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 192; x += 32) {
-            MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 64; x += 32) {
-            MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "hit") {
-        for (let y = 96; y < 128; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
-          }
-        }
-      }
-      else if (movement == "jump") {
-        for (let y = 128; y < 160; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            MobTexturesList.push(malade2Sprite.get(x, y, 32, 32));
-          }
-        }
-      }
-
+      currentSpriteSheet = malade2Sprite
       break;
   }
 
-  //? Remettre l'animation au début quand on change d'animation
+  //& Selectionner la bonne ligne en fonction du mouvement
+  switch (movement) {
+    case "walk":
+      for (let y = 0; y < (1 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
+          MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+        }
+      }
+      break;
+    case "idle":
+      for (let y = (1 * 32); y < (2 * 32); y += 32) {
+        for (let x = 0; x < (2 * 32); x += 32) {
+          MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+        }
+      }
+      break;
+    case "getHit":
+      if (CurrentMob.isAThreat) {
+        for (let y = (3 * 32); y < (4 * 32); y += 32) {
+          for (let x = 0; x < (2 * 32); x += 32) {
+            MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+          }
+        }
+      }
+      break;
+    case "attacking":
+      if (CurrentMob.isAThreat) {
+        for (let y = (2 * 32); y < (3 * 32); y += 32) {
+          for (let x = (0 * 32); x < (6 * 32); x += 32) {
+            MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+          }
+        }
+      }
+      break;
+    case "jump":
+      for (let y = (4 * 32); y < (5 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
+          MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+        }
+      }
+      break;
+    case "die":
+      for (let y = (5 * 32); y < (6 * 32); y += 32) {
+        for (let x = 0; x < (4 * 32); x += 32) {
+          MobTexturesList.push(currentSpriteSheet.get(x, y, 32, 32));
+        }
+      }
+      if (CurrentMob.indexFrame >= MobTexturesList.length - 2) {
+        CurrentMob.isDead = true;
+        statistiques.mobsKilled++
+      }
+      break;
+  }
+
+
+  //* Remettre l'animation au début quand on change d'animation
   if (CurrentMob.lastMovement != movement) {
     CurrentMob.indexFrame = 0;
   }
@@ -430,11 +462,11 @@ function animationMobs(
 
   let MobCurrentTextures = MobTexturesList[CurrentMob.indexFrame];
 
+  //* direction DROITE
   if (direction == "right") {
     image(MobCurrentTextures, positionX, positionY, width, height);
-
-    //* direction GAUCHE
   } else if (direction == "left") {
+    //* direction GAUCHE
     scale(-1, 1);
     image(MobCurrentTextures, -positionX - width, positionY, width, height);
     scale(-1, 1);

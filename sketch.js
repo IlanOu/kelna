@@ -1,5 +1,9 @@
+p5.disableFriendlyErrors = true;
+
 //~ Setup 
 function setup() {
+  
+  initVariables()
 
   //? Viewport
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
@@ -12,100 +16,111 @@ function setup() {
 
 
   //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
-  tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
-  itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
-  tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+  // tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
+  // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
+  // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+
+
+  frameRate(fpsLevel);
 }
 
+//~ Adapte l'écran à la page
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  viewportDisplayWidth = windowWidth
+  viewportDisplayHeight = windowHeight
+}
 
 //~ Preload 
 function preload() {
 
   //? Interfaces
-  GUIParameters = loadImage("assets/GUI/GUIParameters.png")
-  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png")
-  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png")
-  Background = loadImage("assets/Background/Background.gif")
-  GamerHeart = loadImage("assets/GUI/GamerHeart.webp")
-  GUIForStats = loadImage("assets/GUI/GUIForStats.png")
-  GUIInteract = loadImage("assets/GUI/GUIInt.png")
-  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg")
-  GUIStart = loadImage("assets/GUI/start.png")
+  GUIParameters = loadImage("assets/GUI/GUIParameters.png");
+  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png");
+  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
+  Background = loadImage("assets/Background/Background.gif");
+  GamerHeart = loadImage("assets/GUI/heart.png");
+  GamerHeartBlack = loadImage("assets/GUI/heartBlack.png");
+
+  GUIForStats = loadImage("assets/GUI/GUIForStats.png");
+  GUIInteract = loadImage("assets/GUI/GUIInt.png");
+  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
+  GUIStart = loadImage("assets/GUI/start.png");
+  talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
-  backgroundImage = loadImage('assets/Background/sky4.jpg');
+  backgroundImage = loadImage('assets/Background/Sky2.jpg');
 
 
   //? Animation PNJ
-  PNJTextures = loadImage("assets/animations/spriteSheetGuardsHit.png")
-  marjoTexture = loadImage("assets/animations/marjoSprite.png")
-  charleTexture = loadImage("assets/animations/charleSprite.png")
-  malade1Sprite = loadImage("assets/animations/malade1.png")
-  malade2Sprite = loadImage("assets/animations/malade2.png")
+  marjoTexture = loadImage("assets/entities/marjoSprite.png");
+  charleTexture = loadImage("assets/entities/charleSprite.png");
+  malade1Sprite = loadImage("assets/entities/malade1.png");
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png");
 
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/taverne2.png")
+  tileSetTaverne = loadImage("assets/textures/Engine2.png");
 
 
   //? Textures
-  stone = loadImage("assets/textures/Pierre.jpg")
-  stoneBrick = loadImage("assets/textures/BriqueRouge.png")
-  sky = loadImage("assets/textures/Sky.jpg")
-  tileSet = loadImage("assets/textures/tilesetUgo4.png")
-  BackTroc = loadImage("assets/textures/planches.png")
-  Slot = loadImage("assets/textures/Slot.png")
-  BackPop = loadImage("assets/textures/BackPop.png")
+  tileSet = loadImage("assets/textures/Tilesetgeneu.png");
+  backgroundImageTroc = loadImage("assets/textures/planches.png");
+  slot = loadImage("assets/textures/slot.png");
+  backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
   //? Personnage
-  characterTextures = loadImage("assets/animations/spritesheetYvo.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk4.png")
 
 
   //? JSON preload
-  ForItems = loadJSON("json/IsItems.json");
-  Maps = loadJSON("json/Maps.json");
-  World = loadJSON("json/World.json");
-  Houses = loadJSON("json/Houses.json");
-  ForPNJ = loadJSON("json/PNJ.json");
-  ForEnnemis = loadJSON("json/Ennemis.json");
+  adminJSON = loadJSON("json/Admin.json");
   allDoors = loadJSON("json/Doors.json");
+  ennemiesJSON = loadJSON("json/Ennemis.json");
+  Houses = loadJSON("json/Houses.json");
+  itemsJSON = loadJSON("json/Items.json");
+  Maps = loadJSON("json/Maps.json");
+  pnjJSON = loadJSON("json/PNJ.json");
+  World = loadJSON("json/World.json");
+  creditsJSON = loadJSON("json/Credits.json");
   
+  init_pnjJSON = pnjJSON
 
   //? SONG
-  SongBackground = loadSound("music/SongBackground.mp3")
+  // SongBackground = loadSound("music/SongBackground.mp3");
 
 
-  //? CINEMATIC
-  // StartCinematic = createVideo('assets/cinematic/StartCinematic.mp4');
-  // StartCinematic.hide();
-  // StartCinematic.volume(0);
 }
 
 
 //~ Draw 
 function draw() {
   noSmooth()
+
+  //* Effet de tremblement de la caméra
+  if (shakeDuration > 0 && cameraShakeEnabled) {
+    translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
+    shakeDuration--;
+  }
   
   //? Si le jeu joue
   if (gameIsPlaying) {
 
-    //? Variables
-    inGame = true
-
     //~ Si le jeu n'est pas en pause
     if (!gameIsPaused){
       if (engineOne) {
-  
+        statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+        statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
+
+
         //? Afficher le fond du jeu
         drawBackgroundImage(backgroundImage)
         
-
         //? Afficher la map
         drawGrid()
-  
 
         //? Afficher les entités
         doorsManager()
@@ -115,7 +130,6 @@ function draw() {
         //? Afficher le joueur (le perso passe devant les entités)
         character()
         
-
         //? Afficher l'avant plan de la map
         drawGridForeground()
   
@@ -130,5 +144,3 @@ function draw() {
   }
   setupUI()
 }
-
-

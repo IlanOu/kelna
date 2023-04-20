@@ -5,10 +5,10 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(ForPNJ.PNJS.PNJ2);
-    PNJ(ForPNJ.PNJS.Marjo);
+    // PNJ(pnjJSON.PNJS.Marjo);
+    PNJ(pnjJSON.PNJS.Toto);
   } else {
-    drawPNJInside(ForPNJ.PNJS.PNJ1);
+    drawPNJInside(pnjJSON.PNJS.Charle);
   }
 }
 
@@ -44,12 +44,15 @@ let drawPNJInside = (pnj) => {
 function PNJ(pnj) {
   //* Initialisation des variables
 
-  let PNJStart = pnj.globalStartX + xStartWorld;
-  let PNJDistance = pnj.distance + PNJStart;
-  let PNJEnd = PNJDistance;
+  let positionsStart = getPositionAt(pnj.mapName, pnj.globalStartX, pnj.globalStartY)
+  let positionsEnd = getPositionAt(pnj.mapName, pnj.globalStartX + pnj.distance, 0)
 
-  pnj.x = pnj.globalStartX + xStartWorld + pnj.stepCount;
-  pnj.y = pnj.y;
+  let PNJStart = positionsStart.pixelX;
+  let PNJEnd = positionsEnd.pixelX;
+
+  
+  pnj.x = PNJStart + xStartWorld + pnj.stepCount;
+  
 
   let PNJX = pnj.x;
   let PNJY = pnj.y;
@@ -75,6 +78,7 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
+
   //* Ajoute les collisions pour toute les maps autour du perso
   for (let i = 0; i < mapsToCheck.length; i++) {
     let currentMapToCheck = mapsToCheck[i];
@@ -86,9 +90,7 @@ function PNJ(pnj) {
     //? Pour chaque carré dans le tableau
     for (let row = 0; row < currentMapTableColliders.length; row++) {
       for (
-        let column = 0;
-        column < currentMapTableColliders[row].length;
-        column++
+        let column = 0; column < currentMapTableColliders[row].length; column++
       ) {
         //& Lui donner une collision
         let thisObject = currentMapTableColliders[row][column];
@@ -180,13 +182,21 @@ let PNJMovements = (pnj) => {
     doRound(pnj);
     pnj.movement = "walk";
     canInteractWithPNJ = false;
+    canTalkWithPNJ = false
   }
+
+  //* Si le perso est vu s'arreter et le regarder
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
-      // console.log(pnj.canInteractPNJ, pnj.echange);
-      canInteractWithPNJ = true;
+
+    if (pnj.canInteractPNJ) {
+      if (pnj.echange != undefined) {
+        canInteractWithPNJ = true;
+      } else if (pnj.discussions != undefined) {
+        canTalkWithPNJ = true;
+      }
+
     }
   }
 
@@ -236,15 +246,12 @@ let PNJMovements = (pnj) => {
     pnj.width,
     pnj.height,
     pnj.direction,
-    pnj.movement,
-    pnj.color
+    pnj.movement
   );
 
-  // console.log(canInteractWithPNJ);
 };
 
 let PNJMovementsInside = (pnj) => {
-  // console.log(pnj.haveToJump)
 
   //* Variables positions PNJ
   let CurrentX = pnj.x;
@@ -321,8 +328,7 @@ let PNJMovementsInside = (pnj) => {
     pnj.width,
     pnj.height,
     pnj.direction,
-    pnj.movement,
-    pnj.color
+    pnj.movement
   );
 };
 
@@ -338,9 +344,7 @@ function animationPNJ(
   height,
   direction,
   movement,
-  color
 ) {
-  fill(color);
   circle(positionX + 35, positionY - 25, 20);
 
   let timer = round(millis() / animationSpeed) % 2;
@@ -348,29 +352,6 @@ function animationPNJ(
 
   //* Animation en fonction des mouvements
   switch (CurrentPNJ.name) {
-    case "PNJ2":
-      if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "idle") {
-        for (let y = 0; y < 32; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      } else if (movement == "jump") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(PNJTextures.get(x, y, 32, 32));
-          }
-        }
-      }
-
-      break;
-
     case "Marjo":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
@@ -395,6 +376,30 @@ function animationPNJ(
       break;
 
     case "Charle":
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 64; y < 96; y += 32) {
+          for (let x = 0; x < 128; x += 32) {
+            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break;
+
+
+    case "Toto":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
           for (let x = 0; x < 128; x += 32) {

@@ -37,13 +37,14 @@ function drawGrid() {
 
   arrayMap = []
 
-  let currentMap = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  //* Vérifier à partir du centre du personnage dans quelle map on est
+  let currentMap = findIndexOfPositionIn2dArray(characterPositionX+characterWidth/2, characterPositionY+characterHeight/2, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
 
   //* Dessiner la map et les chunks autour
 
   //? Milieu Milieu
   arrayMap.push(World.worldsMap[currentMap[1]][currentMap[0]])
-
+  
   //? Milieu Gauche 
   if (currentMap[0] - 1 >= 0) {
     arrayMap.push(World.worldsMap[currentMap[1]][currentMap[0] - 1])
@@ -55,10 +56,12 @@ function drawGrid() {
   }
 
   //? Milieu Bas
+  
   if (currentMap[1] + 1 < World.worldsMap.length) {
     arrayMap.push(World.worldsMap[currentMap[1] + 1][currentMap[0]])
   }
 
+  
   //? Milieu Haut
   if (currentMap[1] - 1 >= 0) {
     arrayMap.push(World.worldsMap[currentMap[1] - 1][currentMap[0]])
@@ -84,8 +87,8 @@ function drawGrid() {
     arrayMap.push(World.worldsMap[currentMap[1] + 1][currentMap[0] - 1])
   }
 
+  
   arrayMap.forEach(element => {
-
     let indexMap = findIndexValueIn2dArray(World.worldsMap, Maps[element].name)
 
     let gridWidthPx = rectWidth * Maps.numberOfRow
@@ -127,6 +130,7 @@ function drawGridForeground() {
 
 //~ Maison 
 function drawHouse() {
+  
 
   //? Fond noir de la maison
   fill(0)

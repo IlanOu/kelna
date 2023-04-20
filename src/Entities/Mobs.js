@@ -56,7 +56,6 @@ function handleCollisionMobs(
     }
 
 
-
     //* Collisions sur les côtés de l'objet
     if (
       agentY < objectY + objectHeight - objectHeight / 10 &&
@@ -70,7 +69,6 @@ function handleCollisionMobs(
           haveToJump = true;
         }
 
-
         //? collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
         agentX = objectX - agentWidth;
@@ -81,10 +79,7 @@ function handleCollisionMobs(
       
       }
 
-
-
     }
-
 
   }
 
@@ -131,21 +126,32 @@ function followPlayer(Mobs) {
 //^ /* -------------------------------------------------------------------------- */
 function doRound(Mobs) {
 
-
-
   //* Initialisation des variables
 
   Mobs.movement = "walk";
   Mobs.isFollowing = false;
 
   let CurrentX = Mobs.x;
+  
   let walkAmount = Mobs.stepCount;
+  
+  let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+  let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
 
-  let MobEnd = Mobs.xEnd;
-  let MobStart = Mobs.xStart;
+  let MobStart = 0;
+  let MobEnd = 0;
+
+  if (engineOne){
+    MobStart = positionsStart.pixelX + xStartWorld;
+    MobEnd = positionsEnd.pixelX + xStartWorld;
+  }else{
+    MobStart = positionsStart.pixelX + xStartHouse;
+    MobEnd = positionsEnd.pixelX + xStartHouse;
+
+  }
 
   let haveToJump = Mobs.haveToJump;
-
+  
   //* FAIRE UNE RONDE
   if (CurrentX >= MobEnd) {
     Mobs.direction = "left";
@@ -163,8 +169,6 @@ function doRound(Mobs) {
       Mobs.direction = "left";
       haveToJump = false;
       walkAmount -= Mobs.speed
-
-
 
       //? Sinon, marcher
     } else {
@@ -194,6 +198,7 @@ function doRound(Mobs) {
   Mobs.stepCount = walkAmount;
   Mobs.xStart = MobStart;
   Mobs.xEnd = MobEnd;
+  Mobs.x = CurrentX;
 }
 
 
