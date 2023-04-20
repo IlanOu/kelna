@@ -25,9 +25,8 @@
         "x": 900,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -39,7 +38,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 3,
         "isFollowing": false,
@@ -76,9 +75,8 @@
         "x": 0,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
-        "globalStartX": 400,
+        "globalStartX": 5,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -90,7 +88,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,
@@ -120,9 +118,8 @@
         "x": 600,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -134,7 +131,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,
@@ -164,9 +161,8 @@
         "x": 600,
         "y": 200,
 
-        "xStart": 0,
-        "xEnd": 0,
         "globalStartX": 0,
+        "globalStartY": 0,
 
         "velocityY": 0,
         "mass": 60,
@@ -178,7 +174,7 @@
         "width": 80,
         "height": 80,
 
-        "distance": 500,
+        "distance": 5,
         "speed": 3,
         "followSpeed": 4,
         "isFollowing": false,

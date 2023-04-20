@@ -4,6 +4,7 @@ const init_debugMod = false;
 
 //& Moteur de jeu
 const init_engineOne = true;
+const init_fpsLevel = 60
 
 
 //& Le bloc qui tue (littéralement)
@@ -16,7 +17,10 @@ const init_password = "";
 
 
 //& Camera
-const init_cameraShakeEnabled = false;
+const init_cameraShakeEnabled = true;
+
+const init_shakeDuration = 0;
+const init_shakeForce = 0;
 
 //~ ========= Mode SMOOTH ========= 
 const init_smoothCamera = false
@@ -127,7 +131,7 @@ const init_settingsPause = false
 
 //~ Barre de vie
 const init_MargeBarVie = 40;
-const init_healthPlayer = 1
+const init_healthPlayer = 5
 const init_maxHealth = 5
 const init_pressingKey = false
 const init_gettingHurt = false;
@@ -193,8 +197,8 @@ const init_currentIndexTextSpeaking = 0
 const init_behindThisDoor = "";
 const init_engine1WidthDoors = init_rectWidth
 const init_engine1HeightDoors = init_rectHeight * 2
-const init_engine2WidthDoors = init_rectWidth
-const init_engine2HeightDoors = init_rectHeight / 2
+const init_engine2WidthDoors = 10
+const init_engine2HeightDoors = init_rectHeight
 const init_doorInTaverne = false;
 
 //~ Mort
@@ -232,7 +236,7 @@ const init_stackSize = 5
 
 //& FPS
 const init_fpsActivate = false
-const init_ColorForRectFPS = 255
+const init_FPSButtonColor = 255
 
 
 //& Physique
@@ -240,8 +244,8 @@ const init_gravityForce = 0.5;
 
 
 //& Cinématiques
-const init_CinematicIsStart = true;
-const init_MusicForCinematic = false;
-const init_CinematicForEnd = false;
+const init_cinematicStarted = true;
+const init_musicCinematic = false;
+const init_endCinematic = false;
 
 

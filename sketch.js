@@ -20,6 +20,8 @@ function setup() {
   // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
   // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 
+
+  frameRate(fpsLevel);
 }
 
 //~ Adapte l'écran à la page
@@ -42,7 +44,7 @@ function preload() {
 
   GUIForStats = loadImage("assets/GUI/GUIForStats.png");
   GUIInteract = loadImage("assets/GUI/GUIInt.png");
-  GUITroc = loadImage("assets/GUI/GUIForTroc.jpg");
+  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
   GUIStart = loadImage("assets/GUI/start.png");
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
@@ -59,15 +61,14 @@ function preload() {
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/taverne2.png");
+  tileSetTaverne = loadImage("assets/textures/Engine2.png");
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/tilesetKelna.png");
-  sky = loadImage("assets/textures/Sky.jpg");
-  BackTroc = loadImage("assets/textures/planches.png");
-  Slot = loadImage("assets/textures/slot.png");
-  BackPop = loadImage("assets/textures/BackPop.png");
+  tileSet = loadImage("assets/textures/Tilesetgeneu.png");
+  backgroundImageTroc = loadImage("assets/textures/planches.png");
+  slot = loadImage("assets/textures/slot.png");
+  backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
@@ -78,15 +79,15 @@ function preload() {
   //? JSON preload
   adminJSON = loadJSON("json/Admin.json");
   allDoors = loadJSON("json/Doors.json");
-  ForEnnemis = loadJSON("json/Ennemis.json");
+  ennemiesJSON = loadJSON("json/Ennemis.json");
   Houses = loadJSON("json/Houses.json");
-  ForItems = loadJSON("json/Items.json");
+  itemsJSON = loadJSON("json/Items.json");
   Maps = loadJSON("json/Maps.json");
-  ForPNJ = loadJSON("json/PNJ.json");
+  pnjJSON = loadJSON("json/PNJ.json");
   World = loadJSON("json/World.json");
-  creditsJson = loadJSON("json/Credits.json");
+  creditsJSON = loadJSON("json/Credits.json");
   
-  init_ForPNJ = ForPNJ
+  init_pnjJSON = pnjJSON
 
   //? SONG
   // SongBackground = loadSound("music/SongBackground.mp3");
@@ -98,11 +99,11 @@ function preload() {
 //~ Draw 
 function draw() {
   noSmooth()
-  frameRate(60)
-  fps = frameRate();
 
-  if (cameraShakeEnabled){
-    translate(random(-5,5),random(-5,5));
+  //* Effet de tremblement de la caméra
+  if (shakeDuration > 0 && cameraShakeEnabled) {
+    translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
+    shakeDuration--;
   }
   
   //? Si le jeu joue

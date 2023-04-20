@@ -35,8 +35,7 @@ function findIndexValueIn2dArray(array, mapName) {
 
 
 //~ Trouve l'index de la position du 2eme array
-let previous_index_pos;
-
+let previous_index_pos = null;
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -120,16 +119,16 @@ function limitNumberWithinRange(number, minimum, maximum) {
 //~ Joue de la music 
 // let PlayMusic = () => {
 
-//     if (MusicIsActivate === false && Pressing === false) {
-//         MusicIsActivate = true
+//     if (musicEnabled === false && Pressing === false) {
+//         musicEnabled = true
 //         SongBackground.loop()
-//         ColorForRectMusic = 50
+//         musicButtonColor = 50
 //         Pressing = true
 
-//     } else if (MusicIsActivate === true && Pressing === false) {
-//         MusicIsActivate = false
+//     } else if (musicEnabled === true && Pressing === false) {
+//         musicEnabled = false
 //         SongBackground.pause()
-//         ColorForRectMusic = 255
+//         musicButtonColor = 255
 //         Pressing = true
 
 //     }
@@ -140,14 +139,14 @@ function limitNumberWithinRange(number, minimum, maximum) {
 //~ Joue les songs
 let PlaySong = () => {
 
-    if (SongIsActivate === false && Pressing === false) {
-        SongIsActivate = true
-        ColorForRectSong = 50
+    if (soundEnabled === false && Pressing === false) {
+        soundEnabled = true
+        soundButtonColor = 50
         Pressing = true
 
-    } else if (SongIsActivate === true && Pressing === false) {
-        SongIsActivate = false
-        ColorForRectSong = 255
+    } else if (soundEnabled === true && Pressing === false) {
+        soundEnabled = false
+        soundButtonColor = 255
         Pressing = true
 
     }
@@ -368,7 +367,7 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 function getPNJName() {
     let namePNJ = ""
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[1].seePlayer) {
             namePNJ = PNJ[0]
         }
@@ -383,7 +382,7 @@ function getPNJSeePlayer(namePNJ) {
 
 
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].seePlayer
         }
@@ -397,7 +396,7 @@ function getEchangePNJ(namePNJ) {
 
     let echangePNJ = []
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             echangePNJ = PNJ[1].echange
         } else if (echangePNJ != undefined) {
@@ -412,7 +411,7 @@ function getTalkPNJ(namePNJ) {
 
     let talkPNJ = []
 
-    Object.entries(ForPNJ.PNJS).forEach(PNJ => {
+    Object.entries(pnjJSON.PNJS).forEach(PNJ => {
         if (PNJ[0] == namePNJ) {
             talkPNJ = PNJ[1].discussions
         } else if (talkPNJ != undefined) {
@@ -426,7 +425,7 @@ function getItems(nameItem) {
 
     let item = {}
 
-    Object.entries(ForItems.Items).forEach(element => {
+    Object.entries(itemsJSON.Items).forEach(element => {
         if (element[0] == nameItem) {
             item = element[1]
         }
@@ -531,7 +530,7 @@ function popUp(message, options = "info") {
     // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(BackPop, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {
@@ -609,26 +608,26 @@ function popUp(message, options = "info") {
 }
 
 
-//~ Affiche les FPS
-let gameFPS = () => {
+function getSpeed(seconds, meters) {
+    const distanceEnKm = meters / 1000;
+    const tempsEnHeures = seconds / 3600;
+    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
+    return Math.round(vitesseEnKmh);
+  }
 
-    if (fpsActivate === false && Pressing === false) {
-        fpsActivate = true
-        ColorForRectFPS = 50
-        Pressing = true
 
-        if (fpsActivate === true) {
-            textSize(16);
-            fill(255);
-            text("FPS: " + fps.toFixed(0), 50, 50);
-        }
 
-    } else if (fpsActivate === true && Pressing === false) {
-        fpsActivate = false
-        ColorForRectFPS = 255
-        Pressing = true
-    }
-
+function resetJsons(){
+    ennemiesJSON = loadJSON("json/Ennemis.json");
+    pnjJSON = loadJSON("json/PNJ.json");
+    
+    //? Pas besoin de reload les json dont les donnees ne changent pas 
+    // allDoors = loadJSON("json/Doors.json");
+    // adminJSON = loadJSON("json/Admin.json");
+    // Houses = loadJSON("json/Houses.json");
+    itemsJSON = loadJSON("json/Items.json");
+    // Maps = loadJSON("json/Maps.json");
+    // World = loadJSON("json/World.json");
 }
 
 
@@ -653,18 +652,26 @@ function getSpeed(seconds, meters) {
 
 
 
+function shakeCamera(durationSeconds, forcePixels) {
+    shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
+    shakeForce = forcePixels;
+}
+
+
 function resetJsons() {
-    ForEnnemis = loadJSON("json/Ennemis.json");
-    ForPNJ = loadJSON("json/PNJ.json");
+    ennemiesJSON = loadJSON("json/Ennemis.json");
+    pnjJSON = loadJSON("json/PNJ.json");
 
     //? Pas besoin de reload les json dont les donnees ne changent pas 
     // allDoors = loadJSON("json/Doors.json");
     // adminJSON = loadJSON("json/Admin.json");
     // Houses = loadJSON("json/Houses.json");
-    ForItems = loadJSON("json/Items.json");
+    itemsJSON = loadJSON("json/Items.json");
     // Maps = loadJSON("json/Maps.json");
     // World = loadJSON("json/World.json");
 }
+
+
 
 
 
@@ -675,7 +682,7 @@ function initVariables() {
 
     //& Moteur de jeu
     engineOne = init_engineOne;
-
+    fpsLevel = init_fpsLevel;
 
     //& Le bloc qui tue (littéralement)
     killingBlock = init_killingBlock;
@@ -688,6 +695,9 @@ function initVariables() {
 
     //& Camera
     cameraShakeEnabled = init_cameraShakeEnabled;
+
+    shakeDuration = init_shakeDuration
+    shakeForce = init_shakeForce
 
     //~ ========= Mode SMOOTH ========= 
     smoothCamera = init_smoothCamera;
@@ -800,7 +810,7 @@ function initVariables() {
     settingsPause = init_settingsPause;
 
     //~ Barre de vie
-    MargeBarVie = init_MargeBarVie;
+    lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
     maxHealth = init_maxHealth;
     pressingKey = init_pressingKey;
@@ -813,9 +823,8 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
-    console.log(Inventory)
-    WidthSlot = init_WidthSlot;
-    HeightSlot = init_HeightSlot;
+    widthSlot = init_WidthSlot;
+    heightSlot = init_HeightSlot;
     slotX = init_slotX;
     endInventory = init_endInventory;
     waitingButton = init_waitingButton;
@@ -834,13 +843,13 @@ function initVariables() {
 
     //& Audio
     //~ Musique
-    ColorForRectMusic = init_ColorForRectMusic;
-    MusicIsActivate = init_MusicIsActivate;
-    YouCanPlayMusic = init_YouCanPlayMusic;
+    musicButtonColor = init_ColorForRectMusic;
+    musicEnabled = init_MusicIsActivate;
+    canPlayMusic = init_YouCanPlayMusic;
 
     //~ Sons
-    ColorForRectSong = init_ColorForRectSong;
-    SongIsActivate = init_SongIsActivate;
+    soundButtonColor = init_ColorForRectSong;
+    soundEnabled = init_SongIsActivate;
 
 
     //& Evenements
@@ -900,7 +909,7 @@ function initVariables() {
 
     //& FPS
     fpsActivate = init_fpsActivate;
-    ColorForRectFPS = init_ColorForRectFPS;
+    FPSButtonColor = init_FPSButtonColor;
 
 
     //& Physique
@@ -908,9 +917,9 @@ function initVariables() {
 
 
     //& Cinématiques
-    CinematicIsStart = init_CinematicIsStart;
-    MusicForCinematic = init_MusicForCinematic;
-    CinematicForEnd = init_CinematicForEnd;
+    cinematicStarted = init_cinematicStarted;
+    musicCinematic = init_musicCinematic;
+    endCinematic = init_endCinematic;
 
 
     statistiques = init_statistiques;
@@ -939,4 +948,5 @@ function initVariables() {
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
 
     resetJsons()
+
 }

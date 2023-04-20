@@ -1,7 +1,7 @@
 {
   "PNJS": {
     "Charle": {
-      "color": "blue",
+      "mapName": "taverne",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -10,7 +10,6 @@
       "x": 600,
       "y": 0,
 
-      "xStart": 0,
       "globalStartX": 250,
       "globalStartY": 80,
 
@@ -55,7 +54,7 @@
       ]
     },
     "Toto": {
-      "color": "blue",
+      "mapName": "Tileset-1",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -64,8 +63,7 @@
       "x": 100,
       "y": 0,
 
-      "xStart": 100,
-      "globalStartX": 100,
+      "globalStartX": 5,
       "globalStartY": 0,
 
       "velocityY": 0,
@@ -78,7 +76,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 100,
+      "distance": 3,
       "speed": 2,
       "followSpeed": 4,
 
@@ -109,7 +107,7 @@
       ]
     },
     "Marjo": {
-      "color": "green",
+      "mapName": "Tileset-2",
 
       
       "name": "Marjo",
@@ -121,8 +119,6 @@
       "x": 0,
       "y": 200,
 
-      "xStart": 0,
-      "xEnd": 0,
       "globalStartX": 0,
 
       "velocityY": 0,

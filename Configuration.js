@@ -4,7 +4,7 @@ let debugMod;
 
 //& Moteur de jeu
 let engineOne;
-
+let fpsLevel;
 
 //& Le bloc qui tue (littéralement)
 let killingBlock;
@@ -17,6 +17,9 @@ let password;
 
 //& Camera
 let cameraShakeEnabled;
+
+let shakeDuration;
+let shakeForce;
 
 //~ ========= Mode SMOOTH ========= 
 let smoothCamera;
@@ -45,6 +48,7 @@ let characterLastMovement;
 let characterSpriteWidth;
 let characterSpriteHeight;
 
+
 //~ caractéristiques du perso
 //? Positions
 let characterInsidePosX;
@@ -64,7 +68,6 @@ let characterHitting;
 let characterComboHitting;
 let characterComboHittingDouble;
 let lastHit;
-
 //? Saut
 let characterMass;
 let characterJumpHeight;
@@ -129,7 +132,7 @@ let gameIsPlaying;
 let settingsPause;
 
 //~ Barre de vie
-let MargeBarVie;
+let lifeBarSize;
 let healthPlayer;
 let maxHealth;
 let pressingKey;
@@ -140,8 +143,8 @@ let removeHeart;
 
 //~ Inventaire
 let Inventory = [];
-let WidthSlot;
-let HeightSlot;
+let widthSlot;
+let heightSlot;
 let slotX;
 let endInventory;
 let waitingButton;
@@ -160,13 +163,13 @@ let leftGaugeLevel;
 
 //& Audio
 //~ Musique
-let ColorForRectMusic;
-let MusicIsActivate;
-let YouCanPlayMusic;
+let musicButtonColor;
+let musicEnabled;
+let canPlayMusic;
 
 //~ Sons
-let ColorForRectSong;
-let SongIsActivate;
+let soundButtonColor;
+let soundEnabled;
 
 
 //& Evenements
@@ -183,7 +186,6 @@ let leftClickWasPressed;
 
 let canEnterInHouse;
 let canGoOutTheHouse;
-let canGotOut;
 
 //~ PNJ
 let canInteractWithPNJ;
@@ -227,7 +229,7 @@ let stackSize;
 
 //& FPS
 let fpsActivate;
-let ColorForRectFPS;
+let FPSButtonColor;
 
 
 //& Physique
@@ -235,9 +237,10 @@ let gravityForce;
 
 
 //& Cinématiques
-let CinematicIsStart;
-let MusicForCinematic;
-let CinematicForEnd;
+let cinematicStarted;
+let musicCinematic;
+let endCinematic;
+
 
 
 //& Textures
@@ -247,6 +250,7 @@ let tileSetForTaverne;
 let tileSetTaverne;
 let backgroundImage;
 let characterTexture_Dash;
+
 let GUITroc;
 let GUIStart;
 let marjoTexture;
@@ -255,21 +259,24 @@ let malade1Sprite;
 let malade2Sprite;
 let pointEnnemis;
 let tilesetItems;
-let BackTroc;
-let Slot;
-let BackPop;
+let backgroundImageTroc;
+let slot;
+let backgroundImageTalk;
 
 
 //& JSONS
 let adminJSON;
 let allDoors;
-let ForEnnemis;
+let ennemiesJSON;
 let Houses;
-let ForItems;
+let itemsJSON;
+
 let Maps;
-let ForPNJ;
+let pnjJSON;
+
 let World;
-let creditsJson;
+let creditsJSON;
+
 
 //& Variables vides
 let getTrade;

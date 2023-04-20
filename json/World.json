@@ -1,9 +1,9 @@
 {
     "worldsMap": [
-        ["Tileset-1", "Tileset-2", "Tileset-3", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4"],
-        ["Tileset-5", "Tileset-6", "Tileset-7", "Tileset-8", "Tilemap-F1-1", "Tilemap-F2-1", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4"],
-        ["Tileset-9", "Tileset-10", "Tileset-11", "Tileset-12", "Tilemap-F1", "Tilemap-F2", "Tilemap-F3", "Tilemap-VA1", "Tilemap-VA2", "Tilemap-VA3", "Tileset-4", "Tileset-4"],
-        ["Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tileset-4", "Tilemap-AV1", "Tileset-4", "Tileset-4"]   
+        ["Tileset-1", "Tileset-2",  "Tileset-3",     "Tileset-4",    "Tileset-4",       "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4"],
+        ["Tileset-5", "Tileset-6",  "Tileset-7",     "Tileset-8",    "Tilemap-F1-1",    "Tilemap-F2-1", "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4",    "Tileset-4"],
+        ["Tileset-9", "Tileset-10", "Tileset-11",    "Tileset-12",   "Tilemap-F1",      "Tilemap-F2",   "Tilemap-F3",   "Tilemap-VA1",  "Tilemap-VA2",  "Tilemap-VA3",  "Tileset-4",    "Tileset-4"],
+        ["Tileset-4", "Tileset-4",  "Tileset-4",     "Tileset-4",    "Tileset-4",       "Tileset-4",    "Tileset-4",    "Tilemap-VA4",  "Tilemap-VA5",  "Tilemap-VA6",  "Tileset-4",    "Tileset-4"]   
     ]
     
 }

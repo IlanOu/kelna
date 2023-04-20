@@ -28,7 +28,7 @@ function keyPressed() {
     //* Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
-        characterIsEating = true
+        characterIsEating = true 
     }
 
     //* Flèche de bas
@@ -59,23 +59,20 @@ function keyPressed() {
 
     //* Touche I
     if (keyCode == 73) {
-        addItemToInventory(ForItems.Items.sword_1, 1);
+        addItemToInventory(itemsJSON.Items.sword_1, 1);
     }
 
     //* Touche O du clavier
     if (keyCode == 79) {
-        addItemToInventory(ForItems.Items.food_1, 1);
+        addItemToInventory(itemsJSON.Items.food_1, 1);
     }
 
     //* Touche P du clavier
     if (keyCode == 80) {
-        addItemToInventory(ForItems.Items.bow_1, 1);
+        addItemToInventory(itemsJSON.Items.bow_1, 1);
     }
 
-    if (keyCode == 73) {
-        addItemToInventory(ForItems.Items.sword_1);
-    }
-
+    
 }
 
 //~ vérifier si une touche est relâchée 
@@ -125,7 +122,7 @@ function keyReleased() {
             PressInteractPNJ = false
             engineOne = !engineOne;
             test = "suis dedans"
-            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log(canEnterInHouse, canGoOutTheHouse)
             // console.log("DEDANS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
 
         }
@@ -137,7 +134,7 @@ function keyReleased() {
 
             engineOne = !engineOne;
             test = "suis dehors"
-            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log(canEnterInHouse, canGoOutTheHouse)
             // console.log("DEHORS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
             
         }

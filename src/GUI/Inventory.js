@@ -41,7 +41,7 @@ let removeItemFromInventory = (index) => {
 
 
 function updateGauges() {
-    if (leftGaugeLevel >= HeightSlot) {
+    if (leftGaugeLevel >= heightSlot) {
         topGaugeLevel = 0;
         rightGaugeLevel = 0;
         bottomGaugeLevel = 0;
@@ -50,17 +50,17 @@ function updateGauges() {
     } else {
         if (characterIsEating) {
             topGaugeLevel += gaugeSpeed;
-            if (topGaugeLevel >= WidthSlot) {
-                topGaugeLevel = WidthSlot;
+            if (topGaugeLevel >= widthSlot) {
+                topGaugeLevel = widthSlot;
                 rightGaugeLevel += gaugeSpeed;
-                if (rightGaugeLevel >= HeightSlot) {
-                    rightGaugeLevel = HeightSlot;
+                if (rightGaugeLevel >= heightSlot) {
+                    rightGaugeLevel = heightSlot;
                     bottomGaugeLevel += gaugeSpeed;
-                    if (bottomGaugeLevel >= WidthSlot) {
-                        bottomGaugeLevel = WidthSlot;
+                    if (bottomGaugeLevel >= widthSlot) {
+                        bottomGaugeLevel = widthSlot;
                         leftGaugeLevel += gaugeSpeed;
-                        if (leftGaugeLevel >= HeightSlot) {
-                            leftGaugeLevel = HeightSlot;
+                        if (leftGaugeLevel >= heightSlot) {
+                            leftGaugeLevel = heightSlot;
                         }
                     }
                 }
@@ -81,17 +81,17 @@ function displayInventory() {
 
     if (!endInventory) {
 
-        let spaceBetween = HeightSlot/5
+        let spaceBetween = heightSlot/5
 
-        let maxheight = Inventory.length * HeightSlot + spaceBetween
+        let maxheight = Inventory.length * heightSlot + spaceBetween
         let InventoryY = viewportDisplayHeight / 2 - maxheight / 2;
 
-        let itemWidth = WidthSlot - WidthSlot/5
-        let itemHeight = HeightSlot - HeightSlot/5
+        let itemWidth = widthSlot - widthSlot/5
+        let itemHeight = heightSlot - heightSlot/5
 
 
         for (let i = 0; i < Inventory.length; i++) {
-            slotY = InventoryY + (HeightSlot * i)
+            slotY = InventoryY + (heightSlot * i)
 
             if (i == 1){
                 canEat = true
@@ -103,8 +103,8 @@ function displayInventory() {
 
 
             if (Inventory[i].itemNumber != undefined) {
-                let itemPosX = slotX + (WidthSlot - itemWidth)/2
-                let itemPosY = slotY + (HeightSlot - itemHeight)/2
+                let itemPosX = slotX + (widthSlot - itemWidth)/2
+                let itemPosY = slotY + (heightSlot - itemHeight)/2
                 image(itemList[Inventory[i].itemNumber], itemPosX, itemPosY, itemWidth, itemHeight);
 
                 if (i == 1){
@@ -123,7 +123,7 @@ function displayInventory() {
             noFill();
             stroke(0);
             strokeWeight(2)
-            rect(slotX, slotY, WidthSlot, HeightSlot);
+            rect(slotX, slotY, widthSlot, heightSlot);
 
 
             if (i == 1) {
@@ -133,13 +133,13 @@ function displayInventory() {
                 rect(slotX, slotY, topGaugeLevel, gaugeSize);
 
                 //? right gauge
-                rect(slotX + WidthSlot - gaugeSize, slotY, gaugeSize, rightGaugeLevel);
+                rect(slotX + widthSlot - gaugeSize, slotY, gaugeSize, rightGaugeLevel);
 
                 //? bottom gauge
-                rect(slotX + WidthSlot, slotY + HeightSlot - gaugeSize, -bottomGaugeLevel, gaugeSize);
+                rect(slotX + widthSlot, slotY + heightSlot - gaugeSize, -bottomGaugeLevel, gaugeSize);
 
                 //? left gauge
-                rect(slotX, slotY + HeightSlot, gaugeSize, -leftGaugeLevel);
+                rect(slotX, slotY + heightSlot, gaugeSize, -leftGaugeLevel);
             }
 
             

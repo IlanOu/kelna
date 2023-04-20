@@ -109,6 +109,8 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce) {
 function drawCharacter(positionX, positionY, width, height, direction, movement) {
   let timer = (round(millis() / animationSpeed)) % 2
 
+  
+
   characterTextureList = []
 
   //& Debug mod
@@ -206,6 +208,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
   //* Changer de frame
+  
   if (timer && !characterAnimationFramePassed) {
     characterAnimationIndex++
     characterAnimationFramePassed = true
@@ -213,6 +216,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (!timer) {
     characterAnimationFramePassed = false
   }
+  
+
 
   //* Remettre l'index au début 
   if (characterAnimationIndex >= characterTextureList.length) {
@@ -275,6 +280,9 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
         }
 
         //* si le joueur touche le sol, reset le nombre de saut 
+        if (characterJumpCount > 0 && characterVelocityY > 30){
+          shakeCamera(0.25, characterVelocityY/10)
+        }
         //? est relatif au perso
         characterJumpCount = 0;
         //? est relatif au perso
@@ -718,6 +726,8 @@ function character() {
 function characterView2() {
   let timer = (round(millis() / animationSpeed)) % 2
 
+  characterLastMovement = characterMovement
+
   //#region 
   //~ Contrôles du perso (gauche, droite, haut, bas)
 
@@ -801,39 +811,27 @@ function characterView2() {
     }
   }
 
-
-
-
-  //* Changer de frame
-  if (timer && !characterAnimationFramePassed) {
-    characterAnimationIndex++
-    characterAnimationFramePassed = true
-  }
-  if (!timer) {
-    characterAnimationFramePassed = false
-  }
-
-
-
-
+  //~ Assigner les différents mouvements
   if (rightArrowPressed) {
     characterDirection = "right"
     characterMovement = "walk"
   } else if (leftArrowPressed) {
     characterDirection = "left"
     characterMovement = "walk"
-  } else if(highArrowPressed){
+  } else if (highArrowPressed) {
     characterDirection = characterLastDirection
     characterMovement = "walk"
-  } 
-  else if (downArrowPressed) {
+  } else if (downArrowPressed) {
     characterDirection = characterLastDirection
     characterMovement = "walk"
-  } 
-  else {
+  } else {
     characterDirection = characterLastDirection
-    characterMovement = "idle"
+    if (characterMovement != "getHit" && healthPlayer){
+      characterMovement = "idle"
+    }
   }
+        
+      
 
 
 
