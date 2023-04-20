@@ -4,8 +4,8 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    mob(ForEnnemis.Ennemis.Malade1);
-    mob(ForEnnemis.Ennemis.Malade2);
+    mob(ennemiesJSON.Ennemis.Malade1);
+    mob(ennemiesJSON.Ennemis.Malade2);
   }
 }
 

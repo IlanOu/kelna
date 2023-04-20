@@ -300,11 +300,11 @@ function drawSettingsMenu() {
 
   drawInterface(interfaceMenu, GUIParameters);
 
-  fill(ColorForRectSong);
+  fill(soundButtonColor);
   drawButton(buttonSon);
   drawText("Sons", 15, [textSonX, buttonSonY], "center");
   
-  fill(ColorForRectMusic);
+  fill(musicButtonColor);
   drawButton(buttonMusic);
   drawText("Musique", 15, [textMusicX, buttonMusicY], "center");
   
@@ -480,15 +480,15 @@ function drawStats() {
 
 //~ BARRE DE VIE
 function drawLifeBar() {
-  let HeartX = (viewportDisplayWidth/2) - (maxHealth * MargeBarVie)/2;
-  let HeartY = viewportDisplayHeight - MargeBarVie*2
+  let HeartX = (viewportDisplayWidth/2) - (maxHealth * lifeBarSize)/2;
+  let HeartY = viewportDisplayHeight - lifeBarSize*2
 
 
   for (let i = 0; i < maxHealth; i++) {
     if (i+1 <= healthPlayer){
-      image(GamerHeart, MargeBarVie * i + HeartX, HeartY, 30, 30);
+      image(GamerHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
     }else{
-      image(GamerHeartBlack, MargeBarVie * i + HeartX, HeartY, 30, 30);
+      image(GamerHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
 
     }
     
@@ -592,7 +592,7 @@ function drawTroc(x, y, w, h) {
 
                 //? Affichage du slot
                 image(
-                  Slot,
+                  slot,
                   positionXElement,
                   positionYElement - heightElement / 4,
                   widthElement * slotSize,
@@ -616,7 +616,7 @@ function drawTroc(x, y, w, h) {
 
                 //? Affichage du slot
                 image(
-                  Slot,
+                  slot,
                   positionXElement - widthElement / 2,
                   positionYElement - heightElement / 4,
                   widthElement * slotSize,
@@ -660,7 +660,7 @@ function drawTroc(x, y, w, h) {
 function drawTalk(x, y, w, h) {
 
   let currentPNJName = getPNJName();
-  let currentPNJ = ForPNJ.PNJS[currentPNJName]
+  let currentPNJ = pnjJSON.PNJS[currentPNJName]
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
   let talkPNJ = getTalkPNJ(currentPNJName);
 

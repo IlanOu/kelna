@@ -236,7 +236,7 @@ const init_stackSize = 5
 
 //& FPS
 const init_fpsActivate = false
-const init_ColorForRectFPS = 255
+const init_FPSButtonColor = 255
 
 
 //& Physique
@@ -244,8 +244,8 @@ const init_gravityForce = 0.5;
 
 
 //& Cinématiques
-const init_CinematicIsStart = true;
-const init_MusicForCinematic = false;
-const init_CinematicForEnd = false;
+const init_cinematicStarted = true;
+const init_musicCinematic = false;
+const init_endCinematic = false;
 
 

@@ -59,17 +59,17 @@ function keyPressed() {
 
     //* Touche I
     if (keyCode == 73) {
-        addItemToInventory(ForItems.Items.sword_1, 1);
+        addItemToInventory(itemsJSON.Items.sword_1, 1);
     }
 
     //* Touche O du clavier
     if (keyCode == 79) {
-        addItemToInventory(ForItems.Items.food_1, 1);
+        addItemToInventory(itemsJSON.Items.food_1, 1);
     }
 
     //* Touche P du clavier
     if (keyCode == 80) {
-        addItemToInventory(ForItems.Items.bow_1, 1);
+        addItemToInventory(itemsJSON.Items.bow_1, 1);
     }
 
     

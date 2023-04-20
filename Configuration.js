@@ -132,7 +132,7 @@ let gameIsPlaying;
 let settingsPause;
 
 //~ Barre de vie
-let MargeBarVie;
+let lifeBarSize;
 let healthPlayer;
 let maxHealth;
 let pressingKey;
@@ -143,8 +143,8 @@ let removeHeart;
 
 //~ Inventaire
 let Inventory = [];
-let WidthSlot;
-let HeightSlot;
+let widthSlot;
+let heightSlot;
 let slotX;
 let endInventory;
 let waitingButton;
@@ -163,13 +163,13 @@ let leftGaugeLevel;
 
 //& Audio
 //~ Musique
-let ColorForRectMusic;
-let MusicIsActivate;
-let YouCanPlayMusic;
+let musicButtonColor;
+let musicEnabled;
+let canPlayMusic;
 
 //~ Sons
-let ColorForRectSong;
-let SongIsActivate;
+let soundButtonColor;
+let soundEnabled;
 
 
 //& Evenements
@@ -229,7 +229,7 @@ let stackSize;
 
 //& FPS
 let fpsActivate;
-let ColorForRectFPS;
+let FPSButtonColor;
 
 
 //& Physique
@@ -237,9 +237,9 @@ let gravityForce;
 
 
 //& Cinématiques
-let CinematicIsStart;
-let MusicForCinematic;
-let CinematicForEnd;
+let cinematicStarted;
+let musicCinematic;
+let endCinematic;
 
 
 
@@ -259,23 +259,23 @@ let malade1Sprite;
 let malade2Sprite;
 let pointEnnemis;
 let tilesetItems;
-let BackTroc;
-let Slot;
-let BackPop;
+let backgroundImageTroc;
+let slot;
+let backgroundImagePopup;
 
 
 //& JSONS
 let adminJSON;
 let allDoors;
-let ForEnnemis;
+let ennemiesJSON;
 let Houses;
-let ForItems;
+let itemsJSON;
 
 let Maps;
-let ForPNJ;
+let pnjJSON;
 
 let World;
-let creditsJson;
+let creditsJSON;
 
 
 //& Variables vides

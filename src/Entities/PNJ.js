@@ -5,10 +5,10 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(ForPNJ.PNJS.Marjo);
-    PNJ(ForPNJ.PNJS.Toto);
+    // PNJ(pnjJSON.PNJS.Marjo);
+    PNJ(pnjJSON.PNJS.Toto);
   } else {
-    drawPNJInside(ForPNJ.PNJS.Charle);
+    drawPNJInside(pnjJSON.PNJS.Charle);
   }
 }
 

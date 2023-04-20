@@ -66,9 +66,9 @@ function preload() {
 
   //? Textures
   tileSet = loadImage("assets/textures/Tilesetgeneu.png");
-  BackTroc = loadImage("assets/textures/planches.png");
-  Slot = loadImage("assets/textures/slot.png");
-  BackPop = loadImage("assets/textures/BackPop.png");
+  backgroundImageTroc = loadImage("assets/textures/planches.png");
+  slot = loadImage("assets/textures/slot.png");
+  backgroundImagePopup = loadImage("assets/textures/backgroundImagePopup.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 
@@ -79,15 +79,15 @@ function preload() {
   //? JSON preload
   adminJSON = loadJSON("json/Admin.json");
   allDoors = loadJSON("json/Doors.json");
-  ForEnnemis = loadJSON("json/Ennemis.json");
+  ennemiesJSON = loadJSON("json/Ennemis.json");
   Houses = loadJSON("json/Houses.json");
-  ForItems = loadJSON("json/Items.json");
+  itemsJSON = loadJSON("json/Items.json");
   Maps = loadJSON("json/Maps.json");
-  ForPNJ = loadJSON("json/PNJ.json");
+  pnjJSON = loadJSON("json/PNJ.json");
   World = loadJSON("json/World.json");
-  creditsJson = loadJSON("json/Credits.json");
+  creditsJSON = loadJSON("json/Credits.json");
   
-  init_ForPNJ = ForPNJ
+  init_pnjJSON = pnjJSON
 
   //? SONG
   // SongBackground = loadSound("music/SongBackground.mp3");
