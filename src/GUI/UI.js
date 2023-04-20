@@ -562,7 +562,6 @@ function drawTroc(x, y, w, h) {
     let buttonHasBeenClicked = false;
 
     echangePNJ.forEach((echange) => {
-      // console.log((h-heightRow * echangePNJ.length)/2)
       //? Declaration de variables
       let indexEchange = echangePNJ.indexOf(echange);
       let positionYRow = ((h-heightRow * echangePNJ.length)/2) + y + heightRow * indexEchange;

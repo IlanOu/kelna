@@ -299,6 +299,7 @@ let mobMovements = (Mobs) => {
           healthPlayer -= Mobs.damages
           statistiques.damagesGet += Mobs.damages
           shakeCamera(0.25, Mobs.damages/2)
+          Mobs.indexFrame = 3
           
         }
         mobAttacking = true;

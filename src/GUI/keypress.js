@@ -122,7 +122,7 @@ function keyReleased() {
             PressInteractPNJ = false
             engineOne = !engineOne;
             test = "suis dedans"
-            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log(canEnterInHouse, canGoOutTheHouse)
             // console.log("DEDANS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
 
         }
@@ -134,7 +134,7 @@ function keyReleased() {
 
             engineOne = !engineOne;
             test = "suis dehors"
-            console.log(canEnterInHouse, canGoOutTheHouse)
+            // console.log(canEnterInHouse, canGoOutTheHouse)
             // console.log("DEHORS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
             
         }
