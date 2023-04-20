@@ -61,12 +61,11 @@ function preload() {
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/taverne2.png");
+  tileSetTaverne = loadImage("assets/textures/Engine2.png");
 
 
   //? Textures
   tileSet = loadImage("assets/textures/Tilesetgeneu.png");
-  sky = loadImage("assets/textures/Sky.jpg");
   BackTroc = loadImage("assets/textures/planches.png");
   Slot = loadImage("assets/textures/slot.png");
   BackPop = loadImage("assets/textures/BackPop.png");
