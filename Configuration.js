@@ -93,6 +93,8 @@ let dashForce;
 //& Animations
 let animationSpeed;
 let textDialogSpeed;
+let annimationBeginY = 4 * 32;
+let annimationEndY = 5 * 32;
 
 
 //& Grille

@@ -73,7 +73,8 @@ function preload() {
 
 
   //? Personnage
-  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk4.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvo.png")
+  
 
 
   //? JSON preload
@@ -100,6 +101,7 @@ function preload() {
 function draw() {
   noSmooth()
 
+  // console.log(characterMovement)
   //* Effet de tremblement de la caméra
   if (shakeDuration > 0 && cameraShakeEnabled) {
     translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
