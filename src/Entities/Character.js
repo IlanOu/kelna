@@ -128,12 +128,12 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     //* animation MARCHER
     case "walk":
 
-      if (inventoryIsEmpty(Inventory[0])){
-        annimationBeginY = 8*32
-        annimationEndY = 9*32
-      } else{
-        annimationBeginY = 20*32
-        annimationEndY = 21*32
+      if (inventoryIsEmpty(Inventory[0])) {
+        annimationBeginY = 8 * 32
+        annimationEndY = 9 * 32
+      } else {
+        annimationBeginY = 20 * 32
+        annimationEndY = 21 * 32
 
       }
       for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
@@ -150,20 +150,26 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         case "sword_1":
           annimationBeginY = 10 * 32
           annimationEndY = 11 * 32
-        break;
+          break;
 
 
 
         case "sword_2":
           annimationBeginY = 0 * 32
           annimationEndY = 1 * 32
-        break;
+          break;
 
 
         case "sword_3":
           annimationBeginY = 15 * 32
           annimationEndY = 16 * 32
+          break;
+
+        default:
+          annimationBeginY = 5 * 32
+          annimationEndY = 6 * 32
         break;
+
       }
 
 
