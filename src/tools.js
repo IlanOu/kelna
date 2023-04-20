@@ -36,6 +36,7 @@ function findIndexValueIn2dArray(array, mapName) {
 
 //~ Trouve l'index de la position du 2eme array
 let previous_index_pos = null;
+
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -316,7 +317,7 @@ function drawKey(key) {
         PosY = characterPositionY
     } else {
 
-        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth/1.2
+        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth / 1.2
         PosY = characterInsidePosY - characterHeight / 3
     }
 
@@ -613,14 +614,14 @@ function getSpeed(seconds, meters) {
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
     return Math.round(vitesseEnKmh);
-  }
+}
 
 
 
-function resetJsons(){
+function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
-    
+
     //? Pas besoin de reload les json dont les donnees ne changent pas 
     // allDoors = loadJSON("json/Doors.json");
     // adminJSON = loadJSON("json/Admin.json");
@@ -672,6 +673,10 @@ function resetJsons() {
 }
 
 
+
+function inventoryIsEmpty(slot) {
+    return Object.keys(slot).length === 0;
+}
 
 
 

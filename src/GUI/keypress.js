@@ -28,7 +28,7 @@ function keyPressed() {
     //* Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
-        characterIsEating = true 
+        characterIsEating = true
     }
 
     //* Flèche de bas
@@ -67,12 +67,6 @@ function keyPressed() {
         addItemToInventory(itemsJSON.Items.food_1, 1);
     }
 
-    //* Touche P du clavier
-    if (keyCode == 80) {
-        addItemToInventory(itemsJSON.Items.bow_1, 1);
-    }
-
-    
 }
 
 //~ vérifier si une touche est relâchée 
@@ -121,22 +115,13 @@ function keyReleased() {
 
             PressInteractPNJ = false
             engineOne = !engineOne;
-            test = "suis dedans"
-            // console.log(canEnterInHouse, canGoOutTheHouse)
-            // console.log("DEDANS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
-
         }
     }
 
 
     if (canGoOutTheHouse) {
         if (keyCode == 69 && engineOne === false) {
-
             engineOne = !engineOne;
-            test = "suis dehors"
-            // console.log(canEnterInHouse, canGoOutTheHouse)
-            // console.log("DEHORS |", "EngineOne" + " " + engineOne, "| Peut sortir ?" + " " + canGoOutTheHouse, "| Test" + " " + test)
-            
         }
     }
 }
@@ -146,29 +131,31 @@ function keyReleased() {
 function mousePressed() {
     if (mouseButton === LEFT) {
 
+        slotOne = Inventory[0]
         leftClickPressed = true
-
-        if (!PressTalkPNJ) {
-            if (!gameIsPaused && gameIsPlaying && characterAnimationIndex <= characterTextureList.length - 1) {
-                if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
-                    characterHitting = true
-                    characterComboHitting = false
-                    characterComboHittingDouble = false
-                    lastHit = "1"
-                } else if (characterHitting && !characterComboHitting && !characterComboHittingDouble) {
-                    characterHitting = false
-                    characterComboHitting = true
-                    characterComboHittingDouble = false
-                    lastHit = "2"
-                } else if (!characterHitting && characterComboHitting && !characterComboHittingDouble) {
-                    characterHitting = false
-                    characterComboHitting = false
-                    characterComboHittingDouble = true
-                    lastHit = "3"
+        if (inventoryIsEmpty(slotOne) === false) {
+            if (!PressTalkPNJ) {
+                if (!gameIsPaused && gameIsPlaying && characterAnimationIndex <= characterTextureList.length - 1) {
+                    if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
+                        characterHitting = true
+                        characterComboHitting = false
+                        characterComboHittingDouble = false
+                        lastHit = "1"
+                    } else if (characterHitting && !characterComboHitting && !characterComboHittingDouble) {
+                        characterHitting = false
+                        characterComboHitting = true
+                        characterComboHittingDouble = false
+                        lastHit = "2"
+                    } else if (!characterHitting && characterComboHitting && !characterComboHittingDouble) {
+                        characterHitting = false
+                        characterComboHitting = false
+                        characterComboHittingDouble = true
+                        lastHit = "3"
+                    }
                 }
             }
+        } else {
+            return
         }
-
     }
-
 }
