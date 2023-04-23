@@ -665,6 +665,8 @@ function shakeCamera(durationSeconds, forcePixels) {
 function getCurrentItem() {
     addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
     itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+    currentItemPointing = ""
+    canGetItem = false
 }
 
 
@@ -929,9 +931,8 @@ function initVariables() {
 
 
     //& Cinématiques
-    cinematicStarted = init_cinematicStarted;
+    startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
-    endCinematic = init_endCinematic;
 
 
     statistiques = init_statistiques;

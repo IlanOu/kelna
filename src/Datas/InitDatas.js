@@ -246,8 +246,7 @@ const init_gravityForce = 0.5;
 
 
 //& Cinématiques
-const init_cinematicStarted = true;
+const init_startCinematicPlaying = false;
 const init_musicCinematic = false;
-const init_endCinematic = false;
 
 
