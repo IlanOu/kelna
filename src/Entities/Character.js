@@ -128,12 +128,12 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     //* animation MARCHER
     case "walk":
 
-      if (inventoryIsEmpty(Inventory[0])){
-        annimationBeginY = 8*32
-        annimationEndY = 9*32
-      } else{
-        annimationBeginY = 20*32
-        annimationEndY = 21*32
+      if (inventoryIsEmpty(Inventory[0])) {
+        annimationBeginY = 8 * 32
+        annimationEndY = 9 * 32
+      } else {
+        annimationBeginY = 20 * 32
+        annimationEndY = 21 * 32
 
       }
       for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
