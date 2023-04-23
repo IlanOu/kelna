@@ -4,11 +4,12 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    // mob(ennemiesJSON.Ennemis.Malade1);
-    // mob(ennemiesJSON.Ennemis.Malade2);
-      Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
-          mob(Mobs[1]);          
-      })
+    //// mob(ennemiesJSON.Ennemis.Malade1);
+    //// mob(ennemiesJSON.Ennemis.Malade2);
+      
+    // Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
+    //     mob(Mobs[1]);          
+    // })
     
   }
 }

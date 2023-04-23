@@ -87,18 +87,41 @@ function drawGrid() {
     arrayMap.push(World.worldsMap[currentMap[1] + 1][currentMap[0] - 1])
   }
 
+
   
+
+  //~ 1st Layer
   arrayMap.forEach(element => {
     let indexMap = findIndexValueIn2dArray(World.worldsMap, Maps[element].name)
 
     let gridWidthPx = rectWidth * Maps.numberOfRow
     let gridHeightPx = rectHeight * Maps.numberOfColumns
 
+    
     //?  Afficher l'arrière plan
     displayGrid(Maps[element].layers[0], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight)
 
+  });
+
+
+  //&------------------------------
+  //& Effet de lumières et d'ombres
+  //&------------------------------
+  lightsManager()
+
+  
+
+  //~ 2nde Layer
+  arrayMap.forEach(element => {
+    let indexMap = findIndexValueIn2dArray(World.worldsMap, Maps[element].name)
+
+    let gridWidthPx = rectWidth * Maps.numberOfRow
+    let gridHeightPx = rectHeight * Maps.numberOfColumns
+
+
     //? Afficher le plan du millieu
     displayGrid(Maps[element].layers[1], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight)
+    
 
     if (debugMod) {
       fill(0, 0, 255)
@@ -123,6 +146,7 @@ function drawGridForeground() {
     let gridWidthPx = rectWidth * Maps.numberOfRow
     let gridHeightPx = rectHeight * Maps.numberOfColumns
 
+    
     displayGrid(Maps[element].layers[2], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight)
   })
 }

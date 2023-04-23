@@ -8,6 +8,9 @@ function windowResized() {
   viewportDisplayHeight = windowHeight
 }
 
+let bloomVert
+let bloomFrag
+
 //~ Preload 
 function preload() {
 
@@ -70,7 +73,6 @@ function preload() {
   //? Cinématiques
   gameIntroductionVideo = createVideo("assets/cinematic/StartCinematic.mp4");
 
-
 }
 
 
@@ -97,6 +99,8 @@ function setup() {
 
 //~ Draw 
 function draw() {
+
+
   noSmooth()
 
   //* Effet de tremblement de la caméra
@@ -121,15 +125,19 @@ function draw() {
           //? Afficher le fond du jeu
           drawBackgroundImage(backgroundImage)
           
+          
+
           //? Afficher la map
           drawGrid()
-  
+
           //? Afficher les entités
           doorsManager()
           itemsManager()
           PNJManager()
           MobManager()
           
+          
+
           //? Afficher le joueur (le perso passe devant les entités)
           character()
           
