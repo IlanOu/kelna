@@ -219,7 +219,8 @@ let numberOfSteps;
 
 //& Items
 let itemList;
-
+let currentItemPointing;
+let canGetItem;
 
 //& Troc
 let waitingAnswer;

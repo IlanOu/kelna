@@ -224,6 +224,8 @@ const init_statistiques = {
 
 //& Items
 const init_itemList = [];
+const init_currentItemPointing = "";
+const init_canGetItem = false;
 
 
 //& Troc

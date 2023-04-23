@@ -123,8 +123,8 @@ function displayInventory() {
             noFill();
             stroke(0);
             strokeWeight(2)
-            rect(slotX, slotY, widthSlot, heightSlot);
-
+            // rect(slotX, slotY, widthSlot, heightSlot);
+            image(slot, slotX, slotY, widthSlot, heightSlot)
 
             if (i == 1) {
                 noStroke()

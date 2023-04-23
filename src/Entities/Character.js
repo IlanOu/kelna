@@ -164,6 +164,10 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
           annimationBeginY = 15 * 32
           annimationEndY = 16 * 32
         break;
+
+        default:
+          annimationBeginY = 4 * 32
+          annimationEndY = 5 * 32
       }
 
 
@@ -199,14 +203,15 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
           break;
 
         case "sword_1":
-          annimationBeginY = 12 * 32
-          annimationEndY = 13 * 32
+          annimationBeginY = 11 * 32
+          annimationEndY = 12 * 32
           break;
 
         case "sword_3":
-          annimationBeginY = 17 * 32
-          annimationEndY = 18 * 32
+          annimationBeginY = 16 * 32
+          annimationEndY = 17 * 32
           break;
+
       }
       for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
         for (let x = 0; x < (3 * 32); x += characterSpriteWidth) {
@@ -225,13 +230,13 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
           break;
 
         case "sword_1":
-          annimationBeginY = 13 * 32
-          annimationEndY = 14 * 32
+          annimationBeginY = 12 * 32
+          annimationEndY = 13 * 32
           break;
 
         case "sword_3":
-          annimationBeginY = 18 * 32
-          annimationEndY = 19 * 32
+          annimationBeginY = 17 * 32
+          annimationEndY = 18 * 32
           break;
       }
       for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
@@ -251,13 +256,13 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
           break;
 
         case "sword_1":
-          annimationBeginY = 14 * 32
-          annimationEndY = 15 * 32
+          annimationBeginY = 13 * 32
+          annimationEndY = 14 * 32
           break;
 
         case "sword_3":
-          annimationBeginY = 19 * 32
-          annimationEndY = 20 * 32
+          annimationBeginY = 18 * 32
+          annimationEndY = 19 * 32
           break;
       }
 
@@ -272,20 +277,24 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
       switch (Inventory[0].name) {
 
-        case "sword_2":
-          annimationBeginY = 5 * 32
-          annimationEndY = 6 * 32
-          break;
-
+        
         case "sword_1":
           annimationBeginY = 15 * 32
           annimationEndY = 16 * 32
           break;
-
-        case "sword_3":
-          annimationBeginY = 20 * 32
-          annimationEndY = 21 * 32
+        case "sword_2":
+          annimationBeginY = 9 * 32
+          annimationEndY = 10 * 32
           break;
+          
+        case "sword_3":
+          annimationBeginY = 19 * 32
+          annimationEndY = 20 * 32
+          break;
+
+        default:
+          annimationBeginY = 5 * 32
+          annimationEndY = 6 * 32
       }
 
 
@@ -897,7 +906,7 @@ function characterView2() {
   //~ Collisions 
 
   //* Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses[behindThisDoorHouse].layers[1]
+  let currentMapTableColliders = Houses.Houses[behindThisDoorHouse].layers[1]
 
 
   //* Pour chaque carré dans le tableau 

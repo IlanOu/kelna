@@ -517,6 +517,10 @@ function setupInteractions() {
       drawKey("E");
     }
 
+    if (canGetItem) {
+      drawKey("E");
+    }
+
   } else {
     if (canGoOutTheHouse) {
       drawKey("E");
