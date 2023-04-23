@@ -665,6 +665,8 @@ function shakeCamera(durationSeconds, forcePixels) {
 function getCurrentItem() {
     addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
     itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+    currentItemPointing = ""
+    canGetItem = false
 }
 
 
