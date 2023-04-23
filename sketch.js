@@ -15,12 +15,6 @@ function setup() {
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
 
 
-  //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
-  // tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
-  // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
-  // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
-
-
   frameRate(fpsLevel);
 }
 
@@ -126,6 +120,7 @@ function draw() {
 
         //? Afficher les entités
         doorsManager()
+        itemsManager()
         PNJManager()
         MobManager()
         

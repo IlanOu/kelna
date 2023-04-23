@@ -1,26 +1,23 @@
 {
     "Items": {
-        "sword_2": {
-            "name": "sword_2",
-            "itemNumber": 0,
-            "degat": "10",
-            "type": "sword",
-            "category": "weapon",
-            "material":"iron"
-        },
         "sword_1": {
             "name": "sword_1",
             "itemNumber": 1,
-            "degat": "10",
-            "type": "sword",
+            "degat": "1",
             "category": "weapon",
             "material": "wood"
         },
+        "sword_2": {
+            "name": "sword_2",
+            "itemNumber": 0,
+            "degat": "2",
+            "category": "weapon",
+            "material":"iron"
+        },
         "sword_3": {
             "name": "sword_3",
-            "degat": "10",
+            "degat": "3",
             "itemNumber": 2,
-            "type": "sword",
             "category": "weapon",
             "material": "gold"
         },
@@ -28,9 +25,22 @@
             "name": "food_1",
             "healAmount": 2,
             "itemNumber": 3,
-            "type": "steak",
             "amount": 0,
             "category": "food"
         }
+    },
+    "ItemsOnTheFloor": {
+
+        "mushroom_1": {
+            "name": "mushroom_1",
+            "category": "other",
+            "itemNumber": 1,
+            "location": "Tileset-6",
+            "x" : 5,
+            "y": 5,
+            "detectDist": 1,
+            "shown": true
+        }
+
     }
 }

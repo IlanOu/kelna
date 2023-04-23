@@ -266,26 +266,29 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapX = 0;
     let indexMapY = 0;
 
-    World.worldsMap.every(row => {
 
-        if (row.includes(mapName)) {
-            mapExist = true;
-            indexMapX = row.indexOf(mapName);
-
-            return false
-        } else {
-            indexMapY++
-        }
-
-
-    });
-
-    if (!mapExist) {
-        Object.entries(Houses).forEach(row => {
-            row = row[0]
+    
+    Object.entries(World.worldsMap).forEach(row => {
+        row = row[1]
+        
+        if (!mapExist){
             if (row.includes(mapName)) {
                 mapExist = true;
                 indexMapX = row.indexOf(mapName);
+            } else {
+                indexMapY++
+            }
+        }
+    })
+
+
+
+    if (!mapExist) {
+        Object.entries(Houses.Houses).forEach(house => {
+            house = house[1]
+            if (house.name == mapName && !mapExist) {
+                mapExist = true;
+                indexMapX = house.indexOf(mapName);
             } else {
                 indexMapY++
             }
@@ -659,6 +662,12 @@ function shakeCamera(durationSeconds, forcePixels) {
 }
 
 
+function getCurrentItem() {
+    addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+    itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+}
+
+
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
@@ -672,13 +681,9 @@ function resetJsons() {
     // World = loadJSON("json/World.json");
 }
 
-
-
 function inventoryIsEmpty(slot) {
     return Object.keys(slot).length === 0;
 }
-
-
 
 function initVariables() {
     //& Debug Mod
@@ -902,6 +907,8 @@ function initVariables() {
 
     //& Items
     itemList = init_itemList;
+    currentItemPointing = init_currentItemPointing
+    canGetItem = init_canGetItem
 
 
     //& Troc

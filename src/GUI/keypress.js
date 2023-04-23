@@ -52,6 +52,13 @@ function keyPressed() {
         }
     }
 
+    if (canGetItem){
+        if (keyCode == 69 && engineOne) {
+            getCurrentItem();
+            //! Récupérer l'item
+        }
+    }
+
     //* Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
@@ -134,7 +141,7 @@ function mousePressed() {
         slotOne = Inventory[0]
         leftClickPressed = true
         if (inventoryIsEmpty(slotOne) === false) {
-            if (!PressTalkPNJ) {
+            if (!PressTalkPNJ && !PressInteractPNJ) {
                 if (!gameIsPaused && gameIsPlaying && characterAnimationIndex <= characterTextureList.length - 1) {
                     if (!characterHitting && !characterComboHitting && !characterComboHittingDouble) {
                         characterHitting = true
