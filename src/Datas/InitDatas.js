@@ -169,6 +169,13 @@ const init_YouCanPlayMusic = false
 //~ Sons
 const init_ColorForRectSong = 255
 const init_SongIsActivate = false
+const init_YouCanPlaySong = false
+
+const init_VoicesSongMarjo = []
+
+const init_dieSoundPlay = false
+const init_startGame = false;
+const init_startSoundPlay = false
 
 
 //& Evenements
@@ -208,6 +215,11 @@ const init_playerDead = false
 //~ Popups
 const init_popUpShown = false;
 const init_playerAnswersYes = false;
+
+//~ Credits
+const init_endTheGameCredits = false;
+const init_PositionCredits = window.innerHeight + 50;
+const init_speedCredits = 2.5;
 
 //& Statistiques
 const init_numberOfSteps = 0;

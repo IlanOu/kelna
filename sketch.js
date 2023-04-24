@@ -73,6 +73,17 @@ function preload() {
   //? Cinématiques
   gameIntroductionVideo = createVideo("assets/cinematic/StartCinematic.mp4");
 
+
+  //? Music
+  SongBackground = loadSound("audios/music/SongBackground.mp3")
+
+
+  //? Songs
+  // VoicesSongMarjo.push((loadSound("audios/voices/Marjo/marjo1.m4a")))
+  // VoicesSongMarjo.push((loadSound("audios/voices/Marjo/marjo2.m4a")))
+  VoiceStartSong = loadSound("audios/voices/START/teststart.m4a")
+  VoiceEndSong = loadSound("audios/voices/END/testend.m4a")
+
 }
 
 

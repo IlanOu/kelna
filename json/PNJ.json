@@ -106,7 +106,8 @@
       ]
     },
     "Marjo": {
-      "mapName": "Tileset-2",
+      "mapName": "Tileset-1",
+      "mapNameI": "Tileset-2",
 
       "name": "Marjo",
 
@@ -128,7 +129,8 @@
       "width": 80,
       "height": 80,
 
-      "distance": 0,
+      "distance": 100,
+      "distancei": 0,
       "speed": 3,
       "followSpeed": 4,
 
