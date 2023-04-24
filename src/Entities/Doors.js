@@ -147,4 +147,3 @@ function drawDoorInside(door) {
 }
 
 
-

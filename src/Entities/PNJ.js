@@ -5,8 +5,10 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(pnjJSON.PNJS.Marjo);
-    PNJ(pnjJSON.PNJS.Toto);
+      if (pnjJSON.PNJS){
+        PNJ(pnjJSON.PNJS.Marjo);
+        PNJ(pnjJSON.PNJS.Toto);
+      }
   } else {
     drawPNJInside(pnjJSON.PNJS.Charle);
   }
@@ -38,6 +40,8 @@ let drawPNJInside = (pnj) => {
   PNJMovementsInside(pnj);
 };
 
+
+
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                    DRAW PNJ                                */
 //^ /* -------------------------------------------------------------------------- */
@@ -50,12 +54,10 @@ function PNJ(pnj) {
   let PNJStart = positionsStart.pixelX;
   let PNJEnd = positionsEnd.pixelX;
 
-  
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
-  
 
   let PNJX = pnj.x;
-  let PNJY = pnj.y;
+  let PNJY = pnj.y + positionsStart.pixelY;
 
   let PNJWidth = pnj.width;
   let PNJHeight = pnj.height;
@@ -65,86 +67,111 @@ function PNJ(pnj) {
   let PNJJumpCount = pnj.jumpCount;
   let PNJHaveToJump = pnj.haveToJump;
 
-  //* Ajout de la gravité au PNJ
-  let gravityReturns = getPositionWithGravity(
-    PNJY,
-    PNJVelocityY,
-    gravityForce,
-    PNJMass
-  );
-  PNJY = gravityReturns[0];
-  PNJVelocityY = gravityReturns[1];
-
+  //* Faire apparaitre PNJ quans ils sont dans la map verifier par le joueur pour les collisions
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
+  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
 
-  //* Ajoute les collisions pour toute les maps autour du perso
-  for (let i = 0; i < mapsToCheck.length; i++) {
-    let currentMapToCheck = mapsToCheck[i];
-    let currentMapToCheckName =
-      World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
-    //? Récupère la couche des collisions sur la map
-    let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+  let nameMapPlayer = World.worldsMap[positionMapPlayer[0]][positionMapPlayer[1]]
 
-    //? Pour chaque carré dans le tableau
-    for (let row = 0; row < currentMapTableColliders.length; row++) {
-      for (
-        let column = 0; column < currentMapTableColliders[row].length; column++
-      ) {
-        //& Lui donner une collision
-        let thisObject = currentMapTableColliders[row][column];
+  //console.log(pnj.mapName, nameMapPlayer)
 
-        let thisObjectX =
-          rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
-          (xStartWorld + rectWidth * column);
-        let thisObjectY =
-          rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
-          (yStartWorld + rectHeight * row);
+  if (pnj.mapName == nameMapPlayer){
 
-        //& Collisions
-        if (thisObject > 0) {
-          [
-            PNJX,
-            PNJY,
-            PNJVelocityY,
-            PNJJumpCount,
-            PNJIsJumping,
-            PNJHaveToJump,
-          ] = handleCollisionMobs(
-            PNJX,
-            PNJY,
-            PNJWidth,
-            PNJHeight,
-            pnj.direction,
-            thisObjectX,
-            thisObjectY,
-            rectWidth,
-            rectHeight,
-            PNJVelocityY,
-            PNJJumpCount,
-            PNJIsJumping
-          );
+    
 
-          if (PNJHaveToJump) {
-            collide = true;
+  }
+
+  
+
+  if (PNJMustBeShown(pnj)) {
+
+    //* Ajout de la gravité au PNJ
+    let gravityReturns = getPositionWithGravity(
+      PNJY,
+      PNJVelocityY,
+      gravityForce,
+      PNJMass
+    );
+
+    PNJY = gravityReturns[0];
+    PNJVelocityY = gravityReturns[1];
+
+
+
+
+    //* Ajoute les collisions pour toute les maps autour du perso
+    for (let i = 0; i < mapsToCheck.length; i++) {
+      let currentMapToCheck = mapsToCheck[i];
+      let currentMapToCheckName =
+        World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
+      //? Récupère la couche des collisions sur la map
+      let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+
+      //? Pour chaque carré dans le tableau
+      for (let row = 0; row < currentMapTableColliders.length; row++) {
+        for ( 
+          let column = 0; column < currentMapTableColliders[row].length; column++
+        ) {
+          //& Lui donner une collision
+          let thisObject = currentMapTableColliders[row][column];
+
+          let thisObjectX =
+            rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
+            (xStartWorld + rectWidth * column);
+          let thisObjectY =
+            rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
+            (yStartWorld + rectHeight * row);
+
+          //& Collisions
+          if (thisObject > 0) {
+            [
+              PNJX,
+              PNJY,
+              PNJVelocityY,
+              PNJJumpCount,
+              PNJIsJumping,
+              PNJHaveToJump,
+            ] = handleCollisionMobs(
+              PNJX,
+              PNJY,
+              PNJWidth,
+              PNJHeight,
+              pnj.direction,
+              thisObjectX,
+              thisObjectY,
+              rectWidth,
+              rectHeight,
+              PNJVelocityY,
+              PNJJumpCount,
+              PNJIsJumping
+            );
+
+            if (PNJHaveToJump) {
+              collide = true;
+            }
           }
         }
       }
     }
+
+    //* Retourne les variables
+    pnj.x = PNJX;
+    pnj.y = PNJY;
+    pnj.velocityY = PNJVelocityY;
+    pnj.isJumping = PNJIsJumping;
+    pnj.jumpCount = PNJJumpCount;
+    pnj.xEnd = PNJEnd;
+    pnj.haveToJump = collide;
+
+    PNJMovements(pnj);
   }
-
-  //* Retourne les variables
-  pnj.x = PNJX;
-  pnj.y = PNJY;
-  pnj.velocityY = PNJVelocityY;
-  pnj.isJumping = PNJIsJumping;
-  pnj.jumpCount = PNJJumpCount;
-  pnj.xEnd = PNJEnd;
-  pnj.haveToJump = collide;
-
-  PNJMovements(pnj);
 }
+
+
+
+
 
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                PNJ MOVEMENTS                               */

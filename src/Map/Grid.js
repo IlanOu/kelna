@@ -165,15 +165,15 @@ function drawHouse() {
     height
   )
 
-  displayGrid(Houses["taverne"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  displayGrid(Houses["taverne"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  displayGrid(Houses.Houses["taverne"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  displayGrid(Houses.Houses["taverne"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
 }
 
 
 //~ dessine le premier plan de la maison
 function drawHouseForeground() {
 
-  displayGrid(Houses["taverne"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  displayGrid(Houses.Houses["taverne"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
 
 
 }

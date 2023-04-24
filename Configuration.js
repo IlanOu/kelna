@@ -105,6 +105,7 @@ let xStartWorld;
 let yStartWorld;
 
 let arrayMap;
+let currentMap;
 
 
 //& Maisons

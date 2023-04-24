@@ -1,11 +1,13 @@
 function itemsManager(){
 
     if (engineOne){
-        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
-            if (item[1].shown){
-                items(item[1]);
-            }
-        })
+        if (itemsJSON.ItemsOnTheFloor){
+            Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+                if (item[1].shown){
+                    items(item[1]);
+                }
+            })
+        }
     }
 
 }
