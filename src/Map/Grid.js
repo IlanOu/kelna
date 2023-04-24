@@ -153,27 +153,27 @@ function drawGridForeground() {
 
 
 //~ Maison 
-function drawHouse() {
+function drawHouse(house) {
   
 
-  //? Fond noir de la maison
-  fill(0)
-  rect(
-    0,
-    0,
-    width,
-    height
-  )
+    //? Fond noir de la maison
+    fill(0)
+    rect(
+      0,
+      0,
+      width,
+      height
+    )
 
-  displayGrid(Houses.Houses["taverne"].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  displayGrid(Houses.Houses["taverne"].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
+    displayGrid(Houses.Houses[house].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
+    displayGrid(Houses.Houses[house].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
 }
 
 
 //~ dessine le premier plan de la maison
-function drawHouseForeground() {
+function drawHouseForeground(house) {
 
-  displayGrid(Houses.Houses["taverne"].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
+    displayGrid(Houses.Houses[house].layers[2], xStartHouse, yStartHouse, rectWidth, rectHeight)
 
 
 }

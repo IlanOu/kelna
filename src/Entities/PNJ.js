@@ -183,6 +183,7 @@ let PNJMovements = (pnj) => {
   let CurrentX = pnj.x;
   let PNJY = pnj.y;
 
+
   //* Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
     CurrentX,
@@ -209,8 +210,10 @@ let PNJMovements = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
-    canTalkWithPNJ = false
+
+    pnj.canTalkWithMe = false
+    pnj.canTradeWithMe = false
+
   }
 
   //* Si le perso est vu s'arreter et le regarder
@@ -218,14 +221,12 @@ let PNJMovements = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.canInteractPNJ) {
-      if (pnj.echange != undefined) {
-        canInteractWithPNJ = true;
-      } else if (pnj.discussions != undefined) {
-        canTalkWithPNJ = true;
-      }
-
+    if (pnj.echange != undefined) {
+      pnj.canTradeWithMe = true
+    }else if (pnj.discussions != undefined){
+      pnj.canTalkWithMe = true
     }
+    
   }
 
   //* Ajouter le saut au PNJ
@@ -311,13 +312,11 @@ let PNJMovementsInside = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
   }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
-      canInteractWithPNJ = true;
+    if (pnj.echange !== undefined) {
     }
   }
 

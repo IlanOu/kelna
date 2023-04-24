@@ -504,16 +504,15 @@ function setupInteractions() {
     if (canEnterInHouse) {
       drawKey("E");
       PressInteractPNJ = false;
-      canInteractWithPNJ = false
       PressTalkPNJ = false
-      canTalkWithPNJ = false
     }
 
-    if (canInteractWithPNJ) {
+    if (aPNJCanTrade()) {
       drawKey("E");
     }
 
-    if (canTalkWithPNJ) {
+    if (aPNJCanTalk()) {
+      
       drawKey("E");
     }
 
@@ -525,9 +524,7 @@ function setupInteractions() {
     if (canGoOutTheHouse) {
       drawKey("E");
       PressInteractPNJ = false;
-      canInteractWithPNJ = false
       PressTalkPNJ = false
-      canTalkWithPNJ = false
     }
   }
 }

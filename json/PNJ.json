@@ -1,6 +1,8 @@
 {
   "PNJS": {
     "Charle": {
+      "name":"Charle",
+      
       "mapName": "taverne",
 
       "detectDistX": 2,
@@ -33,10 +35,10 @@
       "currentFrame": 0,
       "indexFrame": 0,
       "movement": "walk",
+      
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
-      "name":"Charle",
-
-      "canInteractPNJ": true,
 
       "echange": [
         {
@@ -54,6 +56,8 @@
       ]
     },
     "Toto": {
+      "name":"Toto",
+      
       "mapName": "Tileset-1",
 
       "detectDistX": 2,
@@ -86,9 +90,8 @@
       "indexFrame": 0,
       "movement": "walk",
 
-      "name":"Toto",
-
-      "canInteractPNJ": true,
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
       "echange": [
         {
@@ -106,9 +109,9 @@
       ]
     },
     "Marjo": {
-      "mapName": "Tileset-6",
-
       "name": "Marjo",
+      
+      "mapName": "Tileset-6",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -141,7 +144,8 @@
       "indexFrame": 0,
       "movement": "walk",
 
-      "canInteractPNJ": true,
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
       "step": 0,
       "discussions": [

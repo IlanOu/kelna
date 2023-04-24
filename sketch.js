@@ -145,11 +145,11 @@ function draw() {
           drawGridForeground()
     
         }else{
-          drawHouse()
+          drawHouse(behindThisDoorHouse)
           doorsManager()
           PNJManager()
           characterView2()
-          drawHouseForeground()
+          drawHouseForeground(behindThisDoorHouse)
         }
       }
     }

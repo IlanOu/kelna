@@ -38,14 +38,14 @@ function keyPressed() {
 
 
 
-    if (canInteractWithPNJ) {
+    if (aPNJCanTrade()) {
         //* Touche E
         if (keyCode == 69 && engineOne) {
             PressInteractPNJ = !PressInteractPNJ
         }
     }
 
-    if (canTalkWithPNJ) {
+    if (aPNJCanTalk()) {
         //* Touche E
         if (keyCode == 69 && engineOne) {
             PressTalkPNJ = !PressTalkPNJ
