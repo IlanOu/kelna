@@ -816,7 +816,8 @@ function initVariables() {
     yStartWorld = init_yStartWorld;
 
     arrayMap = init_arrayMap;
-
+    currentMap = init_currentMap
+    lastMap = init_lastMap
 
     //& Maisons
     xStartHouse = init_xStartHouse;

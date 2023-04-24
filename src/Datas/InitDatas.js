@@ -101,7 +101,8 @@ const init_rectHeight = 60;
 const init_xStartWorld = 0;
 const init_yStartWorld = 0;
 const init_arrayMap = [];
-const init_currentMap = 0;
+const init_currentMap = "";
+const init_lastMap = "";
 
 
 //& Maisons

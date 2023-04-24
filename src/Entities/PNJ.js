@@ -71,21 +71,19 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
-  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-
-  let nameMapPlayer = World.worldsMap[positionMapPlayer[0]][positionMapPlayer[1]]
-
-  //console.log(pnj.mapName, nameMapPlayer)
-
-  if (pnj.mapName == nameMapPlayer){
-
-    
-
-  }
-
   
-
   if (PNJMustBeShown(pnj)) {
+    
+    console.log(pnj.velocityY)
+    if (lastMap != currentMap){
+      if (currentMap.toString() == pnj.mapName.toString()){
+        PNJX = positionsStart.pixelX
+        PNJY = positionsStart.pixelY
+        pnj.x = positionsStart.pixelX
+        pnj.y = positionsStart.pixelY
+        pnj.velocityY = 0
+      }
+    }
 
     //* Ajout de la gravité au PNJ
     let gravityReturns = getPositionWithGravity(

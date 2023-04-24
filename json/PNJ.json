@@ -106,7 +106,7 @@
       ]
     },
     "Marjo": {
-      "mapName": "Tileset-2",
+      "mapName": "Tileset-6",
 
       "name": "Marjo",
 
@@ -115,9 +115,11 @@
       "seePlayer": false,
 
       "x": 0,
-      "y": 20,
+      "y": 0,
 
       "globalStartX": 5,
+      "globalStartY": 0,
+
       "velocityY": 0,
       "mass": 60,
 
