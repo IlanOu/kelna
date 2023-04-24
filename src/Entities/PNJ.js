@@ -55,9 +55,11 @@ function PNJ(pnj) {
   let PNJEnd = positionsEnd.pixelX;
 
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
+  // pnj.y = positionsStart.pixelY + yStartWorld
+
 
   let PNJX = pnj.x;
-  let PNJY = pnj.y + positionsStart.pixelY;
+  let PNJY = pnj.y;
 
   let PNJWidth = pnj.width;
   let PNJHeight = pnj.height;
@@ -74,14 +76,15 @@ function PNJ(pnj) {
   
   if (PNJMustBeShown(pnj)) {
     
-    console.log(pnj.velocityY)
+    
     if (lastMap != currentMap){
       if (currentMap.toString() == pnj.mapName.toString()){
-        PNJX = positionsStart.pixelX
-        PNJY = positionsStart.pixelY
-        pnj.x = positionsStart.pixelX
-        pnj.y = positionsStart.pixelY
+        PNJX = positionsStart.pixelX + xStartWorld
+        PNJY = positionsStart.pixelY + yStartWorld
+        pnj.x = positionsStart.pixelX + xStartWorld
+        pnj.y = positionsStart.pixelY + yStartWorld
         pnj.velocityY = 0
+        PNJVelocityY = 0
       }
     }
 

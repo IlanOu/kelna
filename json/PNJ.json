@@ -118,7 +118,7 @@
       "y": 0,
 
       "globalStartX": 5,
-      "globalStartY": 0,
+      "globalStartY": 5,
 
       "velocityY": 0,
       "mass": 60,
@@ -130,7 +130,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 0,
+      "distance": 4,
       "speed": 3,
       "followSpeed": 4,
 
