@@ -365,7 +365,6 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     image(characterCurrentTexture, -positionX - width, positionY, width, height)
     scale(-1, 1)
   }
-
 }
 
 

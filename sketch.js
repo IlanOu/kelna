@@ -1,22 +1,5 @@
 p5.disableFriendlyErrors = true;
 
-//~ Setup 
-function setup() {
-  
-  initVariables()
-
-  //? Viewport
-  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
-    viewportDisplayWidth = windowWidth
-    viewportDisplayHeight = windowHeight
-  }
-
-  //? Canvas
-  createCanvas(viewportDisplayWidth, viewportDisplayHeight);
-
-
-  frameRate(fpsLevel);
-}
 
 //~ Adapte l'écran à la page
 function windowResized() {
@@ -24,6 +7,9 @@ function windowResized() {
   viewportDisplayWidth = windowWidth
   viewportDisplayHeight = windowHeight
 }
+
+let bloomVert
+let bloomFrag
 
 //~ Preload 
 function preload() {
@@ -43,7 +29,7 @@ function preload() {
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
-  backgroundImage = loadImage('assets/Background/Sky2.jpg');
+  backgroundImage = loadImage('assets/Background/bg_final_normalement.png');
 
 
   //? Animation PNJ
@@ -84,60 +70,90 @@ function preload() {
   
   init_pnjJSON = pnjJSON
 
-  //? SONG
-  // SongBackground = loadSound("music/SongBackground.mp3");
+  //? Cinématiques
+  gameIntroductionVideo = createVideo("assets/cinematic/StartCinematic.mp4");
+
+}
 
 
+//~ Setup 
+function setup() {
+  
+  initVariables()
+
+  //? Viewport
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
+    viewportDisplayWidth = windowWidth
+    viewportDisplayHeight = windowHeight
+  }
+
+  //? Canvas
+  createCanvas(viewportDisplayWidth, viewportDisplayHeight);
+
+  frameRate(fpsLevel);
+
+  //? Cinématiques
+  gameIntroductionVideo.hide();
 }
 
 
 //~ Draw 
 function draw() {
+
+
   noSmooth()
 
-  // console.log(characterMovement)
   //* Effet de tremblement de la caméra
   if (shakeDuration > 0 && cameraShakeEnabled) {
     translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
     shakeDuration--;
   }
   
-  //? Si le jeu joue
-  if (gameIsPlaying) {
-
-    //~ Si le jeu n'est pas en pause
-    if (!gameIsPaused){
-      if (engineOne) {
-        statistiques.timeSpentInGame = Math.floor(millis() / 1000)
-        statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
-
-
-        //? Afficher le fond du jeu
-        drawBackgroundImage(backgroundImage)
-        
-        //? Afficher la map
-        drawGrid()
-
-        //? Afficher les entités
-        doorsManager()
-        itemsManager()
-        PNJManager()
-        MobManager()
-        
-        //? Afficher le joueur (le perso passe devant les entités)
-        character()
-        
-        //? Afficher l'avant plan de la map
-        drawGridForeground()
+  if (startCinematicPlaying) {
+    playStartCinematic()
+  }else{
+    //? Si le jeu joue
+    if (gameIsPlaying) {
   
-      }else{
-        drawHouse()
-        doorsManager()
-        PNJManager()
-        characterView2()
-        drawHouseForeground()
+      //~ Si le jeu n'est pas en pause
+      if (!gameIsPaused){
+        if (engineOne) {
+          statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+          statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
+  
+  
+          //? Afficher le fond du jeu
+          drawBackgroundImage(backgroundImage)
+          
+          
+
+          //? Afficher la map
+          drawGrid()
+
+          //? Afficher les entités
+          doorsManager()
+          itemsManager()
+          PNJManager()
+          MobManager()
+          
+          
+
+          //? Afficher le joueur (le perso passe devant les entités)
+          character()
+          
+          //? Afficher l'avant plan de la map
+          drawGridForeground()
+    
+        }else{
+          drawHouse()
+          doorsManager()
+          PNJManager()
+          characterView2()
+          drawHouseForeground()
+        }
       }
     }
+    setupUI()
   }
-  setupUI()
+
 }

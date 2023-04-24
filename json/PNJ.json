@@ -65,7 +65,6 @@
 
       "globalStartX": 5,
       "globalStartY": 0,
-
       "velocityY": 0,
       "mass": 60,
 
@@ -109,7 +108,6 @@
     "Marjo": {
       "mapName": "Tileset-2",
 
-      
       "name": "Marjo",
 
       "detectDistX": 2,
@@ -117,10 +115,9 @@
       "seePlayer": false,
 
       "x": 0,
-      "y": 200,
+      "y": 20,
 
-      "globalStartX": 0,
-
+      "globalStartX": 5,
       "velocityY": 0,
       "mass": 60,
 
@@ -131,7 +128,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 500,
+      "distance": 0,
       "speed": 3,
       "followSpeed": 4,
 

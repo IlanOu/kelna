@@ -105,6 +105,7 @@ let xStartWorld;
 let yStartWorld;
 
 let arrayMap;
+let currentMap;
 
 
 //& Maisons
@@ -240,9 +241,8 @@ let gravityForce;
 
 
 //& Cinématiques
-let cinematicStarted;
+let startCinematicPlaying;
 let musicCinematic;
-let endCinematic;
 
 
 
@@ -287,3 +287,4 @@ let fps;
 let StartCinematic;
 let statistiques;
 let tilesList;
+let gameIntroductionVideo;

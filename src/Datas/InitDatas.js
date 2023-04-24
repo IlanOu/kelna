@@ -52,7 +52,7 @@ const init_characterSpriteHeight = 32;
 //? Positions
 const init_characterInsidePosX = 1;
 const init_characterInsidePosY = 1;
-const init_characterPositionX = 1;
+const init_characterPositionX = 900//1;
 const init_characterPositionY = 1;
 const init_previousPlayerX = 0;
 const init_previousPlayerY = 0
@@ -101,6 +101,7 @@ const init_rectHeight = 60;
 const init_xStartWorld = 0;
 const init_yStartWorld = 0;
 const init_arrayMap = [];
+const init_currentMap = 0;
 
 
 //& Maisons
@@ -246,8 +247,7 @@ const init_gravityForce = 0.5;
 
 
 //& Cinématiques
-const init_cinematicStarted = true;
+const init_startCinematicPlaying = false;
 const init_musicCinematic = false;
-const init_endCinematic = false;
 
 

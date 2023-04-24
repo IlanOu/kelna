@@ -137,6 +137,11 @@ function keyReleased() {
 //~ Clique de souris
 function mousePressed() {
     if (mouseButton === LEFT) {
+        if (startCinematicPlaying && gameIntroductionVideo.elt.paused){
+            gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
+            gameIntroductionVideo.play();
+        }
+
 
         slotOne = Inventory[0]
         leftClickPressed = true

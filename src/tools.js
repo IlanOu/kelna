@@ -56,6 +56,30 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 }
 
 
+//~ Chercher un tableau dans un tableau 2D
+function PNJMustBeShown(pnj) {
+
+
+
+   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+   let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+   let invertedArrayMapPosition = []
+   invertedArrayMapPosition[0] = positionMapPNJ[1]
+    invertedArrayMapPosition[1] = positionMapPNJ[0]
+
+
+    let inChunksCheck = false
+
+    mapsToCheck.some(map => {
+        if (!inChunksCheck){
+            inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
+        }
+    })
+
+    return inChunksCheck
+}
+
+
 //~ Rect is in Rect
 function rectIsInRect(rect1X, rect1Y, rect1Width, rect1Height, rect2X, rect2Y, rect2Width, rect2Height) {
     return (rect1X < rect2X + rect2Width &&
@@ -281,16 +305,15 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         }
     })
 
-
-
     if (!mapExist) {
         Object.entries(Houses.Houses).forEach(house => {
             house = house[1]
             if (house.name == mapName && !mapExist) {
                 mapExist = true;
-                indexMapX = house.indexOf(mapName);
+                //indexMapX = house.indexOf(mapName);
+                indexMapX =  0
             } else {
-                indexMapY++
+                indexMapY = 0
             }
         });
     }
@@ -931,9 +954,8 @@ function initVariables() {
 
 
     //& Cinématiques
-    cinematicStarted = init_cinematicStarted;
+    startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
-    endCinematic = init_endCinematic;
 
 
     statistiques = init_statistiques;
