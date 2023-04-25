@@ -952,7 +952,7 @@ function drawCredits() {
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
-  if (startGame) {
+  if (startGame && !startCinematicPlaying) {
     drawStartGame()
   }
 
@@ -1017,7 +1017,7 @@ function setupUI() {
     drawHomeMenu();
 
     //& Affichage des paramètres
-    if (settingsPause) {
+    if (settingsPause && !startCinematicPlaying) {
       drawSettingsMenu();
     }
   }

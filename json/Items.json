@@ -50,6 +50,16 @@
             "y": 7,
             "detectDist": 1,
             "shown": true
+        },
+        "mushroom_2": {
+            "name": "mushroom_2",
+            "category": "other",
+            "itemNumber": 1,
+            "location": "Tileset-6",
+            "x" : 9,
+            "y": 5,
+            "detectDist": 1,
+            "shown": true
         }
     }
 }

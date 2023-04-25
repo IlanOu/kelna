@@ -596,16 +596,16 @@ function popUp(message, options = "info") {
         let buttonPopUpW = 150
         let buttonPopUpH = 20
         let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
-        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.3)
         let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
 
         let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
 
         fill(128, 128, 128)
         drawButton(buttonPopUp)
-        drawText("OK", 15, [textPopUpX, buttonPopUpY], CENTER)
+        drawText("OK", 15, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
 
 
         if (buttonClicked(buttonPopUp)) {
@@ -622,7 +622,7 @@ function popUp(message, options = "info") {
         let buttonPopUpWYes = 150
         let buttonPopUpHYes = 20
         let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
-        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.6)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
         let buttonPopUpYes = [buttonPopUpXYes, buttonPopUpYYes, buttonPopUpWYes, buttonPopUpHYes]
@@ -631,7 +631,7 @@ function popUp(message, options = "info") {
         let buttonPopUpWNo = 150
         let buttonPopUpHNo = 20
         let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWNo / 2)
-        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.8) + buttonPopUpHYes + 15
+        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.4) + buttonPopUpHYes + 15
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
         let buttonPopUpNo = [buttonPopUpXNo, buttonPopUpYNo, buttonPopUpWNo, buttonPopUpHNo]
@@ -639,15 +639,15 @@ function popUp(message, options = "info") {
 
         fill(128, 128, 128)
         drawButton(buttonPopUpYes)
-        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], CENTER)
+        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
         //
 
         fill(128, 128, 128)
         drawButton(buttonPopUpNo)
-        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], CENTER)
+        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
 
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
 
         if (buttonClicked(buttonPopUpYes)) {
             playerAnswersYes = true
