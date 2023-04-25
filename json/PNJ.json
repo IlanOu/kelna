@@ -58,7 +58,7 @@
     "Toto": {
       "name":"Toto",
       
-      "mapName": "Tileset-1",
+      "mapName": "A-1",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -111,7 +111,7 @@
     "Marjo": {
       "name": "Marjo",
       
-      "mapName": "Tileset-6",
+      "mapName": "B-2",
 
       "detectDistX": 2,
       "detectDistY": 2,
