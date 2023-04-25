@@ -1,21 +1,16 @@
-function drawBackgroundImage (background){
+function drawBackgroundImage (background, backgroundClose, backgroundDistant){
 
   //? dessinez votre image de fond d'écran
   noSmooth()
   
+  let heightImgRatio = viewportDisplayHeight/background.height
   
+  backgroundX = (xStartWorld / heightImgRatio)/2;
+  image(background, backgroundX, 0, background.width*heightImgRatio, background.height*heightImgRatio);
+
+  backgroundX = (xStartWorld / heightImgRatio)/1.5;
+  image(backgroundDistant, backgroundX, 0, background.width*heightImgRatio, background.height*heightImgRatio);
   
-  let heightImgRatio = background.height / viewportDisplayHeight
-  
-  // image(background, backgroundX, 0, background.width/heightImgRatio, background.height/heightImgRatio);
-  image(background, backgroundX, 0, background.width, viewportDisplayHeight);
-  //& déplacez votre image de fond d'écran vers la gauche à chaque trame
-  
-  //? si l'image de fond d'écran est sortie de l'écran, remettez-la à droite
-  if (backgroundX < -background.width + viewportDisplayWidth) {
-    backgroundX += background.width
-  }else{
-    backgroundX = xStartWorld/8;
-    
-  }
+  backgroundX = xStartWorld / heightImgRatio;
+  image(backgroundClose, backgroundX, 0, background.width*heightImgRatio, background.height*heightImgRatio);
 }

@@ -1,28 +1,5 @@
 p5.disableFriendlyErrors = true;
 
-//~ Setup 
-function setup() {
-  
-  initVariables()
-
-  //? Viewport
-  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
-    viewportDisplayWidth = windowWidth
-    viewportDisplayHeight = windowHeight
-  }
-
-  //? Canvas
-  createCanvas(viewportDisplayWidth, viewportDisplayHeight);
-
-
-  //& Ma tileset fait 256x256 px et chaque tile fait du 16x16
-  // tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
-  // itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
-  // tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
-
-
-  frameRate(fpsLevel);
-}
 
 //~ Adapte l'écran à la page
 function windowResized() {
@@ -31,32 +8,36 @@ function windowResized() {
   viewportDisplayHeight = windowHeight
 }
 
+
 //~ Preload 
 function preload() {
 
+
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUIParameters.png");
-  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png");
+  GUIForEscape = loadImage("assets/GUI/PauseGUI.png");
   GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
-  Background = loadImage("assets/Background/Background.gif");
+
+  //Background = loadImage("assets/Background/Background.gif");
+
   GamerHeart = loadImage("assets/GUI/heart.png");
   GamerHeartBlack = loadImage("assets/GUI/heartBlack.png");
 
-  GUIForStats = loadImage("assets/GUI/GUIForStats.png");
-  GUIInteract = loadImage("assets/GUI/GUIInt.png");
-  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
-  GUIStart = loadImage("assets/GUI/start.png");
+  GUITroc = loadImage("assets/GUI/GUIForTroc.png");
+  GUIStart = loadImage("assets/GUI/GUIStart.png")
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
-  backgroundImage = loadImage('assets/Background/Sky2.jpg');
+  backgroundImage = loadImage('assets/Background/bg_forest.png');
+  backgroundImageDistant = loadImage('assets/Background/bg_forest_distant.png');
+  backgroundImageClose = loadImage('assets/Background/bg_forest_close.png');
 
 
   //? Animation PNJ
   marjoTexture = loadImage("assets/entities/marjoSprite.png");
   charleTexture = loadImage("assets/entities/charleSprite.png");
   malade1Sprite = loadImage("assets/entities/malade1.png");
-  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png");
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyard.png");
 
 
   //? Tileset
@@ -65,7 +46,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/Tilesetgeneu.png");
+  tileSet = loadImage("assets/textures/TilesetKelna.png");
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
   backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
@@ -73,7 +54,8 @@ function preload() {
 
 
   //? Personnage
-  characterTextures = loadImage("assets/entities/spritesheetYvoTestAtk4.png")
+  characterTextures = loadImage("assets/entities/spritesheetYvo.png")
+  
 
 
   //? JSON preload
@@ -89,15 +71,44 @@ function preload() {
   
   init_pnjJSON = pnjJSON
 
-  //? SONG
-  // SongBackground = loadSound("music/SongBackground.mp3");
+  //? Cinématiques
+  gameIntroductionVideo = createVideo("assets/cinematic/StartCinematic.mp4");
 
 
+  //? Music
+  SongBackground = loadSound("assets/audios/music/SongBackground.mp3")
+
+
+  //? Songs
+  VoiceStartSong = loadSound("assets/audios/voices/START/teststart.m4a")
+  VoicesDieSong = [loadSound("assets/audios/voices/END/testend.m4a"), loadSound("assets/audios/voices/END/testend2.m4a")]
+}
+
+
+//~ Setup 
+function setup() {
+  initVariables()
+
+  //? Viewport
+  if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
+    viewportDisplayWidth = windowWidth
+    viewportDisplayHeight = windowHeight
+  }
+
+  //? Canvas
+  createCanvas(viewportDisplayWidth, viewportDisplayHeight);
+
+  frameRate(fpsLevel);
+
+  //? Cinématiques
+  gameIntroductionVideo.hide();
 }
 
 
 //~ Draw 
 function draw() {
+
+
   noSmooth()
 
   //* Effet de tremblement de la caméra
@@ -106,41 +117,51 @@ function draw() {
     shakeDuration--;
   }
   
-  //? Si le jeu joue
-  if (gameIsPlaying) {
-
-    //~ Si le jeu n'est pas en pause
-    if (!gameIsPaused){
-      if (engineOne) {
-        statistiques.timeSpentInGame = Math.floor(millis() / 1000)
-        statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
-
-
-        //? Afficher le fond du jeu
-        drawBackgroundImage(backgroundImage)
-        
-        //? Afficher la map
-        drawGrid()
-
-        //? Afficher les entités
-        doorsManager()
-        PNJManager()
-        MobManager()
-        
-        //? Afficher le joueur (le perso passe devant les entités)
-        character()
-        
-        //? Afficher l'avant plan de la map
-        drawGridForeground()
+  if (startCinematicPlaying) {
+    playStartCinematic()
+  }else{
+    //? Si le jeu joue
+    if (gameIsPlaying) {
   
-      }else{
-        drawHouse()
-        doorsManager()
-        PNJManager()
-        characterView2()
-        drawHouseForeground()
+      //~ Si le jeu n'est pas en pause
+      if (!gameIsPaused){
+        if (engineOne) {
+          statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+          statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
+  
+  
+          //? Afficher le fond du jeu
+          drawBackgroundImage(backgroundImage, backgroundImageDistant, backgroundImageClose)
+          
+          
+
+          //? Afficher la map
+          drawGrid()
+
+          //? Afficher les entités
+          doorsManager()
+          itemsManager()
+          PNJManager()
+          MobManager()
+          
+          
+
+          //? Afficher le joueur (le perso passe devant les entités)
+          character()
+          
+          //? Afficher l'avant plan de la map
+          drawGridForeground()
+    
+        }else{
+          drawHouse(behindThisDoorHouse)
+          doorsManager()
+          PNJManager()
+          characterView2()
+          drawHouseForeground(behindThisDoorHouse)
+        }
       }
     }
+    setupUI()
   }
-  setupUI()
+
 }

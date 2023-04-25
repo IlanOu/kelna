@@ -2,6 +2,7 @@
     "Ennemis": {
 
       "Malade1": {
+        "mapName": "Tileset-2",
         "type": "Malade1",
         "isAThreat": false,
         "getHit": false,
@@ -53,6 +54,8 @@
       },
 
       "Malade2": {
+        "mapName": "Tileset-1",
+
         "type": "Malade2",
         "isAThreat": true,
         "getHit": false,
@@ -76,92 +79,6 @@
         "y": 200,
 
         "globalStartX": 5,
-        "globalStartY": 0,
-
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-
-      "Enn2": {
-        "type": "Chevalier",
-        "damages": 1,
-        "getHit": false,
-        "haveBeenHit": false,
-        "life": 2,
-
-        "color": "red",
-
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
-
-        "x": 600,
-        "y": 200,
-
-        "globalStartX": 0,
-        "globalStartY": 0,
-
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-
-      "Enn1": {
-        "type": "Archer",
-        "damages": 10,
-        "getHit": false,
-        "haveBeenHit": false,
-        "life": 2,
-
-        "color": "red",
-
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
-
-        "x": 600,
-        "y": 200,
-
-        "globalStartX": 0,
         "globalStartY": 0,
 
         "velocityY": 0,

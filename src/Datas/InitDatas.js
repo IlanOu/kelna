@@ -8,7 +8,7 @@ const init_fpsLevel = 60
 
 
 //& Le bloc qui tue (littéralement)
-const init_killingBlock = 238;
+const init_killingBlocks = [39, 49];
 
 
 //& Admins
@@ -52,7 +52,7 @@ const init_characterSpriteHeight = 32;
 //? Positions
 const init_characterInsidePosX = 1;
 const init_characterInsidePosY = 1;
-const init_characterPositionX = 1;
+const init_characterPositionX = 900//1;
 const init_characterPositionY = 1;
 const init_previousPlayerX = 0;
 const init_previousPlayerY = 0
@@ -101,6 +101,8 @@ const init_rectHeight = 60;
 const init_xStartWorld = 0;
 const init_yStartWorld = 0;
 const init_arrayMap = [];
+const init_currentMap = "";
+const init_lastMap = "";
 
 
 //& Maisons
@@ -168,6 +170,14 @@ const init_YouCanPlayMusic = false
 //~ Sons
 const init_ColorForRectSong = 255
 const init_SongIsActivate = false
+const init_YouCanPlaySong = false
+
+const init_VoicesSongMarjo = []
+const init_VoicesDieSong = []
+
+const init_dieSoundPlay = false
+const init_startGame = false;
+const init_startSoundPlay = false
 
 
 //& Evenements
@@ -195,11 +205,11 @@ const init_currentIndexTextSpeaking = 0
 
 //~  Portes
 const init_behindThisDoor = "";
+const init_behindThisDoorHouse = ""
 const init_engine1WidthDoors = init_rectWidth
 const init_engine1HeightDoors = init_rectHeight * 2
 const init_engine2WidthDoors = 10
 const init_engine2HeightDoors = init_rectHeight
-const init_doorInTaverne = false;
 
 //~ Mort
 const init_playerDead = false
@@ -207,6 +217,11 @@ const init_playerDead = false
 //~ Popups
 const init_popUpShown = false;
 const init_playerAnswersYes = false;
+
+//~ Credits
+const init_endTheGameCredits = false;
+const init_PositionCredits = window.innerHeight + 50;
+const init_speedCredits = 2.5;
 
 //& Statistiques
 const init_numberOfSteps = 0;
@@ -224,6 +239,8 @@ const init_statistiques = {
 
 //& Items
 const init_itemList = [];
+const init_currentItemPointing = "";
+const init_canGetItem = false;
 
 
 //& Troc
@@ -244,8 +261,7 @@ const init_gravityForce = 0.5;
 
 
 //& Cinématiques
-const init_cinematicStarted = true;
+const init_startCinematicPlaying = false;
 const init_musicCinematic = false;
-const init_endCinematic = false;
 
 

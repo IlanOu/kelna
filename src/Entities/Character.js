@@ -5,10 +5,10 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
     //* Gauche Droite
     //? éviter de pouvoir aller à droite et à gauche en meme temps
-    if ((keyIsDown(38) && keyIsDown(81))
-      || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))
-      || (keyIsDown(38) && keyIsDown(LEFT_ARROW))
-      || (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+    if ((keyIsDown(38) && keyIsDown(81)) ||
+      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
+      (keyIsDown(38) && keyIsDown(LEFT_ARROW)) ||
+      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
       objectPositionX = objectPositionX
     }
     if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
@@ -43,10 +43,10 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
 
     //* Gauche Droite
-    if ((keyIsDown(68) && keyIsDown(81))
-      || (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))
-      || (keyIsDown(68) && keyIsDown(LEFT_ARROW))
-      || (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+    if ((keyIsDown(68) && keyIsDown(81)) ||
+      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
+      (keyIsDown(68) && keyIsDown(LEFT_ARROW)) ||
+      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
       objectPositionX = objectPositionX
     }
     if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
@@ -57,10 +57,10 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     }
 
     //*Haut Bas
-    if ((keyIsDown(90) && keyIsDown(83))
-      || (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW))
-      || (keyIsDown(90) && keyIsDown(DOWN_ARROW))
-      || (keyIsDown(83) && keyIsDown(UP_ARROW))) {
+    if ((keyIsDown(90) && keyIsDown(83)) ||
+      (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW)) ||
+      (keyIsDown(90) && keyIsDown(DOWN_ARROW)) ||
+      (keyIsDown(83) && keyIsDown(UP_ARROW))) {
       objectPositionY = objectPositionY
     }
     if (keyIsDown(90) || keyIsDown(UP_ARROW)) {
@@ -84,12 +84,15 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 function moveLeft(positionX, speed) {
   return positionX - speed
 }
+
 function moveRight(positionX, speed) {
   return positionX + speed
 }
+
 function moveUp(positionY, speed) {
   return positionY - speed
 }
+
 function moveDown(positionY, speed) {
   return positionY + speed
 }
@@ -109,7 +112,7 @@ function addJump(positionY, jumpHeight, velocityY, gravityForce) {
 function drawCharacter(positionX, positionY, width, height, direction, movement) {
   let timer = (round(millis() / animationSpeed)) % 2
 
-  
+
 
   characterTextureList = []
 
@@ -124,82 +127,197 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   switch (movement) {
     //* animation MARCHER
     case "walk":
-      for (let y = (8*32); y < (9*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (6*32); x += characterSpriteWidth) {
+
+      if (inventoryIsEmpty(Inventory[0])) {
+        annimationBeginY = 8 * 32
+        annimationEndY = 9 * 32
+      } else {
+        annimationBeginY = 20 * 32
+        annimationEndY = 21 * 32
+
+      }
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = 0; x < (6 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation IDLE
+      //* animation IDLE
     case "idle":
-      for (let y = (4*32); y < (5*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
+
+      switch (Inventory[0].name) {
+
+        case "sword_1":
+          annimationBeginY = 10 * 32
+          annimationEndY = 11 * 32
+        break;
+
+
+
+        case "sword_2":
+          annimationBeginY = 0 * 32
+          annimationEndY = 1 * 32
+        break;
+
+
+        case "sword_3":
+          annimationBeginY = 15 * 32
+          annimationEndY = 16 * 32
+        break;
+
+        default:
+          annimationBeginY = 4 * 32
+          annimationEndY = 5 * 32
+      }
+
+
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = 0; x < (2 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation JUMP
+      //* animation JUMP
     case "jump":
-      for (let y = (7*32); y < (8*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (4*32); x += characterSpriteWidth) {
+      for (let y = (7 * 32); y < (8 * 32); y += characterSpriteHeight) {
+        for (let x = 0; x < (4 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation DASH
+      //* animation DASH
     case "dash":
-      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (2*32); x += characterSpriteWidth) {
+      for (let y = (5 * 32); y < (6 * 32); y += characterSpriteHeight) {
+        for (let x = 0; x < (2 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation FRAPPER
+      //* animation FRAPPER
     case "hit":
-      for (let y = (1*32); y < (2*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+      switch (Inventory[0].name) {
+
+        case "sword_2":
+          annimationBeginY = 1 * 32
+          annimationEndY = 2 * 32
+          break;
+
+        case "sword_1":
+          annimationBeginY = 11 * 32
+          annimationEndY = 12 * 32
+          break;
+
+        case "sword_3":
+          annimationBeginY = 16 * 32
+          annimationEndY = 17 * 32
+          break;
+
+      }
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = 0; x < (3 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation FRAPPER
+      //* animation FRAPPER 
     case "hit2":
-      for (let y = (2*32); y < (3*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+
+      switch (Inventory[0].name) {
+
+        case "sword_2":
+          annimationBeginY = 2 * 32
+          annimationEndY = 3 * 32
+          break;
+
+        case "sword_1":
+          annimationBeginY = 12 * 32
+          annimationEndY = 13 * 32
+          break;
+
+        case "sword_3":
+          annimationBeginY = 17 * 32
+          annimationEndY = 18 * 32
+          break;
+      }
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = 0; x < (3 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation FRAPPER
+      //* animation FRAPPER 
     case "hit3":
-      for (let y = (3*32); y < (4*32); y += characterSpriteHeight) {
-        for (let x = 0; x < (3*32); x += characterSpriteWidth) {
+
+      switch (Inventory[0].name) {
+
+        case "sword_2":
+          annimationBeginY = 3 * 32
+          annimationEndY = 4 * 32
+          break;
+
+        case "sword_1":
+          annimationBeginY = 13 * 32
+          annimationEndY = 14 * 32
+          break;
+
+        case "sword_3":
+          annimationBeginY = 18 * 32
+          annimationEndY = 19 * 32
+          break;
+      }
+
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = 0; x < (3 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation se faire FRAPPER
+      //* animation se faire 
     case "getHit":
-      for (let y = (5*32); y < (6*32); y += characterSpriteHeight) {
-        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+
+      switch (Inventory[0].name) {
+
+        
+        case "sword_1":
+          annimationBeginY = 15 * 32
+          annimationEndY = 16 * 32
+          break;
+        case "sword_2":
+          annimationBeginY = 9 * 32
+          annimationEndY = 10 * 32
+          break;
+          
+        case "sword_3":
+          annimationBeginY = 19 * 32
+          annimationEndY = 20 * 32
+          break;
+
+        default:
+          annimationBeginY = 5 * 32
+          annimationEndY = 6 * 32
+      }
+
+
+      for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
+        for (let x = (0 * 32); x < (5 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
       break;
-    //* animation MOURIR
+      //* animation MOURIR
     case "die":
-      for (let y = (6*32); y < (7*32); y += characterSpriteHeight) {
-        for (let x = (0*32); x < (5*32); x += characterSpriteWidth) {
+      for (let y = (6 * 32); y < (7 * 32); y += characterSpriteHeight) {
+        for (let x = (0 * 32); x < (5 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
         }
       }
-      if (characterAnimationIndex >= characterTextureList.length-1) {
+      if (characterAnimationIndex >= characterTextureList.length - 1) {
         gameIsPlaying = false;
         statistiques.deathCount++
         drawDeath();
       }
       break;
-    }
+  }
 
   //? Remettre l'animation au début quand on change d'animation
   if (characterLastMovement != characterMovement) {
@@ -208,7 +326,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
 
   //* Changer de frame
-  
+
   if (timer && !characterAnimationFramePassed) {
     characterAnimationIndex++
     characterAnimationFramePassed = true
@@ -216,7 +334,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
   if (!timer) {
     characterAnimationFramePassed = false
   }
-  
+
 
 
   //* Remettre l'index au début 
@@ -226,10 +344,10 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     if (characterHitting) {
       characterHitting = false
     }
-    if (characterComboHitting){
+    if (characterComboHitting) {
       characterComboHitting = false
     }
-    if (characterComboHittingDouble){
+    if (characterComboHittingDouble) {
       characterComboHittingDouble = false
     }
   }
@@ -247,14 +365,13 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
     image(characterCurrentTexture, -positionX - width, positionY, width, height)
     scale(-1, 1)
   }
-
 }
 
 
 //~ Collisions
 function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight) {
   let touchThisObject = false;
-  
+
 
   //* Vérifier si les boîtes se chevauchent
   if (rectIsInRect(agentX, agentY, agentWidth, agentHeight, objectX, objectY, objectWidth, objectHeight)) {
@@ -267,7 +384,6 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
         //? est relatif au perso
         characterVelocityY = 0;
-        touchThisObject = true
       }
       //* collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY) {
@@ -275,21 +391,21 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
         agentY = objectY - agentHeight
 
         //? Augmenter les statistiques
-        if (characterVelocityY > 0){
+        if (characterVelocityY > 0) {
           statistiques.totalJumpCount += characterJumpCount
         }
 
         //* si le joueur touche le sol, reset le nombre de saut 
-        if (characterJumpCount > 0 && characterVelocityY > 30){
-          shakeCamera(0.25, characterVelocityY/10)
+        if (characterJumpCount > 0 && characterVelocityY > 30) {
+          shakeCamera(0.25, characterVelocityY / 10)
         }
         //? est relatif au perso
         characterJumpCount = 0;
         //? est relatif au perso
         characterIsJumping = false
-        
+
         //? est relatif au perso
-        if (!spaceKeyIsPressed){
+        if (!spaceKeyIsPressed) {
           characterVelocityY = 0
         }
 
@@ -306,13 +422,11 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
       if (agentX + agentWidth > objectX && agentX > objectX) {
 
         agentX = objectX + objectWidth
-        touchThisObject = true
 
         //* collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
 
         agentX = objectX - agentWidth
-        touchThisObject = true
       }
     }
   }
@@ -325,6 +439,11 @@ function character() {
 
   characterLastMovement = characterMovement
 
+  lastMap = currentMap
+
+  
+
+
   //* Ancienne positions du perso
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
@@ -333,9 +452,9 @@ function character() {
   if (healthPlayer) {
     //* Contrôles du perso (gauche, droite)
     characterPositionX = getMovementsControls(characterPositionX, characterPositionY, characterMovesSpeed)
-    
-    statistiques.distanceWalked = round(-(xStartWorld / rectWidth)); 
-    
+
+    statistiques.distanceWalked = round(-(xStartWorld / rectWidth));
+
     //* Limites de la velocité Y du perso
     characterVelocityY = limitNumberWithinRange(characterVelocityY, characterVelocityYMin, characterVelocityYMax)
   }
@@ -482,44 +601,44 @@ function character() {
   //~ saut du personnage
   if (spaceKeyIsPressed && healthPlayer) {
     //* le saut du personnage
-    if (characterJumpCount < characterMaxJumps){
-      
+    if (characterJumpCount < characterMaxJumps) {
+
       if (!characterIsJumping) {
-  
+
         characterIsJumping = true;
         characterDoubleJumping = false;
         characterJumpCount++;
-  
+
         let jumpReturns = addJump(characterPositionY,
           characterJumpHeight,
           characterVelocityY,
           gravityForce)
-          
+
         characterPositionY = jumpReturns[0];
         characterVelocityY = jumpReturns[1];
-  
+
         statistiques.totalJumpCount++
-        
-          
-  
-  
+
+
+
+
         //* le double saut du personnage  
       } else if (characterDoubleJumping) {
         characterDoubleJumping = false;
         characterJumpCount++;
-  
+
         let jumpReturns = addJump(characterPositionY,
           characterJumpHeight,
           characterVelocityY,
           gravityForce)
         characterPositionY = jumpReturns[0];
         characterVelocityY = jumpReturns[1];
-          
+
         statistiques.totalJumpCount++
       }
     }
-    
-    
+
+
   }
 
 
@@ -538,6 +657,18 @@ function character() {
   characterPositionY = positions[1];
 
   //#endregion
+
+
+
+  //* Dernière map sur laquelle est passé le joueur
+  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  let positionMapCenterPlayer = findIndexOfPositionIn2dArray(characterPositionX+(characterWidth/2), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+
+
+  if (positionMapCenterPlayer.toString() == positionMapPlayer.toString()){
+    currentMap = World.worldsMap[positionMapPlayer[1]][positionMapPlayer[0]]
+  }
+
 
 
   //#region 
@@ -575,10 +706,12 @@ function character() {
 
         if (thisObject > 0) {
           [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
+
+
           
-          
+
           //~ Tuer le joueur quand il marche sur le bloc 238
-          if (thisObject == killingBlock && touchThisObject){
+          if (killingBlocks.includes(thisObject) && touchThisObject) {
             hurtPlayer(1)
           }
         }
@@ -594,7 +727,7 @@ function character() {
 
   const currentTime = millis();
 
-  if (dashSystem){
+  if (dashSystem) {
     if (
       dashKeyIsPressed &&
       !characterIsDashing &&
@@ -621,7 +754,7 @@ function character() {
   //#region 
   //~ affichage du personnage
 
-  if (characterMovement != "die"){
+  if (characterMovement != "die") {
     if (characterIsJumping) {
       if (rightArrowPressed) {
         characterDirection = "right"
@@ -647,45 +780,45 @@ function character() {
           if (rightArrowPressed) {
             characterDirection = "right"
             characterMovement = "hit"
-              
+
           } else if (leftArrowPressed) {
             characterDirection = "left"
             characterMovement = "hit"
-              
+
           } else {
             characterDirection = characterLastDirection
             characterMovement = "hit"
-              
+
           }
         } else if (characterComboHitting) {
           if (rightArrowPressed) {
             characterDirection = "right"
             characterMovement = "hit2"
-              
+
           } else if (leftArrowPressed) {
             characterDirection = "left"
             characterMovement = "hit2"
-              
+
           } else {
             characterDirection = characterLastDirection
             characterMovement = "hit2"
-              
-          } 
+
+          }
         } else if (characterComboHittingDouble) {
           if (rightArrowPressed) {
             characterDirection = "right"
             characterMovement = "hit3"
-              
+
           } else if (leftArrowPressed) {
             characterDirection = "left"
             characterMovement = "hit3"
-              
+
           } else {
             characterDirection = characterLastDirection
             characterMovement = "hit3"
-              
-          } 
-        }else {
+
+          }
+        } else {
           if (rightArrowPressed) {
             characterDirection = "right"
             characterMovement = "walk"
@@ -694,13 +827,13 @@ function character() {
             characterMovement = "walk"
           } else {
             characterDirection = characterLastDirection
-            if (characterMovement != "getHit" && healthPlayer){
+            if (characterMovement != "getHit" && healthPlayer) {
               characterMovement = "idle"
             }
           }
         }
       }
-  
+
     }
   }
 
@@ -709,7 +842,7 @@ function character() {
   characterLastDirection = characterDirection
 
   drawCharacter(characterPositionX - (characterWidth - characterBoundingBoxWidth) / 2,
-    characterPositionY-(characterHeight - characterBoundingBoxHeight),
+    characterPositionY - (characterHeight - characterBoundingBoxHeight),
     characterWidth,
     characterHeight,
     characterDirection,
@@ -788,7 +921,7 @@ function characterView2() {
   //~ Collisions 
 
   //* Récupère la couche des collisions sur la map
-  let currentMapTableColliders = Houses[behindThisDoorHouse].layers[1]
+  let currentMapTableColliders = Houses.Houses[behindThisDoorHouse].layers[1]
 
 
   //* Pour chaque carré dans le tableau 
@@ -826,12 +959,12 @@ function characterView2() {
     characterMovement = "walk"
   } else {
     characterDirection = characterLastDirection
-    if (characterMovement != "getHit" && healthPlayer){
+    if (characterMovement != "getHit" && healthPlayer) {
       characterMovement = "idle"
     }
   }
-        
-      
+
+
 
 
 
@@ -846,12 +979,12 @@ function characterView2() {
   drawCharacter(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight, characterDirection, characterMovement)
 
 
-  
-  if(debugMod){
+
+  if (debugMod) {
     stroke(255, 0, 0)
     fill(255, 0, 0, 70)
     rect(characterInsidePosX, characterInsidePosY, characterBoundingBoxWidthInside, characterBoundingBoxHeightInside)
-    fill(0,255,0,70)
+    fill(0, 255, 0, 70)
     rect(characterInsidePosX + (characterBoundingBoxWidthInside / 2 - characterWidth / 2), characterInsidePosY + (characterBoundingBoxHeightInside / 2 - characterHeight), characterWidth, characterHeight)
     noStroke()
   }

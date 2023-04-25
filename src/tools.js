@@ -36,6 +36,7 @@ function findIndexValueIn2dArray(array, mapName) {
 
 //~ Trouve l'index de la position du 2eme array
 let previous_index_pos = null;
+
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
     for (let row = 0; row < array.length; row++) {
         for (let column = 0; column < array[0].length; column++) {
@@ -52,6 +53,30 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
         }
     }
     return previous_index_pos;
+}
+
+
+//~ Chercher un tableau dans un tableau 2D
+function PNJMustBeShown(pnj) {
+
+
+
+    let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+    let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+    let invertedArrayMapPosition = []
+    invertedArrayMapPosition[0] = positionMapPNJ[1]
+    invertedArrayMapPosition[1] = positionMapPNJ[0]
+
+
+    let inChunksCheck = false
+
+    mapsToCheck.some(map => {
+        if (!inChunksCheck) {
+            inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
+        }
+    })
+
+    return inChunksCheck
 }
 
 
@@ -117,23 +142,52 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 //~ Joue de la music 
-// let PlayMusic = () => {
+let PlayMusic = () => {
 
-//     if (musicEnabled === false && Pressing === false) {
-//         musicEnabled = true
-//         SongBackground.loop()
-//         musicButtonColor = 50
-//         Pressing = true
+    if (musicEnabled === false && Pressing === false) {
+        musicEnabled = true
+        SongBackground.loop()
+        musicButtonColor = 50
+        Pressing = true
 
-//     } else if (musicEnabled === true && Pressing === false) {
-//         musicEnabled = false
-//         SongBackground.pause()
-//         musicButtonColor = 255
-//         Pressing = true
+    } else if (musicEnabled === true && Pressing === false) {
+        musicEnabled = false
+        SongBackground.pause()
+        musicButtonColor = 255
+        Pressing = true
 
-//     }
+    }
 
-// }
+}
+
+
+//~ Fonction qui joue des sons aleatoire
+
+/*
+function DieGameVoice() {
+    if (!soundEnabled) {
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        let sonAleatoire = VoicesDieSong[indexSong];
+        console.log(VoicesDieSong)
+        sonAleatoire.play();
+    }
+}
+*/
+
+function startGameVoice() {
+    if (!soundEnabled) {
+        VoiceStartSong.play()
+    }
+}
+
+
+function DieGameVoice() {
+    if (!soundEnabled) {
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        console.log("->", VoicesDieSong[indexSong])
+        VoicesDieSong[indexSong].play()
+    }
+}
 
 
 //~ Joue les songs
@@ -265,28 +319,30 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapX = 0;
     let indexMapY = 0;
 
-    World.worldsMap.every(row => {
-
-        if (row.includes(mapName)) {
-            mapExist = true;
-            indexMapX = row.indexOf(mapName);
-
-            return false
-        } else {
-            indexMapY++
-        }
 
 
-    });
+    Object.entries(World.worldsMap).forEach(row => {
+        row = row[1]
 
-    if (!mapExist) {
-        Object.entries(Houses).forEach(row => {
-            row = row[0]
+        if (!mapExist) {
             if (row.includes(mapName)) {
                 mapExist = true;
                 indexMapX = row.indexOf(mapName);
             } else {
                 indexMapY++
+            }
+        }
+    })
+
+    if (!mapExist) {
+        Object.entries(Houses.Houses).forEach(house => {
+            house = house[1]
+            if (house.name == mapName && !mapExist) {
+                mapExist = true;
+                //indexMapX = house.indexOf(mapName);
+                indexMapX = 0
+            } else {
+                indexMapY = 0
             }
         });
     }
@@ -316,7 +372,7 @@ function drawKey(key) {
         PosY = characterPositionY
     } else {
 
-        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth/1.2
+        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth / 1.2
         PosY = characterInsidePosY - characterHeight / 3
     }
 
@@ -332,7 +388,7 @@ function drawKey(key) {
 
     fill(255)
     drawButton(keyBackground)
-    drawText(key, 20, textKey, "center")
+    drawText(key, 20, textKey, [CENTER, BASELINE])
 
 }
 
@@ -354,10 +410,10 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
     }
 
     if (key == "!") {
-        drawText(key, 30, textKey, "center", [255, 0, 0])
+        drawText(key, 30, textKey, [CENTER, BASELINE], [255, 0, 0])
 
     } else {
-        drawText(key, 20, textKey, "center", [0, 0, 0])
+        drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
     }
 
 }
@@ -540,16 +596,16 @@ function popUp(message, options = "info") {
         let buttonPopUpW = 150
         let buttonPopUpH = 20
         let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
-        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.3)
         let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
 
         let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
 
         fill(128, 128, 128)
         drawButton(buttonPopUp)
-        drawText("OK", 15, [textPopUpX, buttonPopUpY], "center")
+        drawText("OK", 15, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
 
 
         if (buttonClicked(buttonPopUp)) {
@@ -566,7 +622,7 @@ function popUp(message, options = "info") {
         let buttonPopUpWYes = 150
         let buttonPopUpHYes = 20
         let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
-        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.8)
+        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.6)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
         let buttonPopUpYes = [buttonPopUpXYes, buttonPopUpYYes, buttonPopUpWYes, buttonPopUpHYes]
@@ -575,7 +631,7 @@ function popUp(message, options = "info") {
         let buttonPopUpWNo = 150
         let buttonPopUpHNo = 20
         let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWNo / 2)
-        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.8) + buttonPopUpHYes + 15
+        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.4) + buttonPopUpHYes + 15
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
         let buttonPopUpNo = [buttonPopUpXNo, buttonPopUpYNo, buttonPopUpWNo, buttonPopUpHNo]
@@ -583,15 +639,15 @@ function popUp(message, options = "info") {
 
         fill(128, 128, 128)
         drawButton(buttonPopUpYes)
-        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], "center")
+        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
         //
 
         fill(128, 128, 128)
         drawButton(buttonPopUpNo)
-        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], "center")
+        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
 
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
+        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
 
         if (buttonClicked(buttonPopUpYes)) {
             playerAnswersYes = true
@@ -613,14 +669,14 @@ function getSpeed(seconds, meters) {
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
     return Math.round(vitesseEnKmh);
-  }
+}
 
 
 
-function resetJsons(){
+function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
-    
+
     //? Pas besoin de reload les json dont les donnees ne changent pas 
     // allDoors = loadJSON("json/Doors.json");
     // adminJSON = loadJSON("json/Admin.json");
@@ -658,6 +714,14 @@ function shakeCamera(durationSeconds, forcePixels) {
 }
 
 
+function getCurrentItem() {
+    addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+    itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+    currentItemPointing = ""
+    canGetItem = false
+}
+
+
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
@@ -671,9 +735,9 @@ function resetJsons() {
     // World = loadJSON("json/World.json");
 }
 
-
-
-
+function inventoryIsEmpty(slot) {
+    return Object.keys(slot).length === 0;
+}
 
 function initVariables() {
     //& Debug Mod
@@ -685,7 +749,7 @@ function initVariables() {
     fpsLevel = init_fpsLevel;
 
     //& Le bloc qui tue (littéralement)
-    killingBlock = init_killingBlock;
+    killingBlocks = init_killingBlocks;
 
 
     //& Admins
@@ -781,7 +845,8 @@ function initVariables() {
     yStartWorld = init_yStartWorld;
 
     arrayMap = init_arrayMap;
-
+    currentMap = init_currentMap
+    lastMap = init_lastMap
 
     //& Maisons
     xStartHouse = init_xStartHouse;
@@ -850,6 +915,14 @@ function initVariables() {
     //~ Sons
     soundButtonColor = init_ColorForRectSong;
     soundEnabled = init_SongIsActivate;
+    canPlaySong = init_YouCanPlaySong;
+
+    VoicesSongMarjo = init_VoicesSongMarjo
+
+    dieSoundPlay = init_dieSoundPlay
+    startGame = init_startGame
+    startSoundPlay = init_startSoundPlay
+
 
 
     //& Evenements
@@ -877,11 +950,11 @@ function initVariables() {
 
     //~  Portes
     behindThisDoor = init_behindThisDoor;
+    behindThisDoorHouse = init_behindThisDoorHouse
     engine1WidthDoors = init_engine1WidthDoors;
     engine1HeightDoors = init_engine1HeightDoors;
     engine2WidthDoors = init_engine2WidthDoors;
     engine2HeightDoors = init_engine2HeightDoors;
-    doorInTaverne = init_doorInTaverne;
 
     //~ Mort
     playerDead = init_playerDead;
@@ -890,6 +963,11 @@ function initVariables() {
     popUpShown = init_popUpShown;
     playerAnswersYes = init_playerAnswersYes;
 
+    //~ Credits
+    endTheGameCredits = init_endTheGameCredits
+    PositionCredits = init_PositionCredits
+    speedCredits = init_speedCredits
+
 
     //& Statistiques
     numberOfSteps = init_numberOfSteps;
@@ -897,6 +975,8 @@ function initVariables() {
 
     //& Items
     itemList = init_itemList;
+    currentItemPointing = init_currentItemPointing
+    canGetItem = init_canGetItem
 
 
     //& Troc
@@ -917,9 +997,8 @@ function initVariables() {
 
 
     //& Cinématiques
-    cinematicStarted = init_cinematicStarted;
+    startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
-    endCinematic = init_endCinematic;
 
 
     statistiques = init_statistiques;
@@ -949,4 +1028,35 @@ function initVariables() {
 
     resetJsons()
 
+}
+
+
+function aPNJCanTalk(){
+    let canTalk = false
+    if (pnjJSON.PNJS){  
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTalkWithMe) {
+                canTalk = true
+            }
+        })
+    }
+    
+    return canTalk;
+}
+
+function aPNJCanTrade(){
+    let canTrade = false
+    if (pnjJSON.PNJS){
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTradeWithMe) {
+                canTrade = true
+            }
+        })
+    }
+    
+    return canTrade;
 }

@@ -68,9 +68,9 @@ function drawDoor(door) {
 
     //? Remettre le spawn du perso en position
     characterInsidePosX =
-      Houses[behindThisDoorHouse].xStart * rectWidth + xStartHouse;
+      Houses.Houses[behindThisDoorHouse].xStart * rectWidth + xStartHouse;
     characterInsidePosY =
-      Houses[behindThisDoorHouse].yStart * rectHeight + yStartHouse;
+      Houses.Houses[behindThisDoorHouse].yStart * rectHeight + yStartHouse;
   }
 
   //* Debug Mod
@@ -145,6 +145,5 @@ function drawDoorInside(door) {
   //* Dessiner la porte
   rect(doorX, doorY, widthDoor, heightDoor);
 }
-
 
 

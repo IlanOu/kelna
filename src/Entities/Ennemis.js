@@ -4,8 +4,13 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    mob(ennemiesJSON.Ennemis.Malade1);
-    mob(ennemiesJSON.Ennemis.Malade2);
+    //// mob(ennemiesJSON.Ennemis.Malade1);
+    //// mob(ennemiesJSON.Ennemis.Malade2);
+      
+    // Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
+    //     mob(Mobs[1]);          
+    // })
+    
   }
 }
 
@@ -20,7 +25,7 @@ function mob(Mobs) {
   let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
   const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
 
-  if ((Mobs.life || !Mobs.isDead) && found) {
+  if ((Mobs.life > 0 || !Mobs.isDead) && found) {
     //* Initialisation des variables
 
     let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
@@ -260,9 +265,9 @@ let mobMovements = (Mobs) => {
         }
         if (Mobs.life > 0) {
           Mobs.indexFrame = 0
-          Mobs.life--;
+          Mobs.life -= Inventory[0].degat;
           Mobs.haveBeenHit = true;
-          statistiques.damagesDones++
+          statistiques.damagesDones += Inventory[0].degat
         }
       }
     }

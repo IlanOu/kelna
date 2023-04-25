@@ -7,7 +7,7 @@ let engineOne;
 let fpsLevel;
 
 //& Le bloc qui tue (littéralement)
-let killingBlock;
+let killingBlocks;
 
 
 //& Admins
@@ -34,6 +34,7 @@ let backgroundSmoothSpeed;
 
 //& Background
 let backgroundX;
+
 
 
 //& Character
@@ -93,6 +94,8 @@ let dashForce;
 //& Animations
 let animationSpeed;
 let textDialogSpeed;
+let annimationBeginY = 4 * 32;
+let annimationEndY = 5 * 32;
 
 
 //& Grille
@@ -103,6 +106,8 @@ let xStartWorld;
 let yStartWorld;
 
 let arrayMap;
+let currentMap;
+let lastMap;
 
 
 //& Maisons
@@ -170,6 +175,19 @@ let canPlayMusic;
 //~ Sons
 let soundButtonColor;
 let soundEnabled;
+let canPlaySong;
+
+
+let VoicesSongMarjo;
+
+let VoicesDieSong;
+let firstDieSound;
+let dieSoundPlay;
+
+let VoiceStartSong;
+let startGame;
+let startSoundPlay;
+
 
 
 //& Evenements
@@ -197,11 +215,11 @@ let currentIndexTextSpeaking;
 
 //~  Portes
 let behindThisDoor;
+let behindThisDoorHouse;
 let engine1WidthDoors;
 let engine1HeightDoors;
 let engine2WidthDoors;
 let engine2HeightDoors;
-let doorInTaverne;
 
 //~ Mort
 let playerDead;
@@ -210,6 +228,11 @@ let playerDead;
 let popUpShown;
 let playerAnswersYes;
 
+//~ Credits
+let endTheGameCredits;
+let PositionCredits;
+let speedCredits;
+
 
 //& Statistiques
 let numberOfSteps;
@@ -217,7 +240,8 @@ let numberOfSteps;
 
 //& Items
 let itemList;
-
+let currentItemPointing;
+let canGetItem;
 
 //& Troc
 let waitingAnswer;
@@ -237,9 +261,8 @@ let gravityForce;
 
 
 //& Cinématiques
-let cinematicStarted;
+let startCinematicPlaying;
 let musicCinematic;
-let endCinematic;
 
 
 
@@ -248,10 +271,14 @@ let sky;
 let tileSet;
 let tileSetForTaverne;
 let tileSetTaverne;
-let backgroundImage;
 let characterTexture_Dash;
 
+let backgroundImage;
+let backgroundImageDistant;
+let backgroundImageClose;
+
 let GUITroc;
+let GUIButton;
 let GUIStart;
 let marjoTexture;
 let charleTexture;
@@ -284,3 +311,4 @@ let fps;
 let StartCinematic;
 let statistiques;
 let tilesList;
+let gameIntroductionVideo;

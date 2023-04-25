@@ -5,8 +5,10 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    // PNJ(pnjJSON.PNJS.Marjo);
-    PNJ(pnjJSON.PNJS.Toto);
+      if (pnjJSON.PNJS){
+        PNJ(pnjJSON.PNJS.Marjo);
+        // PNJ(pnjJSON.PNJS.Toto);
+      }
   } else {
     drawPNJInside(pnjJSON.PNJS.Charle);
   }
@@ -38,6 +40,8 @@ let drawPNJInside = (pnj) => {
   PNJMovementsInside(pnj);
 };
 
+
+
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                    DRAW PNJ                                */
 //^ /* -------------------------------------------------------------------------- */
@@ -50,9 +54,9 @@ function PNJ(pnj) {
   let PNJStart = positionsStart.pixelX;
   let PNJEnd = positionsEnd.pixelX;
 
-  
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
-  
+  // pnj.y = positionsStart.pixelY + yStartWorld
+
 
   let PNJX = pnj.x;
   let PNJY = pnj.y;
@@ -65,86 +69,110 @@ function PNJ(pnj) {
   let PNJJumpCount = pnj.jumpCount;
   let PNJHaveToJump = pnj.haveToJump;
 
-  //* Ajout de la gravité au PNJ
-  let gravityReturns = getPositionWithGravity(
-    PNJY,
-    PNJVelocityY,
-    gravityForce,
-    PNJMass
-  );
-  PNJY = gravityReturns[0];
-  PNJVelocityY = gravityReturns[1];
-
+  //* Faire apparaitre PNJ quans ils sont dans la map verifier par le joueur pour les collisions
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
+  
+  if (PNJMustBeShown(pnj)) {
+    
+    
+    if (lastMap != currentMap){
+      if (currentMap.toString() == pnj.mapName.toString()){
+        PNJX = positionsStart.pixelX + xStartWorld
+        PNJY = positionsStart.pixelY + yStartWorld
+        pnj.x = positionsStart.pixelX + xStartWorld
+        pnj.y = positionsStart.pixelY + yStartWorld
+        pnj.velocityY = 0
+        PNJVelocityY = 0
+      }
+    }
 
-  //* Ajoute les collisions pour toute les maps autour du perso
-  for (let i = 0; i < mapsToCheck.length; i++) {
-    let currentMapToCheck = mapsToCheck[i];
-    let currentMapToCheckName =
-      World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
-    //? Récupère la couche des collisions sur la map
-    let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+    //* Ajout de la gravité au PNJ
+    let gravityReturns = getPositionWithGravity(
+      PNJY,
+      PNJVelocityY,
+      gravityForce,
+      PNJMass
+    );
 
-    //? Pour chaque carré dans le tableau
-    for (let row = 0; row < currentMapTableColliders.length; row++) {
-      for (
-        let column = 0; column < currentMapTableColliders[row].length; column++
-      ) {
-        //& Lui donner une collision
-        let thisObject = currentMapTableColliders[row][column];
+    PNJY = gravityReturns[0];
+    PNJVelocityY = gravityReturns[1];
 
-        let thisObjectX =
-          rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
-          (xStartWorld + rectWidth * column);
-        let thisObjectY =
-          rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
-          (yStartWorld + rectHeight * row);
 
-        //& Collisions
-        if (thisObject > 0) {
-          [
-            PNJX,
-            PNJY,
-            PNJVelocityY,
-            PNJJumpCount,
-            PNJIsJumping,
-            PNJHaveToJump,
-          ] = handleCollisionMobs(
-            PNJX,
-            PNJY,
-            PNJWidth,
-            PNJHeight,
-            pnj.direction,
-            thisObjectX,
-            thisObjectY,
-            rectWidth,
-            rectHeight,
-            PNJVelocityY,
-            PNJJumpCount,
-            PNJIsJumping
-          );
 
-          if (PNJHaveToJump) {
-            collide = true;
+
+    //* Ajoute les collisions pour toute les maps autour du perso
+    for (let i = 0; i < mapsToCheck.length; i++) {
+      let currentMapToCheck = mapsToCheck[i];
+      let currentMapToCheckName =
+        World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
+      //? Récupère la couche des collisions sur la map
+      let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+
+      //? Pour chaque carré dans le tableau
+      for (let row = 0; row < currentMapTableColliders.length; row++) {
+        for ( 
+          let column = 0; column < currentMapTableColliders[row].length; column++
+        ) {
+          //& Lui donner une collision
+          let thisObject = currentMapTableColliders[row][column];
+
+          let thisObjectX =
+            rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
+            (xStartWorld + rectWidth * column);
+          let thisObjectY =
+            rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
+            (yStartWorld + rectHeight * row);
+
+          //& Collisions
+          if (thisObject > 0) {
+            [
+              PNJX,
+              PNJY,
+              PNJVelocityY,
+              PNJJumpCount,
+              PNJIsJumping,
+              PNJHaveToJump,
+            ] = handleCollisionMobs(
+              PNJX,
+              PNJY,
+              PNJWidth,
+              PNJHeight,
+              pnj.direction,
+              thisObjectX,
+              thisObjectY,
+              rectWidth,
+              rectHeight,
+              PNJVelocityY,
+              PNJJumpCount,
+              PNJIsJumping
+            );
+
+            if (PNJHaveToJump) {
+              collide = true;
+            }
           }
         }
       }
     }
+
+    //* Retourne les variables
+    pnj.x = PNJX;
+    pnj.y = PNJY;
+    pnj.velocityY = PNJVelocityY;
+    pnj.isJumping = PNJIsJumping;
+    pnj.jumpCount = PNJJumpCount;
+    pnj.xEnd = PNJEnd;
+    pnj.haveToJump = collide;
+
+    PNJMovements(pnj);
   }
-
-  //* Retourne les variables
-  pnj.x = PNJX;
-  pnj.y = PNJY;
-  pnj.velocityY = PNJVelocityY;
-  pnj.isJumping = PNJIsJumping;
-  pnj.jumpCount = PNJJumpCount;
-  pnj.xEnd = PNJEnd;
-  pnj.haveToJump = collide;
-
-  PNJMovements(pnj);
 }
+
+
+
+
 
 //^ /* -------------------------------------------------------------------------- */
 //^ /*                                PNJ MOVEMENTS                               */
@@ -154,6 +182,7 @@ let PNJMovements = (pnj) => {
   //* Variables positions PNJ
   let CurrentX = pnj.x;
   let PNJY = pnj.y;
+
 
   //* Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
@@ -181,8 +210,10 @@ let PNJMovements = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
-    canTalkWithPNJ = false
+
+    pnj.canTalkWithMe = false
+    pnj.canTradeWithMe = false
+
   }
 
   //* Si le perso est vu s'arreter et le regarder
@@ -190,14 +221,12 @@ let PNJMovements = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.canInteractPNJ) {
-      if (pnj.echange != undefined) {
-        canInteractWithPNJ = true;
-      } else if (pnj.discussions != undefined) {
-        canTalkWithPNJ = true;
-      }
-
+    if (pnj.echange != undefined) {
+      pnj.canTradeWithMe = true
+    }else if (pnj.discussions != undefined){
+      pnj.canTalkWithMe = true
     }
+    
   }
 
   //* Ajouter le saut au PNJ
@@ -283,13 +312,11 @@ let PNJMovementsInside = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
   }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
-      canInteractWithPNJ = true;
+    if (pnj.echange !== undefined) {
     }
   }
 

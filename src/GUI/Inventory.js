@@ -91,8 +91,9 @@ function displayInventory() {
 
 
         for (let i = 0; i < Inventory.length; i++) {
+            
             slotY = InventoryY + (heightSlot * i)
-
+            
             if (i == 1){
                 canEat = true
                 slotY += spaceBetween
@@ -100,7 +101,9 @@ function displayInventory() {
             else if (i == 2){
                 slotY += spaceBetween
             }
-
+            noStroke()
+            fill(58, 37, 30)
+            rect(slotX, slotY, widthSlot, heightSlot);
 
             if (Inventory[i].itemNumber != undefined) {
                 let itemPosX = slotX + (widthSlot - itemWidth)/2
@@ -120,11 +123,10 @@ function displayInventory() {
                 }
             }
 
-            noFill();
-            stroke(0);
-            strokeWeight(2)
-            rect(slotX, slotY, widthSlot, heightSlot);
+            //noFill();
+            //stroke(0);
 
+            image(slot, slotX, slotY, widthSlot, heightSlot)
 
             if (i == 1) {
                 noStroke()

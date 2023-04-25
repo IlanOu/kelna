@@ -1,6 +1,8 @@
 {
   "PNJS": {
     "Charle": {
+      "name":"Charle",
+      
       "mapName": "taverne",
 
       "detectDistX": 2,
@@ -33,10 +35,10 @@
       "currentFrame": 0,
       "indexFrame": 0,
       "movement": "walk",
+      
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
-      "name":"Charle",
-
-      "canInteractPNJ": true,
 
       "echange": [
         {
@@ -54,7 +56,8 @@
       ]
     },
     "Toto": {
-      "mapName": "Tileset-1",
+      "name":"Toto",
+      "mapName": "A-1",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -65,7 +68,6 @@
 
       "globalStartX": 5,
       "globalStartY": 0,
-
       "velocityY": 0,
       "mass": 60,
 
@@ -87,9 +89,8 @@
       "indexFrame": 0,
       "movement": "walk",
 
-      "name":"Toto",
-
-      "canInteractPNJ": true,
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
       "echange": [
         {
@@ -107,19 +108,19 @@
       ]
     },
     "Marjo": {
-      "mapName": "Tileset-2",
-
-      
       "name": "Marjo",
+
+      "mapName": "B-2",
 
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
 
       "x": 0,
-      "y": 200,
+      "y": 0,
 
-      "globalStartX": 0,
+      "globalStartX": 5,
+      "globalStartY": 5,
 
       "velocityY": 0,
       "mass": 60,
@@ -131,7 +132,7 @@
       "width": 80,
       "height": 80,
 
-      "distance": 500,
+      "distance": 4,
       "speed": 3,
       "followSpeed": 4,
 
@@ -142,7 +143,8 @@
       "indexFrame": 0,
       "movement": "walk",
 
-      "canInteractPNJ": true,
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
 
       "step": 0,
       "discussions": [
@@ -151,7 +153,7 @@
           "itemsNameRequired": ["none"]
         }, 
         {
-          "text": "j'ai besoin que tu me ramène une épée ! Ou une pomme !",
+          "text": "J'ai besoin que tu me ramène une épée ! Ou une pomme !",
           "itemsNameRequired": ["none"]
         },
         {
@@ -159,7 +161,11 @@
           "itemsNameRequired": ["sword_1", "food_1"]
         }, 
         {
-         "text": "Un combat entre deux trans, c'est un combat sans gland !",
+         "text": "Un jour Chuck Norris a eu un zéro en latin...",
+         "itemsNameRequired": ["none"]  
+        }, 
+        {
+         "text": "Depuis, c'est une langue morte.",
          "itemsNameRequired": ["none"]  
         }, 
         {
