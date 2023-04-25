@@ -1033,26 +1033,30 @@ function initVariables() {
 
 function aPNJCanTalk(){
     let canTalk = false
-    Object.entries(pnjJSON.PNJS).forEach(pnj => {
-        let pnjName = pnj[0]
-        pnj = pnj[1]
-        if (pnjJSON.PNJS[pnjName].canTalkWithMe) {
-            canTalk = true
-        }
-    })
+    if (pnjJSON.PNJS){  
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTalkWithMe) {
+                canTalk = true
+            }
+        })
+    }
     
     return canTalk;
 }
 
 function aPNJCanTrade(){
     let canTrade = false
-    Object.entries(pnjJSON.PNJS).forEach(pnj => {
-        let pnjName = pnj[0]
-        pnj = pnj[1]
-        if (pnjJSON.PNJS[pnjName].canTradeWithMe) {
-            canTrade = true
-        }
-    })
+    if (pnjJSON.PNJS){
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTradeWithMe) {
+                canTrade = true
+            }
+        })
+    }
     
     return canTrade;
 }

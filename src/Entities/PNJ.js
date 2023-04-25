@@ -7,7 +7,7 @@ function PNJManager() {
   if (engineOne) {
       if (pnjJSON.PNJS){
         PNJ(pnjJSON.PNJS.Marjo);
-        // PNJ(pnjJSON.PNJS.Toto);
+        PNJ(pnjJSON.PNJS.Toto);
       }
   } else {
     drawPNJInside(pnjJSON.PNJS.Charle);
