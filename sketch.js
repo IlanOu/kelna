@@ -46,7 +46,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/TilesetKelna.png");
+  tileSet = loadImage("assets/textures/tilesetKelna.png");
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
   backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
