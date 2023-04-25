@@ -1,9 +1,9 @@
 {
     "worldsMap": [
-        ["Tileset-1",  "Tileset-2",    "Tileset-3",     "Tileset-Air",   "Tileset-Air",     "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air"],
-        ["Tileset-5",  "Tileset-6",    "Tileset-7",     "Tileset-8",     "Tilemap-F1-1",    "Tilemap-F2-1", "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air",    "Tileset-Air"],
-        ["Tileset-9",  "Tileset-10",   "Tileset-11",    "Tileset-12",    "Tilemap-F1",      "Tilemap-F2",   "Tilemap-F3",   "Tilemap-VA1",  "Tilemap-VA2",  "Tilemap-VA3",  "Tileset-Air",    "Tileset-Air"],
-        ["Tileset-Air", "Tileset-Air", "Tileset-BALL", "Tileset-BALL", "Tileset-BALL", "Tileset-BALL", "Tileset-BALL", "Tileset-BG", "Tilemap-VA5", "Tilemap-VA6", "Tileset-Air", "Tileset-Air"]
+        ["A-1", "A-2", "A-3", "A-4", "A-5", "A-6", "A-7", "A-8", "A-9", "A-10", "A-11", "A-12"],
+        ["B-1",  "B-2",    "B-3",     "B-4",     "B-5",    "B-6", "B-7",    "B-8",    "B-9",    "B-10",    "B-11",    "B-12"],
+        ["C-1",  "C-2",   "C-3",    "C-4",    "C-5",      "C-6",   "C-7",   "C-8",  "C-9",  "C-10",  "C-11",  "C-12"],
+        ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-11", "D-12"]
     ]
     
 }
