@@ -355,7 +355,7 @@ function drawSettingsMenu() {
 //~ MENU DEATH
 function drawDeath() {
   if (!dieSoundPlay) {
-    endGameVoice()
+    DieGameVoice()
     dieSoundPlay = true
   }
   playerDead = true
@@ -492,12 +492,6 @@ function drawStartGame() {
   background(0);
   fill(255);
 
-  if (!startSoundPlay) {
-    startGameVoice()
-    startSoundPlay = true
-  }
-  
-  // setTimeout(create, 1000);
   inGame = true
   startGame = false
 
@@ -859,7 +853,7 @@ function drawCredits() {
     initVariables()
   }
 
-
+  textAlign(CENTER, BASELINE);
 }
 
 

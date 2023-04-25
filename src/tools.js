@@ -162,14 +162,17 @@ let PlayMusic = () => {
 
 
 //~ Fonction qui joue des sons aleatoire
-function NomFonction() {
+
+/*
+function DieGameVoice() {
     if (!soundEnabled) {
-        let indexSong = Math.floor(Math.random() * nomdutableau.length);
-        let sonAleatoire = nomdutableau[indexSong];
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        let sonAleatoire = VoicesDieSong[indexSong];
+        console.log(VoicesDieSong)
         sonAleatoire.play();
     }
 }
-
+*/
 
 function startGameVoice() {
     if (!soundEnabled) {
@@ -178,9 +181,11 @@ function startGameVoice() {
 }
 
 
-function endGameVoice() {
+function DieGameVoice() {
     if (!soundEnabled) {
-        VoiceEndSong.play()
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        console.log("->", VoicesDieSong[indexSong])
+        VoicesDieSong[indexSong].play()
     }
 }
 

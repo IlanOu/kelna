@@ -178,11 +178,12 @@ let canPlaySong;
 
 let VoicesSongMarjo;
 
-let VoiceEndSong;
-let VoiceStartSong;
-
+let VoicesDieSong;
+let firstDieSound;
 let dieSoundPlay;
-let startGame ;
+
+let VoiceStartSong;
+let startGame;
 let startSoundPlay;
 
 
