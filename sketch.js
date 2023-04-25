@@ -15,28 +15,27 @@ function preload() {
 
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUIParameters.png");
-  GUIForEscape = loadImage("assets/GUI/PauseGUI.png"); // loadImage("assets/GUI/GUIForEscape.png");
+  GUIForEscape = loadImage("assets/GUI/PauseGUI.png");
   GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
-  Background = loadImage("assets/Background/Background.gif");
+
+  //Background = loadImage("assets/Background/Background.gif");
+
   GamerHeart = loadImage("assets/GUI/heart.png");
   GamerHeartBlack = loadImage("assets/GUI/heartBlack.png");
 
-  GUIForStats = loadImage("assets/GUI/GUIForStats.png");
-  GUIInteract = loadImage("assets/GUI/GUIInt.png");
-  GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
-  GUIButton = loadImage("assets/GUI/start.png");
+  GUITroc = loadImage("assets/GUI/GUIForTroc.png");
   GUIStart = loadImage("assets/GUI/GUIStart.png")
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
-  backgroundImage = loadImage('assets/Background/bg_final_normalement.png');
+  backgroundImage = loadImage('assets/Background/background.png');
 
 
   //? Animation PNJ
   marjoTexture = loadImage("assets/entities/marjoSprite.png");
   charleTexture = loadImage("assets/entities/charleSprite.png");
   malade1Sprite = loadImage("assets/entities/malade1.png");
-  malade2Sprite = loadImage("assets/entities/spritesheetgraveyardTest2.png");
+  malade2Sprite = loadImage("assets/entities/spritesheetgraveyard.png");
 
 
   //? Tileset
@@ -45,7 +44,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/TilesetKelna2.png"); // Tilesetgeneu
+  tileSet = loadImage("assets/textures/TilesetKelna.png");
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
   backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
@@ -75,12 +74,12 @@ function preload() {
 
 
   //? Music
-  SongBackground = loadSound("audios/music/SongBackground.mp3")
+  SongBackground = loadSound("assets/audios/music/SongBackground.mp3")
 
 
   //? Songs
-  VoiceStartSong = loadSound("audios/voices/START/teststart.m4a")
-  VoicesDieSong = [loadSound("audios/voices/END/testend.m4a"), loadSound("audios/voices/Marjo/marjo1.m4a")]
+  VoiceStartSong = loadSound("assets/audios/voices/START/teststart.m4a")
+  VoicesDieSong = [loadSound("assets/audios/voices/END/testend.m4a"), loadSound("assets/audios/voices/END/testend2.m4a")]
 }
 
 

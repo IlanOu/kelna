@@ -93,6 +93,7 @@ function displayInventory() {
         for (let i = 0; i < Inventory.length; i++) {
             
             slotY = InventoryY + (heightSlot * i)
+            
             if (i == 1){
                 canEat = true
                 slotY += spaceBetween
