@@ -35,7 +35,7 @@
             "name": "mushroom_1",
             "category": "other",
             "itemNumber": 1,
-            "location": "Tileset-11",
+            "location": "C-3",
             "x" : 1,
             "y": 2,
             "detectDist": 1,
@@ -46,8 +46,8 @@
             "category": "other",
             "itemNumber": 1,
             "location": "C-4",
-            "x" : 9,
-            "y": 5,
+            "x" : 0,
+            "y": 7,
             "detectDist": 1,
             "shown": true
         }
