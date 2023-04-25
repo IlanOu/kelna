@@ -8,15 +8,14 @@ function windowResized() {
   viewportDisplayHeight = windowHeight
 }
 
-let bloomVert
-let bloomFrag
 
 //~ Preload 
 function preload() {
 
+
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUIParameters.png");
-  GUIForEscape = loadImage("assets/GUI/GUIForEscape.png");
+  GUIForEscape = loadImage("assets/GUI/PauseGUI.png"); // loadImage("assets/GUI/GUIForEscape.png");
   GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
   Background = loadImage("assets/Background/Background.gif");
   GamerHeart = loadImage("assets/GUI/heart.png");
@@ -25,7 +24,8 @@ function preload() {
   GUIForStats = loadImage("assets/GUI/GUIForStats.png");
   GUIInteract = loadImage("assets/GUI/GUIInt.png");
   GUITroc = loadImage("assets/GUI/GUIForTrocV3.png");
-  GUIStart = loadImage("assets/GUI/start.png");
+  GUIButton = loadImage("assets/GUI/start.png");
+  GUIStart = loadImage("assets/GUI/GUIStart.png")
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
@@ -45,7 +45,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/Tilesetgeneu.png");
+  tileSet = loadImage("assets/textures/TilesetKelna2.png"); // Tilesetgeneu
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
   backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");

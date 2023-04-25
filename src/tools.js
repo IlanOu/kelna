@@ -388,7 +388,7 @@ function drawKey(key) {
 
     fill(255)
     drawButton(keyBackground)
-    drawText(key, 20, textKey, "center")
+    drawText(key, 20, textKey, [CENTER, BASELINE])
 
 }
 
@@ -410,10 +410,10 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
     }
 
     if (key == "!") {
-        drawText(key, 30, textKey, "center", [255, 0, 0])
+        drawText(key, 30, textKey, [CENTER, BASELINE], [255, 0, 0])
 
     } else {
-        drawText(key, 20, textKey, "center", [0, 0, 0])
+        drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
     }
 
 }
@@ -603,7 +603,7 @@ function popUp(message, options = "info") {
 
         fill(128, 128, 128)
         drawButton(buttonPopUp)
-        drawText("OK", 15, [textPopUpX, buttonPopUpY], "center")
+        drawText("OK", 15, [textPopUpX, buttonPopUpY], CENTER)
 
         drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
 
@@ -639,12 +639,12 @@ function popUp(message, options = "info") {
 
         fill(128, 128, 128)
         drawButton(buttonPopUpYes)
-        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], "center")
+        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], CENTER)
         //
 
         fill(128, 128, 128)
         drawButton(buttonPopUpNo)
-        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], "center")
+        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], CENTER)
 
 
         drawText(message, 15, [interfacePopUpX, interfacePopUpY], "left")
