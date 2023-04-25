@@ -71,18 +71,6 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
-  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-
-  let nameMapPlayer = World.worldsMap[positionMapPlayer[0]][positionMapPlayer[1]]
-
-  //console.log(pnj.mapName, nameMapPlayer)
-
-  if (pnj.mapName == nameMapPlayer){
-
-    
-
-  }
-
   
 
   if (PNJMustBeShown(pnj)) {

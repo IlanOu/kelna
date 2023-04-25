@@ -273,6 +273,7 @@ let backgroundImage;
 let characterTexture_Dash;
 
 let GUITroc;
+let GUIButton;
 let GUIStart;
 let marjoTexture;
 let charleTexture;

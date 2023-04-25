@@ -12,7 +12,7 @@ function drawInterface([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher un bouton
-function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
+function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255) {
   if (strokeToggle) {
     stroke(0);
   } else {
@@ -22,18 +22,43 @@ function drawButton([x, y, w, h], img = undefined, strokeToggle = true) {
   if (img != undefined) {
     image(img, x, y, w, h);
   } else {
+    fill(255, 255, 255, transparence)
     rect(x, y, w, h);
   }
 }
 
 //~ Afficher du texte
-function drawText(Text, fontSize, [x, y], textAlignment, color = [0, 0, 0]) {
+function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], color = [0, 0, 0], underline = false) {
   fill(color[0], color[1], color[2]);
   noStroke();
   textSize(fontSize);
-  textAlign(textAlignment);
-
+  textAlign(textAlignmentX, textAlignmentY);
+  let margeUnderline = 5;
   text(Text, x, y + fontSize);
+
+  if(underline){
+
+    let offSetX = 0;
+    switch (textAlignmentX){
+
+      case LEFT:
+        offSetX = textWidth(Text) / 2
+      break
+
+      case RIGHT:
+        offSetX = - textWidth(Text) / 2
+      break
+    }
+    if(textAlignmentY != BASELINE){
+      underline = false 
+    }else{
+      rect(x - textWidth(Text)/2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 2)
+    }
+
+
+    
+  }
+
 }
 
 //~  Au clic du bouton
@@ -54,57 +79,73 @@ function buttonHover([x, y, h, w]) {
 //~ MENU HOME
 function drawHomeMenu() {
 
+
+
   //& --------------------------------
   //& ---------- Variables -----------
   //& --------------------------------
 
+
+  let widthButton = (viewportDisplayWidth / 5)
+  let heightButton = 60;
+  let marginButton = viewportDisplayHeight / 12.5;
+  let centerYPage = viewportDisplayHeight / 2
+  let fontSizeHome = 30
+  let centerButtonY = centerYPage - (viewportDisplayHeight / 42)
+
+  let buttonPlayHover = false
+  let buttonSettingsHover = false
+  let buttonCreditsHover = false
+
   let interfaceMenu = [
-    (viewportDisplayWidth - Background.width) / 2,
-    (viewportDisplayHeight - Background.height) / 2,
-    Background.width,
-    Background.height,
+    0,
+    0,
+    viewportDisplayWidth,
+    viewportDisplayHeight,
   ];
 
+  let play = [
+    viewportDisplayWidth / 2 - widthButton / 2,
+    centerButtonY,
+    widthButton,
+    heightButton,
+  ];
+  
+  let textPlay = [
+    play[0] + play[2] / 2,
+    play[1] + (heightButton / 2) - (fontSizeHome / 2),
+  ];
+
+
+
+
   let buttonParameters = [
-    viewportDisplayWidth / 2 - buttonWidthClassic / 2,
-    viewportDisplayHeight / 2 + buttonHeightClassic + 70,
-    buttonWidthClassic,
-    buttonHeightClassic,
+    viewportDisplayWidth / 2 - widthButton / 2,
+     centerButtonY + marginButton,
+      widthButton,
+      heightButton,
   ];
 
   let textParameters = [
-    viewportDisplayWidth / 2,
-    buttonParameters[1] + buttonHeightClassic / 8,
+    buttonParameters[0] + buttonParameters[2] / 2,
+    buttonParameters[1] + (heightButton / 2) - (fontSizeHome / 2),
   ];
 
 
+  
 
-
-  let play = [
-    viewportDisplayWidth / 2 - buttonWidthBIG / 2,
-    viewportDisplayHeight / 2 - buttonHeightBIG / 2,
-    buttonWidthBIG,
-    buttonHeightBIG,
+  let credits = [
+    viewportDisplayWidth / 2 - widthButton / 2,
+    centerButtonY + marginButton * 2,
+    widthButton,
+    heightButton,
   ];
 
+  let textCredits = [
+    credits[0] + credits[2] / 2,
+    credits[1] + (heightButton / 2) - (fontSizeHome / 2),
+  ];
 
-  //& --------------------------------
-  //& ---------- Affichage -----------
-  //& --------------------------------
-
-  //& Dessiner l'interface
-  fill(255, 220, 205);
-  drawInterface(interfaceMenu, Background);
-
-  //& Jouer
-  drawButton(play, GUIStart)
-
-
-  //& Paramètres
-  fill(120, 120, 120);
-  drawButton(buttonParameters);
-  drawText("Paramètres", 15, textParameters, "center");
-  fill(0);
 
 
   //& --------------------------------
@@ -112,19 +153,60 @@ function drawHomeMenu() {
   //& --------------------------------
 
   if (buttonClicked(play)) {
-    // if (playerDead) {
-    //   initVariables()
-    // }
-    // inGame = true
-
     if (playerDead) {
       initVariables()
     }
     startGame = true
   }
+  if (buttonHover(play)) {
+    buttonPlayHover = true
+  }
+
+
   if (buttonClicked(buttonParameters)) {
     settingsPause = true
   }
+  if (buttonHover(buttonParameters)) {
+    buttonSettingsHover = true
+  }
+
+
+  if (buttonClicked(credits)) {
+
+  }
+  if (buttonHover(credits)) {
+    buttonCreditsHover = true
+  } 
+  
+  //& --------------------------------
+  //& ---------- Affichage -----------
+  //& --------------------------------
+  
+  //& Dessiner l'interface
+  fill(255, 220, 205);
+  drawInterface(interfaceMenu, GUIStart);
+  
+  //& Jouer
+  fill(120, 120, 120);
+  drawButton(play, undefined, false, 0)
+  drawText("Jouer", fontSizeHome, textPlay, [CENTER, BASELINE], [0, 0, 0], buttonPlayHover);
+
+
+  //& Paramètres
+  fill(120, 120, 120);
+  drawButton(buttonParameters, undefined, false, 0);
+  drawText("Paramètres", fontSizeHome, textParameters, [CENTER, BASELINE], [0, 0, 0], buttonSettingsHover);
+  fill(0);
+
+
+  //& Credits
+  fill(120, 120, 120);
+  drawButton(credits, undefined, false, 0);
+  drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonCreditsHover);
+  fill(0);
+
+
+
 }
 
 
@@ -141,10 +223,16 @@ function drawPauseMenu() {
   //& --------------------------------
 
   //& Interface
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
+  let interfaceMenuWidth = viewportDisplayWidth; // 500
+  let interfaceMenuHeight = viewportDisplayHeight;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
+  let widthPage = (interfaceMenuWidth / 5)
+  let centerRightPage = (widthPage * 3);
+  let marginButton = interfaceMenuWidth / 20;
+  let widthButtonPause = interfaceMenuWidth / 7;
+  let centerYPage = interfaceMenuY + interfaceMenuHeight / 2
+  let fontSizePause = 30;
 
   let interfaceMenu = [
     interfaceMenuX,
@@ -155,12 +243,13 @@ function drawPauseMenu() {
 
 
 
+
   //& Bouton continuer de jouer
-  let buttonBackW = 150;
-  let buttonBackH = 20;
-  let buttonBackX = interfaceMenuX + interfaceMenuWidth / 2 - buttonBackW / 2;
-  let buttonBackY = interfaceMenuY + interfaceMenuHeight / 4;
-  let textReturnX = buttonBackX + buttonBackW / 2;
+  let buttonBackW = widthButtonPause;
+  let buttonBackH = fontSizePause;
+  let buttonBackX = centerRightPage 
+  let buttonBackY = centerYPage - marginButton;
+  let textReturnX = buttonBackX
   let buttonBack = [
     buttonBackX,
     buttonBackY,
@@ -170,10 +259,10 @@ function drawPauseMenu() {
 
   //& Bouton paramètres
   let buttonSettingsW = 150;
-  let buttonSettingsH = 20;
-  let buttonSettingsX = interfaceMenuX + interfaceMenuWidth / 2 - buttonSettingsW / 2;
-  let buttonSettingsY = interfaceMenuY + interfaceMenuHeight / 2.2;
-  let textSettingsX = buttonSettingsX + buttonSettingsW / 2;
+  let buttonSettingsH = fontSizePause;
+  let buttonSettingsX = centerRightPage 
+  let buttonSettingsY = centerYPage;
+  let textSettingsX = buttonSettingsX
   let buttonSettings = [
     buttonSettingsX,
     buttonSettingsY,
@@ -183,10 +272,10 @@ function drawPauseMenu() {
 
   //& Bouton Retour au Menu
   let buttonExitW = 150;
-  let buttonExitH = 20;
-  let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
-  let textExitX = buttonExitX + buttonExitW / 2;
+  let buttonExitH = fontSizePause;
+  let buttonExitX = centerRightPage //interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
+  let buttonExitY = centerYPage + marginButton;
+  let textExitX = buttonExitX
   let buttonExit = [
     buttonExitX,
     buttonExitY,
@@ -205,18 +294,24 @@ function drawPauseMenu() {
   drawInterface(interfaceMenu, GUIForEscape);
 
   fill(255);
-  drawButton(buttonBack);
-  drawText("Continuer", 15, [textReturnX, buttonBackY], "center");
+  drawButton(buttonBack, undefined, false, 0);
+  drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE]);
 
   fill(255);
-  drawButton(buttonSettings);
-  drawText("Paramètres", 15, [textSettingsX, buttonSettingsY], "center", [0, 0, 255]);
+  drawButton(buttonSettings, undefined, false, 0);
+  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE]);
 
   fill(255);
-  drawButton(buttonExit);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center", [255, 0, 0]);
+  drawButton(buttonExit, undefined, false, 0);
+  drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE]);
 
-
+  /*
+  noFill()
+  stroke(0)
+  strokeWeight(5)
+  rect((interfaceMenuWidth / 5) * 2, 0, widthPage, viewportDisplayHeight)
+  strokeWeight(1)
+  */
   //& --------------------------------
   //& ---------- Evenements ----------
   //& --------------------------------
@@ -307,23 +402,23 @@ function drawSettingsMenu() {
 
   fill(soundButtonColor);
   drawButton(buttonSon);
-  drawText("Sons", 15, [textSonX, buttonSonY], "center");
+  drawText("Sons", 15, [textSonX, buttonSonY], [CENTER, BASELINE]);
 
   fill(musicButtonColor);
   drawButton(buttonMusic);
-  drawText("Musique", 15, [textMusicX, buttonMusicY], "center");
+  drawText("Musique", 15, [textMusicX, buttonMusicY], [CENTER, BASELINE]);
 
   fill(255);
   drawButton(ButtonToggleFPS);
-  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], "center");
+  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
 
   fill(255);
   drawButton(ButtonToggleCameraShake);
-  drawText("Tremblements", 15, [textToggleCameraShakeX, buttonToggleCameraShakeY], "center");
+  drawText("Tremblements", 15, [textToggleCameraShakeX, buttonToggleCameraShakeY], [CENTER, BASELINE]);
 
   fill(255);
   drawButton(ButtonBack);
-  drawText("Retour", 15, [textExitX, buttonExitY], "center");
+  drawText("Retour", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
 
 
 
@@ -406,7 +501,7 @@ function drawDeath() {
 
   fill(255);
   drawButton(buttonBackToHomeEndGame);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
+  drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
 
 
   //& --------------------------------
@@ -466,7 +561,7 @@ function drawStats() {
 
     fill(255);
     drawButton(buttonBackToHome);
-    drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
+    drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
 
 
     //& --------------------------------
