@@ -36,6 +36,7 @@ let backgroundSmoothSpeed;
 let backgroundX;
 
 
+
 //& Character
 //~ Textures / Outils du Personnage
 let characterTextureList;
@@ -270,8 +271,11 @@ let sky;
 let tileSet;
 let tileSetForTaverne;
 let tileSetTaverne;
-let backgroundImage;
 let characterTexture_Dash;
+
+let backgroundImage;
+let backgroundImageDistant;
+let backgroundImageClose;
 
 let GUITroc;
 let GUIButton;
