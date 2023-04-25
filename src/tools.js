@@ -749,7 +749,7 @@ function initVariables() {
     fpsLevel = init_fpsLevel;
 
     //& Le bloc qui tue (littéralement)
-    killingBlock = init_killingBlock;
+    killingBlocks = init_killingBlocks;
 
 
     //& Admins

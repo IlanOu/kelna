@@ -384,7 +384,6 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
         //? est relatif au perso
         characterVelocityY = 0;
-        touchThisObject = true
       }
       //* collision au dessus de l'objet
       else if (agentY + agentHeight > objectY && agentY < objectY) {
@@ -423,13 +422,11 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
       if (agentX + agentWidth > objectX && agentX > objectX) {
 
         agentX = objectX + objectWidth
-        touchThisObject = true
 
         //* collisions à gauche de l'objet
       } else if (agentX < objectX + objectWidth && agentX < objectX) {
 
         agentX = objectX - agentWidth
-        touchThisObject = true
       }
     }
   }
@@ -711,8 +708,10 @@ function character() {
           [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
 
+          
+
           //~ Tuer le joueur quand il marche sur le bloc 238
-          if (thisObject == killingBlock && touchThisObject) {
+          if (killingBlocks.includes(thisObject) && touchThisObject) {
             hurtPlayer(1)
           }
         }

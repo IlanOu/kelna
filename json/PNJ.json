@@ -154,7 +154,7 @@
           "itemsNameRequired": ["none"]
         }, 
         {
-          "text": "j'ai besoin que tu me ramène une épée ! Ou une pomme !",
+          "text": "J'ai besoin que tu me ramène une épée ! Ou une pomme !",
           "itemsNameRequired": ["none"]
         },
         {
@@ -162,7 +162,11 @@
           "itemsNameRequired": ["sword_1", "food_1"]
         }, 
         {
-         "text": "Un combat entre deux trans, c'est un combat sans gland !",
+         "text": "Un jour Chuck Norris a eu un zéro en latin...",
+         "itemsNameRequired": ["none"]  
+        }, 
+        {
+         "text": "Depuis, c'est une langue morte.",
          "itemsNameRequired": ["none"]  
         }, 
         {

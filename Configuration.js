@@ -7,7 +7,7 @@ let engineOne;
 let fpsLevel;
 
 //& Le bloc qui tue (littéralement)
-let killingBlock;
+let killingBlocks;
 
 
 //& Admins

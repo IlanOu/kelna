@@ -96,11 +96,9 @@ function displayInventory() {
             if (i == 1){
                 canEat = true
                 slotY += spaceBetween
-                widthSlot = 100
             }
             else if (i == 2){
                 slotY += spaceBetween
-                widthSlot = 85
             }
             noStroke()
             fill(58, 37, 30)
