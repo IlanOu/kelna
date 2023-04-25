@@ -59,33 +59,33 @@ function drawHomeMenu() {
   //& --------------------------------
 
   let interfaceMenu = [
-                        (viewportDisplayWidth - Background.width) / 2,
-                        (viewportDisplayHeight - Background.height) / 2,
-                        Background.width,
-                        Background.height,
-                      ];
+    (viewportDisplayWidth - Background.width) / 2,
+    (viewportDisplayHeight - Background.height) / 2,
+    Background.width,
+    Background.height,
+  ];
 
   let buttonParameters = [
-                            viewportDisplayWidth / 2 - buttonWidthClassic / 2,
-                            viewportDisplayHeight / 2 + buttonHeightClassic + 70,
-                            buttonWidthClassic,
-                            buttonHeightClassic,
-                          ];
+    viewportDisplayWidth / 2 - buttonWidthClassic / 2,
+    viewportDisplayHeight / 2 + buttonHeightClassic + 70,
+    buttonWidthClassic,
+    buttonHeightClassic,
+  ];
 
   let textParameters = [
-                          viewportDisplayWidth / 2,
-                          buttonParameters[1] + buttonHeightClassic / 8,
-                        ];
+    viewportDisplayWidth / 2,
+    buttonParameters[1] + buttonHeightClassic / 8,
+  ];
 
-  
+
 
 
   let play = [
-                viewportDisplayWidth / 2 - buttonWidthBIG / 2,
-                viewportDisplayHeight / 2 - buttonHeightBIG / 2,
-                buttonWidthBIG,
-                buttonHeightBIG,
-              ];
+    viewportDisplayWidth / 2 - buttonWidthBIG / 2,
+    viewportDisplayHeight / 2 - buttonHeightBIG / 2,
+    buttonWidthBIG,
+    buttonHeightBIG,
+  ];
 
 
   //& --------------------------------
@@ -112,10 +112,15 @@ function drawHomeMenu() {
   //& --------------------------------
 
   if (buttonClicked(play)) {
-    if (playerDead){
+    // if (playerDead) {
+    //   initVariables()
+    // }
+    // inGame = true
+
+    if (playerDead) {
       initVariables()
     }
-    inGame = true
+    startGame = true
   }
   if (buttonClicked(buttonParameters)) {
     settingsPause = true
@@ -142,13 +147,13 @@ function drawPauseMenu() {
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
 
   let interfaceMenu = [
-                        interfaceMenuX,
-                        interfaceMenuY,
-                        interfaceMenuWidth,
-                        interfaceMenuHeight,
-                      ];
+    interfaceMenuX,
+    interfaceMenuY,
+    interfaceMenuWidth,
+    interfaceMenuHeight,
+  ];
 
-  
+
 
   //& Bouton continuer de jouer
   let buttonBackW = 150;
@@ -157,11 +162,11 @@ function drawPauseMenu() {
   let buttonBackY = interfaceMenuY + interfaceMenuHeight / 4;
   let textReturnX = buttonBackX + buttonBackW / 2;
   let buttonBack = [
-                      buttonBackX,
-                      buttonBackY,
-                      buttonBackW,
-                      buttonBackH,
-                    ];
+    buttonBackX,
+    buttonBackY,
+    buttonBackW,
+    buttonBackH,
+  ];
 
   //& Bouton paramètres
   let buttonSettingsW = 150;
@@ -170,11 +175,11 @@ function drawPauseMenu() {
   let buttonSettingsY = interfaceMenuY + interfaceMenuHeight / 2.2;
   let textSettingsX = buttonSettingsX + buttonSettingsW / 2;
   let buttonSettings = [
-                          buttonSettingsX,
-                          buttonSettingsY,
-                          buttonSettingsW,
-                          buttonSettingsH,
-                        ];
+    buttonSettingsX,
+    buttonSettingsY,
+    buttonSettingsW,
+    buttonSettingsH,
+  ];
 
   //& Bouton Retour au Menu
   let buttonExitW = 150;
@@ -183,15 +188,15 @@ function drawPauseMenu() {
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
   let textExitX = buttonExitX + buttonExitW / 2;
   let buttonExit = [
-                      buttonExitX, 
-                      buttonExitY, 
-                      buttonExitW, 
-                      buttonExitH
-                    ];
+    buttonExitX,
+    buttonExitY,
+    buttonExitW,
+    buttonExitH
+  ];
 
-  
 
-  
+
+
   //& --------------------------------
   //& ---------- Affichage -----------
   //& --------------------------------
@@ -205,11 +210,11 @@ function drawPauseMenu() {
 
   fill(255);
   drawButton(buttonSettings);
-  drawText("Paramètres", 15, [textSettingsX, buttonSettingsY], "center", [0,0, 255]);
+  drawText("Paramètres", 15, [textSettingsX, buttonSettingsY], "center", [0, 0, 255]);
 
   fill(255);
   drawButton(buttonExit);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center", [255,0,0]);
+  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center", [255, 0, 0]);
 
 
   //& --------------------------------
@@ -223,7 +228,7 @@ function drawPauseMenu() {
   if (buttonClicked(buttonSettings)) {
     settingsPause = true
   }
-  
+
   if (buttonClicked(buttonExit)) {
     inGame = false
   }
@@ -278,15 +283,15 @@ function drawSettingsMenu() {
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
   let textExitX = buttonExitX + buttonExitW / 2;
 
-  
 
-  
+
+
   let buttonSon = [buttonSonX, buttonSonY, buttonSonW, buttonSonH];
-  
+
   let buttonMusic = [buttonMusicX, buttonMusicY, buttonMusicW, buttonMusicH];
-  
+
   let ButtonToggleFPS = [buttonToggleFPSX, buttonToggleFPSY, buttonToggleFPSW, buttonToggleFPSH];
-  
+
   let ButtonToggleCameraShake = [buttonToggleCameraShakeX, buttonToggleCameraShakeY, buttonToggleCameraShakeW, buttonToggleCameraShakeH];
 
 
@@ -303,11 +308,11 @@ function drawSettingsMenu() {
   fill(soundButtonColor);
   drawButton(buttonSon);
   drawText("Sons", 15, [textSonX, buttonSonY], "center");
-  
+
   fill(musicButtonColor);
   drawButton(buttonMusic);
   drawText("Musique", 15, [textMusicX, buttonMusicY], "center");
-  
+
   fill(255);
   drawButton(ButtonToggleFPS);
   drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], "center");
@@ -328,10 +333,10 @@ function drawSettingsMenu() {
   //& --------------------------------
 
   if (buttonClicked(buttonSon)) {
-    
+    PlaySong()
   }
   if (buttonClicked(buttonMusic)) {
-   
+    PlayMusic()
   }
   if (buttonClicked(ButtonToggleFPS)) {
     fpsActivate = !fpsActivate
@@ -342,72 +347,76 @@ function drawSettingsMenu() {
   if (buttonClicked(ButtonBack)) {
     settingsPause = false
   }
- 
-  
+
+
 }
 
 
 //~ MENU DEATH
 function drawDeath() {
-    playerDead = true
-    fill(0, 0, 0, 50);
-    rect(0, 0, width, height);
+  if (!dieSoundPlay) {
+    DieGameVoice()
+    dieSoundPlay = true
+  }
+  playerDead = true
+  fill(0, 0, 0, 50);
+  rect(0, 0, width, height);
 
-    gameIsPaused = true;
+  gameIsPaused = true;
 
-    //& --------------------------------
-    //& ---------- Variables -----------
-    //& --------------------------------
+  //& --------------------------------
+  //& ---------- Variables -----------
+  //& --------------------------------
 
-    endInventory = true;
-    let interfaceMenuWidth = 500;
-    let interfaceMenuHeight = 500;
-    let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
-    let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
-    let interfaceMenu = [
-                          interfaceMenuX,
-                          interfaceMenuY,
-                          interfaceMenuWidth,
-                          interfaceMenuHeight,
-                        ];
-
-
-    let buttonExitW = 150;
-    let buttonExitH = 20;
-    let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-    let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
-    let textExitX = buttonExitX + buttonExitW / 2;
-
-    let buttonBackToHomeEndGame = [
-                                    buttonExitX,
-                                    buttonExitY,
-                                    buttonExitW,
-                                    buttonExitH,
-                                  ];
+  endInventory = true;
+  let interfaceMenuWidth = 500;
+  let interfaceMenuHeight = 500;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
+  let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
+  let interfaceMenu = [
+    interfaceMenuX,
+    interfaceMenuY,
+    interfaceMenuWidth,
+    interfaceMenuHeight,
+  ];
 
 
+  let buttonExitW = 150;
+  let buttonExitH = 20;
+  let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
+  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
+  let textExitX = buttonExitX + buttonExitW / 2;
 
-    //& --------------------------------
-    //& ---------- Affichage -----------
-    //& --------------------------------
+  let buttonBackToHomeEndGame = [
+    buttonExitX,
+    buttonExitY,
+    buttonExitW,
+    buttonExitH,
+  ];
 
 
-    fill(255);
-    drawInterface(interfaceMenu, GUIOfDeath);
 
-    fill(255);
-    drawButton(buttonBackToHomeEndGame);
-    drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
+  //& --------------------------------
+  //& ---------- Affichage -----------
+  //& --------------------------------
 
 
-    //& --------------------------------
-    //& ---------- Evenements ----------
-    //& --------------------------------
+  fill(255);
+  drawInterface(interfaceMenu, GUIOfDeath);
 
-    if (buttonClicked(buttonBackToHomeEndGame)) {
-      inGame = false
-    }
-  
+  fill(255);
+  drawButton(buttonBackToHomeEndGame);
+  drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
+
+
+  //& --------------------------------
+  //& ---------- Evenements ----------
+  //& --------------------------------
+
+  if (buttonClicked(buttonBackToHomeEndGame)) {
+    inGame = false
+  }
+
 }
 
 
@@ -478,20 +487,29 @@ function drawStats() {
 //^                      Affichage des éléments à l'écran                     
 //^ --------------------------------------------------------------------------
 
+function drawStartGame() {
+
+  background(0);
+  fill(255);
+
+  inGame = true
+  startGame = false
+
+}
 //~ BARRE DE VIE
 function drawLifeBar() {
-  let HeartX = (viewportDisplayWidth/2) - (maxHealth * lifeBarSize)/2;
-  let HeartY = viewportDisplayHeight - lifeBarSize*2
+  let HeartX = (viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2;
+  let HeartY = viewportDisplayHeight - lifeBarSize * 2
 
 
   for (let i = 0; i < maxHealth; i++) {
-    if (i+1 <= healthPlayer){
+    if (i + 1 <= healthPlayer) {
       image(GamerHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
-    }else{
+    } else {
       image(GamerHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
 
     }
-    
+
   }
 }
 
@@ -545,9 +563,9 @@ function drawTroc(x, y, w, h) {
     image(GUITroc, x, y, w, h);
 
     //? Lignes de slot
-    let widthRow = w/2;
-    let heightRow = h *0.75 / echangePNJ.length; //& <- nombre de ligne
-    let postionXRow = x - widthRow/2 + w / 2;
+    let widthRow = w / 2;
+    let heightRow = h * 0.75 / echangePNJ.length; //& <- nombre de ligne
+    let postionXRow = x - widthRow / 2 + w / 2;
     // let positionYRow = y - heightRow/2 + h / 2;
 
     //? Position pour échange
@@ -565,7 +583,7 @@ function drawTroc(x, y, w, h) {
     echangePNJ.forEach((echange) => {
       //? Declaration de variables
       let indexEchange = echangePNJ.indexOf(echange);
-      let positionYRow = ((h-heightRow * echangePNJ.length)/2) + y + heightRow * indexEchange;
+      let positionYRow = ((h - heightRow * echangePNJ.length) / 2) + y + heightRow * indexEchange;
       let positionYElement = positionYRow + heightRow / 2 - heightElement / 2;
 
       //? Lignes
@@ -653,7 +671,7 @@ function drawTroc(x, y, w, h) {
         troc(objectListDemande, objectListDonne);
       }
     }
-    
+
   }
 }
 
@@ -664,20 +682,21 @@ function drawTalk(x, y, w, h) {
   let currentPNJ = pnjJSON.PNJS[currentPNJName]
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
   let talkPNJ = getTalkPNJ(currentPNJName);
-
   let sentenceToTell = ""
-  if (PNJSeePlayer){
-    if (talkPNJ[currentPNJ.step]){
+
+
+  if (PNJSeePlayer) {
+    if (talkPNJ[currentPNJ.step]) {
       //* Vérifier si l'item requis est dans l'inventaire
-      if (talkPNJ[currentPNJ.step].itemsNameRequired.includes("none") || Inventory.some(item => talkPNJ[currentPNJ.step].itemsNameRequired.includes(item.name))){
+      if (talkPNJ[currentPNJ.step].itemsNameRequired.includes("none") || Inventory.some(item => talkPNJ[currentPNJ.step].itemsNameRequired.includes(item.name))) {
         sentenceToTell = talkPNJ[currentPNJ.step].text
-      }else{
+      } else {
         //* Si l'item requis n'est pas dans l'inventaire fermer la discussion
         //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
         PressTalkPNJ = false
         currentPNJ.step -= 1;
       }
-    }else{
+    } else {
       //* Si la discussion est terminée, la fermer
       //* Si le joueur reparle au PNJ, il verra le dernier message du PNJ
       PressTalkPNJ = false
@@ -688,8 +707,8 @@ function drawTalk(x, y, w, h) {
   let fontSize = 20
 
   //? Afficher la banière du fond
-  let ratio = w/talkBackground.width
-  let heightImg = talkBackground.height * ratio 
+  let ratio = w / talkBackground.width
+  let heightImg = talkBackground.height * ratio
   y = y - heightImg
 
 
@@ -720,6 +739,7 @@ function drawTalk(x, y, w, h) {
 
     //* Changer de phrase
     if (mouseIsPressed && currentIndexTextSpeaking) {
+
       mouseIsPressed = false
       if (currentIndexTextSpeaking < sentenceToTell.length) {
         currentIndexTextSpeaking = sentenceToTell.length
@@ -734,7 +754,6 @@ function drawTalk(x, y, w, h) {
     //? Afficher le texte
     textSize(fontSize);
     text(currentTextSpeaking, x + (textWidth / 4), y + (h / 2.5) - fontSize / 2, textWidth, h)
-
     //* Remettre la phrase au début
     if (!PNJSeePlayer) {
       PressTalkPNJ = false;
@@ -751,18 +770,19 @@ function openTrocMenu() {
   let interfaceMenuHeight = 600;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
-  
+
   drawTroc(
     interfaceMenuX,
     interfaceMenuY,
     interfaceMenuWidth,
     interfaceMenuHeight
   );
-  
+
 }
 
 //~ INTERACTION PNJ DISCU
 function openTalkMenu() {
+
   let interfaceMenuWidth = viewportDisplayWidth / 2.5;
   let interfaceMenuHeight = viewportDisplayHeight / 5;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
@@ -777,17 +797,17 @@ function openTalkMenu() {
 }
 
 //~ Affiche les FPS
-function gameFPS () {
+function gameFPS() {
   if (fpsActivate) {
-      textSize(13);
-      noStroke()
-      fill(255);
-      text("FPS: " + fpsLevel.toFixed(0), 50, 50);
+    textSize(13);
+    noStroke()
+    fill(255);
+    text("FPS: " + fpsLevel.toFixed(0), 50, 50);
   }
 }
 
 //~ DISCUSSION
-function drawDiscussion(x,y,w,h){
+function drawDiscussion(x, y, w, h) {
 
   //? Fonction comme conditions pour la discussions
   let currentPNJ = getPNJName();
@@ -795,7 +815,7 @@ function drawDiscussion(x,y,w,h){
   let discussionPNJ = getDiscussionPNJ(currentPNJ)
 
 
-  if (discussionPNJ != undefined){
+  if (discussionPNJ != undefined) {
 
     //? Affichage du troc
     if (!PNJSeePlayer) {
@@ -805,10 +825,41 @@ function drawDiscussion(x,y,w,h){
 
 }
 
+//~ CREDITS END GAME
+function drawCredits() {
+  gameIsPaused = true;
+  endInventory = true;
+
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  background(0);
+  fill(255);
+
+  for (let i = 0; i < creditsJSON.Credits.length; i++) {
+
+    let credit = creditsJSON.Credits[i];
+    let spaceBetweenText = i * 50;
+    text(credit, width / 2, PositionCredits + spaceBetweenText);
+
+  }
+  PositionCredits -= speedCredits;
+
+  if (PositionCredits < -creditsJSON.Credits.length * 50) {
+    inGame = false
+    endTheGameCredits = false
+    initVariables()
+  }
+
+  textAlign(CENTER, BASELINE);
+}
+
 
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
+  if (startGame) {
+    drawStartGame()
+  }
 
   if (inGame) {
     gameIsPlaying = true;
@@ -828,23 +879,28 @@ function setupUI() {
     if (gameIsPaused) {
       if (settingsPause) {
         drawSettingsMenu();
-      }else if (healthPlayer > 0) {
+      } else if (healthPlayer > 0) {
         drawPauseMenu();
       }
+    }
+
+    //& Credits
+    if (endTheGameCredits) {
+      drawCredits()
     }
 
     //& Mort du joueur
     if (healthPlayer < 1) {
       characterMovement = "die"
 
-      if (playerDead){
+      if (playerDead) {
         drawDeath()
       }
-      
+
     } else {
       gameIsPlaying = true;
     }
-    
+
     //& Affichage de l'inventaire
     displayInventory();
 
@@ -868,6 +924,6 @@ function setupUI() {
   }
 
   if (leftClickPressed) {
-    leftClickPressed = false; 
+    leftClickPressed = false;
   }
 }

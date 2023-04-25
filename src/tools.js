@@ -61,17 +61,17 @@ function PNJMustBeShown(pnj) {
 
 
 
-   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-   let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
-   let invertedArrayMapPosition = []
-   invertedArrayMapPosition[0] = positionMapPNJ[1]
+    let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+    let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+    let invertedArrayMapPosition = []
+    invertedArrayMapPosition[0] = positionMapPNJ[1]
     invertedArrayMapPosition[1] = positionMapPNJ[0]
 
 
     let inChunksCheck = false
 
     mapsToCheck.some(map => {
-        if (!inChunksCheck){
+        if (!inChunksCheck) {
             inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
         }
     })
@@ -142,23 +142,52 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 //~ Joue de la music 
-// let PlayMusic = () => {
+let PlayMusic = () => {
 
-//     if (musicEnabled === false && Pressing === false) {
-//         musicEnabled = true
-//         SongBackground.loop()
-//         musicButtonColor = 50
-//         Pressing = true
+    if (musicEnabled === false && Pressing === false) {
+        musicEnabled = true
+        SongBackground.loop()
+        musicButtonColor = 50
+        Pressing = true
 
-//     } else if (musicEnabled === true && Pressing === false) {
-//         musicEnabled = false
-//         SongBackground.pause()
-//         musicButtonColor = 255
-//         Pressing = true
+    } else if (musicEnabled === true && Pressing === false) {
+        musicEnabled = false
+        SongBackground.pause()
+        musicButtonColor = 255
+        Pressing = true
 
-//     }
+    }
 
-// }
+}
+
+
+//~ Fonction qui joue des sons aleatoire
+
+/*
+function DieGameVoice() {
+    if (!soundEnabled) {
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        let sonAleatoire = VoicesDieSong[indexSong];
+        console.log(VoicesDieSong)
+        sonAleatoire.play();
+    }
+}
+*/
+
+function startGameVoice() {
+    if (!soundEnabled) {
+        VoiceStartSong.play()
+    }
+}
+
+
+function DieGameVoice() {
+    if (!soundEnabled) {
+        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
+        console.log("->", VoicesDieSong[indexSong])
+        VoicesDieSong[indexSong].play()
+    }
+}
 
 
 //~ Joue les songs
@@ -291,11 +320,11 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     let indexMapY = 0;
 
 
-    
+
     Object.entries(World.worldsMap).forEach(row => {
         row = row[1]
-        
-        if (!mapExist){
+
+        if (!mapExist) {
             if (row.includes(mapName)) {
                 mapExist = true;
                 indexMapX = row.indexOf(mapName);
@@ -311,7 +340,7 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
             if (house.name == mapName && !mapExist) {
                 mapExist = true;
                 //indexMapX = house.indexOf(mapName);
-                indexMapX =  0
+                indexMapX = 0
             } else {
                 indexMapY = 0
             }
@@ -886,6 +915,14 @@ function initVariables() {
     //~ Sons
     soundButtonColor = init_ColorForRectSong;
     soundEnabled = init_SongIsActivate;
+    canPlaySong = init_YouCanPlaySong;
+
+    VoicesSongMarjo = init_VoicesSongMarjo
+
+    dieSoundPlay = init_dieSoundPlay
+    startGame = init_startGame
+    startSoundPlay = init_startSoundPlay
+
 
 
     //& Evenements
@@ -925,6 +962,11 @@ function initVariables() {
     //~ Popups
     popUpShown = init_popUpShown;
     playerAnswersYes = init_playerAnswersYes;
+
+    //~ Credits
+    endTheGameCredits = init_endTheGameCredits
+    PositionCredits = init_PositionCredits
+    speedCredits = init_speedCredits
 
 
     //& Statistiques

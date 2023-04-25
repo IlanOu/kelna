@@ -174,6 +174,19 @@ let canPlayMusic;
 //~ Sons
 let soundButtonColor;
 let soundEnabled;
+let canPlaySong;
+
+
+let VoicesSongMarjo;
+
+let VoicesDieSong;
+let firstDieSound;
+let dieSoundPlay;
+
+let VoiceStartSong;
+let startGame;
+let startSoundPlay;
+
 
 
 //& Evenements
@@ -213,6 +226,11 @@ let playerDead;
 //~ Popups
 let popUpShown;
 let playerAnswersYes;
+
+//~ Credits
+let endTheGameCredits;
+let PositionCredits;
+let speedCredits;
 
 
 //& Statistiques
