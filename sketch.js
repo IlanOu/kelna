@@ -28,7 +28,9 @@ function preload() {
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   //? Background
-  backgroundImage = loadImage('assets/Background/background.png');
+  backgroundImage = loadImage('assets/Background/bg_forest.png');
+  backgroundImageDistant = loadImage('assets/Background/bg_forest_distant.png');
+  backgroundImageClose = loadImage('assets/Background/bg_forest_close.png');
 
 
   //? Animation PNJ
@@ -129,7 +131,7 @@ function draw() {
   
   
           //? Afficher le fond du jeu
-          drawBackgroundImage(backgroundImage)
+          drawBackgroundImage(backgroundImage, backgroundImageDistant, backgroundImageClose)
           
           
 

@@ -959,6 +959,11 @@ function setupUI() {
   if (inGame) {
     gameIsPlaying = true;
 
+
+    //& Affichage des Intéractions
+    setupInteractions();
+
+   
     //& Barre de vie
     drawLifeBar();
 
@@ -999,8 +1004,7 @@ function setupUI() {
     //& Affichage de l'inventaire
     displayInventory();
 
-    //& Affichage des Intéractions
-    setupInteractions();
+    
     gameFPS()
 
   } else {

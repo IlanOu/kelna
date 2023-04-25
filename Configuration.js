@@ -7,7 +7,7 @@ let engineOne;
 let fpsLevel;
 
 //& Le bloc qui tue (littéralement)
-let killingBlock;
+let killingBlocks;
 
 
 //& Admins
@@ -34,6 +34,7 @@ let backgroundSmoothSpeed;
 
 //& Background
 let backgroundX;
+
 
 
 //& Character
@@ -270,8 +271,11 @@ let sky;
 let tileSet;
 let tileSetForTaverne;
 let tileSetTaverne;
-let backgroundImage;
 let characterTexture_Dash;
+
+let backgroundImage;
+let backgroundImageDistant;
+let backgroundImageClose;
 
 let GUITroc;
 let GUIButton;

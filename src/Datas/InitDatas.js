@@ -8,7 +8,7 @@ const init_fpsLevel = 60
 
 
 //& Le bloc qui tue (littéralement)
-const init_killingBlock = 238;
+const init_killingBlocks = [39, 49];
 
 
 //& Admins
