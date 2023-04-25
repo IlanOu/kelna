@@ -55,9 +55,11 @@ function PNJ(pnj) {
   let PNJEnd = positionsEnd.pixelX;
 
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
+  // pnj.y = positionsStart.pixelY + yStartWorld
+
 
   let PNJX = pnj.x;
-  let PNJY = pnj.y + positionsStart.pixelY;
+  let PNJY = pnj.y;
 
   let PNJWidth = pnj.width;
   let PNJHeight = pnj.height;
@@ -71,21 +73,20 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
-  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-
-  let nameMapPlayer = World.worldsMap[positionMapPlayer[0]][positionMapPlayer[1]]
-
-  //console.log(pnj.mapName, nameMapPlayer)
-
-  if (pnj.mapName == nameMapPlayer){
-
-    
-
-  }
-
   
-
   if (PNJMustBeShown(pnj)) {
+    
+    
+    if (lastMap != currentMap){
+      if (currentMap.toString() == pnj.mapName.toString()){
+        PNJX = positionsStart.pixelX + xStartWorld
+        PNJY = positionsStart.pixelY + yStartWorld
+        pnj.x = positionsStart.pixelX + xStartWorld
+        pnj.y = positionsStart.pixelY + yStartWorld
+        pnj.velocityY = 0
+        PNJVelocityY = 0
+      }
+    }
 
     //* Ajout de la gravité au PNJ
     let gravityReturns = getPositionWithGravity(
@@ -182,6 +183,7 @@ let PNJMovements = (pnj) => {
   let CurrentX = pnj.x;
   let PNJY = pnj.y;
 
+
   //* Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
     CurrentX,
@@ -208,8 +210,10 @@ let PNJMovements = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
-    canTalkWithPNJ = false
+
+    pnj.canTalkWithMe = false
+    pnj.canTradeWithMe = false
+
   }
 
   //* Si le perso est vu s'arreter et le regarder
@@ -217,14 +221,12 @@ let PNJMovements = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.canInteractPNJ) {
-      if (pnj.echange != undefined) {
-        canInteractWithPNJ = true;
-      } else if (pnj.discussions != undefined) {
-        canTalkWithPNJ = true;
-      }
-
+    if (pnj.echange != undefined) {
+      pnj.canTradeWithMe = true
+    }else if (pnj.discussions != undefined){
+      pnj.canTalkWithMe = true
     }
+    
   }
 
   //* Ajouter le saut au PNJ
@@ -310,13 +312,11 @@ let PNJMovementsInside = (pnj) => {
   if (!pnj.seePlayer) {
     doRound(pnj);
     pnj.movement = "walk";
-    canInteractWithPNJ = false;
   }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.canInteractPNJ === true && pnj.echange !== undefined) {
-      canInteractWithPNJ = true;
+    if (pnj.echange !== undefined) {
     }
   }
 

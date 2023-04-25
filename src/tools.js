@@ -845,7 +845,8 @@ function initVariables() {
     yStartWorld = init_yStartWorld;
 
     arrayMap = init_arrayMap;
-
+    currentMap = init_currentMap
+    lastMap = init_lastMap
 
     //& Maisons
     xStartHouse = init_xStartHouse;
@@ -949,11 +950,11 @@ function initVariables() {
 
     //~  Portes
     behindThisDoor = init_behindThisDoor;
+    behindThisDoorHouse = init_behindThisDoorHouse
     engine1WidthDoors = init_engine1WidthDoors;
     engine1HeightDoors = init_engine1HeightDoors;
     engine2WidthDoors = init_engine2WidthDoors;
     engine2HeightDoors = init_engine2HeightDoors;
-    doorInTaverne = init_doorInTaverne;
 
     //~ Mort
     playerDead = init_playerDead;
@@ -1027,4 +1028,35 @@ function initVariables() {
 
     resetJsons()
 
+}
+
+
+function aPNJCanTalk(){
+    let canTalk = false
+    if (pnjJSON.PNJS){  
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTalkWithMe) {
+                canTalk = true
+            }
+        })
+    }
+    
+    return canTalk;
+}
+
+function aPNJCanTrade(){
+    let canTrade = false
+    if (pnjJSON.PNJS){
+        Object.entries(pnjJSON.PNJS).forEach(pnj => {
+            let pnjName = pnj[0]
+            pnj = pnj[1]
+            if (pnjJSON.PNJS[pnjName].canTradeWithMe) {
+                canTrade = true
+            }
+        })
+    }
+    
+    return canTrade;
 }

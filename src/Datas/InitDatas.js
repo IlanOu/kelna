@@ -101,7 +101,8 @@ const init_rectHeight = 60;
 const init_xStartWorld = 0;
 const init_yStartWorld = 0;
 const init_arrayMap = [];
-const init_currentMap = 0;
+const init_currentMap = "";
+const init_lastMap = "";
 
 
 //& Maisons
@@ -204,11 +205,11 @@ const init_currentIndexTextSpeaking = 0
 
 //~  Portes
 const init_behindThisDoor = "";
+const init_behindThisDoorHouse = ""
 const init_engine1WidthDoors = init_rectWidth
 const init_engine1HeightDoors = init_rectHeight * 2
 const init_engine2WidthDoors = 10
 const init_engine2HeightDoors = init_rectHeight
-const init_doorInTaverne = false;
 
 //~ Mort
 const init_playerDead = false

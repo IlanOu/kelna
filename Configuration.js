@@ -106,6 +106,7 @@ let yStartWorld;
 
 let arrayMap;
 let currentMap;
+let lastMap;
 
 
 //& Maisons
@@ -213,11 +214,11 @@ let currentIndexTextSpeaking;
 
 //~  Portes
 let behindThisDoor;
+let behindThisDoorHouse;
 let engine1WidthDoors;
 let engine1HeightDoors;
 let engine2WidthDoors;
 let engine2HeightDoors;
-let doorInTaverne;
 
 //~ Mort
 let playerDead;

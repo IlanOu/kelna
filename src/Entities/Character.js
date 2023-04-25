@@ -442,6 +442,11 @@ function character() {
 
   characterLastMovement = characterMovement
 
+  lastMap = currentMap
+
+  
+
+
   //* Ancienne positions du perso
   previousPlayerX = characterPositionX
   previousPlayerY = characterPositionY
@@ -655,6 +660,18 @@ function character() {
   characterPositionY = positions[1];
 
   //#endregion
+
+
+
+  //* Dernière map sur laquelle est passé le joueur
+  let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  let positionMapCenterPlayer = findIndexOfPositionIn2dArray(characterPositionX+(characterWidth/2), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+
+
+  if (positionMapCenterPlayer.toString() == positionMapPlayer.toString()){
+    currentMap = World.worldsMap[positionMapPlayer[1]][positionMapPlayer[0]]
+  }
+
 
 
   //#region 
