@@ -131,7 +131,7 @@ function displayInventory() {
 
             if (i == 1) {
                 noStroke()
-                fill(255, 0, 0)
+                fill(255, 255, 255)
                 //? top gauge
                 rect(slotX, slotY, topGaugeLevel, gaugeSize);
 

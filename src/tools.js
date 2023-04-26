@@ -405,14 +405,15 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
 
 function showMessage(message){
-    let messageWidth = 200
-    let messageHeight = 100
+    let popupMessageWidth = 200
+    let popupMessageHeight = 100
+
     let messagePositionY = 0
     let messagePositionX = viewportDisplayWidth - messageWidth
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
-    
+    image(backgroundImageTalk, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
     drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
     
 }

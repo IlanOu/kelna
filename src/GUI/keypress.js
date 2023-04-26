@@ -58,8 +58,7 @@ function keyPressed() {
         if (item.canGetItem){
             if (keyCode == 69 && engineOne) {
                 if (Inventory[getIndexOfItemCategory(item.category)].category){
-                    tempMessage("L'inventaire est plein")
-                    
+                    tempMessage()
                 }else{
                     getCurrentItem()
                 }
