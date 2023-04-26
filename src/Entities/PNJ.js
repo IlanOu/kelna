@@ -55,7 +55,6 @@ function PNJ(pnj) {
   let PNJEnd = positionsEnd.pixelX;
 
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
-  // pnj.y = positionsStart.pixelY + yStartWorld
 
 
   let PNJX = pnj.x;

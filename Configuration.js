@@ -1,27 +1,28 @@
-//& Debug Mod
+//~ Debug Mod
 let debugMod;
 
 
-//& Moteur de jeu
+//~ Moteur de jeu
 let engineOne;
 let fpsLevel;
 
-//& Le bloc qui tue (littéralement)
+//~ Le bloc qui tue (littéralement)
 let killingBlocks;
 
 
-//& Admins
+//~ Admins
 let username;
 let password;
 
 
-//& Camera
+//~ Camera
 let cameraShakeEnabled;
 
 let shakeDuration;
 let shakeForce;
 
-//~ ========= Mode SMOOTH ========= 
+
+//^ ========= Mode SMOOTH ========= 
 let smoothCamera;
 let smoothCameraSpeed;
 let cameraSpeedR;
@@ -32,13 +33,13 @@ let backgroundSpeed;
 let backgroundSmoothSpeed;
 
 
-//& Background
+//~ Background
 let backgroundX;
 
 
 
-//& Character
-//~ Textures / Outils du Personnage
+//~ Character
+//? Textures / Outils du Personnage
 let characterTextureList;
 let characterAnimationIndex;
 let characterAnimationFramePassed;
@@ -69,6 +70,8 @@ let characterHitting;
 let characterComboHitting;
 let characterComboHittingDouble;
 let lastHit;
+
+
 //? Saut
 let characterMass;
 let characterJumpHeight;
@@ -91,14 +94,14 @@ let dashTime;
 let dashForce;
 
 
-//& Animations
+//? Animations
 let animationSpeed;
 let textDialogSpeed;
 let annimationBeginY = 4 * 32;
 let annimationEndY = 5 * 32;
 
 
-//& Grille
+//~ Grille
 let rectWidth;
 let rectHeight;
 
@@ -110,18 +113,18 @@ let currentMap;
 let lastMap;
 
 
-//& Maisons
+//~ Maisons
 let xStartHouse;
 let yStartHouse;
 
 
-//& Interfaces
+//^ Interfaces
 
-//~ Font
+//? Font
 let classicFont;
 let pixelFont;
 
-//~ Interfaces
+//? Interfaces
 let interactionWidth;
 let interactionHeight;
 
@@ -139,20 +142,20 @@ let arrowTroc;
 
 let longButton
 let longButtonHover
-let popUpButton
-let popUpButtonHover
+let smallButton
+let smallButtonHover
 let checkedLongButtonHover
 let checkedLongButton
 
-//~ Jeu
+//? Jeu
 let inGame;
 let gameIsPaused;
 let gameIsPlaying;
 
-//~ Parametres
+//? Parametres
 let settingsPause;
 
-//~ Barre de vie
+//? Barre de vie
 let lifeBarSize;
 let healthPlayer;
 let maxHealth;
@@ -164,7 +167,7 @@ let removeHeart;
 let GameHeartBlack;
 let GameHeart
 
-//~ Inventaire
+//? Inventaire
 let Inventory = [];
 let widthSlot;
 let heightSlot;
@@ -172,7 +175,7 @@ let slotX;
 let endInventory;
 let waitingButton;
 
-//~ Jauge quand on mange
+//? Jauge quand on mange
 let characterIsEating;
 
 let gaugeSize;
@@ -184,13 +187,13 @@ let bottomGaugeLevel;
 let leftGaugeLevel;
 
 
-//& Audio
+//^ Audio
 
-//~ Musique
+//? Musique
 let musicEnabled;
 let canPlayMusic;
 
-//~ Sons
+//? Sons
 let soundEnabled;
 let canPlaySong;
 
@@ -207,8 +210,9 @@ let startSoundPlay;
 
 
 
-//& Evenements
-//~ Touches
+//^ Evenements
+
+//? Touches
 let Pressing;
 let spaceKeyIsPressed;
 let rightArrowPressed;
@@ -222,7 +226,7 @@ let leftClickWasPressed;
 let canEnterInHouse;
 let canGoOutTheHouse;
 
-//~ PNJ
+//? PNJ
 let canInteractWithPNJ;
 let PressInteractPNJ;
 let canTalkWithPNJ;
@@ -230,7 +234,7 @@ let PressTalkPNJ;
 let currentTextSpeaking;
 let currentIndexTextSpeaking;
 
-//~  Portes
+//?  Portes
 let behindThisDoor;
 let behindThisDoorHouse;
 let engine1WidthDoors;
@@ -238,30 +242,30 @@ let engine1HeightDoors;
 let engine2WidthDoors;
 let engine2HeightDoors;
 
-//~ Mort
+//? Mort
 let playerDead;
 
-//~ Popups
+//? Popups
 let popUpShown;
 let playerAnswersYes;
 
-//~ Credits
+//? Credits
 let endTheGameCredits;
 let PositionCredits;
 let speedCredits;
 let creditsInHome;
 
 
-//& Statistiques
+//~ Statistiques
 let numberOfSteps;
 
 
-//& Items
+//~ Items
 let itemList;
 let currentItemPointing;
 let canGetItem;
 
-//& Troc
+//~ Troc
 let waitingAnswer;
 let haveToTrade;
 let slotSize;
@@ -269,22 +273,22 @@ let itemSize;
 let stackSize;
 
 
-//& FPS
+//~ FPS
 let fpsEnabled;
 let FPSButtonColor;
 
 
-//& Physique
+//~ Physique
 let gravityForce;
 
 
-//& Cinématiques
+//~ Cinématiques
 let startCinematicPlaying = false;
 let musicCinematic;
 
 
 
-//& Textures
+//~ Textures
 let sky;
 let tileSet;
 let tileSetForTaverne;
@@ -306,10 +310,12 @@ let pointEnnemis;
 let tilesetItems;
 let backgroundImageTroc;
 let slot;
-let backgroundImageTalk;
+let smallPopUp;
 
+let requiredSlotSword;
+let requiredSlotFoods;
 
-//& JSONS
+//~ JSONS
 let adminJSON;
 let allDoors;
 let ennemiesJSON;
@@ -323,7 +329,7 @@ let World;
 let creditsJSON;
 
 
-//& Variables vides
+//~ Variables vides
 let getTrade;
 let fps;
 let StartCinematic;

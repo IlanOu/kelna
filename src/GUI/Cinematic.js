@@ -5,6 +5,7 @@ function playStartCinematic() {
     image(gameIntroductionVideo, 0, 0, viewportDisplayWidth, viewportDisplayHeight);
 }
 
+//~ Si la cinematique est terminé
 function videoEnded() {
     background(0)
     startCinematicPlaying = false

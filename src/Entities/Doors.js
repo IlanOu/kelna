@@ -1,3 +1,4 @@
+//~ Manager des portes
 function doorsManager() {
   let canGoInside = [];
   let canGoOutside = [];

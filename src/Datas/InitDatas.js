@@ -1,28 +1,28 @@
-//& Debug Mod
+//~ Debug Mod
 const init_debugMod = false;
 
 
-//& Moteur de jeu
+//~ Moteur de jeu
 const init_engineOne = true;
 const init_fpsLevel = 60
 
 
-//& Le bloc qui tue (littéralement)
+//~ Le bloc qui tue (littéralement)
 const init_killingBlocks = [39, 49];
 
 
-//& Admins
+//~ Admins
 const init_username = "";
 const init_password = "";
 
 
-//& Camera
+//~ Camera
 const init_cameraShakeEnabled = true;
 
 const init_shakeDuration = 0;
 const init_shakeForce = 0;
 
-//~ ========= Mode SMOOTH ========= 
+//^ ========= Mode SMOOTH ========= 
 const init_smoothCamera = false
 const init_smoothCameraSpeed = 0.04
 const init_cameraSpeedR = 0;
@@ -33,11 +33,11 @@ const init_backgroundSpeed = 8;
 const init_backgroundSmoothSpeed = 0.1
 
 
-//& Background
+//~ Background
 const init_backgroundX = 0;
 
-//& Character
-//~ Textures / Outils du Personnage
+//^ Character
+//* Textures / Outils du Personnage
 const init_characterTextureList = [];
 const init_characterAnimationIndex = 0
 const init_characterAnimationFramePassed = false;
@@ -48,7 +48,7 @@ const init_characterLastMovement = init_characterMovement
 const init_characterSpriteWidth = 32;
 const init_characterSpriteHeight = 32;
 
-//~ caractéristiques du perso
+//* caractéristiques du perso
 //? Positions
 const init_characterInsidePosX = 1;
 const init_characterInsidePosY = 1;
@@ -90,12 +90,12 @@ const init_dashTime = 200;
 const init_dashForce = 2;
 
 
-//& Animations
+//~ Animations
 const init_animationSpeed = 100
 const init_textDialogSpeed = 3
 
 
-//& Grille
+//~ Grille
 const init_rectWidth = 60;
 const init_rectHeight = 60;
 const init_xStartWorld = 0;
@@ -105,13 +105,13 @@ const init_currentMap = "";
 const init_lastMap = "";
 
 
-//& Maisons
+//~ Maisons
 const init_xStartHouse = 0;
 const init_yStartHouse = 0;
 
 
-//& Interfaces
-//~ Interfaces
+//^ Interfaces
+//*Interfaces
 const init_interactionWidth = 30;
 const init_interactionHeight = 30;
 
@@ -125,15 +125,15 @@ const init_buttonHeightBIG = 80
 
 const init_toggleButtonColor = 255
 
-//~  Jeu
+//* Jeu
 const init_inGame = false
 const init_gameIsPaused = false
 const init_gameIsPlaying = false
 
-//~ Parametres
+//*Parametres
 const init_settingsPause = false
 
-//~ Barre de vie
+//*Barre de vie
 const init_MargeBarVie = 40;
 const init_healthPlayer = 5
 const init_maxHealth = 5
@@ -143,7 +143,7 @@ const init_gettingHeal = false;
 const init_addHeart = false;
 const init_removeHeart = false;
 
-//~ Inventaire
+//*Inventaire
 const init_Inventory = [{},{},{}];
 const init_WidthSlot = 85;
 const init_HeightSlot = 85;
@@ -151,7 +151,7 @@ const init_slotX = 0;
 const init_endInventory = false;
 const init_waitingButton = false;
 
-//~ Jauge quand on mange
+//*Jauge quand on mange
 const init_characterIsEating = false;
 
 const init_gaugeSize = 5;
@@ -163,12 +163,12 @@ const init_bottomGaugeLevel = 0;
 const init_leftGaugeLevel = 0;
 
 
-//& Audio
-//~ Musique
+//^ Audio
+//* Musique
 const init_MusicIsActivate = false
 const init_YouCanPlayMusic = false
 
-//~ Sons
+//* Sons
 const init_SongIsActivate = false
 const init_YouCanPlaySong = false
 
@@ -180,8 +180,8 @@ const init_startGame = false;
 const init_startSoundPlay = false
 
 
-//& Evenements
-//~ Touches
+//^ Evenements
+//* Touches
 const init_Pressing = false
 const init_spaceKeyIsPressed = false;
 const init_rightArrowPressed = false;
@@ -195,7 +195,7 @@ const init_leftClickWasPressed = false;
 const init_canEnterInHouse = false;
 const init_canGoOutTheHouse = false;
 
-//~ PNJ
+//* PNJ
 const init_canInteractWithPNJ = false;
 const init_PressInteractPNJ = false
 const init_canTalkWithPNJ = false;
@@ -203,7 +203,7 @@ const init_PressTalkPNJ = false;
 const init_currentTextSpeaking = ""
 const init_currentIndexTextSpeaking = 0
 
-//~  Portes
+//*  Portes
 const init_behindThisDoor = "";
 const init_behindThisDoorHouse = ""
 const init_engine1WidthDoors = init_rectWidth
@@ -211,20 +211,20 @@ const init_engine1HeightDoors = init_rectHeight * 2
 const init_engine2WidthDoors = 10
 const init_engine2HeightDoors = init_rectHeight
 
-//~ Mort
+//* Mort
 const init_playerDead = false
 
-//~ Popups
+//* Popups
 const init_popUpShown = false;
 const init_playerAnswersYes = false;
 
-//~ Credits
+//* Credits
 const init_endTheGameCredits = false;
 const init_PositionCredits = window.innerHeight + 50;
 const init_speedCredits = 2.5;
 const init_creditsInHome = false;
 
-//& Statistiques
+//~ Statistiques
 const init_numberOfSteps = 0;
 const init_statistiques = {
     distanceWalked: 0,
@@ -238,13 +238,13 @@ const init_statistiques = {
     playerSpeed: 0
 }
 
-//& Items
+//~ Items
 const init_itemList = [];
 const init_currentItemPointing = "";
 const init_canGetItem = false;
 
 
-//& Troc
+//~ Troc
 const init_waitingAnswer = false;
 const init_haveToTrade = false;
 const init_slotSize = 2
@@ -252,17 +252,16 @@ const init_itemSize = 1.6
 const init_stackSize = 5
 
 
-//& FPS
+//~ FPS
 const init_fpsEnabled = false
 const init_FPSButtonColor = 255
 
 
-//& Physique
+//~ Physique
 const init_gravityForce = 0.5;
 
 
-//& Cinématiques
-//const init_startCinematicPlaying = true;
+//~ Cinématiques
 const init_musicCinematic = false;
 
 

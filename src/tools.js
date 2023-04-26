@@ -141,9 +141,8 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 
-//~ Joue de la music 
+//~ Joue / desactive de la music 
 let PlayMusic = () => {
-
     if (!musicEnabled  && !Pressing) {
         musicEnabled = true
         SongBackground.loop()
@@ -155,11 +154,10 @@ let PlayMusic = () => {
         Pressing = true
 
     }
-
 }
 
 
-
+//~ Joue des voix dés le début du jeu
 function startGameVoice() {
     if (!soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoiceStartSong.length);
@@ -168,6 +166,8 @@ function startGameVoice() {
 }
 
 
+
+//~ Joue des voix a la mort du jouer
 function DieGameVoice() {
     if (!soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
@@ -176,10 +176,10 @@ function DieGameVoice() {
 }
 
 
-//~ Joue les songs
+//~ Joue / desactive les songs
 let PlaySong = () => {
 
-    if (!soundEnabled  && !Pressing) {
+    if (!soundEnabled && !Pressing) {
         soundEnabled = true
         Pressing = true
 
@@ -490,7 +490,7 @@ function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]
 }
 
 
-
+//~ Trouve la categorie de l'item et le met dans la slot pour
 function getIndexOfItemCategory(itemCategory) {
 
     let index = null;
@@ -569,10 +569,9 @@ function popUp(message, options = "info") {
     let interfacePopUpHeight = 35 * 5
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
-    // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(smallPopUp, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {
@@ -589,9 +588,9 @@ function popUp(message, options = "info") {
 
 
         if (buttonHover(buttonPopUp)) {
-            drawButton(buttonPopUp, popUpButtonHover, true, 255);
+            drawButton(buttonPopUp, smallButtonHover, true, 255);
         } else {
-            drawButton(buttonPopUp, popUpButton, true, 255);
+            drawButton(buttonPopUp, smallButton, true, 255);
         }
 
         drawText("OK", 40, [textPopUpX, buttonPopUpY - 0.5], [CENTER, BASELINE], [0, 0, 0])
@@ -614,7 +613,7 @@ function popUp(message, options = "info") {
 
         let buttonPopUpWYes = 75
         let buttonPopUpHYes = 60
-        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5) //- (buttonPopUpWYes)
+        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5) 
         let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
@@ -623,7 +622,7 @@ function popUp(message, options = "info") {
 
         let buttonPopUpWNo = 75
         let buttonPopUpHNo = 60
-        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth/ 1.8) //- (buttonPopUpWNo)
+        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth/ 1.8) 
         let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
@@ -631,16 +630,16 @@ function popUp(message, options = "info") {
 
 
         if (buttonHover(buttonPopUpYes)) {
-            drawButton(buttonPopUpYes, popUpButtonHover, true, 255);
+            drawButton(buttonPopUpYes, smallButtonHover, true, 255);
         } else {
-            drawButton(buttonPopUpYes, popUpButton, true, 255);
+            drawButton(buttonPopUpYes, smallButton, true, 255);
         }
         drawText("OUI", 40, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
 
         if (buttonHover(buttonPopUpNo)) {
-            drawButton(buttonPopUpNo, popUpButtonHover, true, 255);
+            drawButton(buttonPopUpNo, smallButtonHover, true, 255);
         } else {
-            drawButton(buttonPopUpNo, popUpButton, true, 255);
+            drawButton(buttonPopUpNo, smallButton, true, 255);
         }
         drawText("NON", 40, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
 
@@ -662,6 +661,7 @@ function popUp(message, options = "info") {
 }
 
 
+//~ Avoir la vitesse du joueur (stats)
 function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
@@ -670,7 +670,7 @@ function getSpeed(seconds, meters) {
 }
 
 
-
+//~ Remettre a 0 les JSONS
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
@@ -685,6 +685,7 @@ function resetJsons() {
 }
 
 
+//~ Convertie le temps en heure / min / secondes
 function timeConversion(seconds) {
     const heures = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -697,21 +698,15 @@ function timeConversion(seconds) {
     return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
 }
 
-function getSpeed(seconds, meters) {
-    const distanceEnKm = meters / 1000;
-    const tempsEnHeures = seconds / 3600;
-    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
-}
 
-
-
+//~ Tremblement de la camera
 function shakeCamera(durationSeconds, forcePixels) {
     shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
     shakeForce = forcePixels;
 }
 
 
+//~ Ajoute l'item present
 function getCurrentItem() {
     addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
     itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
@@ -720,23 +715,12 @@ function getCurrentItem() {
 }
 
 
-function resetJsons() {
-    ennemiesJSON = loadJSON("json/Ennemis.json");
-    pnjJSON = loadJSON("json/PNJ.json");
-
-    //? Pas besoin de reload les json dont les donnees ne changent pas 
-    // allDoors = loadJSON("json/Doors.json");
-    // adminJSON = loadJSON("json/Admin.json");
-    // Houses = loadJSON("json/Houses.json");
-    itemsJSON = loadJSON("json/Items.json");
-    // Maps = loadJSON("json/Maps.json");
-    // World = loadJSON("json/World.json");
-}
-
+//~ Retourn si l'inventaire est vide
 function inventoryIsEmpty(slot) {
     return Object.keys(slot).length === 0;
 }
 
+//~ Initie les variables
 function initVariables() {
     //& Debug Mod
     debugMod = init_debugMod;

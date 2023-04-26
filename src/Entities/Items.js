@@ -1,3 +1,4 @@
+//~ Manager des items
 function itemsManager(){
 
     if (engineOne){
@@ -13,7 +14,7 @@ function itemsManager(){
 }
 
 
-
+//~ Items au sols
 function items(item){
 
     let positions = getPositionAt(item.location, item.x, item.y);
@@ -65,7 +66,7 @@ function items(item){
     drawItems(item)
 }
 
-
+//~ Crée l'items au sol
 function drawItems(item){
 
 

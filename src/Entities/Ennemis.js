@@ -4,13 +4,13 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    //mob(ennemiesJSON.Ennemis.Malade1);
-    //mob(ennemiesJSON.Ennemis.Malade2);
-      
-    // Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
-    //     mob(Mobs[1]);          
-    // })
-    
+    if(ennemiesJSON.Ennemis){
+      Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
+        mob(Mobs[1]);          
+      })
+      // mob(ennemiesJSON.Ennemis.Malade1);
+      // mob(ennemiesJSON.Ennemis.Malade2);
+    }  
   }
 }
 
@@ -288,9 +288,9 @@ let mobMovements = (Mobs) => {
     }
   }
 
-  //~ -------------------------------------------------------------------------
-  //~                          Attaquer le joueur                              
-  //~ -------------------------------------------------------------------------
+  //* -------------------------------------------------------------------------
+  //*                          Attaquer le joueur                              
+  //* -------------------------------------------------------------------------
 
   let mobAttacking = false;
 
@@ -378,7 +378,7 @@ function animationMobs(
   let MobTexturesList = [];
   //~ Changer d'animation en fonction du type
 
-  //& Selectionner la bonne spritesheet en fonction du type de mob
+  //? Selectionner la bonne spritesheet en fonction du type de mob
   let currentSpriteSheet;
   switch (CurrentMob.type) {
     case "Malade1":
@@ -390,7 +390,7 @@ function animationMobs(
       break;
   }
 
-  //& Selectionner la bonne ligne en fonction du mouvement
+  //? Selectionner la bonne ligne en fonction du mouvement
   switch (movement) {
     case "walk":
       for (let y = 0; y < (1 * 32); y += 32) {
