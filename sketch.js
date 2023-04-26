@@ -61,7 +61,7 @@ function preload() {
   tileSet = loadImage("assets/textures/TilesetKelna.png");
   backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
-  backgroundImageTalk = loadImage("assets/textures/backgroundImageTalk.png");
+  backgroundImageTalk = loadImage("assets/textures/popUp.png"); //backgroundImageTalk
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
 
 

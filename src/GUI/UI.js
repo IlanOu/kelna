@@ -78,6 +78,7 @@ function buttonHover([x, y, h, w]) {
 /*//^ -------------------------------------------------------------------------- */
 //~ MENU HOME
 function drawHomeMenu() {
+  background(0)
   textFont(classicFont)
 
 
@@ -212,9 +213,7 @@ function drawHomeMenu() {
 
 //~ MENU PAUSE
 function drawPauseMenu() {
-  textFont(classicFont)
-
-  //? Cacher le troc si il s'affiche
+    //? Cacher le troc si il s'affiche
   PressInteractPNJ = false;
   PressTalkPNJ = false
 
@@ -340,14 +339,17 @@ function drawPauseMenu() {
 
 //~ MENU HOME SETTINGS
 function drawSettingsMenu() {
-  textFont(classicFont)
+
+  background(0)
+
+  textFont(pixelFont)
 
   //& --------------------------------
   //& ---------- Variables -----------
   //& --------------------------------
 
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
+  let interfaceMenuWidth = 594;
+  let interfaceMenuHeight = 810;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let interfaceMenu = [
@@ -357,34 +359,34 @@ function drawSettingsMenu() {
     interfaceMenuHeight,
   ];
 
-  let buttonSonW = 150;
-  let buttonSonH = 20;
+  let buttonSonW = 290;
+  let buttonSonH = 70;
   let buttonSonX = interfaceMenuX + interfaceMenuWidth / 2 - buttonSonW / 2;
   let buttonSonY = interfaceMenuY + interfaceMenuHeight / 4;
   let textSonX = buttonSonX + buttonSonW / 2;
 
-  let buttonMusicW = 150;
-  let buttonMusicH = 20;
+  let buttonMusicW = 290;
+  let buttonMusicH = 70;
   let buttonMusicX = interfaceMenuX + interfaceMenuWidth / 2 - buttonMusicW / 2;
-  let buttonMusicY = interfaceMenuY + interfaceMenuHeight / 3
+  let buttonMusicY = interfaceMenuY + interfaceMenuHeight / 2.8
   let textMusicX = buttonMusicX + buttonMusicW / 2;
 
-  let buttonToggleFPSW = 150;
-  let buttonToggleFPSH = 20;
+  let buttonToggleFPSW = 290;
+  let buttonToggleFPSH = 70;
   let buttonToggleFPSX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleFPSW / 2;
-  let buttonToggleFPSY = interfaceMenuY + interfaceMenuHeight / 2.5;
+  let buttonToggleFPSY = interfaceMenuY + interfaceMenuHeight / 2.15;
   let textToggleFPSX = buttonToggleFPSX + buttonMusicW / 2;
 
-  let buttonToggleCameraShakeW = 150;
-  let buttonToggleCameraShakeH = 20;
+  let buttonToggleCameraShakeW = 290;
+  let buttonToggleCameraShakeH = 70;
   let buttonToggleCameraShakeX = interfaceMenuX + interfaceMenuWidth / 2 - buttonToggleCameraShakeW / 2;
-  let buttonToggleCameraShakeY = interfaceMenuY + interfaceMenuHeight / 2;
+  let buttonToggleCameraShakeY = interfaceMenuY + interfaceMenuHeight / 1.75;
   let textToggleCameraShakeX = buttonToggleCameraShakeX + buttonMusicW / 2;
 
-  let buttonExitW = 150;
-  let buttonExitH = 20;
+  let buttonExitW = 290;
+  let buttonExitH = 70;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
+  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.2;
   let textExitX = buttonExitX + buttonExitW / 2;
 
 
@@ -402,21 +404,31 @@ function drawSettingsMenu() {
   let ButtonBack = [buttonExitX, buttonExitY, buttonExitW, buttonExitH];
 
 
+
+  let titleSettingsX = buttonExitX + buttonExitW / 2;
+  let titleSettingsY = interfaceMenuY + interfaceMenuHeight / 16;
+
   //& --------------------------------
   //& ---------- Affichage -----------
   //& --------------------------------
 
-
+  
   drawInterface(interfaceMenu, GUIParameters);
-
+  
+  
   if(soundEnabled){
     toggleButtonColor = [255,255,255]
   }else{
     toggleButtonColor = [100, 100, 100]
   }
-
-  drawButton(buttonSon, undefined, true, 255, toggleButtonColor);
-  drawText("Sons", 15, [textSonX, buttonSonY], [CENTER, BASELINE]);
+  drawText("SETTINGS", 90, [titleSettingsX, titleSettingsY], [CENTER, BASELINE], [0, 0, 0])
+  
+  if (buttonHover(buttonSon)) {
+    drawButton(buttonSon, longButtonHover, true, 255);
+  }else {
+    drawButton(buttonSon, longButton, true, 255);
+  }
+  drawText("Sons", 50, [textSonX, buttonSonY], [CENTER, BASELINE], [0, 0, 0]);
   
 
   if (musicEnabled) {
@@ -425,8 +437,12 @@ function drawSettingsMenu() {
     toggleButtonColor = [100, 100, 100]
   }
 
-  drawButton(buttonMusic, undefined, true, 255, toggleButtonColor);
-  drawText("Musique", 15, [textMusicX, buttonMusicY], [CENTER, BASELINE]);
+  if (buttonHover(buttonMusic)) {
+    drawButton(buttonMusic, longButtonHover, true, 255);
+  } else {
+    drawButton(buttonMusic, longButton, true, 255);
+  }
+  drawText("Musique", 50, [textMusicX, buttonMusicY], [CENTER, BASELINE]);
 
 
   if (fpsEnabled) {
@@ -434,10 +450,14 @@ function drawSettingsMenu() {
   } else {
     toggleButtonColor = [100, 100, 100]
   }
-
-  fill(255);
-  drawButton(ButtonToggleFPS, undefined, true, 255, toggleButtonColor);
-  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
+  
+  
+  if (buttonHover(ButtonToggleFPS)) {
+    drawButton(ButtonToggleFPS, longButtonHover, true, 255);
+  } else {
+    drawButton(ButtonToggleFPS, longButton, true, 255);
+  }
+  drawText("FPS", 50, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
 
 
 
@@ -448,13 +468,23 @@ function drawSettingsMenu() {
   }
 
 
-  fill(255);
-  drawButton(ButtonToggleCameraShake, undefined, true, 255, toggleButtonColor);
-  drawText("Tremblements", 15, [textToggleCameraShakeX, buttonToggleCameraShakeY], [CENTER, BASELINE]);
+  if (buttonHover(ButtonToggleCameraShake)) {
+    drawButton(ButtonToggleCameraShake, longButtonHover, true, 255);
+  } else {
+    drawButton(ButtonToggleCameraShake, longButton, true, 255);
+  }
+  drawText("Tremblements", 48, [textToggleCameraShakeX, buttonToggleCameraShakeY], [CENTER, BASELINE]);
 
   fill(255);
   drawButton(ButtonBack);
   drawText("Retour", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
+
+   if (buttonHover(ButtonBack)) {
+     drawButton(ButtonBack, longButtonHover, true, 255);
+   } else {
+     drawButton(ButtonBack, longButton, true, 255);
+   }
+  drawText("Retour", 50, [textExitX, buttonExitY], [CENTER, BASELINE]);
 
 
 
@@ -519,8 +549,8 @@ function drawDeath() {
   ];
 
 
-  let buttonExitW = 150;
-  let buttonExitH = 20;
+  let buttonExitW = 200;
+  let buttonExitH = 100;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
   let textExitX = buttonExitX + buttonExitW / 2;
@@ -536,16 +566,17 @@ function drawDeath() {
   let titleDieX = buttonExitX + buttonExitW / 2;
   let titleDieY = interfaceMenuY + interfaceMenuHeight / 5;
 
-  //& --------------------------------
-  //& ---------- Affichage -----------
-  //& --------------------------------
+    //& --------------------------------
+    //& ---------- Affichage -----------
+    //& --------------------------------
 
 
-  drawInterface(interfaceMenu, GUIOfDeath);
-  drawText("  VOUS ETES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
+    fill(255);
+    drawInterface(interfaceMenu, GUIOfDeath);
 
-  drawButton(buttonBackToHomeEndGame, popUpButton, true, 255);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE][0, 0, 0], buttonHover(buttonBackToHomeEndGame));
+    fill(255);
+    drawButton(buttonBackToHomeEndGame);
+    drawText("Retour au menu", 15, [textExitX, buttonExitY], "center");
 
 
   //& --------------------------------
@@ -556,7 +587,23 @@ function drawDeath() {
     leftClickPressed = false
     inGame = false
   }
-
+  
+  
+  //& --------------------------------
+  //& ---------- Affichage -----------
+  //& --------------------------------
+  
+  
+  drawInterface(interfaceMenu, GUIOfDeath);
+  drawText("  VOUS ETES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
+  
+  
+  if (buttonHover(buttonBackToHomeEndGame)) {
+    drawButton(buttonBackToHomeEndGame, popUpButtonHover, true, 255);
+  }else{
+    drawButton(buttonBackToHomeEndGame, popUpButton, true, 255);
+  }
+  drawText("MENU", 60, [textExitX, buttonExitY], [CENTER, BASELINE], [0, 0, 0]);
 }
 
 
@@ -674,6 +721,10 @@ function setupInteractions() {
 
     if (aPNJCanTalk()) {
       
+      drawKey("E");
+    }
+
+    if (canGetItem) {
       drawKey("E");
     }
 

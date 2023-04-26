@@ -39,13 +39,12 @@
             "x" : 1,
             "y": 2,
             "detectDist": 1,
-            "shown": true,
-            "canGetItem": false
+            "shown": true
         },
         "mushroom_2": {
             "name": "mushroom_2",
             "category": "other",
-            "itemNumber": 2,
+            "itemNumber": 1,
             "location": "C-4",
             "x" : 0,
             "y": 7,

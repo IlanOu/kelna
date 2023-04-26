@@ -547,6 +547,7 @@ function getIndexOfItemCategory(itemCategory) {
 
 //~ Troc
 function troc(requis, gain) {
+    textFont(pixelFont)
     let canTradeThisObject = false
 
     requis.every(objRequis => {
@@ -560,7 +561,7 @@ function troc(requis, gain) {
 
     if (canTradeThisObject) {
 
-        popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
+        popUp("Voulez-vous vraiment \n échanger cet objet ?", "choice")
         if (playerAnswersYes) {
 
             requis.forEach(objRequis => {
@@ -575,7 +576,7 @@ function troc(requis, gain) {
             haveToTrade = false
         }
     } else {
-        popUp("Vous n'avez pas les objets requis !")
+        popUp("Vous n'avez pas \n les objets requis !")
     }
 
 }
@@ -587,8 +588,8 @@ function popUp(message, options = "info") {
 
 
 
-    let interfacePopUpWidth = 400
-    let interfacePopUpHeight = 400
+    let interfacePopUpWidth = 66 * 5
+    let interfacePopUpHeight = 35 * 5
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
     // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
@@ -601,8 +602,8 @@ function popUp(message, options = "info") {
 
         waitingAnswer = true;
 
-        let buttonPopUpW = 150
-        let buttonPopUpH = 20
+        let buttonPopUpW = 70
+        let buttonPopUpH = 70
         let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
         let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.3)
         let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
@@ -610,11 +611,10 @@ function popUp(message, options = "info") {
         let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
 
         fill(128, 128, 128)
-        drawButton(buttonPopUp)
-        drawText("OK", 15, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
+        drawButton(buttonPopUp, longButton, true, 0)
+        drawText("OK", 40, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
-
+       drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [0, 0, 0])
 
         if (buttonClicked(buttonPopUp)) {
             waitingAnswer = false
