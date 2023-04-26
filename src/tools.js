@@ -413,7 +413,7 @@ function showMessage(message){
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
-    image(backgroundImageTalk, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
+    image(smallPopUp, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
     drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
     
 }
@@ -927,7 +927,6 @@ function initVariables() {
     soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
-    VoicesSongMarjo = init_VoicesSongMarjo
 
     dieSoundPlay = init_dieSoundPlay
     startGame = init_startGame

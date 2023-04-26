@@ -174,8 +174,7 @@ const init_YouCanPlayMusic = false
 const init_SongIsActivate = false
 const init_YouCanPlaySong = false
 
-const init_VoicesSongMarjo = []
-const init_VoicesDieSong = []
+
 
 const init_dieSoundPlay = false
 const init_startGame = false;
