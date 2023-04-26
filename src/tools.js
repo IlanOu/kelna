@@ -403,6 +403,31 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 }
 
 
+
+function showMessage(message){
+    let popupMessageWidth = 200
+    let popupMessageHeight = 100
+
+    let messagePositionY = 0
+    let messagePositionX = viewportDisplayWidth - popupMessageWidth
+
+    let messageTextPosition = [messagePositionX, messagePositionY]
+
+    image(backgroundImageTalk, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
+    drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
+    
+}
+
+
+
+function tempMessage() {
+    canShowMessage = true
+
+    setTimeout(() => {
+        canShowMessage = false
+    }, 1000)
+}
+
 //~ Recupere le nom du PNJ a l'interaction 
 function getPNJName() {
     let namePNJ = ""
@@ -708,12 +733,13 @@ function shakeCamera(durationSeconds, forcePixels) {
 
 //~ Ajoute l'item present
 function getCurrentItem() {
-    addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-    itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-    currentItemPointing = ""
-    canGetItem = false
+    if (itemsJSON.ItemsOnTheFloor[currentItemPointing]){
+        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+        currentItemPointing = ""
+        //canGetItem = false
+    }
 }
-
 
 //~ Retourn si l'inventaire est vide
 function inventoryIsEmpty(slot) {
@@ -837,6 +863,7 @@ function initVariables() {
 
     //& Interfaces
     //~ Interfaces
+    canShowMessage = init_canShowMessage
     interactionWidth = init_interactionWidth;
     interactionHeight = init_interactionHeight;
 
@@ -862,6 +889,7 @@ function initVariables() {
     lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
     maxHealth = init_maxHealth;
+    heartSize = init_heartSize
     pressingKey = init_pressingKey;
     gettingHurt = init_gettingHurt;
     gettingHeal = init_gettingHeal;
@@ -875,7 +903,7 @@ function initVariables() {
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;
-    endInventory = init_endInventory;
+    hideInventory = init_endInventory;
     waitingButton = init_waitingButton;
 
     //~ Jauge quand on mange
@@ -960,7 +988,6 @@ function initVariables() {
     //& Items
     itemList = init_itemList;
     currentItemPointing = init_currentItemPointing
-    canGetItem = init_canGetItem
 
 
     //& Troc

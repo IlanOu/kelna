@@ -7,7 +7,7 @@ function PNJManager() {
   if (engineOne) {
       if (pnjJSON.PNJS){
         PNJ(pnjJSON.PNJS.Marjo);
-        PNJ(pnjJSON.PNJS.Toto);
+        // PNJ(pnjJSON.PNJS.Toto);
       }
   } else {
     drawPNJInside(pnjJSON.PNJS.Charle);
@@ -55,6 +55,8 @@ function PNJ(pnj) {
   let PNJEnd = positionsEnd.pixelX;
 
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
+  // pnj.y = positionsStart.pixelY + yStartWorld
+
 
 
   let PNJX = pnj.x;

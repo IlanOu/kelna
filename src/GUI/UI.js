@@ -12,7 +12,7 @@ function drawInterface([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher un bouton
-function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255, color = [255, 255, 255]) {
+function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255, color = [255,255,255]) {
   if (strokeToggle) {
     stroke(0);
   } else {
@@ -36,27 +36,27 @@ function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], colo
   let margeUnderline = 5;
   text(Text, x, y + fontSize);
 
-  if (underline) {
+  if(underline){
 
     let offSetX = 0;
-    switch (textAlignmentX) {
+    switch (textAlignmentX){
 
       case LEFT:
         offSetX = textWidth(Text) / 2
-        break
+      break
 
       case RIGHT:
-        offSetX = -textWidth(Text) / 2
-        break
+        offSetX = - textWidth(Text) / 2
+      break
     }
-    if (textAlignmentY != BASELINE) {
-      underline = false
-    } else {
-      rect(x - textWidth(Text) / 2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
+    if(textAlignmentY != BASELINE){
+      underline = false 
+    }else{
+      rect(x - textWidth(Text)/2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
     }
 
 
-
+    
   }
 
 }
@@ -233,12 +233,24 @@ function drawPauseMenu() {
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let widthPage = (interfaceMenuWidth / 5)
+
   let centerRightPage = (widthPage * 3);
+  let centerLeftPage = (widthPage * 2);
+
   let marginButton = interfaceMenuWidth / 20;
   let widthButtonPause = interfaceMenuWidth / 7;
   let centerYPage = interfaceMenuY + interfaceMenuHeight / 2
   let fontSizePause = 30;
 
+  let YvoWidth = 250
+  let YvoHeight = 260
+  let YvoX = centerLeftPage-(YvoWidth/1.2)
+  let YvoY = centerYPage-YvoHeight/2
+
+
+  let lifeBarWidth = (maxHealth * heartSize)
+  let LifeBarY = YvoY + YvoHeight + interfaceMenuHeight / 20
+  let lifeBarX = (YvoX + (YvoWidth/2)) - (lifeBarWidth/2)
 
   let interfaceMenu = [
     interfaceMenuX,
@@ -246,6 +258,7 @@ function drawPauseMenu() {
     interfaceMenuWidth,
     interfaceMenuHeight,
   ];
+
 
 
 
@@ -266,7 +279,7 @@ function drawPauseMenu() {
   //? Bouton paramètres
   let buttonSettingsW = 150;
   let buttonSettingsH = fontSizePause;
-  let buttonSettingsX = centerRightPage
+  let buttonSettingsX = centerRightPage 
   let buttonSettingsY = centerYPage;
   let textSettingsX = buttonSettingsX
   let buttonSettings = [
@@ -292,25 +305,28 @@ function drawPauseMenu() {
 
 
 
+
   //* --------------------------------
   //* ---------- Affichage -----------
   //* --------------------------------
 
-  fill(255);
   drawInterface(interfaceMenu, GUIForEscape);
 
-  fill(255);
   drawButton(buttonBack, undefined, false, 0);
   drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonBack));
 
-  fill(255);
   drawButton(buttonSettings, undefined, false, 0);
-  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonSettings));
+  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0,0,0], buttonHover(buttonSettings));
 
-  fill(255);
   drawButton(buttonExit, undefined, false, 0);
   drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonExit));
 
+  //? Dessinner Yvo en Idle
+  drawCharacter(YvoX, YvoY, YvoWidth, YvoHeight, "right", "idle")
+  
+  drawLifeBar(lifeBarX, LifeBarY)
+  
+  
   /*
   noFill()
   stroke(0)
@@ -318,9 +334,9 @@ function drawPauseMenu() {
   rect((interfaceMenuWidth / 5) * 2, 0, widthPage, viewportDisplayHeight)
   strokeWeight(1)
   */
-  //* --------------------------------
-  //* ---------- Evenements ----------
-  //* --------------------------------
+  //& --------------------------------
+  //& ---------- Evenements ----------
+  //& --------------------------------
 
   if (buttonClicked(buttonBack)) {
     gameIsPaused = false
@@ -438,6 +454,7 @@ function drawSettingsMenu() {
   drawText("Sons", 50, [textSonX, buttonSonY - 5], [CENTER, BASELINE], [0, 0, 0]);
 
 
+
   if (!musicEnabled && !buttonHover(buttonMusic)) {
     drawButton(buttonMusic, checkedLongButton, true, 255);
   } else {
@@ -541,7 +558,6 @@ function drawDeath() {
   //* ---------- Variables -----------
   //* --------------------------------
 
-  endInventory = true;
   let interfaceMenuWidth = 750;
   let interfaceMenuHeight = 400;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
@@ -681,17 +697,25 @@ function drawStartGame() {
 }
 
 
-//~ BARRE DE VIE
-function drawLifeBar() {
-  let HeartX = (viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2;
-  let HeartY = viewportDisplayHeight - lifeBarSize * 2
+function drawStartGame() {
 
+  background(0);
+  fill(255);
+
+  inGame = true
+  startGame = false
+
+}
+
+
+//~ BARRE DE VIE
+function drawLifeBar(x, y) {
 
   for (let i = 0; i < maxHealth; i++) {
     if (i + 1 <= healthPlayer) {
-      image(GameHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
     } else {
-      image(GameHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
 
     }
 
@@ -715,13 +739,12 @@ function setupInteractions() {
     }
 
     if (aPNJCanTalk()) {
-
+      
       drawKey("E");
     }
 
-    if (canGetItem) {
-      drawKey("E");
-    }
+
+
 
   } else {
     if (canGoOutTheHouse) {
@@ -1074,12 +1097,16 @@ function setupUI() {
     gameIsPlaying = true;
 
 
-    //? Affichage des Intéractions
+    //& Affichage des Intéractions
     setupInteractions();
 
+   
+    //& Barre de vie
+    drawLifeBar((viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2, viewportDisplayHeight - lifeBarSize * 2);
 
-    //? Barre de vie
-    drawLifeBar();
+    if (canShowMessage){
+      showMessage("Votre inventaire est plein")
+    }
 
     //? Trocs et Discussions 
     if (PressInteractPNJ) {
@@ -1097,6 +1124,7 @@ function setupUI() {
         drawPauseMenu();
       }
     }
+
 
     //? Credits
     if (endTheGameCredits) {

@@ -19,7 +19,17 @@
             "destination": "A-1",
             "inHouse": true
 
-        }
+        },
 
+        "door2": {
+
+            "location": "A-2",
+            "x" : 0,
+            "y": 11,
+            "detectDist": 2,
+            "destination": "taverne",
+            "inHouse": false
+
+        }
     }
 }

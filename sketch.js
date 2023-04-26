@@ -16,7 +16,6 @@ function preload() {
   pixelFont = loadFont("assets/fonts/pixelFont.ttf")
   classicFont = loadFont("assets/fonts/classicFont.ttf")
 
-
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUISettings.png");
   GUIForEscape = loadImage("assets/GUI/GUIPause.png");
@@ -134,6 +133,7 @@ function draw() {
   }else{
     //* Si le jeu joue
     if (gameIsPlaying) {
+      hideInventory = false
       noCursor()
       //? Si le jeu n'est pas en pause
       if (!gameIsPaused){
@@ -171,8 +171,10 @@ function draw() {
           characterView2()
           drawHouseForeground(behindThisDoorHouse)
         }
+      }else{
+        hideInventory = true
       }
-    }
+      }
     setupUI()
   }
 

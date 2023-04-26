@@ -6,7 +6,7 @@ let debugMod;
 let engineOne;
 let fpsLevel;
 
-//~ Le bloc qui tue (littéralement)
+//& Le bloc qui tue (littéralement)
 let killingBlocks;
 
 
@@ -35,8 +35,6 @@ let backgroundSmoothSpeed;
 
 //~ Background
 let backgroundX;
-
-
 
 //~ Character
 //? Textures / Outils du Personnage
@@ -120,11 +118,13 @@ let yStartHouse;
 
 //^ Interfaces
 
-//? Font
+//~ Font
 let classicFont;
 let pixelFont;
 
-//? Interfaces
+//~ Interfaces
+let canShowMessage;
+
 let interactionWidth;
 let interactionHeight;
 
@@ -142,10 +142,11 @@ let arrowTroc;
 
 let longButton
 let longButtonHover
-let smallButton
-let smallButtonHover
+let popUpButton
+let popUpButtonHover
 let checkedLongButtonHover
 let checkedLongButton
+
 
 //? Jeu
 let inGame;
@@ -159,6 +160,7 @@ let settingsPause;
 let lifeBarSize;
 let healthPlayer;
 let maxHealth;
+let heartSize;
 let pressingKey;
 let gettingHurt;
 let gettingHeal;
@@ -172,7 +174,7 @@ let Inventory = [];
 let widthSlot;
 let heightSlot;
 let slotX;
-let endInventory;
+let hideInventory;
 let waitingButton;
 
 //? Jauge quand on mange
@@ -193,7 +195,7 @@ let leftGaugeLevel;
 let musicEnabled;
 let canPlayMusic;
 
-//? Sons
+//~ Sons
 let soundEnabled;
 let canPlaySong;
 
@@ -249,7 +251,7 @@ let playerDead;
 let popUpShown;
 let playerAnswersYes;
 
-//? Credits
+//~ Credits
 let endTheGameCredits;
 let PositionCredits;
 let speedCredits;
@@ -263,7 +265,6 @@ let numberOfSteps;
 //~ Items
 let itemList;
 let currentItemPointing;
-let canGetItem;
 
 //~ Troc
 let waitingAnswer;

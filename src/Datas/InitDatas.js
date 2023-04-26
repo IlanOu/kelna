@@ -7,7 +7,7 @@ const init_engineOne = true;
 const init_fpsLevel = 60
 
 
-//~ Le bloc qui tue (littéralement)
+//& Le bloc qui tue (littéralement)
 const init_killingBlocks = [39, 49];
 
 
@@ -110,8 +110,9 @@ const init_xStartHouse = 0;
 const init_yStartHouse = 0;
 
 
-//^ Interfaces
-//*Interfaces
+//& Interfaces
+//~ Interfaces
+const init_canShowMessage = false
 const init_interactionWidth = 30;
 const init_interactionHeight = 30;
 
@@ -137,6 +138,7 @@ const init_settingsPause = false
 const init_MargeBarVie = 40;
 const init_healthPlayer = 5
 const init_maxHealth = 5
+const init_heartSize = 40
 const init_pressingKey = false
 const init_gettingHurt = false;
 const init_gettingHeal = false;
@@ -218,6 +220,7 @@ const init_playerDead = false
 const init_popUpShown = false;
 const init_playerAnswersYes = false;
 
+
 //* Credits
 const init_endTheGameCredits = false;
 const init_PositionCredits = window.innerHeight + 50;
@@ -241,7 +244,6 @@ const init_statistiques = {
 //~ Items
 const init_itemList = [];
 const init_currentItemPointing = "";
-const init_canGetItem = false;
 
 
 //~ Troc
