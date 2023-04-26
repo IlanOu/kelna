@@ -52,7 +52,7 @@ function keyPressed() {
         }
     }
 
-    if (canGetItem){
+    if (canGetItem) {
         //? Touche E
         if (keyCode == 69 && engineOne) {
             getCurrentItem();
@@ -73,6 +73,12 @@ function keyPressed() {
     //? Touche O du clavier
     if (keyCode == 79) {
         addItemToInventory(itemsJSON.Items.food_1, 1);
+    }
+
+
+    //? Touche shift  du clavier
+    if (keyCode == 16) {
+        addItemToInventory(itemsJSON.Items.mushroom_1, 1);
     }
 
 }
@@ -145,7 +151,7 @@ function keyReleased() {
 //~ Clique de souris
 function mouseReleased() {
     if (mouseButton === LEFT) {
-        if (startCinematicPlaying && gameIntroductionVideo.elt.paused){
+        if (startCinematicPlaying && gameIntroductionVideo.elt.paused) {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
         }
