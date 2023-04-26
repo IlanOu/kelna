@@ -141,9 +141,8 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 
-//~ Joue de la music 
+//~ Joue / desactive de la music 
 let PlayMusic = () => {
-
     if (!musicEnabled  && !Pressing) {
         musicEnabled = true
         SongBackground.loop()
@@ -155,11 +154,10 @@ let PlayMusic = () => {
         Pressing = true
 
     }
-
 }
 
 
-
+//~ Joue des voix dés le début du jeu
 function startGameVoice() {
     if (!soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoiceStartSong.length);
@@ -168,6 +166,8 @@ function startGameVoice() {
 }
 
 
+
+//~ Joue des voix a la mort du jouer
 function DieGameVoice() {
     if (!soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
@@ -176,10 +176,10 @@ function DieGameVoice() {
 }
 
 
-//~ Joue les songs
+//~ Joue / desactive les songs
 let PlaySong = () => {
 
-    if (!soundEnabled  && !Pressing) {
+    if (!soundEnabled && !Pressing) {
         soundEnabled = true
         Pressing = true
 
@@ -413,7 +413,7 @@ function showMessage(message){
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
-    image(backgroundImageTalk, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
+    image(smallPopUp, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
     drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
     
 }
@@ -515,7 +515,7 @@ function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]
 }
 
 
-
+//~ Trouve la categorie de l'item et le met dans la slot pour
 function getIndexOfItemCategory(itemCategory) {
 
     let index = null;
@@ -548,6 +548,7 @@ function getIndexOfItemCategory(itemCategory) {
 
 //~ Troc
 function troc(requis, gain) {
+    cursor('default')
     textFont(pixelFont)
     let canTradeThisObject = false
 
@@ -586,36 +587,40 @@ function troc(requis, gain) {
 
 //~ Pop up
 function popUp(message, options = "info") {
-
+    cursor('default')
 
 
     let interfacePopUpWidth = 66 * 5
     let interfacePopUpHeight = 35 * 5
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
-    // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(smallPopUp, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {
 
         waitingAnswer = true;
 
-        let buttonPopUpW = 70
-        let buttonPopUpH = 70
+        let buttonPopUpW = 75
+        let buttonPopUpH = 60
         let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
-        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.3)
+        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 2)
         let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
 
         let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUp, longButton, true, 0)
-        drawText("OK", 40, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
 
-       drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [0, 0, 0])
+        if (buttonHover(buttonPopUp)) {
+            drawButton(buttonPopUp, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUp, smallButton, true, 255);
+        }
+
+        drawText("OK", 40, [textPopUpX, buttonPopUpY - 0.5], [CENTER, BASELINE], [0, 0, 0])
+
+        drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [119, 54, 51])
 
         if (buttonClicked(buttonPopUp)) {
             waitingAnswer = false
@@ -628,35 +633,43 @@ function popUp(message, options = "info") {
 
         waitingAnswer = true;
 
-        let buttonPopUpWYes = 150
-        let buttonPopUpHYes = 20
-        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
-        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.6)
+
+        let textPopUpX = interfacePopUpX + (interfacePopUpWidth / 2)
+
+        let buttonPopUpWYes = 75
+        let buttonPopUpHYes = 60
+        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5) 
+        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
         let buttonPopUpYes = [buttonPopUpXYes, buttonPopUpYYes, buttonPopUpWYes, buttonPopUpHYes]
 
 
-        let buttonPopUpWNo = 150
-        let buttonPopUpHNo = 20
-        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWNo / 2)
-        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.4) + buttonPopUpHYes + 15
+        let buttonPopUpWNo = 75
+        let buttonPopUpHNo = 60
+        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth/ 1.8) 
+        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
         let buttonPopUpNo = [buttonPopUpXNo, buttonPopUpYNo, buttonPopUpWNo, buttonPopUpHNo]
 
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUpYes)
-        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
-        //
+        if (buttonHover(buttonPopUpYes)) {
+            drawButton(buttonPopUpYes, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUpYes, smallButton, true, 255);
+        }
+        drawText("OUI", 40, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUpNo)
-        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
+        if (buttonHover(buttonPopUpNo)) {
+            drawButton(buttonPopUpNo, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUpNo, smallButton, true, 255);
+        }
+        drawText("NON", 40, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
 
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
+        drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [0, 0, 0])
 
         if (buttonClicked(buttonPopUpYes)) {
             playerAnswersYes = true
@@ -673,6 +686,7 @@ function popUp(message, options = "info") {
 }
 
 
+//~ Avoir la vitesse du joueur (stats)
 function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
@@ -681,7 +695,7 @@ function getSpeed(seconds, meters) {
 }
 
 
-
+//~ Remettre a 0 les JSONS
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
@@ -696,6 +710,7 @@ function resetJsons() {
 }
 
 
+//~ Convertie le temps en heure / min / secondes
 function timeConversion(seconds) {
     const heures = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -708,21 +723,15 @@ function timeConversion(seconds) {
     return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
 }
 
-function getSpeed(seconds, meters) {
-    const distanceEnKm = meters / 1000;
-    const tempsEnHeures = seconds / 3600;
-    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
-}
 
-
-
+//~ Tremblement de la camera
 function shakeCamera(durationSeconds, forcePixels) {
     shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
     shakeForce = forcePixels;
 }
 
 
+//~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]){
         addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
@@ -732,24 +741,12 @@ function getCurrentItem() {
     }
 }
 
-
-function resetJsons() {
-    ennemiesJSON = loadJSON("json/Ennemis.json");
-    pnjJSON = loadJSON("json/PNJ.json");
-
-    //? Pas besoin de reload les json dont les donnees ne changent pas 
-    // allDoors = loadJSON("json/Doors.json");
-    // adminJSON = loadJSON("json/Admin.json");
-    // Houses = loadJSON("json/Houses.json");
-    itemsJSON = loadJSON("json/Items.json");
-    // Maps = loadJSON("json/Maps.json");
-    // World = loadJSON("json/World.json");
-}
-
+//~ Retourn si l'inventaire est vide
 function inventoryIsEmpty(slot) {
     return Object.keys(slot).length === 0;
 }
 
+//~ Initie les variables
 function initVariables() {
     //& Debug Mod
     debugMod = init_debugMod;
@@ -930,7 +927,6 @@ function initVariables() {
     soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
-    VoicesSongMarjo = init_VoicesSongMarjo
 
     dieSoundPlay = init_dieSoundPlay
     startGame = init_startGame
@@ -1011,7 +1007,7 @@ function initVariables() {
 
 
     //& Cinématiques
-    startCinematicPlaying = init_startCinematicPlaying;
+    //startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
 
 

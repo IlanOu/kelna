@@ -58,6 +58,7 @@ function PNJ(pnj) {
   // pnj.y = positionsStart.pixelY + yStartWorld
 
 
+
   let PNJX = pnj.x;
   let PNJY = pnj.y;
 

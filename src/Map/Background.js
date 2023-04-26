@@ -1,3 +1,4 @@
+//~ Crée l'image de fond
 function drawBackgroundImage (background, backgroundClose, backgroundDistant){
 
   //? dessinez votre image de fond d'écran

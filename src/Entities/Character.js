@@ -116,7 +116,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
   characterTextureList = []
 
-  //& Debug mod
+  //? Debug mod
   if (debugMod) {
     stroke(255, 0, 0)
     fill(255, 0, 0, 70)
@@ -415,7 +415,7 @@ function handleCollisionCharacter(agentX, agentY, agentWidth, agentHeight, objec
 
 
     //* Collisions gauche / droite de l'objet
-    //& si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
+    //? si le bas du perso est en dessous du haut du cube + 1/10 de sa hauteur
     if ((agentY < objectY + objectHeight - (objectHeight / 10)) && (agentY + agentHeight > objectY + (objectHeight / 10))) {
 
       //* collisions à droite de l'objet

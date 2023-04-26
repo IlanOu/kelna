@@ -1,37 +1,37 @@
-//~ vérifier si une touche est pressée 
+//^ vérifier si une touche est pressée 
 function keyPressed() {
 
-    //* Bouton echap
+    //? Bouton echap
     if (keyCode == ESCAPE) {
         if (inGame) {
             gameIsPaused = !gameIsPaused
         }
     }
 
-    //* Barre espace
+    //? Barre espace
     if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = true;
     }
 
-    //* Flèche de droite
+    //? Flèche de droite
     if ((keyCode == 39 || keyCode == 68)) {
         rightArrowPressed = true;
         numberOfSteps++
     }
 
-    //* Flèche de gauche
+    //? Flèche de gauche
     if ((keyCode == 37 || keyCode == 81)) {
         leftArrowPressed = true;
         numberOfSteps++
     }
 
-    //* Flèche de haut
+    //? Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
         characterIsEating = true
     }
 
-    //* Flèche de bas
+    //? Flèche de bas
     if ((keyCode == 40 || keyCode == 83)) {
         downArrowPressed = true;
     }
@@ -39,14 +39,14 @@ function keyPressed() {
 
 
     if (aPNJCanTrade()) {
-        //* Touche E
+        //? Touche E
         if (keyCode == 69 && engineOne) {
             PressInteractPNJ = !PressInteractPNJ
         }
     }
 
     if (aPNJCanTalk()) {
-        //* Touche E
+        //? Touche E
         if (keyCode == 69 && engineOne) {
             PressTalkPNJ = !PressTalkPNJ
         }
@@ -67,65 +67,71 @@ function keyPressed() {
         }
     })
         
-    //* Touche R
+    //? Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
     }
 
-    //* Touche I
+    //? Touche I
     if (keyCode == 73) {
         addItemToInventory(itemsJSON.Items.sword_1, 1);
     }
 
-    //* Touche O du clavier
+    //? Touche O du clavier
     if (keyCode == 79) {
         addItemToInventory(itemsJSON.Items.food_1, 1);
+    }
+
+
+    //? Touche shift  du clavier
+    if (keyCode == 16) {
+        addItemToInventory(itemsJSON.Items.mushroom_1, 1);
     }
 
 }
 
 //~ vérifier si une touche est relâchée 
 function keyReleased() {
-    //* Barre espace
+    //? Barre espace
     if (keyCode == 32 || keyCode == 38) {
         spaceKeyIsPressed = false;
         characterDoubleJumping = true;
     }
 
-    //* Flèche de droite
+    //? Flèche de droite
     if ((keyCode == 39 || keyCode == 68)) {
         rightArrowPressed = false;
     }
 
-    //* Flèche de gauche
+    //? Flèche de gauche
     if ((keyCode == 37 || keyCode == 81)) {
         leftArrowPressed = false;
     }
 
-    //* Flèche de haut
+    //? Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = false;
         characterIsEating = false
     }
 
-    //* Flèche de bas
+    //? Flèche de bas
     if ((keyCode == 40 || keyCode == 83)) {
         downArrowPressed = false;
     }
 
-    //* Touche R
+    //? Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = false
     }
 
-    //* Si n'importe quelle touche est relachée
+    //? Si n'importe quelle touche est relachée
     if (keyCode) {
         pressingKey = false;
     }
 
 
     if (canEnterInHouse) {
-        //* Touche E
+        //? Touche E
         if (keyCode == 69 && engineOne) {
 
             PressInteractPNJ = false
@@ -135,12 +141,13 @@ function keyReleased() {
 
 
     if (canGoOutTheHouse) {
+        //? Touche E
         if (keyCode == 69 && engineOne === false) {
             engineOne = !engineOne;
         }
     }
 
-    //* - du pavé de nombre
+    //? - du pavé de nombre
     if (keyCode == 109) {
         endTheGameCredits = true
     }
@@ -151,7 +158,7 @@ function keyReleased() {
 //~ Clique de souris
 function mouseReleased() {
     if (mouseButton === LEFT) {
-        if (startCinematicPlaying && gameIntroductionVideo.elt.paused){
+        if (startCinematicPlaying && gameIntroductionVideo.elt.paused) {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
         }

@@ -9,3 +9,5 @@ Syntaxe a prendre pour la comprehension des feuilles de codes :
 //? () = Informations de la ligne dans la fonction
 
 //& () = Informations precices
+
+//! () = Important

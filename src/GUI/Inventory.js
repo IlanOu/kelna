@@ -1,4 +1,4 @@
-//^ Ajouter a l'inventaire
+//~ Ajouter a l'inventaire
 let addItemToInventory = (item, amount) => {
     if (item){
         if (Inventory.length <= 3) {
@@ -25,22 +25,23 @@ let addItemToInventory = (item, amount) => {
     }
 };
 
-
+//~ Enleve l'item de l'inventaire
 let removeItemFromInventory = (index) => {
     if (index < 3 && index >= 0) {
-        if (index == 1){
-            if (Inventory[index].amount <= 1){
+        if (index == 1) {
+            if (Inventory[index].amount <= 1) {
                 Inventory[index] = {};
-            }else{
+            } else {
                 Inventory[index].amount--
             }
-        }else{
+        } else {
             Inventory[index] = {};
         }
     }
 }
 
 
+//~ Met a jour la jauge
 function updateGauges() {
     if (leftGaugeLevel >= heightSlot) {
         topGaugeLevel = 0;
@@ -76,57 +77,56 @@ function updateGauges() {
 }
 
 
-//^ Creation de l'inventaire
+//~ Creation de l'inventaire
 function displayInventory() {
     let canEat = false
 
     if (!hideInventory) {
 
-        let spaceBetween = heightSlot/5
+        let spaceBetween = heightSlot / 5
 
         let maxheight = Inventory.length * heightSlot + spaceBetween
         let InventoryY = viewportDisplayHeight / 2 - maxheight / 2;
 
-        let itemWidth = widthSlot - widthSlot/5
-        let itemHeight = heightSlot - heightSlot/5
+        let itemWidth = widthSlot - widthSlot / 5
+        let itemHeight = heightSlot - heightSlot / 5
 
 
         for (let i = 0; i < Inventory.length; i++) {
-            
+
             slotY = InventoryY + (heightSlot * i)
-            
-            if (i == 1){
+
+            if (i == 0) {
+                image(requiredSlotSword, slotX, slotY, widthSlot, heightSlot)
+            }
+            if (i == 1) {
                 canEat = true
                 slotY += spaceBetween
-            }
-            else if (i == 2){
+                image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
+            } else if (i == 2) {
                 slotY += spaceBetween
+                fill(58, 37, 30)
+                rect(slotX, slotY, widthSlot, heightSlot);
             }
-            noStroke()
-            fill(58, 37, 30)
-            rect(slotX, slotY, widthSlot, heightSlot);
+
 
             if (Inventory[i].itemNumber != undefined) {
-                let itemPosX = slotX + (widthSlot - itemWidth)/2
-                let itemPosY = slotY + (heightSlot - itemHeight)/2
+                let itemPosX = slotX + (widthSlot - itemWidth) / 2
+                let itemPosY = slotY + (heightSlot - itemHeight) / 2
                 image(itemList[Inventory[i].itemNumber], itemPosX, itemPosY, itemWidth, itemHeight);
 
-                if (i == 1){
-                    canEat = true   
+                if (i == 1) {
+                    canEat = true
                 }
 
-                if (Inventory[i].amount){
+                if (Inventory[i].amount) {
                     let fontSize = 15
                     fill(0)
                     stroke(0)
                     textSize(fontSize);
-                    text(Inventory[i].amount, itemPosX, itemPosY+itemHeight)
+                    text(Inventory[i].amount, itemPosX, itemPosY + itemHeight)
                 }
             }
-
-            //noFill();
-            //stroke(0);
-
             image(slot, slotX, slotY, widthSlot, heightSlot)
 
             if (i == 1) {
@@ -144,14 +144,11 @@ function displayInventory() {
                 //? left gauge
                 rect(slotX, slotY + heightSlot, gaugeSize, -leftGaugeLevel);
             }
-
-            
-
         }
     }
 
-    if (canEat && healthPlayer < maxHealth && Inventory[1].name){
-        if (updateGauges()){
+    if (canEat && healthPlayer < maxHealth && Inventory[1].name) {
+        if (updateGauges()) {
             statistiques.healCount += parseInt(Inventory[1].healAmount)
             regenPlayer(Inventory[1].healAmount)
             removeItemFromInventory(1)

@@ -17,27 +17,28 @@ function preload() {
   classicFont = loadFont("assets/fonts/classicFont.ttf")
 
   //? Interfaces
-  GUIParameters = loadImage("assets/GUI/popUpSettings.png"); //GUIParameters
-  GUIForEscape = loadImage("assets/GUI/PauseGUI.png");
+  GUIParameters = loadImage("assets/GUI/GUISettings.png");
+  GUIForEscape = loadImage("assets/GUI/GUIPause.png");
   GUIOfDeath = loadImage("assets/GUI/popUpDie.png"); 
-
+  GUITroc = loadImage("assets/GUI/GUIForTroc.png");
+  GUIStart = loadImage("assets/GUI/GUIStart.png")
 
   GameHeart = loadImage("assets/GUI/heart.png");
   GameHeartBlack = loadImage("assets/GUI/heartBlack.png");
-  
+
   arrowTroc = loadImage("assets/GUI/arrowTroc.png");
-  GUITroc = loadImage("assets/GUI/GUIForTroc.png");
 
-
-  GUIStart = loadImage("assets/GUI/GUIStart.png")
   talkBackground = loadImage("assets/GUI/talkBackground.png");
 
   longButton = loadImage("assets/GUI/longButton.png");
   longButtonHover = loadImage("assets/GUI/longButtonHover.png");
-  popUpButton = loadImage("assets/GUI/popUpButton.png");
-  popUpButtonHover = loadImage("assets/GUI/popUpButtonHover.png");
+  smallButton = loadImage("assets/GUI/smallButton.png");
+  smallButtonHover = loadImage("assets/GUI/smallButtonHover.png");
   checkedLongButtonHover = loadImage("assets/GUI/checkedLongButtonHover.png");
   checkedLongButton = loadImage("assets/GUI/checkedLongbutton.png");
+
+  smallPopUp = loadImage("assets/GUI/smallPopUp.png"); 
+
 
   //? Background
   backgroundImage = loadImage('assets/Background/bg_forest.png');
@@ -53,16 +54,16 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/TileSetItems.png");
+  tilesetItems = loadImage("assets/items/TileSetItems2.png");
   tileSetTaverne = loadImage("assets/textures/Engine2.png");
 
 
   //? Textures
   tileSet = loadImage("assets/textures/TilesetKelna.png");
-  backgroundImageTroc = loadImage("assets/textures/planches.png");
   slot = loadImage("assets/textures/slot.png");
-  backgroundImageTalk = loadImage("assets/textures/popUp.png"); //backgroundImageTalk
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
+  requiredSlotSword = loadImage("assets/textures/requiredSlotSword.png")
+  requiredSlotFoods = loadImage("assets/textures/requiredSlotFoods.png")
 
 
   //? Personnage
@@ -80,7 +81,6 @@ function preload() {
   pnjJSON = loadJSON("json/PNJ.json");
   World = loadJSON("json/World.json");
   creditsJSON = loadJSON("json/Credits.json");
-  
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
@@ -119,6 +119,7 @@ function setup() {
 
 //~ Draw 
 function draw() {
+  background(0)
   noSmooth()
 
   //* Effet de tremblement de la caméra
@@ -130,10 +131,11 @@ function draw() {
   if (startCinematicPlaying) {
     playStartCinematic()
   }else{
-    //? Si le jeu joue
+    //* Si le jeu joue
     if (gameIsPlaying) {
       hideInventory = false
-      //~ Si le jeu n'est pas en pause
+      noCursor()
+      //? Si le jeu n'est pas en pause
       if (!gameIsPaused){
         if (engineOne) {
           statistiques.timeSpentInGame = Math.floor(millis() / 1000)
