@@ -123,6 +123,8 @@ const init_buttonHeightClassic = 30
 const init_buttonWidthBIG = 120
 const init_buttonHeightBIG = 80
 
+const init_toggleButtonColor = 255
+
 //~  Jeu
 const init_inGame = false
 const init_gameIsPaused = false
@@ -163,12 +165,10 @@ const init_leftGaugeLevel = 0;
 
 //& Audio
 //~ Musique
-const init_ColorForRectMusic = 255
 const init_MusicIsActivate = false
 const init_YouCanPlayMusic = false
 
 //~ Sons
-const init_ColorForRectSong = 255
 const init_SongIsActivate = false
 const init_YouCanPlaySong = false
 
@@ -222,6 +222,7 @@ const init_playerAnswersYes = false;
 const init_endTheGameCredits = false;
 const init_PositionCredits = window.innerHeight + 50;
 const init_speedCredits = 2.5;
+const init_creditsInHome = false;
 
 //& Statistiques
 const init_numberOfSteps = 0;
@@ -252,7 +253,7 @@ const init_stackSize = 5
 
 
 //& FPS
-const init_fpsActivate = false
+const init_fpsEnabled = false
 const init_FPSButtonColor = 255
 
 

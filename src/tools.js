@@ -144,16 +144,14 @@ function limitNumberWithinRange(number, minimum, maximum) {
 //~ Joue de la music 
 let PlayMusic = () => {
 
-    if (musicEnabled === false && Pressing === false) {
+    if (!musicEnabled  && !Pressing) {
         musicEnabled = true
         SongBackground.loop()
-        musicButtonColor = 50
         Pressing = true
 
-    } else if (musicEnabled === true && Pressing === false) {
+    } else if (musicEnabled && !Pressing) {
         musicEnabled = false
         SongBackground.pause()
-        musicButtonColor = 255
         Pressing = true
 
     }
@@ -161,22 +159,11 @@ let PlayMusic = () => {
 }
 
 
-//~ Fonction qui joue des sons aleatoire
-
-/*
-function DieGameVoice() {
-    if (!soundEnabled) {
-        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
-        let sonAleatoire = VoicesDieSong[indexSong];
-        console.log(VoicesDieSong)
-        sonAleatoire.play();
-    }
-}
-*/
 
 function startGameVoice() {
     if (!soundEnabled) {
-        VoiceStartSong.play()
+        let indexSong = Math.floor(Math.random() * VoiceStartSong.length);
+        VoiceStartSong[indexSong].play()
     }
 }
 
@@ -184,7 +171,6 @@ function startGameVoice() {
 function DieGameVoice() {
     if (!soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
-        console.log("->", VoicesDieSong[indexSong])
         VoicesDieSong[indexSong].play()
     }
 }
@@ -193,14 +179,12 @@ function DieGameVoice() {
 //~ Joue les songs
 let PlaySong = () => {
 
-    if (soundEnabled === false && Pressing === false) {
+    if (!soundEnabled  && !Pressing) {
         soundEnabled = true
-        soundButtonColor = 50
         Pressing = true
 
-    } else if (soundEnabled === true && Pressing === false) {
+    } else if (soundEnabled && !Pressing) {
         soundEnabled = false
-        soundButtonColor = 255
         Pressing = true
 
     }
@@ -866,6 +850,8 @@ function initVariables() {
     buttonWidthBIG = init_buttonWidthBIG;
     buttonHeightBIG = init_buttonHeightBIG;
 
+    toggleButtonColor = init_toggleButtonColor
+
     //~ Jeu
     inGame = init_inGame;
     gameIsPaused = init_gameIsPaused;
@@ -908,12 +894,10 @@ function initVariables() {
 
     //& Audio
     //~ Musique
-    musicButtonColor = init_ColorForRectMusic;
     musicEnabled = init_MusicIsActivate;
     canPlayMusic = init_YouCanPlayMusic;
 
     //~ Sons
-    soundButtonColor = init_ColorForRectSong;
     soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
@@ -922,6 +906,7 @@ function initVariables() {
     dieSoundPlay = init_dieSoundPlay
     startGame = init_startGame
     startSoundPlay = init_startSoundPlay
+
 
 
 
@@ -967,6 +952,7 @@ function initVariables() {
     endTheGameCredits = init_endTheGameCredits
     PositionCredits = init_PositionCredits
     speedCredits = init_speedCredits
+    creditsInHome = init_creditsInHome 
 
 
     //& Statistiques
@@ -988,7 +974,7 @@ function initVariables() {
 
 
     //& FPS
-    fpsActivate = init_fpsActivate;
+    fpsEnabled = init_fpsEnabled;
     FPSButtonColor = init_FPSButtonColor;
 
 

@@ -12,7 +12,7 @@ function drawInterface([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher un bouton
-function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255) {
+function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255, color = [255,255,255]) {
   if (strokeToggle) {
     stroke(0);
   } else {
@@ -22,7 +22,7 @@ function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transpar
   if (img != undefined) {
     image(img, x, y, w, h);
   } else {
-    fill(255, 255, 255, transparence)
+    fill(color[0], color[1], color[2], transparence)
     rect(x, y, w, h);
   }
 }
@@ -52,7 +52,7 @@ function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], colo
     if(textAlignmentY != BASELINE){
       underline = false 
     }else{
-      rect(x - textWidth(Text)/2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 2)
+      rect(x - textWidth(Text)/2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
     }
 
 
@@ -78,7 +78,7 @@ function buttonHover([x, y, h, w]) {
 /*//^ -------------------------------------------------------------------------- */
 //~ MENU HOME
 function drawHomeMenu() {
-
+  textFont(classicFont)
 
 
   //& --------------------------------
@@ -93,9 +93,6 @@ function drawHomeMenu() {
   let fontSizeHome = 30
   let centerButtonY = centerYPage - (viewportDisplayHeight / 42)
 
-  let buttonPlayHover = false
-  let buttonSettingsHover = false
-  let buttonCreditsHover = false
 
   let interfaceMenu = [
     0,
@@ -152,31 +149,33 @@ function drawHomeMenu() {
   //& ---------- Evenements ----------
   //& --------------------------------
 
-  if (buttonClicked(play)) {
+  if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
       initVariables()
     }
+    leftClickPressed = false
     startGame = true
   }
-  if (buttonHover(play)) {
-    buttonPlayHover = true
-  }
+  
 
 
-  if (buttonClicked(buttonParameters)) {
+  if (buttonClicked(buttonParameters) && !settingsPause) {
+    leftClickPressed = false
     settingsPause = true
   }
-  if (buttonHover(buttonParameters)) {
-    buttonSettingsHover = true
+  
+
+
+  if (buttonClicked(credits) && !settingsPause) {
+    creditsInHome = true;
+    inGame = true
+    gameIsPlaying = true;
+    leftClickPressed = false
+    endTheGameCredits = true
+    drawCredits()
+    
   }
 
-
-  if (buttonClicked(credits)) {
-
-  }
-  if (buttonHover(credits)) {
-    buttonCreditsHover = true
-  } 
   
   //& --------------------------------
   //& ---------- Affichage -----------
@@ -189,20 +188,20 @@ function drawHomeMenu() {
   //& Jouer
   fill(120, 120, 120);
   drawButton(play, undefined, false, 0)
-  drawText("Jouer", fontSizeHome, textPlay, [CENTER, BASELINE], [0, 0, 0], buttonPlayHover);
+  drawText("Jouer", fontSizeHome, textPlay, [CENTER, BASELINE], [0, 0, 0], buttonHover(play));
 
 
   //& Paramètres
   fill(120, 120, 120);
   drawButton(buttonParameters, undefined, false, 0);
-  drawText("Paramètres", fontSizeHome, textParameters, [CENTER, BASELINE], [0, 0, 0], buttonSettingsHover);
+  drawText("Paramètres", fontSizeHome, textParameters, [CENTER, BASELINE], [0, 0, 0], buttonHover(buttonParameters));
   fill(0);
 
 
   //& Credits
   fill(120, 120, 120);
   drawButton(credits, undefined, false, 0);
-  drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonCreditsHover);
+  drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonHover(credits));
   fill(0);
 
 
@@ -213,6 +212,8 @@ function drawHomeMenu() {
 
 //~ MENU PAUSE
 function drawPauseMenu() {
+  textFont(classicFont)
+
   //? Cacher le troc si il s'affiche
   PressInteractPNJ = false;
   PressTalkPNJ = false
@@ -233,6 +234,7 @@ function drawPauseMenu() {
   let widthButtonPause = interfaceMenuWidth / 7;
   let centerYPage = interfaceMenuY + interfaceMenuHeight / 2
   let fontSizePause = 30;
+
 
   let interfaceMenu = [
     interfaceMenuX,
@@ -295,15 +297,15 @@ function drawPauseMenu() {
 
   fill(255);
   drawButton(buttonBack, undefined, false, 0);
-  drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE]);
+  drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonBack));
 
   fill(255);
   drawButton(buttonSettings, undefined, false, 0);
-  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE]);
+  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0,0,0], buttonHover(buttonSettings));
 
   fill(255);
   drawButton(buttonExit, undefined, false, 0);
-  drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE]);
+  drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonExit));
 
   /*
   noFill()
@@ -318,20 +320,27 @@ function drawPauseMenu() {
 
   if (buttonClicked(buttonBack)) {
     gameIsPaused = false
+    leftClickPressed = false
   }
+
 
   if (buttonClicked(buttonSettings)) {
     settingsPause = true
+    leftClickPressed = false
   }
+
 
   if (buttonClicked(buttonExit)) {
     inGame = false
+    leftClickPressed = false
   }
+
 }
 
 
 //~ MENU HOME SETTINGS
 function drawSettingsMenu() {
+  textFont(classicFont)
 
   //& --------------------------------
   //& ---------- Variables -----------
@@ -400,20 +409,47 @@ function drawSettingsMenu() {
 
   drawInterface(interfaceMenu, GUIParameters);
 
-  fill(soundButtonColor);
-  drawButton(buttonSon);
-  drawText("Sons", 15, [textSonX, buttonSonY], [CENTER, BASELINE]);
+  if(soundEnabled){
+    toggleButtonColor = [255,255,255]
+  }else{
+    toggleButtonColor = [100, 100, 100]
+  }
 
-  fill(musicButtonColor);
-  drawButton(buttonMusic);
+  drawButton(buttonSon, undefined, true, 255, toggleButtonColor);
+  drawText("Sons", 15, [textSonX, buttonSonY], [CENTER, BASELINE]);
+  
+
+  if (musicEnabled) {
+    toggleButtonColor = [255, 255, 255]
+  } else {
+    toggleButtonColor = [100, 100, 100]
+  }
+
+  drawButton(buttonMusic, undefined, true, 255, toggleButtonColor);
   drawText("Musique", 15, [textMusicX, buttonMusicY], [CENTER, BASELINE]);
 
-  fill(255);
-  drawButton(ButtonToggleFPS);
-  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
+
+  if (fpsEnabled) {
+    toggleButtonColor = [255, 255, 255]
+  } else {
+    toggleButtonColor = [100, 100, 100]
+  }
 
   fill(255);
-  drawButton(ButtonToggleCameraShake);
+  drawButton(ButtonToggleFPS, undefined, true, 255, toggleButtonColor);
+  drawText("FPS", 15, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
+
+
+
+  if (cameraShakeEnabled) {
+    toggleButtonColor = [255, 255, 255]
+  } else {
+    toggleButtonColor = [100, 100, 100]
+  }
+
+
+  fill(255);
+  drawButton(ButtonToggleCameraShake, undefined, true, 255, toggleButtonColor);
   drawText("Tremblements", 15, [textToggleCameraShakeX, buttonToggleCameraShakeY], [CENTER, BASELINE]);
 
   fill(255);
@@ -427,19 +463,24 @@ function drawSettingsMenu() {
   //& ---------- Evenements ----------
   //& --------------------------------
 
-  if (buttonClicked(buttonSon)) {
+  if (buttonClicked(buttonSon) && settingsPause) {
+    leftClickPressed = false
     PlaySong()
   }
-  if (buttonClicked(buttonMusic)) {
+  if (buttonClicked(buttonMusic) && settingsPause) {
     PlayMusic()
+    leftClickPressed = false
   }
-  if (buttonClicked(ButtonToggleFPS)) {
-    fpsActivate = !fpsActivate
+  if (buttonClicked(ButtonToggleFPS) && settingsPause) {
+    fpsEnabled = !fpsEnabled
+    leftClickPressed = false
   }
-  if (buttonClicked(ButtonToggleCameraShake)) {
+  if (buttonClicked(ButtonToggleCameraShake) && settingsPause) {
     cameraShakeEnabled = !cameraShakeEnabled
+    leftClickPressed = false
   }
-  if (buttonClicked(ButtonBack)) {
+  if (buttonClicked(ButtonBack) && settingsPause) {
+    leftClickPressed = false
     settingsPause = false
   }
 
@@ -449,6 +490,8 @@ function drawSettingsMenu() {
 
 //~ MENU DEATH
 function drawDeath() {
+  textFont(pixelFont)
+
   if (!dieSoundPlay) {
     DieGameVoice()
     dieSoundPlay = true
@@ -464,8 +507,8 @@ function drawDeath() {
   //& --------------------------------
 
   endInventory = true;
-  let interfaceMenuWidth = 500;
-  let interfaceMenuHeight = 500;
+  let interfaceMenuWidth = 750;
+  let interfaceMenuHeight = 400;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let interfaceMenu = [
@@ -490,18 +533,19 @@ function drawDeath() {
   ];
 
 
+  let titleDieX = buttonExitX + buttonExitW / 2;
+  let titleDieY = interfaceMenuY + interfaceMenuHeight / 5;
 
   //& --------------------------------
   //& ---------- Affichage -----------
   //& --------------------------------
 
 
-  fill(255);
   drawInterface(interfaceMenu, GUIOfDeath);
+  drawText("  VOUS ETES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
 
-  fill(255);
-  drawButton(buttonBackToHomeEndGame);
-  drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
+  drawButton(buttonBackToHomeEndGame, popUpButton, true, 255);
+  drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE][0, 0, 0], buttonHover(buttonBackToHomeEndGame));
 
 
   //& --------------------------------
@@ -509,6 +553,7 @@ function drawDeath() {
   //& --------------------------------
 
   if (buttonClicked(buttonBackToHomeEndGame)) {
+    leftClickPressed = false
     inGame = false
   }
 
@@ -517,6 +562,7 @@ function drawDeath() {
 
 //~ MENU STAT
 function drawStats() {
+  textFont(classicFont)
   if (playerStat === false) {
     fill(0, 0, 0, 50);
     rect(0, 0, width, height);
@@ -570,7 +616,7 @@ function drawStats() {
 
 
     if (buttonClicked(buttonBackToHome)) {
-
+      leftClickPressed = false
     }
   }
 }
@@ -591,6 +637,8 @@ function drawStartGame() {
   startGame = false
 
 }
+
+
 //~ BARRE DE VIE
 function drawLifeBar() {
   let HeartX = (viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2;
@@ -599,9 +647,9 @@ function drawLifeBar() {
 
   for (let i = 0; i < maxHealth; i++) {
     if (i + 1 <= healthPlayer) {
-      image(GamerHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
     } else {
-      image(GamerHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
 
     }
 
@@ -645,6 +693,7 @@ function setupInteractions() {
 
 //~ TROC
 function drawTroc(x, y, w, h) {
+  textFont(pixelFont)
 
   //? Affichage de la ligne troc
   let currentPNJ = getPNJName();
@@ -652,16 +701,12 @@ function drawTroc(x, y, w, h) {
   let echangePNJ = getEchangePNJ(currentPNJ);
 
   if (echangePNJ != undefined) {
-    // image(GUITroc, x / 1.23, y / 1.78, w * 2, h * 1.4);
-    // fill(255)
-    // rect(x, y, w, h)
     image(GUITroc, x, y, w, h);
 
     //? Lignes de slot
     let widthRow = w / 2;
     let heightRow = h * 0.75 / echangePNJ.length; //& <- nombre de ligne
     let postionXRow = x - widthRow / 2 + w / 2;
-    // let positionYRow = y - heightRow/2 + h / 2;
 
     //? Position pour échange
     let widthElement = 30;
@@ -684,7 +729,16 @@ function drawTroc(x, y, w, h) {
       //? Lignes
       let positionRow = [postionXRow, positionYRow, widthRow, heightRow];
 
+      let arrowSize = 1
+
+
+      if (buttonHover(positionRow) && !popUpShown){
+        arrowSize = 1.1
+      }
+
+
       if (buttonClicked(positionRow) && !popUpShown) {
+        leftClickPressed = false
         haveToTrade = true;
         buttonHasBeenClicked = true;
         popUpShown = true;
@@ -692,11 +746,20 @@ function drawTroc(x, y, w, h) {
       } else if (!buttonHasBeenClicked) {
         if (waitingAnswer == false) {
           //? Affichage du background du troc
-          // fill(252, 208, 117);
-          // rect(postionXRow, positionYRow, widthRow, heightRow);
 
           //? Pour chaque ligne creation d'un slot
           Object.entries(echange).forEach((items) => {
+
+            //? Affichage du arrow troc
+            image(
+              arrowTroc,
+              postionXRow + (widthRow/2) - (widthElement),
+              positionYElement - heightElement / 4,
+              widthElement * slotSize * arrowSize,
+              heightElement * slotSize * arrowSize
+            );
+
+
             if (items[0] == "demande") {
               items[1].forEach((element) => {
                 //? Declaration
@@ -772,7 +835,7 @@ function drawTroc(x, y, w, h) {
 
 
 function drawTalk(x, y, w, h) {
-
+  textFont(pixelFont)
   let currentPNJName = getPNJName();
   let currentPNJ = pnjJSON.PNJS[currentPNJName]
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
@@ -893,7 +956,8 @@ function openTalkMenu() {
 
 //~ Affiche les FPS
 function gameFPS() {
-  if (fpsActivate) {
+  textFont(pixelFont)
+  if (fpsEnabled) {
     textSize(13);
     noStroke()
     fill(255);
@@ -903,7 +967,6 @@ function gameFPS() {
 
 //~ DISCUSSION
 function drawDiscussion(x, y, w, h) {
-
   //? Fonction comme conditions pour la discussions
   let currentPNJ = getPNJName();
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
@@ -922,6 +985,7 @@ function drawDiscussion(x, y, w, h) {
 
 //~ CREDITS END GAME
 function drawCredits() {
+  textFont(pixelFont)
   gameIsPaused = true;
   endInventory = true;
 
@@ -940,9 +1004,16 @@ function drawCredits() {
   PositionCredits -= speedCredits;
 
   if (PositionCredits < -creditsJSON.Credits.length * 50) {
-    inGame = false
-    endTheGameCredits = false
-    initVariables()
+
+    if (creditsInHome) {
+      inGame = false
+      endTheGameCredits = false
+      creditsInHome = false;
+    }else{
+      inGame = false
+      endTheGameCredits = false
+      initVariables()
+    }
   }
 
   textAlign(CENTER, BASELINE);

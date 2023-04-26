@@ -2,7 +2,7 @@
     "Ennemis": {
 
       "Malade1": {
-        "mapName": "Tileset-2",
+        "mapName": "A-2",
         "type": "Malade1",
         "isAThreat": false,
         "getHit": false,
@@ -54,7 +54,7 @@
       },
 
       "Malade2": {
-        "mapName": "Tileset-1",
+        "mapName": "A-1",
 
         "type": "Malade2",
         "isAThreat": true,
