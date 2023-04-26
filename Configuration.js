@@ -279,7 +279,7 @@ let gravityForce;
 
 
 //& Cinématiques
-let startCinematicPlaying;
+let startCinematicPlaying = false;
 let musicCinematic;
 
 

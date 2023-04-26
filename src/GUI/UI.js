@@ -78,6 +78,7 @@ function buttonHover([x, y, h, w]) {
 /*//^ -------------------------------------------------------------------------- */
 //~ MENU HOME
 function drawHomeMenu() {
+  cursor('default')
   background(0)
   textFont(classicFont)
 
@@ -213,6 +214,7 @@ function drawHomeMenu() {
 
 //~ MENU PAUSE
 function drawPauseMenu() {
+  cursor('default')
   background(0)
   textFont(classicFont)
 
@@ -342,7 +344,7 @@ function drawPauseMenu() {
 
 //~ MENU HOME SETTINGS
 function drawSettingsMenu() {
-
+  cursor('default')
   background(0)
 
   textFont(pixelFont)
@@ -431,7 +433,7 @@ function drawSettingsMenu() {
   }else {
     drawButton(buttonSon, longButton, true, 255);
   }
-  drawText("Sons", 50, [textSonX, buttonSonY], [CENTER, BASELINE], [0, 0, 0]);
+  drawText("Sons", 50, [textSonX, buttonSonY - 5], [CENTER, BASELINE], [0, 0, 0]);
   
 
   if (musicEnabled) {
@@ -445,7 +447,7 @@ function drawSettingsMenu() {
   } else {
     drawButton(buttonMusic, longButton, true, 255);
   }
-  drawText("Musique", 50, [textMusicX, buttonMusicY], [CENTER, BASELINE]);
+  drawText("Musique", 50, [textMusicX, buttonMusicY - 5], [CENTER, BASELINE]);
 
 
   if (fpsEnabled) {
@@ -460,7 +462,7 @@ function drawSettingsMenu() {
   } else {
     drawButton(ButtonToggleFPS, longButton, true, 255);
   }
-  drawText("FPS", 50, [textToggleFPSX, buttonToggleFPSY], [CENTER, BASELINE]);
+  drawText("FPS", 50, [textToggleFPSX, buttonToggleFPSY - 5], [CENTER, BASELINE]);
 
 
 
@@ -476,7 +478,7 @@ function drawSettingsMenu() {
   } else {
     drawButton(ButtonToggleCameraShake, longButton, true, 255);
   }
-  drawText("Tremblements", 48, [textToggleCameraShakeX, buttonToggleCameraShakeY], [CENTER, BASELINE]);
+  drawText("Tremblements", 48, [textToggleCameraShakeX, buttonToggleCameraShakeY - 5], [CENTER, BASELINE]);
 
   fill(255);
 
@@ -485,7 +487,7 @@ function drawSettingsMenu() {
    } else {
      drawButton(ButtonBack, longButton, true, 255);
    }
-  drawText("Retour", 50, [textExitX, buttonExitY], [CENTER, BASELINE]);
+  drawText("Retour", 50, [textExitX, buttonExitY - 5], [CENTER, BASELINE]);
 
 
 
@@ -521,6 +523,7 @@ function drawSettingsMenu() {
 
 //~ MENU DEATH
 function drawDeath() {
+  cursor('default')
   textFont(pixelFont)
 
   if (!dieSoundPlay) {
@@ -667,13 +670,13 @@ function drawStats() {
 //^ --------------------------------------------------------------------------
 
 function drawStartGame() {
-
-  background(0);
-  fill(255);
-
-  inGame = true
-  startGame = false
-
+  if (!startCinematicPlaying){
+    background(0);
+    fill(255);
+  
+    inGame = true
+    startGame = false
+  }
 }
 
 

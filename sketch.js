@@ -119,7 +119,7 @@ function setup() {
 
 //~ Draw 
 function draw() {
-
+  background(0)
   noSmooth()
 
   //* Effet de tremblement de la caméra
@@ -133,7 +133,7 @@ function draw() {
   }else{
     //? Si le jeu joue
     if (gameIsPlaying) {
-  
+      noCursor()
       //~ Si le jeu n'est pas en pause
       if (!gameIsPaused){
         if (engineOne) {
