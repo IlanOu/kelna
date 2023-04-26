@@ -158,6 +158,7 @@ let settingsPause;
 let lifeBarSize;
 let healthPlayer;
 let maxHealth;
+let heartSize;
 let pressingKey;
 let gettingHurt;
 let gettingHeal;

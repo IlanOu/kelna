@@ -892,6 +892,7 @@ function initVariables() {
     lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
     maxHealth = init_maxHealth;
+    heartSize = init_heartSize
     pressingKey = init_pressingKey;
     gettingHurt = init_gettingHurt;
     gettingHeal = init_gettingHeal;

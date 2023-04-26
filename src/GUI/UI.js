@@ -228,12 +228,24 @@ function drawPauseMenu() {
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let widthPage = (interfaceMenuWidth / 5)
+
   let centerRightPage = (widthPage * 3);
+  let centerLeftPage = (widthPage * 2);
+
   let marginButton = interfaceMenuWidth / 20;
   let widthButtonPause = interfaceMenuWidth / 7;
   let centerYPage = interfaceMenuY + interfaceMenuHeight / 2
   let fontSizePause = 30;
 
+  let YvoWidth = 250
+  let YvoHeight = 260
+  let YvoX = centerLeftPage-(YvoWidth/1.2)
+  let YvoY = centerYPage-YvoHeight/2
+
+
+  let lifeBarWidth = (maxHealth * heartSize)
+  let LifeBarY = YvoY + YvoHeight + interfaceMenuHeight / 20
+  let lifeBarX = (YvoX + (YvoWidth/2)) - (lifeBarWidth/2)
 
   let interfaceMenu = [
     interfaceMenuX,
@@ -287,25 +299,28 @@ function drawPauseMenu() {
 
 
 
+
   //& --------------------------------
   //& ---------- Affichage -----------
   //& --------------------------------
 
-  fill(255);
   drawInterface(interfaceMenu, GUIForEscape);
 
-  fill(255);
   drawButton(buttonBack, undefined, false, 0);
   drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonBack));
 
-  fill(255);
   drawButton(buttonSettings, undefined, false, 0);
   drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0,0,0], buttonHover(buttonSettings));
 
-  fill(255);
   drawButton(buttonExit, undefined, false, 0);
   drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonExit));
 
+  //? Dessinner Yvo en Idle
+  drawCharacter(YvoX, YvoY, YvoWidth, YvoHeight, "right", "idle")
+  
+  drawLifeBar(lifeBarX, LifeBarY)
+  
+  
   /*
   noFill()
   stroke(0)
@@ -687,16 +702,13 @@ function drawStartGame() {
 
 
 //~ BARRE DE VIE
-function drawLifeBar() {
-  let HeartX = (viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2;
-  let HeartY = viewportDisplayHeight - lifeBarSize * 2
-
+function drawLifeBar(x, y) {
 
   for (let i = 0; i < maxHealth; i++) {
     if (i + 1 <= healthPlayer) {
-      image(GameHeart, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
     } else {
-      image(GameHeartBlack, lifeBarSize * i + HeartX, HeartY, 30, 30);
+      image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
 
     }
 
@@ -1082,7 +1094,7 @@ function setupUI() {
 
    
     //& Barre de vie
-    drawLifeBar();
+    drawLifeBar((viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2, viewportDisplayHeight - lifeBarSize * 2);
 
     if (canShowMessage){
       showMessage("Votre inventaire est plein")

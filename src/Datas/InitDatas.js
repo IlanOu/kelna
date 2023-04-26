@@ -138,6 +138,7 @@ const init_settingsPause = false
 const init_MargeBarVie = 40;
 const init_healthPlayer = 5
 const init_maxHealth = 5
+const init_heartSize = 40
 const init_pressingKey = false
 const init_gettingHurt = false;
 const init_gettingHeal = false;
