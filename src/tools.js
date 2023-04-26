@@ -403,6 +403,30 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 }
 
 
+
+function showMessage(message){
+    let messageWidth = 200
+    let messageHeight = 100
+    let messagePositionY = 0
+    let messagePositionX = viewportDisplayWidth - messageWidth
+
+    let messageTextPosition = [messagePositionX, messagePositionY]
+
+    
+    drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
+    
+}
+
+
+
+function tempMessage() {
+    canShowMessage = true
+
+    setTimeout(() => {
+        canShowMessage = false
+    }, 1000)
+}
+
 //~ Recupere le nom du PNJ a l'interaction 
 function getPNJName() {
     let namePNJ = ""
@@ -699,10 +723,12 @@ function shakeCamera(durationSeconds, forcePixels) {
 
 
 function getCurrentItem() {
-    addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-    itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-    currentItemPointing = ""
-    canGetItem = false
+    if (itemsJSON.ItemsOnTheFloor[currentItemPointing]){
+        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+        currentItemPointing = ""
+        //canGetItem = false
+    }
 }
 
 
@@ -839,6 +865,7 @@ function initVariables() {
 
     //& Interfaces
     //~ Interfaces
+    canShowMessage = init_canShowMessage
     interactionWidth = init_interactionWidth;
     interactionHeight = init_interactionHeight;
 
@@ -962,7 +989,6 @@ function initVariables() {
     //& Items
     itemList = init_itemList;
     currentItemPointing = init_currentItemPointing
-    canGetItem = init_canGetItem
 
 
     //& Troc

@@ -1,26 +1,27 @@
 //^ Ajouter a l'inventaire
 let addItemToInventory = (item, amount) => {
-
-    if (Inventory.length <= 3) {
-
-        switch (item.category) {
-            case "weapon":
-                Inventory[0] = item
-                break;
-            case "food":
-                Inventory[1] = item
-                if (Inventory[1].amount < stackSize){
-                    Inventory[1].amount += amount
-                }
-                break;
-            case "other":
-                Inventory[2] = item
-
-                break;
+    if (item){
+        if (Inventory.length <= 3) {
+    
+            switch (item.category) {
+                case "weapon":
+                    Inventory[0] = item
+                    break;
+                case "food":
+                    Inventory[1] = item
+                    if (Inventory[1].amount < stackSize){
+                        Inventory[1].amount += amount
+                    }
+                    break;
+                case "other":
+                    Inventory[2] = item
+    
+                    break;
+            }
+    
+        } else {
+            console.error("Trop d'objet dans l'inventaire !", Inventory.length)
         }
-
-    } else {
-        console.error("Trop d'objet dans l'inventaire !", Inventory.length)
     }
 };
 

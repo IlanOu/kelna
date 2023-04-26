@@ -52,13 +52,22 @@ function keyPressed() {
         }
     }
 
-    if (canGetItem){
-        if (keyCode == 69 && engineOne) {
-            getCurrentItem();
-            //! Récupérer l'item
+    //! Récupérer l'item
+    Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+        item = item[1]
+        if (item.canGetItem){
+            if (keyCode == 69 && engineOne) {
+                if (Inventory[getIndexOfItemCategory(item.category)].category){
+                    tempMessage("L'inventaire est plein")
+                    
+                }else{
+                    getCurrentItem()
+                }
+                item.canGetItem = false
+            }
         }
-    }
-
+    })
+        
     //* Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true

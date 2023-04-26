@@ -677,9 +677,7 @@ function setupInteractions() {
       drawKey("E");
     }
 
-    if (canGetItem) {
-      drawKey("E");
-    }
+
 
   } else {
     if (canGoOutTheHouse) {
@@ -1037,6 +1035,10 @@ function setupUI() {
    
     //& Barre de vie
     drawLifeBar();
+
+    if (canShowMessage){
+      showMessage("Votre inventaire est plein")
+    }
 
     //& Trocs et Discussions 
     if (PressInteractPNJ) {

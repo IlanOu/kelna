@@ -112,6 +112,7 @@ const init_yStartHouse = 0;
 
 //& Interfaces
 //~ Interfaces
+const init_canShowMessage = false
 const init_interactionWidth = 30;
 const init_interactionHeight = 30;
 
@@ -241,7 +242,6 @@ const init_statistiques = {
 //& Items
 const init_itemList = [];
 const init_currentItemPointing = "";
-const init_canGetItem = false;
 
 
 //& Troc

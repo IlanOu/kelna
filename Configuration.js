@@ -122,6 +122,8 @@ let classicFont;
 let pixelFont;
 
 //~ Interfaces
+let canShowMessage;
+
 let interactionWidth;
 let interactionHeight;
 
@@ -259,7 +261,6 @@ let numberOfSteps;
 //& Items
 let itemList;
 let currentItemPointing;
-let canGetItem;
 
 //& Troc
 let waitingAnswer;
