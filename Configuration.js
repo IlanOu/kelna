@@ -116,6 +116,11 @@ let yStartHouse;
 
 
 //& Interfaces
+
+//~ Font
+let classicFont;
+let pixelFont;
+
 //~ Interfaces
 let interactionWidth;
 let interactionHeight;
@@ -127,6 +132,17 @@ let buttonWidthClassic;
 let buttonHeightClassic;
 let buttonWidthBIG;
 let buttonHeightBIG;
+
+let toggleButtonColor;
+
+let arrowTroc;
+
+let longButton
+let longButtonHover
+let popUpButton
+let popUpButtonHover
+let checkedLongButtonHover
+let checkedLongButton
 
 //~ Jeu
 let inGame;
@@ -145,6 +161,8 @@ let gettingHurt;
 let gettingHeal;
 let addHeart;
 let removeHeart;
+let GameHeartBlack;
+let GameHeart
 
 //~ Inventaire
 let Inventory = [];
@@ -167,13 +185,12 @@ let leftGaugeLevel;
 
 
 //& Audio
+
 //~ Musique
-let musicButtonColor;
 let musicEnabled;
 let canPlayMusic;
 
 //~ Sons
-let soundButtonColor;
 let soundEnabled;
 let canPlaySong;
 
@@ -232,6 +249,7 @@ let playerAnswersYes;
 let endTheGameCredits;
 let PositionCredits;
 let speedCredits;
+let creditsInHome;
 
 
 //& Statistiques
@@ -252,7 +270,7 @@ let stackSize;
 
 
 //& FPS
-let fpsActivate;
+let fpsEnabled;
 let FPSButtonColor;
 
 

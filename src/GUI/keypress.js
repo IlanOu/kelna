@@ -141,7 +141,7 @@ function keyReleased() {
 
 
 //~ Clique de souris
-function mousePressed() {
+function mouseReleased() {
     if (mouseButton === LEFT) {
         if (startCinematicPlaying && gameIntroductionVideo.elt.paused){
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);

@@ -12,20 +12,32 @@ function windowResized() {
 //~ Preload 
 function preload() {
 
+  //? Font
+  pixelFont = loadFont("assets/fonts/pixelFont.ttf")
+  classicFont = loadFont("assets/fonts/classicFont.ttf")
 
   //? Interfaces
-  GUIParameters = loadImage("assets/GUI/GUIParameters.png");
+  GUIParameters = loadImage("assets/GUI/popUpSettings.png"); //GUIParameters
   GUIForEscape = loadImage("assets/GUI/PauseGUI.png");
-  GUIOfDeath = loadImage("assets/GUI/GUIOfDeath.png");
+  GUIOfDeath = loadImage("assets/GUI/popUpDie.png"); 
 
-  //Background = loadImage("assets/Background/Background.gif");
 
-  GamerHeart = loadImage("assets/GUI/heart.png");
-  GamerHeartBlack = loadImage("assets/GUI/heartBlack.png");
-
+  GameHeart = loadImage("assets/GUI/heart.png");
+  GameHeartBlack = loadImage("assets/GUI/heartBlack.png");
+  
+  arrowTroc = loadImage("assets/GUI/arrowTroc.png");
   GUITroc = loadImage("assets/GUI/GUIForTroc.png");
+
+
   GUIStart = loadImage("assets/GUI/GUIStart.png")
   talkBackground = loadImage("assets/GUI/talkBackground.png");
+
+  longButton = loadImage("assets/GUI/longButton.png");
+  longButtonHover = loadImage("assets/GUI/longButtonHover.png");
+  popUpButton = loadImage("assets/GUI/popUpButton.png");
+  popUpButtonHover = loadImage("assets/GUI/popUpButtonHover.png");
+  checkedLongButtonHover = loadImage("assets/GUI/checkedLongButtonHover.png");
+  checkedLongButton = loadImage("assets/GUI/checkedLongbutton.png");
 
   //? Background
   backgroundImage = loadImage('assets/Background/bg_forest.png');
@@ -80,8 +92,8 @@ function preload() {
 
 
   //? Songs
-  VoiceStartSong = loadSound("assets/audios/voices/START/teststart.m4a")
-  VoicesDieSong = [loadSound("assets/audios/voices/END/testend.m4a"), loadSound("assets/audios/voices/END/testend2.m4a")]
+  VoiceStartSong = [loadSound("assets/audios/voices/START/start1.m4a"), loadSound("assets/audios/voices/START/start2.m4a")]
+  VoicesDieSong = [loadSound("assets/audios/voices/END/end1.m4a"), loadSound("assets/audios/voices/END/end2.m4a")]
 }
 
 
@@ -107,7 +119,6 @@ function setup() {
 
 //~ Draw 
 function draw() {
-
 
   noSmooth()
 
