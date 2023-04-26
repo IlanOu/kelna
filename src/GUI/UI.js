@@ -724,9 +724,6 @@ function setupInteractions() {
       drawKey("E");
     }
 
-    if (canGetItem) {
-      drawKey("E");
-    }
 
 
 
