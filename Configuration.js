@@ -172,7 +172,7 @@ let Inventory = [];
 let widthSlot;
 let heightSlot;
 let slotX;
-let endInventory;
+let hideInventory;
 let waitingButton;
 
 //~ Jauge quand on mange

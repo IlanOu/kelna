@@ -409,7 +409,7 @@ function showMessage(message){
     let popupMessageHeight = 100
 
     let messagePositionY = 0
-    let messagePositionX = viewportDisplayWidth - messageWidth
+    let messagePositionX = viewportDisplayWidth - popupMessageWidth
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
@@ -906,7 +906,7 @@ function initVariables() {
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;
-    endInventory = init_endInventory;
+    hideInventory = init_endInventory;
     waitingButton = init_waitingButton;
 
     //~ Jauge quand on mange

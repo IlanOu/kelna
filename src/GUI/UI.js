@@ -213,7 +213,10 @@ function drawHomeMenu() {
 
 //~ MENU PAUSE
 function drawPauseMenu() {
-    //? Cacher le troc si il s'affiche
+
+  background(0)
+
+  //? Cacher le troc si il s'affiche
   PressInteractPNJ = false;
   PressTalkPNJ = false
 
@@ -551,7 +554,6 @@ function drawDeath() {
   //& ---------- Variables -----------
   //& --------------------------------
 
-  endInventory = true;
   let interfaceMenuWidth = 750;
   let interfaceMenuHeight = 400;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
@@ -624,6 +626,7 @@ function drawDeath() {
 
 //~ MENU STAT
 function drawStats() {
+
   textFont(classicFont)
   if (playerStat === false) {
     fill(0, 0, 0, 50);
@@ -1045,7 +1048,6 @@ function drawDiscussion(x, y, w, h) {
 function drawCredits() {
   textFont(pixelFont)
   gameIsPaused = true;
-  endInventory = true;
 
   textAlign(CENTER, CENTER);
   textSize(32);

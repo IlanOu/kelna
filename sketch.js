@@ -119,7 +119,6 @@ function setup() {
 
 //~ Draw 
 function draw() {
-
   noSmooth()
 
   //* Effet de tremblement de la caméra
@@ -133,7 +132,7 @@ function draw() {
   }else{
     //? Si le jeu joue
     if (gameIsPlaying) {
-  
+      hideInventory = false
       //~ Si le jeu n'est pas en pause
       if (!gameIsPaused){
         if (engineOne) {
@@ -170,8 +169,10 @@ function draw() {
           characterView2()
           drawHouseForeground(behindThisDoorHouse)
         }
+      }else{
+        hideInventory = true
       }
-    }
+      }
     setupUI()
   }
 
