@@ -159,7 +159,7 @@ let PlayMusic = () => {
 
 //~ Joue des voix dés le début du jeu
 function startGameVoice() {
-    if (!soundEnabled) {
+    if (soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoiceStartSong.length);
         VoiceStartSong[indexSong].play()
     }
@@ -169,7 +169,7 @@ function startGameVoice() {
 
 //~ Joue des voix a la mort du jouer
 function DieGameVoice() {
-    if (!soundEnabled) {
+    if (soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
         VoicesDieSong[indexSong].play()
     }
@@ -930,7 +930,7 @@ function initVariables() {
     canPlayMusic = init_YouCanPlayMusic;
 
     //~ Sons
-    soundEnabled = init_SongIsActivate;
+    //soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
 

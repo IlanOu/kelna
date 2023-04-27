@@ -119,7 +119,6 @@ function setup() {
 
 //~ Draw 
 function draw() {
-  console.log(creditsInHome)
   background(0)
   noSmooth()
 

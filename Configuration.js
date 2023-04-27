@@ -197,7 +197,7 @@ let musicEnabled;
 let canPlayMusic;
 
 //~ Sons
-let soundEnabled;
+let soundEnabled = true;
 let canPlaySong;
 
 
