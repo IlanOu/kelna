@@ -168,12 +168,12 @@ function drawHomeMenu() {
 
 
 
-  if (buttonClicked(credits) && !settingsPause) {
+  if (buttonClicked(credits) && !settingsPause && !creditsInHome) {
     creditsInHome = true;
+    console.log(creditsInHome)
     inGame = true
     gameIsPlaying = true;
     leftClickPressed = false
-    endTheGameCredits = true
     drawCredits()
 
   }
@@ -1186,9 +1186,8 @@ function drawCredits() {
 
     if (creditsInHome) {
       inGame = false
-      endTheGameCredits = false
       creditsInHome = false;
-    } else {
+    } else if(endTheGameCredits){
       inGame = false
       endTheGameCredits = false
       initVariables()
@@ -1244,7 +1243,7 @@ function setupUI() {
 
 
     //? Credits
-    if (endTheGameCredits) {
+    if (endTheGameCredits && inGame|| creditsInHome ) {
       drawCredits()
     }
 
@@ -1275,7 +1274,6 @@ function setupUI() {
     //* Le jeu n'est pas lancé
     gameIsPaused = false;
     gameIsPlaying = false;
-
 
     //? Affichage du menu principal
     drawHomeMenu();
