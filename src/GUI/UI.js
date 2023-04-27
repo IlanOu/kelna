@@ -558,8 +558,8 @@ function drawDeath() {
   //* ---------- Variables -----------
   //* --------------------------------
 
-  let interfaceMenuWidth = 750;
-  let interfaceMenuHeight = 400;
+  let interfaceMenuWidth = 900;
+  let interfaceMenuHeight = 500;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let interfaceMenu = [
@@ -573,7 +573,7 @@ function drawDeath() {
   let buttonExitW = 200;
   let buttonExitH = 100;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
+  let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
   let textExitX = buttonExitX + buttonExitW / 2;
 
   let buttonBackToHomeEndGame = [
@@ -582,6 +582,15 @@ function drawDeath() {
     buttonExitW,
     buttonExitH,
   ];
+
+  let buttonStatsY = interfaceMenuY + interfaceMenuHeight / 2.5;
+
+  let buttonStats = [
+    buttonExitX,
+    buttonStatsY,
+    buttonExitW,
+    buttonExitH
+  ]
 
 
   let titleDieX = buttonExitX + buttonExitW / 2;
@@ -598,6 +607,11 @@ function drawDeath() {
     inGame = false
   }
 
+  if (buttonClicked(buttonStats)) {
+    leftClickPressed = false
+    statsMenu = true
+  }
+
 
   //* --------------------------------
   //* ---------- Affichage -----------
@@ -607,6 +621,13 @@ function drawDeath() {
   drawInterface(interfaceMenu, GUIOfDeath);
   drawText("  VOUS ETES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
 
+
+  if (buttonHover(buttonStats)) {
+    drawButton(buttonStats, smallButtonHover, true, 255);
+  } else {
+    drawButton(buttonStats, smallButton, true, 255);
+  }
+  drawText("STATS", 60, [textExitX, buttonStatsY], [CENTER, BASELINE], [0, 0, 0]);
 
   if (buttonHover(buttonBackToHomeEndGame)) {
     drawButton(buttonBackToHomeEndGame, smallButtonHover, true, 255);
@@ -633,9 +654,9 @@ function drawStats() {
   let titleFontSize = 90
   let defaultFontSize = 25
 
-  let margin = 50
+  let margin = 40
 
-  let marginTop = 50
+  let marginTop = 40
   let marginBetweenLines = 30
 
   let interfaceMenuWidth = 600;
@@ -688,6 +709,9 @@ function drawStats() {
   let titleHealCount = "Nombre de coeurs régénérés :\n"
   let textHealCount = statistiques.healCount
 
+  let titleDeathCount = "Nombre de morts :\n"
+  let textDeathCount = statistiques.deathCount
+
 
 
   let startParagraphY = titleStatsY + titleFontSize
@@ -727,6 +751,9 @@ function drawStats() {
   drawText(titleHealCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (12*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
   drawText(textHealCount, defaultFontSize, [startParagraphXRight, startParagraphY + (12*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
 
+  drawText(titleDeathCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (14*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDeathCount, defaultFontSize, [startParagraphXRight, startParagraphY + (14*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
 
 
   fill(255);
@@ -735,7 +762,7 @@ function drawStats() {
   } else {
     drawButton(buttonBackToHome, smallButton, true, 255);
   }
-  drawText("MENU", 60, [textExitX, buttonExitY], [CENTER, BASELINE]);
+  drawText("RETOUR", 60, [textExitX, buttonExitY], [CENTER, BASELINE]);
 
 
 
@@ -746,6 +773,7 @@ function drawStats() {
 
   if (buttonClicked(buttonBackToHome)) {
     leftClickPressed = false
+    statsMenu = false
   }
 }
 
@@ -1215,11 +1243,11 @@ function setupUI() {
       } else if (healthPlayer > 0) {
         drawPauseMenu();
       }
+    }else{
+      timerGame()
     }
 
-    if (statsMenu){
-      drawStats();
-    }
+    
 
 
     //? Credits
@@ -1239,12 +1267,16 @@ function setupUI() {
       gameIsPlaying = true;
     }
 
+    if (statsMenu){
+      drawStats();
+    }
+
     //? Affichage de l'inventaire
     displayInventory();
 
 
     gameFPS()
-    timerGame()
+    
 
   } else {
     //* Le jeu n'est pas lancé
