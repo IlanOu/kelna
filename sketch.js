@@ -138,7 +138,8 @@ function draw() {
       //? Si le jeu n'est pas en pause
       if (!gameIsPaused){
         if (engineOne) {
-          statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+          let seconds = Math.round(millis() / millis()) / 100
+          statistiques.timeSpentInGame += seconds
           statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
   
   
@@ -155,7 +156,6 @@ function draw() {
           itemsManager()
           PNJManager()
           MobManager()
-          
           
 
           //? Afficher le joueur (le perso passe devant les entités)

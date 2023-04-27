@@ -52,6 +52,12 @@ function keyPressed() {
         }
     }
 
+
+    //! A EFFECER
+    if (keyCode == 69 && engineOne) {
+        statsMenu = !statsMenu
+    }
+
     //! Récupérer l'item
     Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
         item = item[1]

@@ -156,6 +156,9 @@ let gameIsPlaying;
 //? Parametres
 let settingsPause;
 
+//? Statistiques
+let statsMenu;
+
 //? Barre de vie
 let lifeBarSize;
 let healthPlayer;

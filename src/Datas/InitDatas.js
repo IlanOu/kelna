@@ -134,6 +134,9 @@ const init_gameIsPlaying = false
 //*Parametres
 const init_settingsPause = false
 
+//*Statistiques
+const init_statsMenu = false
+
 //*Barre de vie
 const init_MargeBarVie = 40;
 const init_healthPlayer = 5
@@ -153,7 +156,7 @@ const init_slotX = 0;
 const init_endInventory = false;
 const init_waitingButton = false;
 
-//*Jauge quand on mange
+//*Jauge quand on mange 
 const init_characterIsEating = false;
 
 const init_gaugeSize = 5;
@@ -163,6 +166,7 @@ const init_topGaugeLevel = 0;
 const init_rightGaugeLevel = 0;
 const init_bottomGaugeLevel = 0;
 const init_leftGaugeLevel = 0;
+
 
 
 //^ Audio

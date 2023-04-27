@@ -620,62 +620,132 @@ function drawDeath() {
 
 //~ MENU STAT
 function drawStats() {
-  textFont(classicFont)
-  if (playerStat === false) {
-    fill(0, 0, 0, 50);
-    rect(0, 0, width, height);
+  textFont(pixelFont)
+  cursor('default')
+
+  background(0)
+  gameIsPaused = true;
+
+  //* --------------------------------
+  //* ---------- Variables -----------
+  //* --------------------------------
+
+  let titleFontSize = 90
+  let defaultFontSize = 25
+
+  let margin = 50
+
+  let marginTop = 50
+  let marginBetweenLines = 30
+
+  let interfaceMenuWidth = 600;
+  let interfaceMenuHeight = 800;
+  let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
+  let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
+
+  let interfaceMenu = [
+    interfaceMenuX,
+    interfaceMenuY,
+    interfaceMenuWidth,
+    interfaceMenuHeight
+  ]
+
+  let buttonExitW = 200;
+  let buttonExitH = 100;
+  let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
+  let buttonExitY = interfaceMenuY + interfaceMenuHeight - buttonExitH * 1.5;
+
+  let textExitX = buttonExitX + buttonExitW / 2;
+  let buttonBackToHome = [
+    buttonExitX,
+    buttonExitY,
+    buttonExitW,
+    buttonExitH
+  ]
+
+  let titleStatsX = buttonExitX + buttonExitW / 2;
+  let titleStatsY = interfaceMenuY + margin;
 
 
-    //* --------------------------------
-    //* ---------- Variables -----------
-    //* --------------------------------
-
-    let interfaceMenuWidth = 500;
-    let interfaceMenuHeight = 500;
-    let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
-    let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
-    let interfaceMenu = [
-      interfaceMenuX,
-      interfaceMenuY,
-      interfaceMenuWidth,
-      interfaceMenuHeight,
-    ];
-
-    let buttonExitW = 150;
-    let buttonExitH = 20;
-    let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
-    let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.8;
-    let textExitX = buttonExitX + buttonExitW / 2;
-
-    let buttonBackToHome = [
-      buttonExitX,
-      buttonExitY,
-      buttonExitW,
-      buttonExitH,
-    ];
+  let titleTimeSpent = "Temps passé en jeu :\n"
+  let textTimeSpent = timeConversion(Math.floor(statistiques.timeSpentInGame))
+  
+  let titleDistanceWalked = "Distance parcourue :\n"
+  let textDistanceWalked = statistiques.distanceWalked + " blocs"
+  
+  let titlePlayerSpeed = "Vitesse moyenne :\n"
+  let textPlayerSpeed = statistiques.playerSpeed + "km/h"
+  
+  let titleMobsKilled = "Ennemis tués :\n"
+  let textMobsKilled = statistiques.mobsKilled
+  
+  let titleDamagesGet = "Nombre de dégâts subis :\n"
+  let textDamagesGet = statistiques.damagesGet
+  
+  let titleDamagesDones = "Nombre de dégâts infligés :\n"
+  let textDamagesDones = statistiques.damagesDones
+  
+  let titleHealCount = "Nombre de coeurs régénérés :\n"
+  let textHealCount = statistiques.healCount
 
 
-    //* --------------------------------
-    //* ---------- Affichage -----------
-    //* --------------------------------
+
+  let startParagraphY = titleStatsY + titleFontSize
+  let startParagraphXLeft = interfaceMenuX +margin
+  let startParagraphXRight = interfaceMenuX + interfaceMenuWidth - margin
 
 
-    fill(255);
-    drawInterface(interfaceMenu, GUIForStats);
-
-    fill(255);
-    drawButton(buttonBackToHome);
-    drawText("Retour au menu", 15, [textExitX, buttonExitY], [CENTER, BASELINE]);
+  //* --------------------------------
+  //* ---------- Affichage -----------
+  //* --------------------------------
 
 
-    //* --------------------------------
-    //* ---------- Evenements ----------
-    //* --------------------------------
+  fill(255);
+  drawInterface(interfaceMenu, GUIParameters);
+
+  drawText("STATS", titleFontSize, [titleStatsX, titleStatsY], [CENTER, BASELINE], [0, 0, 0])
 
 
-    if (buttonClicked(buttonBackToHome)) {
-      leftClickPressed = false
-    }
+  drawText(titleTimeSpent, defaultFontSize, [startParagraphXLeft, startParagraphY + (0*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textTimeSpent, defaultFontSize, [startParagraphXRight, startParagraphY + (0*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titleDistanceWalked, defaultFontSize, [startParagraphXLeft, startParagraphY + (2*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDistanceWalked, defaultFontSize, [startParagraphXRight, startParagraphY + (2*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titlePlayerSpeed, defaultFontSize, [startParagraphXLeft, startParagraphY + (4*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textPlayerSpeed, defaultFontSize, [startParagraphXRight, startParagraphY + (4*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titleMobsKilled, defaultFontSize, [startParagraphXLeft, startParagraphY + (6*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textMobsKilled, defaultFontSize, [startParagraphXRight, startParagraphY + (6*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titleDamagesGet, defaultFontSize, [startParagraphXLeft, startParagraphY + (8*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDamagesGet, defaultFontSize, [startParagraphXRight, startParagraphY + (8*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titleDamagesDones, defaultFontSize, [startParagraphXLeft, startParagraphY + (10*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDamagesDones, defaultFontSize, [startParagraphXRight, startParagraphY + (10*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  
+  drawText(titleHealCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (12*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textHealCount, defaultFontSize, [startParagraphXRight, startParagraphY + (12*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+
+
+  fill(255);
+  if (buttonHover(buttonBackToHome)) {
+    drawButton(buttonBackToHome, smallButtonHover, true, 255);
+  } else {
+    drawButton(buttonBackToHome, smallButton, true, 255);
+  }
+  drawText("MENU", 60, [textExitX, buttonExitY], [CENTER, BASELINE]);
+
+
+
+  //* --------------------------------
+  //* ---------- Evenements ----------
+  //* --------------------------------
+
+
+  if (buttonClicked(buttonBackToHome)) {
+    leftClickPressed = false
   }
 }
 
@@ -1020,6 +1090,28 @@ function openTalkMenu() {
 
 }
 
+function timerGame(){
+  textFont(pixelFont)
+
+  let popupMargin = 40
+
+  let timerFontSize = 20
+
+  let timerPopupWidth = 100
+  let timerPopupHeight = 80
+  let timerPopupX = viewportDisplayWidth - timerPopupWidth - popupMargin
+  let timerPopupY = 0 + popupMargin
+
+  let timerTextX = timerPopupX + timerPopupWidth/2
+  let timerTextY = timerPopupY + (timerPopupHeight/2) - timerFontSize*1.5
+
+  let timerTextPosition = [timerTextX, timerTextY]
+
+  image(smallButton, timerPopupX, timerPopupY, timerPopupWidth, timerPopupHeight)
+  drawText(" Temps: \n" + timeConversion(Math.floor(statistiques.timeSpentInGame), 1), timerFontSize, timerTextPosition, [CENTER, BASELINE], [0, 0, 0]);
+  
+}
+
 //~ Affiche les FPS
 function gameFPS() {
   textFont(pixelFont)
@@ -1105,7 +1197,7 @@ function setupUI() {
     drawLifeBar((viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2, viewportDisplayHeight - lifeBarSize * 2);
 
     if (canShowMessage){
-      showMessage("Votre inventaire est plein")
+      showMessage("Votre inventaire est plein.")
     }
 
     //? Trocs et Discussions 
@@ -1123,6 +1215,10 @@ function setupUI() {
       } else if (healthPlayer > 0) {
         drawPauseMenu();
       }
+    }
+
+    if (statsMenu){
+      drawStats();
     }
 
 
@@ -1148,6 +1244,7 @@ function setupUI() {
 
 
     gameFPS()
+    timerGame()
 
   } else {
     //* Le jeu n'est pas lancé

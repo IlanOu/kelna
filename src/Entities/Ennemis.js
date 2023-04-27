@@ -6,7 +6,7 @@ function MobManager() {
   if (engineOne) {
     if(ennemiesJSON.Ennemis){
       Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
-        mob(Mobs[1]);          
+        //mob(Mobs[1]);          
       })
       // mob(ennemiesJSON.Ennemis.Malade1);
       // mob(ennemiesJSON.Ennemis.Malade2);

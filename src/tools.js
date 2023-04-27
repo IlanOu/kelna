@@ -405,16 +405,22 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
 
 function showMessage(message){
-    let popupMessageWidth = 200
-    let popupMessageHeight = 100
+    let popupMarginTop = 40
 
-    let messagePositionY = 0
-    let messagePositionX = viewportDisplayWidth - popupMessageWidth
+    let popupMessageWidth = 400
+    let popupMessageHeight = 100
+    let popupPositionX = (viewportDisplayWidth/2) - (popupMessageWidth/2)
+    let popupPositionY = 0 + popupMarginTop
+
+    let messageFontSize = 30
+
+    let messagePositionX = popupPositionX + popupMessageWidth/2 
+    let messagePositionY = popupPositionY + (popupMessageHeight/2) - messageFontSize/1.2
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
-    image(smallPopUp, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
-    drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
+    image(longButton, popupPositionX, popupPositionY, popupMessageWidth, popupMessageHeight)
+    drawText(message, 30, messageTextPosition, [CENTER, BASELINE], [0, 0, 0])
     
 }
 
@@ -691,7 +697,7 @@ function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
+    return Math.round(vitesseEnKmh/2);
 }
 
 
@@ -711,16 +717,28 @@ function resetJsons() {
 
 
 //~ Convertie le temps en heure / min / secondes
-function timeConversion(seconds) {
+function timeConversion(seconds, mod = 0) {
     const heures = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secondes = seconds % 60;
 
-    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
-    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const heuresFormatees = heures < 10 ? `0${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `0${minutes}` : `${minutes}`;
     const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
 
-    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+
+    let returnValue = "";
+
+    switch (mod) {
+        case 0:
+            returnValue = `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+        break;
+        case 1:
+            returnValue = `${heuresFormatees}:${minutesFormatees}:${secondesFormatees}`;
+        break;
+    }
+
+    return returnValue;
 }
 
 
@@ -885,6 +903,9 @@ function initVariables() {
     //~ Parametres
     settingsPause = init_settingsPause;
 
+    //~ Statistiques
+    statsMenu = init_statsMenu
+
     //~ Barre de vie
     lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
@@ -1021,15 +1042,15 @@ function initVariables() {
     }
 
     //* Reset toutes les statistiques sauf le nombre de morts 
-    statistiques.distanceWalked = init_statistiques.distanceWalked
-    statistiques.totalJumpCount = init_statistiques.totalJumpCount
-    statistiques.mobsKilled = init_statistiques.mobsKilled
-    statistiques.damagesDones = init_statistiques.damagesDones
-    statistiques.damagesGet = init_statistiques.damagesGet
-    statistiques.healCount = init_statistiques.healCount
+    statistiques.distanceWalked = 0
+    statistiques.totalJumpCount = 0
+    statistiques.mobsKilled = 0
+    statistiques.damagesDones = 0
+    statistiques.damagesGet = 0
+    statistiques.healCount = 0
     ////statistiques.deathCount = init_statistiques.deathCount
-    statistiques.timeSpentInGame = init_statistiques.timeSpentInGame
-    statistiques.playerSpeed = init_statistiques.playerSpeed
+    statistiques.timeSpentInGame = 0
+    statistiques.playerSpeed = 0
 
 
     tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
