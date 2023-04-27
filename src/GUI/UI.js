@@ -79,7 +79,7 @@ function buttonHover([x, y, h, w]) {
 //~ MENU HOME
 function drawHomeMenu() {
   cursor('default')
-  background(0)
+  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
 
 
@@ -205,9 +205,6 @@ function drawHomeMenu() {
   drawButton(credits, undefined, false, 0);
   drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonHover(credits));
   fill(0);
-
-
-
 }
 
 
@@ -215,7 +212,7 @@ function drawHomeMenu() {
 //~ MENU PAUSE
 function drawPauseMenu() {
   cursor('default')
-  background(0)
+  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
 
   //? Cacher le troc si il s'affiche
@@ -235,22 +232,15 @@ function drawPauseMenu() {
   let widthPage = (interfaceMenuWidth / 5)
 
   let centerRightPage = (widthPage * 3);
-  let centerLeftPage = (widthPage * 2);
+  let centerLeftPage = (widthPage * 1.8);
 
   let marginButton = interfaceMenuWidth / 20;
   let widthButtonPause = interfaceMenuWidth / 7;
   let centerYPage = interfaceMenuY + interfaceMenuHeight / 2
   let fontSizePause = 30;
 
-  let YvoWidth = 250
-  let YvoHeight = 260
-  let YvoX = centerLeftPage-(YvoWidth/1.2)
-  let YvoY = centerYPage-YvoHeight/2
+  let marginLeftPage = 30
 
-
-  let lifeBarWidth = (maxHealth * heartSize)
-  let LifeBarY = YvoY + YvoHeight + interfaceMenuHeight / 20
-  let lifeBarX = (YvoX + (YvoWidth/2)) - (lifeBarWidth/2)
 
   let interfaceMenu = [
     interfaceMenuX,
@@ -304,7 +294,12 @@ function drawPauseMenu() {
 
 
 
+  let buttonsWidth = 50
+  let buttonsHeight = 50
+  let buttonXOnPage = centerLeftPage-(buttonsWidth/2)
+  let buttonYOnPage = interfaceMenuY + interfaceMenuHeight/3
 
+  let secondParagraphY = buttonYOnPage+buttonsHeight + (marginLeftPage*4)
 
   //* --------------------------------
   //* ---------- Affichage -----------
@@ -321,12 +316,21 @@ function drawPauseMenu() {
   drawButton(buttonExit, undefined, false, 0);
   drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonExit));
 
-  //? Dessinner Yvo en Idle
-  drawCharacter(YvoX, YvoY, YvoWidth, YvoHeight, "right", "idle")
   
-  drawLifeBar(lifeBarX, LifeBarY)
+  textFont(pixelFont)
+  drawText("Déplacements:", fontSizePause, [buttonXOnPage+(buttonsWidth/2), buttonYOnPage-fontSizePause-marginLeftPage], [CENTER, BASELINE]);
+
+
+  image(buttonZ, buttonXOnPage, buttonYOnPage, buttonsWidth, buttonsHeight)
+  image(buttonQ, buttonXOnPage-buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonS, buttonXOnPage, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonD, buttonXOnPage+buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
   
-  
+
+  drawText("Intéractions:", fontSizePause, [buttonXOnPage+(buttonsWidth/2), secondParagraphY], [CENTER, BASELINE])
+
+  image(buttonE, buttonXOnPage, secondParagraphY+buttonsHeight, buttonsWidth, buttonsHeight)
+
   /*
   noFill()
   stroke(0)
@@ -361,7 +365,7 @@ function drawPauseMenu() {
 //~ MENU HOME SETTINGS
 function drawSettingsMenu() {
   cursor('default')
-  background(0)
+  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
 
   textFont(pixelFont)
 
@@ -644,7 +648,7 @@ function drawStats() {
   textFont(pixelFont)
   cursor('default')
 
-  background(0)
+  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
   gameIsPaused = true;
 
   //* --------------------------------
@@ -785,19 +789,8 @@ function drawStats() {
 //^ --------------------------------------------------------------------------
 
 function drawStartGame() {
-  if (!startCinematicPlaying) {
-    background(0);
-    fill(255);
 
-    inGame = true
-    startGame = false
-  }
-}
-
-
-function drawStartGame() {
-
-  background(0);
+  image(backgroundImageUI,0,0,(viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.width, (viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.height);
   fill(255);
 
   inGame = true
@@ -1177,7 +1170,7 @@ function drawCredits() {
 
   textAlign(CENTER, CENTER);
   textSize(32);
-  background(0);
+  image(backgroundImageUI,0,0,(viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.width, (viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.height);
   fill(255);
 
   for (let i = 0; i < creditsJSON.Credits.length; i++) {

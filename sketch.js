@@ -40,10 +40,20 @@ function preload() {
   smallPopUp = loadImage("assets/GUI/smallPopUp.png"); 
 
 
+  //? Buttons
+  buttonZ = loadImage("assets/GUI/buttonZ.png");
+  buttonQ = loadImage("assets/GUI/buttonQ.png");
+  buttonS = loadImage("assets/GUI/buttonS.png");
+  buttonD = loadImage("assets/GUI/buttonD.png");
+  buttonE = loadImage("assets/GUI/buttonE.png");
+
   //? Background
   backgroundImage = loadImage('assets/Background/bg_forest.png');
   backgroundImageDistant = loadImage('assets/Background/bg_forest_distant.png');
   backgroundImageClose = loadImage('assets/Background/bg_forest_close.png');
+
+  backgroundImageUI = loadImage('assets/Background/UIBackground.png');
+
 
 
   //? Animation PNJ
@@ -144,7 +154,7 @@ function draw() {
   
   
           //? Afficher le fond du jeu
-          drawBackgroundImage(backgroundImage, backgroundImageDistant, backgroundImageClose)
+          drawBackgroundImage(backgroundImage, backgroundImageClose, backgroundImageDistant)
           
           
 

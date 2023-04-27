@@ -147,6 +147,13 @@ let popUpButtonHover
 let checkedLongButtonHover
 let checkedLongButton
 
+//? Buttons UI
+
+let buttonZ
+let buttonQ
+let buttonS
+let buttonD
+let buttonE
 
 //? Jeu
 let inGame;
@@ -302,6 +309,8 @@ let characterTexture_Dash;
 let backgroundImage;
 let backgroundImageDistant;
 let backgroundImageClose;
+
+let backgroundImageUI;
 
 let GUITroc;
 let GUIButton;
