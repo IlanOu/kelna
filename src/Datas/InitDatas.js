@@ -13,6 +13,7 @@ const init_killingBlocks = [39, 49];
 
 //~ Admins
 const init_username = "";
+const init_loged = false;
 const init_password = "";
 
 

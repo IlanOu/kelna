@@ -13,6 +13,7 @@ let killingBlocks;
 //~ Admins
 let username;
 let password;
+let loged;
 
 
 //~ Camera

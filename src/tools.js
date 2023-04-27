@@ -194,8 +194,13 @@ let PlaySong = () => {
 
 //~ hurtPlayer
 function hurtPlayer(amount) {
-    healthPlayer -= amount; //& Enlever point de vie
-    healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
+    if(!loged){
+        healthPlayer -= amount; //& Enlever point de vie
+        healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
+    }else{
+        healthPlayer += amount; //& Enlever point de vie
+        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+    }
 }
 
 
@@ -763,6 +768,7 @@ function initVariables() {
     //& Admins
     username = init_username;
     password = init_password;
+    loged = init_loged
 
 
     //& Camera
