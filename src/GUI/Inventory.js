@@ -102,10 +102,10 @@ function displayInventory() {
             }
             if (i == 1) {
                 canEat = true
-                slotY += spaceBetween
+                // slotY += spaceBetween
                 image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
             } else if (i == 2) {
-                slotY += spaceBetween
+                // slotY += spaceBetween
                 fill(58, 37, 30)
                 rect(slotX, slotY, widthSlot, heightSlot);
             }
