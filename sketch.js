@@ -46,6 +46,8 @@ function preload() {
   buttonS = loadImage("assets/GUI/buttonS.png");
   buttonD = loadImage("assets/GUI/buttonD.png");
   buttonE = loadImage("assets/GUI/buttonE.png");
+  buttonSpace = loadImage("assets/GUI/buttonSpace.png");
+
 
   //? Background
   backgroundImage = loadImage('assets/Background/bg_forest.png');
@@ -129,7 +131,6 @@ function setup() {
 
 //~ Draw 
 function draw() {
-  console.log(creditsInHome)
   background(0)
   noSmooth()
 

@@ -57,15 +57,15 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 
 
 //~ Chercher un tableau dans un tableau 2D
-function PNJMustBeShown(pnj) {
+function entityMustBeShown(mob) {
 
 
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-    let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+    let positionMapMob = findIndexValueIn2dArray(World.worldsMap, mob.mapName)
     let invertedArrayMapPosition = []
-    invertedArrayMapPosition[0] = positionMapPNJ[1]
-    invertedArrayMapPosition[1] = positionMapPNJ[0]
+    invertedArrayMapPosition[0] = positionMapMob[1]
+    invertedArrayMapPosition[1] = positionMapMob[0]
 
 
     let inChunksCheck = false
@@ -328,7 +328,6 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
             house = house[1]
             if (house.name == mapName && !mapExist) {
                 mapExist = true;
-                //indexMapX = house.indexOf(mapName);
                 indexMapX = 0
             } else {
                 indexMapY = 0
@@ -360,24 +359,20 @@ function drawKey(key) {
         PosX = characterPositionX
         PosY = characterPositionY
     } else {
-
-        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth / 1.2
-        PosY = characterInsidePosY - characterHeight / 3
+        PosX = characterInsidePosX + (characterWidth / 2) - (interactionWidth / 1.2)
+        PosY = characterInsidePosY - (characterHeight / 3)
     }
 
-    let keyBackground = [(PosX),
-        PosY - 50,
-        interactionWidth,
-        interactionHeight
-    ]
-
-    let textKey = [PosX + (keyBackground[2] / 2),
-        PosY - 50 + (keyBackground[3] / 8)
-    ]
+    let keyBackground = [
+                            PosX,
+                            PosY - (interactionHeight*1.5),
+                            interactionWidth,
+                            interactionHeight
+                        ]
 
     fill(255)
-    drawButton(keyBackground)
-    drawText(key, 20, textKey, [CENTER, BASELINE])
+    drawButton(keyBackground, buttonE)
+    // drawText(key, 20, textKey, [CENTER, BASELINE])
 
 }
 

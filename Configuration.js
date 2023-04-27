@@ -155,6 +155,8 @@ let buttonQ
 let buttonS
 let buttonD
 let buttonE
+let buttonSpace
+
 
 //? Jeu
 let inGame;

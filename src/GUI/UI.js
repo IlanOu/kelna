@@ -299,7 +299,10 @@ function drawPauseMenu() {
   let buttonXOnPage = centerLeftPage-(buttonsWidth/2)
   let buttonYOnPage = interfaceMenuY + interfaceMenuHeight/3
 
-  let secondParagraphY = buttonYOnPage+buttonsHeight + (marginLeftPage*4)
+  let secondParagraphY = buttonYOnPage+buttonsHeight + (marginLeftPage*5)
+
+
+  let buttonSpaceWidth = buttonsWidth*4
 
   //* --------------------------------
   //* ---------- Affichage -----------
@@ -325,7 +328,8 @@ function drawPauseMenu() {
   image(buttonQ, buttonXOnPage-buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
   image(buttonS, buttonXOnPage, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
   image(buttonD, buttonXOnPage+buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
-  
+  image(buttonSpace, buttonXOnPage-(buttonSpaceWidth/2) + (buttonsWidth/2), buttonYOnPage+(buttonsHeight*2)+marginLeftPage, buttonSpaceWidth, buttonsHeight)
+
 
   drawText("Intéractions:", fontSizePause, [buttonXOnPage+(buttonsWidth/2), secondParagraphY], [CENTER, BASELINE])
 
@@ -992,6 +996,7 @@ function drawTroc(x, y, w, h) {
 
 
 function drawTalk(x, y, w, h) {
+  cursor('default')
   textFont(pixelFont)
   let currentPNJName = getPNJName();
   let currentPNJ = pnjJSON.PNJS[currentPNJName]
@@ -1019,7 +1024,7 @@ function drawTalk(x, y, w, h) {
     }
   }
 
-  let fontSize = 20
+  let fontSize = 30
 
   //? Afficher la banière du fond
   let ratio = w / talkBackground.width
@@ -1146,6 +1151,7 @@ function gameFPS() {
 
 //~ DISCUSSION
 function drawDiscussion(x, y, w, h) {
+  
   //? Fonction comme conditions pour la discussions
   let currentPNJ = getPNJName();
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
@@ -1156,7 +1162,7 @@ function drawDiscussion(x, y, w, h) {
 
     //? Affichage du troc
     if (!PNJSeePlayer) {
-      PressInteractPNJD = false;
+      PressInteractPNJ = false;
     }
   }
 

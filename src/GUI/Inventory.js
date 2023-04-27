@@ -30,6 +30,7 @@ let removeItemFromInventory = (index) => {
     if (index < 3 && index >= 0) {
         if (index == 1) {
             if (Inventory[index].amount <= 1) {
+                Inventory[index].amount--
                 Inventory[index] = {};
             } else {
                 Inventory[index].amount--
@@ -120,11 +121,11 @@ function displayInventory() {
                 }
 
                 if (Inventory[i].amount) {
-                    let fontSize = 15
-                    fill(0)
+                    let fontSize = 25
+                    fill(255)
                     stroke(0)
                     textSize(fontSize);
-                    text(Inventory[i].amount, itemPosX, itemPosY + itemHeight)
+                    text(Inventory[i].amount, itemPosX+itemWidth, itemPosY + itemHeight)
                 }
             }
             image(slot, slotX, slotY, widthSlot, heightSlot)

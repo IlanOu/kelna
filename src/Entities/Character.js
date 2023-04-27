@@ -279,8 +279,8 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
 
         
         case "sword_1":
-          annimationBeginY = 15 * 32
-          annimationEndY = 16 * 32
+          annimationBeginY = 14 * 32
+          annimationEndY = 15 * 32
           break;
         case "sword_2":
           annimationBeginY = 9 * 32

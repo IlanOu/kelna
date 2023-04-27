@@ -6,7 +6,12 @@ function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
       if (pnjJSON.PNJS){
-        PNJ(pnjJSON.PNJS.Marjo);
+        Object.entries(pnjJSON.PNJS).forEach((pnj) => {
+          if (World.worldsMap.some(row => row.includes(pnj[1].mapName))){
+            PNJ(pnj[1]);          
+          }
+        })
+        // PNJ(pnjJSON.PNJS.Marjo);
         // PNJ(pnjJSON.PNJS.Toto);
       }
   } else {
@@ -75,7 +80,7 @@ function PNJ(pnj) {
   let collide = false;
 
   
-  if (PNJMustBeShown(pnj)) {
+  if (entityMustBeShown(pnj)) {
     
     
     if (lastMap != currentMap){
