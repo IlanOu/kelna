@@ -146,12 +146,6 @@ function keyReleased() {
             engineOne = !engineOne;
         }
     }
-
-    //? - du pavé de nombre
-    if (keyCode == 109) {
-        endTheGameCredits = true
-    }
-
 }
 
 
