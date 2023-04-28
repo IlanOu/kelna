@@ -96,7 +96,7 @@ function preload() {
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
-  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.mov"); //  - cinematicGameKelna.mov
+  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV"); //  - cinematicGameKelna.mov
 
 
   //? Music
