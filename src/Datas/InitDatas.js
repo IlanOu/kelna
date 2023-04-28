@@ -176,7 +176,7 @@ const init_MusicIsActivate = false
 const init_YouCanPlayMusic = false
 
 //* Sons
-const init_SongIsActivate = false
+//const init_SongIsActivate = false
 const init_YouCanPlaySong = false
 
 

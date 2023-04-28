@@ -170,7 +170,7 @@ function drawHomeMenu() {
 
   if (buttonClicked(credits) && !settingsPause && !creditsInHome) {
     creditsInHome = true;
-    console.log(creditsInHome)
+  
     inGame = true
     gameIsPlaying = true;
     leftClickPressed = false
@@ -1190,10 +1190,11 @@ function drawCredits() {
 
   if (PositionCredits < -creditsJSON.Credits.length * 50) {
 
-    if (creditsInHome) {
+    if (creditsInHome && !endTheGameCredits) {
       inGame = false
       creditsInHome = false;
-    } else if(endTheGameCredits){
+      initVariables()
+    } else if (endTheGameCredits && !creditsInHome) {
       inGame = false
       endTheGameCredits = false
       initVariables()
@@ -1249,7 +1250,7 @@ function setupUI() {
 
 
     //? Credits
-    if (endTheGameCredits && inGame|| creditsInHome ) {
+    if (endTheGameCredits || creditsInHome ) {
       drawCredits()
     }
 

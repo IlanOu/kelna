@@ -41,20 +41,20 @@
         "mushroom_1": {
             "name": "mushroom_1",
             "category": "other",
-            "itemNumber": 1,
-            "location": "A-1",
-            "x": 5,
-            "y": 11,
+            "itemNumber": 4,
+            "location": "C-3",
+            "x": 1,
+            "y": 2,
             "detectDist": 1,
             "shown": true
         },
         "mushroom_2": {
             "name": "mushroom_2",
             "category": "other",
-            "itemNumber": 1,
-            "location": "A-1",
-            "x": 10,
-            "y": 11,
+            "itemNumber": 4,
+            "location": "C-4",
+            "x": 0,
+            "y": 7,
             "detectDist": 1,
             "shown": true
         }
