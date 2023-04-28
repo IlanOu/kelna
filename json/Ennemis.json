@@ -1,60 +1,7 @@
 {
     "Ennemis": {
-
-      "Malade1": {
-        "mapName": "A-2",
-        "type": "Malade1",
-        "isAThreat": false,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-
-        
-        "life": 3,
-        
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
-
-        "color": "yellow",
-
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
-
-        "x": 900,
-        "y": 200,
-
-        "globalStartX": 0,
-        "globalStartY": 0,
-
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 3,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-
       "Malade2": {
-        "mapName": "A-1",
+        "mapName": "C-6",
 
         "type": "Malade2",
         "isAThreat": true,
@@ -76,10 +23,10 @@
         "seePlayer": false,
 
         "x": 0,
-        "y": 200,
+        "y": 0,
 
-        "globalStartX": 5,
-        "globalStartY": 0,
+        "globalStartX": 8,
+        "globalStartY": 8,
 
         "velocityY": 0,
         "mass": 60,

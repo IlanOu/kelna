@@ -67,7 +67,8 @@
       "y": 0,
 
       "globalStartX": 5,
-      "globalStartY": 0,
+      "globalStartY": 11,
+
       "velocityY": 0,
       "mass": 60,
 
@@ -110,7 +111,7 @@
     "Marjo": {
       "name": "Marjo",
 
-      "mapName": "B-2",
+      "mapName": "A-1",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -119,8 +120,8 @@
       "x": 0,
       "y": 0,
 
-      "globalStartX": 5,
-      "globalStartY": 5,
+      "globalStartX": 15,
+      "globalStartY": 11,
 
       "velocityY": 0,
       "mass": 60,

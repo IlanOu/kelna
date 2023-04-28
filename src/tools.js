@@ -57,9 +57,34 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 
 
 //~ Chercher un tableau dans un tableau 2D
-function entityMustBeShown(mob) {
+function mobMustBeShown(mob) {
+    let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x-xStartWorld, mob.y-yStartWorld, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
+    
+    console.log(currentMapInWorld)
+    console.log(currentMapName)
+
+    let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+    let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
+    let invertedArrayMapPosition = []
+    invertedArrayMapPosition[0] = positionMapMob[1]
+    invertedArrayMapPosition[1] = positionMapMob[0]
 
 
+    let inChunksCheck = false
+
+    mapsToCheck.some(map => {
+        if (!inChunksCheck) {
+            inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
+        }
+    })
+
+    return inChunksCheck
+}
+
+
+//~ Chercher un tableau dans un tableau 2D
+function pnjMustBeShown(mob) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
     let positionMapMob = findIndexValueIn2dArray(World.worldsMap, mob.mapName)

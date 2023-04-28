@@ -80,7 +80,7 @@ function PNJ(pnj) {
   let collide = false;
 
   
-  if (entityMustBeShown(pnj)) {
+  if (pnjMustBeShown(pnj)) {
     
     
     if (lastMap != currentMap){

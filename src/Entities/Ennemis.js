@@ -47,7 +47,7 @@ function mob(Mobs) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
 
-    if (entityMustBeShown(Mobs)){
+    if (pnjMustBeShown(Mobs)){ //! IMPORTANT Régler le probleme du MOB qui despawn 
       //* Ajout de la gravité au Mob
       let gravityReturns = getPositionWithGravity(
         MobsY,
