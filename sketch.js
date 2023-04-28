@@ -96,7 +96,7 @@ function preload() {
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
-  gameIntroductionVideo = createVideo("assets/cinematic/StartCinematic.mp4"); //  - cinematicGameKelna.mov
+  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.mov"); //  - cinematicGameKelna.mov
 
 
   //? Music
@@ -104,8 +104,8 @@ function preload() {
 
 
   //? Songs
-  VoiceStartSong = [loadSound("assets/audios/voices/START/teststart1.m4a"), loadSound("assets/audios/voices/START/teststart2.m4a")]
-  VoicesDieSong = [loadSound("assets/audios/voices/DIE/end1.m4a"), loadSound("assets/audios/voices/DIE/end2.m4a")]
+  VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
+  VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
 }
 
 
