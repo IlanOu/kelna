@@ -10,6 +10,7 @@ function login(username, password) {
             characterPositionY = 0,
             maxHealth = 10,
             healthPlayer = 10
+            dashSystem = true
         } else {
             console.error("Nom ou mot de passe incorrect !")
         }
@@ -27,6 +28,7 @@ function logout() {
         maxHealth = init_maxHealth,
         healthPlayer = init_healthPlayer
         loged = false
+        dashSystem = false
     } else {
         console.error("Vous n'êtes pas connecté pour vous déconnecter !")
     }
