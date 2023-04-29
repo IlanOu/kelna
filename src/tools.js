@@ -193,6 +193,8 @@ let PlaySong = () => {
 
 
 function soundEffects() {
+
+    /*
     if (soundEnabled) {
 
         if (characterIsJumping) {
@@ -226,8 +228,9 @@ function soundEffects() {
         } else {
             soundSwordHit3.pause()
         }
-    }
+    }*/
 }
+
 
 //~ hurtPlayer
 function hurtPlayer(amount) {
@@ -776,10 +779,17 @@ function shakeCamera(durationSeconds, forcePixels) {
 //~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
-        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-        currentItemPointing = ""
-        //canGetItem = false
+        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna"){
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+            currentItemPointing = ""
+            gameIsEnd = true
+        }else {
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+            currentItemPointing = ""
+            //canGetItem = false
+        }
     }
 }
 
@@ -1056,6 +1066,10 @@ function initVariables() {
 
     //~ Mort
     playerDead = init_playerDead;
+
+
+    //~ END
+    gameIsEnd = init_gameIsEnd
 
     //~ Popups
     popUpShown = init_popUpShown;

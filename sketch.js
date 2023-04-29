@@ -55,7 +55,7 @@ function preload() {
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/taverne.png");
+  tileSetTaverne = loadImage("assets/textures/tavernelabo.png"); //taverne
   tileSetLabo = loadImage("assets/textures/labo.png");
 
 
@@ -85,7 +85,7 @@ function preload() {
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
-  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.mov"); //  -
+  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.mov");
 
 
   //? Music
@@ -98,13 +98,13 @@ function preload() {
 
 
   //? Sounds effects
-  soundJump = loadSound("assets/audios/sounds/jump.mp3")
-  soundHit = loadSound("assets/audios/sounds/hit.mp3")
-  soundDie = loadSound("assets/audios/sounds/die.mp3")
-  soundUnsheathSword = loadSound("assets/audios/sounds/unsheathSword.mp3")
-  soundSwordHit1 = loadSound("assets/audios/sounds/swordsHit_1.mp3")
-  soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
-  soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
+  //soundJump = loadSound("assets/audios/sounds/jump.mp3")
+  //soundHit = loadSound("assets/audios/sounds/hit.mp3")
+  //soundDie = loadSound("assets/audios/sounds/die.mp3")
+  //soundUnsheathSword = loadSound("assets/audios/sounds/unsheathSword.mp3")
+  //soundSwordHit1 = loadSound("assets/audios/sounds/swordsHit_1.mp3")
+  //soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
+  //soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
 }
 
 

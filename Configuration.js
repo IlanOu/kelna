@@ -268,6 +268,10 @@ let speedCredits;
 let creditsInHome;
 
 
+//~ Fin du jeu
+let gameIsEnd;
+
+
 //~ Statistiques
 let numberOfSteps;
 

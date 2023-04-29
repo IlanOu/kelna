@@ -730,11 +730,8 @@ function setupInteractions() {
     }
 
     if (aPNJCanTalk()) {
-      
       drawKey("E");
     }
-
-
 
 
   } else {
@@ -1077,6 +1074,18 @@ function drawCredits() {
 }
 
 
+//~ End game
+
+function endGame(){
+
+
+  console.log("FIN DU JEU")
+
+
+}
+
+
+
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
@@ -1114,6 +1123,10 @@ function setupUI() {
       } else if (healthPlayer > 0) {
         drawPauseMenu();
       }
+    }
+
+    if(gameIsEnd){
+      endGame()
     }
 
 
