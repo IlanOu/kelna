@@ -55,26 +55,26 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
     return previous_index_pos;
 }
 
-  
-  
+
+
 
 //~ Chercher un tableau dans un tableau 2D
 function mobMustBeShown(mob, found) {
-    
-    if (found){
+
+    if (found) {
         let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x, mob.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
         let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
-        
-    
+
+
         let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
         let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
         let invertedArrayMapPosition = []
         invertedArrayMapPosition[0] = positionMapMob[1]
         invertedArrayMapPosition[1] = positionMapMob[0]
-    
-    
+
+
         let inChunksCheck = false
-    
+
         mapsToCheck.some(map => {
             if (!inChunksCheck) {
                 inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
@@ -222,41 +222,43 @@ let PlaySong = () => {
 
 function soundEffects() {
 
-    /*
     if (soundEnabled) {
-
-        if (characterIsJumping) {
-            soundJump.play()
-        } else {
-            soundJump.pause()
+        if (!soundHit.isPlaying()) {
+            if (characterMovement == "getHit") {
+                soundHit.play()
+            } else {
+                soundHit.pause()
+            }
         }
-        if (characterMovement == "getHit") {
-            soundHit.play()
-        } else {
-            soundHit.pause()
+        if (!soundDie.isPlaying()) {
+            if (characterMovement == "die") {
+                soundDie.play()
+            } else {
+                soundDie.pause()
+            }
         }
-        if (characterMovement == "die") {
-            soundDie.play()
-        } else {
-            soundDie.pause()
+        if (!soundSwordHit1.isPlaying()) {
+            if (characterMovement == "hit") {
+                soundSwordHit1.play()
+            } else {
+                soundSwordHit1.pause()
+            }
         }
-        if (characterMovement == "hit") {
-
-            soundSwordHit1.play()
-        } else {
-            soundSwordHit1.pause()
+        if (!soundSwordHit2.isPlaying()) {
+            if (characterMovement == "hit2") {
+                soundSwordHit2.play()
+            } else {
+                soundSwordHit2.pause()
+            }
         }
-        if (characterMovement == "hit2") {
-            soundSwordHit2.play()
-        } else {
-            soundSwordHit2.pause()
+        if (!soundSwordHit3.isPlaying()) {
+            if (characterMovement == "hit3") {
+                soundSwordHit3.play()
+            } else {
+                soundSwordHit3.pause()
+            }
         }
-        if (characterMovement == "hit3") {
-            soundSwordHit3.play()
-        } else {
-            soundSwordHit3.pause()
-        }
-    }*/
+    }
 }
 
 
@@ -432,11 +434,11 @@ function drawKey(key) {
     }
 
     let keyBackground = [
-                            PosX,
-                            PosY - (interactionHeight*1.5),
-                            interactionWidth,
-                            interactionHeight
-                        ]
+        PosX,
+        PosY - (interactionHeight * 1.5),
+        interactionWidth,
+        interactionHeight
+    ]
 
     fill(255)
     drawButton(keyBackground, buttonE)
@@ -472,24 +474,24 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
 
 
-function showMessage(message){
+function showMessage(message) {
     let popupMarginTop = 40
 
     let popupMessageWidth = 400
     let popupMessageHeight = 100
-    let popupPositionX = (viewportDisplayWidth/2) - (popupMessageWidth/2)
+    let popupPositionX = (viewportDisplayWidth / 2) - (popupMessageWidth / 2)
     let popupPositionY = 0 + popupMarginTop
 
     let messageFontSize = 30
 
-    let messagePositionX = popupPositionX + popupMessageWidth/2 
-    let messagePositionY = popupPositionY + (popupMessageHeight/2) - messageFontSize/1.2
+    let messagePositionX = popupPositionX + popupMessageWidth / 2
+    let messagePositionY = popupPositionY + (popupMessageHeight / 2) - messageFontSize / 1.2
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
     image(longButton, popupPositionX, popupPositionY, popupMessageWidth, popupMessageHeight)
     drawText(message, 30, messageTextPosition, [CENTER, BASELINE], [0, 0, 0])
-    
+
 }
 
 
@@ -765,7 +767,7 @@ function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh/2);
+    return Math.round(vitesseEnKmh / 2);
 }
 
 
@@ -800,10 +802,10 @@ function timeConversion(seconds, mod = 0) {
     switch (mod) {
         case 0:
             returnValue = `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
-        break;
+            break;
         case 1:
             returnValue = `${heuresFormatees}:${minutesFormatees}:${secondesFormatees}`;
-        break;
+            break;
     }
 
     return returnValue;
@@ -820,12 +822,12 @@ function shakeCamera(durationSeconds, forcePixels) {
 //~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
-        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna"){
+        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna") {
             addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
             itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
             currentItemPointing = ""
             gameIsEnd = true
-        }else {
+        } else {
             addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
             itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
             currentItemPointing = ""

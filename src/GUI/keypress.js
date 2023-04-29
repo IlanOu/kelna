@@ -54,14 +54,14 @@ function keyPressed() {
 
 
     //! Récupérer l'item
-    if (itemsJSON.ItemsOnTheFloor){
+    if (itemsJSON.ItemsOnTheFloor) {
         Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
             item = item[1]
-            if (item.canGetItem){
+            if (item.canGetItem) {
                 if (keyCode == 69 && engineOne) {
-                    if (Inventory[getIndexOfItemCategory(item.category)].category){
+                    if (Inventory[getIndexOfItemCategory(item.category)].category) {
                         tempMessage()
-                    }else{
+                    } else {
                         getCurrentItem()
                     }
                     item.canGetItem = false
@@ -69,7 +69,7 @@ function keyPressed() {
             }
         })
     }
-        
+
     //? Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
@@ -102,6 +102,13 @@ function keyPressed() {
 function keyReleased() {
     //? Barre espace
     if (keyCode == 32 || keyCode == 38) {
+        if (!soundJump.isPlaying()) {
+            if (characterIsJumping) {
+                soundJump.play()
+            } else {
+                soundJump.pause()
+            }
+        }
         spaceKeyIsPressed = false;
         characterDoubleJumping = true;
     }

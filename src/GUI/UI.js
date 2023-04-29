@@ -12,7 +12,7 @@ function drawInterface([x, y, w, h], img = undefined) {
 }
 
 //~ Afficher un bouton
-function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255, color = [255,255,255]) {
+function drawButton([x, y, w, h], img = undefined, strokeToggle = true, transparence = 255, color = [255, 255, 255]) {
   if (strokeToggle) {
     stroke(0);
   } else {
@@ -36,27 +36,27 @@ function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], colo
   let margeUnderline = 5;
   text(Text, x, y + fontSize);
 
-  if(underline){
+  if (underline) {
 
     let offSetX = 0;
-    switch (textAlignmentX){
+    switch (textAlignmentX) {
 
       case LEFT:
         offSetX = textWidth(Text) / 2
-      break
+        break
 
       case RIGHT:
-        offSetX = - textWidth(Text) / 2
-      break
+        offSetX = -textWidth(Text) / 2
+        break
     }
-    if(textAlignmentY != BASELINE){
-      underline = false 
-    }else{
-      rect(x - textWidth(Text)/2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
+    if (textAlignmentY != BASELINE) {
+      underline = false
+    } else {
+      rect(x - textWidth(Text) / 2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
     }
 
 
-    
+
   }
 
 }
@@ -79,7 +79,7 @@ function buttonHover([x, y, h, w]) {
 //~ MENU HOME
 function drawHomeMenu() {
   cursor('default')
-  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
+  image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
 
 
@@ -155,6 +155,7 @@ function drawHomeMenu() {
     if (playerDead) {
       initVariables()
     }
+    SongBackground.pause()
     leftClickPressed = false
     startGame = true
   }
@@ -170,7 +171,7 @@ function drawHomeMenu() {
 
   if (buttonClicked(credits) && !settingsPause && !creditsInHome) {
     creditsInHome = true;
-  
+
     inGame = true
     gameIsPlaying = true;
     leftClickPressed = false
@@ -212,7 +213,7 @@ function drawHomeMenu() {
 //~ MENU PAUSE
 function drawPauseMenu() {
   cursor('default')
-  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
+  image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
 
   //? Cacher le troc si il s'affiche
@@ -269,7 +270,7 @@ function drawPauseMenu() {
   //? Bouton paramètres
   let buttonSettingsW = 150;
   let buttonSettingsH = fontSizePause;
-  let buttonSettingsX = centerRightPage 
+  let buttonSettingsX = centerRightPage
   let buttonSettingsY = centerYPage;
   let textSettingsX = buttonSettingsX
   let buttonSettings = [
@@ -296,13 +297,13 @@ function drawPauseMenu() {
 
   let buttonsWidth = 50
   let buttonsHeight = 50
-  let buttonXOnPage = centerLeftPage-(buttonsWidth/2)
-  let buttonYOnPage = interfaceMenuY + interfaceMenuHeight/3
+  let buttonXOnPage = centerLeftPage - (buttonsWidth / 2)
+  let buttonYOnPage = interfaceMenuY + interfaceMenuHeight / 3
 
-  let secondParagraphY = buttonYOnPage+buttonsHeight + (marginLeftPage*5)
+  let secondParagraphY = buttonYOnPage + buttonsHeight + (marginLeftPage * 5)
 
 
-  let buttonSpaceWidth = buttonsWidth*4
+  let buttonSpaceWidth = buttonsWidth * 4
 
   //* --------------------------------
   //* ---------- Affichage -----------
@@ -314,26 +315,26 @@ function drawPauseMenu() {
   drawText("Continuer", fontSizePause, [textReturnX, buttonBackY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonBack));
 
   drawButton(buttonSettings, undefined, false, 0);
-  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0,0,0], buttonHover(buttonSettings));
+  drawText("Paramètres", fontSizePause, [textSettingsX, buttonSettingsY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonSettings));
 
   drawButton(buttonExit, undefined, false, 0);
   drawText("Retour au menu", fontSizePause, [textExitX, buttonExitY], [LEFT, BASELINE], [0, 0, 0], buttonHover(buttonExit));
 
-  
+
   textFont(pixelFont)
-  drawText("Déplacements:", fontSizePause, [buttonXOnPage+(buttonsWidth/2), buttonYOnPage-fontSizePause-marginLeftPage], [CENTER, BASELINE]);
+  drawText("Déplacements:", fontSizePause, [buttonXOnPage + (buttonsWidth / 2), buttonYOnPage - fontSizePause - marginLeftPage], [CENTER, BASELINE]);
 
 
   image(buttonZ, buttonXOnPage, buttonYOnPage, buttonsWidth, buttonsHeight)
-  image(buttonQ, buttonXOnPage-buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
-  image(buttonS, buttonXOnPage, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
-  image(buttonD, buttonXOnPage+buttonsHeight, buttonYOnPage+buttonsHeight, buttonsWidth, buttonsHeight)
-  image(buttonSpace, buttonXOnPage-(buttonSpaceWidth/2) + (buttonsWidth/2), buttonYOnPage+(buttonsHeight*2)+marginLeftPage, buttonSpaceWidth, buttonsHeight)
+  image(buttonQ, buttonXOnPage - buttonsHeight, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonS, buttonXOnPage, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonD, buttonXOnPage + buttonsHeight, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonSpace, buttonXOnPage - (buttonSpaceWidth / 2) + (buttonsWidth / 2), buttonYOnPage + (buttonsHeight * 2) + marginLeftPage, buttonSpaceWidth, buttonsHeight)
 
 
-  drawText("Intéractions:", fontSizePause, [buttonXOnPage+(buttonsWidth/2), secondParagraphY], [CENTER, BASELINE])
+  drawText("Intéractions:", fontSizePause, [buttonXOnPage + (buttonsWidth / 2), secondParagraphY], [CENTER, BASELINE])
 
-  image(buttonE, buttonXOnPage, secondParagraphY+buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonE, buttonXOnPage, secondParagraphY + buttonsHeight, buttonsWidth, buttonsHeight)
 
   /*
   noFill()
@@ -369,7 +370,7 @@ function drawPauseMenu() {
 //~ MENU HOME SETTINGS
 function drawSettingsMenu() {
   cursor('default')
-  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
+  image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
 
   textFont(pixelFont)
 
@@ -491,7 +492,7 @@ function drawSettingsMenu() {
 
 
 
-  
+
 
   if (!cameraShakeEnabled && !buttonHover(ButtonToggleCameraShake)) {
     drawButton(ButtonToggleCameraShake, checkedLongButton, true, 255);
@@ -613,7 +614,6 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
-    playerDead = init_playerDead;
   }
 
   if (buttonClicked(buttonStats)) {
@@ -653,7 +653,7 @@ function drawStats() {
   textFont(pixelFont)
   cursor('default')
 
-  image(backgroundImageUI,0,0,backgroundImageUI.width, backgroundImageUI.height)
+  image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   gameIsPaused = true;
 
   //* --------------------------------
@@ -699,22 +699,22 @@ function drawStats() {
 
   let titleTimeSpent = "Temps passé en jeu :\n"
   let textTimeSpent = timeConversion(Math.floor(statistiques.timeSpentInGame))
-  
+
   let titleDistanceWalked = "Distance parcourue :\n"
   let textDistanceWalked = statistiques.distanceWalked + " blocs"
-  
+
   let titlePlayerSpeed = "Vitesse moyenne :\n"
   let textPlayerSpeed = statistiques.playerSpeed + "km/h"
-  
+
   let titleMobsKilled = "Ennemis tués :\n"
   let textMobsKilled = statistiques.mobsKilled
-  
+
   let titleDamagesGet = "Nombre de dégâts subis :\n"
   let textDamagesGet = statistiques.damagesGet
-  
+
   let titleDamagesDones = "Nombre de dégâts infligés :\n"
   let textDamagesDones = statistiques.damagesDones
-  
+
   let titleHealCount = "Nombre de coeurs régénérés :\n"
   let textHealCount = statistiques.healCount
 
@@ -724,7 +724,7 @@ function drawStats() {
 
 
   let startParagraphY = titleStatsY + titleFontSize
-  let startParagraphXLeft = interfaceMenuX +margin
+  let startParagraphXLeft = interfaceMenuX + margin
   let startParagraphXRight = interfaceMenuX + interfaceMenuWidth - margin
 
 
@@ -739,29 +739,29 @@ function drawStats() {
   drawText("STATS", titleFontSize, [titleStatsX, titleStatsY], [CENTER, BASELINE], [0, 0, 0])
 
 
-  drawText(titleTimeSpent, defaultFontSize, [startParagraphXLeft, startParagraphY + (0*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textTimeSpent, defaultFontSize, [startParagraphXRight, startParagraphY + (0*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titleDistanceWalked, defaultFontSize, [startParagraphXLeft, startParagraphY + (2*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textDistanceWalked, defaultFontSize, [startParagraphXRight, startParagraphY + (2*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titlePlayerSpeed, defaultFontSize, [startParagraphXLeft, startParagraphY + (4*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textPlayerSpeed, defaultFontSize, [startParagraphXRight, startParagraphY + (4*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titleMobsKilled, defaultFontSize, [startParagraphXLeft, startParagraphY + (6*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textMobsKilled, defaultFontSize, [startParagraphXRight, startParagraphY + (6*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titleDamagesGet, defaultFontSize, [startParagraphXLeft, startParagraphY + (8*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textDamagesGet, defaultFontSize, [startParagraphXRight, startParagraphY + (8*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titleDamagesDones, defaultFontSize, [startParagraphXLeft, startParagraphY + (10*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textDamagesDones, defaultFontSize, [startParagraphXRight, startParagraphY + (10*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
-  
-  drawText(titleHealCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (12*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textHealCount, defaultFontSize, [startParagraphXRight, startParagraphY + (12*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  drawText(titleTimeSpent, defaultFontSize, [startParagraphXLeft, startParagraphY + (0 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textTimeSpent, defaultFontSize, [startParagraphXRight, startParagraphY + (0 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
 
-  drawText(titleDeathCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (14*marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
-  drawText(textDeathCount, defaultFontSize, [startParagraphXRight, startParagraphY + (14*marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+  drawText(titleDistanceWalked, defaultFontSize, [startParagraphXLeft, startParagraphY + (2 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDistanceWalked, defaultFontSize, [startParagraphXRight, startParagraphY + (2 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titlePlayerSpeed, defaultFontSize, [startParagraphXLeft, startParagraphY + (4 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textPlayerSpeed, defaultFontSize, [startParagraphXRight, startParagraphY + (4 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titleMobsKilled, defaultFontSize, [startParagraphXLeft, startParagraphY + (6 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textMobsKilled, defaultFontSize, [startParagraphXRight, startParagraphY + (6 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titleDamagesGet, defaultFontSize, [startParagraphXLeft, startParagraphY + (8 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDamagesGet, defaultFontSize, [startParagraphXRight, startParagraphY + (8 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titleDamagesDones, defaultFontSize, [startParagraphXLeft, startParagraphY + (10 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDamagesDones, defaultFontSize, [startParagraphXRight, startParagraphY + (10 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titleHealCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (12 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textHealCount, defaultFontSize, [startParagraphXRight, startParagraphY + (12 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
+
+  drawText(titleDeathCount, defaultFontSize, [startParagraphXLeft, startParagraphY + (14 * marginBetweenLines) + marginTop], [LEFT, BASELINE], [0, 0, 0])
+  drawText(textDeathCount, defaultFontSize, [startParagraphXRight, startParagraphY + (14 * marginBetweenLines) + marginTop], [RIGHT, BASELINE], [0, 0, 0])
 
 
 
@@ -795,7 +795,7 @@ function drawStats() {
 
 function drawStartGame() {
 
-  image(backgroundImageUI,0,0,(viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.width, (viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.height);
+  image(backgroundImageUI, 0, 0, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.width, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.height);
   fill(255);
 
   inGame = true
@@ -1114,7 +1114,7 @@ function openTalkMenu() {
 
 }
 
-function timerGame(){
+function timerGame() {
   textFont(pixelFont)
 
   let popupMargin = 40
@@ -1126,14 +1126,14 @@ function timerGame(){
   let timerPopupX = viewportDisplayWidth - timerPopupWidth - popupMargin
   let timerPopupY = 0 + popupMargin
 
-  let timerTextX = timerPopupX + timerPopupWidth/2
-  let timerTextY = timerPopupY + (timerPopupHeight/2) - timerFontSize*1.5
+  let timerTextX = timerPopupX + timerPopupWidth / 2
+  let timerTextY = timerPopupY + (timerPopupHeight / 2) - timerFontSize * 1.5
 
   let timerTextPosition = [timerTextX, timerTextY]
 
   image(smallButton, timerPopupX, timerPopupY, timerPopupWidth, timerPopupHeight)
   drawText(" Temps: \n" + timeConversion(Math.floor(statistiques.timeSpentInGame), 1), timerFontSize, timerTextPosition, [CENTER, BASELINE], [0, 0, 0]);
-  
+
 }
 
 //~ Affiche les FPS
@@ -1149,7 +1149,7 @@ function gameFPS() {
 
 //~ DISCUSSION
 function drawDiscussion(x, y, w, h) {
-  
+
   //? Fonction comme conditions pour la discussions
   let currentPNJ = getPNJName();
   let PNJSeePlayer = getPNJSeePlayer(currentPNJ);
@@ -1174,7 +1174,7 @@ function drawCredits() {
 
   textAlign(CENTER, CENTER);
   textSize(32);
-  image(backgroundImageUI,0,0,(viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.width, (viewportDisplayWidth/viewportDisplayHeight)*backgroundImageUI.height);
+  image(backgroundImageUI, 0, 0, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.width, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.height);
   fill(255);
 
   for (let i = 0; i < creditsJSON.Credits.length; i++) {
@@ -1205,7 +1205,7 @@ function drawCredits() {
 
 //~ End game
 
-function endGame(){
+function endGame() {
 
 
   console.log("FIN DU JEU")
@@ -1229,11 +1229,11 @@ function setupUI() {
     //& Affichage des Intéractions
     setupInteractions();
 
-   
+
     //& Barre de vie
     drawLifeBar((viewportDisplayWidth / 2) - (maxHealth * lifeBarSize) / 2, viewportDisplayHeight - lifeBarSize * 2);
 
-    if (canShowMessage){
+    if (canShowMessage) {
       showMessage("Votre inventaire est plein.")
     }
 
@@ -1252,17 +1252,17 @@ function setupUI() {
       } else if (healthPlayer > 0) {
         drawPauseMenu();
       }
-    }else{
+    } else {
       timerGame()
     }
 
-    if(gameIsEnd){
+    if (gameIsEnd) {
       endGame()
     }
 
 
     //? Credits
-    if (endTheGameCredits || creditsInHome && !playerDead) {
+    if (endTheGameCredits && !playerDead || creditsInHome && !playerDead) {
       drawCredits()
     }
 
@@ -1278,7 +1278,7 @@ function setupUI() {
       gameIsPlaying = true;
     }
 
-    if (statsMenu){
+    if (statsMenu) {
       drawStats();
     }
 
@@ -1287,7 +1287,7 @@ function setupUI() {
 
 
     gameFPS()
-    
+
 
   } else {
     //* Le jeu n'est pas lancé

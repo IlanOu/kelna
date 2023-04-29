@@ -107,6 +107,18 @@ function preload() {
   //? Songs
   VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
   VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
+
+
+
+
+    //? Sounds effects
+    soundJump = loadSound("assets/audios/sounds/jump.mp3")
+    soundHit = loadSound("assets/audios/sounds/hit.mp3")
+    soundDie = loadSound("assets/audios/sounds/die.mp3")
+    soundWalk = loadSound("assets/audios/sounds/walk.mp3")
+    soundSwordHit1 = loadSound("assets/audios/sounds/swordsHit_1.mp3")
+    soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
+    soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
 }
 
 
