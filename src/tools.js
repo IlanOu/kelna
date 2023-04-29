@@ -21,7 +21,7 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
-//~ Trouve la valeur de l'index de la 2eme array 
+//~ Trouve l'index d'une map dans world 
 function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
@@ -34,7 +34,7 @@ function findIndexValueIn2dArray(array, mapName) {
 }
 
 
-//~ Trouve l'index de la position du 2eme array
+//~ Trouver l'index d'une position dans un tableau 2d
 let previous_index_pos = null;
 
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
@@ -55,31 +55,34 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
     return previous_index_pos;
 }
 
+  
+  
 
 //~ Chercher un tableau dans un tableau 2D
-function mobMustBeShown(mob) {
-    let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x-xStartWorld, mob.y-yStartWorld, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-    let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
+function mobMustBeShown(mob, found) {
     
-    console.log(currentMapInWorld)
-    console.log(currentMapName)
-
-    let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-    let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
-    let invertedArrayMapPosition = []
-    invertedArrayMapPosition[0] = positionMapMob[1]
-    invertedArrayMapPosition[1] = positionMapMob[0]
-
-
-    let inChunksCheck = false
-
-    mapsToCheck.some(map => {
-        if (!inChunksCheck) {
-            inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
-        }
-    })
-
-    return inChunksCheck
+    if (found){
+        let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x, mob.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+        let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
+        
+    
+        let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+        let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
+        let invertedArrayMapPosition = []
+        invertedArrayMapPosition[0] = positionMapMob[1]
+        invertedArrayMapPosition[1] = positionMapMob[0]
+    
+    
+        let inChunksCheck = false
+    
+        mapsToCheck.some(map => {
+            if (!inChunksCheck) {
+                inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
+            }
+        })
+        return inChunksCheck
+    }
+    return null
 }
 
 

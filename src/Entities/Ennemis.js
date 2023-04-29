@@ -18,16 +18,22 @@ function MobManager() {
 
 function mob(Mobs) {
   
+  
   //? Le mob n'est plus calculé quand il n'est pas affiché
   let mapsToCheckColliders = getMapsToCheck(characterPositionX, characterPositionY)
   let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  
+  let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+  let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
+  
+
+
   const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
+  mobMustBeShown(Mobs, found)
 
   if ((Mobs.life > 0 || !Mobs.isDead) && found) {
     //* Initialisation des variables
 
-    let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
-    let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
 
     let MobStart = positionsStart.pixelX;
     let MobEnd = positionsEnd.pixelX;
@@ -46,6 +52,9 @@ function mob(Mobs) {
     let MobsJumpCount = Mobs.jumpCount;
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+
+
+
 
     if (pnjMustBeShown(Mobs)){ //! IMPORTANT Régler le probleme du MOB qui despawn 
       //* Ajout de la gravité au Mob
@@ -226,6 +235,8 @@ let mobMovements = (Mobs) => {
         fill(255, 0, 0);
         drawKeyAt("!", CurrentX, MobY);
       }
+
+      console.log(findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns))
     } else {
       doRound(Mobs);
     }
