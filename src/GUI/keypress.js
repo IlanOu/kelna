@@ -55,18 +55,18 @@ function keyPressed() {
     //! Récupérer l'item
     Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
         item = item[1]
-        if (item.canGetItem){
+        if (item.canGetItem) {
             if (keyCode == 69 && engineOne) {
-                if (Inventory[getIndexOfItemCategory(item.category)].category){
+                if (Inventory[getIndexOfItemCategory(item.category)].category) {
                     tempMessage()
-                }else{
+                } else {
                     getCurrentItem()
                 }
                 item.canGetItem = false
             }
         }
     })
-        
+
     //? Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true
@@ -83,9 +83,14 @@ function keyPressed() {
     }
 
 
-    //? Touche shift  du clavier
-    if (keyCode == 16) {
+    //? Touche M  du clavier
+    if (keyCode == 188) {
         addItemToInventory(itemsJSON.Items.mushroom_1, 1);
+    }
+
+    //? Touche H  du clavier
+    if (keyCode == 72) {
+        addItemToInventory(itemsJSON.Items.kelna, 1);
     }
 
 }
@@ -146,6 +151,15 @@ function keyReleased() {
             engineOne = !engineOne;
         }
     }
+
+
+    if (startCinematicPlaying) {
+        //? Touche entrée
+        if (keyCode == 13) {
+            startCinematicPlaying = false
+            gameIntroductionVideo.pause();
+        }
+    }
 }
 
 
@@ -156,7 +170,6 @@ function mouseReleased() {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
         }
-
 
         slotOne = Inventory[0]
         leftClickPressed = true

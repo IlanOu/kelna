@@ -437,7 +437,7 @@ function drawSettingsMenu() {
   drawInterface(interfaceMenu, GUIParameters);
 
 
-  drawText("SETTINGS", 90, [titleSettingsX, titleSettingsY], [CENTER, BASELINE], [0, 0, 0])
+  drawText("PARAMETRES", 90, [titleSettingsX, titleSettingsY], [CENTER, BASELINE], [0, 0, 0])
 
 
 
@@ -596,6 +596,7 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
+    playerDead = init_playerDead;
   }
 
 
@@ -1117,7 +1118,7 @@ function setupUI() {
 
 
     //? Credits
-    if (endTheGameCredits || creditsInHome ) {
+    if (endTheGameCredits || creditsInHome && !playerDead) {
       drawCredits()
     }
 

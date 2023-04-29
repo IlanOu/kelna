@@ -34,6 +34,11 @@
             "itemNumber": 4,
             "amount": 0,
             "category": "other"
+        },
+        "kelna": {
+            "name": "kelna",
+            "itemNumber": 5,
+            "category": "other"
         }
     },
     "ItemsOnTheFloor": {
@@ -48,10 +53,10 @@
             "detectDist": 1,
             "shown": true
         },
-        "mushroom_2": {
-            "name": "mushroom_2",
+        "kelna": {
+            "name": "kelna",
             "category": "other",
-            "itemNumber": 4,
+            "itemNumber": 5,
             "location": "C-4",
             "x": 0,
             "y": 7,

@@ -46,7 +46,7 @@
     "labo": {
       "name": "labo",
       "xStart": 2,
-      "yStart": 7,
+      "yStart": 10,
       "layers": [
         [
           [0, 0, 0, 0, 0, 0, 0, 0, 0],
