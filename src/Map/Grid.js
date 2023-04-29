@@ -1,5 +1,5 @@
 //~ Affichage d'une grille à la position x et y, de la taille N par M;
-function displayGrid(grid, positionY, positionX, rectWidth, rectHeight) {
+function displayGrid(grid, positionY, positionX, rectWidth, rectHeight, showCollisions = false) {
   let gridWidth = 0
   let gridHeight = 0
   let thisTileSet;
@@ -19,12 +19,15 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight) {
     for (let y = 0; y < grid[x].length; y++) {
 
       image(thisTileSet[grid[x][y]], positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
-
+      
       if (debugMod) {
         stroke(50, 50, 50, 50)
         noFill()
         rect(positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
-
+        if (showCollisions && grid[x][y] > 0){
+          fill(255,0,0, 100)
+          rect(positionY + y * rectWidth, positionX + x * rectHeight, rectWidth, rectHeight)
+        }
       }
     }
   }
@@ -121,7 +124,7 @@ function drawGrid() {
 
 
     //? Afficher le plan du millieu
-    displayGrid(Maps[element].layers[1], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight)
+    displayGrid(Maps[element].layers[1], xStartWorld + (gridWidthPx * indexMap[1]), yStartWorld + (gridHeightPx * indexMap[0]), rectWidth, rectHeight, true)
 
 
     if (debugMod) {
@@ -165,7 +168,7 @@ function drawHouse(house) {
   )
 
   displayGrid(Houses.Houses[house].layers[0], xStartHouse, yStartHouse, rectWidth, rectHeight)
-  displayGrid(Houses.Houses[house].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight)
+  displayGrid(Houses.Houses[house].layers[1], xStartHouse, yStartHouse, rectWidth, rectHeight, true)
 }
 
 

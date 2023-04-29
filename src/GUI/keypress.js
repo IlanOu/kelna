@@ -52,21 +52,24 @@ function keyPressed() {
         }
     }
 
-    //! Récupérer l'item
-    Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
-        item = item[1]
-        if (item.canGetItem) {
-            if (keyCode == 69 && engineOne) {
-                if (Inventory[getIndexOfItemCategory(item.category)].category) {
-                    tempMessage()
-                } else {
-                    getCurrentItem()
-                }
-                item.canGetItem = false
-            }
-        }
-    })
 
+    //! Récupérer l'item
+    if (itemsJSON.ItemsOnTheFloor){
+        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+            item = item[1]
+            if (item.canGetItem){
+                if (keyCode == 69 && engineOne) {
+                    if (Inventory[getIndexOfItemCategory(item.category)].category){
+                        tempMessage()
+                    }else{
+                        getCurrentItem()
+                    }
+                    item.canGetItem = false
+                }
+            }
+        })
+    }
+        
     //? Touche R
     if (keyCode == 82) {
         dashKeyIsPressed = true

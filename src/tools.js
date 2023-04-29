@@ -21,7 +21,7 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
-//~ Trouve la valeur de l'index de la 2eme array 
+//~ Trouve l'index d'une map dans world 
 function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
@@ -34,7 +34,7 @@ function findIndexValueIn2dArray(array, mapName) {
 }
 
 
-//~ Trouve l'index de la position du 2eme array
+//~ Trouver l'index d'une position dans un tableau 2d
 let previous_index_pos = null;
 
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
@@ -55,17 +55,45 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
     return previous_index_pos;
 }
 
+  
+  
 
 //~ Chercher un tableau dans un tableau 2D
-function PNJMustBeShown(pnj) {
+function mobMustBeShown(mob, found) {
+    
+    if (found){
+        let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x, mob.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+        let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
+        
+    
+        let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
+        let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
+        let invertedArrayMapPosition = []
+        invertedArrayMapPosition[0] = positionMapMob[1]
+        invertedArrayMapPosition[1] = positionMapMob[0]
+    
+    
+        let inChunksCheck = false
+    
+        mapsToCheck.some(map => {
+            if (!inChunksCheck) {
+                inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
+            }
+        })
+        return inChunksCheck
+    }
+    return null
+}
 
 
+//~ Chercher un tableau dans un tableau 2D
+function pnjMustBeShown(mob) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-    let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+    let positionMapMob = findIndexValueIn2dArray(World.worldsMap, mob.mapName)
     let invertedArrayMapPosition = []
-    invertedArrayMapPosition[0] = positionMapPNJ[1]
-    invertedArrayMapPosition[1] = positionMapPNJ[0]
+    invertedArrayMapPosition[0] = positionMapMob[1]
+    invertedArrayMapPosition[1] = positionMapMob[0]
 
 
     let inChunksCheck = false
@@ -368,7 +396,6 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
             house = house[1]
             if (house.name == mapName && !mapExist) {
                 mapExist = true;
-                //indexMapX = house.indexOf(mapName);
                 indexMapX = 0
             } else {
                 indexMapY = 0
@@ -400,24 +427,20 @@ function drawKey(key) {
         PosX = characterPositionX
         PosY = characterPositionY
     } else {
-
-        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth / 1.2
-        PosY = characterInsidePosY - characterHeight / 3
+        PosX = characterInsidePosX + (characterWidth / 2) - (interactionWidth / 1.2)
+        PosY = characterInsidePosY - (characterHeight / 3)
     }
 
-    let keyBackground = [(PosX),
-        PosY - 50,
-        interactionWidth,
-        interactionHeight
-    ]
-
-    let textKey = [PosX + (keyBackground[2] / 2),
-        PosY - 50 + (keyBackground[3] / 8)
-    ]
+    let keyBackground = [
+                            PosX,
+                            PosY - (interactionHeight*1.5),
+                            interactionWidth,
+                            interactionHeight
+                        ]
 
     fill(255)
-    drawButton(keyBackground)
-    drawText(key, 20, textKey, [CENTER, BASELINE])
+    drawButton(keyBackground, buttonE)
+    // drawText(key, 20, textKey, [CENTER, BASELINE])
 
 }
 
@@ -449,18 +472,24 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
 
 
-function showMessage(message) {
-    let popupMessageWidth = 200
-    let popupMessageHeight = 100
+function showMessage(message){
+    let popupMarginTop = 40
 
-    let messagePositionY = 0
-    let messagePositionX = viewportDisplayWidth - popupMessageWidth
+    let popupMessageWidth = 400
+    let popupMessageHeight = 100
+    let popupPositionX = (viewportDisplayWidth/2) - (popupMessageWidth/2)
+    let popupPositionY = 0 + popupMarginTop
+
+    let messageFontSize = 30
+
+    let messagePositionX = popupPositionX + popupMessageWidth/2 
+    let messagePositionY = popupPositionY + (popupMessageHeight/2) - messageFontSize/1.2
 
     let messageTextPosition = [messagePositionX, messagePositionY]
 
-    image(smallPopUp, messagePositionX, messagePositionY, popupMessageWidth, popupMessageHeight)
-    drawText(message, 40, messageTextPosition, [CENTER, BASELINE], [255, 0, 0])
-
+    image(longButton, popupPositionX, popupPositionY, popupMessageWidth, popupMessageHeight)
+    drawText(message, 30, messageTextPosition, [CENTER, BASELINE], [0, 0, 0])
+    
 }
 
 
@@ -736,7 +765,7 @@ function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
+    return Math.round(vitesseEnKmh/2);
 }
 
 
@@ -756,16 +785,28 @@ function resetJsons() {
 
 
 //~ Convertie le temps en heure / min / secondes
-function timeConversion(seconds) {
+function timeConversion(seconds, mod = 0) {
     const heures = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secondes = seconds % 60;
 
-    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
-    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const heuresFormatees = heures < 10 ? `0${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `0${minutes}` : `${minutes}`;
     const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
 
-    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+
+    let returnValue = "";
+
+    switch (mod) {
+        case 0:
+            returnValue = `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+        break;
+        case 1:
+            returnValue = `${heuresFormatees}:${minutesFormatees}:${secondesFormatees}`;
+        break;
+    }
+
+    return returnValue;
 }
 
 
@@ -983,6 +1024,9 @@ function initVariables() {
     //~ Parametres
     settingsPause = init_settingsPause;
 
+    //~ Statistiques
+    statsMenu = init_statsMenu
+
     //~ Barre de vie
     lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
@@ -1122,15 +1166,15 @@ function initVariables() {
     }
 
     //* Reset toutes les statistiques sauf le nombre de morts 
-    statistiques.distanceWalked = init_statistiques.distanceWalked
-    statistiques.totalJumpCount = init_statistiques.totalJumpCount
-    statistiques.mobsKilled = init_statistiques.mobsKilled
-    statistiques.damagesDones = init_statistiques.damagesDones
-    statistiques.damagesGet = init_statistiques.damagesGet
-    statistiques.healCount = init_statistiques.healCount
-    //statistiques.deathCount = init_statistiques.deathCount
-    statistiques.timeSpentInGame = init_statistiques.timeSpentInGame
-    statistiques.playerSpeed = init_statistiques.playerSpeed
+    statistiques.distanceWalked = 0
+    statistiques.totalJumpCount = 0
+    statistiques.mobsKilled = 0
+    statistiques.damagesDones = 0
+    statistiques.damagesGet = 0
+    statistiques.healCount = 0
+    ////statistiques.deathCount = init_statistiques.deathCount
+    statistiques.timeSpentInGame = 0
+    statistiques.playerSpeed = 0
 
 
     tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])

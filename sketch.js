@@ -40,10 +40,22 @@ function preload() {
   smallPopUp = loadImage("assets/GUI/smallPopUp.png"); 
 
 
+  //? Buttons
+  buttonZ = loadImage("assets/GUI/buttonZ.png");
+  buttonQ = loadImage("assets/GUI/buttonQ.png");
+  buttonS = loadImage("assets/GUI/buttonS.png");
+  buttonD = loadImage("assets/GUI/buttonD.png");
+  buttonE = loadImage("assets/GUI/buttonE.png");
+  buttonSpace = loadImage("assets/GUI/buttonSpace.png");
+
+
   //? Background
   backgroundImage = loadImage('assets/Background/bg_forest.png');
   backgroundImageDistant = loadImage('assets/Background/bg_forest_distant.png');
   backgroundImageClose = loadImage('assets/Background/bg_forest_close.png');
+
+  backgroundImageUI = loadImage('assets/Background/UIBackground.png');
+
 
 
   //? Animation PNJ
@@ -60,7 +72,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/TilesetKelna.png");
+  tileSet = loadImage("assets/textures/tilesetKelna.png");
   slot = loadImage("assets/textures/slot.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
   requiredSlotSword = loadImage("assets/textures/requiredSlotSword.png")
@@ -85,26 +97,16 @@ function preload() {
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
-  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.mov");
+  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV"); //  - cinematicGameKelna.mov
 
 
   //? Music
   SongBackground = loadSound("assets/audios/music/SongBackground.mp3")
 
 
-  //? Voices
-  VoiceStartSong = [loadSound("assets/audios/voices/START/teststart1.m4a"), loadSound("assets/audios/voices/START/teststart2.m4a")]
-  VoicesDieSong = [loadSound("assets/audios/voices/DIE/end1.m4a"), loadSound("assets/audios/voices/DIE/end2.m4a")]
-
-
-  //? Sounds effects
-  //soundJump = loadSound("assets/audios/sounds/jump.mp3")
-  //soundHit = loadSound("assets/audios/sounds/hit.mp3")
-  //soundDie = loadSound("assets/audios/sounds/die.mp3")
-  //soundUnsheathSword = loadSound("assets/audios/sounds/unsheathSword.mp3")
-  //soundSwordHit1 = loadSound("assets/audios/sounds/swordsHit_1.mp3")
-  //soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
-  //soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
+  //? Songs
+  VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
+  VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
 }
 
 
@@ -149,12 +151,13 @@ function draw() {
       //? Si le jeu n'est pas en pause
       if (!gameIsPaused){
         if (engineOne) {
-          statistiques.timeSpentInGame = Math.floor(millis() / 1000)
+          let seconds = Math.round(millis() / millis()) / 100
+          statistiques.timeSpentInGame += seconds
           statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
   
   
           //? Afficher le fond du jeu
-          drawBackgroundImage(backgroundImage, backgroundImageDistant, backgroundImageClose)
+          drawBackgroundImage(backgroundImage, backgroundImageClose, backgroundImageDistant)
           
           
 
@@ -166,7 +169,6 @@ function draw() {
           itemsManager()
           PNJManager()
           MobManager()
-          
           
 
           //? Afficher le joueur (le perso passe devant les entités)
