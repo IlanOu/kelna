@@ -231,6 +231,11 @@ const init_PositionCredits = window.innerHeight + 50;
 const init_speedCredits = 2.5;
 const init_creditsInHome = false;
 
+
+//* END
+
+const init_gameIsEnd = false;
+
 //~ Statistiques
 const init_numberOfSteps = 0;
 const init_statistiques = {

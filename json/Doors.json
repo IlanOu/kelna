@@ -19,6 +19,26 @@
             "destination": "A-1",
             "inHouse": true
 
+        },
+
+        "door2": {
+
+            "location": "C-18",
+            "x" : 19.8,
+            "y": 2,
+            "detectDist": 2,
+            "destination": "labo",
+            "inHouse": false
+
+        }, "door2-i": {
+
+            "location": "labo",
+            "x": 0,
+            "y": 11,
+            "detectDist": 2,
+            "destination": "C-18",
+            "inHouse": true
+
         }
     }
 }

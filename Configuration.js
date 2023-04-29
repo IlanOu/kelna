@@ -208,7 +208,7 @@ let leftGaugeLevel;
 let musicEnabled;
 let canPlayMusic;
 
-//~ Sons
+//? Sons
 let soundEnabled = true;
 let canPlaySong;
 
@@ -222,6 +222,15 @@ let dieSoundPlay;
 let VoiceStartSong;
 let startGame;
 let startSoundPlay;
+
+
+let soundJump;
+let soundHit;
+let soundDie;
+let soundUnsheathSword;
+let soundSwordHit1;
+let soundSwordHit2;
+let soundSwordHit3;
 
 
 
@@ -271,6 +280,10 @@ let speedCredits;
 let creditsInHome;
 
 
+//~ Fin du jeu
+let gameIsEnd;
+
+
 //~ Statistiques
 let numberOfSteps;
 
@@ -307,6 +320,8 @@ let sky;
 let tileSet;
 let tileSetForTaverne;
 let tileSetTaverne;
+let tileSetForLabo;
+let tileSetLabo;
 let characterTexture_Dash;
 
 let backgroundImage;

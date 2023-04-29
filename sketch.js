@@ -66,8 +66,9 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/TileSetItems2.png");
-  tileSetTaverne = loadImage("assets/textures/Engine2.png");
+  tilesetItems = loadImage("assets/items/TileSetItems.png");
+  tileSetTaverne = loadImage("assets/textures/tavernelabo.png"); //taverne
+  tileSetLabo = loadImage("assets/textures/labo.png");
 
 
   //? Textures

@@ -150,27 +150,25 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
         case "sword_1":
           annimationBeginY = 10 * 32
           annimationEndY = 11 * 32
-        break;
+          break;
 
 
 
         case "sword_2":
           annimationBeginY = 0 * 32
           annimationEndY = 1 * 32
-        break;
+          break;
 
 
         case "sword_3":
           annimationBeginY = 15 * 32
           annimationEndY = 16 * 32
-        break;
+          break;
 
         default:
           annimationBeginY = 4 * 32
           annimationEndY = 5 * 32
       }
-
-
       for (let y = (annimationBeginY); y < (annimationEndY); y += characterSpriteHeight) {
         for (let x = 0; x < (2 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
@@ -179,6 +177,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation JUMP
     case "jump":
+      soundEffects()
       for (let y = (7 * 32); y < (8 * 32); y += characterSpriteHeight) {
         for (let x = 0; x < (4 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
@@ -195,6 +194,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation FRAPPER
     case "hit":
+      soundEffects()
       switch (Inventory[0].name) {
 
         case "sword_2":
@@ -221,7 +221,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation FRAPPER 
     case "hit2":
-
+      soundEffects()
       switch (Inventory[0].name) {
 
         case "sword_2":
@@ -247,7 +247,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation FRAPPER 
     case "hit3":
-
+      soundEffects()
       switch (Inventory[0].name) {
 
         case "sword_2":
@@ -274,10 +274,10 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation se faire 
     case "getHit":
-
+      soundEffects()
       switch (Inventory[0].name) {
 
-        
+
         case "sword_1":
           annimationBeginY = 14 * 32
           annimationEndY = 15 * 32
@@ -286,7 +286,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
           annimationBeginY = 9 * 32
           annimationEndY = 10 * 32
           break;
-          
+
         case "sword_3":
           annimationBeginY = 19 * 32
           annimationEndY = 20 * 32
@@ -306,6 +306,7 @@ function drawCharacter(positionX, positionY, width, height, direction, movement)
       break;
       //* animation MOURIR
     case "die":
+      soundEffects()
       for (let y = (6 * 32); y < (7 * 32); y += characterSpriteHeight) {
         for (let x = (0 * 32); x < (5 * 32); x += characterSpriteWidth) {
           characterTextureList.push(characterTextures.get(x, y, characterSpriteWidth, characterSpriteHeight));
@@ -441,7 +442,7 @@ function character() {
 
   lastMap = currentMap
 
-  
+
 
 
   //* Ancienne positions du perso
@@ -662,10 +663,10 @@ function character() {
 
   //* Dernière map sur laquelle est passé le joueur
   let positionMapPlayer = findIndexOfPositionIn2dArray(characterPositionX, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-  let positionMapCenterPlayer = findIndexOfPositionIn2dArray(characterPositionX+(characterWidth/2), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  let positionMapCenterPlayer = findIndexOfPositionIn2dArray(characterPositionX + (characterWidth / 2), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
 
 
-  if (positionMapCenterPlayer.toString() == positionMapPlayer.toString()){
+  if (positionMapCenterPlayer.toString() == positionMapPlayer.toString()) {
     currentMap = World.worldsMap[positionMapPlayer[1]][positionMapPlayer[0]]
   }
 
@@ -708,7 +709,7 @@ function character() {
           [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
 
 
-          
+
 
           //~ Tuer le joueur quand il marche sur le bloc 238
           if (killingBlocks.includes(thisObject) && touchThisObject) {
@@ -766,6 +767,7 @@ function character() {
         characterDirection = characterLastDirection
         characterMovement = "jump"
       }
+      soundEffects()
     } else {
       if (characterIsDashing) {
         if (rightArrowPressed) {

@@ -445,7 +445,7 @@ function drawSettingsMenu() {
   drawInterface(interfaceMenu, GUIParameters);
 
 
-  drawText("SETTINGS", 90, [titleSettingsX, titleSettingsY], [CENTER, BASELINE], [0, 0, 0])
+  drawText("PARAMETRES", 90, [titleSettingsX, titleSettingsY], [CENTER, BASELINE], [0, 0, 0])
 
 
 
@@ -613,6 +613,7 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
+    playerDead = init_playerDead;
   }
 
   if (buttonClicked(buttonStats)) {
@@ -834,11 +835,8 @@ function setupInteractions() {
     }
 
     if (aPNJCanTalk()) {
-      
       drawKey("E");
     }
-
-
 
 
   } else {
@@ -1205,6 +1203,18 @@ function drawCredits() {
 }
 
 
+//~ End game
+
+function endGame(){
+
+
+  console.log("FIN DU JEU")
+
+
+}
+
+
+
 //^ LANCER
 function setupUI() {
   //? Si je suis en jeu
@@ -1246,11 +1256,13 @@ function setupUI() {
       timerGame()
     }
 
-    
+    if(gameIsEnd){
+      endGame()
+    }
 
 
     //? Credits
-    if (endTheGameCredits || creditsInHome ) {
+    if (endTheGameCredits || creditsInHome && !playerDead) {
       drawCredits()
     }
 

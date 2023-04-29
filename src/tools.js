@@ -168,7 +168,7 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 //~ Joue / desactive de la music 
 let PlayMusic = () => {
-    if (!musicEnabled  && !Pressing) {
+    if (!musicEnabled && !Pressing) {
         musicEnabled = true
         SongBackground.loop()
         Pressing = true
@@ -217,12 +217,52 @@ let PlaySong = () => {
 }
 
 
+function soundEffects() {
+
+    /*
+    if (soundEnabled) {
+
+        if (characterIsJumping) {
+            soundJump.play()
+        } else {
+            soundJump.pause()
+        }
+        if (characterMovement == "getHit") {
+            soundHit.play()
+        } else {
+            soundHit.pause()
+        }
+        if (characterMovement == "die") {
+            soundDie.play()
+        } else {
+            soundDie.pause()
+        }
+        if (characterMovement == "hit") {
+
+            soundSwordHit1.play()
+        } else {
+            soundSwordHit1.pause()
+        }
+        if (characterMovement == "hit2") {
+            soundSwordHit2.play()
+        } else {
+            soundSwordHit2.pause()
+        }
+        if (characterMovement == "hit3") {
+            soundSwordHit3.play()
+        } else {
+            soundSwordHit3.pause()
+        }
+    }*/
+}
+
+
 //~ hurtPlayer
 function hurtPlayer(amount) {
-    if(!loged){
+    if (!loged) {
         healthPlayer -= amount; //& Enlever point de vie
         healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
-    }else{
+    } else {
         healthPlayer += amount; //& Enlever point de vie
         healthPlayer = constrain(healthPlayer, 0, maxHealth);
     }
@@ -669,7 +709,7 @@ function popUp(message, options = "info") {
 
         let buttonPopUpWYes = 75
         let buttonPopUpHYes = 60
-        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5) 
+        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5)
         let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
@@ -678,7 +718,7 @@ function popUp(message, options = "info") {
 
         let buttonPopUpWNo = 75
         let buttonPopUpHNo = 60
-        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth/ 1.8) 
+        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 1.8)
         let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
@@ -690,7 +730,7 @@ function popUp(message, options = "info") {
         } else {
             drawButton(buttonPopUpYes, smallButton, true, 255);
         }
-        drawText("OUI", 40, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
+        drawText("OUI", 40, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE], [0, 0, 0])
 
         if (buttonHover(buttonPopUpNo)) {
             drawButton(buttonPopUpNo, smallButtonHover, true, 255);
@@ -776,11 +816,18 @@ function shakeCamera(durationSeconds, forcePixels) {
 
 //~ Ajoute l'item present
 function getCurrentItem() {
-    if (itemsJSON.ItemsOnTheFloor[currentItemPointing]){
-        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-        currentItemPointing = ""
-        //canGetItem = false
+    if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
+        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna"){
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+            currentItemPointing = ""
+            gameIsEnd = true
+        }else {
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+            currentItemPointing = ""
+            //canGetItem = false
+        }
     }
 }
 
@@ -788,6 +835,51 @@ function getCurrentItem() {
 function inventoryIsEmpty(slot) {
     return Object.keys(slot).length === 0;
 }
+
+
+//~ Fonction de tp
+function tp(map = "") {
+
+    if (loged) {
+        console.log("test", map)
+
+        switch (map) {
+
+            case "spawn":
+
+                characterPositionX = 456
+                characterPositionY = 618
+
+                break
+
+
+            case "foret":
+
+                characterPositionX = 516
+                characterPositionY = 536
+
+                break
+
+            case "village":
+
+                characterPositionX = 957
+                characterPositionY = 487
+
+                break
+
+
+            case "citadelle":
+
+                characterPositionX = 516
+                characterPositionY = 616
+
+                break
+        }
+    } else {
+        console.error("Vous devez etre admin/connecté pour pouvoir vous teleportez !")
+    }
+}
+
 
 //~ Initie les variables
 function initVariables() {
@@ -1016,6 +1108,10 @@ function initVariables() {
     //~ Mort
     playerDead = init_playerDead;
 
+
+    //~ END
+    gameIsEnd = init_gameIsEnd
+
     //~ Popups
     popUpShown = init_popUpShown;
     playerAnswersYes = init_playerAnswersYes;
@@ -1024,7 +1120,7 @@ function initVariables() {
     endTheGameCredits = init_endTheGameCredits
     PositionCredits = init_PositionCredits
     speedCredits = init_speedCredits
-    creditsInHome = init_creditsInHome 
+    creditsInHome = init_creditsInHome
 
 
     //& Statistiques
@@ -1054,7 +1150,6 @@ function initVariables() {
 
 
     //& Cinématiques
-    //startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
 
 
@@ -1082,15 +1177,16 @@ function initVariables() {
     tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
     itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+    tileSetForLabo = cutTileset(tileSetLabo, [16, 16], [tileSetLabo.width, tileSetLabo.height])
 
     resetJsons()
 
 }
 
 
-function aPNJCanTalk(){
+function aPNJCanTalk() {
     let canTalk = false
-    if (pnjJSON.PNJS){  
+    if (pnjJSON.PNJS) {
         Object.entries(pnjJSON.PNJS).forEach(pnj => {
             let pnjName = pnj[0]
             pnj = pnj[1]
@@ -1099,13 +1195,13 @@ function aPNJCanTalk(){
             }
         })
     }
-    
+
     return canTalk;
 }
 
-function aPNJCanTrade(){
+function aPNJCanTrade() {
     let canTrade = false
-    if (pnjJSON.PNJS){
+    if (pnjJSON.PNJS) {
         Object.entries(pnjJSON.PNJS).forEach(pnj => {
             let pnjName = pnj[0]
             pnj = pnj[1]
@@ -1114,6 +1210,6 @@ function aPNJCanTrade(){
             }
         })
     }
-    
+
     return canTrade;
 }

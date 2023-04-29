@@ -86,9 +86,14 @@ function keyPressed() {
     }
 
 
-    //? Touche shift  du clavier
-    if (keyCode == 16) {
+    //? Touche M  du clavier
+    if (keyCode == 188) {
         addItemToInventory(itemsJSON.Items.mushroom_1, 1);
+    }
+
+    //? Touche H  du clavier
+    if (keyCode == 72) {
+        addItemToInventory(itemsJSON.Items.kelna, 1);
     }
 
 }
@@ -149,6 +154,15 @@ function keyReleased() {
             engineOne = !engineOne;
         }
     }
+
+
+    if (startCinematicPlaying) {
+        //? Touche entrée
+        if (keyCode == 13) {
+            startCinematicPlaying = false
+            gameIntroductionVideo.pause();
+        }
+    }
 }
 
 
@@ -159,7 +173,6 @@ function mouseReleased() {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
         }
-
 
         slotOne = Inventory[0]
         leftClickPressed = true

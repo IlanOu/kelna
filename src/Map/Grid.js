@@ -12,6 +12,7 @@ function displayGrid(grid, positionY, positionX, rectWidth, rectHeight, showColl
 
   } else {
     thisTileSet = tileSetForTaverne
+    // thisTileSet = tileSetForLabo
   }
 
   for (let x = 0; x < grid.length; x++) {
