@@ -19,7 +19,7 @@ function preload() {
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUISettings.png");
   GUIForEscape = loadImage("assets/GUI/GUIPause.png");
-  GUIOfDeath = loadImage("assets/GUI/popUpDie.png"); 
+  GUIOfDeath = loadImage("assets/GUI/popUpDie.png");
   GUITroc = loadImage("assets/GUI/GUIForTroc.png");
   GUIStart = loadImage("assets/GUI/GUIStart.png")
 
@@ -37,7 +37,7 @@ function preload() {
   checkedLongButtonHover = loadImage("assets/GUI/checkedLongButtonHover.png");
   checkedLongButton = loadImage("assets/GUI/checkedLongbutton.png");
 
-  smallPopUp = loadImage("assets/GUI/smallPopUp.png"); 
+  smallPopUp = loadImage("assets/GUI/smallPopUp.png");
 
 
   //? Buttons
@@ -81,7 +81,7 @@ function preload() {
 
   //? Personnage
   characterTextures = loadImage("assets/entities/spritesheetYvo.png")
-  
+
 
 
   //? JSON preload
@@ -97,28 +97,32 @@ function preload() {
   init_pnjJSON = pnjJSON
 
   //? Cinématiques
-  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV"); //  - cinematicGameKelna.mov
+  gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV");
 
 
   //? Music
-  SongBackground = loadSound("assets/audios/music/SongBackground.mp3")
-
+  musicCredits = loadSound("assets/audios/music/musicCredits.mp3")
+  musicGame = loadSound("assets/audios/music/musicGame.mp3")
 
 
 
   //? Songs
   VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
-  VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"),loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
+  VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
+
+
+
 
   //? Sounds effects
   soundJump = loadSound("assets/audios/sounds/jump.mp3")
   soundHit = loadSound("assets/audios/sounds/hit.mp3")
   soundDie = loadSound("assets/audios/sounds/die.mp3")
-  soundUnsheathSword = loadSound("assets/audios/sounds/unsheathSword.mp3")
+  soundWalk = loadSound("assets/audios/sounds/walk.mp3")
   soundSwordHit1 = loadSound("assets/audios/sounds/swordsHit_1.mp3")
   soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
-  soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3") 
-
+  soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
+  soundClick = loadSound("assets/audios/sounds/click.mp3")
+  soundPNJ = [loadSound("assets/audios/sounds/homme.wav"),loadSound("assets/audios/sounds/femme.wav")]
 }
 
 
@@ -152,26 +156,26 @@ function draw() {
     translate(random(-shakeForce, shakeForce), random(-shakeForce, shakeForce));
     shakeDuration--;
   }
-  
+
   if (startCinematicPlaying) {
     playStartCinematic()
-  }else{
+  } else {
     //* Si le jeu joue
     if (gameIsPlaying) {
       hideInventory = false
       noCursor()
       //? Si le jeu n'est pas en pause
-      if (!gameIsPaused){
+      if (!gameIsPaused) {
         if (engineOne) {
           let seconds = Math.round(millis() / millis()) / 100
           statistiques.timeSpentInGame += seconds
           statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
-  
-  
+
+
           //? Afficher le fond du jeu
           drawBackgroundImage(backgroundImage, backgroundImageClose, backgroundImageDistant)
-          
-          
+
+
 
           //? Afficher la map
           drawGrid()
@@ -181,25 +185,25 @@ function draw() {
           itemsManager()
           PNJManager()
           MobManager()
-          
+
 
           //? Afficher le joueur (le perso passe devant les entités)
           character()
-          
+
           //? Afficher l'avant plan de la map
           drawGridForeground()
-    
-        }else{
+
+        } else {
           drawHouse(behindThisDoorHouse)
           doorsManager()
           PNJManager()
           characterView2()
           drawHouseForeground(behindThisDoorHouse)
         }
-      }else{
+      } else {
         hideInventory = true
       }
-      }
+    }
     setupUI()
   }
 
