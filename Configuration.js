@@ -223,6 +223,15 @@ let VoiceStartSong;
 let startGame;
 let startSoundPlay;
 
+let soundWalk;
+let soundJump;
+let soundHit;
+let soundDie;
+let soundSwordHit1;
+let soundSwordHit2;
+let soundSwordHit3;
+let soundClick;
+let soundPNJ;
 
 let soundJump;
 let soundHit;
@@ -233,6 +242,8 @@ let soundSwordHit2;
 let soundSwordHit3;
 
 
+
+let buttonClickSound = false
 
 //^ Evenements
 

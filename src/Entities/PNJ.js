@@ -378,7 +378,6 @@ function animationPNJ(
   direction,
   movement,
 ) {
-  circle(positionX + 35, positionY - 25, 20);
 
   let timer = round(millis() / animationSpeed) % 2;
   let PNJTexturesList = [];
