@@ -41,6 +41,7 @@ function keyPressed() {
     if (aPNJCanTrade()) {
         //? Touche E
         if (keyCode == 69 && engineOne) {
+            pnjGameVoice()
             PressInteractPNJ = !PressInteractPNJ
         }
     }
@@ -48,6 +49,7 @@ function keyPressed() {
     if (aPNJCanTalk()) {
         //? Touche E
         if (keyCode == 69 && engineOne) {
+            pnjGameVoice()
             PressTalkPNJ = !PressTalkPNJ
         }
     }

@@ -171,14 +171,14 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 //~ Joue / desactive de la music 
 let PlayMusic = () => {
-    if (!musicEnabled && !Pressing) {
+    if (!musicEnabled && !Pressing && !endTheGameCredits && !creditsInHome) {
         musicEnabled = true
-        SongBackground.loop()
+        musicGame.loop()
         Pressing = true
 
-    } else if (musicEnabled && !Pressing) {
+    } else if (musicEnabled && !Pressing && !endTheGameCredits && !creditsInHome) {
         musicEnabled = false
-        SongBackground.pause()
+        musicGame.pause()
         Pressing = true
 
     }
@@ -202,6 +202,23 @@ function DieGameVoice() {
         VoicesDieSong[indexSong].play()
     }
 }
+
+
+//~ Joue des voix de PNJ
+function pnjGameVoice() {
+    if (soundEnabled) {
+        let indexSong = Math.floor(Math.random() * soundPNJ.length);
+        if (!soundPNJ[indexSong].isPlaying()) {
+            if (aPNJCanTalk() || aPNJCanTrade()) {
+                soundPNJ[indexSong].play()
+            } else {
+                soundPNJ[indexSong].pause()
+            }
+        }
+    }
+}
+
+
 
 
 //~ Joue / desactive les songs
@@ -231,7 +248,7 @@ function soundEffects() {
             }
         }
         if (!soundDie.isPlaying()) {
-            if (characterMovement == "die") {
+            if (characterMovement === "die") {
                 soundDie.play()
             } else {
                 soundDie.pause()
@@ -256,6 +273,14 @@ function soundEffects() {
                 soundSwordHit3.play()
             } else {
                 soundSwordHit3.pause()
+            }
+        }
+        if (!soundClick.isPlaying()) {
+            if (buttonClickSound) {
+                soundClick.play()
+                buttonClickSound = false
+            } else {
+                soundClick.pause()
             }
         }
     }
@@ -846,7 +871,6 @@ function inventoryIsEmpty(slot) {
 function tp(map = "") {
 
     if (loged) {
-        console.log("test", map)
 
         switch (map) {
 
@@ -1075,8 +1099,6 @@ function initVariables() {
     dieSoundPlay = init_dieSoundPlay
     startGame = init_startGame
     startSoundPlay = init_startSoundPlay
-
-
 
 
     //& Evenements

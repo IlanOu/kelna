@@ -63,6 +63,7 @@ function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], colo
 
 //~  Au clic du bouton
 function buttonClicked([x, y, h, w]) {
+  buttonClickSound = true
   return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
@@ -155,7 +156,8 @@ function drawHomeMenu() {
     if (playerDead) {
       initVariables()
     }
-    SongBackground.pause()
+    soundEffects()
+    musicCredits.pause()
     leftClickPressed = false
     startGame = true
   }
@@ -165,6 +167,7 @@ function drawHomeMenu() {
   if (buttonClicked(buttonParameters) && !settingsPause) {
     leftClickPressed = false
     settingsPause = true
+    soundEffects()
   }
 
 
@@ -175,8 +178,8 @@ function drawHomeMenu() {
     inGame = true
     gameIsPlaying = true;
     leftClickPressed = false
+    soundEffects()
     drawCredits()
-
   }
 
 
@@ -350,18 +353,21 @@ function drawPauseMenu() {
   if (buttonClicked(buttonBack)) {
     gameIsPaused = false
     leftClickPressed = false
+    soundEffects()
   }
 
 
   if (buttonClicked(buttonSettings)) {
     settingsPause = true
     leftClickPressed = false
+    soundEffects()
   }
 
 
   if (buttonClicked(buttonExit)) {
     inGame = false
     leftClickPressed = false
+    soundEffects()
   }
 
 }
@@ -525,23 +531,28 @@ function drawSettingsMenu() {
 
   if (buttonClicked(buttonSon) && settingsPause) {
     leftClickPressed = false
+    soundEffects()
     PlaySong()
   }
   if (buttonClicked(buttonMusic) && settingsPause) {
     PlayMusic()
+    soundEffects()
     leftClickPressed = false
   }
   if (buttonClicked(ButtonToggleFPS) && settingsPause) {
     fpsEnabled = !fpsEnabled
     leftClickPressed = false
+    soundEffects()
   }
   if (buttonClicked(ButtonToggleCameraShake) && settingsPause) {
     cameraShakeEnabled = !cameraShakeEnabled
     leftClickPressed = false
+    soundEffects()
   }
   if (buttonClicked(ButtonBack) && settingsPause) {
     leftClickPressed = false
     settingsPause = false
+    soundEffects()
   }
 
 
@@ -550,6 +561,7 @@ function drawSettingsMenu() {
 
 //~ MENU DEATH
 function drawDeath() {
+  characterMovement = "idle"
   cursor('default')
   textFont(pixelFont)
 
@@ -614,11 +626,13 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
+    soundEffects()
   }
 
   if (buttonClicked(buttonStats)) {
     leftClickPressed = false
     statsMenu = true
+    soundEffects()
   }
 
 
@@ -783,6 +797,7 @@ function drawStats() {
   if (buttonClicked(buttonBackToHome)) {
     leftClickPressed = false
     statsMenu = false
+    soundEffects()
   }
 }
 
@@ -897,6 +912,7 @@ function drawTroc(x, y, w, h) {
 
 
       if (buttonClicked(positionRow) && !popUpShown) {
+        soundEffects()
         leftClickPressed = false
         haveToTrade = true;
         buttonHasBeenClicked = true;
@@ -1001,7 +1017,6 @@ function drawTalk(x, y, w, h) {
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
   let talkPNJ = getTalkPNJ(currentPNJName);
   let sentenceToTell = ""
-
 
   if (PNJSeePlayer) {
     if (talkPNJ[currentPNJ.step]) {
@@ -1172,12 +1187,20 @@ function drawCredits() {
   gameIsPaused = true;
   endInventory = true;
 
+
   textAlign(CENTER, CENTER);
   textSize(32);
   image(backgroundImageUI, 0, 0, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.width, (viewportDisplayWidth / viewportDisplayHeight) * backgroundImageUI.height);
-  fill(255);
+  //fill(255);
+  fill(0)
+
+
 
   for (let i = 0; i < creditsJSON.Credits.length; i++) {
+
+    if (!musicCredits.isPlaying()) {
+      musicCredits.loop()
+    }
 
     let credit = creditsJSON.Credits[i];
     let spaceBetweenText = i * 50;
@@ -1186,7 +1209,11 @@ function drawCredits() {
   }
   PositionCredits -= speedCredits;
 
+
   if (PositionCredits < -creditsJSON.Credits.length * 50) {
+    if (musicCredits.isPlaying()) {
+      musicCredits.pause()
+    }
 
     if (creditsInHome && !endTheGameCredits) {
       inGame = false
@@ -1198,10 +1225,8 @@ function drawCredits() {
       initVariables()
     }
   }
-
   textAlign(CENTER, BASELINE);
 }
-
 
 //~ End game
 
