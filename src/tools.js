@@ -876,31 +876,31 @@ function tp(map = "") {
 
             case "spawn":
 
-                characterPositionX = 456
-                characterPositionY = 618
+                xStartWorld = 0
+                yStartWorld = -42
 
                 break
 
 
             case "foret":
 
-                characterPositionX = 516
-                characterPositionY = 536
+                xStartWorld = -4410
+                yStartWorld = -1483
 
                 break
 
             case "village":
 
-                characterPositionX = 957
-                characterPositionY = 487
+                xStartWorld = -12300
+                yStartWorld = -1648
 
                 break
 
 
             case "citadelle":
 
-                characterPositionX = 516
-                characterPositionY = 616
+                xStartWorld = -16206
+                yStartWorld = -1604
 
                 break
         }
