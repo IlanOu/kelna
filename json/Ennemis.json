@@ -207,57 +207,6 @@
         "indexFrame": 0,
         "movement": "walk",
         "lastMovement": "idle"
-      }, 
-      "Malade1": {
-        "mapName": "A-1",
-
-        "type": "Malade1",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-
-        "life": 5,
-
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
-
-        "color": "blue",
-
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
-
-        "x": 0,
-        "y": 0,
-
-        "globalStartX": 8,
-        "globalStartY": 8,
-
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
       }
     }
 }

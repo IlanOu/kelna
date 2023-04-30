@@ -1,8 +1,8 @@
 {
   "PNJS": {
-    "Charle": {
-      "name":"Charle",
-      
+    "Tavernier": {
+      "name": "TAVERNIER",
+
       "mapName": "taverne",
 
       "detectDistX": 2,
@@ -35,28 +35,18 @@
       "currentFrame": 0,
       "indexFrame": 0,
       "movement": "walk",
-      
+
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
 
-      "echange": [
-        {
-          "demande": ["sword_2"],
-          "donne": ["sword_3"]
-        },
-        {
-          "demande": ["sword_1"],
-          "donne": ["sword_2"]
-        },
-        {
-          "demande": ["food_1"],
-          "donne": ["sword_1"]
-        }
-      ]
+      "echange": [{
+        "demande": ["food_1"],
+        "donne": ["sword_1"]
+      }]
     },
     "Toto": {
-      "name":"Toto",
+      "name": "MEN",
       "mapName": "A-1",
 
       "detectDistX": 2,
@@ -93,25 +83,36 @@
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
-      "echange": [
-        {
-          "demande": ["sword_2"],
-          "donne": ["sword_3"]
+      "step": 0,
+      "discussions": [{
+          "text": "Oh bonjour, Yvo, ça fait plaisir de te voir.",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["sword_1"],
-          "donne": ["sword_2"]
+          "text": "C'est un véritable désastre, on perd un être cher à chaque instant",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["food_1"],
-          "donne": ["sword_1"]
+          "text": "J'espère que ta femme s'en tirera...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Mais, es-tu capable d'aller chercher cet sois disante plante légendaire Kelna ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "M'enfin bon, va voir le tavernier il a peut-être de quoi t'aider",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sauve nous Yvo !",
+          "itemsNameRequired": ["none"]
         }
       ]
     },
-    "Marjo": {
-      "name": "Marjo",
-
-      "mapName": "A-1",
+    "Roberto": {
+      "name": "MEN",
+      "mapName": "D-7",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -120,8 +121,8 @@
       "x": 0,
       "y": 0,
 
-      "globalStartX": 15,
-      "globalStartY": 11,
+      "globalStartX": 1,
+      "globalStartY": 0,
 
       "velocityY": 0,
       "mass": 60,
@@ -133,8 +134,8 @@
       "width": 80,
       "height": 80,
 
-      "distance": 4,
-      "speed": 3,
+      "distance": 2,
+      "speed": 2,
       "followSpeed": 4,
 
       "stepCount": 0,
@@ -147,43 +148,65 @@
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
-      "step": 0,
-      "discussions": [
-        {
-          "text": "Bonjour jeune entrepreneur", 
-          "itemsNameRequired": ["none"]
-        }, 
-        {
-          "text": "J'ai besoin que tu me ramène une épée ! Ou une pomme !",
-          "itemsNameRequired": ["none"]
-        },
-        {
-          "text" : "C'est très gentil, je vais te donner une information géniale en échange !",
-          "itemsNameRequired": ["sword_1", "food_1"]
-        }, 
-        {
-         "text": "Un jour Chuck Norris a eu un zéro en latin...",
-         "itemsNameRequired": ["none"]  
-        }, 
-        {
-         "text": "Depuis, c'est une langue morte.",
-         "itemsNameRequired": ["none"]  
-        }, 
-        {
-         "text": "Hahahahahahahaha",
-         "itemsNameRequired": ["none"]  
-        }
-      ]
+      "echange": [{
+        "demande": ["mushroom_1"],
+        "donne": ["sword_2"]
+      }]
+
     },
-    "Roberto": {
-      "name":"Toto",
-      "mapName": "C-13",
+    "Sorcier": {
+      "name": "WIZARD",
+      "mapName": "C-17",
 
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 100,
+      "x": 900,
+      "y": 0,
+
+      "globalStartX": 3,
+      "globalStartY": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 2,
+      "speed": 2,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "echange": [{
+        "demande": ["food_1", "sword_3"],
+        "donne": ["kelna"]
+      }]
+
+    },
+    "Folle": {
+      "name": "CRAZY",
+      "mapName": "C-19",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
       "y": 0,
 
       "globalStartX": 4,
@@ -213,13 +236,107 @@
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
-      "echange": [
+      "echange": [{
+        "demande": ["sword_1", "food_1"],
+        "donne": ["sword_3"]
+      }]
+
+    },
+    "Marjo": {
+      "name": "WOMEN",
+
+      "mapName": "C-6",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 0,
+
+      "globalStartX": 4,
+      "globalStartY": 3,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 4,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Notre belle contrée détruite par cet infeste maladie...",
+          "itemsNameRequired": ["none"]
+        },
         {
-          "demande": ["sword_1", "food_1"],
-          "donne": ["sword_3"]
+          "text": "Je suis en plein cauchemar hein ? je rêve je suis en train de dormir nan ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Je peux même pas rentrer dans ma tente au-dessus de l'arbre avec tous ces infesté partout....",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Aide nous Yvo...",
+          "itemsNameRequired": ["none"]
         }
       ]
+    },
+    "Tom": {
+      "name": "MEN",
+      "mapName": "C-12",
 
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 1,
+      "y": 0,
+
+      "globalStartX": 3,
+      "globalStartY": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 1,
+      "speed": 2,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false
     }
   }
 }

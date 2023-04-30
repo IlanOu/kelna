@@ -61,13 +61,16 @@ function preload() {
   //? Animation PNJ
   marjoTexture = loadImage("assets/entities/marjoSprite.png");
   charleTexture = loadImage("assets/entities/charleSprite.png");
+  crazyTexture = loadImage("assets/entities/crazySprite.png");
+  innkeeperTexture = loadImage("assets/entities/innkeeperSprite.png");
+  wizardTexture = loadImage("assets/entities/witchSprite.png");
   malade1Sprite = loadImage("assets/entities/malade1.png");
   malade2Sprite = loadImage("assets/entities/spritesheetgraveyard.png");
 
 
   //? Tileset
   tilesetItems = loadImage("assets/items/TileSetItems.png");
-  tileSetTaverne = loadImage("assets/textures/tavernelabo.png"); //taverne
+  tileSetTaverne = loadImage("assets/textures/tavernelabo.png");
   tileSetLabo = loadImage("assets/textures/labo.png");
 
 

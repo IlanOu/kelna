@@ -25,7 +25,7 @@
 
             "location": "C-18",
             "x" : 19.8,
-            "y": 2,
+            "y": 4,
             "detectDist": 2,
             "destination": "labo",
             "inHouse": false
