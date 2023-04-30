@@ -105,6 +105,7 @@ function preload() {
   musicGame = loadSound("assets/audios/music/musicGame.mp3")
 
 
+
   //? Songs
   VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
   VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]

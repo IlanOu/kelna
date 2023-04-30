@@ -6,7 +6,7 @@ function MobManager() {
   if (engineOne) {
     if(ennemiesJSON.Ennemis){
       Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
-        mob(Mobs[1]);          
+        mob(Mobs[1]);
       })
     }  
   }
@@ -23,15 +23,14 @@ function mob(Mobs) {
   let mapsToCheckColliders = getMapsToCheck(characterPositionX, characterPositionY)
   let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
   
+
   let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
   let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
-  
 
 
   const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
-  mobMustBeShown(Mobs, found)
 
-  if ((Mobs.life > 0 || !Mobs.isDead) && found) {
+  if ((Mobs.life > 0 || !Mobs.isDead)) { //&& found
     //* Initialisation des variables
 
 
@@ -168,13 +167,12 @@ function mob(Mobs) {
 //^ /* -------------------------------------------------------------------------- */
 let mobMovements = (Mobs) => {
   //* Variables positions Mobs
-  let CurrentX = Mobs.x;
-  let MobY = Mobs.y;
+  Mobs.lastMapName = Mobs.mapName
 
   //* Variables Collisions / HitBox Mobs
   let MobBoundingBox = expandRect(
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     Mobs.detectDistX,
@@ -183,8 +181,8 @@ let mobMovements = (Mobs) => {
 
   //* Quand le mob s'arrête ?
   let MobLittleBoundingBox = expandRect(
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     1,
@@ -222,10 +220,12 @@ let mobMovements = (Mobs) => {
     //? Afficher un !
     if (Mobs.isAThreat) {
       fill(255, 0, 0);
-      drawKeyAt("!", CurrentX, MobY);
+      drawKeyAt("!", Mobs.x, Mobs.y);
     }
     Mobs.movement = "idle";
   } else {
+    
+
     if (Mobs.seePlayer) {
       followPlayer(Mobs);
       lookThePlayer(Mobs);
@@ -233,10 +233,29 @@ let mobMovements = (Mobs) => {
       //? Afficher un !
       if (Mobs.isAThreat) {
         fill(255, 0, 0);
-        drawKeyAt("!", CurrentX, MobY);
+        drawKeyAt("!", Mobs.x, Mobs.y);
       }
 
-      console.log(findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns))
+      //& Changer la map en fonction de sa position
+      let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+
+      
+      Mobs.mapName = World.worldsMap[positions[1]][positions[0]]
+      
+      if (Mobs.lastMapName != Mobs.mapName){
+        
+        
+        if (Mobs.direction == "right"){
+          Mobs.stepCount -= rectWidth * Maps.numberOfRow //? 1320 
+          
+        }else{
+          Mobs.stepCount += rectWidth * Maps.numberOfRow //? 1320 
+          
+        }
+        // console.log(Mobs.stepCount)
+      }
+
+      
     } else {
       doRound(Mobs);
     }
@@ -245,7 +264,7 @@ let mobMovements = (Mobs) => {
   //* Si le mob est une menace (s'il peut t'attaquer)
   if (Mobs.isAThreat) {
     let characterCenterX = characterPositionX;
-    let mobsCenterX = CurrentX + Mobs.width / 2;
+    let mobsCenterX = Mobs.x + Mobs.width / 2;
 
 
     if (characterComboHitting && lastHit == "2"){
@@ -357,8 +376,8 @@ let mobMovements = (Mobs) => {
   //* Afficher le Mob
   animationMobs(
     Mobs,
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     Mobs.direction,
@@ -382,8 +401,6 @@ function animationMobs(
   color
 ) {
   CurrentMob.lastMovement = movement;
-
-  image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
   let timer = round(millis() / animationSpeed) % 2;
 

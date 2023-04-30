@@ -474,7 +474,7 @@ function drawKey(key) {
 
 //~ Dessine les touches pour les interactions
 function drawKeyAt(key, positionX, positionY, haveBackground = false) {
-    let keyBackground = [(positionX),
+    /*let keyBackground = [(positionX),
         positionY - 50,
         interactionWidth,
         interactionHeight
@@ -493,7 +493,9 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
     } else {
         drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
-    }
+    } */
+
+    image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
 }
 
