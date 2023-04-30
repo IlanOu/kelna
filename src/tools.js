@@ -222,41 +222,43 @@ let PlaySong = () => {
 
 function soundEffects() {
 
-    /*
-    if (soundEnabled) {
+    
+    // if (soundEnabled) {
 
-        if (characterIsJumping) {
-            soundJump.play()
-        } else {
-            soundJump.pause()
-        }
-        if (characterMovement == "getHit") {
-            soundHit.play()
-        } else {
-            soundHit.pause()
-        }
-        if (characterMovement == "die") {
-            soundDie.play()
-        } else {
-            soundDie.pause()
-        }
-        if (characterMovement == "hit") {
+    //     if (!soundJump.isPlaying()){
+    //         if (characterIsJumping) {
+    //             soundJump.play()
+    //         } else {
+    //             soundJump.pause()
+    //         }
+    //     }
+    //     if (characterMovement == "getHit") {
+    //         soundHit.play()
+    //     } else {
+    //         soundHit.pause()
+    //     }
+    //     if (characterMovement == "die") {
+    //         soundDie.play()
+    //     } else {
+    //         soundDie.pause()
+    //     }
+    //     if (characterMovement == "hit") {
 
-            soundSwordHit1.play()
-        } else {
-            soundSwordHit1.pause()
-        }
-        if (characterMovement == "hit2") {
-            soundSwordHit2.play()
-        } else {
-            soundSwordHit2.pause()
-        }
-        if (characterMovement == "hit3") {
-            soundSwordHit3.play()
-        } else {
-            soundSwordHit3.pause()
-        }
-    }*/
+    //         soundSwordHit1.play()
+    //     } else {
+    //         soundSwordHit1.pause()
+    //     }
+    //     if (characterMovement == "hit2") {
+    //         soundSwordHit2.play()
+    //     } else {
+    //         soundSwordHit2.pause()
+    //     }
+    //     if (characterMovement == "hit3") {
+    //         soundSwordHit3.play()
+    //     } else {
+    //         soundSwordHit3.pause()
+    //     }
+    // }
 }
 
 
@@ -447,7 +449,7 @@ function drawKey(key) {
 
 //~ Dessine les touches pour les interactions
 function drawKeyAt(key, positionX, positionY, haveBackground = false) {
-    let keyBackground = [(positionX),
+    /*let keyBackground = [(positionX),
         positionY - 50,
         interactionWidth,
         interactionHeight
@@ -466,7 +468,9 @@ function drawKeyAt(key, positionX, positionY, haveBackground = false) {
 
     } else {
         drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
-    }
+    } */
+
+    image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
 }
 
