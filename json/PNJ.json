@@ -150,28 +150,22 @@
       "step": 0,
       "discussions": [
         {
-          "text": "Bonjour jeune entrepreneur", 
+          "text": "Salut je suis ton dealer personnel", 
           "itemsNameRequired": ["none"]
         }, 
         {
-          "text": "J'ai besoin que tu me ramène une épée ! Ou une pomme !",
+          "text": "Si tu me file une pomme, je te file...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text" : "C'est très gentil, je vais te donner une information géniale en échange !",
-          "itemsNameRequired": ["sword_1", "food_1"]
-        }, 
+          "text" : "une pomme.",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+      "echange": [
         {
-         "text": "Un jour Chuck Norris a eu un zéro en latin...",
-         "itemsNameRequired": ["none"]  
-        }, 
-        {
-         "text": "Depuis, c'est une langue morte.",
-         "itemsNameRequired": ["none"]  
-        }, 
-        {
-         "text": "Hahahahahahahaha",
-         "itemsNameRequired": ["none"]  
+          "demande": ["food_1"],
+          "donne": ["food_1"]
         }
       ]
     },

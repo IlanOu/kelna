@@ -227,10 +227,20 @@ let PNJMovements = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.echange != undefined) {
-      pnj.canTradeWithMe = true
-    }else if (pnj.discussions != undefined){
-      pnj.canTalkWithMe = true
+    if (pnj.echange && pnj.discussions){
+      if (pnj.step == pnj.discussions.length-1){
+        pnj.canTalkWithMe = false
+        pnj.canTradeWithMe = true
+      }else{
+        pnj.canTalkWithMe = true
+        pnj.canTradeWithMe = false
+      }
+    }else{
+      if (pnj.echange) {
+        pnj.canTradeWithMe = true
+      }else if (pnj.discussions){
+        pnj.canTalkWithMe = true
+      }
     }
     
   }

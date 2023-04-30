@@ -147,6 +147,14 @@ function drawHomeMenu() {
   ];
 
 
+  let sunflowerLink = [
+    viewportDisplayWidth / 2 - widthButton / 2,
+    centerButtonY + marginButton * 3,
+    widthButton,
+    heightButton,
+  ];
+
+
 
   //* --------------------------------
   //* ---------- Evenements ----------

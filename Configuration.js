@@ -233,13 +233,6 @@ let soundSwordHit3;
 let soundClick;
 let soundPNJ;
 
-let soundJump;
-let soundHit;
-let soundDie;
-let soundUnsheathSword;
-let soundSwordHit1;
-let soundSwordHit2;
-let soundSwordHit3;
 
 
 
