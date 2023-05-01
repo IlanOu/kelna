@@ -147,7 +147,6 @@ function doRound(Mobs) {
   }else{
     MobStart = positionsStart.pixelX + xStartHouse;
     MobEnd = positionsEnd.pixelX + xStartHouse;
-
   }
 
   let haveToJump = Mobs.haveToJump;
@@ -193,6 +192,8 @@ function doRound(Mobs) {
   }
 
 
+
+
   //* Retourner les variables
   Mobs.haveToJump = haveToJump;
   Mobs.stepCount = walkAmount;
@@ -208,12 +209,20 @@ function doRound(Mobs) {
 /* -------------------------------------------------------------------------- */
 function lookThePlayer(Mobs) {
     //* Initialisation des variables
-    let CurrentX = Mobs.x;
+    let CurrentX = Mobs.x + (Mobs.width*Mobs.detectDistX)/2;
 
    //* Regarder le joueur
-  if (characterPositionX > CurrentX || characterInsidePosX > CurrentX) {
-    Mobs.direction = "right";
-  } else if (characterPositionX < CurrentX || characterInsidePosX < CurrentX) {
-    Mobs.direction = "left";
-  }
+   if (engineOne){
+    if (characterPositionX+ (characterWidth/2) > CurrentX) {
+      Mobs.direction = "right";
+    } else if (characterPositionX+ (characterWidth/2) < CurrentX) {
+      Mobs.direction = "left";
+    }  
+   }else{
+     if (characterInsidePosX+ (characterWidth/2) > CurrentX) {
+       Mobs.direction = "right";
+     } else if (characterInsidePosX+ (characterWidth/2) < CurrentX) {
+       Mobs.direction = "left";
+     }
+   }
 }

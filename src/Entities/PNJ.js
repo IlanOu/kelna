@@ -5,15 +5,15 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-    if (pnjJSON.PNJS) {
-      Object.entries(pnjJSON.PNJS).forEach((pnj) => {
-        if (World.worldsMap.some(row => row.includes(pnj[1].mapName))) {
-          PNJ(pnj[1]);
-        }
-      })
-      // PNJ(pnjJSON.PNJS.Marjo);
-      // PNJ(pnjJSON.PNJS.Toto);
-    }
+      if (pnjJSON.PNJS){
+        Object.entries(pnjJSON.PNJS).forEach((pnj) => {
+          if (World.worldsMap.some(row => row.includes(pnj[1].mapName))){
+            PNJ(pnj[1]);          
+          }
+        })
+        // PNJ(pnjJSON.PNJS.Marjo);
+        // PNJ(pnjJSON.PNJS.Toto);
+      }
   } else {
     drawPNJInside(pnjJSON.PNJS.Tavernier);
   }
@@ -29,7 +29,6 @@ let drawPNJInside = (pnj) => {
   let PNJStart = pnj.globalStartX + xStartHouse;
   let PNJDistance = pnj.distance + PNJStart;
   let PNJEnd = PNJDistance;
-
 
   pnj.x = pnj.globalStartX + xStartHouse + pnj.stepCount;
   pnj.y = pnj.globalStartY + yStartHouse;
@@ -54,10 +53,8 @@ function PNJ(pnj) {
   //* Initialisation des variables
 
   let positionsStart = getPositionAt(pnj.mapName, pnj.globalStartX, pnj.globalStartY)
-  let positionsEnd = getPositionAt(pnj.mapName, pnj.globalStartX + pnj.distance, 0)
 
   let PNJStart = positionsStart.pixelX;
-  let PNJEnd = positionsEnd.pixelX;
 
   pnj.x = PNJStart + xStartWorld + pnj.stepCount;
   // pnj.y = positionsStart.pixelY + yStartWorld
@@ -79,12 +76,12 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
-
+  
   if (pnjMustBeShown(pnj)) {
-
-
-    if (lastMap != currentMap) {
-      if (currentMap.toString() == pnj.mapName.toString()) {
+    
+    
+    if (lastMap != currentMap){
+      if (currentMap.toString() == pnj.mapName.toString()){
         PNJX = positionsStart.pixelX + xStartWorld
         PNJY = positionsStart.pixelY + yStartWorld
         pnj.x = positionsStart.pixelX + xStartWorld
@@ -169,7 +166,6 @@ function PNJ(pnj) {
     pnj.velocityY = PNJVelocityY;
     pnj.isJumping = PNJIsJumping;
     pnj.jumpCount = PNJJumpCount;
-    pnj.xEnd = PNJEnd;
     pnj.haveToJump = collide;
 
     PNJMovements(pnj);
@@ -180,9 +176,9 @@ function PNJ(pnj) {
 
 
 
-//^ /* -------------------------------------------------------------------------- */
-//^ /*                                PNJ MOVEMENTS                               */
-//^ /* -------------------------------------------------------------------------- */
+//^ --------------------------------------------------------------------------
+//^                                 PNJ MOVEMENTS                             
+//^ --------------------------------------------------------------------------
 
 let PNJMovements = (pnj) => {
   //* Variables positions PNJ
@@ -212,27 +208,34 @@ let PNJMovements = (pnj) => {
     VillagerBoundingBox[3]
   );
 
-  //* Si le perso n'est pas vu, faire une ronde
-  if (!pnj.seePlayer) {
-    doRound(pnj);
-    pnj.movement = "walk";
-
-    pnj.canTalkWithMe = false
-    pnj.canTradeWithMe = false
-
-  }
-
   //* Si le perso est vu s'arreter et le regarder
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.echange != undefined) {
-      pnj.canTradeWithMe = true
-    } else if (pnj.discussions != undefined) {
-      pnj.canTalkWithMe = true
+    if (pnj.echange && pnj.discussions){
+      if (pnj.step == pnj.discussions.length-1){
+        pnj.canTalkWithMe = false
+        pnj.canTradeWithMe = true
+      }else{
+        pnj.canTalkWithMe = true
+        pnj.canTradeWithMe = false
+      }
+    //* Si le perso n'est pas vu, faire une ronde
+    }else{
+      if (pnj.echange) {
+        pnj.canTradeWithMe = true
+      }else if (pnj.discussions){
+        pnj.canTalkWithMe = true
+      }
     }
+    
+  }else{
+    doRound(pnj);
+    pnj.movement = "walk";
 
+    pnj.canTalkWithMe = false
+    pnj.canTradeWithMe = false
   }
 
   //* Ajouter le saut au PNJ
@@ -286,11 +289,18 @@ let PNJMovements = (pnj) => {
 
 };
 
+
+//& --------------------------------------------------------------------------
+//&                          Dessiner le pnj engine 2                         
+//& --------------------------------------------------------------------------
+
 let PNJMovementsInside = (pnj) => {
 
+  let positionsStart = getPositionAt(pnj.mapName, pnj.globalStartX, pnj.globalStartY)
+
   //* Variables positions PNJ
-  let CurrentX = pnj.x;
-  let PNJY = pnj.y;
+  let CurrentX = positionsStart.pixelX + pnj.stepCount + xStartHouse;
+  let PNJY = positionsStart.pixelY + yStartHouse;
 
   //* Variables Collisions / HitBox PNJ
   let VillagerBoundingBox = expandRect(
@@ -315,23 +325,33 @@ let PNJMovementsInside = (pnj) => {
   );
 
   //* Si le perso n'est pas vu, faire une ronde
-  if (!pnj.seePlayer) {
-    doRound(pnj);
-    pnj.movement = "walk";
-  }
   if (pnj.seePlayer) {
     lookThePlayer(pnj);
     pnj.movement = "idle";
-    if (pnj.echange !== undefined) {}
-  }
 
-  //* Ajouter le saut au PNJ
-  if (pnj.haveToJump) {
-    if (pnj.direction == "left") {
-      pnj.direction = "right";
-    } else if (pnj.direction == "right") {
-      pnj.direction = "left";
+    if (pnj.echange && pnj.discussions){
+      if (pnj.step == pnj.discussions.length-1){
+        pnj.canTalkWithMe = false
+        pnj.canTradeWithMe = true
+      }else{
+        pnj.canTalkWithMe = true
+        pnj.canTradeWithMe = false
+      }
+    }else{
+      if (pnj.echange) {
+        pnj.canTradeWithMe = true
+        // console.log('je suis un marchand', pnj.canTradeWithMe)
+      }else if (pnj.discussions){
+        pnj.canTalkWithMe = true
+      }
     }
+    
+  }
+  else {
+    doRound(pnj);
+    pnj.movement = "walk";
+    pnj.canTalkWithMe = false
+    pnj.canTradeWithMe = false
   }
 
   //* Debug Mod

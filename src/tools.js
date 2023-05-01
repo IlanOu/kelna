@@ -419,15 +419,14 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     })
 
     if (!mapExist) {
-        Object.entries(Houses.Houses).forEach(house => {
-            house = house[1]
-            if (house.name == mapName && !mapExist) {
-                mapExist = true;
-                indexMapX = 0
-            } else {
-                indexMapY = 0
-            }
-        });
+        mapExist = true;
+        indexMapX = 0
+        indexMapY = 0
+
+        return {
+            "pixelX": positionX*rectWidth,
+            "pixelY": positionY*rectHeight
+        }
     }
 
     if (mapExist) {

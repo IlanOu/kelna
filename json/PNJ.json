@@ -5,15 +5,15 @@
 
       "mapName": "taverne",
 
-      "detectDistX": 2,
-      "detectDistY": 2,
+      "detectDistX": 4,
+      "detectDistY": 4,
       "seePlayer": false,
 
-      "x": 600,
+      "x": 0,
       "y": 0,
 
-      "globalStartX": 250,
-      "globalStartY": 80,
+      "globalStartX": 2,
+      "globalStartY": 1.5,
 
       "velocityY": 0,
       "mass": 60,
@@ -25,11 +25,11 @@
       "width": 80,
       "height": 80,
 
-      "distance": 0,
-      "speed": 0,
+      "distance": 1.5,
+      "speed": 1,
       "followSpeed": 4,
 
-      "stepCount": 0,
+      "stepCount": 110,
       "direction": "right",
 
       "currentFrame": 0,
@@ -299,44 +299,6 @@
           "itemsNameRequired": ["none"]
         }
       ]
-    },
-    "Tom": {
-      "name": "MEN",
-      "mapName": "C-12",
-
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 1,
-      "y": 0,
-
-      "globalStartX": 3,
-      "globalStartY": 0,
-
-      "velocityY": 0,
-      "mass": 60,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 1,
-      "speed": 2,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canTalkWithMe": false,
-      "canTradeWithMe": false
     }
   }
 }
