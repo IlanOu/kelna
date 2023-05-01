@@ -29,7 +29,7 @@ function doorsManager() {
 //~ Dessiner la porte devant la maison
 function drawDoor(door) {
   noStroke()
-  fill(0,0,0,70);
+  fill(0,0,0,0); //70
 
   let positions = getPositionAt(door.location, door.x, door.y);
   let doorX = positions.pixelX + xStartWorld;
@@ -95,8 +95,8 @@ function drawDoor(door) {
 
 //~ Dessiner la porte dans la maison
 function drawDoorInside(door) {
-  stroke(255)
-  fill(255);
+  noStroke()
+  fill(67, 37, 27, 0); //255
 
   let positions = getPositionAt(door.location, door.x, door.y);
   let doorX = positions.pixelX + xStartHouse;
