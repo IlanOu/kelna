@@ -148,6 +148,9 @@ let popUpButtonHover
 let checkedLongButtonHover
 let checkedLongButton
 
+let site = "https://readymag.com/u2730643025/4237179/"
+let logo;
+
 //? Buttons UI
 
 let buttonZ

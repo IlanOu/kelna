@@ -18,10 +18,10 @@ function videoEnded() {
 
 
 //~ Lancement de la cinematique de fin de jeu
-/*
 function playEndCinematic() {
     leftClickPressed = false;
     noCursor()
+    hideInventory = true
     image(gameEndVideo, 0, 0, viewportDisplayWidth, viewportDisplayHeight);
 }
 
@@ -30,4 +30,4 @@ function videoEndedEnd() {
     background(0)
     endTheGameCredits = true
     drawCredits()
-}*/
+}

@@ -67,6 +67,13 @@ function buttonClicked([x, y, h, w]) {
   return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
+
+//~  Au clic d'une image
+function imgClicked([x, y, h, w]) {
+  return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
+}
+
+
 //~ Hover du bouton
 function buttonHover([x, y, h, w]) {
   return pointIsInRect(mouseX, mouseY, x, y, h, w);
@@ -82,76 +89,88 @@ function drawHomeMenu() {
   cursor('default')
   image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
-
-
+  
+  
   //* --------------------------------
   //* ---------- Variables -----------
   //* --------------------------------
-
-
+  
+  
   let widthButton = (viewportDisplayWidth / 5)
   let heightButton = 60;
   let marginButton = viewportDisplayHeight / 12.5;
   let centerYPage = viewportDisplayHeight / 2
   let fontSizeHome = 30
   let centerButtonY = centerYPage - (viewportDisplayHeight / 42)
-
-
+  
+  
   let interfaceMenu = [
     0,
     0,
     viewportDisplayWidth,
     viewportDisplayHeight,
   ];
-
+  
   let play = [
     viewportDisplayWidth / 2 - widthButton / 2,
     centerButtonY,
     widthButton,
     heightButton,
   ];
-
+  
   let textPlay = [
     play[0] + play[2] / 2,
     play[1] + (heightButton / 2) - (fontSizeHome / 2),
   ];
-
-
-
-
+  
+  
+  
+  
   let buttonParameters = [
     viewportDisplayWidth / 2 - widthButton / 2,
     centerButtonY + marginButton,
     widthButton,
     heightButton,
   ];
-
+  
   let textParameters = [
     buttonParameters[0] + buttonParameters[2] / 2,
     buttonParameters[1] + (heightButton / 2) - (fontSizeHome / 2),
   ];
-
-
-
-
+  
+  
+  
+  
   let credits = [
     viewportDisplayWidth / 2 - widthButton / 2,
     centerButtonY + marginButton * 2,
     widthButton,
     heightButton,
   ];
-
+  
   let textCredits = [
     credits[0] + credits[2] / 2,
     credits[1] + (heightButton / 2) - (fontSizeHome / 2),
   ];
+  
+  
+  let logoPos = [
+    0,
+    viewportDisplayHeight - (viewportDisplayHeight / 5),
+    logo.width / 3,
+    logo.height / 3
+  ]
 
 
-
-
+  
   //* --------------------------------
   //* ---------- Evenements ----------
   //* --------------------------------
+  
+
+
+  image(logo, logoPos[0], logoPos[1], logoPos[2], logoPos[3])
+
 
   if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
@@ -164,6 +183,10 @@ function drawHomeMenu() {
     //addItemToInventory(itemsJSON.Items.food_1, 3)
   }
 
+
+  if (imgClicked(logoPos)) {
+    window.location.href = site;
+  }
 
 
   if (buttonClicked(buttonParameters) && !settingsPause) {
@@ -563,7 +586,6 @@ function drawSettingsMenu() {
 
 //~ MENU DEATH
 function drawDeath() {
-  characterMovement = "idle"
   cursor('default')
   textFont(pixelFont)
 
@@ -571,10 +593,10 @@ function drawDeath() {
     DieGameVoice()
     dieSoundPlay = true
   }
-  playerDead = true
   fill(0, 0, 0, 50);
   rect(0, 0, width, height);
-
+  
+  playerDead = true
   gameIsPaused = true;
 
   //* --------------------------------
@@ -628,6 +650,8 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
+    playerDead = false
+    characterMovement = "idle"
     soundEffects()
   }
 
@@ -1274,7 +1298,7 @@ function setupUI() {
     }
 
     if (Inventory[2].name === "kelna") {
-      console.log("lsdlsld")
+      gameIsEnd = true
       playEndCinematic()
     }
 

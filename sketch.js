@@ -39,6 +39,8 @@ function preload() {
 
   smallPopUp = loadImage("assets/GUI/smallPopUp.png");
 
+  logo = loadImage("assets/GUI/logo.png")
+
 
   //? Buttons
   buttonZ = loadImage("assets/GUI/buttonZ.png");
@@ -101,7 +103,7 @@ function preload() {
 
   //? Cinématiques
   gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV");
-  //gameEndVideo = createVideo("assets/cinematic/endGame.mp4");
+  gameEndVideo = createVideo("assets/cinematic/test.mp4"); //endGame.mp4 bm.mp4
 
 
   //? Music
@@ -147,6 +149,7 @@ function setup() {
 
   //? Cinématiques
   gameIntroductionVideo.hide();
+  gameEndVideo.hide();
 }
 
 

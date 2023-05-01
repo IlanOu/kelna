@@ -657,12 +657,17 @@ function troc(requis, gain) {
     let canTradeThisObject = false
 
     requis.every(objRequis => {
-        if (Inventory.includes(objRequis)) {
-            canTradeThisObject = true
-        } else {
-            canTradeThisObject = false
-            return false
-        }
+
+        Inventory.forEach(item => {
+            item = Inventory[2]
+            if (objRequis.name === item.name) {
+                canTradeThisObject = true
+            } else {
+                canTradeThisObject = false
+                return false
+            }
+        });
+
     })
 
     if (canTradeThisObject) {

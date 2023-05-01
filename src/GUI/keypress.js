@@ -194,7 +194,7 @@ function mouseReleased() {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
         }
-        if (gameIsEnd && gameEndVideo.elt.paused) {
+        if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
             gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
             gameEndVideo.play();
         }
