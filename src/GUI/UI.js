@@ -847,15 +847,14 @@ function drawStartGame() {
 
 //~ BARRE DE VIE
 function drawLifeBar(x, y) {
-
-  for (let i = 0; i < maxHealth; i++) {
-    if (i + 1 <= healthPlayer) {
-      image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
-    } else {
-      image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
-
+  if (!hideUI){
+    for (let i = 0; i < maxHealth; i++) {
+      if (i + 1 <= healthPlayer) {
+        image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
+      } else {
+        image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
+      }
     }
-
   }
 }
 

@@ -82,7 +82,7 @@ function updateGauges() {
 function displayInventory() {
     let canEat = false
 
-    if (!hideInventory) {
+    if (!hideInventory || hideUI) {
 
         let spaceBetween = heightSlot / 5
 

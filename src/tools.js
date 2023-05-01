@@ -21,6 +21,7 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
+
 //~ Trouve l'index d'une map dans world 
 function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
