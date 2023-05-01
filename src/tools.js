@@ -657,9 +657,14 @@ function troc(requis, gain) {
     let canTradeThisObject = false
 
     requis.every(objRequis => {
-
         Inventory.forEach(item => {
-            item = Inventory[2]
+            if(objRequis.category == "other"){
+                item = Inventory[2]
+            } else if (objRequis.category == "weapon") {
+                item = Inventory[0]
+            } else if (objRequis.category == "food") {
+                item = Inventory[1]
+            }
             if (objRequis.name === item.name) {
                 canTradeThisObject = true
             } else {
