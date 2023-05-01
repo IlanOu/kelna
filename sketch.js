@@ -101,6 +101,7 @@ function preload() {
 
   //? Cinématiques
   gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV");
+  //gameEndVideo = createVideo("assets/cinematic/endGame.mp4");
 
 
   //? Music

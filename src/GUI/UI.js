@@ -1183,7 +1183,7 @@ function drawDiscussion(x, y, w, h) {
 
 }
 
-//~ CREDITS END GAME
+//~ CREDITS
 function drawCredits() {
   textFont(pixelFont)
   gameIsPaused = true;
@@ -1230,16 +1230,6 @@ function drawCredits() {
   textAlign(CENTER, BASELINE);
 }
 
-//~ End game
-
-function endGame() {
-
-
-  console.log("FIN DU JEU")
-
-
-}
-
 
 
 //^ LANCER
@@ -1283,8 +1273,9 @@ function setupUI() {
       timerGame()
     }
 
-    if (gameIsEnd) {
-      endGame()
+    if (Inventory[2].name === "kelna") {
+      console.log("lsdlsld")
+      playEndCinematic()
     }
 
 

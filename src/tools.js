@@ -426,8 +426,8 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         indexMapY = 0
 
         return {
-            "pixelX": positionX*rectWidth,
-            "pixelY": positionY*rectHeight
+            "pixelX": positionX * rectWidth,
+            "pixelY": positionY * rectHeight
         }
     }
 
@@ -850,16 +850,10 @@ function shakeCamera(durationSeconds, forcePixels) {
 //~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
-        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna") {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
-            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-            currentItemPointing = ""
-            gameIsEnd = true
-        } else {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
-            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-            currentItemPointing = ""
-        }
+        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
+        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+        currentItemPointing = ""
+
     }
 }
 

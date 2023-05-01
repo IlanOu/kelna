@@ -374,3 +374,4 @@ let StartCinematic;
 let statistiques;
 let tilesList;
 let gameIntroductionVideo;
+let gameEndVideo;

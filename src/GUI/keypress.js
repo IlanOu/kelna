@@ -28,6 +28,10 @@ function keyPressed() {
     //? Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = true;
+    }
+
+    //? Touche F
+    if ((keyCode == 70)) {
         characterIsEating = true
     }
 
@@ -79,7 +83,7 @@ function keyPressed() {
 
     //? Touche I
     if (keyCode == 73) {
-        addItemToInventory(itemsJSON.Items.sword_1, 1);
+        addItemToInventory(itemsJSON.Items.sword_3, 1);
     }
 
     //? Touche O du clavier
@@ -130,7 +134,13 @@ function keyReleased() {
     //? Flèche de haut
     if ((keyCode == 38 || keyCode == 90)) {
         highArrowPressed = false;
-        characterIsEating = false
+    }
+
+
+    //? Touche F
+    if ((keyCode == 70)) {
+        console.log("lsdsd")
+        characterIsEating = true
     }
 
     //? Flèche de bas
@@ -183,6 +193,10 @@ function mouseReleased() {
         if (startCinematicPlaying && gameIntroductionVideo.elt.paused) {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
+        }
+        if (gameIsEnd && gameEndVideo.elt.paused) {
+            gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
+            gameEndVideo.play();
         }
 
         slotOne = Inventory[0]

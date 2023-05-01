@@ -12,7 +12,7 @@ function drawBackgroundImage (background, backgroundClose, backgroundDistant){
   
   //? Premier background
   backgroundX = (xStartWorld / widthImgRatio);
-  image(background,         backgroundX, 0, background.width*heightImgRatio*multiplyFactor, background.height*heightImgRatio*multiplyFactor);
+  image(background, backgroundX, 0, background.width*heightImgRatio*multiplyFactor, background.height*heightImgRatio*multiplyFactor);
 
 
   //? Deuxième background
