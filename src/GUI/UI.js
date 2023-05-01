@@ -147,13 +147,6 @@ function drawHomeMenu() {
   ];
 
 
-  let sunflowerLink = [
-    viewportDisplayWidth / 2 - widthButton / 2,
-    centerButtonY + marginButton * 3,
-    widthButton,
-    heightButton,
-  ];
-
 
 
   //* --------------------------------
@@ -846,21 +839,21 @@ function drawLifeBar(x, y) {
 function setupInteractions() {
   fill(255);
 
+  if (aPNJCanTrade()) {
+    // console.log('Echange')
+    drawKey("E");
+  }
+
+  if (aPNJCanTalk()) {
+    drawKey("E");
+  }
+
   if (engineOne) {
     if (canEnterInHouse) {
       drawKey("E");
       PressInteractPNJ = false;
       PressTalkPNJ = false
     }
-
-    if (aPNJCanTrade()) {
-      drawKey("E");
-    }
-
-    if (aPNJCanTalk()) {
-      drawKey("E");
-    }
-
 
   } else {
     if (canGoOutTheHouse) {
@@ -1258,7 +1251,7 @@ function setupUI() {
   if (inGame) {
     gameIsPlaying = true;
 
-
+    
     //& Affichage des Intéractions
     setupInteractions();
 

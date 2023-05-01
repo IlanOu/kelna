@@ -166,10 +166,10 @@ function draw() {
       noCursor()
       //? Si le jeu n'est pas en pause
       if (!gameIsPaused) {
+        let seconds = Math.round(millis() / millis()) / 100
+        statistiques.timeSpentInGame += seconds
+        statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
         if (engineOne) {
-          let seconds = Math.round(millis() / millis()) / 100
-          statistiques.timeSpentInGame += seconds
-          statistiques.playerSpeed = getSpeed(statistiques.timeSpentInGame, statistiques.distanceWalked)
 
 
           //? Afficher le fond du jeu
@@ -187,6 +187,7 @@ function draw() {
           MobManager()
 
 
+
           //? Afficher le joueur (le perso passe devant les entités)
           character()
 
@@ -199,6 +200,8 @@ function draw() {
           PNJManager()
           characterView2()
           drawHouseForeground(behindThisDoorHouse)
+
+          
         }
       } else {
         hideInventory = true

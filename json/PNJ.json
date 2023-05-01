@@ -5,15 +5,15 @@
       
       "mapName": "taverne",
 
-      "detectDistX": 2,
-      "detectDistY": 2,
+      "detectDistX": 4,
+      "detectDistY": 4,
       "seePlayer": false,
 
-      "x": 600,
+      "x": 0,
       "y": 0,
 
-      "globalStartX": 250,
-      "globalStartY": 80,
+      "globalStartX": 2,
+      "globalStartY": 1.5,
 
       "velocityY": 0,
       "mass": 60,
@@ -25,11 +25,11 @@
       "width": 80,
       "height": 80,
 
-      "distance": 0,
-      "speed": 0,
+      "distance": 1.5,
+      "speed": 1,
       "followSpeed": 4,
 
-      "stepCount": 0,
+      "stepCount": 110,
       "direction": "right",
 
       "currentFrame": 0,
