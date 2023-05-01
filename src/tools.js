@@ -206,6 +206,7 @@ function DieGameVoice() {
 
 //~ Joue des voix de PNJ
 function pnjGameVoice() {
+    /*
     if (soundEnabled) {
         let indexSong = Math.floor(Math.random() * soundPNJ.length);
         if (!soundPNJ[indexSong].isPlaying()) {
@@ -216,6 +217,7 @@ function pnjGameVoice() {
             }
         }
     }
+    */
 }
 
 
@@ -1064,6 +1066,7 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
+    //addItemToInventory(itemsJSON.Items.food_1, 3)
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;

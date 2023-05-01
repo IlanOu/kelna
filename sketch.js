@@ -69,7 +69,7 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/TileSetItems.png");
+  tilesetItems = loadImage("assets/items/TileSetItems3.png");
   tileSetTaverne = loadImage("assets/textures/tavernelabo.png");
   tileSetLabo = loadImage("assets/textures/labo.png");
 
@@ -125,7 +125,7 @@ function preload() {
   soundSwordHit2 = loadSound("assets/audios/sounds/swordsHit_2.mp3")
   soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
   soundClick = loadSound("assets/audios/sounds/click.mp3")
-  soundPNJ = [loadSound("assets/audios/sounds/homme.wav"),loadSound("assets/audios/sounds/femme.wav")]
+  //soundPNJ = [loadSound("assets/audios/sounds/homme.wav"),loadSound("assets/audios/sounds/femme.wav")]
 }
 
 

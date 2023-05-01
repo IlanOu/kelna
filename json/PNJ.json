@@ -39,6 +39,37 @@
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
+      "step": 0,
+      "discussions": [{
+          "text": "Henri :Oh salut Yvo, comment tu vas ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Ça va ça va. Écoute Henri, Toto ma dis de venir te voir car tu as peut-être quelque chose pour moi",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Henri : Et tu cherche quoi exactement ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Une épée ou un truc du genre pour me défendre",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Henri : Oui, j'ai une épée en bois vieille de 20 ans mais elle pourra toujours te servir...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je prends !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Henri : Bonne chance Yvo !",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
 
       "echange": [{
         "demande": ["food_1"],
@@ -85,27 +116,44 @@
 
       "step": 0,
       "discussions": [{
-          "text": "Oh bonjour, Yvo, ça fait plaisir de te voir.",
+
+          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "C'est un véritable désastre, on perd un être cher à chaque instant",
+          "text": "Yvo : De même Toto...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "J'espère que ta femme s'en tirera...",
+          "text": "Toto : C'est un véritable désastre, on perd un être cher à chaque instant",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Mais, es-tu capable d'aller chercher cet sois disante plante légendaire Kelna ?",
+          "text": "Toto : J'espère que ta femme s'en tirera...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "M'enfin bon, va voir le tavernier il a peut-être de quoi t'aider",
+          "text": "Yvo : ...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sauve nous Yvo !",
+          "text": "Toto : Mais, es-tu capable d'aller chercher cet sois disante plante légendaire Kelna ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Bien sur ! Pour le village et ma dulciné",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Toto : M'enfin bon, va voir le tavernier il a peut-être de quoi t'aider",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Merci Toto",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Toto : Sauve nous Yvo !",
           "itemsNameRequired": ["none"]
         }
       ]
@@ -121,8 +169,8 @@
       "x": 0,
       "y": 0,
 
-      "globalStartX": 1,
-      "globalStartY": 0,
+      "globalStartX": 0,
+      "globalStartY": 5,
 
       "velocityY": 0,
       "mass": 60,
@@ -134,9 +182,9 @@
       "width": 80,
       "height": 80,
 
-      "distance": 2,
+      "distance": 0.5,
       "speed": 2,
-      "followSpeed": 4,
+      "followSpeed": 2,
 
       "stepCount": 0,
       "direction": "right",
@@ -147,6 +195,38 @@
 
       "canTalkWithMe": false,
       "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Roberto : Oh bonjour, dite je peux vous déranger 5 minutes ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Bonjour, oui dites-moi ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Je suis à la recherche d'un champignon mais j'ai un souci",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Il se trouve que j'en ai repéré un mais il y a des infectés partout là-bas au fond...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Pourriez-vous m'aider ? Je vous offrirais un beau cadeau !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Très bien",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : N'oubliez pas, il se trouve au fond et ne mourrez pas hein...",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
 
       "echange": [{
         "demande": ["mushroom_1"],
@@ -191,6 +271,41 @@
 
       "canTalkWithMe": false,
       "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Sorcier Fou : Oh petit, est-ce bien toi Yvo ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (D'où il connaît mon nom ?)",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auquel tu as dû faire face",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Tu es ici pour sauver ta femme ainsi que ton village natal",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Malgré les périples, les personnes qui t'étaient chères qui eux-mêmes était infectée tu as su faire face",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Je te donnerais Kelna...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : si tu échange",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (J'y suis enfin !)",
+          "itemsNameRequired": ["none"]
+        }
+      ],
 
       "echange": [{
         "demande": ["food_1", "sword_3"],
@@ -255,7 +370,7 @@
       "y": 0,
 
       "globalStartX": 4,
-      "globalStartY": 3,
+      "globalStartY": 8,
 
       "velocityY": 0,
       "mass": 60,
@@ -283,22 +398,90 @@
 
       "step": 0,
       "discussions": [{
-          "text": "Notre belle contrée détruite par cet infeste maladie...",
+          "text": "Marjo : Notre belle contrée détruite par cet infeste maladie...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Je suis en plein cauchemar hein ? je rêve je suis en train de dormir nan ?",
+          "text": "Marjo : Je suis en plein cauchemar hein ? je rêve je suis en train de dormir nan ?",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Je peux même pas rentrer dans ma tente au-dessus de l'arbre avec tous ces infesté partout....",
+          "text": "Yvo : Je ne crois que non Marjo...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Aide nous Yvo...",
+          "text": "Marjo : Je peux même pas rentrer dans ma tente au-dessus de l'arbre avec tous ces infesté partout....",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Marjo : Aide nous Yvo...",
           "itemsNameRequired": ["none"]
         }
       ]
+    },
+    "Sarah": {
+      "name": "WOMEN",
+
+      "mapName": "C-13",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 0,
+
+      "globalStartX": 4,
+      "globalStartY": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 1,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Sarah : Eh toi",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Oui ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sarah : J'ai besoin d'une pièce, en échange je te donnerais un objet que tu ne refuseras pas !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (elle est vraiment bizarre...)",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
+      "echange": [{
+        "demande": ["coin"],
+        "donne": ["sword_3"]
+      }]
+
     }
   }
 }

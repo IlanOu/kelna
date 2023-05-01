@@ -161,8 +161,7 @@ function drawHomeMenu() {
     musicCredits.pause()
     leftClickPressed = false
     startGame = true
-    // addItemToInventory(itemsJSON.Items.sword_1, 1)
-    // addItemToInventory(itemsJSON.Items.food_1, 3)
+    //addItemToInventory(itemsJSON.Items.food_1, 3)
   }
 
 
