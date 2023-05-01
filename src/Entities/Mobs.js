@@ -209,16 +209,16 @@ function doRound(Mobs) {
 /* -------------------------------------------------------------------------- */
 function lookThePlayer(Mobs) {
     //* Initialisation des variables
-    let CurrentX = Mobs.x + (Mobs.width*Mobs.detectDistX)/2;
-
-   //* Regarder le joueur
+    let CurrentX = Mobs.x
+    //* Regarder le joueur
    if (engineOne){
-    if (characterPositionX+ (characterWidth/2) > CurrentX) {
+     if (characterPositionX > CurrentX) {
       Mobs.direction = "right";
-    } else if (characterPositionX+ (characterWidth/2) < CurrentX) {
+    } else if (characterPositionX < CurrentX) {
       Mobs.direction = "left";
     }  
-   }else{
+  }else{
+     CurrentX = Mobs.x + (Mobs.width*Mobs.detectDistX)/2;
      if (characterInsidePosX+ (characterWidth/2) > CurrentX) {
        Mobs.direction = "right";
      } else if (characterInsidePosX+ (characterWidth/2) < CurrentX) {
