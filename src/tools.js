@@ -851,15 +851,14 @@ function shakeCamera(durationSeconds, forcePixels) {
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
         if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna") {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
             itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
             currentItemPointing = ""
             gameIsEnd = true
         } else {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
+            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
             itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
             currentItemPointing = ""
-            //canGetItem = false
         }
     }
 }
