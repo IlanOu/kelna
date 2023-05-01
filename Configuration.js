@@ -147,6 +147,7 @@ let popUpButton
 let popUpButtonHover
 let checkedLongButtonHover
 let checkedLongButton
+let homeButton
 
 //? Buttons UI
 

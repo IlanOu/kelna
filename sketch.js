@@ -36,6 +36,7 @@ function preload() {
   smallButtonHover = loadImage("assets/GUI/smallButtonHover.png");
   checkedLongButtonHover = loadImage("assets/GUI/checkedLongButtonHover.png");
   checkedLongButton = loadImage("assets/GUI/checkedLongbutton.png");
+  homeButton = loadImage("assets/GUI/homeButton.png");
 
   smallPopUp = loadImage("assets/GUI/smallPopUp.png");
 

@@ -149,7 +149,7 @@
       "canTradeWithMe": false,
 
       "echange": [{
-        "demande": ["mushroom_1"],
+        "demande": ["mushroom_1", "sword_1"],
         "donne": ["sword_2"]
       }]
 
