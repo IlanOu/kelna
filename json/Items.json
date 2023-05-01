@@ -52,9 +52,9 @@
             "name": "mushroom_1",
             "category": "other",
             "itemNumber": 4,
-            "location": "C-3",
-            "x": 19,
-            "y": 10,
+            "location": "C-9",
+            "x": 5,
+            "y": 25,
             "detectDist": 1,
             "shown": true
         },
