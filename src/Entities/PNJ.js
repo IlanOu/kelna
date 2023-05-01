@@ -15,7 +15,7 @@ function PNJManager() {
         // PNJ(pnjJSON.PNJS.Toto);
       }
   } else {
-    drawPNJInside(pnjJSON.PNJS.Charle);
+    drawPNJInside(pnjJSON.PNJS.Tavernier);
   }
 }
 
@@ -115,7 +115,7 @@ function PNJ(pnj) {
 
       //? Pour chaque carré dans le tableau
       for (let row = 0; row < currentMapTableColliders.length; row++) {
-        for ( 
+        for (
           let column = 0; column < currentMapTableColliders[row].length; column++
         ) {
           //& Lui donner une collision
@@ -403,7 +403,7 @@ function animationPNJ(
 
   //* Animation en fonction des mouvements
   switch (CurrentPNJ.name) {
-    case "Marjo":
+    case "WOMEN":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
           for (let x = 0; x < 128; x += 32) {
@@ -426,7 +426,7 @@ function animationPNJ(
 
       break;
 
-    case "Charle":
+    case "MEN":
       if (movement == "walk") {
         for (let y = 32; y < 64; y += 32) {
           for (let x = 0; x < 128; x += 32) {
@@ -449,29 +449,78 @@ function animationPNJ(
 
       break;
 
+    case "TAVERNIER":
 
-    case "Toto":
       if (movement == "walk") {
-        for (let y = 32; y < 64; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(innkeeperTexture.get(x, y, 32, 32));
           }
         }
       } else if (movement == "idle") {
         for (let y = 0; y < 32; y += 32) {
           for (let x = 0; x < 64; x += 32) {
-            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+            PNJTexturesList.push(innkeeperTexture.get(x, y, 32, 32));
           }
         }
       } else if (movement == "jump") {
-        for (let y = 64; y < 96; y += 32) {
-          for (let x = 0; x < 128; x += 32) {
-            PNJTexturesList.push(charleTexture.get(x, y, 32, 32));
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(innkeeperTexture.get(x, y, 32, 32));
           }
         }
       }
 
-      break;
+      break
+
+    case "WIZARD":
+
+      if (movement == "walk") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(wizardTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(wizardTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(wizardTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break
+
+    case "CRAZY":
+
+      if (movement == "walk") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(crazyTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(crazyTexture.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(crazyTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break
+
   }
 
   //* Changer de frame

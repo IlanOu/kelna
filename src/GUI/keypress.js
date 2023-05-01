@@ -104,11 +104,13 @@ function keyPressed() {
 function keyReleased() {
     //? Barre espace
     if (keyCode == 32 || keyCode == 38) {
-        if (!soundJump.isPlaying()) {
-            if (characterIsJumping) {
-                soundJump.play()
-            } else {
-                soundJump.pause()
+        if (soundEnabled) {
+            if (!soundJump.isPlaying()) {
+                if (characterIsJumping) {
+                    soundJump.play()
+                } else {
+                    soundJump.pause()
+                }
             }
         }
         spaceKeyIsPressed = false;

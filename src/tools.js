@@ -871,45 +871,40 @@ function inventoryIsEmpty(slot) {
 //~ Fonction de tp
 function tp(map = "") {
 
-    if (loged) {
 
-        switch (map) {
+    switch (map) {
 
-            case "spawn":
+        case "spawn":
 
-                xStartWorld = 0
-                yStartWorld = -42
+            xStartWorld = 0
+            yStartWorld = -42
 
-                break
-
-
-            case "foret":
-
-                xStartWorld = -4410
-                yStartWorld = -1483
-
-                break
-
-            case "village":
-
-                xStartWorld = -12300
-                yStartWorld = -1648
-
-                break
+            break
 
 
-            case "citadelle":
+        case "foret":
 
-                xStartWorld = -16206
-                yStartWorld = -1604
+            xStartWorld = -4410
+            yStartWorld = -1483
 
-                break
-        }
-    } else {
-        console.error("Vous devez etre admin/connecté pour pouvoir vous teleportez !")
+            break
+
+        case "village":
+
+            xStartWorld = -12300
+            yStartWorld = -1648
+
+            break
+
+
+        case "citadelle":
+
+            xStartWorld = -16206
+            yStartWorld = -1604
+
+            break
     }
 }
-
 
 //~ Initie les variables
 function initVariables() {
