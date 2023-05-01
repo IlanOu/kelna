@@ -41,7 +41,9 @@ let drawPNJInside = (pnj) => {
   pnj.y = PNJY;
   pnj.xEnd = PNJEnd;
 
-  PNJMovementsInside(pnj);
+  if (pnj.mapName == behindThisDoorHouse){
+    PNJMovementsInside(pnj);
+  }
 };
 
 

@@ -5,20 +5,24 @@ function doorsManager() {
 
   Object.entries(allDoors.Doors).forEach((door) => {
     if (engineOne) {
+
       if (!door[1].inHouse) {
         drawDoor(door[1]);
         canGoInside.push(canEnterInHouse);
       }
+
     } else {
-      if (door[1].inHouse) {
+      if (door[1].inHouse && behindThisDoorHouse == door[1].location) {
         drawDoorInside(door[1]);
         canGoOutside.push(canGoOutTheHouse);
       }
+
     }
   });
   if (canGoInside.includes(true)) {
     canEnterInHouse = true;
     canGoOutTheHouse = false
+
   }
   if (canGoOutside.includes(true)) {
     canGoOutTheHouse = true;
@@ -97,54 +101,57 @@ function drawDoor(door) {
 function drawDoorInside(door) {
   noStroke()
   fill(67, 37, 27, 0); //255
+  // fill(255)
 
-  let positions = getPositionAt(door.location, door.x, door.y);
-  let doorX = positions.pixelX + xStartHouse;
-  positions.pixelY = door.y
-  let doorY = positions.pixelY + yStartHouse;
-  let widthDoor = engine2WidthDoors;
-  let heightDoor = engine2HeightDoors;
-
-  //* Variables Collisions / HitBox Mobs
-  let doorBoundingBox = expandRect(
-    doorX,
-    doorY,
-    widthDoor,
-    heightDoor,
-    door.detectDist,
-    door.detectDist
-  );
-
-  //* Détéction du joueur
-  canGoOutTheHouse = rectIsInRect(
-    characterInsidePosX,
-    characterInsidePosY,
-    characterBoundingBoxWidth,
-    characterBoundingBoxHeight,
-    doorBoundingBox[0],
-    doorBoundingBox[1],
-    doorBoundingBox[2],
-    doorBoundingBox[3]
-  );
-
-  if (canGoOutTheHouse) {
-    behindThisDoor = door.destination;
-  }
-
-  //* Debug Mod
-  if (debugMod) {
-    fill(255, 0, 0, 70);
-    rect(
+  if (door.location == behindThisDoorHouse){
+    let positions = getPositionAt(door.location, door.x, door.y);
+    let doorX = positions.pixelX + xStartHouse;
+    positions.pixelY = door.y
+    let doorY = positions.pixelY + yStartHouse;
+    let widthDoor = engine2WidthDoors;
+    let heightDoor = engine2HeightDoors;
+  
+    //* Variables Collisions / HitBox Mobs
+    let doorBoundingBox = expandRect(
+      doorX,
+      doorY,
+      widthDoor,
+      heightDoor,
+      door.detectDist,
+      door.detectDist
+    );
+  
+    //* Détéction du joueur
+    canGoOutTheHouse = rectIsInRect(
+      characterInsidePosX,
+      characterInsidePosY,
+      characterBoundingBoxWidth,
+      characterBoundingBoxHeight,
       doorBoundingBox[0],
       doorBoundingBox[1],
       doorBoundingBox[2],
       doorBoundingBox[3]
     );
-    fill(255);
+  
+    if (canGoOutTheHouse) {
+      behindThisDoor = door.destination;
+    }
+  
+    //* Debug Mod
+    if (debugMod) {
+      fill(255, 0, 0, 70);
+      rect(
+        doorBoundingBox[0],
+        doorBoundingBox[1],
+        doorBoundingBox[2],
+        doorBoundingBox[3]
+      );
+      fill(255);
+    }
+  
+    //* Dessiner la porte
+    rect(doorX, doorY, widthDoor, heightDoor);
   }
-
-  //* Dessiner la porte
-  rect(doorX, doorY, widthDoor, heightDoor);
 }
 
 
