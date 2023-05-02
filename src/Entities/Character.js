@@ -22,52 +22,40 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
     //* réduire la vitesse des diagonales
     if ((keyIsDown(68) && keyIsDown(83)) ||
-      keyIsDown(68) && keyIsDown(DOWN_ARROW) ||
+      keyIsDown(68) ||
       keyIsDown(68) && keyIsDown(90) ||
-      keyIsDown(68) && keyIsDown(UP_ARROW) ||
+      keyIsDown(68) ||
       keyIsDown(81) && keyIsDown(83) ||
-      keyIsDown(81) && keyIsDown(DOWN_ARROW) ||
+      keyIsDown(81) ||
       keyIsDown(81) && keyIsDown(90) ||
-      keyIsDown(81) && keyIsDown(UP_ARROW) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(83) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(DOWN_ARROW) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(90) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(UP_ARROW) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(83) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(DOWN_ARROW) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(90) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(UP_ARROW)) {
+      keyIsDown(81) ||
+      keyIsDown(83) ||
+      keyIsDown(90))
+    {
       speed /= 1.25
     }
 
 
     //* Gauche Droite
-    if ((keyIsDown(68) && keyIsDown(81)) ||
-      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(68) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+    if (keyIsDown(68) && keyIsDown(81)) {
       objectPositionX = objectPositionX
     }
-    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(81)) {
       objectPositionX = moveLeft(objectPositionX, speed)
     }
-    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       objectPositionX = moveRight(objectPositionX, speed)
     }
 
     //*Haut Bas
-    if ((keyIsDown(90) && keyIsDown(83)) ||
-      (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW)) ||
-      (keyIsDown(90) && keyIsDown(DOWN_ARROW)) ||
-      (keyIsDown(83) && keyIsDown(UP_ARROW))) {
+    if (keyIsDown(90) && keyIsDown(83)) {
       objectPositionY = objectPositionY
     }
-    if (keyIsDown(90) || keyIsDown(UP_ARROW)) {
+    if (keyIsDown(90)) {
       objectPositionY = moveUp(objectPositionY, speed)
       highArrowPressed
-
     }
-    if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
+    if (keyIsDown(83)) {
       objectPositionY = moveDown(objectPositionY, speed)
       downArrowPressed
     }

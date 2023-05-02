@@ -255,7 +255,6 @@ let mobMovements = (Mobs) => {
             Mobs.stepCount += rectWidth * Maps.numberOfRow //? 1320 
             
           }
-          // console.log(Mobs.stepCount)
         }
   
         

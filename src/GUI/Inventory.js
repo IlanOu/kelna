@@ -1,11 +1,13 @@
 //~ Ajouter a l'inventaire
 let addItemToInventory = (item, amount) => {
     
-    let amountItemSlot2 =  Inventory[1].amount
-    if (!amountItemSlot2){
-        amountItemSlot2 = 0
+    let amountItemSlot2 = 0
+    if (Inventory[1]){
+        if (Inventory[1].category == item.category){
+            amountItemSlot2 = Inventory[1].amount
+        }
     }
-    console.log(amountItemSlot2)
+    
     if (item){
         if (Inventory.length <= 3) {
     
@@ -21,9 +23,7 @@ let addItemToInventory = (item, amount) => {
                 case "food":
                     Inventory[1] = item
 
-                    console.log(Inventory[1].amount, item.amount)
-
-                    if (Inventory[1].amount + amountItemSlot2 < stackSize){
+                    if (Inventory[1].amount + amountItemSlot2 <= stackSize){
                         Inventory[1].amount = amountItemSlot2 + amount
                     }else{
                         Inventory[1].amount = stackSize

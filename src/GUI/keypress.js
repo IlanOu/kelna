@@ -9,37 +9,35 @@ function keyPressed() {
     }
 
     //? Barre espace
-    if (keyCode == 32 || keyCode == 38) {
+    if (keyCode == 32) {
         spaceKeyIsPressed = true;
     }
 
-    //? Flèche de droite
+    //? Touche D
     if (keyCode == 68) {
         rightArrowPressed = true;
         numberOfSteps++
     }
 
-    //? Flèche de gauche
+    //? Touche Q
     if (keyCode == 81) {
         leftArrowPressed = true;
         numberOfSteps++
     }
 
-    //? Flèche de haut
-    if ((keyCode == 38 || keyCode == 90)) {
+    //? Touche Z
+    if (keyCode == 90) {
         highArrowPressed = true;
     }
-
-    //? Touche F
-    if ((keyCode == 70)) {
-        characterIsEating = true
-    }
-
-    //? Flèche de bas
-    if ((keyCode == 40 || keyCode == 83)) {
+    //? Touche S
+    if (keyCode == 83) {
         downArrowPressed = true;
     }
 
+    //? Touche F
+    if (keyCode == 70) {
+        characterIsEating = true
+    }
 
 
     if (aPNJCanTrade()) {
@@ -63,48 +61,52 @@ function keyPressed() {
     }
 
 
-    //! Récupérer l'item
-    if (itemsJSON.ItemsOnTheFloor) {
-        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {  //Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
-            item = item[1]
-            if (item.canGetItem) {
-                if (keyCode == 69 && engineOne) {
+    if (keyCode == 69 && engineOne) {
+        //! Récupérer l'item
+        if (itemsJSON.ItemsOnTheFloor) {
+            Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {  //Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+                item = item[1]
+                if (item.canGetItem) {
                     if (Inventory[getIndexOfItemCategory(item.category)].category && item.category != "food") {
                         tempMessage()
                     } else {
-                        if (Inventory[getIndexOfItemCategory(item.category)].amount < stackSize){
+                        if (item.category == "food"){
+                            if (Inventory[getIndexOfItemCategory(item.category)].amount < stackSize){
+                                getCurrentItem()
+                            }
+                        }else{
                             getCurrentItem()
                         }
                     }
                     item.canGetItem = false
                 }
-            }
-        })
+            })
+        }
     }
 
     //? Touche R
-    if (keyCode == 82) {
+    if (keyCode == 82 && logged) {
         dashKeyIsPressed = true
     }
 
     //? Touche I
-    if (keyCode == 73) {
+    if (keyCode == 73 && logged) {
         addItemToInventory(itemsJSON.Items.sword_3, 1);
     }
 
     //? Touche O du clavier
-    if (keyCode == 79) {
+    if (keyCode == 79 && logged) {
         addItemToInventory(itemsJSON.Items.food_1, 1);
     }
 
 
     //? Touche M  du clavier
-    if (keyCode == 188) {
+    if (keyCode == 188 && logged) {
         addItemToInventory(itemsJSON.Items.mushroom_1, 1);
     }
 
     //? Touche H  du clavier
-    if (keyCode == 72) {
+    if (keyCode == 72 && logged) {
         addItemToInventory(itemsJSON.Items.kelna, 1);
     }
 
@@ -184,9 +186,10 @@ function keyReleased() {
 
     if (startCinematicPlaying) {
         //? Touche entrée
-        if (keyCode == 13) {
+        if (keyCode == 13 || keyCode == ESCAPE) {
             startCinematicPlaying = false
             gameIntroductionVideo.pause();
+            startGameVoice()
         }
     }
 }

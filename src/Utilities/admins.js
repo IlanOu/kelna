@@ -4,7 +4,6 @@ function login(username, password) {
     adminJSON.admins.forEach(user => {
         if (user.name == username && user.password == password) {
             logged = true
-            console.log('Current User :' + " " + username)
             characterMaxJumps = 100,
             //characterMovesSpeed = 10,
             characterPositionY = 0,
@@ -22,7 +21,6 @@ function login(username, password) {
 
 function logout() {
     if (logged) {
-        console.log('Log out !')
         characterMaxJumps = init_characterMaxJumps,
         //characterMovesSpeed = init_characterMovesSpeed,
         maxHealth = init_maxHealth,
