@@ -69,10 +69,12 @@ function keyPressed() {
             item = item[1]
             if (item.canGetItem) {
                 if (keyCode == 69 && engineOne) {
-                    if (Inventory[getIndexOfItemCategory(item.category)].category) {
+                    if (Inventory[getIndexOfItemCategory(item.category)].category && item.category != "food") {
                         tempMessage()
                     } else {
-                        getCurrentItem()
+                        if (Inventory[getIndexOfItemCategory(item.category)].amount < stackSize){
+                            getCurrentItem()
+                        }
                     }
                     item.canGetItem = false
                 }
