@@ -6,15 +6,14 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     //* Gauche Droite
     //? éviter de pouvoir aller à droite et à gauche en meme temps
     if ((keyIsDown(38) && keyIsDown(81)) ||
-      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(38) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+      (keyIsDown(38)) ||
+      (keyIsDown(81))) {
       objectPositionX = objectPositionX
     }
-    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(81)) {
       objectPositionX = moveLeft(objectPositionX, speed)
     }
-    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       objectPositionX = moveRight(objectPositionX, speed)
     }
 
@@ -670,13 +669,8 @@ function character() {
     currentMap = World.worldsMap[positionMapPlayer[1]][positionMapPlayer[0]]
   }
 
-
-
   //#region 
   //~ collisions
-
-
-
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
@@ -702,14 +696,9 @@ function character() {
         let thisObjectX = ((rectWidth * Maps.numberOfRow) * (currentMapToCheck[0])) + (xStartWorld + (rectWidth * column))
         let thisObjectY = ((rectHeight * Maps.numberOfColumns) * (currentMapToCheck[1])) + (yStartWorld + (rectHeight * row))
 
-        // rect(thisObjectX, thisObjectY, 10, 10)
-
 
         if (thisObject > 0) {
           [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
-
-
-
 
           //~ Tuer le joueur quand il marche sur le bloc 238
           if (killingBlocks.includes(thisObject) && touchThisObject) {

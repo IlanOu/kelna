@@ -55,7 +55,9 @@ function mob(Mobs) {
 
 
 
-    if (pnjMustBeShown(Mobs)){ //! IMPORTANT Régler le probleme du MOB qui despawn 
+    if (entityMustBeShown(Mobs)){ //! IMPORTANT Régler le probleme du MOB qui despawn 
+      
+      
       //* Ajout de la gravité au Mob
       let gravityReturns = getPositionWithGravity(
         MobsY,
@@ -226,38 +228,40 @@ let mobMovements = (Mobs) => {
   } else {
     
 
-    if (Mobs.seePlayer) {
-      followPlayer(Mobs);
-      lookThePlayer(Mobs);
-
-      //? Afficher un !
-      if (Mobs.isAThreat) {
-        fill(255, 0, 0);
-        drawKeyAt("!", Mobs.x, Mobs.y);
-      }
-
-      //& Changer la map en fonction de sa position
-      let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-
-      
-      Mobs.mapName = World.worldsMap[positions[1]][positions[0]]
-      
-      if (Mobs.lastMapName != Mobs.mapName){
-        
-        
-        if (Mobs.direction == "right"){
-          Mobs.stepCount -= rectWidth * Maps.numberOfRow //? 1320 
-          
-        }else{
-          Mobs.stepCount += rectWidth * Maps.numberOfRow //? 1320 
-          
+    if (Mobs.movement != "die"){
+      if (Mobs.seePlayer) {
+        followPlayer(Mobs);
+        lookThePlayer(Mobs);
+  
+        //? Afficher un !
+        if (Mobs.isAThreat) {
+          fill(255, 0, 0);
+          drawKeyAt("!", Mobs.x, Mobs.y);
         }
-        // console.log(Mobs.stepCount)
+  
+        //& Changer la map en fonction de sa position
+        let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  
+        
+        Mobs.mapName = World.worldsMap[positions[1]][positions[0]]
+        
+        if (Mobs.lastMapName != Mobs.mapName){
+          
+          
+          if (Mobs.direction == "right"){
+            Mobs.stepCount -= rectWidth * Maps.numberOfRow //? 1320 
+            
+          }else{
+            Mobs.stepCount += rectWidth * Maps.numberOfRow //? 1320 
+            
+          }
+          // console.log(Mobs.stepCount)
+        }
+  
+        
+      } else {
+        doRound(Mobs);
       }
-
-      
-    } else {
-      doRound(Mobs);
     }
   }
 
@@ -332,8 +336,10 @@ let mobMovements = (Mobs) => {
         //? Attaquer toutes les Mobs.attackInterval secondes
         if (millis() - Mobs.lastAttackTime > Mobs.attackInterval * 1000) {
           Mobs.lastAttackTime = millis();
-          healthPlayer -= Mobs.damages
-          statistiques.damagesGet += Mobs.damages
+          if (!logged){
+            healthPlayer -= Mobs.damages
+            statistiques.damagesGet += Mobs.damages
+          }
           shakeCamera(0.25, Mobs.damages/2)
           Mobs.indexFrame = 3
           

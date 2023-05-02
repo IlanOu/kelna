@@ -40,8 +40,8 @@
       "height": 80,
 
       "distance": 5,
-      "speed": 3,
-      "followSpeed": 4,
+      "speed": 1.5,
+      "followSpeed": 2.5,
       "isFollowing": false,
 
       "stepCount": 0,
@@ -92,8 +92,8 @@
       "height": 80,
 
       "distance": 5,
-      "speed": 3,
-      "followSpeed": 4,
+      "speed": 1.5,
+      "followSpeed": 2.5,
       "isFollowing": false,
 
       "stepCount": 0,
@@ -144,8 +144,8 @@
       "height": 80,
 
       "distance": 5,
-      "speed": 3,
-      "followSpeed": 4,
+      "speed": 1.5,
+      "followSpeed": 2.5,
       "isFollowing": false,
 
       "stepCount": 0,
@@ -196,8 +196,8 @@
       "height": 80,
 
       "distance": 5,
-      "speed": 3,
-      "followSpeed": 4,
+      "speed": 1.5,
+      "followSpeed": 2.5,
       "isFollowing": false,
 
       "stepCount": 0,

@@ -49,6 +49,7 @@ function preload() {
   buttonS = loadImage("assets/GUI/buttonS.png");
   buttonD = loadImage("assets/GUI/buttonD.png");
   buttonE = loadImage("assets/GUI/buttonE.png");
+  buttonF = loadImage("assets/GUI/buttonF.png");
   buttonSpace = loadImage("assets/GUI/buttonSpace.png");
 
 
@@ -130,13 +131,18 @@ function preload() {
   soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
   soundClick = loadSound("assets/audios/sounds/click.mp3")
   //soundPNJ = [loadSound("assets/audios/sounds/homme.wav"),loadSound("assets/audios/sounds/femme.wav")]
+
+
+  //? Cinématiques
+  gameIntroductionVideo.hide();
+  gameEndVideo.hide();
+
 }
 
 
 //~ Setup 
 function setup() {
   initVariables()
-
   //? Viewport
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
@@ -147,10 +153,7 @@ function setup() {
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
 
   frameRate(fpsLevel);
-
-  //? Cinématiques
-  gameIntroductionVideo.hide();
-  gameEndVideo.hide();
+  
 }
 
 
@@ -182,8 +185,6 @@ function draw() {
 
           //? Afficher le fond du jeu
           drawBackgroundImage(backgroundImage, backgroundImageClose, backgroundImageDistant)
-
-
 
           //? Afficher la map
           drawGrid()
