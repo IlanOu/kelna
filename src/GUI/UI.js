@@ -67,15 +67,11 @@ function buttonClicked([x, y, h, w]) {
   return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
-
-//~  Au clic d'une image
-function imgClicked([x, y, h, w]) {
-  return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
-}
-
-
 //~ Hover du bouton
 function buttonHover([x, y, h, w]) {
+  if (pointIsInRect(mouseX, mouseY, x, y, h, w)){
+    cursor("pointer")
+  }
   return pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
@@ -189,7 +185,6 @@ function drawHomeMenu() {
 
   if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
-      console.log("Le joueur est mort")
       initVariables()
     }
     soundEffects()
@@ -200,10 +195,12 @@ function drawHomeMenu() {
   }
 
 
-  if (imgClicked(logoPos)) {
+  if (buttonClicked(logoPos)) {
     window.location.href = site;
   }
 
+  buttonHover(logoPos)
+  
 
   if (buttonClicked(buttonParameters) && !settingsPause) {
     leftClickPressed = false
