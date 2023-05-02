@@ -236,17 +236,17 @@
     },
     "Sorcier": {
       "name": "WIZARD",
-      "mapName": "C-17",
+      "mapName": "labo",
 
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 900,
+      "x": 0,
       "y": 0,
 
-      "globalStartX": 3,
-      "globalStartY": 0,
+      "globalStartX": 50,
+      "globalStartY": 50,
 
       "velocityY": 0,
       "mass": 60,
@@ -349,12 +349,7 @@
       "movement": "walk",
 
       "canTalkWithMe": false,
-      "canTradeWithMe": false,
-
-      "echange": [{
-        "demande": ["sword_1", "food_1"],
-        "donne": ["sword_3"]
-      }]
+      "canTradeWithMe": false
 
     },
     "Marjo": {

@@ -36,6 +36,7 @@ function preload() {
   smallButtonHover = loadImage("assets/GUI/smallButtonHover.png");
   checkedLongButtonHover = loadImage("assets/GUI/checkedLongButtonHover.png");
   checkedLongButton = loadImage("assets/GUI/checkedLongbutton.png");
+  homeButton = loadImage("assets/GUI/homeButton.png");
 
   smallPopUp = loadImage("assets/GUI/smallPopUp.png");
 
@@ -52,9 +53,12 @@ function preload() {
 
 
   //? Background
-  backgroundImage = loadImage('assets/Background/bg_forest.png');
-  backgroundImageDistant = loadImage('assets/Background/bg_forest_distant.png');
-  backgroundImageClose = loadImage('assets/Background/bg_forest_close.png');
+  backgroundImage = loadImage('assets/Background/background_back.png');
+  backgroundImageDistant = loadImage('assets/Background/background_distant.png');
+  backgroundImageClose = loadImage('assets/Background/background_close.png');
+
+  backgroundImageUI = loadImage('assets/Background/UIBackground.png');
+
 
   backgroundImageUI = loadImage('assets/Background/UIBackground.png');
 

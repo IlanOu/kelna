@@ -147,6 +147,20 @@ let popUpButton
 let popUpButtonHover
 let checkedLongButtonHover
 let checkedLongButton
+let homeButton
+
+//? Buttons UI
+
+let buttonZ
+let buttonQ
+let buttonS
+let buttonD
+let buttonE
+let buttonSpace
+
+let site = "https://readymag.com/u2730643025/4237179/"
+let logo;
+
 
 let site = "https://readymag.com/u2730643025/4237179/"
 let logo;

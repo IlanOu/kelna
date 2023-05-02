@@ -41,7 +41,9 @@ let drawPNJInside = (pnj) => {
   pnj.y = PNJY;
   pnj.xEnd = PNJEnd;
 
-  PNJMovementsInside(pnj);
+  if (pnj.mapName == behindThisDoorHouse){
+    PNJMovementsInside(pnj);
+  }
 };
 
 
@@ -340,6 +342,7 @@ let PNJMovementsInside = (pnj) => {
     }else{
       if (pnj.echange) {
         pnj.canTradeWithMe = true
+        // console.log('je suis un marchand', pnj.canTradeWithMe)
       }else if (pnj.discussions){
         pnj.canTalkWithMe = true
       }
