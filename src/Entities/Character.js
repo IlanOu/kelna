@@ -6,15 +6,14 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
     //* Gauche Droite
     //? éviter de pouvoir aller à droite et à gauche en meme temps
     if ((keyIsDown(38) && keyIsDown(81)) ||
-      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(38) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+      (keyIsDown(38)) ||
+      (keyIsDown(81))) {
       objectPositionX = objectPositionX
     }
-    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(81)) {
       objectPositionX = moveLeft(objectPositionX, speed)
     }
-    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       objectPositionX = moveRight(objectPositionX, speed)
     }
 
@@ -23,52 +22,40 @@ function getMovementsControls(objectPositionX, objectPositionY, speed) {
 
     //* réduire la vitesse des diagonales
     if ((keyIsDown(68) && keyIsDown(83)) ||
-      keyIsDown(68) && keyIsDown(DOWN_ARROW) ||
+      keyIsDown(68) ||
       keyIsDown(68) && keyIsDown(90) ||
-      keyIsDown(68) && keyIsDown(UP_ARROW) ||
+      keyIsDown(68) ||
       keyIsDown(81) && keyIsDown(83) ||
-      keyIsDown(81) && keyIsDown(DOWN_ARROW) ||
+      keyIsDown(81) ||
       keyIsDown(81) && keyIsDown(90) ||
-      keyIsDown(81) && keyIsDown(UP_ARROW) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(83) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(DOWN_ARROW) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(90) ||
-      keyIsDown(RIGHT_ARROW) && keyIsDown(UP_ARROW) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(83) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(DOWN_ARROW) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(90) ||
-      keyIsDown(LEFT_ARROW) && keyIsDown(UP_ARROW)) {
+      keyIsDown(81) ||
+      keyIsDown(83) ||
+      keyIsDown(90))
+    {
       speed /= 1.25
     }
 
 
     //* Gauche Droite
-    if ((keyIsDown(68) && keyIsDown(81)) ||
-      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(68) && keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(81) && keyIsDown(RIGHT_ARROW))) {
+    if (keyIsDown(68) && keyIsDown(81)) {
       objectPositionX = objectPositionX
     }
-    if (keyIsDown(81) || keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(81)) {
       objectPositionX = moveLeft(objectPositionX, speed)
     }
-    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       objectPositionX = moveRight(objectPositionX, speed)
     }
 
     //*Haut Bas
-    if ((keyIsDown(90) && keyIsDown(83)) ||
-      (keyIsDown(UP_ARROW) && keyIsDown(DOWN_ARROW)) ||
-      (keyIsDown(90) && keyIsDown(DOWN_ARROW)) ||
-      (keyIsDown(83) && keyIsDown(UP_ARROW))) {
+    if (keyIsDown(90) && keyIsDown(83)) {
       objectPositionY = objectPositionY
     }
-    if (keyIsDown(90) || keyIsDown(UP_ARROW)) {
+    if (keyIsDown(90)) {
       objectPositionY = moveUp(objectPositionY, speed)
       highArrowPressed
-
     }
-    if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
+    if (keyIsDown(83)) {
       objectPositionY = moveDown(objectPositionY, speed)
       downArrowPressed
     }
@@ -670,13 +657,8 @@ function character() {
     currentMap = World.worldsMap[positionMapPlayer[1]][positionMapPlayer[0]]
   }
 
-
-
   //#region 
   //~ collisions
-
-
-
 
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY)
 
@@ -702,14 +684,9 @@ function character() {
         let thisObjectX = ((rectWidth * Maps.numberOfRow) * (currentMapToCheck[0])) + (xStartWorld + (rectWidth * column))
         let thisObjectY = ((rectHeight * Maps.numberOfColumns) * (currentMapToCheck[1])) + (yStartWorld + (rectHeight * row))
 
-        // rect(thisObjectX, thisObjectY, 10, 10)
-
 
         if (thisObject > 0) {
           [characterPositionX, characterPositionY, touchThisObject] = handleCollisionCharacter(characterPositionX, characterPositionY, characterBoundingBoxWidth, characterBoundingBoxHeight, thisObjectX, thisObjectY, rectWidth, rectHeight)
-
-
-
 
           //~ Tuer le joueur quand il marche sur le bloc 238
           if (killingBlocks.includes(thisObject) && touchThisObject) {

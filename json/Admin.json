@@ -1,8 +1,8 @@
 {
     "admins": [
         {
-            "name": "Nuggets",
-            "password": "TheChickenIsOnFire"
+            "name": "admin",
+            "password": "admin"
         }
     ]
 }

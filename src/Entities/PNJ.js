@@ -85,7 +85,7 @@ function PNJ(pnj) {
   let collide = false;
 
 
-  if (pnjMustBeShown(pnj)) {
+  if (entityMustBeShown(pnj)) {
 
 
     if (lastMap != currentMap) {
@@ -97,6 +97,15 @@ function PNJ(pnj) {
         pnj.velocityY = 0
         PNJVelocityY = 0
       }
+    }
+
+    if (pnj.velocityY > 30) {
+        PNJX = positionsStart.pixelX + xStartWorld
+        PNJY = positionsStart.pixelY + yStartWorld
+        pnj.x = positionsStart.pixelX + xStartWorld
+        pnj.y = positionsStart.pixelY + yStartWorld
+        pnj.velocityY = 0
+        PNJVelocityY = 0
     }
 
     //* Ajout de la gravité au PNJ
@@ -348,7 +357,6 @@ let PNJMovementsInside = (pnj) => {
     } else {
       if (pnj.echange) {
         pnj.canTradeWithMe = true
-        // console.log('je suis un marchand', pnj.canTradeWithMe)
       } else if (pnj.discussions) {
         pnj.canTalkWithMe = true
       }

@@ -50,6 +50,7 @@ function preload() {
   buttonS = loadImage("assets/GUI/buttonS.png");
   buttonD = loadImage("assets/GUI/buttonD.png");
   buttonE = loadImage("assets/GUI/buttonE.png");
+  buttonF = loadImage("assets/GUI/buttonF.png");
   buttonSpace = loadImage("assets/GUI/buttonSpace.png");
 
 
@@ -118,7 +119,7 @@ function preload() {
 
 
   //? Songs
-  VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3")]
+  VoiceStartSong = [loadSound("assets/audios/voices/START/WelcometoKelna_1.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_2.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_3.mp3"), loadSound("assets/audios/voices/START/WelcometoKelna_4.mp3")]
   VoicesDieSong = [loadSound("assets/audios/voices/DIE/YouAreDead_1.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_2.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_3.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_4.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_5.mp3"), loadSound("assets/audios/voices/DIE/YouAreDead_6.mp3")]
 
 
@@ -134,13 +135,18 @@ function preload() {
   soundSwordHit3 = loadSound("assets/audios/sounds/swordsHit_3.mp3")
   soundClick = loadSound("assets/audios/sounds/click.mp3")
   //soundPNJ = [loadSound("assets/audios/sounds/homme.wav"),loadSound("assets/audios/sounds/femme.wav")]
+
+
+  //? Cinématiques
+  gameIntroductionVideo.hide();
+  gameEndVideo.hide();
+
 }
 
 
 //~ Setup 
 function setup() {
   initVariables()
-
   //? Viewport
   if (windowWidth < viewportDisplayWidth || windowHeight < viewportDisplayHeight) {
     viewportDisplayWidth = windowWidth
@@ -151,10 +157,7 @@ function setup() {
   createCanvas(viewportDisplayWidth, viewportDisplayHeight);
 
   frameRate(fpsLevel);
-
-  //? Cinématiques
-  gameIntroductionVideo.hide();
-  gameEndVideo.hide();
+  
 }
 
 
@@ -186,8 +189,6 @@ function draw() {
 
           //? Afficher le fond du jeu
           drawBackgroundImage(backgroundImage, backgroundImageClose, backgroundImageDistant)
-
-
 
           //? Afficher la map
           drawGrid()

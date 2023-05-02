@@ -1,21 +1,38 @@
 //~ Ajouter a l'inventaire
 let addItemToInventory = (item, amount) => {
+    
+    let amountItemSlot2 = 0
+    if (Inventory[1]){
+        if (Inventory[1].category == item.category){
+            amountItemSlot2 = Inventory[1].amount
+        }
+    }
+    
     if (item){
         if (Inventory.length <= 3) {
     
             switch (item.category) {
                 case "weapon":
                     Inventory[0] = item
+                    
+                    //? Activer le checkpoint quand on obtien la première épée
+                    if (item.name == "sword_1"){
+                        checkpointActivated = true
+                    }
                     break;
                 case "food":
                     Inventory[1] = item
-                    if (Inventory[1].amount < stackSize){
-                        Inventory[1].amount += amount
+
+                    if (Inventory[1].amount + amountItemSlot2 <= stackSize){
+                        Inventory[1].amount = amountItemSlot2 + amount
+                    }else{
+                        Inventory[1].amount = stackSize
                     }
+
                     break;
                 case "other":
                     Inventory[2] = item
-    
+
                     break;
             }
     
@@ -92,6 +109,7 @@ function displayInventory() {
         let itemWidth = widthSlot - widthSlot / 5
         let itemHeight = heightSlot - heightSlot / 5
 
+        let buttonFSize = 25
 
         for (let i = 0; i < Inventory.length; i++) {
 
@@ -102,7 +120,6 @@ function displayInventory() {
             }
             if (i == 1) {
                 canEat = true
-                // slotY += spaceBetween
                 image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
             } else if (i == 2) {
                 // slotY += spaceBetween
@@ -131,6 +148,8 @@ function displayInventory() {
             image(slot, slotX, slotY, widthSlot, heightSlot)
 
             if (i == 1) {
+                image(buttonF, slotX,slotY, buttonFSize, buttonFSize)
+
                 noStroke()
                 fill(255, 255, 255)
                 //? top gauge

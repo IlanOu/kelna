@@ -28,6 +28,13 @@
             "amount": 0,
             "category": "food"
         },
+        "food_2": {
+            "name": "food_2",
+            "healAmount": 2,
+            "itemNumber": 3,
+            "amount": 0,
+            "category": "food"
+        },
         "mushroom_1": {
             "name": "mushroom_1",
             "healAmount": 2,
@@ -56,7 +63,8 @@
             "x": 5,
             "y": 25,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
         },
         "coin": {
             "name": "coin",
@@ -66,7 +74,8 @@
             "x": 4,
             "y": 12,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
         },
         "food_1": {
             "name": "food_1",
@@ -76,7 +85,8 @@
             "x": 15,
             "y": 6,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
         },
         "food_2": {
             "name": "food_2",
@@ -86,7 +96,8 @@
             "x": 2,
             "y": 3,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
         }
     }
 }

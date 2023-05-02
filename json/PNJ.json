@@ -45,7 +45,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Ça va ça va. Écoute Henri, Toto ma dis de venir te voir car tu as peut-être quelque chose pour moi.",
+          "text": "Yvo : Ça va ça va. Écoute Henri, Charles ma dis de venir te voir car tu as peut-être quelque chose pour moi.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -76,7 +76,7 @@
         "donne": ["sword_1"]
       }]
     },
-    "Toto": {
+    "Charles": {
       "name": "MEN",
       "mapName": "A-1",
 
@@ -117,19 +117,19 @@
       "step": 0,
       "discussions": [{
 
-          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir.",
+          "text": "Charles : Oh bonjour, Yvo, ça fait plaisir de te voir",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : De même Toto...",
+          "text": "Yvo : De même Charles...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : C'est un véritable désastre, on perd un être cher à chaque instant.",
+          "text": "Charles : C'est un véritable désastre, on perd un être cher à chaque instant.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : J'espère que ta femme s'en tirera...",
+          "text": "Charles : J'espère que ta femme s'en tirera...",
           "itemsNameRequired": ["none"]
         },
         {
@@ -137,7 +137,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : Mais, es-tu capable d'aller chercher cette sois disante plante légendaire Kelna ?",
+          "text": "Charles : Mais, es-tu capable d'aller chercher cette sois disante plante légendaire Kelna ?",
           "itemsNameRequired": ["none"]
         },
         {
@@ -145,15 +145,15 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : Bien... Va voir le tavernier il a peut-être de quoi t'aider.",
+          "text": "Charles : Bien... Va voir le tavernier il a peut-être de quoi t'aider.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Merci Toto.",
+          "text": "Yvo : Merci Charles.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : Sauve nous Yvo !",
+          "text": "Charles : Sauve nous Yvo !",
           "itemsNameRequired": ["none"]
         }
       ]
@@ -388,7 +388,7 @@
       "y": 0,
 
       "globalStartX": 4,
-      "globalStartY": 0,
+      "globalStartY": 3,
 
       "velocityY": 0,
       "mass": 60,

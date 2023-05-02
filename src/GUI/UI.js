@@ -54,9 +54,6 @@ function drawText(Text, fontSize, [x, y], [textAlignmentX, textAlignmentY], colo
     } else {
       rect(x - textWidth(Text) / 2 + offSetX, y + fontSize + margeUnderline, textWidth(Text), 1)
     }
-
-
-
   }
 
 }
@@ -67,15 +64,11 @@ function buttonClicked([x, y, h, w]) {
   return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
-
-//~  Au clic d'une image
-function imgClicked([x, y, h, w]) {
-  return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
-}
-
-
 //~ Hover du bouton
 function buttonHover([x, y, h, w]) {
+  if (pointIsInRect(mouseX, mouseY, x, y, h, w)){
+    cursor("pointer")
+  }
   return pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
@@ -101,7 +94,7 @@ function drawHomeMenu() {
   let marginButton = viewportDisplayHeight / 13;
   let centerYPage = viewportDisplayHeight / 2
   let fontSizeHome = 30
-  let centerButtonY = centerYPage - (viewportDisplayHeight / 20) //? 42
+  let centerButtonY = centerYPage - (viewportDisplayHeight / 42) //? 42
 
   let interfaceWidth = 700
   let interfaceheight = 800
@@ -143,26 +136,13 @@ function drawHomeMenu() {
 
 
 
-  let Studio = [
-    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
+  let credits = [
+    interfaceX + (interfaceWidth/2) - (widthButton / 2),
     centerButtonY + marginButton * 2,
     widthButton,
     heightButton,
   ];
-
-  let textStudio = [
-    Studio[0] + Studio[2] / 2,
-    Studio[1] + (heightButton / 2) - (fontSizeHome / 1.8),
-  ];
-
-
-  let credits = [
-    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
-    centerButtonY + marginButton * 3,
-    widthButton,
-    heightButton,
-  ];
-
+  
   let textCredits = [
     credits[0] + credits[2] / 2,
     credits[1] + (heightButton / 2) - (fontSizeHome / 1.8),
@@ -189,21 +169,21 @@ function drawHomeMenu() {
 
   if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
-      console.log("Le joueur est mort")
       initVariables()
     }
     soundEffects()
     musicCredits.pause()
     leftClickPressed = false
     startGame = true
-    //addItemToInventory(itemsJSON.Items.food_1, 3)
   }
 
 
-  if (imgClicked(logoPos)) {
+  if (buttonClicked(logoPos)) {
     window.location.href = site;
   }
 
+  buttonHover(logoPos)
+  
 
   if (buttonClicked(buttonParameters) && !settingsPause) {
     leftClickPressed = false
@@ -246,7 +226,7 @@ function drawHomeMenu() {
 
   //? Credits
   fill(120, 120, 120);
-  drawButton(credits, undefined, false, 0);
+  drawButton(credits, homeButton, false, 0);
   drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonHover(credits));
   fill(0);
 }
@@ -364,32 +344,17 @@ function drawPauseMenu() {
   drawText("Déplacements:", fontSizePause, [buttonXOnPage + (buttonsWidth / 2), buttonYOnPage - fontSizePause - marginLeftPage], [CENTER, BASELINE]);
 
   image(buttonZ, buttonXOnPage, buttonYOnPage, buttonsWidth, buttonsHeight)
-  image(buttonQ, buttonXOnPage - buttonsHeight, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonQ, buttonXOnPage - buttonsWidth, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
   image(buttonS, buttonXOnPage, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
-  image(buttonD, buttonXOnPage + buttonsHeight, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
+  image(buttonD, buttonXOnPage + buttonsWidth, buttonYOnPage + buttonsHeight, buttonsWidth, buttonsHeight)
   image(buttonSpace, buttonXOnPage - (buttonSpaceWidth / 2) + (buttonsWidth / 2), buttonYOnPage + (buttonsHeight * 2) + marginLeftPage, buttonSpaceWidth, buttonsHeight)
 
 
-  drawText("Intéractions:", fontSizePause, [buttonXOnPage + (buttonsWidth / 2), secondParagraphY], [CENTER, BASELINE])
+  drawText("Intéragir:", fontSizePause, [buttonXOnPage - (buttonsWidth*1.5) + (buttonsWidth / 2), secondParagraphY], [CENTER, BASELINE])
+  image(buttonE, buttonXOnPage - (buttonsWidth*1.5), secondParagraphY + buttonsHeight, buttonsWidth, buttonsHeight)
 
-  image(buttonE, buttonXOnPage, secondParagraphY + buttonsHeight, buttonsWidth, buttonsHeight)
-
-
-  /* fill(255,0,0, 50)
-  rect(buttonExitX,
-    buttonExitY,
-    buttonExitW,
-    buttonExitH)
-
-  rect(buttonSettingsX,
-    buttonSettingsY,
-    buttonSettingsW,
-    buttonSettingsH)
-  rect(buttonBackX,
-    buttonBackY,
-    buttonBackW,
-    buttonBackH)
- */
+  drawText("Manger:", fontSizePause, [buttonXOnPage + (buttonsWidth*1.5) + (buttonsWidth / 2), secondParagraphY], [CENTER, BASELINE])
+  image(buttonF, buttonXOnPage + (buttonsWidth*1.5), secondParagraphY + buttonsHeight, buttonsWidth, buttonsHeight)
 
 
   //& --------------------------------
@@ -1117,9 +1082,9 @@ function drawTalk(x, y, w, h) {
     }
 
     //? Changer de phrase
-    if (mouseIsPressed && currentIndexTextSpeaking) {
+    if (skipTalk && currentIndexTextSpeaking) {
 
-      mouseIsPressed = false
+      skipTalk = false
       if (currentIndexTextSpeaking < sentenceToTell.length) {
         currentIndexTextSpeaking = sentenceToTell.length
         currentTextSpeaking = sentenceToTell
@@ -1314,7 +1279,7 @@ function setupUI() {
         drawPauseMenu();
       }
     } else {
-      if (!hideUI) {
+      if(!hideUI){
         timerGame()
       }
     }
@@ -1348,7 +1313,7 @@ function setupUI() {
     }
 
     //? Affichage de l'inventaire
-    if (!hideUI) {
+    if(!hideUI){
       displayInventory();
     }
 
