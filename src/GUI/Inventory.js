@@ -116,11 +116,21 @@ function displayInventory() {
             slotY = InventoryY + (heightSlot * i)
 
             if (i == 0) {
-                image(requiredSlotSword, slotX, slotY, widthSlot, heightSlot)
+                if (Inventory[0].category){
+                    fill(58, 37, 30)
+                    rect(slotX, slotY, widthSlot, heightSlot)
+                }else{
+                    image(requiredSlotSword, slotX, slotY, widthSlot, heightSlot)
+                }
             }
             if (i == 1) {
                 canEat = true
-                image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
+                if (Inventory[1].category){
+                    fill(58, 37, 30)
+                    rect(slotX, slotY, widthSlot, heightSlot)
+                }else{
+                    image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
+                }
             } else if (i == 2) {
                 // slotY += spaceBetween
                 fill(58, 37, 30)
