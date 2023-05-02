@@ -6,6 +6,11 @@ let addItemToInventory = (item, amount) => {
             switch (item.category) {
                 case "weapon":
                     Inventory[0] = item
+                    
+                    //? Activer le checkpoint quand on obtien la première épée
+                    if (item.name == "sword_1"){
+                        checkpointActivated = true
+                    }
                     break;
                 case "food":
                     Inventory[1] = item
@@ -92,6 +97,7 @@ function displayInventory() {
         let itemWidth = widthSlot - widthSlot / 5
         let itemHeight = heightSlot - heightSlot / 5
 
+        let buttonFSize = 25
 
         for (let i = 0; i < Inventory.length; i++) {
 
@@ -102,7 +108,6 @@ function displayInventory() {
             }
             if (i == 1) {
                 canEat = true
-                // slotY += spaceBetween
                 image(requiredSlotFoods, slotX, slotY, widthSlot, heightSlot)
             } else if (i == 2) {
                 // slotY += spaceBetween
@@ -131,6 +136,8 @@ function displayInventory() {
             image(slot, slotX, slotY, widthSlot, heightSlot)
 
             if (i == 1) {
+                image(buttonF, slotX,slotY, buttonFSize, buttonFSize)
+
                 noStroke()
                 fill(255, 255, 255)
                 //? top gauge

@@ -14,13 +14,13 @@ function keyPressed() {
     }
 
     //? Flèche de droite
-    if ((keyCode == 39 || keyCode == 68)) {
+    if (keyCode == 68) {
         rightArrowPressed = true;
         numberOfSteps++
     }
 
     //? Flèche de gauche
-    if ((keyCode == 37 || keyCode == 81)) {
+    if (keyCode == 81) {
         leftArrowPressed = true;
         numberOfSteps++
     }
@@ -54,7 +54,11 @@ function keyPressed() {
         //? Touche E
         if (keyCode == 69) {
             pnjGameVoice()
-            PressTalkPNJ = !PressTalkPNJ
+            if (!PressTalkPNJ){
+                PressTalkPNJ = true
+            }else{
+                skipTalk = true
+            }
         }
     }
 
@@ -138,9 +142,8 @@ function keyReleased() {
 
 
     //? Touche F
-    if ((keyCode == 70)) {
-        console.log("lsdsd")
-        characterIsEating = true
+    if (keyCode == 70) {
+        characterIsEating = false
     }
 
     //? Flèche de bas
@@ -171,7 +174,7 @@ function keyReleased() {
 
     if (canGoOutTheHouse) {
         //? Touche E
-        if (keyCode == 69 && engineOne === false) {
+        if (keyCode == 69 && !engineOne) {
             engineOne = !engineOne;
         }
     }

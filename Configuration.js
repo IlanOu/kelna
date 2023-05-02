@@ -13,8 +13,10 @@ let killingBlocks;
 //~ Admins
 let username;
 let password;
-let loged;
+let logged;
 
+//& Checkpoint start
+let checkpointActivated = false
 
 //~ Camera
 let cameraShakeEnabled;
@@ -156,6 +158,7 @@ let buttonQ
 let buttonS
 let buttonD
 let buttonE
+let buttonF
 let buttonSpace
 
 let site = "https://readymag.com/u2730643025/4237179/"
@@ -266,6 +269,8 @@ let canTalkWithPNJ;
 let PressTalkPNJ;
 let currentTextSpeaking;
 let currentIndexTextSpeaking;
+
+let skipTalk = true
 
 //?  Portes
 let behindThisDoor;

@@ -13,7 +13,7 @@ const init_killingBlocks = [39, 49];
 
 //~ Admins
 const init_username = "";
-const init_loged = false;
+const init_logged = false;
 const init_password = "";
 
 
@@ -53,7 +53,7 @@ const init_characterSpriteHeight = 32;
 //? Positions
 const init_characterInsidePosX = 1;
 const init_characterInsidePosY = 1;
-const init_characterPositionX = 900//1;
+const init_characterPositionX = 120//1;
 const init_characterPositionY = 660;
 const init_previousPlayerX = 0;
 const init_previousPlayerY = 0

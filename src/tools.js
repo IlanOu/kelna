@@ -58,37 +58,8 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 
 
 
-
 //~ Chercher un tableau dans un tableau 2D
-function mobMustBeShown(mob, found) {
-
-    if (found) {
-        let currentMapInWorld = findIndexOfPositionIn2dArray(mob.x, mob.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
-        let currentMapName = World.worldsMap[currentMapInWorld[1]][currentMapInWorld[0]]
-
-
-        let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-        let positionMapMob = findIndexValueIn2dArray(World.worldsMap, currentMapName)
-        let invertedArrayMapPosition = []
-        invertedArrayMapPosition[0] = positionMapMob[1]
-        invertedArrayMapPosition[1] = positionMapMob[0]
-
-
-        let inChunksCheck = false
-
-        mapsToCheck.some(map => {
-            if (!inChunksCheck) {
-                inChunksCheck = invertedArrayMapPosition.every((v, i) => v === map[i])
-            }
-        })
-        return inChunksCheck
-    }
-    return null
-}
-
-
-//~ Chercher un tableau dans un tableau 2D
-function pnjMustBeShown(mob) {
+function entityMustBeShown(mob) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
     let positionMapMob = findIndexValueIn2dArray(World.worldsMap, mob.mapName)
@@ -292,7 +263,7 @@ function soundEffects() {
 
 //~ hurtPlayer
 function hurtPlayer(amount) {
-    if (!loged) {
+    if (!logged) {
         healthPlayer -= amount; //& Enlever point de vie
         healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
     } else {
@@ -929,7 +900,7 @@ function initVariables() {
     //& Admins
     username = init_username;
     password = init_password;
-    loged = init_loged
+    logged = init_logged
 
 
     //& Camera
@@ -1070,7 +1041,7 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
-    //addItemToInventory(itemsJSON.Items.food_1, 3)
+    
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;
@@ -1208,6 +1179,17 @@ function initVariables() {
     itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
     tileSetForLabo = cutTileset(tileSetLabo, [16, 16], [tileSetLabo.width, tileSetLabo.height])
+
+
+    if (checkpointActivated){
+        addItemToInventory(itemsJSON.Items.sword_1, 2);
+        addItemToInventory(itemsJSON.Items.food_1, 2);
+        characterPositionX = 750
+        xStartWorld = -600
+    }else{
+        //& Player start with 3 apple
+        addItemToInventory(itemsJSON.Items.food_1, 3)
+    }
 
     resetJsons()
 
