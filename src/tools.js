@@ -868,8 +868,8 @@ function tp(map = "") {
 
         case "village":
 
-            xStartWorld = -12300
-            yStartWorld = -1648
+            xStartWorld = -12301
+            yStartWorld = -1486
 
             break
 
