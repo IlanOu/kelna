@@ -189,6 +189,7 @@ function drawHomeMenu() {
 
   if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
+      console.log("Le joueur est mort")
       initVariables()
     }
     soundEffects()
@@ -671,7 +672,7 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
-    playerDead = false
+    // playerDead = false
     characterMovement = "idle"
     soundEffects()
   }
