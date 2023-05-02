@@ -67,6 +67,26 @@
             "y": 12,
             "detectDist": 1,
             "shown": true
+        },
+        "food_1": {
+            "name": "food_1",
+            "category": "food",
+            "itemNumber": 3,
+            "location": "D-9",
+            "x": 15,
+            "y": 6,
+            "detectDist": 1,
+            "shown": true
+        },
+        "food_2": {
+            "name": "food_2",
+            "category": "food",
+            "itemNumber": 3,
+            "location": "C-13",
+            "x": 2,
+            "y": 3,
+            "detectDist": 1,
+            "shown": true
         }
     }
 }
