@@ -15,6 +15,8 @@ let username;
 let password;
 let logged;
 
+//& Checkpoint start
+let checkpointActivated = false
 
 //~ Camera
 let cameraShakeEnabled;

@@ -1180,8 +1180,16 @@ function initVariables() {
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
     tileSetForLabo = cutTileset(tileSetLabo, [16, 16], [tileSetLabo.width, tileSetLabo.height])
 
-    //& Player start with 3 apple
-    addItemToInventory(itemsJSON.Items.food_1, 3)
+
+    if (checkpointActivated){
+        addItemToInventory(itemsJSON.Items.sword_1, 2);
+        addItemToInventory(itemsJSON.Items.food_1, 2);
+        characterPositionX = 750
+        xStartWorld = -600
+    }else{
+        //& Player start with 3 apple
+        addItemToInventory(itemsJSON.Items.food_1, 3)
+    }
 
     resetJsons()
 
