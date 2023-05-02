@@ -1,263 +1,214 @@
 {
-    "Ennemis": {
-      "Malade2": {
-        "mapName": "D-8",
-        "lastMapName": "",
+  "Ennemis": {
+    "Malade2": {
+      "mapName": "D-8",
+      "lastMapName": "",
 
-        "type": "Malade2",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-        
-        "life": 5,
-        
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
+      "type": "Malade2",
+      "isAThreat": true,
+      "getHit": false,
+      "haveBeenHit": false,
+      "isDead": false,
+      "beingHit": false,
 
+      "life": 5,
 
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
-
-        "x": 0,
-        "y": 0,
+      "damages": 1,
+      "attackInterval": 1.2,
+      "lastAttackTime": 0,
 
 
-        "globalStartX": 15,
-        "globalStartY": 11,
+      "detectDistX": 8,
+      "detectDistY": 8,
+      "seePlayer": false,
 
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-      "Malade3": {
-        "mapName": "D-7",
-        "lastMapName": "",
-
-        "type": "Malade2",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-        
-        "life": 5,
-        
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
+      "x": 0,
+      "y": 0,
 
 
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
+      "globalStartX": 15,
+      "globalStartY": 11,
 
-        "x": 0,
-        "y": 500,
+      "velocityY": 0,
+      "mass": 60,
 
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
 
-        "globalStartX": 8,
-        "globalStartY": 11,
+      "width": 80,
+      "height": 80,
 
-        "velocityY": 0,
-        "mass": 60,
+      "distance": 5,
+      "speed": 3,
+      "followSpeed": 4,
+      "isFollowing": false,
 
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
+      "stepCount": 0,
+      "direction": "right",
 
-        "width": 80,
-        "height": 80,
+      "currentFrame": false,
+      "indexFrame": 0,
+      "movement": "walk",
+      "lastMovement": "idle"
+    },
+    "Malade3": {
+      "mapName": "D-7",
+      "lastMapName": "",
 
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
+      "type": "Malade2",
+      "isAThreat": true,
+      "getHit": false,
+      "haveBeenHit": false,
+      "isDead": false,
+      "beingHit": false,
 
-        "stepCount": 0,
-        "direction": "right",
+      "life": 5,
 
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-      "Malade4": {
-        "mapName": "D-8",
-        "lastMapName": "",
-
-        "type": "Malade2",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-        
-        "life": 5,
-        
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
+      "damages": 1,
+      "attackInterval": 1.2,
+      "lastAttackTime": 0,
 
 
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
+      "detectDistX": 8,
+      "detectDistY": 8,
+      "seePlayer": false,
 
-        "x": 0,
-        "y": 500,
-
-
-        "globalStartX": 18,
-        "globalStartY": 11,
-
-        "velocityY": 0,
-        "mass": 60,
-
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
-
-        "width": 80,
-        "height": 80,
-
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
-
-        "stepCount": 0,
-        "direction": "right",
-
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      },
-      "Malade5": {
-        "mapName": "D-9",
-        "lastMapName": "",
-
-        "type": "Malade2",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
-        
-        "life": 5,
-        
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
+      "x": 0,
+      "y": 500,
 
 
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
+      "globalStartX": 8,
+      "globalStartY": 11,
 
-        "x": 0,
-        "y": 500,
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 5,
+      "speed": 3,
+      "followSpeed": 4,
+      "isFollowing": false,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": false,
+      "indexFrame": 0,
+      "movement": "walk",
+      "lastMovement": "idle"
+    },
+    "Malade4": {
+      "mapName": "D-8",
+      "lastMapName": "",
+
+      "type": "Malade2",
+      "isAThreat": true,
+      "getHit": false,
+      "haveBeenHit": false,
+      "isDead": false,
+      "beingHit": false,
+
+      "life": 5,
+
+      "damages": 1,
+      "attackInterval": 1.2,
+      "lastAttackTime": 0,
 
 
-        "globalStartX": 2,
-        "globalStartY": 11,
+      "detectDistX": 8,
+      "detectDistY": 8,
+      "seePlayer": false,
 
-        "velocityY": 0,
-        "mass": 60,
+      "x": 0,
+      "y": 500,
 
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
 
-        "width": 80,
-        "height": 80,
+      "globalStartX": 18,
+      "globalStartY": 11,
 
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
+      "velocityY": 0,
+      "mass": 60,
 
-        "stepCount": 0,
-        "direction": "right",
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
 
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      }, 
-      "Malade1": {
-        "mapName": "A-1",
+      "width": 80,
+      "height": 80,
 
-        "type": "Malade1",
-        "isAThreat": true,
-        "getHit": false,
-        "haveBeenHit": false,
-        "isDead": false,
-        "beingHit": false,
+      "distance": 5,
+      "speed": 3,
+      "followSpeed": 4,
+      "isFollowing": false,
 
-        "life": 5,
+      "stepCount": 0,
+      "direction": "right",
 
-        "damages": 1,
-        "attackInterval": 1.2,
-        "lastAttackTime": 0,
+      "currentFrame": false,
+      "indexFrame": 0,
+      "movement": "walk",
+      "lastMovement": "idle"
+    },
+    "Malade5": {
+      "mapName": "D-9",
+      "lastMapName": "",
 
-        "color": "blue",
+      "type": "Malade2",
+      "isAThreat": true,
+      "getHit": false,
+      "haveBeenHit": false,
+      "isDead": false,
+      "beingHit": false,
 
-        "detectDistX": 8,
-        "detectDistY": 8,
-        "seePlayer": false,
+      "life": 5,
 
-        "x": 0,
-        "y": 0,
+      "damages": 1,
+      "attackInterval": 1.2,
+      "lastAttackTime": 0,
 
-        "globalStartX": 8,
-        "globalStartY": 8,
 
-        "velocityY": 0,
-        "mass": 60,
+      "detectDistX": 8,
+      "detectDistY": 8,
+      "seePlayer": false,
 
-        "jumpCount": 0,
-        "isJumping": false,
-        "haveToJump": false,
+      "x": 0,
+      "y": 500,
 
-        "width": 80,
-        "height": 80,
 
-        "distance": 5,
-        "speed": 3,
-        "followSpeed": 4,
-        "isFollowing": false,
+      "globalStartX": 2,
+      "globalStartY": 11,
 
-        "stepCount": 0,
-        "direction": "right",
+      "velocityY": 0,
+      "mass": 60,
 
-        "currentFrame": false,
-        "indexFrame": 0,
-        "movement": "walk",
-        "lastMovement": "idle"
-      }
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 5,
+      "speed": 3,
+      "followSpeed": 4,
+      "isFollowing": false,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": false,
+      "indexFrame": 0,
+      "movement": "walk",
+      "lastMovement": "idle"
     }
+
+
+  }
 }

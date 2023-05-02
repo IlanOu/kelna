@@ -21,6 +21,7 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
+
 //~ Trouve l'index d'une map dans world 
 function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
@@ -206,6 +207,7 @@ function DieGameVoice() {
 
 //~ Joue des voix de PNJ
 function pnjGameVoice() {
+    /*
     if (soundEnabled) {
         let indexSong = Math.floor(Math.random() * soundPNJ.length);
         if (!soundPNJ[indexSong].isPlaying()) {
@@ -216,6 +218,7 @@ function pnjGameVoice() {
             }
         }
     }
+    */
 }
 
 
@@ -424,8 +427,8 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
         indexMapY = 0
 
         return {
-            "pixelX": positionX*rectWidth,
-            "pixelY": positionY*rectHeight
+            "pixelX": positionX * rectWidth,
+            "pixelY": positionY * rectHeight
         }
     }
 
@@ -655,12 +658,22 @@ function troc(requis, gain) {
     let canTradeThisObject = false
 
     requis.every(objRequis => {
-        if (Inventory.includes(objRequis)) {
-            canTradeThisObject = true
-        } else {
-            canTradeThisObject = false
-            return false
-        }
+        Inventory.forEach(item => {
+            if(objRequis.category == "other"){
+                item = Inventory[2]
+            } else if (objRequis.category == "weapon") {
+                item = Inventory[0]
+            } else if (objRequis.category == "food") {
+                item = Inventory[1]
+            }
+            if (objRequis.name === item.name) {
+                canTradeThisObject = true
+            } else {
+                canTradeThisObject = false
+                return false
+            }
+        });
+
     })
 
     if (canTradeThisObject) {
@@ -848,17 +861,10 @@ function shakeCamera(durationSeconds, forcePixels) {
 //~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
-        if (itemsJSON.ItemsOnTheFloor[currentItemPointing].name == "kelna") {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-            currentItemPointing = ""
-            gameIsEnd = true
-        } else {
-            addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-            itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-            currentItemPointing = ""
-            //canGetItem = false
-        }
+        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
+        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+        currentItemPointing = ""
+
     }
 }
 
@@ -1064,6 +1070,7 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
+    //addItemToInventory(itemsJSON.Items.food_1, 3)
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;

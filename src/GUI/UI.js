@@ -67,6 +67,13 @@ function buttonClicked([x, y, h, w]) {
   return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
 }
 
+
+//~  Au clic d'une image
+function imgClicked([x, y, h, w]) {
+  return leftClickPressed && pointIsInRect(mouseX, mouseY, x, y, h, w);
+}
+
+
 //~ Hover du bouton
 function buttonHover([x, y, h, w]) {
   return pointIsInRect(mouseX, mouseY, x, y, h, w);
@@ -82,13 +89,13 @@ function drawHomeMenu() {
   cursor('default')
   image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
-
-
+  
+  
   //* --------------------------------
   //* ---------- Variables -----------
   //* --------------------------------
-
-
+  
+  
   let widthButton = (viewportDisplayWidth / 5)
   let heightButton = 60;
   let marginButton = viewportDisplayHeight / 13;
@@ -106,29 +113,29 @@ function drawHomeMenu() {
     interfaceWidth,
     interfaceheight,
   ];
-
+  
   let play = [
     interfaceX + (interfaceWidth/2) - (widthButton / 2),
     centerButtonY,
     widthButton,
     heightButton,
   ];
-
+  
   let textPlay = [
     play[0] + play[2] / 2,
     play[1] + (heightButton / 2) - (fontSizeHome / 1.8),
   ];
-
-
-
-
+  
+  
+  
+  
   let buttonParameters = [
     interfaceX + (interfaceWidth/2) - (widthButton / 2),
     centerButtonY + marginButton,
     widthButton,
     heightButton,
   ];
-
+  
   let textParameters = [
     buttonParameters[0] + buttonParameters[2] / 2,
     buttonParameters[1] + (heightButton / 2) - (fontSizeHome / 1.8),
@@ -155,21 +162,30 @@ function drawHomeMenu() {
     widthButton,
     heightButton,
   ];
-
+  
   let textCredits = [
     credits[0] + credits[2] / 2,
     credits[1] + (heightButton / 2) - (fontSizeHome / 1.8),
   ];
+  
+  
+  let logoPos = [
+    0,
+    viewportDisplayHeight - (viewportDisplayHeight / 5),
+    logo.width / 3,
+    logo.height / 3
+  ]
 
 
   
-
-
-
-
   //* --------------------------------
   //* ---------- Evenements ----------
   //* --------------------------------
+  
+
+
+  image(logo, logoPos[0], logoPos[1], logoPos[2], logoPos[3])
+
 
   if (buttonClicked(play) && !settingsPause) {
     if (playerDead) {
@@ -179,8 +195,13 @@ function drawHomeMenu() {
     musicCredits.pause()
     leftClickPressed = false
     startGame = true
+    //addItemToInventory(itemsJSON.Items.food_1, 3)
   }
 
+
+  if (imgClicked(logoPos)) {
+    window.location.href = site;
+  }
 
 
   if (buttonClicked(buttonParameters) && !settingsPause) {
@@ -199,10 +220,6 @@ function drawHomeMenu() {
     leftClickPressed = false
     soundEffects()
     drawCredits()
-  }
-
-  if (buttonClicked(Studio)) {
-    window.open('https://readymag.com/u2730643025/4237179/');
   }
 
 
@@ -228,13 +245,8 @@ function drawHomeMenu() {
 
   //? Credits
   fill(120, 120, 120);
-  drawButton(credits, homeButton, false, 0);
-  drawText("Crédits", fontSizeHome, textCredits, [CENTER, BASELINE], [33, 25, 19], buttonHover(credits));
-
-  //? Studio
-  fill(120, 120, 120);
-  drawButton(Studio, homeButton, false, 0);
-  drawText("Studio", fontSizeHome, textStudio, [CENTER, BASELINE], [33, 25, 19], buttonHover(Studio));
+  drawButton(credits, undefined, false, 0);
+  drawText("Credits", fontSizeHome, textCredits, [CENTER, BASELINE], [0, 0, 0], buttonHover(credits));
   fill(0);
 }
 
@@ -325,6 +337,7 @@ function drawPauseMenu() {
   let buttonsHeight = 50
   let buttonXOnPage = centerLeftPage - (buttonsWidth / 2)
   let buttonYOnPage = interfaceMenuY + interfaceMenuHeight / 3
+
 
   let secondParagraphY = buttonYOnPage + buttonsHeight + (marginLeftPage * 5)
 
@@ -601,10 +614,10 @@ function drawDeath() {
     DieGameVoice()
     dieSoundPlay = true
   }
-  playerDead = true
   fill(0, 0, 0, 50);
   rect(0, 0, width, height);
-
+  
+  playerDead = true
   gameIsPaused = true;
 
   //* --------------------------------
@@ -658,6 +671,8 @@ function drawDeath() {
   if (buttonClicked(buttonBackToHomeEndGame)) {
     leftClickPressed = false
     inGame = false
+    playerDead = false
+    characterMovement = "idle"
     soundEffects()
   }
 
@@ -853,15 +868,14 @@ function drawStartGame() {
 
 //~ BARRE DE VIE
 function drawLifeBar(x, y) {
-
-  for (let i = 0; i < maxHealth; i++) {
-    if (i + 1 <= healthPlayer) {
-      image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
-    } else {
-      image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
-
+  if (!hideUI){
+    for (let i = 0; i < maxHealth; i++) {
+      if (i + 1 <= healthPlayer) {
+        image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
+      } else {
+        image(GameHeartBlack, lifeBarSize * i + x, y, heartSize, heartSize);
+      }
     }
-
   }
 }
 
@@ -1213,7 +1227,7 @@ function drawDiscussion(x, y, w, h) {
 
 }
 
-//~ CREDITS END GAME
+//~ CREDITS
 function drawCredits() {
   textFont(pixelFont)
   gameIsPaused = true;
@@ -1260,16 +1274,6 @@ function drawCredits() {
   textAlign(CENTER, BASELINE);
 }
 
-//~ End game
-
-function endGame() {
-
-
-  console.log("FIN DU JEU")
-
-
-}
-
 
 
 //^ LANCER
@@ -1313,8 +1317,9 @@ function setupUI() {
       timerGame()
     }
 
-    if (gameIsEnd) {
-      endGame()
+    if (Inventory[2].name === "kelna") {
+      gameIsEnd = true
+      playEndCinematic()
     }
 
 
