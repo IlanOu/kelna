@@ -183,7 +183,7 @@
 
 
       "globalStartX": 18,
-      "globalStartY": 11,
+      "globalStartY": 10,
 
       "velocityY": 0,
       "mass": 60,
@@ -287,7 +287,7 @@
 
 
       "globalStartX": 13,
-      "globalStartY": 11,
+      "globalStartY": 10,
 
       "velocityY": 0,
       "mass": 60,
@@ -339,7 +339,7 @@
 
 
       "globalStartX": 14,
-      "globalStartY": 11,
+      "globalStartY": 10,
 
       "velocityY": 0,
       "mass": 60,
@@ -390,8 +390,8 @@
       "y": 0,
 
 
-      "globalStartX": 15,
-      "globalStartY": 11,
+      "globalStartX": 10,
+      "globalStartY": 10,
 
       "velocityY": 0,
       "mass": 60,

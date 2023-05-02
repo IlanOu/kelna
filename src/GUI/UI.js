@@ -690,7 +690,7 @@ function drawDeath() {
 
 
   drawInterface(interfaceMenu, GUIOfDeath);
-  drawText("  VOUS ETES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
+  drawText("  VOUS ÊTES MORT !", 60, [titleDieX, titleDieY], [CENTER, BASELINE])
 
 
   if (buttonHover(buttonStats)) {

@@ -45,7 +45,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Ça va ça va. Écoute Henri, Toto ma dis de venir te voir car tu as peut-être quelque chose pour moi",
+          "text": "Yvo : Ça va ça va. Écoute Henri, Toto ma dis de venir te voir car tu as peut-être quelque chose pour moi.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -53,7 +53,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Une épée ou un truc du genre pour me défendre",
+          "text": "Yvo : Une épée ou un truc du genre pour me défendre.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -117,7 +117,7 @@
       "step": 0,
       "discussions": [{
 
-          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir",
+          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -125,7 +125,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : C'est un véritable désastre, on perd un être cher à chaque instant",
+          "text": "Toto : C'est un véritable désastre, on perd un être cher à chaque instant.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -137,19 +137,19 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : Mais, es-tu capable d'aller chercher cet sois disante plante légendaire Kelna ?",
+          "text": "Toto : Mais, es-tu capable d'aller chercher cette sois disante plante légendaire Kelna ?",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Bien sur ! Pour le village et ma dulciné",
+          "text": "Yvo : Bien sur ! Pour le monde et ma dulciné.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Toto : M'enfin bon, va voir le tavernier il a peut-être de quoi t'aider",
+          "text": "Toto : Bien... Va voir le tavernier il a peut-être de quoi t'aider.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Merci Toto",
+          "text": "Yvo : Merci Toto.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -206,7 +206,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Roberto : Je suis à la recherche d'un champignon mais j'ai un souci",
+          "text": "Roberto : Je suis à la recherche d'un champignon mais j'ai un souci.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -218,7 +218,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Très bien",
+          "text": "Yvo : Très bien.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -282,15 +282,15 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auquel tu as dû faire face",
+          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auquel tu as dû faire face.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : Tu es ici pour sauver ta femme ainsi que ton village natal",
+          "text": "Sorcier Fou : Tu es ici pour sauver ta femme ainsi que le monde.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : Malgré les périples, les personnes qui t'étaient chères qui eux-mêmes était infectée tu as su faire face",
+          "text": "Sorcier Fou : Malgré les périples, les personnes qui t'étaient chères qui eux-mêmes était infectée tu as su faire face.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -298,7 +298,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : si tu échange",
+          "text": "Sorcier Fou : si tu échange.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -455,7 +455,7 @@
 
       "step": 0,
       "discussions": [{
-          "text": "Sarah : Eh toi",
+          "text": "Sarah : Eh toi !",
           "itemsNameRequired": ["none"]
         },
         {
@@ -573,11 +573,11 @@
       "step": 0,
       "discussions": [{
 
-          "text": "??? : Eh eh vous revenez en arriere c'est trop dangereux",
+          "text": "??? : Eh eh vous revenez en arriere c'est trop dangereux.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Je dois avancer",
+          "text": "Yvo : Je dois avancer.",
           "itemsNameRequired": ["none"]
         },
         {
