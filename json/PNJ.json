@@ -169,138 +169,6 @@
       "x": 0,
       "y": 0,
 
-      "globalStartX": 1,
-      "globalStartY": 0,
-
-      "velocityY": 0,
-      "mass": 60,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 2,
-      "speed": 2,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canTalkWithMe": false,
-      "canTradeWithMe": false,
-
-      "echange": [{
-        "demande": ["mushroom_1", "sword_1"],
-        "donne": ["sword_2"]
-      }]
-
-    },
-    "Sorcier": {
-      "name": "WIZARD",
-      "mapName": "C-17",
-
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 900,
-      "y": 0,
-
-      "globalStartX": 3,
-      "globalStartY": 0,
-
-      "velocityY": 0,
-      "mass": 60,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 2,
-      "speed": 2,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canTalkWithMe": false,
-      "canTradeWithMe": false,
-
-      "echange": [{
-        "demande": ["food_1", "sword_3"],
-        "donne": ["kelna"]
-      }]
-
-    },
-    "Folle": {
-      "name": "CRAZY",
-      "mapName": "C-19",
-
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 0,
-      "y": 0,
-
-      "globalStartX": 4,
-      "globalStartY": 3,
-
-      "velocityY": 0,
-      "mass": 60,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 2,
-      "speed": 2,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canTalkWithMe": false,
-      "canTradeWithMe": false,
-
-      "echange": [{
-        "demande": ["sword_1", "food_1"],
-        "donne": ["sword_3"]
-      }]
-
-    },
-    "Roberto": {
-      "name": "MEN",
-      "mapName": "D-7",
-
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 0,
-      "y": 0,
-
       "globalStartX": 0,
       "globalStartY": 5,
 
@@ -368,17 +236,17 @@
     },
     "Sorcier": {
       "name": "WIZARD",
-      "mapName": "C-17",
+      "mapName": "labo",
 
       "detectDistX": 2,
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 900,
+      "x": 0,
       "y": 0,
 
-      "globalStartX": 3,
-      "globalStartY": 0,
+      "globalStartX": 50,
+      "globalStartY": 50,
 
       "velocityY": 0,
       "mass": 60,
@@ -481,12 +349,7 @@
       "movement": "walk",
 
       "canTalkWithMe": false,
-      "canTradeWithMe": false,
-
-      "echange": [{
-        "demande": ["sword_1", "food_1"],
-        "donne": ["sword_3"]
-      }]
+      "canTradeWithMe": false
 
     },
     "Marjo": {
