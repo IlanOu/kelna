@@ -82,7 +82,7 @@ function preload() {
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/tilesetKelna.png");
+  tileSet = loadImage("assets/textures/tilesetKelna2.png");
   slot = loadImage("assets/textures/slot.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
   requiredSlotSword = loadImage("assets/textures/requiredSlotSword.png")
