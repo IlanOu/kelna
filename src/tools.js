@@ -832,7 +832,7 @@ function shakeCamera(durationSeconds, forcePixels) {
 //~ Ajoute l'item present
 function getCurrentItem() {
     if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
-        addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing], 1)
+        addItemToInventory(itemsJSON.Items[currentItemPointing], 1)
         itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
         currentItemPointing = ""
 

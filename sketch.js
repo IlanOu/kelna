@@ -15,6 +15,7 @@ function preload() {
   //? Font
   pixelFont = loadFont("assets/fonts/pixelFont.ttf")
   classicFont = loadFont("assets/fonts/classicFont.ttf")
+  discuFont = loadFont("assets/fonts/discuFont.ttf")
 
   //? Interfaces
   GUIParameters = loadImage("assets/GUI/GUISettings.png");
@@ -61,6 +62,9 @@ function preload() {
   backgroundImageUI = loadImage('assets/Background/UIBackground.png');
 
 
+  backgroundImageUI = loadImage('assets/Background/UIBackground.png');
+
+
 
   //? Animation PNJ
   marjoTexture = loadImage("assets/entities/marjoSprite.png");
@@ -73,7 +77,7 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/TileSetItems3.png");
+  tilesetItems = loadImage("assets/items/TileSetItems.png");
   tileSetTaverne = loadImage("assets/textures/tavernelabo.png");
   tileSetLabo = loadImage("assets/textures/labo.png");
 

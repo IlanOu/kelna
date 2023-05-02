@@ -65,7 +65,7 @@ function keyPressed() {
 
     //! Récupérer l'item
     if (itemsJSON.ItemsOnTheFloor) {
-        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {  //Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
             item = item[1]
             if (item.canGetItem) {
                 if (keyCode == 69 && engineOne) {
@@ -196,10 +196,6 @@ function mouseReleased() {
         if (startCinematicPlaying && gameIntroductionVideo.elt.paused) {
             gameIntroductionVideo.elt.addEventListener('ended', videoEnded);
             gameIntroductionVideo.play();
-        }
-        if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
-            gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
-            gameEndVideo.play();
         }
 
         slotOne = Inventory[0]

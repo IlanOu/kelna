@@ -25,6 +25,14 @@ function playEndCinematic() {
     image(gameEndVideo, 0, 0, viewportDisplayWidth, viewportDisplayHeight);
 }
 
+function checkEndCredits() {
+
+    if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
+        gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
+        gameEndVideo.play();
+    }
+}
+
 //~ Si la cinematique est terminé
 function videoEndedEnd() {
     background(0)

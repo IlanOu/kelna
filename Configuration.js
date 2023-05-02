@@ -165,7 +165,6 @@ let site = "https://readymag.com/u2730643025/4237179/"
 let logo;
 
 
-
 //? Jeu
 let inGame;
 let gameIsPaused;
