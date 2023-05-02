@@ -162,19 +162,6 @@ let site = "https://readymag.com/u2730643025/4237179/"
 let logo;
 
 
-let site = "https://readymag.com/u2730643025/4237179/"
-let logo;
-
-//? Buttons UI
-
-let buttonZ
-let buttonQ
-let buttonS
-let buttonD
-let buttonE
-let buttonSpace
-
-
 //? Jeu
 let inGame;
 let gameIsPaused;

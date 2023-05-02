@@ -914,7 +914,7 @@ function setupInteractions() {
 //~ TROC
 function drawTroc(x, y, w, h) {
   cursor('default')
-  textFont(pixelFont)
+  textFont(classicFont)
 
   //? Affichage de la ligne troc
   let currentPNJ = getPNJName();
@@ -1058,7 +1058,7 @@ function drawTroc(x, y, w, h) {
 
 function drawTalk(x, y, w, h) {
   cursor('default')
-  textFont(pixelFont)
+  textFont(discuFont)
   let currentPNJName = getPNJName();
   let currentPNJ = pnjJSON.PNJS[currentPNJName]
   let PNJSeePlayer = getPNJSeePlayer(currentPNJName);
@@ -1084,7 +1084,7 @@ function drawTalk(x, y, w, h) {
     }
   }
 
-  let fontSize = 30
+  let fontSize = 19
 
   //? Afficher la banière du fond
   let ratio = w / talkBackground.width
@@ -1315,12 +1315,15 @@ function setupUI() {
         drawPauseMenu();
       }
     } else {
-      timerGame()
+      if(!hideUI){
+        timerGame()
+      }
     }
 
     if (Inventory[2].name === "kelna") {
       gameIsEnd = true
       playEndCinematic()
+      checkEndCredits()
     }
 
 
@@ -1346,7 +1349,9 @@ function setupUI() {
     }
 
     //? Affichage de l'inventaire
-    displayInventory();
+    if(!hideUI){
+      displayInventory();
+    }
 
 
     gameFPS()

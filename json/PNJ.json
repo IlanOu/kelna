@@ -117,7 +117,7 @@
       "step": 0,
       "discussions": [{
 
-          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir.",
+          "text": "Toto : Oh bonjour, Yvo, ça fait plaisir de te voir",
           "itemsNameRequired": ["none"]
         },
         {
@@ -242,11 +242,11 @@
       "detectDistY": 2,
       "seePlayer": false,
 
-      "x": 0,
+      "x": 5,
       "y": 0,
 
-      "globalStartX": 50,
-      "globalStartY": 50,
+      "globalStartX": 2,
+      "globalStartY": 3,
 
       "velocityY": 0,
       "mass": 60,
@@ -262,7 +262,7 @@
       "speed": 2,
       "followSpeed": 4,
 
-      "stepCount": 0,
+      "stepCount": 60,
       "direction": "right",
 
       "currentFrame": 0,
@@ -477,6 +477,122 @@
         "donne": ["sword_3"]
       }]
 
+    },
+    "Malade1-1": {
+      "name": "MALADE",
+      "mapName": "B-2",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 100,
+      "y": 0,
+
+      "globalStartX": 5,
+      "globalStartY": 5,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 0,
+      "speed": 0,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "idle",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+
+          "text": "??? : Aidez moi s’il vous plait… je souffre atrocement, je ne sais plus quoi faire.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je… je suis désolée je n’ai pas les moyens de vous aider pour l’instant. ",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Aidez moi !",
+          "itemsNameRequired": ["none"]
+        }
+      ]
+    },
+    "Malade1-2": {
+      "name": "MALADE",
+      "mapName": "C-4",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 100,
+      "y": 0,
+
+      "globalStartX": 5,
+      "globalStartY": 0,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 0,
+      "speed": 0,
+      "followSpeed": 0,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "idle",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+
+          "text": "??? : Eh eh vous revenez en arriere c'est trop dangereux",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je dois avancer",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Je suis pas le seul infecté il vous reste une derniere chance d'etre en vie...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (Je dois les sauver)",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Pauvre homme...",
+          "itemsNameRequired": ["none"]
+        }
+      ]
     }
   }
 }

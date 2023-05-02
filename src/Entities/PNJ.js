@@ -5,17 +5,23 @@
 function PNJManager() {
   //? Draw des PNJ en EXTERIEUR
   if (engineOne) {
-      if (pnjJSON.PNJS){
-        Object.entries(pnjJSON.PNJS).forEach((pnj) => {
-          if (World.worldsMap.some(row => row.includes(pnj[1].mapName))){
-            PNJ(pnj[1]);          
+    if (pnjJSON.PNJS) {
+      Object.entries(pnjJSON.PNJS).forEach((pnj) => {
+        if (World.worldsMap.some(row => row.includes(pnj[1].mapName))) {
+          PNJ(pnj[1]);
+        }
+      });
+    }
+  } else {
+    if (pnjJSON.PNJS) {
+      Object.entries(pnjJSON.PNJS).forEach((pnj) => {
+        Object.entries(Houses.Houses).forEach((house) => {
+          if(house[0] == pnj[1].mapName){
+            drawPNJInside(pnj[1]);
           }
         })
-        // PNJ(pnjJSON.PNJS.Marjo);
-        // PNJ(pnjJSON.PNJS.Toto);
-      }
-  } else {
-    drawPNJInside(pnjJSON.PNJS.Tavernier);
+      })
+    }
   }
 }
 
@@ -41,7 +47,7 @@ let drawPNJInside = (pnj) => {
   pnj.y = PNJY;
   pnj.xEnd = PNJEnd;
 
-  if (pnj.mapName == behindThisDoorHouse){
+  if (pnj.mapName == behindThisDoorHouse) {
     PNJMovementsInside(pnj);
   }
 };
@@ -78,12 +84,12 @@ function PNJ(pnj) {
   let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
   let collide = false;
 
-  
+
   if (pnjMustBeShown(pnj)) {
-    
-    
-    if (lastMap != currentMap){
-      if (currentMap.toString() == pnj.mapName.toString()){
+
+
+    if (lastMap != currentMap) {
+      if (currentMap.toString() == pnj.mapName.toString()) {
         PNJX = positionsStart.pixelX + xStartWorld
         PNJY = positionsStart.pixelY + yStartWorld
         pnj.x = positionsStart.pixelX + xStartWorld
@@ -215,24 +221,24 @@ let PNJMovements = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.echange && pnj.discussions){
-      if (pnj.step == pnj.discussions.length-1){
+    if (pnj.echange && pnj.discussions) {
+      if (pnj.step == pnj.discussions.length - 1) {
         pnj.canTalkWithMe = false
         pnj.canTradeWithMe = true
-      }else{
+      } else {
         pnj.canTalkWithMe = true
         pnj.canTradeWithMe = false
       }
-    //* Si le perso n'est pas vu, faire une ronde
-    }else{
+      //* Si le perso n'est pas vu, faire une ronde
+    } else {
       if (pnj.echange) {
         pnj.canTradeWithMe = true
-      }else if (pnj.discussions){
+      } else if (pnj.discussions) {
         pnj.canTalkWithMe = true
       }
     }
-    
-  }else{
+
+  } else {
     doRound(pnj);
     pnj.movement = "walk";
 
@@ -331,25 +337,24 @@ let PNJMovementsInside = (pnj) => {
     lookThePlayer(pnj);
     pnj.movement = "idle";
 
-    if (pnj.echange && pnj.discussions){
-      if (pnj.step == pnj.discussions.length-1){
+    if (pnj.echange && pnj.discussions) {
+      if (pnj.step == pnj.discussions.length - 1) {
         pnj.canTalkWithMe = false
         pnj.canTradeWithMe = true
-      }else{
+      } else {
         pnj.canTalkWithMe = true
         pnj.canTradeWithMe = false
       }
-    }else{
+    } else {
       if (pnj.echange) {
         pnj.canTradeWithMe = true
         // console.log('je suis un marchand', pnj.canTradeWithMe)
-      }else if (pnj.discussions){
+      } else if (pnj.discussions) {
         pnj.canTalkWithMe = true
       }
     }
-    
-  }
-  else {
+
+  } else {
     doRound(pnj);
     pnj.movement = "walk";
     pnj.canTalkWithMe = false
@@ -517,6 +522,31 @@ function animationPNJ(
         for (let y = 0; y < 32; y += 32) {
           for (let x = 0; x < 64; x += 32) {
             PNJTexturesList.push(crazyTexture.get(x, y, 32, 32));
+          }
+        }
+      }
+
+      break
+
+
+    case "MALADE":
+
+      if (movement == "walk") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(malade1Sprite.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "idle") {
+        for (let y = 32; y < 64; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(malade1Sprite.get(x, y, 32, 32));
+          }
+        }
+      } else if (movement == "jump") {
+        for (let y = 0; y < 32; y += 32) {
+          for (let x = 0; x < 64; x += 32) {
+            PNJTexturesList.push(malade1Sprite.get(x, y, 32, 32));
           }
         }
       }
