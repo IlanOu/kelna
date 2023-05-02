@@ -61,16 +61,25 @@ function keyPressed() {
 
     //! Récupérer l'item
     if (itemsJSON.ItemsOnTheFloor) {
-        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {  //Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+        Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
             item = item[1]
             if (item.canGetItem) {
-                if (keyCode == 69 && engineOne) {
-                    if (Inventory[getIndexOfItemCategory(item.category)].category) {
-                        tempMessage()
-                    } else {
-                        getCurrentItem()
+                if (item.category == "other") {
+                    if (keyCode == 69 && engineOne) {
+                        if (Inventory[getIndexOfItemCategory(item.category)].category) {
+                            tempMessage()
+                        } else {
+                            getCurrentItem()
+                        }
+                        item.canGetItem = false
                     }
-                    item.canGetItem = false
+                } else {
+                    if (keyCode == 69 && engineOne) {
+                        console.log(Inventory[getIndexOfItemCategory(item.category)])
+                        if (Inventory[getIndexOfItemCategory(item.category)].category) {
+                            getCurrentItem()
+                        }
+                    }
                 }
             }
         })
