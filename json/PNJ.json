@@ -313,45 +313,6 @@
       }]
 
     },
-    "Folle": {
-      "name": "CRAZY",
-      "mapName": "C-19",
-
-      "detectDistX": 2,
-      "detectDistY": 2,
-      "seePlayer": false,
-
-      "x": 0,
-      "y": 0,
-
-      "globalStartX": 4,
-      "globalStartY": 3,
-
-      "velocityY": 0,
-      "mass": 60,
-
-      "jumpCount": 0,
-      "isJumping": false,
-      "haveToJump": false,
-
-      "width": 80,
-      "height": 80,
-
-      "distance": 2,
-      "speed": 2,
-      "followSpeed": 4,
-
-      "stepCount": 0,
-      "direction": "right",
-
-      "currentFrame": 0,
-      "indexFrame": 0,
-      "movement": "walk",
-
-      "canTalkWithMe": false,
-      "canTradeWithMe": false
-
-    },
     "Marjo": {
       "name": "WOMEN",
 

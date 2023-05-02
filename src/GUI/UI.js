@@ -89,13 +89,13 @@ function drawHomeMenu() {
   cursor('default')
   image(backgroundImageUI, 0, 0, backgroundImageUI.width, backgroundImageUI.height)
   textFont(classicFont)
-  
-  
+
+
   //* --------------------------------
   //* ---------- Variables -----------
   //* --------------------------------
-  
-  
+
+
   let widthButton = (viewportDisplayWidth / 5)
   let heightButton = 60;
   let marginButton = viewportDisplayHeight / 13;
@@ -105,37 +105,37 @@ function drawHomeMenu() {
 
   let interfaceWidth = 700
   let interfaceheight = 800
-  let interfaceX = (viewportDisplayWidth/2)-(interfaceWidth/2)
+  let interfaceX = (viewportDisplayWidth / 2) - (interfaceWidth / 2)
 
   let interfaceMenu = [
-    interfaceX - (interfaceWidth*0.02),
-    (viewportDisplayHeight/2)-(interfaceheight/2),
+    interfaceX - (interfaceWidth * 0.02),
+    (viewportDisplayHeight / 2) - (interfaceheight / 2),
     interfaceWidth,
     interfaceheight,
   ];
-  
+
   let play = [
-    interfaceX + (interfaceWidth/2) - (widthButton / 2),
+    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
     centerButtonY,
     widthButton,
     heightButton,
   ];
-  
+
   let textPlay = [
     play[0] + play[2] / 2,
     play[1] + (heightButton / 2) - (fontSizeHome / 1.8),
   ];
-  
-  
-  
-  
+
+
+
+
   let buttonParameters = [
-    interfaceX + (interfaceWidth/2) - (widthButton / 2),
+    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
     centerButtonY + marginButton,
     widthButton,
     heightButton,
   ];
-  
+
   let textParameters = [
     buttonParameters[0] + buttonParameters[2] / 2,
     buttonParameters[1] + (heightButton / 2) - (fontSizeHome / 1.8),
@@ -144,7 +144,7 @@ function drawHomeMenu() {
 
 
   let Studio = [
-    interfaceX + (interfaceWidth/2) - (widthButton / 2),
+    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
     centerButtonY + marginButton * 2,
     widthButton,
     heightButton,
@@ -157,18 +157,18 @@ function drawHomeMenu() {
 
 
   let credits = [
-    interfaceX + (interfaceWidth/2) - (widthButton / 2),
+    interfaceX + (interfaceWidth / 2) - (widthButton / 2),
     centerButtonY + marginButton * 3,
     widthButton,
     heightButton,
   ];
-  
+
   let textCredits = [
     credits[0] + credits[2] / 2,
     credits[1] + (heightButton / 2) - (fontSizeHome / 1.8),
   ];
-  
-  
+
+
   let logoPos = [
     0,
     viewportDisplayHeight - (viewportDisplayHeight / 5),
@@ -177,11 +177,11 @@ function drawHomeMenu() {
   ]
 
 
-  
+
   //* --------------------------------
   //* ---------- Evenements ----------
   //* --------------------------------
-  
+
 
 
   image(logo, logoPos[0], logoPos[1], logoPos[2], logoPos[3])
@@ -275,7 +275,7 @@ function drawPauseMenu() {
   let interfaceMenuY = viewportDisplayHeight / 2 - interfaceMenuHeight / 2;
   let widthPage = (interfaceMenuWidth / 5)
 
-  let centerRightPage = (widthPage * 3) - widthPage/10;
+  let centerRightPage = (widthPage * 3) - widthPage / 10;
   let centerLeftPage = (widthPage * 1.8);
 
   let marginButton = interfaceMenuHeight / 15;
@@ -390,7 +390,7 @@ function drawPauseMenu() {
     buttonBackW,
     buttonBackH)
  */
-    
+
 
   //& --------------------------------
   //& ---------- Evenements ----------
@@ -617,7 +617,7 @@ function drawDeath() {
   }
   fill(0, 0, 0, 50);
   rect(0, 0, width, height);
-  
+
   playerDead = true
   gameIsPaused = true;
 
@@ -869,7 +869,7 @@ function drawStartGame() {
 
 //~ BARRE DE VIE
 function drawLifeBar(x, y) {
-  if (!hideUI){
+  if (!hideUI) {
     for (let i = 0; i < maxHealth; i++) {
       if (i + 1 <= healthPlayer) {
         image(GameHeart, lifeBarSize * i + x, y, heartSize, heartSize);
@@ -886,7 +886,6 @@ function setupInteractions() {
   fill(255);
 
   if (aPNJCanTrade()) {
-    // console.log('Echange')
     drawKey("E");
   }
 
@@ -1287,7 +1286,7 @@ function setupUI() {
   if (inGame) {
     gameIsPlaying = true;
 
-    
+
     //& Affichage des Intéractions
     setupInteractions();
 
@@ -1315,7 +1314,7 @@ function setupUI() {
         drawPauseMenu();
       }
     } else {
-      if(!hideUI){
+      if (!hideUI) {
         timerGame()
       }
     }
@@ -1349,7 +1348,7 @@ function setupUI() {
     }
 
     //? Affichage de l'inventaire
-    if(!hideUI){
+    if (!hideUI) {
       displayInventory();
     }
 
