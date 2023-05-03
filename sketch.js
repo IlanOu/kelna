@@ -94,7 +94,6 @@ function preload() {
   characterTextures = loadImage("assets/entities/spritesheetYvo.png")
 
 
-
   //? JSON preload
   adminJSON = loadJSON("json/Admin.json");
   allDoors = loadJSON("json/Doors.json");

@@ -1127,8 +1127,8 @@ function openTrocMenu() {
 //~ INTERACTION PNJ DISCU
 function openTalkMenu() {
 
-  let interfaceMenuWidth = viewportDisplayWidth / 2.5;
-  let interfaceMenuHeight = viewportDisplayHeight / 5;
+  let interfaceMenuWidth = viewportDisplayWidth / 3;
+  let interfaceMenuHeight = viewportDisplayHeight / 7;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight;
   drawTalk(

@@ -2,7 +2,7 @@
 let addItemToInventory = (item, amount) => {
     
     let amountItemSlot2 = 0
-    if (Inventory[1]){
+    if (Inventory[1].category){
         if (Inventory[1].category == item.category){
             amountItemSlot2 = Inventory[1].amount
         }
