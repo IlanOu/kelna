@@ -1095,6 +1095,7 @@ function drawTalk(x, y, w, h) {
       }
     }
 
+    image(buttonE, x,y, 40,40)
     //? Afficher le texte
     textSize(fontSize);
     text(currentTextSpeaking, x + (textWidth / 4), y + (h / 2.5) - fontSize / 2, textWidth, h)
