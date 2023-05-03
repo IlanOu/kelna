@@ -968,8 +968,6 @@ function characterView2() {
     noStroke()
   }
 
-  //- (characterHeight - characterBoundingBoxHeightInside)
-
   //#endregion
 
 }

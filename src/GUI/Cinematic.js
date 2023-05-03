@@ -1,8 +1,12 @@
 //~ Lancement de la cinematique de debut de jeu
 function playStartCinematic() {
-    leftClickPressed = false;
-    noCursor()
     image(gameIntroductionVideo, 0, 0, viewportDisplayWidth, viewportDisplayHeight);
+    noCursor()
+    fill(255)
+    noStroke(0)
+    textSize(15)
+    text("Passer -> ECHAP", 50, 50)
+    leftClickPressed = false;
 }
 
 //~ Si la cinematique est terminé
@@ -19,6 +23,7 @@ function videoEnded() {
 
 //~ Lancement de la cinematique de fin de jeu
 function playEndCinematic() {
+    musicGame.pause()
     leftClickPressed = false;
     noCursor()
     hideInventory = true
@@ -26,7 +31,6 @@ function playEndCinematic() {
 }
 
 function checkEndCredits() {
-
     if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
         gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
         gameEndVideo.play();

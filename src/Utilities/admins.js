@@ -5,7 +5,6 @@ function login(username, password) {
         if (user.name == username && user.password == password) {
             logged = true
             characterMaxJumps = 100,
-            //characterMovesSpeed = 10,
             characterPositionY = 0,
             maxHealth = 10,
             healthPlayer = 10
@@ -22,7 +21,6 @@ function login(username, password) {
 function logout() {
     if (logged) {
         characterMaxJumps = init_characterMaxJumps,
-        //characterMovesSpeed = init_characterMovesSpeed,
         maxHealth = init_maxHealth,
         healthPlayer = init_healthPlayer
         logged = false
