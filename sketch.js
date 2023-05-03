@@ -77,13 +77,13 @@ function preload() {
 
 
   //? Tileset
-  tilesetItems = loadImage("assets/items/TileSetItems2.png");
+  tilesetItems = loadImage("assets/items/TileSetItems.png");
   tileSetTaverne = loadImage("assets/textures/tavernelabo.png");
   tileSetLabo = loadImage("assets/textures/labo.png");
 
 
   //? Textures
-  tileSet = loadImage("assets/textures/tilesetKelna2.png");
+  tileSet = loadImage("assets/textures/tilesetKelna.png");
   slot = loadImage("assets/textures/slot.png");
   pointEnnemis = loadImage("assets/textures/pointEnnemis.png");
   requiredSlotSword = loadImage("assets/textures/requiredSlotSword.png")
