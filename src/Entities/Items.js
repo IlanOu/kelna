@@ -1,3 +1,4 @@
+//~ Manager des items
 function itemsManager(){
 
     if (engineOne){
@@ -13,7 +14,7 @@ function itemsManager(){
 }
 
 
-
+//~ Items au sols
 function items(item){
 
     let positions = getPositionAt(item.location, item.x, item.y);
@@ -32,7 +33,7 @@ function items(item){
         item.detectDist
       );
 
-    canGetItem = rectIsInRect(
+    item.canGetItem = rectIsInRect(
         characterPositionX,
         characterPositionY,
         characterBoundingBoxWidth,
@@ -43,8 +44,9 @@ function items(item){
         itemBoundingBox[3]
       );
     
-    if (canGetItem){
+    if (item.canGetItem){
         currentItemPointing = item.name
+        drawKey("E");
     }
 
 
@@ -65,7 +67,7 @@ function items(item){
     drawItems(item)
 }
 
-
+//~ Crée l'items au sol
 function drawItems(item){
 
 

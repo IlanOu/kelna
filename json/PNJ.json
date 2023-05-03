@@ -1,19 +1,19 @@
 {
   "PNJS": {
-    "Charle": {
-      "name":"Charle",
-      
+    "Tavernier": {
+      "name": "TAVERNIER",
+
       "mapName": "taverne",
 
-      "detectDistX": 2,
-      "detectDistY": 2,
+      "detectDistX": 4,
+      "detectDistY": 4,
       "seePlayer": false,
 
-      "x": 600,
+      "x": 0,
       "y": 0,
 
-      "globalStartX": 250,
-      "globalStartY": 80,
+      "globalStartX": 2,
+      "globalStartY": 1.5,
 
       "velocityY": 0,
       "mass": 60,
@@ -25,38 +25,59 @@
       "width": 80,
       "height": 80,
 
-      "distance": 0,
-      "speed": 0,
+      "distance": 1.5,
+      "speed": 1,
       "followSpeed": 4,
 
-      "stepCount": 0,
+      "stepCount": 110,
       "direction": "right",
 
       "currentFrame": 0,
       "indexFrame": 0,
       "movement": "walk",
-      
+
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
-
-      "echange": [
-        {
-          "demande": ["sword_2"],
-          "donne": ["sword_3"]
+      "step": 0,
+      "discussions": [{
+          "text": "Henri : Oh salut Yvo, comment tu vas ?",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["sword_1"],
-          "donne": ["sword_2"]
+          "text": "Yvo : Ça va ça va. Écoute Henri, Charles m'a dit de venir te voir car tu as peut-être quelque chose pour moi.",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["food_1"],
-          "donne": ["sword_1"]
+          "text": "Henri : Et tu cherches quoi exactement ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Une épée ou un truc du genre pour me défendre.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Henri : Oui, j'ai une vieille épée en bois, elle pourra sûrement te servir...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je prends !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Henri : Bonne chance Yvo !",
+          "itemsNameRequired": ["none"]
         }
-      ]
+      ],
+
+
+      "echange": [{
+        "demande": ["food_1"],
+        "donne": ["sword_1"]
+      }]
     },
-    "Toto": {
-      "name":"Toto",
+    "Charles": {
+      "name": "MEN",
       "mapName": "A-1",
 
       "detectDistX": 2,
@@ -67,7 +88,8 @@
       "y": 0,
 
       "globalStartX": 5,
-      "globalStartY": 0,
+      "globalStartY": 11,
+
       "velocityY": 0,
       "mass": 60,
 
@@ -92,25 +114,53 @@
       "canTalkWithMe": false,
       "canTradeWithMe": false,
 
-      "echange": [
-        {
-          "demande": ["sword_2"],
-          "donne": ["sword_3"]
+      "step": 0,
+      "discussions": [{
+
+          "text": "Charles : Oh bonjour, Yvo, ça fait plaisir de te voir",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["sword_1"],
-          "donne": ["sword_2"]
+          "text": "Yvo : De même Charles...",
+          "itemsNameRequired": ["none"]
         },
         {
-          "demande": ["food_1"],
-          "donne": ["sword_1"]
+          "text": "Charles : C'est un véritable désastre, on perd un être cher à chaque instant.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Charles : J'espère que ta femme s'en tirera...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : ...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Charles : Mais, es-tu capable d'aller chercher cette fameuse plante légendaire Kelna ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Bien sur ! Pour le monde et ma dulciné.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Charles : Bien... Va voir le tavernier, il a peut-être de quoi t'aider.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Merci Charles.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Charles : Sauves nous Yvo !",
+          "itemsNameRequired": ["none"]
         }
       ]
     },
-    "Marjo": {
-      "name": "Marjo",
-
-      "mapName": "B-2",
+    "Roberto": {
+      "name": "MEN",
+      "mapName": "D-7",
 
       "detectDistX": 2,
       "detectDistY": 2,
@@ -119,8 +169,160 @@
       "x": 0,
       "y": 0,
 
-      "globalStartX": 5,
+      "globalStartX": 0,
       "globalStartY": 5,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 0.5,
+      "speed": 2,
+      "followSpeed": 2,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Roberto : Oh bonjour ! Dites, je peux vous déranger 5 minutes ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Bonjour, oui dites-moi ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Je suis à la recherche d'un champignon mais j'ai un souci.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Il se trouve que j'en ai repéré un mais il y a des infectés partout là-bas au fond...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : Pourriez-vous m'aider ? Je vous offrirais un beau cadeau !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Très bien.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Roberto : N'oubliez pas, il se trouve au fond et surtout ne mourrez pas !",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
+
+      "echange": [{
+        "demande": ["mushroom_1"],
+        "donne": ["sword_2"]
+      }]
+
+    },
+    "Sorcier": {
+      "name": "WIZARD",
+      "mapName": "labo",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 5,
+      "y": 0,
+
+      "globalStartX": 2,
+      "globalStartY": 3,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 2,
+      "speed": 2,
+      "followSpeed": 4,
+
+      "stepCount": 60,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Sorcier Fou : Oh petit, est-ce bien toi Yvo ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (D'où il connaît mon nom ?)",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auxquelles tu as dû faire face.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Tu es ici pour sauver ta femme ainsi que le monde.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Malgré ton long périple, tu as su faire face à la difficulté.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Je te donnerais Kelna...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sorcier Fou : Si tu m'échanges...",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
+      "echange": [{
+        "demande": ["food_1", "sword_3"],
+        "donne": ["kelna"]
+      }]
+
+    },
+    "Marjo": {
+      "name": "WOMEN",
+
+      "mapName": "C-6",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 0,
+
+      "globalStartX": 4,
+      "globalStartY": 8,
 
       "velocityY": 0,
       "mass": 60,
@@ -147,30 +349,201 @@
       "canTradeWithMe": false,
 
       "step": 0,
-      "discussions": [
-        {
-          "text": "Bonjour jeune entrepreneur", 
-          "itemsNameRequired": ["none"]
-        }, 
-        {
-          "text": "J'ai besoin que tu me ramène une épée ! Ou une pomme !",
+      "discussions": [{
+          "text": "Marjo : Notre belle contrée est détruite par cette infeste maladie...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text" : "C'est très gentil, je vais te donner une information géniale en échange !",
-          "itemsNameRequired": ["sword_1", "food_1"]
-        }, 
+          "text": "Marjo : Je suis en plein cauchemar ? Je rêve, je suis en train de dormir non ?",
+          "itemsNameRequired": ["none"]
+        },
         {
-         "text": "Un jour Chuck Norris a eu un zéro en latin...",
-         "itemsNameRequired": ["none"]  
-        }, 
+          "text": "Yvo : Je crain que non Marjo...",
+          "itemsNameRequired": ["none"]
+        },
         {
-         "text": "Depuis, c'est une langue morte.",
-         "itemsNameRequired": ["none"]  
-        }, 
+          "text": "Marjo : Je ne peux même pas rentrer dans ma tente au-dessus de l'arbre avec tout ces infectés partout....",
+          "itemsNameRequired": ["none"]
+        },
         {
-         "text": "Hahahahahahahaha",
-         "itemsNameRequired": ["none"]  
+          "text": "Marjo : Aides-nous Yvo...",
+          "itemsNameRequired": ["none"]
+        }
+      ]
+    },
+    "Sarah": {
+      "name": "WOMEN",
+
+      "mapName": "C-13",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 0,
+      "y": 0,
+
+      "globalStartX": 4,
+      "globalStartY": 3,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 1,
+      "speed": 3,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "walk",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+          "text": "Sarah : Eh toi !",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Oui ?",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Sarah : J'ai besoin d'une pièce, en échange je te donnerais un objet que tu ne refuseras pas !",
+          "itemsNameRequired": ["none"]
+        }
+      ],
+
+      "echange": [{
+        "demande": ["coin"],
+        "donne": ["sword_3"]
+      }]
+
+    },
+    "Malade1-1": {
+      "name": "MALADE",
+      "mapName": "B-2",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 100,
+      "y": 0,
+
+      "globalStartX": 5,
+      "globalStartY": 5,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 0,
+      "speed": 0,
+      "followSpeed": 4,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "idle",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+
+          "text": "??? : Aidez-moi s’il vous plait… Je souffre atrocement, je ne sais plus quoi faire.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je… je suis désolée je n’ai pas les moyens de vous aider pour l’instant. ",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Aidez moi !",
+          "itemsNameRequired": ["none"]
+        }
+      ]
+    },
+    "Malade1-2": {
+      "name": "MALADE",
+      "mapName": "C-4",
+
+      "detectDistX": 2,
+      "detectDistY": 2,
+      "seePlayer": false,
+
+      "x": 100,
+      "y": 0,
+
+      "globalStartX": 5,
+      "globalStartY": 3,
+
+      "velocityY": 0,
+      "mass": 60,
+
+      "jumpCount": 0,
+      "isJumping": false,
+      "haveToJump": false,
+
+      "width": 80,
+      "height": 80,
+
+      "distance": 0,
+      "speed": 0,
+      "followSpeed": 0,
+
+      "stepCount": 0,
+      "direction": "right",
+
+      "currentFrame": 0,
+      "indexFrame": 0,
+      "movement": "idle",
+
+      "canTalkWithMe": false,
+      "canTradeWithMe": false,
+
+      "step": 0,
+      "discussions": [{
+
+          "text": "??? : Hé, vous ! Revenez en arrière c'est trop dangereux par ici.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : Je dois avancer.",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Je ne suis pas le seul infecté, il vous reste encore une chance de rester en vie...",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "Yvo : (Je dois les sauver)",
+          "itemsNameRequired": ["none"]
+        },
+        {
+          "text": "??? : Pauvre homme...",
+          "itemsNameRequired": ["none"]
         }
       ]
     }

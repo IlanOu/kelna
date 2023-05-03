@@ -43,7 +43,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
   </ol>
 </details>
 
@@ -97,18 +96,6 @@ _Below is how you can how to install " " . You have to_ :
 3. Launch the code and play !
 
 <p align="right">(<a href="#readme-top">Back to top !</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-*In progress...*
-<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
-
-<p align="right">(<a href="#readme-top">Back to top !</a>)</p>
-
-
 <!--  -->
 [P5.js]: https://img.shields.io/badge/p5%20js-ED225D?style=for-the-badge&logo=p5dotjs&logoColor=white
 [P5-url]: https://p5js.org/

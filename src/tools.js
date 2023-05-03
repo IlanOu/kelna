@@ -21,7 +21,8 @@ function createTable(columnNumber, rowNumber) {
 }
 
 
-//~ Trouve la valeur de l'index de la 2eme array 
+
+//~ Trouve l'index d'une map dans world 
 function findIndexValueIn2dArray(array, mapName) {
     for (let row = 0; row < array[0].length; row++) {
         for (let column = 0; column < array.length; column++) {
@@ -34,7 +35,7 @@ function findIndexValueIn2dArray(array, mapName) {
 }
 
 
-//~ Trouve l'index de la position du 2eme array
+//~ Trouver l'index d'une position dans un tableau 2d
 let previous_index_pos = null;
 
 function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight) {
@@ -56,16 +57,25 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 }
 
 
+
+
+//~ Dessine les touches pour les interactions
+function drawKeyAt(key, positionX, positionY, haveBackground = false) {
+    image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
+}
+
+
+
+
+
 //~ Chercher un tableau dans un tableau 2D
-function PNJMustBeShown(pnj) {
-
-
+function entityMustBeShown(mob) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
-    let positionMapPNJ = findIndexValueIn2dArray(World.worldsMap, pnj.mapName)
+    let positionMapMob = findIndexValueIn2dArray(World.worldsMap, mob.mapName)
     let invertedArrayMapPosition = []
-    invertedArrayMapPosition[0] = positionMapPNJ[1]
-    invertedArrayMapPosition[1] = positionMapPNJ[0]
+    invertedArrayMapPosition[0] = positionMapMob[1]
+    invertedArrayMapPosition[1] = positionMapMob[0]
 
 
     let inChunksCheck = false
@@ -141,66 +151,53 @@ function limitNumberWithinRange(number, minimum, maximum) {
 
 
 
-//~ Joue de la music 
+//~ Joue / desactive de la music 
 let PlayMusic = () => {
-
-    if (musicEnabled === false && Pressing === false) {
+    if (!musicEnabled && !Pressing && !endTheGameCredits && !creditsInHome) {
         musicEnabled = true
-        SongBackground.loop()
-        musicButtonColor = 50
+        musicGame.loop()
         Pressing = true
 
-    } else if (musicEnabled === true && Pressing === false) {
+    } else if (musicEnabled && !Pressing && !endTheGameCredits && !creditsInHome) {
         musicEnabled = false
-        SongBackground.pause()
-        musicButtonColor = 255
+        musicGame.pause()
         Pressing = true
 
     }
-
 }
 
 
-//~ Fonction qui joue des sons aleatoire
-
-/*
-function DieGameVoice() {
-    if (!soundEnabled) {
-        let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
-        let sonAleatoire = VoicesDieSong[indexSong];
-        console.log(VoicesDieSong)
-        sonAleatoire.play();
-    }
-}
-*/
-
+//~ Joue des voix dés le début du jeu
 function startGameVoice() {
-    if (!soundEnabled) {
-        VoiceStartSong.play()
+    if (soundEnabled) {
+        let indexSong = Math.floor(Math.random() * VoiceStartSong.length);
+        VoiceStartSong[indexSong].play()
     }
 }
 
 
+
+//~ Joue des voix a la mort du jouer
 function DieGameVoice() {
-    if (!soundEnabled) {
+    if (soundEnabled) {
         let indexSong = Math.floor(Math.random() * VoicesDieSong.length);
-        console.log("->", VoicesDieSong[indexSong])
         VoicesDieSong[indexSong].play()
     }
 }
 
 
-//~ Joue les songs
+
+
+
+//~ Joue / desactive les songs
 let PlaySong = () => {
 
-    if (soundEnabled === false && Pressing === false) {
+    if (!soundEnabled && !Pressing) {
         soundEnabled = true
-        soundButtonColor = 50
         Pressing = true
 
-    } else if (soundEnabled === true && Pressing === false) {
+    } else if (soundEnabled && !Pressing) {
         soundEnabled = false
-        soundButtonColor = 255
         Pressing = true
 
     }
@@ -208,10 +205,65 @@ let PlaySong = () => {
 }
 
 
+function soundEffects() {
+
+    if (soundEnabled) {
+        if (!soundHit.isPlaying()) {
+            if (characterMovement == "getHit") {
+                soundHit.play()
+            } else {
+                soundHit.pause()
+            }
+        }
+        if (!soundDie.isPlaying()) {
+            if (characterMovement === "die") {
+                soundDie.play()
+            } else {
+                soundDie.pause()
+            }
+        }
+        if (!soundSwordHit1.isPlaying()) {
+            if (characterMovement == "hit") {
+                soundSwordHit1.play()
+            } else {
+                soundSwordHit1.pause()
+            }
+        }
+        if (!soundSwordHit2.isPlaying()) {
+            if (characterMovement == "hit2") {
+                soundSwordHit2.play()
+            } else {
+                soundSwordHit2.pause()
+            }
+        }
+        if (!soundSwordHit3.isPlaying()) {
+            if (characterMovement == "hit3") {
+                soundSwordHit3.play()
+            } else {
+                soundSwordHit3.pause()
+            }
+        }
+        if (!soundClick.isPlaying()) {
+            if (buttonClickSound) {
+                soundClick.play()
+                buttonClickSound = false
+            } else {
+                soundClick.pause()
+            }
+        }
+    }
+}
+
+
 //~ hurtPlayer
 function hurtPlayer(amount) {
-    healthPlayer -= amount; //& Enlever point de vie
-    healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
+    if (!logged) {
+        healthPlayer -= amount; //& Enlever point de vie
+        healthPlayer = constrain(healthPlayer, 0, maxHealth); //& Depasse pas la vie, de 0 et de la vie max
+    } else {
+        healthPlayer += amount; //& Enlever point de vie
+        healthPlayer = constrain(healthPlayer, 0, maxHealth);
+    }
 }
 
 
@@ -262,11 +314,11 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(currentMapInWorld)
 
     //? map à DROITE du perso
-    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atRightMapInWorld)
 
     //? map à GAUCHE du perso
-    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atLeftMapInWorld)
 
     //? map en HAUT du perso
@@ -278,19 +330,19 @@ function getMapsToCheck(characterPositionX, characterPositionY) {
     mapsToCheck.push(atBottomMapInWorld)
 
     //? map en BAS à DROITE du perso
-    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomRightMapInWorld)
 
     //? map en BAS à GAUCHE du perso
-    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atBottomLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY + (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atBottomLeftMapInWorld)
 
     //? map en HAUT à DROITE du perso
-    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopRightMapInWorld = findIndexOfPositionIn2dArray(characterPositionX + (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopRightMapInWorld)
 
     //? map en HAUT à GAUCHE du perso
-    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow) / 2, characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+    let atTopLeftMapInWorld = findIndexOfPositionIn2dArray(characterPositionX - (rectWidth * Maps.numberOfRow), characterPositionY - (rectHeight * Maps.numberOfColumns), World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
     mapsToCheck.push(atTopLeftMapInWorld)
 
 
@@ -335,16 +387,14 @@ function getPositionAt(mapName = "", positionX = 0, positionY = 0) {
     })
 
     if (!mapExist) {
-        Object.entries(Houses.Houses).forEach(house => {
-            house = house[1]
-            if (house.name == mapName && !mapExist) {
-                mapExist = true;
-                //indexMapX = house.indexOf(mapName);
-                indexMapX = 0
-            } else {
-                indexMapY = 0
-            }
-        });
+        mapExist = true;
+        indexMapX = 0
+        indexMapY = 0
+
+        return {
+            "pixelX": positionX * rectWidth,
+            "pixelY": positionY * rectHeight
+        }
     }
 
     if (mapExist) {
@@ -371,53 +421,53 @@ function drawKey(key) {
         PosX = characterPositionX
         PosY = characterPositionY
     } else {
-
-        PosX = characterInsidePosX + characterWidth / 2 - interactionWidth / 1.2
-        PosY = characterInsidePosY - characterHeight / 3
+        PosX = characterInsidePosX + (characterWidth / 2) - (interactionWidth / 1.2)
+        PosY = characterInsidePosY - (characterHeight / 3)
     }
 
-    let keyBackground = [(PosX),
-        PosY - 50,
+    let keyBackground = [
+        PosX,
+        PosY - (interactionHeight * 1.5),
         interactionWidth,
         interactionHeight
-    ]
-
-    let textKey = [PosX + (keyBackground[2] / 2),
-        PosY - 50 + (keyBackground[3] / 8)
     ]
 
     fill(255)
-    drawButton(keyBackground)
-    drawText(key, 20, textKey, [CENTER, BASELINE])
+    drawButton(keyBackground, buttonE)
 
 }
 
 
-//~ Dessine les touches pour les interactions
-function drawKeyAt(key, positionX, positionY, haveBackground = false) {
-    let keyBackground = [(positionX),
-        positionY - 50,
-        interactionWidth,
-        interactionHeight
-    ]
 
-    let textKey = [positionX + (keyBackground[2] / 2),
-        positionY - 50 + (keyBackground[3] / 8)
-    ]
+function showMessage(message) {
+    let popupMarginTop = 40
 
-    if (haveBackground) {
-        drawButton(keyBackground, undefined, false)
-    }
+    let popupMessageWidth = 400
+    let popupMessageHeight = 100
+    let popupPositionX = (viewportDisplayWidth / 2) - (popupMessageWidth / 2)
+    let popupPositionY = 0 + popupMarginTop
 
-    if (key == "!") {
-        drawText(key, 30, textKey, [CENTER, BASELINE], [255, 0, 0])
+    let messageFontSize = 30
 
-    } else {
-        drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
-    }
+    let messagePositionX = popupPositionX + popupMessageWidth / 2
+    let messagePositionY = popupPositionY + (popupMessageHeight / 2) - messageFontSize / 1.2
+
+    let messageTextPosition = [messagePositionX, messagePositionY]
+
+    image(longButton, popupPositionX, popupPositionY, popupMessageWidth, popupMessageHeight)
+    drawText(message, 30, messageTextPosition, [CENTER, BASELINE], [0, 0, 0])
 
 }
 
+
+
+function tempMessage() {
+    canShowMessage = true
+
+    setTimeout(() => {
+        canShowMessage = false
+    }, 1000)
+}
 
 //~ Recupere le nom du PNJ a l'interaction 
 function getPNJName() {
@@ -506,7 +556,7 @@ function cutTileset(tileset, tileResolution = [0, 0], tilesetResolution = [1, 1]
 }
 
 
-
+//~ Trouve la categorie de l'item et le met dans la slot pour
 function getIndexOfItemCategory(itemCategory) {
 
     let index = null;
@@ -539,20 +589,32 @@ function getIndexOfItemCategory(itemCategory) {
 
 //~ Troc
 function troc(requis, gain) {
+    cursor('default')
+    textFont(pixelFont)
     let canTradeThisObject = false
 
     requis.every(objRequis => {
-        if (Inventory.includes(objRequis)) {
-            canTradeThisObject = true
-        } else {
-            canTradeThisObject = false
-            return false
-        }
+        Inventory.forEach(item => {
+            if(objRequis.category == "other"){
+                item = Inventory[2]
+            } else if (objRequis.category == "weapon") {
+                item = Inventory[0]
+            } else if (objRequis.category == "food") {
+                item = Inventory[1]
+            }
+            if (objRequis.name === item.name || item.category === "food") {
+                canTradeThisObject = true
+            } else {
+                canTradeThisObject = false
+                return false
+            }
+        });
+
     })
 
     if (canTradeThisObject) {
 
-        popUp("Voulez-vous vraiment échanger cet objet ?", "choice")
+        popUp("Voulez-vous vraiment \n échanger cet objet ?", "choice")
         if (playerAnswersYes) {
 
             requis.forEach(objRequis => {
@@ -567,7 +629,7 @@ function troc(requis, gain) {
             haveToTrade = false
         }
     } else {
-        popUp("Vous n'avez pas les objets requis !")
+        popUp("Vous n'avez pas \n les objets requis !")
     }
 
 }
@@ -576,37 +638,40 @@ function troc(requis, gain) {
 
 //~ Pop up
 function popUp(message, options = "info") {
+    cursor('default')
 
 
-
-    let interfacePopUpWidth = 400
-    let interfacePopUpHeight = 400
+    let interfacePopUpWidth = 66 * 5
+    let interfacePopUpHeight = 35 * 5
     let interfacePopUpX = (viewportDisplayWidth / 2) - (interfacePopUpWidth / 2)
     let interfacePopUpY = (viewportDisplayHeight / 2) - (interfacePopUpHeight / 2)
-    // let interfacePopUp = [interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight]
 
 
-    image(backgroundImageTalk, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
+    image(smallPopUp, interfacePopUpX, interfacePopUpY, interfacePopUpWidth, interfacePopUpHeight)
 
 
     if (options == "info") {
 
         waitingAnswer = true;
 
-        let buttonPopUpW = 150
-        let buttonPopUpH = 20
+        let buttonPopUpW = 75
+        let buttonPopUpH = 60
         let buttonPopUpX = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpW / 2)
-        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 1.3)
+        let buttonPopUpY = interfacePopUpY + (interfacePopUpHeight / 2)
         let textPopUpX = buttonPopUpX + (buttonPopUpW / 2)
 
         let buttonPopUp = [buttonPopUpX, buttonPopUpY, buttonPopUpW, buttonPopUpH]
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUp)
-        drawText("OK", 15, [textPopUpX, buttonPopUpY], [CENTER, BASELINE], [0, 0, 0])
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
+        if (buttonHover(buttonPopUp)) {
+            drawButton(buttonPopUp, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUp, smallButton, true, 255);
+        }
 
+        drawText("OK", 40, [textPopUpX, buttonPopUpY - 0.5], [CENTER, BASELINE], [0, 0, 0])
+
+        drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [119, 54, 51])
 
         if (buttonClicked(buttonPopUp)) {
             waitingAnswer = false
@@ -619,35 +684,43 @@ function popUp(message, options = "info") {
 
         waitingAnswer = true;
 
-        let buttonPopUpWYes = 150
-        let buttonPopUpHYes = 20
-        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWYes / 2)
-        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.6)
+
+        let textPopUpX = interfacePopUpX + (interfacePopUpWidth / 2)
+
+        let buttonPopUpWYes = 75
+        let buttonPopUpHYes = 60
+        let buttonPopUpXYes = interfacePopUpX + (interfacePopUpWidth / 5)
+        let buttonPopUpYYes = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXYes = buttonPopUpXYes + (buttonPopUpWYes / 2)
 
         let buttonPopUpYes = [buttonPopUpXYes, buttonPopUpYYes, buttonPopUpWYes, buttonPopUpHYes]
 
 
-        let buttonPopUpWNo = 150
-        let buttonPopUpHNo = 20
-        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 2) - (buttonPopUpWNo / 2)
-        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.4) + buttonPopUpHYes + 15
+        let buttonPopUpWNo = 75
+        let buttonPopUpHNo = 60
+        let buttonPopUpXNo = interfacePopUpX + (interfacePopUpWidth / 1.8)
+        let buttonPopUpYNo = interfacePopUpY + (interfacePopUpHeight / 1.9)
         let textPopUpXNo = buttonPopUpXNo + (buttonPopUpWNo / 2)
 
         let buttonPopUpNo = [buttonPopUpXNo, buttonPopUpYNo, buttonPopUpWNo, buttonPopUpHNo]
 
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUpYes)
-        drawText("YES", 15, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE] , [0, 0, 0])
-        //
+        if (buttonHover(buttonPopUpYes)) {
+            drawButton(buttonPopUpYes, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUpYes, smallButton, true, 255);
+        }
+        drawText("OUI", 40, [textPopUpXYes, buttonPopUpYYes], [CENTER, BASELINE], [0, 0, 0])
 
-        fill(128, 128, 128)
-        drawButton(buttonPopUpNo)
-        drawText("NO", 15, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
+        if (buttonHover(buttonPopUpNo)) {
+            drawButton(buttonPopUpNo, smallButtonHover, true, 255);
+        } else {
+            drawButton(buttonPopUpNo, smallButton, true, 255);
+        }
+        drawText("NON", 40, [textPopUpXNo, buttonPopUpYNo], [CENTER, BASELINE], [0, 0, 0])
 
 
-        drawText(message, 15, [interfacePopUpX, interfacePopUpY], [LEFT, BASELINE], [0, 0, 0])
+        drawText(message, 30, [textPopUpX, interfacePopUpY], [CENTER, BASELINE], [0, 0, 0])
 
         if (buttonClicked(buttonPopUpYes)) {
             playerAnswersYes = true
@@ -664,81 +737,113 @@ function popUp(message, options = "info") {
 }
 
 
+//~ Avoir la vitesse du joueur (stats)
 function getSpeed(seconds, meters) {
     const distanceEnKm = meters / 1000;
     const tempsEnHeures = seconds / 3600;
     const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
+    return Math.round(vitesseEnKmh / 2);
 }
 
 
-
+//~ Remettre a 0 les JSONS
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
-
-    //? Pas besoin de reload les json dont les donnees ne changent pas 
-    // allDoors = loadJSON("json/Doors.json");
-    // adminJSON = loadJSON("json/Admin.json");
-    // Houses = loadJSON("json/Houses.json");
     itemsJSON = loadJSON("json/Items.json");
-    // Maps = loadJSON("json/Maps.json");
-    // World = loadJSON("json/World.json");
 }
 
 
-function timeConversion(seconds) {
+//~ Convertie le temps en heure / min / secondes
+function timeConversion(seconds, mod = 0) {
     const heures = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secondes = seconds % 60;
 
-    const heuresFormatees = heures < 10 ? `${heures}` : `${heures}`;
-    const minutesFormatees = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const heuresFormatees = heures < 10 ? `0${heures}` : `${heures}`;
+    const minutesFormatees = minutes < 10 ? `0${minutes}` : `${minutes}`;
     const secondesFormatees = secondes < 10 ? `0${secondes}` : `${secondes}`;
 
-    return `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+
+    let returnValue = "";
+
+    switch (mod) {
+        case 0:
+            returnValue = `${heuresFormatees}h ${minutesFormatees}min et ${secondesFormatees}s`;
+            break;
+        case 1:
+            returnValue = `${heuresFormatees}:${minutesFormatees}:${secondesFormatees}`;
+            break;
+    }
+
+    return returnValue;
 }
 
-function getSpeed(seconds, meters) {
-    const distanceEnKm = meters / 1000;
-    const tempsEnHeures = seconds / 3600;
-    const vitesseEnKmh = distanceEnKm / tempsEnHeures;
-    return Math.round(vitesseEnKmh);
-}
 
-
-
+//~ Tremblement de la camera
 function shakeCamera(durationSeconds, forcePixels) {
     shakeDuration = durationSeconds * 60; // Convertit la durée en secondes en frames
     shakeForce = forcePixels;
 }
 
 
+//~ Ajoute l'item present
 function getCurrentItem() {
-    addItemToInventory(itemsJSON.ItemsOnTheFloor[currentItemPointing])
-    itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
-    currentItemPointing = ""
-    canGetItem = false
+    if (itemsJSON.ItemsOnTheFloor[currentItemPointing]) {
+        addItemToInventory(itemsJSON.Items[currentItemPointing], 1)
+        itemsJSON.ItemsOnTheFloor[currentItemPointing].shown = false;
+        currentItemPointing = ""
+
+    }
 }
 
-
-function resetJsons() {
-    ennemiesJSON = loadJSON("json/Ennemis.json");
-    pnjJSON = loadJSON("json/PNJ.json");
-
-    //? Pas besoin de reload les json dont les donnees ne changent pas 
-    // allDoors = loadJSON("json/Doors.json");
-    // adminJSON = loadJSON("json/Admin.json");
-    // Houses = loadJSON("json/Houses.json");
-    itemsJSON = loadJSON("json/Items.json");
-    // Maps = loadJSON("json/Maps.json");
-    // World = loadJSON("json/World.json");
-}
-
+//~ Retourn si l'inventaire est vide
 function inventoryIsEmpty(slot) {
     return Object.keys(slot).length === 0;
 }
 
+
+//~ Fonction de tp
+function tp(map = "") {
+
+    if(logged){
+
+        switch (map) {
+    
+            case "spawn":
+    
+                xStartWorld = 0
+                yStartWorld = -42
+    
+                break
+    
+    
+            case "foret":
+    
+                xStartWorld = -4410
+                yStartWorld = -1483
+    
+                break
+    
+            case "village":
+    
+                xStartWorld = -12301
+                yStartWorld = -1486
+    
+                break
+    
+    
+            case "citadelle":
+    
+                xStartWorld = -16206
+                yStartWorld = -1604
+    
+                break
+        }
+    }
+}
+
+//~ Initie les variables
 function initVariables() {
     //& Debug Mod
     debugMod = init_debugMod;
@@ -755,6 +860,7 @@ function initVariables() {
     //& Admins
     username = init_username;
     password = init_password;
+    logged = init_logged
 
 
     //& Camera
@@ -855,6 +961,7 @@ function initVariables() {
 
     //& Interfaces
     //~ Interfaces
+    canShowMessage = init_canShowMessage
     interactionWidth = init_interactionWidth;
     interactionHeight = init_interactionHeight;
 
@@ -866,6 +973,8 @@ function initVariables() {
     buttonWidthBIG = init_buttonWidthBIG;
     buttonHeightBIG = init_buttonHeightBIG;
 
+    toggleButtonColor = init_toggleButtonColor
+
     //~ Jeu
     inGame = init_inGame;
     gameIsPaused = init_gameIsPaused;
@@ -874,10 +983,14 @@ function initVariables() {
     //~ Parametres
     settingsPause = init_settingsPause;
 
+    //~ Statistiques
+    statsMenu = init_statsMenu
+
     //~ Barre de vie
     lifeBarSize = init_MargeBarVie;
     healthPlayer = init_healthPlayer;
     maxHealth = init_maxHealth;
+    heartSize = init_heartSize
     pressingKey = init_pressingKey;
     gettingHurt = init_gettingHurt;
     gettingHeal = init_gettingHeal;
@@ -888,10 +1001,11 @@ function initVariables() {
     Inventory[0] = init_Inventory[0];
     Inventory[1] = init_Inventory[1];
     Inventory[2] = init_Inventory[2];
+    
     widthSlot = init_WidthSlot;
     heightSlot = init_HeightSlot;
     slotX = init_slotX;
-    endInventory = init_endInventory;
+    hideInventory = init_endInventory;
     waitingButton = init_waitingButton;
 
     //~ Jauge quand on mange
@@ -908,21 +1022,16 @@ function initVariables() {
 
     //& Audio
     //~ Musique
-    musicButtonColor = init_ColorForRectMusic;
     musicEnabled = init_MusicIsActivate;
     canPlayMusic = init_YouCanPlayMusic;
 
     //~ Sons
-    soundButtonColor = init_ColorForRectSong;
-    soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
-    VoicesSongMarjo = init_VoicesSongMarjo
 
     dieSoundPlay = init_dieSoundPlay
     startGame = init_startGame
     startSoundPlay = init_startSoundPlay
-
 
 
     //& Evenements
@@ -959,6 +1068,10 @@ function initVariables() {
     //~ Mort
     playerDead = init_playerDead;
 
+
+    //~ END
+    gameIsEnd = init_gameIsEnd
+
     //~ Popups
     popUpShown = init_popUpShown;
     playerAnswersYes = init_playerAnswersYes;
@@ -967,6 +1080,7 @@ function initVariables() {
     endTheGameCredits = init_endTheGameCredits
     PositionCredits = init_PositionCredits
     speedCredits = init_speedCredits
+    creditsInHome = init_creditsInHome
 
 
     //& Statistiques
@@ -976,7 +1090,6 @@ function initVariables() {
     //& Items
     itemList = init_itemList;
     currentItemPointing = init_currentItemPointing
-    canGetItem = init_canGetItem
 
 
     //& Troc
@@ -988,7 +1101,7 @@ function initVariables() {
 
 
     //& FPS
-    fpsActivate = init_fpsActivate;
+    fpsEnabled = init_fpsEnabled;
     FPSButtonColor = init_FPSButtonColor;
 
 
@@ -997,7 +1110,6 @@ function initVariables() {
 
 
     //& Cinématiques
-    startCinematicPlaying = init_startCinematicPlaying;
     musicCinematic = init_musicCinematic;
 
 
@@ -1011,29 +1123,40 @@ function initVariables() {
     }
 
     //* Reset toutes les statistiques sauf le nombre de morts 
-    statistiques.distanceWalked = init_statistiques.distanceWalked
-    statistiques.totalJumpCount = init_statistiques.totalJumpCount
-    statistiques.mobsKilled = init_statistiques.mobsKilled
-    statistiques.damagesDones = init_statistiques.damagesDones
-    statistiques.damagesGet = init_statistiques.damagesGet
-    statistiques.healCount = init_statistiques.healCount
-    ////statistiques.deathCount = init_statistiques.deathCount
-    statistiques.timeSpentInGame = init_statistiques.timeSpentInGame
-    statistiques.playerSpeed = init_statistiques.playerSpeed
+    statistiques.distanceWalked = 0
+    statistiques.totalJumpCount = 0
+    statistiques.mobsKilled = 0
+    statistiques.damagesDones = 0
+    statistiques.damagesGet = 0
+    statistiques.healCount = 0
+    statistiques.timeSpentInGame = 0
+    statistiques.playerSpeed = 0
 
 
     tilesList = cutTileset(tileSet, [16, 16], [tileSet.width, tileSet.height])
     itemList = cutTileset(tilesetItems, [16, 16], [tilesetItems.width, tilesetItems.height])
     tileSetForTaverne = cutTileset(tileSetTaverne, [16, 16], [tileSetTaverne.width, tileSetTaverne.height])
+    tileSetForLabo = cutTileset(tileSetLabo, [16, 16], [tileSetLabo.width, tileSetLabo.height])
+
+
+    if (checkpointActivated){
+        addItemToInventory(itemsJSON.Items.sword_1, 1);
+        addItemToInventory(itemsJSON.Items.food_1, 2);
+        characterPositionX = 750
+        xStartWorld = -600
+    }else{
+        //& Player start with 3 apple
+        addItemToInventory(itemsJSON.Items.food_1, 3)
+    }
 
     resetJsons()
 
 }
 
 
-function aPNJCanTalk(){
+function aPNJCanTalk() {
     let canTalk = false
-    if (pnjJSON.PNJS){  
+    if (pnjJSON.PNJS) {
         Object.entries(pnjJSON.PNJS).forEach(pnj => {
             let pnjName = pnj[0]
             pnj = pnj[1]
@@ -1042,13 +1165,13 @@ function aPNJCanTalk(){
             }
         })
     }
-    
+
     return canTalk;
 }
 
-function aPNJCanTrade(){
+function aPNJCanTrade() {
     let canTrade = false
-    if (pnjJSON.PNJS){
+    if (pnjJSON.PNJS) {
         Object.entries(pnjJSON.PNJS).forEach(pnj => {
             let pnjName = pnj[0]
             pnj = pnj[1]
@@ -1057,6 +1180,6 @@ function aPNJCanTrade(){
             }
         })
     }
-    
+
     return canTrade;
 }

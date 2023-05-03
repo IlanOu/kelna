@@ -1,8 +1,8 @@
-//& Debug Mod
+//~ Debug Mod
 let debugMod;
 
 
-//& Moteur de jeu
+//~ Moteur de jeu
 let engineOne;
 let fpsLevel;
 
@@ -10,18 +10,22 @@ let fpsLevel;
 let killingBlocks;
 
 
-//& Admins
+//~ Admins
 let username;
 let password;
+let logged;
 
+//& Checkpoint start
+let checkpointActivated = false
 
-//& Camera
+//~ Camera
 let cameraShakeEnabled;
 
 let shakeDuration;
 let shakeForce;
 
-//~ ========= Mode SMOOTH ========= 
+
+//^ ========= Mode SMOOTH ========= 
 let smoothCamera;
 let smoothCameraSpeed;
 let cameraSpeedR;
@@ -32,13 +36,11 @@ let backgroundSpeed;
 let backgroundSmoothSpeed;
 
 
-//& Background
+//~ Background
 let backgroundX;
 
-
-
-//& Character
-//~ Textures / Outils du Personnage
+//~ Character
+//? Textures / Outils du Personnage
 let characterTextureList;
 let characterAnimationIndex;
 let characterAnimationFramePassed;
@@ -69,6 +71,8 @@ let characterHitting;
 let characterComboHitting;
 let characterComboHittingDouble;
 let lastHit;
+
+
 //? Saut
 let characterMass;
 let characterJumpHeight;
@@ -91,14 +95,14 @@ let dashTime;
 let dashForce;
 
 
-//& Animations
+//? Animations
 let animationSpeed;
 let textDialogSpeed;
 let annimationBeginY = 4 * 32;
 let annimationEndY = 5 * 32;
 
 
-//& Grille
+//~ Grille
 let rectWidth;
 let rectHeight;
 
@@ -110,13 +114,20 @@ let currentMap;
 let lastMap;
 
 
-//& Maisons
+//~ Maisons
 let xStartHouse;
 let yStartHouse;
 
 
-//& Interfaces
+//^ Interfaces
+
+//~ Font
+let classicFont;
+let pixelFont;
+
 //~ Interfaces
+let canShowMessage;
+
 let interactionWidth;
 let interactionHeight;
 
@@ -128,33 +139,65 @@ let buttonHeightClassic;
 let buttonWidthBIG;
 let buttonHeightBIG;
 
-//~ Jeu
+let toggleButtonColor;
+
+let arrowTroc;
+
+let longButton
+let longButtonHover
+let popUpButton
+let popUpButtonHover
+let checkedLongButtonHover
+let checkedLongButton
+let homeButton
+
+//? Buttons UI
+
+let buttonZ
+let buttonQ
+let buttonS
+let buttonD
+let buttonE
+let buttonF
+let buttonSpace
+
+let site = "https://readymag.com/u2730643025/4237179/"
+let logo;
+
+
+//? Jeu
 let inGame;
 let gameIsPaused;
 let gameIsPlaying;
 
-//~ Parametres
+//? Parametres
 let settingsPause;
 
-//~ Barre de vie
+//? Statistiques
+let statsMenu;
+
+//? Barre de vie
 let lifeBarSize;
 let healthPlayer;
 let maxHealth;
+let heartSize;
 let pressingKey;
 let gettingHurt;
 let gettingHeal;
 let addHeart;
 let removeHeart;
+let GameHeartBlack;
+let GameHeart
 
-//~ Inventaire
+//? Inventaire
 let Inventory = [];
 let widthSlot;
 let heightSlot;
 let slotX;
-let endInventory;
+let hideInventory;
 let waitingButton;
 
-//~ Jauge quand on mange
+//? Jauge quand on mange
 let characterIsEating;
 
 let gaugeSize;
@@ -166,15 +209,14 @@ let bottomGaugeLevel;
 let leftGaugeLevel;
 
 
-//& Audio
-//~ Musique
-let musicButtonColor;
+//^ Audio
+
+//? Musique
 let musicEnabled;
 let canPlayMusic;
 
-//~ Sons
-let soundButtonColor;
-let soundEnabled;
+//? Sons
+let soundEnabled = true;
 let canPlaySong;
 
 
@@ -188,10 +230,24 @@ let VoiceStartSong;
 let startGame;
 let startSoundPlay;
 
+let soundWalk;
+let soundJump;
+let soundHit;
+let soundDie;
+let soundSwordHit1;
+let soundSwordHit2;
+let soundSwordHit3;
+let soundClick;
+let soundPNJ;
 
 
-//& Evenements
-//~ Touches
+
+
+let buttonClickSound = false
+
+//^ Evenements
+
+//? Touches
 let Pressing;
 let spaceKeyIsPressed;
 let rightArrowPressed;
@@ -205,7 +261,7 @@ let leftClickWasPressed;
 let canEnterInHouse;
 let canGoOutTheHouse;
 
-//~ PNJ
+//? PNJ
 let canInteractWithPNJ;
 let PressInteractPNJ;
 let canTalkWithPNJ;
@@ -213,7 +269,9 @@ let PressTalkPNJ;
 let currentTextSpeaking;
 let currentIndexTextSpeaking;
 
-//~  Portes
+let skipTalk = true
+
+//?  Portes
 let behindThisDoor;
 let behindThisDoorHouse;
 let engine1WidthDoors;
@@ -221,10 +279,10 @@ let engine1HeightDoors;
 let engine2WidthDoors;
 let engine2HeightDoors;
 
-//~ Mort
+//? Mort
 let playerDead;
 
-//~ Popups
+//? Popups
 let popUpShown;
 let playerAnswersYes;
 
@@ -232,18 +290,22 @@ let playerAnswersYes;
 let endTheGameCredits;
 let PositionCredits;
 let speedCredits;
+let creditsInHome;
 
 
-//& Statistiques
+//~ Fin du jeu
+let gameIsEnd;
+
+
+//~ Statistiques
 let numberOfSteps;
 
 
-//& Items
+//~ Items
 let itemList;
 let currentItemPointing;
-let canGetItem;
 
-//& Troc
+//~ Troc
 let waitingAnswer;
 let haveToTrade;
 let slotSize;
@@ -251,47 +313,55 @@ let itemSize;
 let stackSize;
 
 
-//& FPS
-let fpsActivate;
+//~ FPS
+let fpsEnabled;
 let FPSButtonColor;
 
 
-//& Physique
+//~ Physique
 let gravityForce;
 
 
-//& Cinématiques
-let startCinematicPlaying;
+//~ Cinématiques
+let startCinematicPlaying = true;
 let musicCinematic;
 
 
-
-//& Textures
+//~ Textures
 let sky;
 let tileSet;
 let tileSetForTaverne;
 let tileSetTaverne;
+let tileSetForLabo;
+let tileSetLabo;
 let characterTexture_Dash;
 
 let backgroundImage;
 let backgroundImageDistant;
 let backgroundImageClose;
 
+let backgroundImageUI;
+
 let GUITroc;
 let GUIButton;
 let GUIStart;
 let marjoTexture;
 let charleTexture;
+let crazyTexture;
+let innkeeperTexture;
+let wizardTexture;
 let malade1Sprite;
 let malade2Sprite;
 let pointEnnemis;
 let tilesetItems;
 let backgroundImageTroc;
 let slot;
-let backgroundImageTalk;
+let smallPopUp;
 
+let requiredSlotSword;
+let requiredSlotFoods;
 
-//& JSONS
+//~ JSONS
 let adminJSON;
 let allDoors;
 let ennemiesJSON;
@@ -305,10 +375,12 @@ let World;
 let creditsJSON;
 
 
-//& Variables vides
+//~ Variables vides
 let getTrade;
 let fps;
 let StartCinematic;
 let statistiques;
 let tilesList;
 let gameIntroductionVideo;
+let gameEndVideo;
+let hideUI = false;

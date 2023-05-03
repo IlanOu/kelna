@@ -12,7 +12,7 @@
             "itemNumber": 0,
             "degat": "2",
             "category": "weapon",
-            "material":"iron"
+            "material": "iron"
         },
         "sword_3": {
             "name": "sword_3",
@@ -27,6 +27,30 @@
             "itemNumber": 3,
             "amount": 0,
             "category": "food"
+        },
+        "food_2": {
+            "name": "food_2",
+            "healAmount": 2,
+            "itemNumber": 3,
+            "amount": 0,
+            "category": "food"
+        },
+        "mushroom_1": {
+            "name": "mushroom_1",
+            "healAmount": 2,
+            "itemNumber": 4,
+            "amount": 0,
+            "category": "other"
+        },
+        "kelna": {
+            "name": "kelna",
+            "itemNumber": 5,
+            "category": "other"
+        },
+        "coin": {
+            "name": "coin",
+            "itemNumber": 6,
+            "category": "other"
         }
     },
     "ItemsOnTheFloor": {
@@ -34,22 +58,46 @@
         "mushroom_1": {
             "name": "mushroom_1",
             "category": "other",
-            "itemNumber": 1,
-            "location": "C-3",
-            "x" : 1,
-            "y": 2,
+            "itemNumber": 4,
+            "location": "C-9",
+            "x": 5,
+            "y": 25,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
         },
-        "mushroom_2": {
-            "name": "mushroom_2",
+        "coin": {
+            "name": "coin",
             "category": "other",
-            "itemNumber": 1,
-            "location": "C-4",
-            "x" : 0,
-            "y": 7,
+            "itemNumber": 6,
+            "location": "C-9",
+            "x": 4,
+            "y": 12,
             "detectDist": 1,
-            "shown": true
+            "shown": true,
+            "canGetItem": true
+        },
+        "food_1": {
+            "name": "food_1",
+            "category": "food",
+            "itemNumber": 3,
+            "location": "D-9",
+            "x": 15,
+            "y": 6,
+            "detectDist": 1,
+            "shown": true,
+            "canGetItem": true
+        },
+        "food_2": {
+            "name": "food_2",
+            "category": "food",
+            "itemNumber": 3,
+            "location": "C-13",
+            "x": 2,
+            "y": 3,
+            "detectDist": 1,
+            "shown": true,
+            "canGetItem": true
         }
     }
 }

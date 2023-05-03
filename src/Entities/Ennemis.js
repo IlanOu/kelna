@@ -4,13 +4,11 @@
 function MobManager() {
   // * Draw des Mobs en EXTERIEUR
   if (engineOne) {
-    //// mob(ennemiesJSON.Ennemis.Malade1);
-    //// mob(ennemiesJSON.Ennemis.Malade2);
-      
-    // Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
-    //     mob(Mobs[1]);          
-    // })
-    
+    if(ennemiesJSON.Ennemis){
+      Object.entries(ennemiesJSON.Ennemis).forEach((Mobs) => {
+        mob(Mobs[1]);
+      })
+    }  
   }
 }
 
@@ -20,16 +18,21 @@ function MobManager() {
 
 function mob(Mobs) {
   
+  
   //? Le mob n'est plus calculé quand il n'est pas affiché
   let mapsToCheckColliders = getMapsToCheck(characterPositionX, characterPositionY)
   let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  
+
+  let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
+  let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
+
+
   const found = mapsToCheckColliders.some(arr => arr.every((val, i) => val === positions[i]));
 
-  if ((Mobs.life > 0 || !Mobs.isDead) && found) {
+  if ((Mobs.life > 0 || !Mobs.isDead)) { //&& found
     //* Initialisation des variables
 
-    let positionsStart = getPositionAt(Mobs.mapName, Mobs.globalStartX, Mobs.globalStartY)
-    let positionsEnd = getPositionAt(Mobs.mapName, Mobs.globalStartX + Mobs.distance, 0)
 
     let MobStart = positionsStart.pixelX;
     let MobEnd = positionsEnd.pixelX;
@@ -49,107 +52,115 @@ function mob(Mobs) {
 
     let mapsToCheck = getMapsToCheck(characterPositionX, characterPositionY);
 
-    //* Ajout de la gravité au Mob
-    let gravityReturns = getPositionWithGravity(
-      MobsY,
-      MobsVelocityY,
-      gravityForce,
-      MobsMass
-    );
-    MobsY = gravityReturns[0];
-    MobsVelocityY = gravityReturns[1];
 
-    let collide = false;
-    //* Ajoute les collisions pour toute les maps autour du perso
-    for (let i = 0; i < mapsToCheck.length; i++) {
-      let currentMapToCheck = mapsToCheck[i];
-      let currentMapToCheckName =
-        World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
 
-      //? Récupère la couche des collisions sur la map
-      let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
 
-      //? Pour chaque carré dans le tableau
-      for (let row = 0; row < currentMapTableColliders.length; row++) {
-        for (
-          let column = 0; column < currentMapTableColliders[row].length; column++
-        ) {
-          //? Lui donner une collision
-          let thisObject = currentMapTableColliders[row][column];
-
-          let thisObjectX =
-            rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
-            (xStartWorld + rectWidth * column);
-          let thisObjectY =
-            rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
-            (yStartWorld + rectHeight * row);
-
-          //? Collisions
-          if (thisObject > 0) {
-            [
-              MobsX,
-              MobsY,
-              MobsVelocityY,
-              MobsJumpCount,
-              MobsIsJumping,
-              MobsHaveToJump,
-            ] = handleCollisionMobs(
-              MobsX,
-              MobsY,
-              MobsWidth,
-              MobsHeight,
-              Mobs.direction,
-              thisObjectX,
-              thisObjectY,
-              rectWidth,
-              rectHeight,
-              MobsVelocityY,
-              MobsJumpCount,
-              MobsIsJumping
-            );
-
-            if (MobsHaveToJump) {
-              collide = true;
+    if (entityMustBeShown(Mobs)){ //! IMPORTANT Régler le probleme du MOB qui despawn 
+      
+      
+      //* Ajout de la gravité au Mob
+      let gravityReturns = getPositionWithGravity(
+        MobsY,
+        MobsVelocityY,
+        gravityForce,
+        MobsMass
+      );
+      MobsY = gravityReturns[0];
+      MobsVelocityY = gravityReturns[1];
+  
+      let collide = false;
+      //* Ajoute les collisions pour toute les maps autour du perso
+      for (let i = 0; i < mapsToCheck.length; i++) {
+        let currentMapToCheck = mapsToCheck[i];
+        let currentMapToCheckName =
+          World.worldsMap[currentMapToCheck[1]][currentMapToCheck[0]];
+  
+        //? Récupère la couche des collisions sur la map
+        let currentMapTableColliders = Maps[currentMapToCheckName].layers[1];
+  
+        //? Pour chaque carré dans le tableau
+        for (let row = 0; row < currentMapTableColliders.length; row++) {
+          for (
+            let column = 0; column < currentMapTableColliders[row].length; column++
+          ) {
+            //? Lui donner une collision
+            let thisObject = currentMapTableColliders[row][column];
+  
+            let thisObjectX =
+              rectWidth * Maps.numberOfRow * currentMapToCheck[0] +
+              (xStartWorld + rectWidth * column);
+            let thisObjectY =
+              rectHeight * Maps.numberOfColumns * currentMapToCheck[1] +
+              (yStartWorld + rectHeight * row);
+  
+            //? Collisions
+            if (thisObject > 0) {
+              [
+                MobsX,
+                MobsY,
+                MobsVelocityY,
+                MobsJumpCount,
+                MobsIsJumping,
+                MobsHaveToJump,
+              ] = handleCollisionMobs(
+                MobsX,
+                MobsY,
+                MobsWidth,
+                MobsHeight,
+                Mobs.direction,
+                thisObjectX,
+                thisObjectY,
+                rectWidth,
+                rectHeight,
+                MobsVelocityY,
+                MobsJumpCount,
+                MobsIsJumping
+              );
+  
+              if (MobsHaveToJump) {
+                collide = true;
+              }
             }
           }
         }
       }
-    }
-    //* Ajouter le saut au mob
-    if (collide) {
-      if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
-        if (!MobsIsJumping && MobsJumpCount < 1) {
-          let jumpReturns = addJump(
-            MobsY,
-            characterJumpHeight,
-            MobsVelocityY,
-            gravityForce
-          );
-
-          MobsY = jumpReturns[0];
-          MobsVelocityY = jumpReturns[1];
-          MobsIsJumping = true;
-          MobsJumpCount += 1;
-          Mobs.movement = "jump";
-        } else {
-          MobsJumpCount = 0;
+      //* Ajouter le saut au mob
+      if (collide) {
+        if (Mobs.isFollowing || MobsX > MobEnd || MobsX < MobStart) {
+          if (!MobsIsJumping && MobsJumpCount < 1) {
+            let jumpReturns = addJump(
+              MobsY,
+              characterJumpHeight,
+              MobsVelocityY,
+              gravityForce
+            );
+  
+            MobsY = jumpReturns[0];
+            MobsVelocityY = jumpReturns[1];
+            MobsIsJumping = true;
+            MobsJumpCount += 1;
+            Mobs.movement = "jump";
+          } else {
+            MobsJumpCount = 0;
+          }
         }
       }
+  
+      //* Retourner les variables
+      Mobs.x = MobsX;
+      Mobs.y = MobsY;
+      Mobs.velocityY = MobsVelocityY;
+      Mobs.isJumping = MobsIsJumping;
+      Mobs.jumpCount = MobsJumpCount;
+  
+      Mobs.xStart = MobStart;
+      Mobs.xEnd = MobEnd;
+      Mobs.haveToJump = collide;
+  
+      //* Dessiner le Mob
+      mobMovements(Mobs);
     }
 
-    //* Retourner les variables
-    Mobs.x = MobsX;
-    Mobs.y = MobsY;
-    Mobs.velocityY = MobsVelocityY;
-    Mobs.isJumping = MobsIsJumping;
-    Mobs.jumpCount = MobsJumpCount;
-
-    Mobs.xStart = MobStart;
-    Mobs.xEnd = MobEnd;
-    Mobs.haveToJump = collide;
-
-    //* Dessiner le Mob
-    mobMovements(Mobs);
   }
 }
 
@@ -158,13 +169,12 @@ function mob(Mobs) {
 //^ /* -------------------------------------------------------------------------- */
 let mobMovements = (Mobs) => {
   //* Variables positions Mobs
-  let CurrentX = Mobs.x;
-  let MobY = Mobs.y;
+  Mobs.lastMapName = Mobs.mapName
 
   //* Variables Collisions / HitBox Mobs
   let MobBoundingBox = expandRect(
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     Mobs.detectDistX,
@@ -173,8 +183,8 @@ let mobMovements = (Mobs) => {
 
   //* Quand le mob s'arrête ?
   let MobLittleBoundingBox = expandRect(
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     1,
@@ -212,28 +222,52 @@ let mobMovements = (Mobs) => {
     //? Afficher un !
     if (Mobs.isAThreat) {
       fill(255, 0, 0);
-      drawKeyAt("!", CurrentX, MobY);
+      drawKeyAt("!", Mobs.x, Mobs.y);
     }
     Mobs.movement = "idle";
   } else {
-    if (Mobs.seePlayer) {
-      followPlayer(Mobs);
-      lookThePlayer(Mobs);
+    
 
-      //? Afficher un !
-      if (Mobs.isAThreat) {
-        fill(255, 0, 0);
-        drawKeyAt("!", CurrentX, MobY);
+    if (Mobs.movement != "die"){
+      if (Mobs.seePlayer) {
+        followPlayer(Mobs);
+        lookThePlayer(Mobs);
+  
+        //? Afficher un !
+        if (Mobs.isAThreat) {
+          fill(255, 0, 0);
+          drawKeyAt("!", Mobs.x, Mobs.y);
+        }
+  
+        //& Changer la map en fonction de sa position
+        let positions = findIndexOfPositionIn2dArray(Mobs.x, Mobs.y, World.worldsMap, rectWidth * Maps.numberOfRow, rectHeight * Maps.numberOfColumns)
+  
+        
+        Mobs.mapName = World.worldsMap[positions[1]][positions[0]]
+        
+        if (Mobs.lastMapName != Mobs.mapName){
+          
+          
+          if (Mobs.direction == "right"){
+            Mobs.stepCount -= rectWidth * Maps.numberOfRow //? 1320 
+            
+          }else{
+            Mobs.stepCount += rectWidth * Maps.numberOfRow //? 1320 
+            
+          }
+        }
+  
+        
+      } else {
+        doRound(Mobs);
       }
-    } else {
-      doRound(Mobs);
     }
   }
 
   //* Si le mob est une menace (s'il peut t'attaquer)
   if (Mobs.isAThreat) {
     let characterCenterX = characterPositionX;
-    let mobsCenterX = CurrentX + Mobs.width / 2;
+    let mobsCenterX = Mobs.x + Mobs.width / 2;
 
 
     if (characterComboHitting && lastHit == "2"){
@@ -267,7 +301,7 @@ let mobMovements = (Mobs) => {
           Mobs.indexFrame = 0
           Mobs.life -= Inventory[0].degat;
           Mobs.haveBeenHit = true;
-          statistiques.damagesDones += Inventory[0].degat
+          statistiques.damagesDones += parseInt(Inventory[0].degat)
         }
       }
     }
@@ -288,9 +322,9 @@ let mobMovements = (Mobs) => {
     }
   }
 
-  //~ -------------------------------------------------------------------------
-  //~                          Attaquer le joueur                              
-  //~ -------------------------------------------------------------------------
+  //* -------------------------------------------------------------------------
+  //*                          Attaquer le joueur                              
+  //* -------------------------------------------------------------------------
 
   let mobAttacking = false;
 
@@ -301,8 +335,10 @@ let mobMovements = (Mobs) => {
         //? Attaquer toutes les Mobs.attackInterval secondes
         if (millis() - Mobs.lastAttackTime > Mobs.attackInterval * 1000) {
           Mobs.lastAttackTime = millis();
-          healthPlayer -= Mobs.damages
-          statistiques.damagesGet += Mobs.damages
+          if (!logged){
+            healthPlayer -= Mobs.damages
+            statistiques.damagesGet += Mobs.damages
+          }
           shakeCamera(0.25, Mobs.damages/2)
           Mobs.indexFrame = 3
           
@@ -345,8 +381,8 @@ let mobMovements = (Mobs) => {
   //* Afficher le Mob
   animationMobs(
     Mobs,
-    CurrentX,
-    MobY,
+    Mobs.x,
+    Mobs.y,
     Mobs.width,
     Mobs.height,
     Mobs.direction,
@@ -371,14 +407,12 @@ function animationMobs(
 ) {
   CurrentMob.lastMovement = movement;
 
-  image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
-
   let timer = round(millis() / animationSpeed) % 2;
 
   let MobTexturesList = [];
   //~ Changer d'animation en fonction du type
 
-  //& Selectionner la bonne spritesheet en fonction du type de mob
+  //? Selectionner la bonne spritesheet en fonction du type de mob
   let currentSpriteSheet;
   switch (CurrentMob.type) {
     case "Malade1":
@@ -390,7 +424,7 @@ function animationMobs(
       break;
   }
 
-  //& Selectionner la bonne ligne en fonction du mouvement
+  //? Selectionner la bonne ligne en fonction du mouvement
   switch (movement) {
     case "walk":
       for (let y = 0; y < (1 * 32); y += 32) {
