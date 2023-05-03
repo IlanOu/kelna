@@ -109,7 +109,7 @@ function preload() {
 
   //? Cinématiques
   gameIntroductionVideo = createVideo("assets/cinematic/cinematicGameKelna.MOV");
-  gameEndVideo = createVideo("assets/cinematic/cinematicEndGameKelna.mp4");
+  gameEndVideo = createVideo("assets/cinematic/cinematicEndGameKelna.MOV");
 
 
   //? Music
