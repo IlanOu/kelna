@@ -45,11 +45,11 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Ça va ça va. Écoute Henri, Charles ma dis de venir te voir car tu as peut-être quelque chose pour moi.",
+          "text": "Yvo : Ça va ça va. Écoute Henri, Charles m'a dit de venir te voir car tu as peut-être quelque chose pour moi.",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Henri : Et tu cherche quoi exactement ?",
+          "text": "Henri : Et tu cherches quoi exactement ?",
           "itemsNameRequired": ["none"]
         },
         {
@@ -57,7 +57,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Henri : Oui, j'ai une épée en bois vieille de 20 ans mais elle pourra toujours te servir...",
+          "text": "Henri : Oui, j'ai une vieille épée en bois, elle pourra sûrement te servir...",
           "itemsNameRequired": ["none"]
         },
         {
@@ -137,7 +137,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Charles : Mais, es-tu capable d'aller chercher cette sois disante plante légendaire Kelna ?",
+          "text": "Charles : Mais, es-tu capable d'aller chercher cette fameuse plante légendaire Kelna ?",
           "itemsNameRequired": ["none"]
         },
         {
@@ -145,7 +145,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Charles : Bien... Va voir le tavernier il a peut-être de quoi t'aider.",
+          "text": "Charles : Bien... Va voir le tavernier, il a peut-être de quoi t'aider.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -153,7 +153,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Charles : Sauve nous Yvo !",
+          "text": "Charles : Sauves nous Yvo !",
           "itemsNameRequired": ["none"]
         }
       ]
@@ -198,7 +198,7 @@
 
       "step": 0,
       "discussions": [{
-          "text": "Roberto : Oh bonjour, dite je peux vous déranger 5 minutes ?",
+          "text": "Roberto : Oh bonjour ! Dites, je peux vous déranger 5 minutes ?",
           "itemsNameRequired": ["none"]
         },
         {
@@ -222,7 +222,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Roberto : N'oubliez pas, il se trouve au fond et ne mourrez pas hein...",
+          "text": "Roberto : N'oubliez pas, il se trouve au fond et surtout ne mourrez pas !",
           "itemsNameRequired": ["none"]
         }
       ],
@@ -282,7 +282,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auquel tu as dû faire face.",
+          "text": "Sorcier Fou : Comment je connais ton nom ? C'est simple, j'ai vu tout ton parcours, les épreuves auxquelles tu as dû faire face.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -290,7 +290,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : Malgré les périples, les personnes qui t'étaient chères qui eux-mêmes était infectée tu as su faire face.",
+          "text": "Sorcier Fou : Malgré ton long périple, tu as su faire face à la difficulté.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -298,11 +298,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Sorcier Fou : si tu échange.",
-          "itemsNameRequired": ["none"]
-        },
-        {
-          "text": "Yvo : (J'y suis enfin !)",
+          "text": "Sorcier Fou : Si tu m'échanges...",
           "itemsNameRequired": ["none"]
         }
       ],
@@ -354,23 +350,23 @@
 
       "step": 0,
       "discussions": [{
-          "text": "Marjo : Notre belle contrée détruite par cet infeste maladie...",
+          "text": "Marjo : Notre belle contrée est détruite par cette infeste maladie...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Marjo : Je suis en plein cauchemar hein ? je rêve je suis en train de dormir nan ?",
+          "text": "Marjo : Je suis en plein cauchemar ? Je rêve, je suis en train de dormir non ?",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Yvo : Je ne crois que non Marjo...",
+          "text": "Yvo : Je crain que non Marjo...",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Marjo : Je peux même pas rentrer dans ma tente au-dessus de l'arbre avec tous ces infesté partout....",
+          "text": "Marjo : Je ne peux même pas rentrer dans ma tente au-dessus de l'arbre avec tout ces infectés partout....",
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "Marjo : Aide nous Yvo...",
+          "text": "Marjo : Aides-nous Yvo...",
           "itemsNameRequired": ["none"]
         }
       ]
@@ -426,10 +422,6 @@
         {
           "text": "Sarah : J'ai besoin d'une pièce, en échange je te donnerais un objet que tu ne refuseras pas !",
           "itemsNameRequired": ["none"]
-        },
-        {
-          "text": "Yvo : (elle est vraiment bizarre...)",
-          "itemsNameRequired": ["none"]
         }
       ],
 
@@ -480,7 +472,7 @@
       "step": 0,
       "discussions": [{
 
-          "text": "??? : Aidez moi s’il vous plait… je souffre atrocement, je ne sais plus quoi faire.",
+          "text": "??? : Aidez-moi s’il vous plait… Je souffre atrocement, je ne sais plus quoi faire.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -534,7 +526,7 @@
       "step": 0,
       "discussions": [{
 
-          "text": "??? : Eh eh vous revenez en arriere c'est trop dangereux.",
+          "text": "??? : Hé, vous ! Revenez en arrière c'est trop dangereux par ici.",
           "itemsNameRequired": ["none"]
         },
         {
@@ -542,7 +534,7 @@
           "itemsNameRequired": ["none"]
         },
         {
-          "text": "??? : Je suis pas le seul infecté il vous reste une derniere chance d'etre en vie...",
+          "text": "??? : Je ne suis pas le seul infecté, il vous reste encore une chance de rester en vie...",
           "itemsNameRequired": ["none"]
         },
         {
