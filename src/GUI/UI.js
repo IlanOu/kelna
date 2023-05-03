@@ -303,7 +303,7 @@ function drawPauseMenu() {
   //? Bouton Retour au Menu
   let buttonExitW = widthButtonPause;
   let buttonExitH = fontSizePause;
-  let buttonExitX = centerRightPage //interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
+  let buttonExitX = centerRightPage 
   let buttonExitY = centerYPage + marginButton;
   let textExitX = buttonExitX
   let buttonExit = [

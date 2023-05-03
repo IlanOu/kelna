@@ -58,6 +58,16 @@ function findIndexOfPositionIn2dArray(posX, posY, array, ArrayWidth, ArrayHeight
 
 
 
+
+//~ Dessine les touches pour les interactions
+function drawKeyAt(key, positionX, positionY, haveBackground = false) {
+    image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
+}
+
+
+
+
+
 //~ Chercher un tableau dans un tableau 2D
 function entityMustBeShown(mob) {
 
@@ -175,22 +185,6 @@ function DieGameVoice() {
     }
 }
 
-
-//~ Joue des voix de PNJ
-function pnjGameVoice() {
-    /*
-    if (soundEnabled) {
-        let indexSong = Math.floor(Math.random() * soundPNJ.length);
-        if (!soundPNJ[indexSong].isPlaying()) {
-            if (aPNJCanTalk() || aPNJCanTrade()) {
-                soundPNJ[indexSong].play()
-            } else {
-                soundPNJ[indexSong].pause()
-            }
-        }
-    }
-    */
-}
 
 
 
@@ -440,35 +434,6 @@ function drawKey(key) {
 
     fill(255)
     drawButton(keyBackground, buttonE)
-    // drawText(key, 20, textKey, [CENTER, BASELINE])
-
-}
-
-
-//~ Dessine les touches pour les interactions
-function drawKeyAt(key, positionX, positionY, haveBackground = false) {
-    /*let keyBackground = [(positionX),
-        positionY - 50,
-        interactionWidth,
-        interactionHeight
-    ]
-
-    let textKey = [positionX + (keyBackground[2] / 2),
-        positionY - 50 + (keyBackground[3] / 8)
-    ]
-
-    if (haveBackground) {
-        drawButton(keyBackground, undefined, false)
-    }
-
-    if (key == "!") {
-        drawText(key, 30, textKey, [CENTER, BASELINE], [255, 0, 0])
-
-    } else {
-        drawText(key, 20, textKey, [CENTER, BASELINE], [0, 0, 0])
-    } */
-
-    image(pointEnnemis, positionX + 15, positionY - 52, 50, 50);
 
 }
 
@@ -785,14 +750,7 @@ function getSpeed(seconds, meters) {
 function resetJsons() {
     ennemiesJSON = loadJSON("json/Ennemis.json");
     pnjJSON = loadJSON("json/PNJ.json");
-
-    //? Pas besoin de reload les json dont les donnees ne changent pas 
-    // allDoors = loadJSON("json/Doors.json");
-    // adminJSON = loadJSON("json/Admin.json");
-    // Houses = loadJSON("json/Houses.json");
     itemsJSON = loadJSON("json/Items.json");
-    // Maps = loadJSON("json/Maps.json");
-    // World = loadJSON("json/World.json");
 }
 
 
@@ -848,38 +806,40 @@ function inventoryIsEmpty(slot) {
 //~ Fonction de tp
 function tp(map = "") {
 
+    if(logged){
 
-    switch (map) {
-
-        case "spawn":
-
-            xStartWorld = 0
-            yStartWorld = -42
-
-            break
-
-
-        case "foret":
-
-            xStartWorld = -4410
-            yStartWorld = -1483
-
-            break
-
-        case "village":
-
-            xStartWorld = -12301
-            yStartWorld = -1486
-
-            break
-
-
-        case "citadelle":
-
-            xStartWorld = -16206
-            yStartWorld = -1604
-
-            break
+        switch (map) {
+    
+            case "spawn":
+    
+                xStartWorld = 0
+                yStartWorld = -42
+    
+                break
+    
+    
+            case "foret":
+    
+                xStartWorld = -4410
+                yStartWorld = -1483
+    
+                break
+    
+            case "village":
+    
+                xStartWorld = -12301
+                yStartWorld = -1486
+    
+                break
+    
+    
+            case "citadelle":
+    
+                xStartWorld = -16206
+                yStartWorld = -1604
+    
+                break
+        }
     }
 }
 
@@ -1066,7 +1026,6 @@ function initVariables() {
     canPlayMusic = init_YouCanPlayMusic;
 
     //~ Sons
-    //soundEnabled = init_SongIsActivate;
     canPlaySong = init_YouCanPlaySong;
 
 
@@ -1170,7 +1129,6 @@ function initVariables() {
     statistiques.damagesDones = 0
     statistiques.damagesGet = 0
     statistiques.healCount = 0
-    ////statistiques.deathCount = init_statistiques.deathCount
     statistiques.timeSpentInGame = 0
     statistiques.playerSpeed = 0
 

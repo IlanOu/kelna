@@ -43,7 +43,6 @@ function keyPressed() {
     if (aPNJCanTrade()) {
         //? Touche E
         if (keyCode == 69) {
-            pnjGameVoice()
             PressInteractPNJ = !PressInteractPNJ
         }
     }
@@ -51,7 +50,6 @@ function keyPressed() {
     if (aPNJCanTalk()) {
         //? Touche E
         if (keyCode == 69) {
-            pnjGameVoice()
             if (!PressTalkPNJ){
                 PressTalkPNJ = true
             }else{
@@ -64,14 +62,14 @@ function keyPressed() {
     if (keyCode == 69 && engineOne) {
         //! Récupérer l'item
         if (itemsJSON.ItemsOnTheFloor) {
-            Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {  //Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => {
+            Object.entries(itemsJSON.ItemsOnTheFloor).forEach((item) => { 
                 item = item[1]
                 if (item.canGetItem) {
                     if (Inventory[getIndexOfItemCategory(item.category)].category && item.category != "food") {
                         tempMessage()
                     } else {
                         if (item.category == "food"){
-                            if (Inventory[getIndexOfItemCategory(item.category)].amount < stackSize){
+                            if (Inventory[getIndexOfItemCategory(item.category)].amount < stackSize || Object.keys(Inventory[getIndexOfItemCategory(item.category)]).length == 0) {
                                 getCurrentItem()
                             }
                         }else{
