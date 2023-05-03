@@ -5,8 +5,17 @@ function playStartCinematic() {
     fill(255)
     noStroke(0)
     textSize(15)
-    text("Passer -> ECHAP", 50, 50)
     leftClickPressed = false;
+    
+    
+    if (!gameIntroductionVideo.elt.currentTime){
+        textSize(20)
+        textAlign(CENTER, BASELINE)
+        text("Cliquez pour jouer !", viewportDisplayWidth/2, viewportDisplayHeight/2)
+    }else{
+        textAlign(LEFT, BASELINE)
+        text("Passer > ECHAP", 50, 50)
+    }
 }
 
 //~ Si la cinematique est terminé
@@ -20,7 +29,6 @@ function videoEnded() {
 }
 
 
-
 //~ Lancement de la cinematique de fin de jeu
 function playEndCinematic() {
     musicGame.pause()
@@ -31,9 +39,9 @@ function playEndCinematic() {
 }
 
 function checkEndCredits() {
-    if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
-        gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
+    if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits && !statsMenu) {
         gameEndVideo.play();
+        gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
     }
 }
 

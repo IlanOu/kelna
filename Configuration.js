@@ -327,7 +327,6 @@ let startCinematicPlaying = true;
 let musicCinematic;
 
 
-
 //~ Textures
 let sky;
 let tileSet;

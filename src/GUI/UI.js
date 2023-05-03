@@ -303,7 +303,7 @@ function drawPauseMenu() {
   //? Bouton Retour au Menu
   let buttonExitW = widthButtonPause;
   let buttonExitH = fontSizePause;
-  let buttonExitX = centerRightPage 
+  let buttonExitX = centerRightPage //interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
   let buttonExitY = centerYPage + marginButton;
   let textExitX = buttonExitX
   let buttonExit = [
@@ -602,7 +602,7 @@ function drawDeath() {
   ];
 
 
-  let buttonExitW = 150;
+  let buttonExitW = 200;
   let buttonExitH = 100;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
@@ -811,6 +811,8 @@ function drawStats() {
     leftClickPressed = false
     statsMenu = false
     soundEffects()
+
+    console.log("coucou")
   }
 }
 
@@ -1095,7 +1097,6 @@ function drawTalk(x, y, w, h) {
       }
     }
 
-    image(buttonE, x,y, 40,40)
     //? Afficher le texte
     textSize(fontSize);
     text(currentTextSpeaking, x + (textWidth / 4), y + (h / 2.5) - fontSize / 2, textWidth, h)
@@ -1128,8 +1129,8 @@ function openTrocMenu() {
 //~ INTERACTION PNJ DISCU
 function openTalkMenu() {
 
-  let interfaceMenuWidth = viewportDisplayWidth / 3;
-  let interfaceMenuHeight = viewportDisplayHeight / 7;
+  let interfaceMenuWidth = viewportDisplayWidth / 2.5;
+  let interfaceMenuHeight = viewportDisplayHeight / 5;
   let interfaceMenuX = viewportDisplayWidth / 2 - interfaceMenuWidth / 2;
   let interfaceMenuY = viewportDisplayHeight;
   drawTalk(
