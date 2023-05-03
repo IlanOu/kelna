@@ -637,7 +637,7 @@ function troc(requis, gain) {
             } else if (objRequis.category == "food") {
                 item = Inventory[1]
             }
-            if (objRequis.name === item.name) {
+            if (objRequis.name === item.name || item.category === "food") {
                 canTradeThisObject = true
             } else {
                 canTradeThisObject = false

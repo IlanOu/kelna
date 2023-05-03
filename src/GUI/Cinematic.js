@@ -23,6 +23,7 @@ function videoEnded() {
 
 //~ Lancement de la cinematique de fin de jeu
 function playEndCinematic() {
+    musicGame.pause()
     leftClickPressed = false;
     noCursor()
     hideInventory = true
@@ -30,7 +31,6 @@ function playEndCinematic() {
 }
 
 function checkEndCredits() {
-
     if (gameIsEnd && gameEndVideo.elt.paused && !endTheGameCredits) {
         gameEndVideo.elt.addEventListener('ended', videoEndedEnd);
         gameEndVideo.play();
