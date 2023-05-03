@@ -602,7 +602,7 @@ function drawDeath() {
   ];
 
 
-  let buttonExitW = 200;
+  let buttonExitW = 150;
   let buttonExitH = 100;
   let buttonExitX = interfaceMenuX + interfaceMenuWidth / 2 - buttonExitW / 2;
   let buttonExitY = interfaceMenuY + interfaceMenuHeight / 1.5;
